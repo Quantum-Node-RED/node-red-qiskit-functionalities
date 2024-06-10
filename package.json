@@ -1,0 +1,16 @@
+{
+  "name": "node-red-qiskit-functionality",
+  "version": "0.0.1",
+  "description": "Quantum Computing Functionality for Node-RED",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "wangyiyuelva",
+  "license": "Apache-2.0",
+  "node-red": {
+    "nodes": {
+      "lower-case": "templates/lower-case.js"
+    }
+  }
+}
