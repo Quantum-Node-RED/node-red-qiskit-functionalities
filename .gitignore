@@ -1,0 +1,9 @@
+# dependencies
+/node_modules
+
+# local dev file
+.vscode/
+.DS_Store
+
+# Optional npm cache directory
+.npm
