@@ -1,0 +1,26 @@
+<script type="text/javascript">
+  RED.nodes.registerType('CHSH-game-quantum', {
+    category: 'function',
+    color: '#aaaaaa',
+    defaults: {
+      name: { value: "" }
+    },
+    inputs: 2,
+    outputs: 3,
+    icon: "file.svg",
+    label: function () {
+      return this.name || "CHSH-game-quantum";
+    }
+  });
+</script>
+
+<script type="text/html" data-template-name="CHSH-game-quantum">
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+
+<script type="text/html" data-help-name="CHSH-game-quantum">
+  <p>CHSH-game-quantum</p>
+</script>
