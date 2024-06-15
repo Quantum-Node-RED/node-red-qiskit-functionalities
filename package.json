@@ -10,7 +10,8 @@
   "license": "Apache-2.0",
   "node-red": {
     "nodes": {
-      "lower-case": "templates/lower-case.js"
+      "lower-case": "templates/lower-case.js",
+      "CHSH-game-classic": "nodes/CHSH-game-classic/CHSH-game-classic.js"
     }
   }
 }
