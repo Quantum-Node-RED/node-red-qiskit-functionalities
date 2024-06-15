@@ -1,0 +1,26 @@
+<script type="text/javascript">
+    RED.nodes.registerType('CHSH-game-classic',{
+        category: 'function',
+        color: '#a6bbcf',
+        defaults: {
+            name: {value:""}
+        },
+        inputs: 2,
+        outputs: 3,
+        icon: "file.svg",
+        label: function() {
+            return this.name||"CHSH-game-classic";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="CHSH-game-classic">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="CHSH-game-classic">
+    <p>A simple node that converts the message payloads into all lower-case characters</p>
+</script>
