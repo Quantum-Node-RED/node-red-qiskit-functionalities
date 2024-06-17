@@ -10,7 +10,11 @@
   "license": "Apache-2.0",
   "node-red": {
     "nodes": {
-      "lower-case": "templates/lower-case.js"
+      "lower-case": "templates/lower-case.js",
+      "CHSH-game-quantum": "nodes/CHSH-game-quantum/CHSH-game-quantum.js"
     }
+  },
+  "dependencies": {
+    "python-shell": "^5.0.0"
   }
 }
