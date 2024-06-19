@@ -8,21 +8,16 @@ module.exports = function (RED) {
       const result = await new Promise((resolve, reject) => {
         const option = {
           x: msg.payload.x,
-          y: msg.payload.y,
+          y: msg.payload.y
         };
-        runPythonScript(
-          __dirname,
-          "CHSH-game-quantum.py",
-          option,
-          (err, results) => {
-            if (err) throw err;
-            return resolve(results);
-          }
-        );
+        runPythonScript(__dirname, "CHSH-game-quantum.py", option, (err, results) => {
+          if (err) throw err;
+          return resolve(results);
+        });
       });
 
       const newMsg = {
-        payload: result,
+        payload: result
       };
       node.send(newMsg);
     });
