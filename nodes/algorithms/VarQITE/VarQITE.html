@@ -1,0 +1,53 @@
+<script type="text/javascript">
+    RED.nodes.registerType("VarQITE", {
+      category: "function",
+      color: "#aaaaaa",
+      defaults: {
+        name: { value: "VarQITE Algorithm" },
+        hamiltonian_data: { value: "" },
+        hamiltonian_coeffs: { value: "" },
+        magnetization_data: { value: "" },
+        magnetization_coeffs: { value: "" },
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "VarQITE";
+      },
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="VarQITE">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Name" />
+    </div>
+
+    <div class="form-row">
+      <label for="node-input-hamiltonian_data"><i class="fa fa-tag"></i> Hamiltonian's Pauli list of terms</label>
+      <input type="string" id="node-input-hamiltonian_data" placeholder='Please use format ["a", "b", "c"]'>
+    </div>
+
+    <div class="form-row">
+      <label for="node-input-hamiltonian_coeffs"><i class="fa fa-tag"></i> Hamiltonian's complex coefficients for Pauli terms</label>
+      <input type="string" id="node-input-hamiltonian_coeffs" placeholder="Please use format [1.0, 2.0, 3.0]">
+    </div>
+
+    <div class="form-row">
+      <label for="node-input-magnetization_data"><i class="fa fa-tag"></i> Magnetization's Pauli list of terms</label>
+      <input type="string" id="node-input-magnetization_data" placeholder='Please use format ["a", "b", "c"]'>
+    </div>
+
+    <div class="form-row">
+      <label for="node-input-magnetization_coeffs"><i class="fa fa-tag"></i> Magnetization's complex coefficients for Pauli terms</label>
+      <input type="string" id="node-input-magnetization_coeffs" placeholder="Please use format [1.0, 2.0, 3.0]">
+    </div>
+  </script>
+
+  
+  
+  <script type="text/html" data-help-name="AdaptVQE">
+    <p>A simple node that implements the Variational Quantum Imaginary Time Evolution algorithm.</p>
+  </script>
+  
