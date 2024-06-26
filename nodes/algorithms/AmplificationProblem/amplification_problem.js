@@ -1,4 +1,4 @@
-const runPythonScript = require("../runPythonScript");
+const runPythonScript = require("../../pythonShell");
 
 module.exports = function (RED) {
   function AmplificationProblemNode(config) {
@@ -6,7 +6,9 @@ module.exports = function (RED) {
     var node = this;
     node.on("input", async function (msg) {
       const result = await new Promise((resolve, reject) => {
-        const options = {}; 
+        const options = {
+          target: msg.payload.target
+        }; 
         runPythonScript(__dirname, "amplification_problem.py", options, (err, results) => {
           if (err) {
             node.error("Error running Python script: " + err);
@@ -22,5 +24,5 @@ module.exports = function (RED) {
       node.send(newMsg);
     });
   }
-  RED.nodes.registerType("amplification-problem", AmplificationProblemNode);
+  RED.nodes.registerType("AmplificationProblem", AmplificationProblemNode);
 };
