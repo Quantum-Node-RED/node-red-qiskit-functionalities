@@ -29,7 +29,8 @@ module.exports = function (RED) {
         });
 
         const newMsg = {
-          payload: result
+          payload: result,
+          encoding: 'base64'
         }
 
 

@@ -7,6 +7,11 @@ from qiskit.primitives import Estimator
 from qiskit.quantum_info import Statevector
 from qiskit_algorithms import SciPyImaginaryEvolver
 import numpy as np
+import pylab
+import matplotlib.pyplot as plt
+import base64
+import io
+import warnings
 
 import json
 import sys
@@ -50,4 +55,30 @@ h_exp_val = [ele[0][0] for ele in evolution_result.observables]
 
 result = {'result': h_exp_val}
 
+# print(json.dumps(result))
+times = evolution_result.times
+pylab.plot(times, h_exp_val, label="VarQITE")
+pylab.xlabel("Time")
+pylab.ylabel(r"$\langle H \rangle$ (energy)")
+pylab.legend(loc="upper right")
+
+
+# Save the plot to a buffer
+buffer = io.BytesIO()
+plt.savefig(buffer, format='png')
+buffer.seek(0)
+
+# Convert the plot to a Base64 string
+b64_str = base64.b64encode(buffer.read()).decode('utf-8')
+buffer.close()
+
+
+result = {
+    "image": b64_str,
+    "ground_state_energy": h_exp_val[-1]
+}
+
+# Return the result as a JSON string
 print(json.dumps(result))
+
+
