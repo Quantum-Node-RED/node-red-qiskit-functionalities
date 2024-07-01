@@ -4,23 +4,47 @@
     color: "#aaaaaa",
     defaults: {
       name: { value: "VQE algorithm" },
+      rotationLayers: { value: "rx" },
+      entanglementLayers: { value: "rx" },
+      hamiltonianPauli: { value: '["II", "IZ", "ZI", "ZZ", "XX"]' },
+      hamiltonianCoeffs: { value: '[-1.05237, 0.39793, -0.39793, -0.01128, 0.1809]' }
     },
     inputs: 1,
     outputs: 1,
     icon: "file.svg",
     label: function () {
-      return this.name || "VQE-algorithm";
+      return this.name || "VQE";
     },
   });
 </script>
 
-<script type="text/html" data-template-name="VQE-algorithm">
+<script type="text/html" data-template-name="VQE">
   <div class="form-row">
     <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
     <input type="text" id="node-input-name" placeholder="Name" />
   </div>
+
+  <div class="form-row">
+    <label for="node-input-rotationLayers"><i class="fa fa-tag"></i>Rotation Layers</label>
+    <input type="string" id="node-input-rotationLayers" placeholder="The gates used in the rotation layer. ex: 'ry' or 'RYGate'">
+  </div>
+  
+  <div class="form-row">
+    <label for="node-input-entanglementLayers"><i class="fa fa-tag"></i>Entanglement Layers</label>
+    <input type="string" id="node-input-entanglementLayers" placeholder="The gates used in the entanglement layer. ex: 'ry' or 'RYGate'">
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-hamiltonianPauli"><i class="fa fa-tag"></i>Hamiltonian's Pauli list of terms</label>
+    <input type="string" id="node-input-hamiltonianPauli" placeholder='Please use format ["a", "b", "c"]'>
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-hamiltonianCoeffs"><i class="fa fa-tag"></i>Hamiltonian's complex coefficients for Pauli terms</label>
+    <input type="string" id="node-input-hamiltonianCoeffs" placeholder="Please use format [1.0, 2.0, 3.0]">
+  </div>
 </script>
 
-<script type="text/html" data-help-name="VQE-algorithm">
+<script type="text/html" data-help-name="VQE">
   <p>A simple node that implements VQE algorithm.</p>
 </script>

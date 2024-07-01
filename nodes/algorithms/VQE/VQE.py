@@ -25,21 +25,19 @@ input = sys.argv[1]
 parse_input = json.loads(input)
 
 num_qubits = parse_input["numQubits"]
+rotation_blocks = parse_input["rotationLayers"]
+entanglement_blocks = parse_input["entanglementLayers"]
+hamiltonian_data = parse_input["hamiltonianPauli"]
 
-H2_op = SparsePauliOp.from_list(  # TODO: convert to input or attributes
-    [
-        ("II", -1.052373245772859),
-        ("IZ", 0.39793742484318045),
-        ("ZI", -0.39793742484318045),
-        ("ZZ", -0.01128010425623538),
-        ("XX", 0.18093119978423156),
-    ]
-)
+hamiltonian_data = parse_input['hamiltonianPauli'].strip('[]').split(',')
+hamiltonian_data = [item.strip('" ').strip() for item in hamiltonian_data]
+hamiltonian_coeffs = [float(f) for f in parse_input['hamiltonianCoeffs'].strip('[]').split(',')]
+print(hamiltonian_coeffs)
+
+H2_op = SparsePauliOp(hamiltonian_data, coeffs=hamiltonian_coeffs)
 
 estimator = Estimator()
 
-rotation_blocks = "rx"           # TODO: convert to input or attributes
-entanglement_blocks = "crx"      # TODO: convert to input or attributes
 ansatz = TwoLocal(num_qubits, rotation_blocks, entanglement_blocks)
 
 optimizer = SLSQP(maxiter=1000)  # TODO: convert to input or attributes
@@ -53,6 +51,5 @@ vqe = VQE(estimator, ansatz, optimizer)
 
 result = vqe.compute_minimum_eigenvalue(H2_op)
 # serializable_result = convert_to_serializable(result)
-# print(json.dumps(serializable_result))
 
 print(json.dumps({"optimal_value": result.optimal_value}))

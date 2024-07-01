@@ -3,11 +3,21 @@ const runPythonScript = require("../../pythonShell");
 module.exports = function (RED) {
   function VQENode(config) {
     RED.nodes.createNode(this, config);
+
+    this.rotationLayers = config.rotationLayers;
+    this.entanglementLayers = config.entanglementLayers;
+    this.hamiltonianPauli = config.hamiltonianPauli;
+    this.hamiltonianCoeffs = config.hamiltonianCoeffs;
+
     var node = this;
     node.on('input', async function (msg) {
       const result = await new Promise((resolve, reject) => {
         const option = {
-          numQubits: msg.payload.numQubits
+          numQubits: msg.payload.numQubits,
+          rotationLayers: node.rotationLayers,
+          entanglementLayers: node.entanglementLayers,
+          hamiltonianPauli: node.hamiltonianPauli,
+          hamiltonianCoeffs: node.hamiltonianCoeffs
         };
         runPythonScript(__dirname, "VQE.py", option, (err, results) => {
           if (err) throw err;
