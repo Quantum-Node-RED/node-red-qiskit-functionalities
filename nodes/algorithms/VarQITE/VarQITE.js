@@ -7,8 +7,6 @@ module.exports = function (RED) {
 
       this.hamiltonian_data = config.hamiltonian_data;
       this.hamiltonian_coeffs = config.hamiltonian_coeffs;
-      this.magnetization_data = config.magnetization_data;
-      this.magnetization_coeffs = config.magnetization_coeffs;
 
       var node = this;
 
@@ -17,8 +15,6 @@ module.exports = function (RED) {
           const options = {
             hamiltonian_data: node.hamiltonian_data,
             hamiltonian_coeffs: node.hamiltonian_coeffs,
-            magnetization_data: node.magnetization_data,
-            magnetization_coeffs: node.magnetization_coeffs
           };
           
           runPythonScript(__dirname, "VarQITE.py", arg = options, (err, results) => {

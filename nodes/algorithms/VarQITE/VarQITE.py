@@ -6,15 +6,16 @@ from qiskit_algorithms import VarQITE
 from qiskit.primitives import Estimator
 from qiskit.quantum_info import Statevector
 from qiskit_algorithms import SciPyImaginaryEvolver
+from qiskit import QuantumCircuit
 import numpy as np
 import pylab
-import matplotlib.pyplot as plt
 import base64
 import io
 import warnings
 
 import json
 import sys
+
 
 input = sys.argv[1]
 parsed_input = json.loads(input)
@@ -24,16 +25,17 @@ parsed_input = json.loads(input)
 hamiltonian_data = parsed_input['hamiltonian_data'].strip('[]').split(',')
 hamiltonian_data = [item.strip('" ').strip() for item in hamiltonian_data]
 hamiltonian_coeffs = [float(f) for f in parsed_input['hamiltonian_coeffs'].strip('[]').split(',')]
-magnetization_data = parsed_input['magnetization_data'].strip('[]').split(',')
-magnetization_data = [item.strip('" ').strip() for item in magnetization_data]
-magnetization_coeffs = [float(f) for f in parsed_input['magnetization_coeffs'].strip('[]').split(',')]
+
+# hamiltonian_data = ["ZZ", "IX", "XI"]
+# hamiltonian_coeffs = [-0.2, -1, -1]
 
 
-# Define the Hamiltonian and the magnetization operator
-hamiltonian = SparsePauliOp(["ZZ", "IX", "XI"], coeffs=[-0.2, -1, -1])
-magnetization = SparsePauliOp(["IZ", "ZI"], coeffs=[1, 1])
+# Define the Hamiltonian operator
+hamiltonian = SparsePauliOp(hamiltonian_data, coeffs=hamiltonian_coeffs)
 
+# Define the ansatz
 ansatz = EfficientSU2(hamiltonian.num_qubits, reps=1)
+
 
 init_param_values = {}
 for i in range(len(ansatz.parameters)):
@@ -53,19 +55,20 @@ evolution_result = var_qite.evolve(evolution_problem)
 
 h_exp_val = [ele[0][0] for ele in evolution_result.observables]
 
-result = {'result': h_exp_val}
-
-# print(json.dumps(result))
+# Return the result as a JSON string
 times = evolution_result.times
 pylab.plot(times, h_exp_val, label="VarQITE")
 pylab.xlabel("Time")
 pylab.ylabel(r"$\langle H \rangle$ (energy)")
 pylab.legend(loc="upper right")
+pylab.annotate('Ground state energy', xy=(times[-1], h_exp_val[-1]), xytext=(-90, 25), 
+               textcoords='offset points', arrowprops=dict(arrowstyle='->'))
+
 
 
 # Save the plot to a buffer
 buffer = io.BytesIO()
-plt.savefig(buffer, format='png')
+pylab.savefig(buffer, format='png')
 buffer.seek(0)
 
 # Convert the plot to a Base64 string
@@ -73,8 +76,18 @@ b64_str = base64.b64encode(buffer.read()).decode('utf-8')
 buffer.close()
 
 
+# Draw the ansatz circuit
+ansatz_buffer = io.BytesIO()
+ansatz.decompose().draw('mpl').savefig(ansatz_buffer, format='png')
+ansatz_buffer.seek(0)
+
+ansatz_b64_str = base64.b64encode(ansatz_buffer.read()).decode('utf-8')
+ansatz_buffer.close()
+
+
 result = {
-    "image": b64_str,
+    "ansatz_image": ansatz_b64_str,
+    "result_image": b64_str,
     "ground_state_energy": h_exp_val[-1]
 }
 
