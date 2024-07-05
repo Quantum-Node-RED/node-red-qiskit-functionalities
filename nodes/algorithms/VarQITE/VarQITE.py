@@ -1,5 +1,5 @@
 from qiskit.quantum_info import SparsePauliOp
-from qiskit.circuit.library import EfficientSU2
+from qiskit.circuit.library import EfficientSU2, PauliTwoDesign, RealAmplitudes
 from qiskit_algorithms.time_evolvers.variational import ImaginaryMcLachlanPrinciple
 from qiskit_algorithms import TimeEvolutionProblem
 from qiskit_algorithms import VarQITE
@@ -25,6 +25,9 @@ parsed_input = json.loads(input)
 hamiltonian_data = parsed_input['hamiltonian_data'].strip('[]').split(',')
 hamiltonian_data = [item.strip('" ').strip() for item in hamiltonian_data]
 hamiltonian_coeffs = [float(f) for f in parsed_input['hamiltonian_coeffs'].strip('[]').split(',')]
+ansatz_name = parsed_input['ansatz']
+evolution_time = float(parsed_input['evolution_time'])
+reps = int(parsed_input['reps'])
 
 # hamiltonian_data = ["ZZ", "IX", "XI"]
 # hamiltonian_coeffs = [-0.2, -1, -1]
@@ -34,7 +37,12 @@ hamiltonian_coeffs = [float(f) for f in parsed_input['hamiltonian_coeffs'].strip
 hamiltonian = SparsePauliOp(hamiltonian_data, coeffs=hamiltonian_coeffs)
 
 # Define the ansatz
-ansatz = EfficientSU2(hamiltonian.num_qubits, reps=1)
+if ansatz_name == "EfficientSU2":
+    ansatz = EfficientSU2(hamiltonian.num_qubits, reps = reps)
+elif ansatz_name == "RealAmplitudes":
+    ansatz = RealAmplitudes(hamiltonian.num_qubits, reps = reps)
+elif ansatz_name == "PauliTwoDesign":
+    ansatz = PauliTwoDesign(hamiltonian.num_qubits, reps = reps)
 
 
 init_param_values = {}
@@ -45,7 +53,7 @@ for i in range(len(ansatz.parameters)):
 var_principle = ImaginaryMcLachlanPrinciple()
 
 
-time = 5.0
+time = evolution_time
 aux_ops = [hamiltonian]
 evolution_problem = TimeEvolutionProblem(hamiltonian, time, aux_operators=aux_ops)
 

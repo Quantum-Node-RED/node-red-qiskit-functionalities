@@ -2,37 +2,43 @@ const runPythonScript = require("../../pythonShell");
 
 
 module.exports = function (RED) {
-    function VarQITENode(config) {
-      RED.nodes.createNode(this, config);
+  function VarQITENode(config) {
+    RED.nodes.createNode(this, config);
 
-      this.hamiltonian_data = config.hamiltonian_data;
-      this.hamiltonian_coeffs = config.hamiltonian_coeffs;
+    this.hamiltonian_data = config.hamiltonian_data;
+    this.hamiltonian_coeffs = config.hamiltonian_coeffs;
+    this.evolution_time = config.evolution_time;
+    this.ansatz = config.ansatz;
+    this.reps = config.reps;
 
-      var node = this;
+    var node = this;
 
-      node.on('input',  async function (msg) {
-        const result = await new Promise((resolve,reject) => {
-          const options = {
-            hamiltonian_data: node.hamiltonian_data,
-            hamiltonian_coeffs: node.hamiltonian_coeffs,
-          };
-          
-          runPythonScript(__dirname, "VarQITE.py", arg = options, (err, results) => {
-            if (err) throw err;
-            return resolve(results);
-          });
+    node.on('input',  async function (msg) {
+      const result = await new Promise((resolve,reject) => {
+        const options = {
+          hamiltonian_data: node.hamiltonian_data,
+          hamiltonian_coeffs: node.hamiltonian_coeffs,
+          ansatz: node.ansatz,
+          evolution_time: node.evolution_time,
+          reps: node.reps
+        };
         
+        runPythonScript(__dirname, "VarQITE.py", arg = options, (err, results) => {
+          if (err) throw err;
+          return resolve(results);
         });
-
-        const newMsg = {
-          payload: result,
-          encoding: 'base64'
-        }
-
-
-        node.send(newMsg);
+      
       });
-    }
-    RED.nodes.registerType("VarQITE", VarQITENode);
+
+      const newMsg = {
+        payload: result,
+        encoding: 'base64'
+      }
+
+
+      node.send(newMsg);
+    });
   }
+  RED.nodes.registerType("VarQITE", VarQITENode);
+}
 

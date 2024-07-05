@@ -14,6 +14,9 @@
         "name": "VarQITE Algorithm",
         "hamiltonian_data": "[\"ZZ\", \"IX\", \"XI\"]",
         "hamiltonian_coeffs": "[-0.2, -1, -1]",
+        "ansatz": "EfficientSU2",
+        "evolution_time": "5.0",
+        "reps": "1",
         "x": 650,
         "y": 180,
         "wires": [
@@ -23,7 +26,7 @@
                 "294ea2526a0331f4"
             ]
         ],
-        "info": "# **What is VarQITE Algorithm ?**\r\nThe VarQuantumImaginaryTimeEvolution algorithm is a computational method used in quantum computing for simulating the dynamics of quantum systems. It focuses on efficiently calculating the ground state (lowest energy state) properties of quantum systems, which is crucial for various applications in materials science, chemistry, and physics.\r\n\r\nIn VarQITE, the algorithm iteratively evolves an initial trial wavefunction using imaginary time evolution techniques. This process gradually improves the wavefunction towards the ground state of the Hamiltonian. By leveraging quantum superpositions and entanglement, VarQITE aims to efficiently compute properties such as energy levels and ground state wavefunctions that are crucial in fields like materials science, chemistry, and physics.\r\n\r\nCompared to classical methods, VarQITE holds potential advantages in terms of computational efficiency for certain classes of problems, thanks to its ability to exploit quantum parallelism and perform complex calculations more effectively.\r\n\r\n## **Input: Hamiltonian**\r\nThe Hamiltonian represents the total energy of the system and dictates its evolution over time.\r\n\r\nIn the node editor, you can set the Pauli Operators and their coefficeints for the hamiltonian."
+        "info": "# **What is VarQITE Algorithm ?**\r\nThe VarQuantumImaginaryTimeEvolution algorithm is a computational method used in quantum computing for simulating the dynamics of quantum systems. It focuses on efficiently calculating the ground state (lowest energy state) properties of quantum systems, which is crucial for various applications in materials science, chemistry, and physics.\r\n\r\nIn VarQITE, the algorithm iteratively evolves an initial trial wavefunction using imaginary time evolution techniques. This process gradually improves the wavefunction towards the ground state of the Hamiltonian. By leveraging quantum superpositions and entanglement, VarQITE aims to efficiently compute properties such as energy levels and ground state wavefunctions that are crucial in fields like materials science, chemistry, and physics.\r\n\r\nCompared to classical methods, VarQITE holds potential advantages in terms of computational efficiency for certain classes of problems, thanks to its ability to exploit quantum parallelism and perform complex calculations more effectively.\r\n\r\n## **Input**\r\n\r\n### **Hamiltonian**\r\nThe Hamiltonian represents the total energy of the system and dictates its evolution over time.\r\n\r\nIn the node editor, you can set the Pauli Operators and their coefficeints for the hamiltonian.\r\n\r\n### **Ansatz**\r\nIn the node editor, you can choose 3 different type of ansatz constructor and the number of repetitions.\r\n\r\nThe default constructor is __EfficientSU2__ and the default number of repetition is **1**.\r\n\r\n<span style=\"color:red;\">Notice: Although increasing the number of repetitions can yield more precise results, it also exponentially increases the required computational time and resources, and may lead to over-optimization towards local minima. Therefore, it is recommended to use only 1 repetition.</span>\r\n\r\n### **Evolution time**\r\nIn the node editor, you can set the time of evolution.\r\n\r\nThe default evolution time is 5.0."
     },
     {
         "id": "c9066fadf10661a1",

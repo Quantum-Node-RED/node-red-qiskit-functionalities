@@ -1,3 +1,32 @@
+<style>
+  .form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    position: relative;
+  }
+
+  .form-row label {
+    flex: 0 0 200px; 
+    margin-right: 10px; 
+  }
+
+  .form-row input {
+    flex: 1; 
+  }
+
+
+  .slider {
+    flex: 1;
+    margin-left: 10px;
+  }
+
+  #slider-value {
+    margin-left: 10px;
+  }
+</style>
+
+
 <script type="text/javascript">
     RED.nodes.registerType("VarQITE", {
       category: "function",
@@ -5,21 +34,68 @@
       defaults: {
         name: { value: "VarQITE Algorithm" },
         hamiltonian_data: { value: "" },
-        hamiltonian_coeffs: { value: "" }
+        hamiltonian_coeffs: { value: "" },
+        ansatz: { value: "EfficientSU2" },
+        evolution_time: { value: 5.0 },
+        reps: { value: 1 },
       },
       inputs: 1,
       outputs: 1,
       icon: "file.svg",
+      oneditprepare: function () {
+
+        $("#node-input-ansatz").typedInput({
+          types: [
+            {
+              value: "string",
+              options: [
+                  { value: "EfficientSU2", label: "EfficientSU2"},
+                  { value: "RealAmplitudes", label: "RealAmplitudes"},
+                  { value:"PauliTwoDesign", label: "PauliTwoDesign"}
+              ]
+            }
+          ]
+        });
+
+        var slider = document.getElementById("node-input-reps");
+        var output = document.getElementById("slider-value");
+
+        // Display the default slider value
+        output.innerHTML = slider.value;
+
+        $('#node-input-reps').on('input', function() {
+          var value = $(this).val();
+          $('#slider-value').text(value);
+        });
+
+      },
       label: function () {
         return this.name || "VarQITE";
       },
     });
+
   </script>
   
   <script type="text/html" data-template-name="VarQITE">
     <div class="form-row">
       <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
       <input type="text" id="node-input-name" placeholder="Name" />
+    </div>
+
+    <div class="form-row">
+    <label for="node-input-ansatz"><i class="fa fa-tag"></i> Ansatz Construction function</label>
+    <input type="text" id="node-input-ansatz">
+    </div>
+
+    <div class="form-row">
+      <label for="node-input-reps"><i class="fa fa-sliders"></i> Number of repetitions:</label>
+      <input type="range" id="node-input-reps" min="1" max="3" step="1" value="1" class="slider">
+      <span id="slider-value"></span>
+    </div>
+
+    <div class="form-row">
+      <label for="node-input-evolution_time"><i class="fa fa-tag"></i> Evolution time</label>
+      <input type="string" id="node-input-evolution_time" placeholder='Please use float, e.g. 1.0'>
     </div>
 
     <div class="form-row">
