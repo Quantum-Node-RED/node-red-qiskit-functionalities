@@ -8,6 +8,8 @@ module.exports = function (RED) {
     this.entanglementLayers = config.entanglementLayers;
     this.hamiltonianPauli = config.hamiltonianPauli;
     this.hamiltonianCoeffs = config.hamiltonianCoeffs;
+    this.optimizer = config.optimizer;
+    this.maxiter = config.maxiter;
 
     var node = this;
     node.on('input', async function (msg) {
@@ -17,7 +19,9 @@ module.exports = function (RED) {
           rotationLayers: node.rotationLayers,
           entanglementLayers: node.entanglementLayers,
           hamiltonianPauli: node.hamiltonianPauli,
-          hamiltonianCoeffs: node.hamiltonianCoeffs
+          hamiltonianCoeffs: node.hamiltonianCoeffs,
+          optimizer: node.optimizer,
+          maxiter: node.maxiter
         };
         runPythonScript(__dirname, "VQE.py", option, (err, results) => {
           if (err) throw err;

@@ -7,7 +7,9 @@
       rotationLayers: { value: "rx" },
       entanglementLayers: { value: "rx" },
       hamiltonianPauli: { value: '["II", "IZ", "ZI", "ZZ", "XX"]' },
-      hamiltonianCoeffs: { value: '[-1.05237, 0.39793, -0.39793, -0.01128, 0.1809]' }
+      hamiltonianCoeffs: { value: '[-1.05237, 0.39793, -0.39793, -0.01128, 0.1809]' },
+      optimizer: { value: "SLSQP" },
+      maxiter: { value: 0 }
     },
     inputs: 1,
     outputs: 1,
@@ -15,6 +17,20 @@
     label: function () {
       return this.name || "VQE";
     },
+    oneditprepare: function () {
+      document.getElementById("node-input-maxiter-slider").onchange = function () {
+        document.getElementById("node-input-maxiter").value = this.value;
+      };
+      document.getElementById("node-input-maxiter").onchange = function () {
+        let input = this.value;
+        if (input < 0 || input > 200) this.value = 100;
+        document.getElementById("node-input-maxiter-slider").value = this.value;
+      };
+
+      document.getElementById("node-input-maxiter").value = this.maxiter;
+      document.getElementById("node-input-maxiter-slider").value = this.maxiter;
+
+    }
   });
 </script>
 
@@ -25,23 +41,61 @@
   </div>
 
   <div class="form-row">
-    <label for="node-input-rotationLayers"><i class="fa fa-tag"></i>Rotation Layers</label>
-    <input type="string" id="node-input-rotationLayers" placeholder="The gates used in the rotation layer. ex: 'ry' or 'RYGate'">
+    <label for="node-input-optimizer"><i class="fa fa-tag"></i>Optimizer</label>
+    <select name="optimizer" id="node-input-optimizer">
+      <option value="SLSQP">SLSQP</option>
+      <option value="SPSA">SPSA</option>
+      <option value="COBYLA">COBYLA</option>
+      <option value="L_BFGS_B">L_BFGS_B</option>
+    </select>
+  </div>
+
+  <label for="node-input-maxiter" id="maxiter-label" style="width:100%;">Optimizer maxiter</label>
+    <div style="width:75%; float:left;">
+      <input
+        style="width:100%"
+        type="range"
+        id="node-input-maxiter-slider"
+        name="maxiter"
+        min="0"
+        max="200"
+        step="1"
+        list="labels"
+      /> 
+      <div style="width:33.33%; text-align:left; float:left;">0</div>
+      <div style="width:33.33%; text-align:center; float:left;">100</div>
+      <div style="width:33.33%; text-align:right; float:left;">200</div>
+    </div>
+    <div style="width:20%; float:left;">
+      <input
+        style="width:60%; float:right; text-align: right;"
+        type="number"
+        id="node-input-maxiter"
+        name="maxiter-text"
+        placeholder="0"
+        step="any"
+      /> 
+    </div>
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-rotationLayers" style="width:40%"><i class="fa fa-tag"></i>Rotation Layers</label>
+    <input type="string" id="node-input-rotationLayers" placeholder="The gates used in the rotation layer. ex: 'ry' or 'RYGate'" style="width:40%; float:right;">
   </div>
   
   <div class="form-row">
-    <label for="node-input-entanglementLayers"><i class="fa fa-tag"></i>Entanglement Layers</label>
-    <input type="string" id="node-input-entanglementLayers" placeholder="The gates used in the entanglement layer. ex: 'ry' or 'RYGate'">
+    <label for="node-input-entanglementLayers" style="width:40%"><i class="fa fa-tag"></i>Entanglement Layers</label>
+    <input type="string" id="node-input-entanglementLayers" placeholder="The gates used in the entanglement layer. ex: 'ry' or 'RYGate'" style="width:40%; float:right;">
   </div>
 
   <div class="form-row">
-    <label for="node-input-hamiltonianPauli"><i class="fa fa-tag"></i>Hamiltonian's Pauli list of terms</label>
-    <input type="string" id="node-input-hamiltonianPauli" placeholder='Please use format ["a", "b", "c"]'>
+    <label for="node-input-hamiltonianPauli"  style="width:100%"><i class="fa fa-tag"></i>Hamiltonian's Pauli list of terms</label>
+    <input type="string" id="node-input-hamiltonianPauli" placeholder='Please use format ["a", "b", "c"]' style="width:100%">
   </div>
 
   <div class="form-row">
-    <label for="node-input-hamiltonianCoeffs"><i class="fa fa-tag"></i>Hamiltonian's complex coefficients for Pauli terms</label>
-    <input type="string" id="node-input-hamiltonianCoeffs" placeholder="Please use format [1.0, 2.0, 3.0]">
+    <label for="node-input-hamiltonianCoeffs" style="width:100%;"><i class="fa fa-tag"></i>Hamiltonian's complex coefficients for Pauli terms</label>
+    <input type="string" id="node-input-hamiltonianCoeffs" placeholder="Please use format [1.0, 2.0, 3.0]" style="width:100%">
   </div>
 </script>
 
