@@ -1,0 +1,133 @@
+[
+    {
+        "id": "f3a858fd71a3bec1",
+        "type": "tab",
+        "label": "AmplificationProblem-Default-Flow",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "d6ce38305b234e05",
+        "type": "inject",
+        "z": "f3a858fd71a3bec1",
+        "name": "target",
+        "props": [
+            {
+                "p": "payload.target",
+                "v": "11",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 210,
+        "y": 220,
+        "wires": [
+            [
+                "d94b7d327c3fbd64"
+            ]
+        ]
+    },
+    {
+        "id": "d94b7d327c3fbd64",
+        "type": "AmplificationProblem",
+        "z": "f3a858fd71a3bec1",
+        "name": "AmplificationProblem",
+        "x": 520,
+        "y": 220,
+        "wires": [
+            [
+                "1f2bd93af85af399",
+                "e305a7a642c76780",
+                "8291524bd51cc101",
+                "23aeed536dde7049",
+                "1df244effc9714e4"
+            ]
+        ]
+    },
+    {
+        "id": "1f2bd93af85af399",
+        "type": "debug",
+        "z": "f3a858fd71a3bec1",
+        "name": "oracle_evaluation",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result.oracle_evaluation",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 950,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "e305a7a642c76780",
+        "type": "debug",
+        "z": "f3a858fd71a3bec1",
+        "name": "top_measurement",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result.top_measurement",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 950,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "8291524bd51cc101",
+        "type": "debug",
+        "z": "f3a858fd71a3bec1",
+        "name": "circuit_results",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result.circuit_results",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "23aeed536dde7049",
+        "type": "image viewer",
+        "z": "f3a858fd71a3bec1",
+        "name": "circuit_image",
+        "width": "600",
+        "data": "payload.result.circuit_image",
+        "dataType": "msg",
+        "active": true,
+        "x": 990,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1df244effc9714e4",
+        "type": "image viewer",
+        "z": "f3a858fd71a3bec1",
+        "name": "circuit_results_image",
+        "width": "500",
+        "data": "payload.result.circuit_results_image",
+        "dataType": "msg",
+        "active": true,
+        "x": 1020,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    }
+]
