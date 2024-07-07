@@ -14,7 +14,10 @@
     "nodes": {
       "lower-case": "templates/lower-case.js",
       "CHSH-game-classic": "nodes/CHSH-game-classic/CHSH-game-classic.js",
-      "CHSH-game-quantum": "nodes/CHSH-game-quantum/CHSH-game-quantum.js"
+      "CHSH-game-quantum": "nodes/CHSH-game-quantum/CHSH-game-quantum.js",
+      "pulse-build-circuit": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Pulse_Build_Circuit.js",
+      "pulse-build-calibration": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Pulse_Build_Calibration.js",
+      "pulse-link-cal-to-cir": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Pulse_Link_cal_to_cir.js"
     }
   },
   "dependencies": {
