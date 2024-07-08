@@ -1,8 +1,8 @@
-const runPythonScript = require("../../../pythonShell.js");
+const runPythonScript = require("../../../../pythonShell.js");
 
 
 module.exports = function (RED) {
-  function PulseBuildCalibrationNode(config) {
+  function PulseBuildCalibrationForCustomNode(config) {
     RED.nodes.createNode(this, config);
 
     var node = this;
@@ -11,7 +11,7 @@ module.exports = function (RED) {
       const result = await new Promise((resolve,reject) => {
 
         
-        runPythonScript(__dirname, "Pulse_Build_Calibration.py", arg = null, (err, results) => {
+        runPythonScript(__dirname, "Pulse_Build_Calibration_for_custom.py", arg = null, (err, results) => {
           if (err) throw err;
           return resolve(results);
         });
@@ -27,6 +27,6 @@ module.exports = function (RED) {
       node.send(newMsg);
     });
   }
-  RED.nodes.registerType("pulse-build-calibration", PulseBuildCalibrationNode);
+  RED.nodes.registerType("pulse-build-calibration-for-custom", PulseBuildCalibrationForCustomNode);
 }
 

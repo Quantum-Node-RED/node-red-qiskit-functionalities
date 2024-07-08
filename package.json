@@ -15,9 +15,14 @@
       "lower-case": "templates/lower-case.js",
       "CHSH-game-classic": "nodes/CHSH-game-classic/CHSH-game-classic.js",
       "CHSH-game-quantum": "nodes/CHSH-game-quantum/CHSH-game-quantum.js",
-      "pulse-build-circuit": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Pulse_Build_Circuit.js",
-      "pulse-build-calibration": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Pulse_Build_Calibration.js",
-      "pulse-link-cal-to-cir": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Pulse_Link_cal_to_cir.js"
+      "pulse-build-circuit": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Add_cal_to_cir/Pulse_Build_Circuit.js",
+      "pulse-build-calibration": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Add_cal_to_cir/Pulse_Build_Calibration.js",
+      "pulse-link-cal-to-cir": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Add_cal_to_cir/Pulse_Link_cal_to_cir.js",
+      "pulse-build-custom-circuit": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Add_cal_to_custom_cir/Pulse_Build_custom_circuit.js",
+      "pulse-build-calibration-for-custom": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Add_cal_to_custom_cir/Pulse_Build_Calibration_for_custom.js",
+      "pulse-link-cal-to-custom-cir": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Add_cal_to_custom_cir/Pulse_Link_cal_to_custom_cir.js",
+      "pulse-try-transpile-on-custom": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Add_cal_to_custom_cir/Pulse_Try_transpile_on_custom_gate.js",
+      "pulse-link-cal-to-custom-cir-another": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Add_cal_to_custom_cir/Pulse_Link_cal_to_custom_cir_another.js"
     }
   },
   "dependencies": {

@@ -1,0 +1,33 @@
+
+<script type="text/javascript">
+    RED.nodes.registerType("pulse-link-cal-to-cir", {
+      category: "Add calibrations to circuits",
+      color: "#aaaaaa",
+      defaults: {
+        name: { value: "Link calibration to circuit" },
+        info: { value: "# Now we need to map the calibration to the circuit. The circuit method _add_calibration_ needs information about the gate and a reference to the schedule to complete the mapping:\r\n```python\r\nQuantumCircuit.add_calibration(gate, qubits, schedule, parameters)\r\n```\r\n&nbsp;\r\n# The gate can be either a circuit.Gate object or the name of the gate. Usually, you'll need a different schedule for each unique set of qubits and parameters. Since the Hadamard gate doesn't have any parameters, there is no need to supply any. So we can link the calibration 'h_q0' to circuit 'circ' by using following python code:\r\n```python\r\ncirc.add_calibration('h', [0], h_q0)\r\n```\r\n&nbsp;\r\n# Lastly, note that the transpiler will respect your calibrations. In other words, the transpiler will generate a series of instructions aimed at optimizing your circuit. Use it as you normally would.\r\n```python\r\nfrom qiskit_ibm_runtime.fake_provider import FakeHanoiV2\r\nfrom qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager\r\n \r\nbackend = FakeHanoiV2()\r\npassmanager = generate_preset_pass_manager(optimization_level=1, backend=backend)\r\ncirc = passmanager.run(circ)\r\n \r\n# Print instructions that only affect qubits 0 and 1\r\nfor instruction, qubits in FakeHanoiV2().instructions:\r\n    if qubits and set(qubits).issubset({0, 1}):\r\n        print(instruction, qubits)\r\ncirc.draw('mpl', idle_wires=False)\r\n```\r\n&nbsp;\r\n# The generated optimization instructions are transmitted to the \"Show optimizing instruction\" node, and you can open the debug palette on the right to view these instructions. The diagram of optimized quantum circuit is displayed below the \"Optimized circuit\" node  (our example is too simple for the transpiler to optimize, so the output circuit is the same as what we built before).\r\n"}
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "Link calibration to circuit";
+      },
+    });
+
+  </script>
+  
+  <script type="text/html" data-template-name="pulse-link-cal-to-cir">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Link calibration to circuit" />
+    </div>
+
+  </script>
+
+  
+  
+  <script type="text/html" data-help-name="pulse-link-cal-to-cir">
+    <p>A simple node that link the calibration to your circuit.</p>
+  </script>
+  

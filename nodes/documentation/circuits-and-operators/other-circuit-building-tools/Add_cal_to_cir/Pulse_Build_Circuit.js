@@ -1,8 +1,8 @@
-const runPythonScript = require("../../../pythonShell.js");
+const runPythonScript = require("../../../../pythonShell.js");
 
 
 module.exports = function (RED) {
-  function PulseLinkCalToCirNode(config) {
+  function PulseBuildCircuitNode(config) {
     RED.nodes.createNode(this, config);
 
     var node = this;
@@ -11,7 +11,7 @@ module.exports = function (RED) {
       const result = await new Promise((resolve,reject) => {
 
         
-        runPythonScript(__dirname, "Pulse_Link_cal_to_cir.py", arg = null, (err, results) => {
+        runPythonScript(__dirname, "Pulse_Build_Circuit.py", arg = null, (err, results) => {
           if (err) throw err;
           return resolve(results);
         });
@@ -27,6 +27,6 @@ module.exports = function (RED) {
       node.send(newMsg);
     });
   }
-  RED.nodes.registerType("pulse-link-cal-to-cir", PulseLinkCalToCirNode);
+  RED.nodes.registerType("pulse-build-circuit", PulseBuildCircuitNode);
 }
 
