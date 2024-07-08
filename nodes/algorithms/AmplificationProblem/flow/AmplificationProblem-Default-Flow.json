@@ -11,11 +11,16 @@
         "id": "d6ce38305b234e05",
         "type": "inject",
         "z": "f3a858fd71a3bec1",
-        "name": "target",
+        "name": "parameters",
         "props": [
             {
                 "p": "payload.target",
                 "v": "11",
+                "vt": "str"
+            },
+            {
+                "p": "payload.iterations",
+                "v": "1,2,3",
                 "vt": "str"
             }
         ],
@@ -24,7 +29,7 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "x": 210,
+        "x": 230,
         "y": 220,
         "wires": [
             [
@@ -129,5 +134,15 @@
         "wires": [
             []
         ]
+    },
+    {
+        "id": "a47ef54586a63a1d",
+        "type": "comment",
+        "z": "f3a858fd71a3bec1",
+        "name": "tips for paramteters",
+        "info": "msg.payload.target consist of 0 and 1\nmsg.payload.iterations is an optional \nparameter, you can input an int \nor a list like 1,2,3\n",
+        "x": 190,
+        "y": 280,
+        "wires": []
     }
 ]

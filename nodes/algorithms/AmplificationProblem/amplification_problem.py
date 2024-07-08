@@ -13,6 +13,7 @@ try:
     # msg.payload from node-red
     data = json.loads(sys.argv[1])
     target = data["target"]
+    iterations_times = data.get("iterations",-1)
 except json.JSONDecodeError:
     print("Error: Failed to decode JSON from input.")
     sys.exit(1)
@@ -49,8 +50,16 @@ try:
     backend = Aer.get_backend('qasm_simulator')
 
     problem = AmplificationProblem(oracle, is_good_state=lambda bitstring: bitstring == target)
-
-    grover = Grover(sampler=Sampler())
+    if iterations_times == -1:
+        grover = Grover(sampler=Sampler())
+    else:
+        if ',' in iterations_times:
+            iterations_times = iterations_times.split(',')
+            iterations_times = [int(i) for i in iterations_times]
+            grover = Grover(iterations=iterations_times, sampler=Sampler())
+        else:    
+            iterations_times = int(iterations_times)    
+            grover = Grover(iterations=iterations_times, sampler=Sampler())
     result = grover.amplify(problem)
 
     circuit_image = circuit_drawer(problem.grover_operator.decompose(), output='mpl')
