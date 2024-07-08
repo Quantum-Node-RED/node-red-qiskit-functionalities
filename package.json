@@ -22,7 +22,12 @@
       "pulse-build-calibration-for-custom": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Add_cal_to_custom_cir/Pulse_Build_Calibration_for_custom.js",
       "pulse-link-cal-to-custom-cir": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Add_cal_to_custom_cir/Pulse_Link_cal_to_custom_cir.js",
       "pulse-try-transpile-on-custom": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Add_cal_to_custom_cir/Pulse_Try_transpile_on_custom_gate.js",
-      "pulse-link-cal-to-custom-cir-another": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Add_cal_to_custom_cir/Pulse_Link_cal_to_custom_cir_another.js"
+      "pulse-link-cal-to-custom-cir-another": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Add_cal_to_custom_cir/Pulse_Link_cal_to_custom_cir_another.js",
+      "initial-scheduleblock": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Build_pulse_schedule/Initial_ScheduleBlock.js",
+      "scheduleblock-set-channel": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Build_pulse_schedule/ScheduleBlock_set_channel.js",
+      "pulse-introduction": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Build_pulse_schedule/Pulse_introduction.js",
+      "parametric-pulse": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Build_pulse_schedule/Parametric_pulse.js",
+      "pulse-waveforms": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Build_pulse_schedule/Pulse_waveforms.js"
     }
   },
   "dependencies": {
