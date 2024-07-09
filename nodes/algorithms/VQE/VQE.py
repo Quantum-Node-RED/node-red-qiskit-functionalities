@@ -24,9 +24,11 @@ from qiskit_algorithms.optimizers import SLSQP, SPSA, COBYLA, L_BFGS_B
 #             serializable_data[key] = str(value) if not isinstance(value, (int, float, type(None))) else value
 #     return serializable_data
 
+assert len(sys.argv) > 1, "No arguments found."
 input = sys.argv[1]
 parse_input = json.loads(input)
 
+# parese input
 num_qubits = parse_input["numQubits"]
 rotation_blocks = parse_input["rotationLayers"]
 entanglement_blocks = parse_input["entanglementLayers"]
@@ -35,6 +37,9 @@ hamiltonian_data = [item.strip('" ').strip() for item in hamiltonian_data]
 hamiltonian_coeffs = [float(f) for f in parse_input["hamiltonianCoeffs"].strip('[]').split(',')]
 chosen_optimizer = parse_input["optimizer"]
 chosen_maxiter = int(parse_input["maxiter"])
+
+# input error handling
+assert len(hamiltonian_data) == len(hamiltonian_coeffs), "The Pauli list of terms for the Hamiltonian should be as long as the complex coefficients."
 
 operator = SparsePauliOp(hamiltonian_data, coeffs=hamiltonian_coeffs)
 
@@ -50,6 +55,8 @@ elif chosen_optimizer == "COBYLA":
 elif chosen_optimizer == "L_BFGS_B":
   optimizer = L_BFGS_B(maxiter=chosen_maxiter)
 
+
+# storing intermediate energy value while optimizing
 counts = []
 values = []
 
@@ -61,6 +68,7 @@ vqe = VQE(estimator, ansatz, optimizer, callback=store_intermediate_result)
 
 vqe_result = vqe.compute_minimum_eigenvalue(operator)
 
+# Draw optimization convergence
 pylab.rcParams["figure.figsize"] = (12, 8)
 pylab.plot(counts, values, label=type(optimizer).__name__)
 pylab.xlabel("Eval count")
@@ -68,7 +76,6 @@ pylab.ylabel("Energy")
 pylab.title("Energy convergence")
 pylab.legend(loc="upper right")
 
-# Draw optimization convergence
 buffer = io.BytesIO()
 pylab.savefig(buffer, format='png')
 buffer.seek(0)
