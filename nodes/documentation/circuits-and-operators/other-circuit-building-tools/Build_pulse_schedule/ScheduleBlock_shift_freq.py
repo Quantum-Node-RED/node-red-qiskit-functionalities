@@ -23,10 +23,13 @@ gaus = pulse.library.Gaussian(num_samples, amp, sigma,
 with pulse.build(backend=backend) as pulse_prog_orig:
     pulse.play(gaus, channel)
 
-# Create the Gaussian pulse with a 5 dt delay
-with pulse.build(backend=backend) as pulse_prog_delay:
-    pulse.delay(5, channel)
-    pulse.play(gaus, channel)
+
+d0 = pulse.DriveChannel(0)
+ 
+with pulse.build(backend=backend) as pulse_prog_shift_freq:
+    pulse.shift_frequency(1e9, d0)
+    pulse.play(gaus, d0)
+
 
 # Plot the two pulse programs for comparison
 fig, axs = plt.subplots(1, 2, figsize=(10, 3))
@@ -35,8 +38,8 @@ fig, axs = plt.subplots(1, 2, figsize=(10, 3))
 pulse_prog_orig.draw(axis=axs[0])
 axs[0].set_title("Original Pulse Program", y=1.1)
 
-pulse_prog_delay.draw(axis=axs[1])
-axs[1].set_title("Pulse Program with Delay", y=1.1)
+pulse_prog_shift_freq.draw(axis=axs[1])
+axs[1].set_title("Pulse Program with shifted Frequency", y=1.1)
 
 plt.tight_layout()
 

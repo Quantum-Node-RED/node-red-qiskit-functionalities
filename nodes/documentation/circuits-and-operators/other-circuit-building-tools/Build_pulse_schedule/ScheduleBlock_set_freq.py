@@ -18,27 +18,10 @@ gaus = pulse.library.Gaussian(num_samples, amp, sigma,
                               name="Parametric Gaus")
  
  
-
-# Create the Gaussian pulse
-with pulse.build(backend=backend) as pulse_prog_orig:
+# Create the Gaussian pulse with frequency 4.5e9
+with pulse.build(backend=backend) as pulse_prog_set_freq:
+    pulse.set_frequency(4.5e9, channel)
     pulse.play(gaus, channel)
-
-# Create the Gaussian pulse with a 5 dt delay
-with pulse.build(backend=backend) as pulse_prog_delay:
-    pulse.delay(5, channel)
-    pulse.play(gaus, channel)
-
-# Plot the two pulse programs for comparison
-fig, axs = plt.subplots(1, 2, figsize=(10, 3))
-
-# Use the draw method to plot the pulse programs
-pulse_prog_orig.draw(axis=axs[0])
-axs[0].set_title("Original Pulse Program", y=1.1)
-
-pulse_prog_delay.draw(axis=axs[1])
-axs[1].set_title("Pulse Program with Delay", y=1.1)
-
-plt.tight_layout()
 
 
 
@@ -46,7 +29,7 @@ plt.tight_layout()
 
 # Save the plot to a buffer
 buffer = io.BytesIO()
-plt.savefig(buffer, format='png')
+pulse_prog_set_freq.draw().savefig(buffer, format='png')
 buffer.seek(0)
 
 # Convert the plot to a Base64 string
