@@ -27,7 +27,9 @@
       "scheduleblock-set-channel": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Build_pulse_schedule/ScheduleBlock_set_channel.js",
       "pulse-introduction": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Build_pulse_schedule/Pulse_introduction.js",
       "parametric-pulse": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Build_pulse_schedule/Parametric_pulse.js",
-      "pulse-waveforms": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Build_pulse_schedule/Pulse_waveforms.js"
+      "pulse-waveforms": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Build_pulse_schedule/Pulse_waveforms.js",
+      "pulse-delay": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Build_pulse_schedule/ScheduleBlock_delay.js",
+      "pulse-play": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Build_pulse_schedule/ScheduleBlock_play.js"
     }
   },
   "dependencies": {
