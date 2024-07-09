@@ -1,0 +1,229 @@
+[
+    {
+        "id": "f965af6e921672a2",
+        "type": "tab",
+        "label": "Build Pulse Schedule",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "d639657fc9098126",
+        "type": "initial-scheduleblock",
+        "z": "f965af6e921672a2",
+        "name": "Initiate the schedule",
+        "x": 560,
+        "y": 480,
+        "wires": [
+            [
+                "3e4ce8508968e517",
+                "c95d622120cc2684"
+            ]
+        ]
+    },
+    {
+        "id": "b6e1e385260cc9d4",
+        "type": "inject",
+        "z": "f965af6e921672a2",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 310,
+        "y": 480,
+        "wires": [
+            [
+                "d639657fc9098126",
+                "d14cd47d6177f1d3"
+            ]
+        ]
+    },
+    {
+        "id": "3e4ce8508968e517",
+        "type": "debug",
+        "z": "f965af6e921672a2",
+        "name": "ScheduleBlock Object",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result.result_obj",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 910,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "c95d622120cc2684",
+        "type": "scheduleblock-set-channel",
+        "z": "f965af6e921672a2",
+        "name": "Set a channel",
+        "x": 1240,
+        "y": 480,
+        "wires": [
+            [
+                "58c30beeca94cb44",
+                "cf7b4cf3235b1aa9",
+                "c46cf571b9dbf48c"
+            ]
+        ]
+    },
+    {
+        "id": "58c30beeca94cb44",
+        "type": "debug",
+        "z": "f965af6e921672a2",
+        "name": "Channel",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result.result_obj",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1520,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "d14cd47d6177f1d3",
+        "type": "pulse-introduction",
+        "z": "f965af6e921672a2",
+        "name": "What is pulse?",
+        "x": 560,
+        "y": 1040,
+        "wires": [
+            [
+                "1832deeefc45d6d8",
+                "7dfdb599c3b77fd3"
+            ]
+        ]
+    },
+    {
+        "id": "1832deeefc45d6d8",
+        "type": "parametric-pulse",
+        "z": "f965af6e921672a2",
+        "name": "Build parametric pulse",
+        "x": 900,
+        "y": 880,
+        "wires": [
+            [
+                "af01534711e5729c"
+            ]
+        ]
+    },
+    {
+        "id": "af01534711e5729c",
+        "type": "image",
+        "z": "f965af6e921672a2",
+        "name": "",
+        "width": "640",
+        "data": "payload.result.result_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1200,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "7dfdb599c3b77fd3",
+        "type": "pulse-waveforms",
+        "z": "f965af6e921672a2",
+        "name": "Build pulse by waveforms",
+        "x": 890,
+        "y": 1240,
+        "wires": [
+            [
+                "8b1e11bc0b14e2d0"
+            ]
+        ]
+    },
+    {
+        "id": "8b1e11bc0b14e2d0",
+        "type": "image",
+        "z": "f965af6e921672a2",
+        "name": "",
+        "width": "640",
+        "data": "payload.result.result_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1200,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "c55ff30b7631e6a7",
+        "type": "image",
+        "z": "f965af6e921672a2",
+        "name": "",
+        "width": "480",
+        "data": "payload.result.result_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 2540,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "cf7b4cf3235b1aa9",
+        "type": "pulse-play",
+        "z": "f965af6e921672a2",
+        "name": "Executing pulse with pulse.play()",
+        "x": 2140,
+        "y": 260,
+        "wires": [
+            [
+                "29c988c011a64718"
+            ]
+        ]
+    },
+    {
+        "id": "29c988c011a64718",
+        "type": "image",
+        "z": "f965af6e921672a2",
+        "name": "",
+        "width": "480",
+        "data": "payload.result.result_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 2540,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "c46cf571b9dbf48c",
+        "type": "pulse-delay",
+        "z": "f965af6e921672a2",
+        "name": "Set 5 dt delay to the pulse with pulse.delay()",
+        "x": 2170,
+        "y": 480,
+        "wires": [
+            [
+                "c55ff30b7631e6a7"
+            ]
+        ]
+    }
+]
