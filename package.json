@@ -4,14 +4,26 @@
   "description": "Quantum Computing Functionality for Node-RED",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node-red",
+    "lint": "eslint \"**/**/*.js\"",
+    "lint-fix": "eslint --fix \"**/**/*.js\""
   },
   "author": "wangyiyuelva",
   "license": "Apache-2.0",
   "node-red": {
     "nodes": {
       "lower-case": "templates/lower-case.js",
+      "CHSH-game-classic": "nodes/CHSH-game-classic/CHSH-game-classic.js",
+      "CHSH-game-quantum": "nodes/CHSH-game-quantum/CHSH-game-quantum.js",
+      "AmplificationProblem": "nodes/algorithms/AmplificationProblem/amplification_problem.js",
       "routing": "nodes/documentation/transpiler/routing.js"
     }
+  },
+  "dependencies": {
+    "python-shell": "^5.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.5.0",
+    "eslint": "^9.5.0"
   }
 }
