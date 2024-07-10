@@ -14,7 +14,8 @@
     "nodes": {
       "lower-case": "templates/lower-case.js",
       "CHSH-game-classic": "nodes/CHSH-game-classic/CHSH-game-classic.js",
-      "CHSH-game-quantum": "nodes/CHSH-game-quantum/CHSH-game-quantum.js"
+      "CHSH-game-quantum": "nodes/CHSH-game-quantum/CHSH-game-quantum.js",
+      "default-draw": "nodes/documentation/post-processing-results/default-draw.js"
     }
   },
   "dependencies": {
