@@ -18,6 +18,8 @@ pass_manager = generate_preset_pass_manager(
     backend=backend,
     layout_method="trivial",  # Fixed layout mapped in circuit order
 )
+
+# draw the image of circuit depth and gate count
 depths = []
 for _ in range(100):
     depths.append(pass_manager.run(ghz).depth())
@@ -37,6 +39,6 @@ result = {
     "layout_image": layout 
 }
 
-print(json.dump(result))
+print(json.dumps(result))
 
 

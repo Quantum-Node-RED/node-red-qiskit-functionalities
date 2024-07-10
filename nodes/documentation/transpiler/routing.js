@@ -1,7 +1,7 @@
 const runPythonScript = require("../../pythonShell");
 
 module.exports = function (RED) {
-  function routing(config) {
+  function RoutingNode(config) {
     RED.nodes.createNode(this, config);
 
     var node = this;
@@ -11,7 +11,10 @@ module.exports = function (RED) {
           
         };
         runPythonScript(__dirname, "routing.py", options, (err, results) => {
-          if (err) throw err;
+          if (err) {
+            node.error("Error running Python script: " + err);
+            return reject(err);
+          }
           return resolve(results);
         });
       });
