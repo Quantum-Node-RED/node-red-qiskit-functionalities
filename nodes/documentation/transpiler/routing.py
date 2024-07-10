@@ -7,6 +7,7 @@ from qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager
 import io
 from qiskit.visualization import plot_circuit_layout
 from qiskit_aer import Aer
+import pickle
 
 # take a 15-qubit GHZ circuit executed 100 times, using a “bad” (disconnected) initial_layout. 
 backend = FakeAuckland()
@@ -60,6 +61,9 @@ result = {
     "circuit_image": circuit_image_b64,
     "qubit_image":  qubits_used_image_b64 
 }
+
+with open('backend_state.pkl', 'wb') as f:
+    pickle.dump(backend, f)
 
 print(json.dumps(result))
 
