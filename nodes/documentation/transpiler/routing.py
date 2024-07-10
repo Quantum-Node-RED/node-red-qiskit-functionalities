@@ -5,6 +5,8 @@ from qiskit import QuantumCircuit
 from qiskit_ibm_runtime.fake_provider import FakeAuckland, FakeWashingtonV2
 from qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager
 import io
+from qiskit.visualization import plot_circuit_layout
+from qiskit_aer import Aer
 
 # take a 15-qubit GHZ circuit executed 100 times, using a “bad” (disconnected) initial_layout. 
 backend = FakeAuckland()
@@ -35,8 +37,28 @@ buffer.seek(0)
 layout = base64.b64encode(buffer.read()).decode('utf-8')
 buffer.close()
 
+circuit_image = ghz.draw('mpl', idle_wires=False)
+buffer = io.BytesIO()
+circuit_image.savefig(buffer, format='png') 
+buffer.seek(0)
+circuit_image_b64 = base64.b64encode(buffer.read()).decode('utf-8')
+buffer.close()
+
+# Plot the hardware graph and indicate which hardware qubits were chosen to run the circuit
+transpiled_circ = pass_manager.run(ghz)
+
+# https://graphviz.org/download/ to download the graphvizs
+qubits_used_image = plot_circuit_layout(transpiled_circ, backend)
+buffer = io.BytesIO()
+qubits_used_image.savefig(buffer, format='png') 
+buffer.seek(0)
+qubits_used_image_b64 = base64.b64encode(buffer.read()).decode('utf-8')
+buffer.close()
+
 result = {
-    "layout_image": layout 
+    "layout_image": layout,
+    "circuit_image": circuit_image_b64,
+    "qubit_image":  qubits_used_image_b64 
 }
 
 print(json.dumps(result))
