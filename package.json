@@ -10,7 +10,8 @@
   "license": "Apache-2.0",
   "node-red": {
     "nodes": {
-      "lower-case": "templates/lower-case.js"
+      "lower-case": "templates/lower-case.js",
+      "routing": "nodes/documentation/transpiler/routing.js"
     }
   }
 }
