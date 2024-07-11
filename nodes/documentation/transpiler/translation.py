@@ -14,7 +14,7 @@ file_path = 'backend_state.pkl'
 with open(file_path, 'rb') as f:
     backend = pickle.load(f)
     
-os.remove(file_path)    
+# os.remove(file_path)    
 
 native_gates = str(backend.operation_names)
 qc = QuantumCircuit(2)

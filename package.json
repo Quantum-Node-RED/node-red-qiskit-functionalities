@@ -17,7 +17,8 @@
       "CHSH-game-quantum": "nodes/CHSH-game-quantum/CHSH-game-quantum.js",
       "AmplificationProblem": "nodes/algorithms/AmplificationProblem/amplification_problem.js",
       "routing": "nodes/documentation/transpiler/routing.js",
-      "translation": "nodes/documentation/transpiler/translation.js"
+      "translation": "nodes/documentation/transpiler/translation.js",
+      "optimization": "nodes/documentation/transpiler/optimization.js"
     }
   },
   "dependencies": {
