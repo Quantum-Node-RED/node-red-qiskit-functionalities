@@ -1,8 +1,9 @@
 import io
 import base64
+import json
 from qiskit import QuantumCircuit
 from qiskit.circuit.library import GroverOperator, Diagonal
-from qiskit_ibm_runtime import QiskitRuntimeService
+# from qiskit_ibm_runtime import QiskitRuntimeService
 from qiskit_ibm_runtime.fake_provider import FakeSherbrooke
 from qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager
 
@@ -30,7 +31,11 @@ qc = qc.compose(GroverOperator(oracle))
 qc.measure_all()
  
 # View the circuit
-qc.draw(output='mpl')
+qc_buffer = io.BytesIO()
+qc.draw(output='mpl').savefig(qc_buffer, format='png')
+qc_buffer.seek(0)
+qc_str = base64.b64encode(qc_buffer.read()).decode('utf-8')
+qc_buffer.close()
 
 # Specify the system to target
 backend = FakeSherbrooke()
@@ -45,3 +50,10 @@ transpiled_circ.draw(output='mpl', idle_wires=False).savefig(transpiled_circ_buf
 transpiled_circ_buffer.seek(0)
 transpiled_circ_str = base64.b64encode(transpiled_circ_buffer.read()).decode('utf-8')
 transpiled_circ_buffer.close()
+
+result = {
+  "qc_image": qc_str, 
+  "transpiled_circ_image": transpiled_circ_str,
+}
+
+print(json.dumps(result))

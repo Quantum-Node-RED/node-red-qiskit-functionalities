@@ -1,14 +1,14 @@
-const runPythonScript = require("../pythonShell");
+const runPythonScript = require("../../../../pythonShell");
 
 module.exports = function (RED) {
-  function transpilationDefaultSetting(config) {
+  function transpilationQuantumComputers(config) {
     RED.nodes.createNode(this, config);
     var node = this;
     node.on("input", async function (msg) {
       const result = await new Promise((resolve, reject) => {
         const option = {
         };
-        runPythonScript(__dirname, "default-settings.py", option, (err, results) => {
+        runPythonScript(__dirname, "quantum-computers.py", option, (err, results) => {
           if (err) throw err;
           return resolve(results);
         });
@@ -20,5 +20,5 @@ module.exports = function (RED) {
       node.send(newMsg);
     });
   }
-  RED.nodes.registerType("transpilation-default-settings", transpilationDefaultSetting);
+  RED.nodes.registerType("transpilation-quantum-computers", transpilationQuantumComputers);
 };

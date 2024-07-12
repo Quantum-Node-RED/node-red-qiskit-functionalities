@@ -14,7 +14,11 @@
     "nodes": {
       "lower-case": "templates/lower-case.js",
       "CHSH-game-classic": "nodes/CHSH-game-classic/CHSH-game-classic.js",
-      "CHSH-game-quantum": "nodes/CHSH-game-quantum/CHSH-game-quantum.js"
+      "CHSH-game-quantum": "nodes/CHSH-game-quantum/CHSH-game-quantum.js",
+      "transpilation-default-settings": "nodes/documentation/transpiler/pass-managers/default-settings/default-settings.js",
+      "transpilation-optimization": "nodes/documentation/transpiler/pass-managers/optimization/optimization.js",
+      "transpilation-parameters": "nodes/documentation/transpiler/pass-managers/parameters/parameters.js",
+      "transpilation-quantum-computers": "nodes/documentation/transpiler/pass-managers/quantum-computers/quantum-computers.js"
     }
   },
   "dependencies": {

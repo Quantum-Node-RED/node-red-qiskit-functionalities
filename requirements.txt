@@ -3,3 +3,5 @@ qiskit_aer
 numpy
 qiskit_ibm_runtime
 python-dotenv
+seaborn
+Graphviz
