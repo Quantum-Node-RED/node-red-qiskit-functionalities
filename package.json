@@ -34,7 +34,14 @@
       "pulse-shift-freq": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Build_pulse_schedule/ScheduleBlock_shift_freq.js",
       "pulse-set-phase": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Build_pulse_schedule/ScheduleBlock_set_phase.js",
       "pulse-shift-phase": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Build_pulse_schedule/ScheduleBlock_shift_phase.js",
-      "pulse-acquire": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Build_pulse_schedule/ScheduleBlock_acquire.js"
+      "pulse-acquire": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Build_pulse_schedule/ScheduleBlock_acquire.js",
+      "pulse-builder-feature": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Feature_of_pulse_builder/Feature_of_pulse_builder.js",
+      "pulse-builder-alignment-context": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Feature_of_pulse_builder/Alignment_context.js",
+      "pulse-builder-align-left": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Feature_of_pulse_builder/Align_context_left.js",
+      "pulse-builder-align-right": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Feature_of_pulse_builder/Align_context_right.js",
+      "pulse-builder-align-equispaced": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Feature_of_pulse_builder/Align_context_equispaced.js",
+      "pulse-builder-align-sequential": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Feature_of_pulse_builder/Align_context_sequential.js",
+      "pulse-builder-phase-frequency-offset": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Feature_of_pulse_builder/Phase_and_frequency_offset.js"
     }
   },
   "dependencies": {
