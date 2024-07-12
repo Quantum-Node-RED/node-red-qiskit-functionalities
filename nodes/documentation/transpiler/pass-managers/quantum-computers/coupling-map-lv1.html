@@ -1,5 +1,5 @@
 <script type="text/javascript">
-  RED.nodes.registerType('transpilation-fewer-gates-approx', {
+  RED.nodes.registerType('transpilation-coupling-map-lv1', {
     category: 'function',
     color: '#aaaaaa',
     defaults: {
@@ -8,20 +8,20 @@
     inputs: 1,
     outputs: 1,
     icon: "file.svg",
-    paletteLabel: "fewer gates approx",
+    paletteLabel: "coupling map lv1",
     label: function () {
-      return this.name || "fewer gates approx";
+      return this.name || "coupling map lv1";
     }
   });
 </script>
 
-<script type="text/html" data-template-name="transpilation-fewer-gates-approx">
+<script type="text/html" data-template-name="transpilation-coupling-map-lv1">
   <div class="form-row">
       <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
       <input type="text" id="node-input-name" placeholder="Name">
   </div>
 </script>
 
-<script type="text/html" data-help-name="transpilation-fewer-gates-approx">
-  <p>transpilation fewer gates approx</p>
+<script type="text/html" data-help-name="transpilation-coupling-map-lv1">
+  <p>transpilation-coupling-map-lv1</p>
 </script>

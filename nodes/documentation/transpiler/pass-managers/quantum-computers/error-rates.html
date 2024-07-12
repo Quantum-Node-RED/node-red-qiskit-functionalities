@@ -1,5 +1,5 @@
 <script type="text/javascript">
-  RED.nodes.registerType('transpilation-parameters', {
+  RED.nodes.registerType('transpilation-error-rates', {
     category: 'function',
     color: '#aaaaaa',
     defaults: {
@@ -8,19 +8,20 @@
     inputs: 1,
     outputs: 1,
     icon: "file.svg",
+    paletteLabel: "error-rates",
     label: function () {
-      return this.name || "transpilation-parameters";
+      return this.name || "error rates";
     }
   });
 </script>
 
-<script type="text/html" data-template-name="transpilation-parameters">
+<script type="text/html" data-template-name="transpilation-error-rates">
   <div class="form-row">
       <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
       <input type="text" id="node-input-name" placeholder="Name">
   </div>
 </script>
 
-<script type="text/html" data-help-name="transpilation-parameters">
-  <p>transpilation-parameters</p>
+<script type="text/html" data-help-name="transpilation-error-rates">
+  <p>transpilation-error-rates</p>
 </script>

@@ -1,5 +1,5 @@
 <script type="text/javascript">
-  RED.nodes.registerType('transpilation-quantum-computers', {
+  RED.nodes.registerType('transpilation-system-information', {
     category: 'function',
     color: '#aaaaaa',
     defaults: {
@@ -8,19 +8,20 @@
     inputs: 1,
     outputs: 1,
     icon: "file.svg",
+    paletteLabel: "system information",
     label: function () {
-      return this.name || "transpilation-quantum-computers";
+      return this.name || "system information";
     }
   });
 </script>
 
-<script type="text/html" data-template-name="transpilation-quantum-computers">
+<script type="text/html" data-template-name="transpilation-system-information">
   <div class="form-row">
       <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
       <input type="text" id="node-input-name" placeholder="Name">
   </div>
 </script>
 
-<script type="text/html" data-help-name="transpilation-quantum-computers">
-  <p>transpilation-quantum-computers</p>
+<script type="text/html" data-help-name="transpilation-system-information">
+  <p>transpilation-system-information</p>
 </script>

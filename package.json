@@ -21,8 +21,16 @@
       "transpilation-set-optimization": "nodes/documentation/transpiler/pass-managers/optimization/set-optimization.js",
       "transpilation-fewer-gates-approx": "nodes/documentation/transpiler/pass-managers/optimization/fewer-gates-approx.js",
       "transpilation-synthesis-fidelity": "nodes/documentation/transpiler/pass-managers/optimization/synthesis-fidelity.js",
-      "transpilation-parameters": "nodes/documentation/transpiler/pass-managers/parameters/parameters.js",
-      "transpilation-quantum-computers": "nodes/documentation/transpiler/pass-managers/quantum-computers/quantum-computers.js"
+      "transpilation-approximation-degree": "nodes/documentation/transpiler/pass-managers/parameters/approximation-degree.js",
+      "transpilation-number-generator-seed": "nodes/documentation/transpiler/pass-managers/parameters/number-generator-seed.js",
+      "transpilation-initial-layout": "nodes/documentation/transpiler/pass-managers/parameters/initial-layout.js",
+      "transpilation-error-map": "nodes/documentation/transpiler/pass-managers/parameters/error-map.js",
+      "transpilation-system-information": "nodes/documentation/transpiler/pass-managers/quantum-computers/system-information.js",
+      "transpilation-default-configuration": "nodes/documentation/transpiler/pass-managers/quantum-computers/default-configuration.js",
+      "transpilation-coupling-map-lv0": "nodes/documentation/transpiler/pass-managers/quantum-computers/coupling-map-lv0.js",
+      "transpilation-coupling-map-lv1": "nodes/documentation/transpiler/pass-managers/quantum-computers/coupling-map-lv1.js",
+      "transpilation-basis-gates": "nodes/documentation/transpiler/pass-managers/quantum-computers/basis-gates.js",
+      "transpilation-error-rates": "nodes/documentation/transpiler/pass-managers/quantum-computers/error-rates.js"
     }
   },
   "dependencies": {
