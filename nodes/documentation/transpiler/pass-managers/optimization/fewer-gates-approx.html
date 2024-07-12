@@ -1,5 +1,5 @@
 <script type="text/javascript">
-  RED.nodes.registerType('transpilation-default-settings', {
+  RED.nodes.registerType('transpilation-fewer-gates-approx', {
     category: 'function',
     color: '#aaaaaa',
     defaults: {
@@ -8,19 +8,20 @@
     inputs: 1,
     outputs: 1,
     icon: "file.svg",
+    paletteLabel: "transpilation fewer gates approx",
     label: function () {
-      return this.name || "transpilation-default-settings";
+      return this.name || "transpilation fewer gates approx";
     }
   });
 </script>
 
-<script type="text/html" data-template-name="transpilation-default-settings">
+<script type="text/html" data-template-name="transpilation-fewer-gates-approx">
   <div class="form-row">
       <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
       <input type="text" id="node-input-name" placeholder="Name">
   </div>
 </script>
 
-<script type="text/html" data-help-name="transpilation-default-settings">
-  <p>transpilation-default-settings</p>
+<script type="text/html" data-help-name="transpilation-fewer-gates-approx">
+  <p>transpilation fewer gates approx</p>
 </script>

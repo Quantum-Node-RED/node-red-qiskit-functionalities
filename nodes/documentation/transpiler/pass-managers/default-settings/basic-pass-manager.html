@@ -1,5 +1,5 @@
 <script type="text/javascript">
-  RED.nodes.registerType('transpilation-optimization', {
+  RED.nodes.registerType('transpilation-basic-pass-manager', {
     category: 'function',
     color: '#aaaaaa',
     defaults: {
@@ -8,19 +8,20 @@
     inputs: 1,
     outputs: 1,
     icon: "file.svg",
+    paletteLabel: "basic pass manager",
     label: function () {
-      return this.name || "transpilation-optimization";
+      return this.name || "transpilation basic pass manager";
     }
   });
 </script>
 
-<script type="text/html" data-template-name="transpilation-optimization">
+<script type="text/html" data-template-name="transpilation-basic-pass-manager">
   <div class="form-row">
       <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
       <input type="text" id="node-input-name" placeholder="Name">
   </div>
 </script>
 
-<script type="text/html" data-help-name="transpilation-optimization">
-  <p>transpilation-optimization</p>
+<script type="text/html" data-help-name="transpilation-basic-pass-manager">
+  <p>transpilation basic pass manager</p>
 </script>

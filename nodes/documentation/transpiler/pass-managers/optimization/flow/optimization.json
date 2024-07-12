@@ -1,0 +1,228 @@
+[
+  {
+    "id": "7ac8cf4cc4e5a610",
+    "type": "tab",
+    "label": "optimization",
+    "disabled": false,
+    "info": "",
+    "env": []
+  },
+  {
+    "id": "f63db4f5cc76da52",
+    "type": "inject",
+    "z": "7ac8cf4cc4e5a610",
+    "name": "",
+    "props": [
+      {
+        "p": "payload"
+      },
+      {
+        "p": "topic",
+        "vt": "str"
+      }
+    ],
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "x": 280,
+    "y": 160,
+    "wires": [
+      [
+        "2ce98b2ce7cc4d89"
+      ]
+    ]
+  },
+  {
+    "id": "eb607f1b85302a51",
+    "type": "image",
+    "z": "7ac8cf4cc4e5a610",
+    "name": "",
+    "width": "200",
+    "data": "payload.result.qc_image",
+    "dataType": "msg",
+    "thumbnail": false,
+    "active": true,
+    "pass": false,
+    "outputs": 0,
+    "x": 200,
+    "y": 420,
+    "wires": []
+  },
+  {
+    "id": "feace14a7e7d4e99",
+    "type": "image",
+    "z": "7ac8cf4cc4e5a610",
+    "name": "",
+    "width": "600",
+    "data": "payload.result.qc_t0_image",
+    "dataType": "msg",
+    "thumbnail": false,
+    "active": true,
+    "pass": false,
+    "outputs": 0,
+    "x": 520,
+    "y": 460,
+    "wires": []
+  },
+  {
+    "id": "2a6ee117da08ae3e",
+    "type": "image",
+    "z": "7ac8cf4cc4e5a610",
+    "name": "",
+    "width": "600",
+    "data": "payload.result.qc_t3_approx_image",
+    "dataType": "msg",
+    "thumbnail": false,
+    "active": true,
+    "pass": false,
+    "outputs": 0,
+    "x": 1140,
+    "y": 880,
+    "wires": []
+  },
+  {
+    "id": "8dc803d8567edf96",
+    "type": "debug",
+    "z": "7ac8cf4cc4e5a610",
+    "name": "debug 1",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload.result.synthesis_fidelity_exact",
+    "targetType": "msg",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 1380,
+    "y": 300,
+    "wires": []
+  },
+  {
+    "id": "6a32b9861b67070c",
+    "type": "debug",
+    "z": "7ac8cf4cc4e5a610",
+    "name": "debug 2",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload.result.synthesis_fidelity_approx",
+    "targetType": "msg",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 1380,
+    "y": 360,
+    "wires": []
+  },
+  {
+    "id": "2ce98b2ce7cc4d89",
+    "type": "transpilation-random-unitary",
+    "z": "7ac8cf4cc4e5a610",
+    "name": "",
+    "x": 320,
+    "y": 280,
+    "wires": [
+      [
+        "eb607f1b85302a51",
+        "e5d37423f4b15c2e"
+      ]
+    ]
+  },
+  {
+    "id": "e5d37423f4b15c2e",
+    "type": "transpilation-set-optimization",
+    "z": "7ac8cf4cc4e5a610",
+    "name": "",
+    "x": 580,
+    "y": 280,
+    "wires": [
+      [
+        "38238be35a216205",
+        "feace14a7e7d4e99",
+        "95e959387e28f2d6",
+        "47430aa321209b8a",
+        "18e0d2839ff9940e"
+      ]
+    ]
+  },
+  {
+    "id": "38238be35a216205",
+    "type": "transpilation-fewer-gates-approx",
+    "z": "7ac8cf4cc4e5a610",
+    "name": "",
+    "x": 870,
+    "y": 280,
+    "wires": [
+      [
+        "6860db8d230d01ac",
+        "2a6ee117da08ae3e"
+      ]
+    ]
+  },
+  {
+    "id": "6860db8d230d01ac",
+    "type": "transpilation-synthesis-fidelity",
+    "z": "7ac8cf4cc4e5a610",
+    "name": "",
+    "x": 1160,
+    "y": 280,
+    "wires": [
+      [
+        "6a32b9861b67070c",
+        "8dc803d8567edf96"
+      ]
+    ]
+  },
+  {
+    "id": "95e959387e28f2d6",
+    "type": "image",
+    "z": "7ac8cf4cc4e5a610",
+    "name": "",
+    "width": "600",
+    "data": "payload.result.qc_t1_image",
+    "dataType": "msg",
+    "thumbnail": false,
+    "active": true,
+    "pass": false,
+    "outputs": 0,
+    "x": 520,
+    "y": 620,
+    "wires": []
+  },
+  {
+    "id": "18e0d2839ff9940e",
+    "type": "image",
+    "z": "7ac8cf4cc4e5a610",
+    "name": "",
+    "width": "600",
+    "data": "payload.result.qc_t3_image",
+    "dataType": "msg",
+    "thumbnail": false,
+    "active": true,
+    "pass": false,
+    "outputs": 0,
+    "x": 520,
+    "y": 900,
+    "wires": []
+  },
+  {
+    "id": "47430aa321209b8a",
+    "type": "image",
+    "z": "7ac8cf4cc4e5a610",
+    "name": "",
+    "width": "600",
+    "data": "payload.result.qc_t2_image",
+    "dataType": "msg",
+    "thumbnail": false,
+    "active": true,
+    "pass": false,
+    "outputs": 0,
+    "x": 520,
+    "y": 780,
+    "wires": []
+  }
+]

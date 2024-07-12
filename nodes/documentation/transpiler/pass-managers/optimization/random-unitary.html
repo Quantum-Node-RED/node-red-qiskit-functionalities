@@ -1,0 +1,27 @@
+<script type="text/javascript">
+  RED.nodes.registerType('transpilation-random-unitary', {
+    category: 'function',
+    color: '#aaaaaa',
+    defaults: {
+      name: { value: "" }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    paletteLabel: "random unitary",
+    label: function () {
+      return this.name || "transpilation random unitary";
+    }
+  });
+</script>
+
+<script type="text/html" data-template-name="transpilation-random-unitary">
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+
+<script type="text/html" data-help-name="transpilation-random-unitary">
+  <p>transpilation random unitary</p>
+</script>

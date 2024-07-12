@@ -1,0 +1,27 @@
+<script type="text/javascript">
+  RED.nodes.registerType('transpilation-set-optimization', {
+    category: 'function',
+    color: '#aaaaaa',
+    defaults: {
+      name: { value: "" }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    paletteLabel: "set optimization level",
+    label: function () {
+      return this.name || "transpilation set optimization";
+    }
+  });
+</script>
+
+<script type="text/html" data-template-name="transpilation-set-optimization">
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+
+<script type="text/html" data-help-name="transpilation-set-optimization">
+  <p>transpilation set optimization level</p>
+</script>

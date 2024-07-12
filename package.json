@@ -15,8 +15,12 @@
       "lower-case": "templates/lower-case.js",
       "CHSH-game-classic": "nodes/CHSH-game-classic/CHSH-game-classic.js",
       "CHSH-game-quantum": "nodes/CHSH-game-quantum/CHSH-game-quantum.js",
-      "transpilation-default-settings": "nodes/documentation/transpiler/pass-managers/default-settings/default-settings.js",
-      "transpilation-optimization": "nodes/documentation/transpiler/pass-managers/optimization/optimization.js",
+      "transpilation-basic-pass-manager": "nodes/documentation/transpiler/pass-managers/default-settings/basic-pass-manager.js",
+      "transpilation-circuit-for-pm": "nodes/documentation/transpiler/pass-managers/default-settings/circuit-for-pm.js",
+      "transpilation-random-unitary": "nodes/documentation/transpiler/pass-managers/optimization/random-unitary.js",
+      "transpilation-set-optimization": "nodes/documentation/transpiler/pass-managers/optimization/set-optimization.js",
+      "transpilation-fewer-gates-approx": "nodes/documentation/transpiler/pass-managers/optimization/fewer-gates-approx.js",
+      "transpilation-synthesis-fidelity": "nodes/documentation/transpiler/pass-managers/optimization/synthesis-fidelity.js",
       "transpilation-parameters": "nodes/documentation/transpiler/pass-managers/parameters/parameters.js",
       "transpilation-quantum-computers": "nodes/documentation/transpiler/pass-managers/quantum-computers/quantum-computers.js"
     }
