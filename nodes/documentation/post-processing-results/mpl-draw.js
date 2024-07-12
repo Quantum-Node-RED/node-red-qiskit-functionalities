@@ -1,16 +1,15 @@
 const runPythonScript = require("../../pythonShell");
 
 module.exports = function(RED) {
-    function DefaultDrawNode(config) {
+    function MplDrawNode(config) {
         RED.nodes.createNode(this,config);
         var node = this;
         node.on('input', async function(msg) {
             const result = await new Promise((resolve, reject) => {
                 const option = {
-                //   x: msg.payload.x,
-                //   y: msg.payload.y
+
                 };
-                runPythonScript(__dirname, "default-draw.py", option, (err, results) => {
+                runPythonScript(__dirname, "mpl-draw.py", option, (err, results) => {
                   if (err) throw err;
                   return resolve(results);
                 });
@@ -20,11 +19,7 @@ module.exports = function(RED) {
                 payload: result
               };
               node.send(newMsg);
-
-
-            // msg.payload = msg.payload.toLowerCase();
-            // node.send(msg);
         });
     }
-    RED.nodes.registerType("default-draw", DefaultDrawNode);
+    RED.nodes.registerType("mpl-draw", MplDrawNode);
 }

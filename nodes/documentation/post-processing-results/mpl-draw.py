@@ -11,7 +11,6 @@ from qiskit_aer import Aer
 import pickle
 import os
 
-
 # Build a quantum circuit
 circuit = QuantumCircuit(3, 3)
 circuit.x(1)
@@ -20,17 +19,15 @@ circuit.cx(0, 1)
 circuit.measure(range(3), range(3));
 
 # Draw the circuit
-default_draw_str = circuit.draw('mpl')
+mpl_draw_str = circuit.draw('mpl')
 buffer = io.BytesIO()
-default_draw_str.savefig(buffer, format='png') 
+mpl_draw_str.savefig(buffer, format='png') 
 buffer.seek(0)
-default_draw_str_b64 = base64.b64encode(buffer.read()).decode('utf-8')
+mpl_draw_str_b64 = base64.b64encode(buffer.read()).decode('utf-8')
 buffer.close()
 
-
-
 result = {
-    "default_draw": default_draw_str_b64
+    "circuit_image": mpl_draw_str_b64
 }
 
 print(json.dumps(result))
