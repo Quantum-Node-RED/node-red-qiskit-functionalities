@@ -28,11 +28,11 @@
     "topic": "",
     "payload": "",
     "payloadType": "date",
-    "x": 280,
+    "x": 220,
     "y": 160,
     "wires": [
       [
-        "2ce98b2ce7cc4d89"
+        "fcac399de92c8a4f"
       ]
     ]
   },
@@ -40,7 +40,7 @@
     "id": "eb607f1b85302a51",
     "type": "image",
     "z": "7ac8cf4cc4e5a610",
-    "name": "",
+    "name": "View circuit",
     "width": "200",
     "data": "payload.result.qc_image",
     "dataType": "msg",
@@ -48,7 +48,7 @@
     "active": true,
     "pass": false,
     "outputs": 0,
-    "x": 200,
+    "x": 190,
     "y": 420,
     "wires": []
   },
@@ -56,7 +56,7 @@
     "id": "feace14a7e7d4e99",
     "type": "image",
     "z": "7ac8cf4cc4e5a610",
-    "name": "",
+    "name": "View optimization level 0",
     "width": "600",
     "data": "payload.result.qc_t0_image",
     "dataType": "msg",
@@ -64,15 +64,16 @@
     "active": true,
     "pass": false,
     "outputs": 0,
-    "x": 520,
+    "x": 550,
     "y": 460,
-    "wires": []
+    "wires": [],
+    "info": "The transpiled circuit has six of the two-qubit ECR gates."
   },
   {
     "id": "2a6ee117da08ae3e",
     "type": "image",
     "z": "7ac8cf4cc4e5a610",
-    "name": "",
+    "name": "View approximations circuit",
     "width": "600",
     "data": "payload.result.qc_t3_approx_image",
     "dataType": "msg",
@@ -80,7 +81,7 @@
     "active": true,
     "pass": false,
     "outputs": 0,
-    "x": 1140,
+    "x": 1180,
     "y": 880,
     "wires": []
   },
@@ -88,7 +89,7 @@
     "id": "8dc803d8567edf96",
     "type": "debug",
     "z": "7ac8cf4cc4e5a610",
-    "name": "debug 1",
+    "name": "Synthesis fidelity of Exact",
     "active": true,
     "tosidebar": true,
     "console": false,
@@ -97,7 +98,7 @@
     "targetType": "msg",
     "statusVal": "",
     "statusType": "auto",
-    "x": 1380,
+    "x": 1430,
     "y": 300,
     "wires": []
   },
@@ -105,7 +106,7 @@
     "id": "6a32b9861b67070c",
     "type": "debug",
     "z": "7ac8cf4cc4e5a610",
-    "name": "debug 2",
+    "name": "Synthesis fidelity of Approximate",
     "active": true,
     "tosidebar": true,
     "console": false,
@@ -114,34 +115,85 @@
     "targetType": "msg",
     "statusVal": "",
     "statusType": "auto",
-    "x": 1380,
+    "x": 1460,
     "y": 360,
     "wires": []
   },
   {
-    "id": "2ce98b2ce7cc4d89",
+    "id": "95e959387e28f2d6",
+    "type": "image",
+    "z": "7ac8cf4cc4e5a610",
+    "name": "View optimization level 1",
+    "width": "600",
+    "data": "payload.result.qc_t1_image",
+    "dataType": "msg",
+    "thumbnail": false,
+    "active": true,
+    "pass": false,
+    "outputs": 0,
+    "x": 550,
+    "y": 620,
+    "wires": [],
+    "info": "The transpiled circuit still has six ECR gates, but the number of single-qubit gates has reduced."
+  },
+  {
+    "id": "18e0d2839ff9940e",
+    "type": "image",
+    "z": "7ac8cf4cc4e5a610",
+    "name": "View optimization level 3",
+    "width": "600",
+    "data": "payload.result.qc_t3_image",
+    "dataType": "msg",
+    "thumbnail": false,
+    "active": true,
+    "pass": false,
+    "outputs": 0,
+    "x": 550,
+    "y": 900,
+    "wires": [],
+    "info": "Now, there are only three ECR gates."
+  },
+  {
+    "id": "47430aa321209b8a",
+    "type": "image",
+    "z": "7ac8cf4cc4e5a610",
+    "name": "View optimization level 2",
+    "width": "600",
+    "data": "payload.result.qc_t2_image",
+    "dataType": "msg",
+    "thumbnail": false,
+    "active": true,
+    "pass": false,
+    "outputs": 0,
+    "x": 550,
+    "y": 780,
+    "wires": [],
+    "info": "This yields the same results as optimization level 1. Note that increasing the level of optimization does not always make a difference."
+  },
+  {
+    "id": "fcac399de92c8a4f",
     "type": "transpilation-random-unitary",
     "z": "7ac8cf4cc4e5a610",
     "name": "",
-    "x": 320,
-    "y": 280,
+    "x": 240,
+    "y": 300,
     "wires": [
       [
-        "eb607f1b85302a51",
-        "e5d37423f4b15c2e"
+        "355ef61fdca2452d",
+        "eb607f1b85302a51"
       ]
     ]
   },
   {
-    "id": "e5d37423f4b15c2e",
+    "id": "355ef61fdca2452d",
     "type": "transpilation-set-optimization",
     "z": "7ac8cf4cc4e5a610",
     "name": "",
-    "x": 580,
-    "y": 280,
+    "x": 500,
+    "y": 300,
     "wires": [
       [
-        "38238be35a216205",
+        "31c211975bb67fc9",
         "feace14a7e7d4e99",
         "95e959387e28f2d6",
         "47430aa321209b8a",
@@ -150,79 +202,31 @@
     ]
   },
   {
-    "id": "38238be35a216205",
+    "id": "31c211975bb67fc9",
     "type": "transpilation-fewer-gates-approx",
     "z": "7ac8cf4cc4e5a610",
     "name": "",
-    "x": 870,
-    "y": 280,
+    "x": 850,
+    "y": 300,
     "wires": [
       [
-        "6860db8d230d01ac",
+        "a44cfbc98b73563d",
         "2a6ee117da08ae3e"
       ]
     ]
   },
   {
-    "id": "6860db8d230d01ac",
+    "id": "a44cfbc98b73563d",
     "type": "transpilation-synthesis-fidelity",
     "z": "7ac8cf4cc4e5a610",
     "name": "",
-    "x": 1160,
-    "y": 280,
+    "x": 1200,
+    "y": 300,
     "wires": [
       [
-        "6a32b9861b67070c",
-        "8dc803d8567edf96"
+        "8dc803d8567edf96",
+        "6a32b9861b67070c"
       ]
     ]
-  },
-  {
-    "id": "95e959387e28f2d6",
-    "type": "image",
-    "z": "7ac8cf4cc4e5a610",
-    "name": "",
-    "width": "600",
-    "data": "payload.result.qc_t1_image",
-    "dataType": "msg",
-    "thumbnail": false,
-    "active": true,
-    "pass": false,
-    "outputs": 0,
-    "x": 520,
-    "y": 620,
-    "wires": []
-  },
-  {
-    "id": "18e0d2839ff9940e",
-    "type": "image",
-    "z": "7ac8cf4cc4e5a610",
-    "name": "",
-    "width": "600",
-    "data": "payload.result.qc_t3_image",
-    "dataType": "msg",
-    "thumbnail": false,
-    "active": true,
-    "pass": false,
-    "outputs": 0,
-    "x": 520,
-    "y": 900,
-    "wires": []
-  },
-  {
-    "id": "47430aa321209b8a",
-    "type": "image",
-    "z": "7ac8cf4cc4e5a610",
-    "name": "",
-    "width": "600",
-    "data": "payload.result.qc_t2_image",
-    "dataType": "msg",
-    "thumbnail": false,
-    "active": true,
-    "pass": false,
-    "outputs": 0,
-    "x": 520,
-    "y": 780,
-    "wires": []
   }
 ]

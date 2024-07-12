@@ -8,37 +8,10 @@
     "env": []
   },
   {
-    "id": "a3e71f75169afe25",
-    "type": "transpilation-circuit-for-pm",
-    "z": "fcd13e60cf7c3c29",
-    "name": "",
-    "x": 180,
-    "y": 220,
-    "wires": [
-      [
-        "5ee77c81912491e3",
-        "7b1165bc8b3ec814"
-      ]
-    ]
-  },
-  {
-    "id": "7b1165bc8b3ec814",
-    "type": "transpilation-basic-pass-manager",
-    "z": "fcd13e60cf7c3c29",
-    "name": "",
-    "x": 520,
-    "y": 220,
-    "wires": [
-      [
-        "86a161272f1abc84"
-      ]
-    ]
-  },
-  {
     "id": "5ee77c81912491e3",
     "type": "image",
     "z": "fcd13e60cf7c3c29",
-    "name": "",
+    "name": "View circuit",
     "width": "600",
     "data": "payload.result.qc_image",
     "dataType": "msg",
@@ -46,15 +19,15 @@
     "active": true,
     "pass": false,
     "outputs": 0,
-    "x": 340,
-    "y": 360,
+    "x": 150,
+    "y": 340,
     "wires": []
   },
   {
     "id": "86a161272f1abc84",
     "type": "image",
     "z": "fcd13e60cf7c3c29",
-    "name": "",
+    "name": "View transpiled circuit",
     "width": "600",
     "data": "payload.result.transpiled_circ_image",
     "dataType": "msg",
@@ -62,8 +35,8 @@
     "active": true,
     "pass": false,
     "outputs": 0,
-    "x": 800,
-    "y": 360,
+    "x": 780,
+    "y": 340,
     "wires": []
   },
   {
@@ -91,7 +64,34 @@
     "y": 60,
     "wires": [
       [
-        "a3e71f75169afe25"
+        "f80a663dbbdffae2"
+      ]
+    ]
+  },
+  {
+    "id": "f80a663dbbdffae2",
+    "type": "transpilation-circuit-for-pm",
+    "z": "fcd13e60cf7c3c29",
+    "name": "",
+    "x": 130,
+    "y": 200,
+    "wires": [
+      [
+        "eda36f5054531ac9",
+        "5ee77c81912491e3"
+      ]
+    ]
+  },
+  {
+    "id": "eda36f5054531ac9",
+    "type": "transpilation-basic-pass-manager",
+    "z": "fcd13e60cf7c3c29",
+    "name": "",
+    "x": 560,
+    "y": 200,
+    "wires": [
+      [
+        "86a161272f1abc84"
       ]
     ]
   }

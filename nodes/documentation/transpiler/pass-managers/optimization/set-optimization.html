@@ -1,10 +1,11 @@
 <script type="text/javascript">
   RED.nodes.registerType('transpilation-set-optimization', {
-    category: 'function',
+    category: 'transpiler-pass-managers',
     color: '#aaaaaa',
     defaults: {
       name: { value: "" }
     },
+    info: "# Transpiler Optimization Levels Example\n\nWe'll use the FakeSherbrooke mock backend to demonstrate transpilation at different optimization levels.\n\n## Transpile with Optimization Level 0\n\n```python\nfrom qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager\nfrom qiskit_ibm_runtime.fake_provider import FakeSherbrooke\n\nbackend = FakeSherbrooke()\n\npass_manager = generate_preset_pass_manager(\n    optimization_level=0, backend=backend, seed_transpiler=12345\n)\nqc_t1_exact = pass_manager.run(qc)\nqc_t1_exact.draw(\"mpl\", idle_wires=False)\n```\n\n## Repeat for optimization level 1, level 2, level 3",
     inputs: 1,
     outputs: 1,
     icon: "file.svg",
@@ -20,8 +21,4 @@
       <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
       <input type="text" id="node-input-name" placeholder="Name">
   </div>
-</script>
-
-<script type="text/html" data-help-name="transpilation-set-optimization">
-  <p>transpilation set optimization level</p>
 </script>

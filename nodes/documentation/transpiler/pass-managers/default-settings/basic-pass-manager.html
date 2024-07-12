@@ -1,10 +1,11 @@
 <script type="text/javascript">
   RED.nodes.registerType('transpilation-basic-pass-manager', {
-    category: 'function',
+    category: 'transpiler-pass-managers',
     color: '#aaaaaa',
     defaults: {
       name: { value: "" }
     },
+    info: "# Transpile the Circuit and View the Result:\n\n```python\nfrom qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager\n\n# Specify the system to target\nbackend = FakeSherbrooke()\n\n# Transpile the circuit\npass_manager = generate_preset_pass_manager(optimization_level=1, backend=backend)\ntranspiled_circ = pass_manager.run(qc)\n\n# View the transpiled circuit\ntranspiled_circ.draw(output='mpl', idle_wires=False)\n```\n",
     inputs: 1,
     outputs: 1,
     icon: "file.svg",
@@ -20,8 +21,4 @@
       <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
       <input type="text" id="node-input-name" placeholder="Name">
   </div>
-</script>
-
-<script type="text/html" data-help-name="transpilation-basic-pass-manager">
-  <p>transpilation basic pass manager</p>
 </script>
