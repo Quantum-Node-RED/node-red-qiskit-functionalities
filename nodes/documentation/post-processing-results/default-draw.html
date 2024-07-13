@@ -1,9 +1,10 @@
 <script type="text/javascript">
     RED.nodes.registerType('default-draw',{
-        category: 'function',
-        color: '#a6bbcf',
+        category: 'Visualize circuits',
+        color: '#aaaaaa',
         defaults: {
-            name: {value:"Default Draw"}
+            name: {value:"Default Draw"},
+            info: {value:"# Part 1 of the [Visualize circuits guide.](https://docs.quantum.ibm.com/guides/visualize-circuits#)\r\n&nbsp;\r\n# This node shows a text output rendering for drawing a quantum circuit using <font style='background: lightgrey'>_`circuit.draw()`_</font>. The output is the diagram in text format.\r\n```python\r\nfrom qiskit import QuantumCircuit\r\n \r\# Build a quantum circuit \r\ncircuit = QuantumCircuit(3, 3)\r\ncircuit.x(1)\r\ncircuit.h(range(3))\r\ncircuit.cx(0, 1)\r\ncircuit.measure(range(3), range(3));\r\n \r\ncirc.draw(output=\"mpl\")\r\n```\r\n "}
         },
         inputs: 1,
         outputs: 1,
@@ -22,5 +23,5 @@
 </script>
 
 <script type="text/html" data-help-name="default-draw">
-    <p>A simple node for the default Visualization for circuits</p>
+    <p>A simple node for the text rendering of circuit diagrams</p>
 </script>

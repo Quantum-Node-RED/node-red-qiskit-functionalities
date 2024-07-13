@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from qiskit import QuantumCircuit
 from qiskit import QuantumRegister, ClassicalRegister
 from qiskit_ibm_runtime.fake_provider import FakeAuckland, FakeWashingtonV2
-# from qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager
+from qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager
 import io
 from qiskit.visualization import plot_circuit_layout
 from qiskit_aer import Aer
@@ -34,15 +34,15 @@ circuit.measure(q_a, c_a)
 circuit.measure(q_b, c_b);
 
 # Draw the circuit
-customize_mpl_draw_str = circuit.draw(output="mpl", reverse_bits=True)
+no_barriers_mpl_draw_str = circuit.draw(output="mpl", plot_barriers=False)
 buffer = io.BytesIO()
-customize_mpl_draw_str.savefig(buffer, format='png') 
+no_barriers_mpl_draw_str.savefig(buffer, format="png") 
 buffer.seek(0)
-customize_mpl_draw_str_b64 = base64.b64encode(buffer.read()).decode('utf-8')
+no_barriers_mpl_draw_str_b64 = base64.b64encode(buffer.read()).decode('utf-8')
 buffer.close()
 
 result = {
-    "circuit_image": customize_mpl_draw_str_b64
+    "circuit_image": no_barriers_mpl_draw_str_b64
 }
 
 print(json.dumps(result))

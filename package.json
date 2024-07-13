@@ -18,7 +18,8 @@
       "default-draw": "nodes/documentation/post-processing-results/default-draw.js",
       "mpl-draw": "nodes/documentation/post-processing-results/mpl-draw.js",
       "reverse-bits-mpl-draw": "nodes/documentation/post-processing-results/reverse-bits-mpl-draw.js",
-      "barriers-mpl-draw": "nodes/documentation/post-processing-results/barriers-mpl-draw.js"
+      "barriers-mpl-draw": "nodes/documentation/post-processing-results/barriers-mpl-draw.js",
+      "no-barriers-mpl-draw": "nodes/documentation/post-processing-results/no-barriers-mpl-draw.js"
     }
   },
   "dependencies": {
