@@ -14,7 +14,7 @@ default_draw = circuit.draw()
 default_draw_str = str(default_draw)
 
 result = {
-    "default_draw_text": default_draw_str
+    "circuit_text": default_draw_str
 }
 
 print(json.dumps(result))

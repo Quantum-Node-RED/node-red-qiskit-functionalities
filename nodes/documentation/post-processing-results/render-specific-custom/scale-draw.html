@@ -1,0 +1,27 @@
+<script type="text/javascript">
+    RED.nodes.registerType('scale-draw',{
+        category: 'Visualize circuits',
+        color: '#aaaaaa',
+        defaults: {
+            name: {value:"Scale Draw"},
+            info: {value:"# Part 8 of the [Visualize circuits guide.](https://docs.quantum.ibm.com/guides/visualize-circuits#)\r\n&nbsp;\r\n# This node shows a text output rendering for drawing a quantum circuit using <font style='background: lightgrey'>_`circuit.draw()`_</font> and the <font style='background: lightgrey'>_`scale`_</font> argument. The output is a diagram with the mpl renderer with a scaled output.\r\n```python\r\nfrom qiskit import QuantumCircuit\r\n \r\circuit = QuantumCircuit(1) \r\nfor _ in range(10):\r\n    circuit.h(0)\r\n# Scale the mpl output to 1/2 the normal size\r\ncircuit.draw(output=\"mpl\", scale=0.5)\r\n```\r\n "}
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "file.svg",
+        label: function() {
+            return this.name||"scale-draw";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="scale-draw">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="scale-draw">
+    <p>A simple node for the mpl rendering of circuit diagrams using the scale argument</p>
+</script>

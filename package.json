@@ -15,11 +15,15 @@
       "lower-case": "templates/lower-case.js",
       "CHSH-game-classic": "nodes/CHSH-game-classic/CHSH-game-classic.js",
       "CHSH-game-quantum": "nodes/CHSH-game-quantum/CHSH-game-quantum.js",
-      "default-draw": "nodes/documentation/post-processing-results/default-draw.js",
-      "mpl-draw": "nodes/documentation/post-processing-results/mpl-draw.js",
-      "reverse-bits-mpl-draw": "nodes/documentation/post-processing-results/reverse-bits-mpl-draw.js",
-      "barriers-mpl-draw": "nodes/documentation/post-processing-results/barriers-mpl-draw.js",
-      "no-barriers-mpl-draw": "nodes/documentation/post-processing-results/no-barriers-mpl-draw.js"
+      "default-draw": "nodes/documentation/post-processing-results/draw-quantum-circuit/default-draw.js",
+      "mpl-draw": "nodes/documentation/post-processing-results/draw-quantum-circuit/mpl-draw.js",
+      "reverse-bits-mpl-draw": "nodes/documentation/post-processing-results/draw-quantum-circuit/reverse-bits-mpl-draw.js",
+      "barriers-mpl-draw": "nodes/documentation/post-processing-results/draw-quantum-circuit/barriers-mpl-draw.js",
+      "no-barriers-mpl-draw": "nodes/documentation/post-processing-results/draw-quantum-circuit/no-barriers-mpl-draw.js",
+      "fold-draw": "nodes/documentation/post-processing-results/render-specific-custom/fold-draw.js",
+      "scale-draw": "nodes/documentation/post-processing-results/render-specific-custom/scale-draw.js",
+      "standalone-draw": "nodes/documentation/post-processing-results/render-specific-custom/standalone-draw.js",
+      "style-draw": "nodes/documentation/post-processing-results/render-specific-custom/style-draw.js"
     }
   },
   "dependencies": {
