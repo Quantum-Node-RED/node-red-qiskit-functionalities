@@ -41,7 +41,18 @@
       "pulse-builder-align-right": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Feature_of_pulse_builder/Align_context_right.js",
       "pulse-builder-align-equispaced": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Feature_of_pulse_builder/Align_context_equispaced.js",
       "pulse-builder-align-sequential": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Feature_of_pulse_builder/Align_context_sequential.js",
-      "pulse-builder-phase-frequency-offset": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Feature_of_pulse_builder/Phase_and_frequency_offset.js"
+      "pulse-builder-phase-frequency-offset": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Feature_of_pulse_builder/Phase_and_frequency_offset.js",
+      "intro-to-OpenQASM": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Introduction_to_OpenQASM/Intro_to_OpenQASM.js",
+      "import-OpenQASM2-program": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Import_OpenQASM_2/Import_simple_openQASM2_program.js",
+      "import-OpenQASM2-program-as-string": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Import_OpenQASM_2/Import_openQASM2_as_string.js",
+      "import-OpenQASM2-program-from-file": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Import_OpenQASM_2/Import_openQASM2_from_file.js",
+      "link-OpenQASM2-to-Qiskit": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Import_OpenQASM_2/Link_openQASM2_to_qiskit.js",
+      "link-openQASM2-by-qiskit-legacy-exporter": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Import_OpenQASM_2/Link_by_qiskit_legacy_exporter.js",
+      "link-openQASM2-by-gate-class": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Import_OpenQASM_2/Link_use_particular_gate_class.js",
+      "link-define-new-built-in-gate": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Import_OpenQASM_2/Link_define_built_in_gate.js",
+      "define-custom-classical-function": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Import_OpenQASM_2/Define_custom_classical_functions.js",
+      "define-use-custom-classical-instruction": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Import_OpenQASM_2/Define_use_custom_classical_instructions.js",
+      "openQASM2-strict-mode": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Import_OpenQASM_2/OpenQASM2_strict_mode.js"
     }
   },
   "dependencies": {
