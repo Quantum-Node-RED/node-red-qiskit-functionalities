@@ -52,7 +52,10 @@
       "link-define-new-built-in-gate": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Import_OpenQASM_2/Link_define_built_in_gate.js",
       "define-custom-classical-function": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Import_OpenQASM_2/Define_custom_classical_functions.js",
       "define-use-custom-classical-instruction": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Import_OpenQASM_2/Define_use_custom_classical_instructions.js",
-      "openQASM2-strict-mode": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Import_OpenQASM_2/OpenQASM2_strict_mode.js"
+      "openQASM2-strict-mode": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Import_OpenQASM_2/OpenQASM2_strict_mode.js",
+      "export-Qiskit-as-OpenQASM2-file": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Export_OpenQASM_2/Export_openQASM2_as_file.js",
+      "import-OpenQASM3": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Import_and_export_OpenQASM_3/Import_openQASM3.js",
+      "export-OpenQASM3": "nodes/documentation/circuits-and-operators/other-circuit-building-tools/Import_and_export_OpenQASM_3/Export_openQASM3.js"
     }
   },
   "dependencies": {
