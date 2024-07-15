@@ -1,0 +1,29 @@
+<script type="text/javascript">
+  RED.nodes.registerType("pass_manage", {
+    category: "function",
+    color: "#aaaaaa",
+    defaults: {
+      name: { value: "pass_manage" },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    label: function () {
+      return this.name || "pass_manage";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="pass_manage">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="pass_manage">
+  <p>
+    A simple node that a 15-qubit GHZ circuit executed 100 times, using a “bad”
+    (disconnected) initial_layout.
+  </p>
+</script>

@@ -14,7 +14,7 @@ import pickle
  
 ghz = QuantumCircuit(5)
 ghz.h(0)
-ghz.cx(0, range(1, 5))
+ghz.cx(0, range(1, 5))  
  
  
 # Use fake pulse-enabled backend

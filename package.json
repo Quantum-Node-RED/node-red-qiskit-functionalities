@@ -19,7 +19,8 @@
       "routing": "nodes/documentation/transpiler/routing.js",
       "translation": "nodes/documentation/transpiler/translation.js",
       "optimization": "nodes/documentation/transpiler/optimization.js",
-      "scheduling": "nodes/documentation/transpiler/scheduling.js"
+      "scheduling": "nodes/documentation/transpiler/scheduling.js",
+      "pass-manager": "nodes/documentation/transpiler/pass_manage.js"
     }
   },
   "dependencies": {
