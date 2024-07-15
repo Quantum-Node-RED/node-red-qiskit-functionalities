@@ -8,12 +8,18 @@ from qiskit_aer.primitives import Sampler
 from qiskit_algorithms import AmplificationProblem, Grover
 from qiskit.visualization import circuit_drawer
 import matplotlib.pyplot as plt
+from qiskit.quantum_info import Statevector
 
 try:
     # msg.payload from node-red
     data = json.loads(sys.argv[1])
+    # TODO target接受多个值
     target = data["target"]
-    iterations_times = data.get("iterations",-1)
+    oracle_type = data["oracleType"]
+    iterators = data["iterators"]
+    input_value = data["input"]
+    growth_rates = data["growthRate"]
+    sample_from_iterations = data["sampleFromIterations"]
 except json.JSONDecodeError:
     print("Error: Failed to decode JSON from input.")
     sys.exit(1)
@@ -22,8 +28,10 @@ except IndexError:
     sys.exit(1)
 
 num_qubits = len(target)
-oracle = QuantumCircuit(num_qubits)
-
+if oracle_type == "QuantumCircuit":
+    oracle = QuantumCircuit(num_qubits)
+elif oracle_type == "Statevector":    
+    oracle = Statevector.from_label(target)
 try:
     if not all(c in '01' for c in target):
         raise ValueError("Target must be a binary string.")
@@ -31,35 +39,19 @@ try:
     num_qubits = len(target)
     oracle = QuantumCircuit(num_qubits)
 
-    # Apply X gates where the target bits are 0
-    for i, char in enumerate(target):
-        if char == '0':
-            oracle.x(i)
-
-    # Apply multi-controlled NOT gate
-    oracle.mcx(list(range(num_qubits-1)), num_qubits-1)
-
-    # Reapply X gates to restore the states
-    for i, char in enumerate(target):
-        if char == '0':
-            oracle.x(i)
-
-    # Apply Z gate to the ancilla to introduce a phase flip
-    oracle.z(num_qubits-1)  
-
     backend = Aer.get_backend('qasm_simulator')
 
     problem = AmplificationProblem(oracle, is_good_state=lambda bitstring: bitstring == target)
-    if iterations_times == -1:
+    if iterators == "None":
         grover = Grover(sampler=Sampler())
-    else:
-        if ',' in iterations_times:
-            iterations_times = iterations_times.split(',')
-            iterations_times = [int(i) for i in iterations_times]
-            grover = Grover(iterations=iterations_times, sampler=Sampler())
-        else:    
-            iterations_times = int(iterations_times)    
-            grover = Grover(iterations=iterations_times, sampler=Sampler())
+    elif iterators == "Times":
+        grover = Grover(iterations=int(input_value), sampler=Sampler())
+    elif iterators == "List":
+        iterations_times = [int(i) for i in input_value.split(',')]
+        grover = Grover(iterations=iterations_times, sampler=Sampler())
+    elif iterators == "Iterator": 
+        # TODO 
+        grover = Grover(sampler=Sampler())   
     result = grover.amplify(problem)
 
     circuit_image = circuit_drawer(problem.grover_operator.decompose(), output='mpl')
@@ -94,7 +86,11 @@ try:
         "top_measurement": result.top_measurement,
         "circuit_results": result.circuit_results,
         "circuit_results_image": circuit_image_b64,
-        "circuit_image": image_b64
+        "circuit_image": image_b64,
+        # "iteraors": iterators,
+        # "growth_rate": growth_rates,
+        # "sample_from_iterations": sample_from_iterations,
+        # "input": input_value
     }
 
     print(json.dumps(output))

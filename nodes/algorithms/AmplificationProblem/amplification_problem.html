@@ -3,7 +3,12 @@
     category: "function",
     color: "#aaaaaa",
     defaults: {
-      name: { value: "AmplificationProblem" },
+      name: { value: "Amplification Problem" },
+      oracleType: { value: "QuantumCircuit " },
+      iterators: { value: "None" },
+      input: { value: "None" },
+      growthRate: { value: "0.5" },
+      sampleFromIterations: { value: "None" },
     },
     inputs: 1,
     outputs: 1,
@@ -11,16 +16,98 @@
     label: function () {
       return this.name || "AmplificationProblem";
     },
+    oneditprepare: function () {
+      $("#node-input-name").val(this.name || "");
+      $("#node-input-oracleType").val(this.oracleType || "QuantumCircuit");
+      $("#node-input-iterators").val(this.iterators || "None");
+      $("#node-input-input").val(this.input || "");
+      $("#node-input-growth-rate").val(this.growthRate || "0.5");
+      $("#node-input-sampleFromIterations").val(
+        this.sampleFromIterations || "None"
+      );
+
+      function updateFields() {
+        var option = $("#node-input-iterators").val();
+        $("#input-row").hide();
+        $("#growth-rate-row").hide();
+        $("#sample-row").hide();
+
+        if (option === "List" || option === "Times") {
+          $("#input-row").show();
+        } else if (option === "Iterator") {
+          $("#input-row").show();
+          $("#growth-rate-row").show();
+          $("#sample-row").show();
+        }
+      }
+
+      updateFields();
+      $("#node-input-iterators").on("change", updateFields);
+    },
+    oneditsave: function () {
+      this.name = $("#node-input-name").val();
+      this.oracleType = $("#node-input-oracleType").val();
+      this.input = $("#node-input-input").val();
+      this.iterators = $("#node-input-iterators").val();
+      this.growthRate = $("#node-input-growth-rate").val();
+      this.sampleFromIterations = $("#node-input-sampleFromIterations").val();
+    },
   });
 </script>
 
 <script type="text/html" data-template-name="AmplificationProblem">
   <div class="form-row">
-    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
     <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-oracleType"
+      ><i class="fa fa-tag"></i>Oracle Type</label
+    >
+    <select name="oracleType" id="node-input-oracleType">
+      <option value="QuantumCircuit">QuantumCircuit</option>
+      <option value="Statevector">Statevector</option>
+    </select>
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-iterators"><i class="fa fa-tag"></i> Iterator</label>
+    <select id="node-input-iterators" name="iterators">
+      <option value="List">List</option>
+      <option value="Iterator">Iterator</option>
+      <option value="Times">Times</option>
+      <option value="None">None</option>
+    </select>
+  </div>
+
+  <div class="form-row" id="input-row">
+    <label for="node-input-input"><i class="fa fa-tag"></i>Input</label>
+    <input
+      type="text"
+      id="node-input-input"
+      placeholder="Input a Integer or a list like 1,2,3"
+    />
+  </div>
+
+  <div class="form-row" id="growth-rate-row">
+    <label for="node-input-growth-rate"
+      ><i class="fa fa-tag"></i> Growth Rate</label
+    >
+    <input type="text" id="node-input-growth-rate" placeholder="Growth Rate" />
+  </div>
+
+  <div class="form-row" id="sample-row">
+    <label for="node-input-sample"
+      ><i class="fa fa-tag"></i> Sample From Iterations</label
+    >
+    <select id="node-input-sampleFromIterations" name="sampleFromIterations">
+      <option value="True">True</option>
+      <option value="False">False</option>
+    </select>
   </div>
 </script>
 
 <script type="text/html" data-help-name="AmplificationProblem">
-  <p>AmplificationProblem.</p>
+  <p>Amplification Problem.</p>
 </script>

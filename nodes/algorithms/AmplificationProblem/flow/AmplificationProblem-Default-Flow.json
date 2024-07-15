@@ -11,16 +11,11 @@
         "id": "d6ce38305b234e05",
         "type": "inject",
         "z": "f3a858fd71a3bec1",
-        "name": "parameters",
+        "name": "target",
         "props": [
             {
                 "p": "payload.target",
                 "v": "11",
-                "vt": "str"
-            },
-            {
-                "p": "payload.iterations",
-                "v": "1,2,3",
                 "vt": "str"
             }
         ],
@@ -29,28 +24,11 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "x": 230,
-        "y": 220,
+        "x": 210,
+        "y": 240,
         "wires": [
             [
-                "d94b7d327c3fbd64"
-            ]
-        ]
-    },
-    {
-        "id": "d94b7d327c3fbd64",
-        "type": "AmplificationProblem",
-        "z": "f3a858fd71a3bec1",
-        "name": "AmplificationProblem",
-        "x": 520,
-        "y": 220,
-        "wires": [
-            [
-                "1f2bd93af85af399",
-                "e305a7a642c76780",
-                "8291524bd51cc101",
-                "23aeed536dde7049",
-                "1df244effc9714e4"
+                "1266a8b0dbf676ad"
             ]
         ]
     },
@@ -106,43 +84,74 @@
         "wires": []
     },
     {
-        "id": "23aeed536dde7049",
-        "type": "image viewer",
+        "id": "8bb08d9cc46a1c9c",
+        "type": "debug",
         "z": "f3a858fd71a3bec1",
-        "name": "circuit_image",
+        "name": "all_parameter",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 960,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "1266a8b0dbf676ad",
+        "type": "AmplificationProblem",
+        "z": "f3a858fd71a3bec1",
+        "name": "Grover",
+        "oracleType": "QuantumCircuit",
+        "iterators": "None",
+        "input": "123,123,123,123",
+        "growthRate": "0.2",
+        "sampleFromIterations": "False",
+        "x": 430,
+        "y": 240,
+        "wires": [
+            [
+                "be18094ed1edb914",
+                "d075f306e3f785ff",
+                "1f2bd93af85af399",
+                "e305a7a642c76780",
+                "8291524bd51cc101"
+            ]
+        ]
+    },
+    {
+        "id": "be18094ed1edb914",
+        "type": "image",
+        "z": "f3a858fd71a3bec1",
+        "name": "",
         "width": "600",
         "data": "payload.result.circuit_image",
         "dataType": "msg",
+        "thumbnail": false,
         "active": true,
-        "x": 990,
-        "y": 360,
-        "wires": [
-            []
-        ]
+        "pass": false,
+        "outputs": 0,
+        "x": 940,
+        "y": 320,
+        "wires": []
     },
     {
-        "id": "1df244effc9714e4",
-        "type": "image viewer",
+        "id": "d075f306e3f785ff",
+        "type": "image",
         "z": "f3a858fd71a3bec1",
-        "name": "circuit_results_image",
-        "width": "500",
+        "name": "",
+        "width": "600",
         "data": "payload.result.circuit_results_image",
         "dataType": "msg",
+        "thumbnail": false,
         "active": true,
-        "x": 1020,
-        "y": 560,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "a47ef54586a63a1d",
-        "type": "comment",
-        "z": "f3a858fd71a3bec1",
-        "name": "tips for paramteters",
-        "info": "msg.payload.target consist of 0 and 1\nmsg.payload.iterations is an optional \nparameter, you can input an int \nor a list like 1,2,3\n",
-        "x": 190,
-        "y": 280,
+        "pass": false,
+        "outputs": 0,
+        "x": 960,
+        "y": 640,
         "wires": []
     }
 ]
