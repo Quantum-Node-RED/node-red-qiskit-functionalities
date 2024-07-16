@@ -14,7 +14,12 @@
     "nodes": {
       "lower-case": "templates/lower-case.js",
       "CHSH-game-classic": "nodes/CHSH-game-classic/CHSH-game-classic.js",
-      "CHSH-game-quantum": "nodes/CHSH-game-quantum/CHSH-game-quantum.js"
+      "CHSH-game-quantum": "nodes/CHSH-game-quantum/CHSH-game-quantum.js",
+      "get-backend-operations": "nodes/documentation/transpiler/advanced-transpilation-resources/Create_pass_manager_for_dynamical_decoupling/Get_backend_operations.js",
+      "create-and-optimize-quantum-circuit": "nodes/documentation/transpiler/advanced-transpilation-resources/Create_pass_manager_for_dynamical_decoupling/Create_and_optimize_quantum_circuit.js",
+      "create-custom-pass-for-dd": "nodes/documentation/transpiler/advanced-transpilation-resources/Create_pass_manager_for_dynamical_decoupling/Create_custom_passes_for_dd.js",
+      "execute-custom-pass-for-dd": "nodes/documentation/transpiler/advanced-transpilation-resources/Create_pass_manager_for_dynamical_decoupling/Execute_custom_passes_for_dd.js",
+      "decompose-circuit-into-basis-gate": "nodes/documentation/transpiler/advanced-transpilation-resources/Create_pass_manager_for_dynamical_decoupling/Decompose_circuit_into_basis_gate.js"
     }
   },
   "dependencies": {
