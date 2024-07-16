@@ -1,10 +1,11 @@
 <script type="text/javascript">
   RED.nodes.registerType('transpilation-approximation-degree', {
-    category: 'function',
+    category: 'transpiler-pass-managers',
     color: '#aaaaaa',
     defaults: {
       name: { value: "" }
     },
+    info: "# Commonly Used Parameters for Transpilation\n\nThis guide covers key parameters for local transpilation. These parameters are set using arguments for `generate_preset_pass_manager` or `transpile`.\n\n## Approximation Degree\n\n- **Definition**: Controls how closely the output circuit matches the input circuit.\n- **Range**: `0.0` (max approximation) to `1.0` (no approximation, default).\n- **Usage**: Smaller values trade accuracy for fewer gates, making execution easier.\n- **Default**: `1.0`\n\n### In Two-Qubit Unitary Synthesis\n\n- **Target Fidelity**: Lower approximation degrees result in circuits that differ more from the input but have fewer gates.\n- **Error Trade-off**: Fewer gates can reduce hardware errors, especially with the CX gate, which is error-prone.\n- **Example**: Synthesizing a random two-qubit `UnitaryGate` with an approximation degree less than `1.0` can generate an approximate circuit. Specify `basis_gates` for allowable gates in synthesis.\n```\nfrom qiskit import QuantumCircuit, QuantumRegister\nfrom qiskit.circuit.library import UnitaryGate\nfrom qiskit.quantum_info import random_unitary\nfrom qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager\n \nUU = random_unitary(4, seed=12345)\nrand_U = UnitaryGate(UU)\n \nqubits = QuantumRegister(2, name=\"q\")\nqc = QuantumCircuit(qubits)\nqc.append(rand_U, qubits)\npass_manager = generate_preset_pass_manager(\n    optimization_level=1, approximation_degree=0.85, basis_gates=[\"sx\", \"rz\", \"cx\"]\n)\napprox_qc = pass_manager.run(qc)\nprint(approx_qc.count_ops()[\"cx\"])\n```",
     inputs: 1,
     outputs: 1,
     icon: "file.svg",

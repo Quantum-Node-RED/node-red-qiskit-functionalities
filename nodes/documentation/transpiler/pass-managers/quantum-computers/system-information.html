@@ -1,10 +1,11 @@
 <script type="text/javascript">
   RED.nodes.registerType('transpilation-system-information', {
-    category: 'function',
+    category: 'transpiler-pass-managers',
     color: '#aaaaaa',
     defaults: {
       name: { value: "" }
     },
+    info: "## Representing Quantum Computers for the Transpiler\n\n### Purpose\n\n- **System Information**: The transpiler converts an abstract circuit into an ISA circuit for a specific system using system information from `BackendV2` (or legacy `BackendV1`) and the backend's `Target`.\n\n### Key Components\n\n- **Target**: Contains device constraints like native basis gates, qubit connectivity, and timing information.\n- **Backend**: Possesses a `Target` and additional information such as `InstructionScheduleMap`. It also provides the interface for submitting quantum circuit jobs.\n\n### Transpiler Configuration\n\n- **Stochastic Algorithms**: The transpilation process is inherently stochastic, so results may vary.\n\n### Default Configuration\n\n- **System Information**: Typically, the `Backend` or `Target` provides all necessary information for the transpiler.\n\n### Example Workflow\n\n1. **Import Libraries and Instantiate System**:\n   ```python\n   from qiskit_ibm_runtime.fake_provider import FakeSherbrooke\n\n   backend = FakeSherbrooke()\n   target = backend.target\n   ```\n\n2. **Create and Decompose Circuit**:\n   ```python\n   from qiskit.circuit.library import EfficientSU2\n\n   qc = EfficientSU2(12, entanglement=\"circular\", reps=1)\n   qc.decompose().draw(\"mpl\")\n   ```\n\nThis example uses the `FakeSherbrooke` mock backend and an `EfficientSU2` circuit to illustrate how to pass system information to the transpiler.",
     inputs: 1,
     outputs: 1,
     icon: "file.svg",

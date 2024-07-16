@@ -1,10 +1,11 @@
 <script type="text/javascript">
   RED.nodes.registerType('transpilation-coupling-map-lv0', {
-    category: 'function',
+    category: 'transpiler-pass-managers',
     color: '#aaaaaa',
     defaults: {
       name: { value: "" }
     },
+    info: "## Coupling Map\n\n### Purpose\n\n- **Connectivity Graph**: Shows which qubits are connected and can perform two-qubit gates.\n- **Directional Gates**: Gates may be directional, but the transpiler can adjust direction with additional single-qubit gates.\n- **Virtual vs. Physical Qubits**: Maps virtual qubits from the abstract circuit to physical qubits on the coupling map.\n\n### Stages in Transpilation\n\n- **Layout Stage**: Maps virtual qubits to physical qubits.\n- **Routing Stage**: Adjusts for connectivity, often introducing SWAP gates.\n\n### Example Workflow\n\n1. **Generate Coupling Map**:\n   ```python\n   coupling_map = target.build_coupling_map()\n   ```\n\n2. **Pass Manager with Coupling Map**:\n   ```python\n   from qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager\n\n   pass_manager = generate_preset_pass_manager(\n       optimization_level=0, coupling_map=coupling_map, seed_transpiler=12345\n   )\n   qc_t_cm_lv0 = pass_manager.run(qc)\n   qc_t_cm_lv0.draw(\"mpl\", idle_wires=False, fold=-1)\n   ```\n\n3. **Plot Circuit Layout**:\n   ```python\n   from qiskit.visualization import plot_circuit_layout\n\n   plot_circuit_layout(qc_t_cm_lv0, backend, view=\"physical\")\n   ```\n",
     inputs: 1,
     outputs: 1,
     icon: "file.svg",

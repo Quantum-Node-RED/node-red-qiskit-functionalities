@@ -1,10 +1,11 @@
 <script type="text/javascript">
   RED.nodes.registerType('transpilation-coupling-map-lv1', {
-    category: 'function',
+    category: 'transpiler-pass-managers',
     color: '#aaaaaa',
     defaults: {
       name: { value: "" }
     },
+    info: "### Let's return to the default (optimization_level=1), which uses VF2Layout if any routing is required.\n1. **Default Pass Manager**:\n   ```python\n   pass_manager = generate_preset_pass_manager(\n       optimization_level=1, coupling_map=coupling_map, seed_transpiler=12345\n   )\n   qc_t_cm_lv1 = pass_manager.run(qc)\n   qc_t_cm_lv1.draw(\"mpl\", idle_wires=False, fold=-1)\n   ```\n\n2. **Plot Optimized Circuit Layout**:\n   ```python\n   plot_circuit_layout(qc_t_cm_lv1, backend, view=\"physical\")\n   ```\n",
     inputs: 1,
     outputs: 1,
     icon: "file.svg",

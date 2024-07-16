@@ -28,11 +28,11 @@
     "topic": "",
     "payload": "",
     "payloadType": "date",
-    "x": 80,
+    "x": 240,
     "y": 80,
     "wires": [
       [
-        "e4281f48b854fbb9"
+        "5255b247bbb9cb94"
       ]
     ]
   },
@@ -40,7 +40,7 @@
     "id": "2388eb779958cce7",
     "type": "image",
     "z": "f052e07e5fe87552",
-    "name": "",
+    "name": "View optimized circuit",
     "width": "600",
     "data": "payload.result.optimized_1_image",
     "dataType": "msg",
@@ -48,7 +48,7 @@
     "active": true,
     "pass": false,
     "outputs": 0,
-    "x": 100,
+    "x": 280,
     "y": 300,
     "wires": []
   },
@@ -56,7 +56,7 @@
     "id": "9cd8194a5b01ee9f",
     "type": "image",
     "z": "f052e07e5fe87552",
-    "name": "",
+    "name": "View transpiled circuit",
     "width": "600",
     "data": "payload.result.transpiled_circ_image",
     "dataType": "msg",
@@ -64,7 +64,7 @@
     "active": true,
     "pass": false,
     "outputs": 0,
-    "x": 100,
+    "x": 280,
     "y": 440,
     "wires": []
   },
@@ -72,7 +72,7 @@
     "id": "f3ea8843f78f2a20",
     "type": "image",
     "z": "f052e07e5fe87552",
-    "name": "",
+    "name": "View error information of device",
     "width": "600",
     "data": "payload.result.error_map",
     "dataType": "msg",
@@ -80,7 +80,7 @@
     "active": true,
     "pass": false,
     "outputs": 0,
-    "x": 660,
+    "x": 930,
     "y": 280,
     "wires": []
   },
@@ -88,7 +88,7 @@
     "id": "5018dfc9c42d5cac",
     "type": "debug",
     "z": "f052e07e5fe87552",
-    "name": "debug 3",
+    "name": "approximation",
     "active": true,
     "tosidebar": true,
     "console": false,
@@ -97,62 +97,63 @@
     "targetType": "msg",
     "statusVal": "",
     "statusType": "auto",
-    "x": 320,
+    "x": 500,
     "y": 120,
-    "wires": []
+    "wires": [],
+    "info": "This yields an output of 2 because the approximation requires fewer CX gates."
   },
   {
-    "id": "e4281f48b854fbb9",
-    "type": "transpilation-approximation-degree",
-    "z": "f052e07e5fe87552",
-    "name": "",
-    "x": 100,
-    "y": 220,
-    "wires": [
-      [
-        "fea6c12e19d35813",
-        "5018dfc9c42d5cac"
-      ]
-    ]
-  },
-  {
-    "id": "fea6c12e19d35813",
-    "type": "transpilation-number-generator-seed",
-    "z": "f052e07e5fe87552",
-    "name": "",
-    "x": 370,
-    "y": 220,
-    "wires": [
-      [
-        "f687b017bc633651",
-        "2388eb779958cce7"
-      ]
-    ]
-  },
-  {
-    "id": "f687b017bc633651",
+    "id": "2f9d50c3ecbb9a9c",
     "type": "transpilation-initial-layout",
     "z": "f052e07e5fe87552",
     "name": "",
-    "x": 650,
-    "y": 220,
+    "x": 730,
+    "y": 200,
     "wires": [
       [
-        "c5f4215d3054b96a",
+        "3b2ee984cbcb5488",
         "9cd8194a5b01ee9f"
       ]
     ]
   },
   {
-    "id": "c5f4215d3054b96a",
+    "id": "3b2ee984cbcb5488",
     "type": "transpilation-error-map",
     "z": "f052e07e5fe87552",
     "name": "",
-    "x": 920,
-    "y": 220,
+    "x": 900,
+    "y": 200,
     "wires": [
       [
         "f3ea8843f78f2a20"
+      ]
+    ]
+  },
+  {
+    "id": "37190074411946ce",
+    "type": "transpilation-number-generator-seed",
+    "z": "f052e07e5fe87552",
+    "name": "",
+    "x": 490,
+    "y": 200,
+    "wires": [
+      [
+        "2f9d50c3ecbb9a9c",
+        "2388eb779958cce7"
+      ]
+    ]
+  },
+  {
+    "id": "5255b247bbb9cb94",
+    "type": "transpilation-approximation-degree",
+    "z": "f052e07e5fe87552",
+    "name": "",
+    "x": 200,
+    "y": 200,
+    "wires": [
+      [
+        "5018dfc9c42d5cac",
+        "37190074411946ce"
       ]
     ]
   }
