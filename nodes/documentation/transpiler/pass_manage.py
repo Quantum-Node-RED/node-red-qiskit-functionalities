@@ -1,18 +1,20 @@
 from qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager
 from qiskit_ibm_runtime import QiskitRuntimeService
-from qiskit_ibm_runtime.fake_provider import FakeAuckland, FakeWashingtonV2
+from qiskit_ibm_runtime.fake_provider import FakeWashingtonV2
 from qiskit import QuantumRegister, QuantumCircuit
 import base64
 import json
-import matplotlib.pyplot as plt
 import io
+import sys
  
-# TODO enable user to use their token  
-# service = QiskitRuntimeService(channel="ibm_quantum", token="YOUR API TOKEN")
-# backend = service.backend("ibm_brisbane")
-
-# Use fake pulse-enabled backend
-backend = FakeWashingtonV2()
+data = json.loads(sys.argv[1])
+token = data["token"]
+if token != "None":
+    service = QiskitRuntimeService(channel="ibm_quantum", token="YOUR API TOKEN")
+    backend = service.backend("ibm_brisbane")
+else:
+    # Use fake pulse-enabled backend
+    backend = FakeWashingtonV2()
  
 # Run with optimization level 3 and 'asap' scheduling pass
 pass_manager = generate_preset_pass_manager(

@@ -3,12 +3,13 @@ const runPythonScript = require("../../pythonShell");
 module.exports = function (RED) {
   function PassmanageNode(config) {
     RED.nodes.createNode(this, config);
+    this.token = config.token;
 
     var node = this;
     node.on('input', async function (msg) {
       const result = await new Promise((resolve, reject) => {
         const options = {
-          
+            token: node.token
         };
         runPythonScript(__dirname, "pass_manage.py", options, (err, results) => {
           if (err) {
