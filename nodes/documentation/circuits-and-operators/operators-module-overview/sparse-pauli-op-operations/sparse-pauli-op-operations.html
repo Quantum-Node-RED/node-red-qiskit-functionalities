@@ -1,0 +1,66 @@
+<script type="text/javascript">
+  RED.nodes.registerType("Sparse-Pauli-Op-Operations", {
+    category: "function",
+    color: "#aaaaaa",
+    defaults: {
+      name: { value: "" },
+      op1: { value: "", required: true },
+      op1_num_qubits: { value: 1, required: true },
+      op2: { value: "", required: true },
+      op2_num_qubits: { value: 1, required: true },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    label: function () {
+      return this.name || "Sparse-Pauli-Op-Operations";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="Sparse-Pauli-Op-Operations">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+
+  <div class="form-row">
+    <label><i class="fa fa-cube"></i> Operator 1</label>
+  </div>
+  <div class="form-row">
+    <label for="node-input-op1"><i class="fa fa-cube"></i> Sparse List</label>
+    <input
+      type="string"
+      id="node-input-op1"
+      placeholder='[["ZX", [1, 4], 1.0], ["YY", [0, 3], -1 + 1j]]'
+    />
+  </div>
+  <div class="form-row">
+    <label for="node-input-op1_num_qubits"
+      ><i class="fa fa-cube"></i> Num Qubits</label
+    >
+    <input type="number" id="node-input-op1_num_qubits" placeholder="5" />
+  </div>
+
+  <div class="form-row">
+    <label><i class="fa fa-cube"></i> Operator 2</label>
+  </div>
+  <div class="form-row">
+    <label for="node-input-op2"><i class="fa fa-cube"></i> Sparse List</label>
+    <input
+      type="string"
+      id="node-input-op2"
+      placeholder='[["XXZ", [0, 1, 4], 1 + 2j], ["ZZ", [1, 2], -1 + 1j]]'
+    />
+  </div>
+  <div class="form-row">
+    <label for="node-input-op2_num_qubits"
+      ><i class="fa fa-cube"></i> Num Qubits</label
+    >
+    <input type="number" id="node-input-op2_num_qubits" placeholder="5" />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="Sparse-Pauli-Op-Operations">
+  <p>Sparse Pauli Op Operations</p>
+</script>

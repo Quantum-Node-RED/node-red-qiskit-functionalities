@@ -1,0 +1,36 @@
+<script type="text/javascript">
+  RED.nodes.registerType("Pauli-Operations", {
+    category: "function",
+    color: "#aaaaaa",
+    defaults: {
+      name: { value: "" },
+      operator: { value: "", required: true },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    label: function () {
+      return this.name || "Pauli-Operations";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="Pauli-Operations">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-operator"><i class="fa fa-cube"></i> Operator</label>
+    <input
+      type="text"
+      id="node-input-operator"
+      placeholder="Operator (e.g., 'iXX')"
+    />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="Pauli-Operations">
+  <p>Pauli Operations</p>
+  <p>Configure the node with the Pauli operator string (e.g., 'iXX').</p>
+</script>

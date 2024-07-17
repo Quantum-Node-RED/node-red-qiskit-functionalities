@@ -1,0 +1,35 @@
+<script type="text/javascript">
+  RED.nodes.registerType("Operators", {
+    category: "function",
+    color: "#aaaaaa",
+    defaults: {
+      name: { value: "" },
+      matrix: { value: "[[]]", required: true },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    label: function () {
+      return this.name || "Operators";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="Operators">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-matrix"><i class="fa fa-cube"></i> Operator</label>
+    <input
+      type="string"
+      id="node-input-matrix"
+      placeholder="Matrix in 2D array format (e.g., '[[1,0],[0,1]]')"
+    />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="Operators">
+  <p>Operators</p>
+</script>

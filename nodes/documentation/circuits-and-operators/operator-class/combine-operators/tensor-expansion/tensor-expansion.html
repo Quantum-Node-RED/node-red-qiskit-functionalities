@@ -1,0 +1,44 @@
+<script type="text/javascript">
+  RED.nodes.registerType("Tensor-Expansion", {
+    category: "function",
+    color: "#aaaaaa",
+    defaults: {
+      name: { value: "" },
+      pauli_1: { value: "X", required: true },
+      pauli_2: { value: "Z", required: true },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    label: function () {
+      return this.name || "Tensor-Expansion";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="Tensor-Expansion">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-pauli-1"><i class="fa fa-magic"></i> Pauli 1</label>
+    <input
+      type="string"
+      id="node-input-pauli-1"
+      placeholder="Please give a Pauli term"
+    />
+  </div>
+  <div class="form-row">
+    <label for="node-input-pauli-2"><i class="fa fa-magic"></i> Pauli 2</label>
+    <input
+      type="string"
+      id="node-input-pauli-2"
+      placeholder="Please give a Pauli term"
+    />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="Tensor-Expansion">
+  <p>Tensor Expansion</p>
+</script>

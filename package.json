@@ -14,7 +14,24 @@
     "nodes": {
       "lower-case": "templates/lower-case.js",
       "CHSH-game-classic": "nodes/CHSH-game-classic/CHSH-game-classic.js",
-      "CHSH-game-quantum": "nodes/CHSH-game-quantum/CHSH-game-quantum.js"
+      "CHSH-game-quantum": "nodes/CHSH-game-quantum/CHSH-game-quantum.js",
+      "sparse-pauli-op-operation": "nodes/documentation/circuits-and-operators/operators-module-overview/sparse-pauli-op-operations/sparse-pauli-op-operations.js",
+      "pauli-op-operation": "nodes/documentation/circuits-and-operators/operators-module-overview/pauli-operations/pauli-operations.js",
+      "operators": "nodes/documentation/circuits-and-operators/operators-module-overview/operators/operators.js",
+      "measure-pauli-bases": "nodes/documentation/circuits-and-operators/pauli-basis-observables/measure-pauli-bases/measure-pauli-bases.js",
+      "operator-from-pauli-object": "nodes/documentation/circuits-and-operators/operator-class/convert-classes-to-operator/operator-from-pauli-object/operator-from-pauli-object.js",
+      "operator-for-gate-object": "nodes/documentation/circuits-and-operators/operator-class/convert-classes-to-operator/operator-for-gate-object/operator-for-gate-object.js",
+      "operator-from-parameterized-gate-object": "nodes/documentation/circuits-and-operators/operator-class/convert-classes-to-operator/operator-from-parameterized-gate-object/operator-from-parameterized-gate-object.js",
+      "operator-from-quantum-circuit-object": "nodes/documentation/circuits-and-operators/operator-class/convert-classes-to-operator/operator-from-quantum-circuit-object/operator-from-quantum-circuit-object.js",
+      "use-unitary-operator-in-circuit": "nodes/documentation/circuits-and-operators/operator-class/use-operators-in-circuit/use-unitary-operator-in-circuit/use-unitary-operator-in-circuit.js",
+      "use-pauli-in-circuit": "nodes/documentation/circuits-and-operators/operator-class/use-operators-in-circuit/use-pauli-in-circuit/use-pauli-in-circuit.js",
+      "tensor-product": "nodes/documentation/circuits-and-operators/operator-class/combine-operators/tensor-product/tensor-product.js",
+      "tensor-expansion": "nodes/documentation/circuits-and-operators/operator-class/combine-operators/tensor-expansion/tensor-expansion.js",
+      "composition": "nodes/documentation/circuits-and-operators/operator-class/combine-operators/composition/composition.js",
+      "subsystem-composition": "nodes/documentation/circuits-and-operators/operator-class/combine-operators/subsystem-composition/subsystem-composition.js",
+      "linear-combinations": "nodes/documentation/circuits-and-operators/operator-class/combine-operators/linear-combinations/linear-combinations.js",
+      "equality-operator": "nodes/documentation/circuits-and-operators/operator-class/compare-operators/equality-operator/equality-operator.js",
+      "process-fidelity": "nodes/documentation/circuits-and-operators/operator-class/compare-operators/process-fidelity/process-fidelity.js"
     }
   },
   "dependencies": {

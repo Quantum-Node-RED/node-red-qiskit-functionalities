@@ -1,0 +1,26 @@
+<script type="text/javascript">
+  RED.nodes.registerType("Process-Fidelity", {
+    category: "function",
+    color: "#aaaaaa",
+    defaults: {
+      name: { value: "" },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    label: function () {
+      return this.name || "Process-Fidelity";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="Process-Fidelity">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="Process-Fidelity">
+  <p>Process Fidelity</p>
+</script>
