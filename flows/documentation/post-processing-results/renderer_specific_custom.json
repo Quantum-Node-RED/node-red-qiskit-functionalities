@@ -1,20 +1,5 @@
 [
     {
-        "id": "8258a0eed29fb110",
-        "type": "fold-draw",
-        "z": "40abd99c86f26227",
-        "name": "Fold Draw",
-        "info": "# Part 6 of the [Visualize circuits guide.](https://docs.quantum.ibm.com/guides/visualize-circuits#)\r\n&nbsp;\r\n# This node shows a text output rendering for drawing a quantum circuit using <font style='background: lightgrey'>_`circuit.draw()`_</font> and the <font style='background: lightgrey'>_`fold`_</font> argument. The output is the diagram in text format and sets the maximum width for the output.\r\n```python\r\nfrom qiskit import QuantumCircuit\r\n \rcircuit = QuantumCircuit(1) \r\nfor _ in range(10):\r\n    circuit.h(0)\r\n# limit line length to 40 characters\r\ncircuit.draw(output=\"text\", fold=40)\r\n```\r\n ",
-        "x": 250,
-        "y": 320,
-        "wires": [
-            [
-                "5a238ef7fbefef8a",
-                "a08074f985fb39a7"
-            ]
-        ]
-    },
-    {
         "id": "ba735f940fa03cfc",
         "type": "inject",
         "z": "40abd99c86f26227",
@@ -39,7 +24,7 @@
         "y": 320,
         "wires": [
             [
-                "8258a0eed29fb110"
+                "0a90ecb3cc5e6f4a"
             ]
         ]
     },
@@ -47,7 +32,7 @@
         "id": "5a238ef7fbefef8a",
         "type": "debug",
         "z": "40abd99c86f26227",
-        "name": "Default Draw output",
+        "name": "Text circuit output",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -56,53 +41,9 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 500,
-        "y": 200,
+        "x": 490,
+        "y": 140,
         "wires": []
-    },
-    {
-        "id": "649e16a635520ab9",
-        "type": "scale-draw",
-        "z": "40abd99c86f26227",
-        "name": "Scale Draw",
-        "info": "# Part 8 of the [Visualize circuits guide.](https://docs.quantum.ibm.com/guides/visualize-circuits#)\r\n&nbsp;\r\n# This node shows a text output rendering for drawing a quantum circuit using <font style='background: lightgrey'>_`circuit.draw()`_</font> and the <font style='background: lightgrey'>_`scale`_</font> argument. The output is a diagram with the mpl renderer with a scaled output.\r\n```python\r\nfrom qiskit import QuantumCircuit\r\n \rcircuit = QuantumCircuit(1) \r\nfor _ in range(10):\r\n    circuit.h(0)\r\n# Scale the mpl output to 1/2 the normal size\r\ncircuit.draw(output=\"mpl\", scale=0.5)\r\n```\r\n ",
-        "x": 610,
-        "y": 320,
-        "wires": [
-            [
-                "33bbd71188559c3d",
-                "e6929ea8f1cdc304"
-            ]
-        ]
-    },
-    {
-        "id": "a08074f985fb39a7",
-        "type": "style-draw",
-        "z": "40abd99c86f26227",
-        "name": "Style Draw",
-        "info": "# Part 7 of the [Visualize circuits guide.](https://docs.quantum.ibm.com/guides/visualize-circuits#)\r\n&nbsp;\r\n# This node shows a text output rendering for drawing a quantum circuit using <font style='background: lightgrey'>_`circuit.draw()`_</font> and the <font style='background: lightgrey'>_`style`_</font> argument. The output is a diagram using the mpl renderer and changes to the colors and outlines.\r\n```python\r\nfrom qiskit import QuantumCircuit\r\n \rcircuit = QuantumCircuit(1) \r\nfor _ in range(10):\r\n    circuit.h(0)\r\n# limit line length to 40 characters\r\nstyle = {\"backgroundcolor\": \"lightgreen\"}\r\ncircuit.draw(output=\"mpl\", style=style)\r\n```\r\n ",
-        "x": 430,
-        "y": 320,
-        "wires": [
-            [
-                "6eae54233c10e5e6",
-                "649e16a635520ab9"
-            ]
-        ]
-    },
-    {
-        "id": "33bbd71188559c3d",
-        "type": "standalone-draw",
-        "z": "40abd99c86f26227",
-        "name": "Standalone Draw",
-        "info": "# Part 9 of the [Visualize circuits guide.](https://docs.quantum.ibm.com/guides/visualize-circuits#)\r\n&nbsp;\r\n# This node shows a text output rendering for drawing a quantum circuit using the <font style='background: lightgrey'>_`circuit_drawer()`_</font> function instead of the and the <font style='background: lightgrey'>_`circuit.draw()`_</font> method. The function behaves identically to the method, except that it takes in a circuit object as a required argument.\r\n```python\r\nfrom qiskit import QuantumCircuit\r\nfrom qiskit.visualization import circuit_drawer\r\n \rcircuit = QuantumCircuit(1) \r\nfor _ in range(10):\r\n    circuit.h(0)\r\ncircuit_drawer(circuit, output=\"mpl\", plot_barriers=False)\r\n```\r\n ",
-        "x": 810,
-        "y": 320,
-        "wires": [
-            [
-                "bd06fcdd148aeeab"
-            ]
-        ]
     },
     {
         "id": "6eae54233c10e5e6",
@@ -116,8 +57,8 @@
         "active": true,
         "pass": false,
         "outputs": 0,
-        "x": 600,
-        "y": 540,
+        "x": 440,
+        "y": 400,
         "wires": []
     },
     {
@@ -133,7 +74,7 @@
         "pass": false,
         "outputs": 0,
         "x": 820,
-        "y": 200,
+        "y": 140,
         "wires": []
     },
     {
@@ -151,5 +92,64 @@
         "x": 960,
         "y": 400,
         "wires": []
+    },
+    {
+        "id": "0a90ecb3cc5e6f4a",
+        "type": "fold-draw",
+        "z": "40abd99c86f26227",
+        "name": "Fold Draw",
+        "info": "# Part 6 of the [Visualize circuits guide.](https://docs.quantum.ibm.com/guides/visualize-circuits#)\r\n&nbsp;\r\n# This node shows a text output rendering for drawing a quantum circuit using <font style='background: lightgrey'>_`circuit.draw()`_</font> and the <font style='background: lightgrey'>_`fold`_</font> argument. The output is the diagram in text format and sets the maximum width for the output.\r\n```python\r\nfrom qiskit import QuantumCircuit\r\n \r\ncircuit = QuantumCircuit(1) \r\nfor _ in range(10):\r\n    circuit.h(0)\r\n# limit line length to 40 characters\r\ncircuit.draw(output=\"text\", fold=40)\r\n```\r\n ",
+        "x": 250,
+        "y": 320,
+        "wires": [
+            [
+                "a234d75e787bac6b",
+                "5a238ef7fbefef8a"
+            ]
+        ]
+    },
+    {
+        "id": "ffb63f57cea59ba6",
+        "type": "standalone-draw",
+        "z": "40abd99c86f26227",
+        "name": "Standalone Draw",
+        "info": "# Part 9 of the [Visualize circuits guide.](https://docs.quantum.ibm.com/guides/visualize-circuits#)\r\n&nbsp;\r\n# This node shows a text output rendering for drawing a quantum circuit using the <font style='background: lightgrey'>_`circuit_drawer()`_</font> function instead of the and the <font style='background: lightgrey'>_`circuit.draw()`_</font> method. The function behaves identically to the method, except that it takes in a circuit object as a required argument.\r\n```python\r\nfrom qiskit import QuantumCircuit\r\nfrom qiskit.visualization import circuit_drawer\r\n \r\ncircuit = QuantumCircuit(1) \r\nfor _ in range(10):\r\n    circuit.h(0)\r\ncircuit_drawer(circuit, output=\"mpl\", plot_barriers=False)\r\n```\r\n ",
+        "x": 810,
+        "y": 320,
+        "wires": [
+            [
+                "bd06fcdd148aeeab"
+            ]
+        ]
+    },
+    {
+        "id": "a234d75e787bac6b",
+        "type": "style-draw",
+        "z": "40abd99c86f26227",
+        "name": "Style Draw",
+        "info": "# Part 7 of the [Visualize circuits guide.](https://docs.quantum.ibm.com/guides/visualize-circuits#)\r\n&nbsp;\r\n# This node shows a text output rendering for drawing a quantum circuit using <font style='background: lightgrey'>_`circuit.draw()`_</font> and the <font style='background: lightgrey'>_`style`_</font> argument. The output is a diagram using the mpl renderer with changes to the colors and outlines.\r\n```python\r\nfrom qiskit import QuantumCircuit\r\n \r\ncircuit = QuantumCircuit(1) \r\nfor _ in range(10):\r\n    circuit.h(0)\r\nstyle = {\"backgroundcolor\": \"lightgreen\"}\r\ncircuit.draw(output=\"mpl\", style=style)\r\n```\r\n ",
+        "x": 430,
+        "y": 320,
+        "wires": [
+            [
+                "a7dc9f0ace8e7b0c",
+                "6eae54233c10e5e6"
+            ]
+        ]
+    },
+    {
+        "id": "a7dc9f0ace8e7b0c",
+        "type": "scale-draw",
+        "z": "40abd99c86f26227",
+        "name": "Scale Draw",
+        "info": "# Part 8 of the [Visualize circuits guide.](https://docs.quantum.ibm.com/guides/visualize-circuits#)\r\n&nbsp;\r\n# This node shows a text output rendering for drawing a quantum circuit using <font style='background: lightgrey'>_`circuit.draw()`_</font> and the <font style='background: lightgrey'>_`scale`_</font> argument. The output is a diagram with the mpl renderer with a scaled output.\r\n```python\r\nfrom qiskit import QuantumCircuit\r\n \r\ncircuit = QuantumCircuit(1) \r\nfor _ in range(10):\r\n    circuit.h(0)\r\n# Scale the mpl output to 1/2 the normal size\r\ncircuit.draw(output=\"mpl\", scale=0.5)\r\n```\r\n ",
+        "x": 610,
+        "y": 320,
+        "wires": [
+            [
+                "ffb63f57cea59ba6",
+                "e6929ea8f1cdc304"
+            ]
+        ]
     }
 ]

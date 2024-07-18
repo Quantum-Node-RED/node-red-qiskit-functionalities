@@ -1,0 +1,150 @@
+[
+    {
+        "id": "9b0b8d35d29bb275",
+        "type": "inject",
+        "z": "7b302bf2b7ea13c6",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload.numQubits",
+                "v": "2",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 90,
+        "y": 340,
+        "wires": [
+            [
+                "75bd126cd69a6a18"
+            ]
+        ]
+    },
+    {
+        "id": "c046a8a09c619e95",
+        "type": "image",
+        "z": "7b302bf2b7ea13c6",
+        "name": "",
+        "width": "350",
+        "data": "payload.result.circuit_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 480,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "bcf200527e9f754e",
+        "type": "image",
+        "z": "7b302bf2b7ea13c6",
+        "name": "",
+        "width": "350",
+        "data": "payload.result.circuit_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 700,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "6671b54478e58532",
+        "type": "image",
+        "z": "7b302bf2b7ea13c6",
+        "name": "",
+        "width": "300",
+        "data": "payload.result.circuit_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 960,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "5f78eacf0360af67",
+        "type": "image",
+        "z": "7b302bf2b7ea13c6",
+        "name": "",
+        "width": "350",
+        "data": "payload.result.circuit_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1180,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "75bd126cd69a6a18",
+        "type": "plot-histogram",
+        "z": "7b302bf2b7ea13c6",
+        "name": "Plot histogram",
+        "info": "# [Visualize results guide.](https://docs.quantum.ibm.com/guides/visualize-results#)\r\n&nbsp;\r\n# The <font style='background: lightgrey'>_`plot_histogram`_</font> function visualizes the result of sampling a quantum circuit on a system or simulator.\r\n```python\r\nfrom qiskit_aer.primitives import Sampler\r\nfrom qiskit import QuantumCircuit\r\nfrom qiskit.visualization import plot_histogram\r\n\r\n# quantum circuit to make a Bell state\r\nbell = QuantumCircuit(2)\r\nbell.h(0)\r\nbell.cx(0, 1)\r\nbell.measure_all()\r\n\r\n# execute the quantum circuit\r\nquasi_dists = Sampler().run(bell, shots=1000).result().quasi_dists[0]\r\nplot_histogram(quasi_dists)\r\n```\r\n ",
+        "x": 260,
+        "y": 340,
+        "wires": [
+            [
+                "c046a8a09c619e95",
+                "57dab349bc01e60a"
+            ]
+        ]
+    },
+    {
+        "id": "57dab349bc01e60a",
+        "type": "plot-histogram-options",
+        "z": "7b302bf2b7ea13c6",
+        "name": "Plot histogram options",
+        "info": "# [Visualize results guide.](https://docs.quantum.ibm.com/guides/visualize-results#)\r\n&nbsp;\r\n# The <font style='background: lightgrey'>_`plot_histogram`_</font> function visualizes the result of sampling a quantum circuit on a system or simulator.\r\n# Use the following options for <font style='background: lightgrey'>_`plot_histogram`_</font> to adjust the output graph.\r\n<font style='background: lightgrey'>_`legend`_</font>: Provides a label for the executions. It takes a list ofstrings used to label each execution's results. This is mostly useful when plotting multiple execution results inthe same histogram.\r\n\r\n<font style='background: lightgrey'>_`sort`_</font>: Adjusts the order of the bars in the histogram. It can be to either ascending order with <font style='background: lightgrey'>_`asc`_</font> or decending order with<font style='background: lightgrey'>_`desc`_</font>.\r\n\r\n<font style='background: lightgrey'>_`number_to_keep`_</font>: Takes an integer for the number of terms to show. The rest are grouped together in a single bar called \"rest\".\r\n\r\n<font style='background: lightgrey'>_`color`_</font>: Adjusts the color of the bars; takes a string or alist of strings for the colors to use for the bars for each execution.\r\n\r\n<font style='background: lightgrey'>_`bar_labels`_</font>: Adjusts whether labels are printed above the bars.\r\n\r\n<font style='background: lightgrey'>_`figsize`_</font>: Takes a tuple of the size in inches to make the output figure.\r\n```python\r\nfrom qiskit_aer.primitives import Sampler\r\nfrom qiskit import QuantumCircuit\r\nfrom qiskit.visualization import plot_histogram\r\n\r\n# quantum circuit to make a Bell state\r\nbell = QuantumCircuit(2)\r\nbell.h(0)\r\nbell.cx(0, 1)\r\nbell.measure_all()\r\n\r\n# execute the quantum circuit\r\nquasi_dists = Sampler().run(bell, shots=1000).result().quasi_dists[0]\r\n\r\n# Execute two-qubit Bell state again\r\nsecond_quasi_dists = Sampler().run(bell, shots=1000).result().quasi_dists[0]\r\nplot_histogram(\r\n    [quasi_dists, second_quasi_dists],\r\n    legend=[\"first\", \"second\"],\r\n    sort=\"desc\",\r\n    figsize=(15, 12),\r\n    color=[\"orange\", \"black\"],\r\n    bar_labels=False,\r\n)\r\n```\r\n ",
+        "x": 480,
+        "y": 340,
+        "wires": [
+            [
+                "853c3440dcc8c9e4",
+                "bcf200527e9f754e"
+            ]
+        ]
+    },
+    {
+        "id": "853c3440dcc8c9e4",
+        "type": "plot-estimator-results",
+        "z": "7b302bf2b7ea13c6",
+        "name": "Plot estimator results",
+        "info": "# [Visualize results guide.](https://docs.quantum.ibm.com/guides/visualize-results#)\r\n&nbsp;\r\n# Qiskit does not have a built-in function for plotting <font style='background: lightgrey'>_`Estimator `_</font> results, but you can use Matplotlib's [bar plot](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.bar.html#) for a quick visualization.\r\n# To demonstrate, the following code example estimates the expectation values of seven different observables on a quantum state.\r\n```python\r\nfrom qiskit import QuantumCircuit\r\nfrom qiskit.quantum_info import SparsePauliOp\r\nfrom qiskit_aer.primitives import Estimator\r\nfrom matplotlib import pyplot as plt\r\n\r\n# Simple estimation experiment to create results\r\nqc = QuantumCircuit(2)\r\nqc.h(0)\r\nqc.crx(1.5, 0, 1)\r\n\r\nobservables_labels = [\"ZZ\", \"XX\", \"YZ\", \"ZY\", \"XY\", \"XZ\", \"ZX\"]\r\nobservables = [SparsePauliOp(label) for label in observables_labels]\r\n\r\nresult = Estimator().run([qc]*7, observables).result()\r\n\r\n# Plot using Matplotlib\r\nplt.bar(observables_labels, result.values)\r\n```\r\n ",
+        "x": 720,
+        "y": 340,
+        "wires": [
+            [
+                "6671b54478e58532",
+                "14a198859e6c64dc"
+            ]
+        ]
+    },
+    {
+        "id": "14a198859e6c64dc",
+        "type": "plot-estimator-results-w-errors",
+        "z": "7b302bf2b7ea13c6",
+        "name": "Estimator results w. errors",
+        "info": "# [Visualize results guide.](https://docs.quantum.ibm.com/guides/visualize-results#)\r\n&nbsp;\r\n# The following code exmaple estimates the standard error from the variance of each result and adds them as error bars. See the [bar plot documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.bar.html#) for a full description of the plot.\r\n```python\r\nfrom qiskit import QuantumCircuit\r\nfrom qiskit.quantum_info import SparsePauliOp\r\nfrom qiskit_aer.primitives import Estimator\r\nfrom matplotlib import pyplot as plt\r\nfrom math import sqrt\r\n\r\n# Simple estimation experiment to create results\r\nqc = QuantumCircuit(2)\r\nqc.h(0)\r\nqc.crx(1.5, 0, 1)\r\n\r\nobservables_labels = [\"ZZ\", \"XX\", \"YZ\", \"ZY\", \"XY\", \"XZ\", \"ZX\"]\r\nobservables = [SparsePauliOp(label) for label in observables_labels]\r\n\r\nresult = Estimator().run([qc]*7, observables).result()\r\nstandard_error = [sqrt(exp_data[\"variance\"])/sqrt(exp_data[\"shots\"]) for exp_data in result.metadata]\r\n\r\n_, ax = plt.subplots()\r\nax.bar(observables_labels, result.values, yerr=standard_error, capsize=2)\r\nax.set_title(\"Expectation values (with standard errors)\")```\r\n ",
+        "x": 970,
+        "y": 340,
+        "wires": [
+            [
+                "5f78eacf0360af67"
+            ]
+        ]
+    }
+]

@@ -4,7 +4,22 @@
         color: '#aaaaaa',
         defaults: {
             name: {value:"Fold Draw"},
-            info: {value:"# Part 6 of the [Visualize circuits guide.](https://docs.quantum.ibm.com/guides/visualize-circuits#)\r\n&nbsp;\r\n# This node shows a text output rendering for drawing a quantum circuit using <font style='background: lightgrey'>_`circuit.draw()`_</font> and the <font style='background: lightgrey'>_`fold`_</font> argument. The output is the diagram in text format and sets the maximum width for the output.\r\n```python\r\nfrom qiskit import QuantumCircuit\r\n \r\circuit = QuantumCircuit(1) \r\nfor _ in range(10):\r\n    circuit.h(0)\r\n# limit line length to 40 characters\r\ncircuit.draw(output=\"text\", fold=40)\r\n```\r\n "}
+            info: {
+                value:"# Part 6 of the [Visualize circuits guide.](https://docs.quantum.ibm.com/guides/visualize-circuits#)\r\n" +
+                "&nbsp;\r\n" +
+                "# This node shows a text output rendering for drawing a quantum circuit using " +
+                "<font style='background: lightgrey'>_`circuit.draw()`_</font> and the <font style='background: lightgrey'>_`fold`_</font>" +
+                " argument. The output is the diagram in text format and sets the maximum width for the output.\r\n" +
+                "```python\r\n" +
+                "from qiskit import QuantumCircuit\r\n" +
+                " \r\n" +
+                "circuit = QuantumCircuit(1) \r\n" +
+                "for _ in range(10):\r\n" +
+                "    circuit.h(0)\r\n" +
+                "# limit line length to 40 characters\r\n" +
+                "circuit.draw(output=\"text\", fold=40)\r\n" +
+                "```\r\n "
+            }
         },
         inputs: 1,
         outputs: 1,
