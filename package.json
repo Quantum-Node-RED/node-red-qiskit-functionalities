@@ -19,7 +19,14 @@
       "create-and-optimize-quantum-circuit": "nodes/documentation/transpiler/advanced-transpilation-resources/Create_pass_manager_for_dynamical_decoupling/Create_and_optimize_quantum_circuit.js",
       "create-custom-pass-for-dd": "nodes/documentation/transpiler/advanced-transpilation-resources/Create_pass_manager_for_dynamical_decoupling/Create_custom_passes_for_dd.js",
       "execute-custom-pass-for-dd": "nodes/documentation/transpiler/advanced-transpilation-resources/Create_pass_manager_for_dynamical_decoupling/Execute_custom_passes_for_dd.js",
-      "decompose-circuit-into-basis-gate": "nodes/documentation/transpiler/advanced-transpilation-resources/Create_pass_manager_for_dynamical_decoupling/Decompose_circuit_into_basis_gate.js"
+      "decompose-circuit-into-basis-gate": "nodes/documentation/transpiler/advanced-transpilation-resources/Create_pass_manager_for_dynamical_decoupling/Decompose_circuit_into_basis_gate.js",
+      "add-dynamical-decoupling-to-circuit": "nodes/documentation/transpiler/advanced-transpilation-resources/Create_pass_manager_for_dynamical_decoupling/Add_dynamical_decoupling_to_circuit.js",
+      "create-circuit-for-dag": "nodes/documentation/transpiler/advanced-transpilation-resources/Write_a_custom_transpiler_pass/Create_a_circuit.js",
+      "generate-dag-for-circuit": "nodes/documentation/transpiler/advanced-transpilation-resources/Write_a_custom_transpiler_pass/Generate_DAG_diagram.js",
+      "intro-to-transpiler-pass": "nodes/documentation/transpiler/advanced-transpilation-resources/Write_a_custom_transpiler_pass/Introduction_to_transpiler_passes.js",
+      "intro-to-dag": "nodes/documentation/transpiler/advanced-transpilation-resources/Write_a_custom_transpiler_pass/Introduction_to_DAG.js",
+      "create-transpiler-pass": "nodes/documentation/transpiler/advanced-transpilation-resources/Write_a_custom_transpiler_pass/Create_a_transpiler_pass.js",
+      "use-the-transpiler-pass": "nodes/documentation/transpiler/advanced-transpilation-resources/Write_a_custom_transpiler_pass/Use_transpiler_pass.js"
     }
   },
   "dependencies": {

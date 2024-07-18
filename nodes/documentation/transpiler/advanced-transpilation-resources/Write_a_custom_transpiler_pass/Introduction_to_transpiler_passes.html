@@ -1,0 +1,34 @@
+
+<script type="text/javascript">
+    RED.nodes.registerType("intro-to-transpiler-pass", {
+      category: "Write a custom transpiler pass",
+      color: "#aaaaaa",
+      defaults: {
+        name: { value: "What is transpiler passes?" },
+        //info: { value: "# A _dynamical decoupling sequence_ is a series of gates that compose to the identity and are spaced regularly in time. For example, in this code snippet, we start by creating a simple sequence called XY4 consisting of four gates.\r\n```python\r\nfrom qiskit.circuit.library import XGate, YGate\r\n \r\nX = XGate()\r\nY = YGate()\r\n \r\ndd_sequence = [X, Y, X, Y]\r\n```\r\n# Then, because of the regular timing of dynamical decoupling sequences, information about the <font style=\"background: lightgrey\">YGate</font> must be added to the <font style=\"background: lightgrey\">target</font> because it is not a basis gate, whereas the <font style=\"background: lightgrey\">XGate</font> is. We know a _priori_ that the <font style=\"background: lightgrey\">YGate</font> has the same duration and error as the <font style=\"background: lightgrey\">XGate</font>, however, so we can just retrieve those properties from the <font style=\"background: lightgrey\">target</font> and add them back for the <font style=\"background: lightgrey\">YGates</font>. This is also why the list 'basis_gates' were saved separately in the previous node, since we are adding the <font style=\"background: lightgrey\">YGate</font> instruction to the <font style=\"background: lightgrey\">target</font> although it is not an actual basis gate of <font style=\"background: lightgrey\">ibm_brisbane</font>.\r\n&nbsp;\r\n# In this code, we copy the duration and error properties of the <font style=\"background: lightgrey\">X gate</font> to the <font style=\"background: lightgrey\">Y gate</font> for each qubit in the target quantum device and then adds the <font style=\"background: lightgrey\">Y gate</font> with these properties to the <font style=\"background: lightgrey\">target</font>.\r\n```python\r\nfrom qiskit.transpiler import InstructionProperties\r\n \r\ny_gate_properties = {}\r\nfor qubit in range(target.num_qubits):\r\n    y_gate_properties.update(\r\n        {\r\n            (qubit,): InstructionProperties(\r\n                duration=target[\"x\"][(qubit,)].duration,\r\n                error=target[\"x\"][(qubit,)].error,\r\n            )\r\n        }\r\n    )\r\n \r\ntarget.add_instruction(YGate(), y_gate_properties)\r\n```\r\n# The new operation name list is set to \"New Target Operation Names\" node, and you can check the instruction names in debug palette. Compare to the previous instructions, Compared to the previous instructions, the <font style=\"background: lightgrey\">target</font> should now include an additional instruction called <font style=\"background: lightgrey\">'y'</font>, while all other instructions should remain the same as before. " }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "What is transpiler passes?";
+      },
+      
+    });
+
+  </script>
+  
+  <script type="text/html" data-template-name="intro-to-transpiler-pass">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="What is transpiler passes?" />
+    </div>
+
+  </script>
+
+  
+  
+  <script type="text/html" data-help-name="intro-to-transpiler-pass">
+    <p>A node that introduce transpiler passes.</p>
+  </script>
+  
