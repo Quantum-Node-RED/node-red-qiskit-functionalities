@@ -1,0 +1,30 @@
+<script type="text/javascript">
+    RED.nodes.registerType('quantum-circuits', {
+      category: 'function',
+      color: '#aaaaaa',
+      defaults: {
+        name: { value: "quantum-circuits" },
+        info: {
+          value: `A simple quantum circuit is a collection of qubits and a list of instructions that act on those qubits. To demonstrate, the following cell creates a new circuit with two new qubits, then displays the circuit's qubits attribute.`,
+          required: false
+        }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "quantum-circuits";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="quantum-circuits">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="quantum-circuits">
+    <p>A quantum circuit.</p>
+  </script>

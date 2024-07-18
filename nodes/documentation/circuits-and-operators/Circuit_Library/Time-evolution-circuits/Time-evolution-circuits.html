@@ -1,0 +1,35 @@
+<script type="text/javascript">
+    RED.nodes.registerType('Time-evolution-circuits', {
+      category: 'function',
+      color: '#aaaaaa',
+      defaults: {
+        name: { value: "Time-evolution-circuits" },
+        info: {
+          value: `These circuits simulate a quantum state evolving in time. 
+          Use time-evolution circuits to investigate physical effects such 
+          as heat transfer or phase transitions in a system. Time-evolution 
+          circuits are also a fundamental building block of chemistry wave functions 
+          (such as unitary coupled-cluster trial states) and of the QAOA algorithm 
+          we use for optimization problems.`,
+          required: false
+        }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "Time-evolution-circuits";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="Time-evolution-circuits">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="Time-evolution-circuits">
+    <p>These circuits simulate a quantum state evolving in time.</p>
+  </script>

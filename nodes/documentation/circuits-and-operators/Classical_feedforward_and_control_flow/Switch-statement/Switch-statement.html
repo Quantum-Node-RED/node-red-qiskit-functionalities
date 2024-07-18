@@ -1,0 +1,30 @@
+<script type="text/javascript">
+    RED.nodes.registerType('Switch-statement', {
+      category: 'function',
+      color: '#aaaaaa',
+      defaults: {
+        name: { value: "Switch-statment" },
+        info: {
+          value: `The switch statement is used to select actions based on the value of a classical bit or register. It is similar to an if statement, but allows one to specify more cases for the branching logic. In the example below, we apply a Hadamard gate to a qubit and measure it. If the result is 0, we apply an X gate on the qubit, and if the result is 1, we apply a Z gate. The resulting measurement outcome should be 1 with 100% probability.`,
+          required: false
+        }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "Switch-statment";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="Switch-statment">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="Switch-statment">
+    <p>Apply switch statements.</p>
+  </script>
