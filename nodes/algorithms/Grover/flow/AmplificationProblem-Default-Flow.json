@@ -12,13 +12,7 @@
         "type": "inject",
         "z": "f3a858fd71a3bec1",
         "name": "target",
-        "props": [
-            {
-                "p": "payload.target",
-                "v": "11",
-                "vt": "str"
-            }
-        ],
+        "props": [],
         "repeat": "",
         "crontab": "",
         "once": false,
@@ -28,7 +22,7 @@
         "y": 240,
         "wires": [
             [
-                "1266a8b0dbf676ad"
+                "1997725fc9f57eae"
             ]
         ]
     },
@@ -92,35 +86,13 @@
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "payload.result",
+        "complete": "payload.result.target11",
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 960,
+        "x": 940,
         "y": 60,
         "wires": []
-    },
-    {
-        "id": "1266a8b0dbf676ad",
-        "type": "AmplificationProblem",
-        "z": "f3a858fd71a3bec1",
-        "name": "Grover",
-        "oracleType": "QuantumCircuit",
-        "iterators": "None",
-        "input": "123,123,123,123",
-        "growthRate": "0.2",
-        "sampleFromIterations": "False",
-        "x": 430,
-        "y": 240,
-        "wires": [
-            [
-                "be18094ed1edb914",
-                "d075f306e3f785ff",
-                "1f2bd93af85af399",
-                "e305a7a642c76780",
-                "8291524bd51cc101"
-            ]
-        ]
     },
     {
         "id": "be18094ed1edb914",
@@ -153,5 +125,27 @@
         "x": 960,
         "y": 640,
         "wires": []
+    },
+    {
+        "id": "1997725fc9f57eae",
+        "type": "Grover",
+        "z": "f3a858fd71a3bec1",
+        "name": "Grover",
+        "oracleType": "QuantumCircuit",
+        "iterators": "None",
+        "input": "None",
+        "growthRate": "0.5",
+        "sampleFromIterations": null,
+        "target": "01",
+        "x": 430,
+        "y": 240,
+        "wires": [
+            [
+                "be18094ed1edb914",
+                "d075f306e3f785ff",
+                "1f2bd93af85af399",
+                "e305a7a642c76780"
+            ]
+        ]
     }
 ]

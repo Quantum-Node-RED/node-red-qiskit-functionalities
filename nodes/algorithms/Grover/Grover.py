@@ -13,7 +13,6 @@ from qiskit.quantum_info import Statevector
 try:
     # msg.payload from node-red
     data = json.loads(sys.argv[1])
-    # TODO target接受多个值
     target = data["target"]
     oracle_type = data["oracleType"]
     iterators = data["iterators"]
@@ -27,17 +26,73 @@ except IndexError:
     print("Error: No input data provided.")
     sys.exit(1)
 
-num_qubits = len(target)
-if oracle_type == "QuantumCircuit":
-    oracle = QuantumCircuit(num_qubits)
-elif oracle_type == "Statevector":    
-    oracle = Statevector.from_label(target)
 try:
     if not all(c in '01' for c in target):
         raise ValueError("Target must be a binary string.")
 
     num_qubits = len(target)
-    oracle = QuantumCircuit(num_qubits)
+    if oracle_type == "QuantumCircuit":
+        oracle = QuantumCircuit(num_qubits)
+        if num_qubits == 2:
+            if target == "00":
+                oracle.x(0)
+                oracle.x(1)
+                oracle.cz(0, 1)
+                oracle.x(0)
+                oracle.x(1)
+            elif target == "01":
+                oracle.x(0)
+                oracle.cz(0, 1)
+                oracle.x(0)
+            elif target == "10":
+                oracle.x(1)
+                oracle.cz(0, 1)
+                oracle.x(1)
+            elif target == "11":
+                oracle.cz(0, 1)
+        elif num_qubits == 3:
+            if target == "000":
+                oracle.x(0)
+                oracle.x(1)
+                oracle.x(2)
+                oracle.ccx(0, 1, 2)
+                oracle.x(0)
+                oracle.x(1)
+                oracle.x(2)
+            elif target == "001":
+                oracle.x(0)
+                oracle.x(1)
+                oracle.ccx(0, 1, 2)
+                oracle.x(0)
+                oracle.x(1)
+            elif target == "010":
+                oracle.x(0)
+                oracle.x(2)
+                oracle.ccx(0, 1, 2)
+                oracle.x(0)
+                oracle.x(2)
+            elif target == "011":
+                oracle.x(0)
+                oracle.ccx(0, 1, 2)
+                oracle.x(0)
+            elif target == "100":
+                oracle.x(1)
+                oracle.x(2)
+                oracle.ccx(0, 1, 2)
+                oracle.x(1)
+                oracle.x(2)
+            elif target == "101":
+                oracle.x(1)
+                oracle.ccx(0, 1, 2)
+                oracle.x(1)
+            elif target == "110":
+                oracle.x(2)
+                oracle.ccx(0, 1, 2)
+                oracle.x(2)
+            elif target == "111":
+                oracle.ccx(0, 1, 2)                                            
+    elif oracle_type == "Statevector":    
+        oracle = Statevector.from_label(target)
 
     backend = Aer.get_backend('qasm_simulator')
 
@@ -86,11 +141,7 @@ try:
         "top_measurement": result.top_measurement,
         "circuit_results": result.circuit_results,
         "circuit_results_image": circuit_image_b64,
-        "circuit_image": image_b64,
-        # "iteraors": iterators,
-        # "growth_rate": growth_rates,
-        # "sample_from_iterations": sample_from_iterations,
-        # "input": input_value
+        "circuit_image": image_b64
     }
 
     print(json.dumps(output))
