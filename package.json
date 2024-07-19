@@ -14,7 +14,6 @@
     "nodes": {
       "lower-case": "templates/lower-case.js",
       "CHSH-game-classic": "nodes/CHSH-game-classic/CHSH-game-classic.js",
-      "CHSH-game-quantum": "nodes/CHSH-game-quantum/CHSH-game-quantum.js",
       "transpilation-basic-pass-manager": "nodes/documentation/transpiler/pass-managers/default-settings/basic-pass-manager.js",
       "transpilation-circuit-for-pm": "nodes/documentation/transpiler/pass-managers/default-settings/circuit-for-pm.js",
       "transpilation-random-unitary": "nodes/documentation/transpiler/pass-managers/optimization/random-unitary.js",
@@ -30,14 +29,14 @@
       "transpilation-coupling-map-lv0": "nodes/documentation/transpiler/pass-managers/quantum-computers/coupling-map-lv0.js",
       "transpilation-coupling-map-lv1": "nodes/documentation/transpiler/pass-managers/quantum-computers/coupling-map-lv1.js",
       "transpilation-basis-gates": "nodes/documentation/transpiler/pass-managers/quantum-computers/basis-gates.js",
-      "transpilation-error-rates": "nodes/documentation/transpiler/pass-managers/quantum-computers/error-rates.js"
+      "transpilation-error-rates": "nodes/documentation/transpiler/pass-managers/quantum-computers/error-rates.js",
       "CHSH-game-quantum": "nodes/CHSH-game-quantum/CHSH-game-quantum.js",
       "Grover": "nodes/algorithms/Grover/Grover.js",
-      "routing": "nodes/documentation/transpiler/routing.js",
-      "translation": "nodes/documentation/transpiler/translation.js",
-      "optimization": "nodes/documentation/transpiler/optimization.js",
-      "scheduling": "nodes/documentation/transpiler/scheduling.js",
-      "pass-manager": "nodes/documentation/transpiler/pass_manage.js"
+      "routing": "nodes/documentation/transpiler/introduction/routing/routing.js",
+      "translation": "nodes/documentation/transpiler/introduction/translation/translation.js",
+      "optimization": "nodes/documentation/transpiler/introduction/optimization/optimization.js",
+      "scheduling": "nodes/documentation/transpiler/introduction/scheduling/scheduling.js",
+      "pass-manager": "nodes/documentation/transpiler/introduction/passmanager/pass_manage.js"
     }
   },
   "dependencies": {
