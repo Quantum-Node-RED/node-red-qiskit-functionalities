@@ -7,3 +7,7 @@
 
 # Optional npm cache directory
 .npm
+
+# environment
+/venv
+.env
