@@ -1,0 +1,34 @@
+
+<script type="text/javascript">
+    RED.nodes.registerType("intro-to-OpenQASM", {
+      category: "Introduction to OpenQASM",
+      color: "#aaaaaa",
+      defaults: {
+        name: { value: "Introduction to OpenQASM" },
+        info: { value: "# **What is OpenQASM ?**\r\n&nbsp;\r\n# OpenQASM (open quantum assembly language), a machine-independent programming interface compatible with IBM Quantum™ systems, is an imperative programming language for describing quantum circuits. OpenQASM uses the quantum circuit model to express quantum programs as ordered sequences of parameterized operations (such as gates, measurements, and resets) and real-time classical computation. In addition to quantum algorithms, OpenQASM can describe circuits intended to characterize, validate, or debug quantum systems.\r\n&nbsp;\r\n# As the needs of quantum system development have evolved, OpenQASM's feature list has expanded in response; the latest version, [OpenQASM 3](https://arxiv.org/abs/2104.14722), incorporates extensions including classical feed-forward flow control, gate modifiers, and pulse implementations.\r\n&nbsp;\r\n# OpenQASM is the common interchange format among independent quantum software tools. For developers that prefer one tool for circuit construction, another for transpilation, and so forth, OpenQASM is the lingua franca that acts as a bridge among them.\r\n&nbsp;\r\n# The Qiskit SDK provides ways to convert between OpenQASM and the [QuantumCircuit](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit) class. We will introduce you how both OpenQASM2 and OpenQASM3 are converted with the Circuit Class.\r\n&nbsp;\r\n# OpenQASM is the choice for a variety of audiences because of its versatility. For more information, view the [OpenQASM live specification](https://openqasm.com/)." }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "Introduction to OpenQASM";
+      },
+      
+    });
+
+  </script>
+  
+  <script type="text/html" data-template-name="intro-to-OpenQASM">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Introduction to OpenQASM" />
+    </div>
+
+  </script>
+
+  
+  
+  <script type="text/html" data-help-name="intro-to-OpenQASM">
+    <p>A node that briefly introduce OpenQASM.</p>
+  </script>
+  

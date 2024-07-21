@@ -1,0 +1,384 @@
+[
+    {
+        "id": "f965af6e921672a2",
+        "type": "tab",
+        "label": "Build Pulse Schedule",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "b6e1e385260cc9d4",
+        "type": "inject",
+        "z": "f965af6e921672a2",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 350,
+        "y": 940,
+        "wires": [
+            [
+                "ea67bbdedd931f1a",
+                "fc942e668f5840f0"
+            ]
+        ],
+        "info": "# **In this flow, we will show you how to build pulse schedule and the different operations that could be peformed on pulse.**"
+    },
+    {
+        "id": "3e4ce8508968e517",
+        "type": "debug",
+        "z": "f965af6e921672a2",
+        "name": "ScheduleBlock Object",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result.result_obj",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 960,
+        "y": 1220,
+        "wires": [],
+        "info": "# Display the ScheduleBlock object you created at debug palette."
+    },
+    {
+        "id": "58c30beeca94cb44",
+        "type": "debug",
+        "z": "f965af6e921672a2",
+        "name": "Channel",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result.result_obj",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1680,
+        "y": 860,
+        "wires": [],
+        "info": "# Output the Channel object you created"
+    },
+    {
+        "id": "af01534711e5729c",
+        "type": "image",
+        "z": "f965af6e921672a2",
+        "name": "Parametric Pulse Output",
+        "width": "960",
+        "data": "payload.result.result_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1410,
+        "y": 240,
+        "wires": [],
+        "info": "# The image of the parametric pulse"
+    },
+    {
+        "id": "8b1e11bc0b14e2d0",
+        "type": "image",
+        "z": "f965af6e921672a2",
+        "name": "Pulse Waveform Output",
+        "width": "960",
+        "data": "payload.result.result_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1390,
+        "y": 600,
+        "wires": [],
+        "info": "# The image of the pulse specified by waveform"
+    },
+    {
+        "id": "c55ff30b7631e6a7",
+        "type": "image",
+        "z": "f965af6e921672a2",
+        "name": "Delay Output",
+        "width": "960",
+        "data": "payload.result.result_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 2170,
+        "y": 1120,
+        "wires": [],
+        "info": "# The image shows the comparison between the delayed pulse and the original pulse."
+    },
+    {
+        "id": "29c988c011a64718",
+        "type": "image",
+        "z": "f965af6e921672a2",
+        "name": "Play Output",
+        "width": "960",
+        "data": "payload.result.result_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 2170,
+        "y": 940,
+        "wires": [],
+        "info": "# The image of executed pulse"
+    },
+    {
+        "id": "3bdae849afae659c",
+        "type": "image",
+        "z": "f965af6e921672a2",
+        "name": "Set Frequency Output",
+        "width": "960",
+        "data": "payload.result.result_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 2200,
+        "y": 1480,
+        "wires": [],
+        "info": "# The image of the frequency-set pulse"
+    },
+    {
+        "id": "4fbe55e46cf6c1ce",
+        "type": "image",
+        "z": "f965af6e921672a2",
+        "name": "Shift Frequency Output",
+        "width": "960",
+        "data": "payload.result.result_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 2210,
+        "y": 1680,
+        "wires": [],
+        "info": "# The image shows the comparison between frequency-shifted pulse and the original pulse"
+    },
+    {
+        "id": "4a19e82ead1ac2b2",
+        "type": "image",
+        "z": "f965af6e921672a2",
+        "name": "Set Phase Output",
+        "width": "960",
+        "data": "payload.result.result_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 2190,
+        "y": 2080,
+        "wires": [],
+        "info": "# The image of phase-set pulse"
+    },
+    {
+        "id": "085d585c6831be31",
+        "type": "image",
+        "z": "f965af6e921672a2",
+        "name": "Shift Phase Output",
+        "width": "960",
+        "data": "payload.result.result_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 2190,
+        "y": 2300,
+        "wires": [],
+        "info": "# The image shows the comparison between the phase-shifted pulse and the original pulse."
+    },
+    {
+        "id": "ea67bbdedd931f1a",
+        "type": "initial-scheduleblock",
+        "z": "f965af6e921672a2",
+        "name": "Initiate the schedule",
+        "info": "# Pulse gates define a low-level, exact representation for a circuit gate. A single operation can be implemented with a pulse program, which is comprised of multiple low-level instructions. Regardless of how the program is used, the syntax for building the program is the same.\r\n&nbsp;\r\n# A pulse program, which is called a <font style=\"background: lightgrey\">_ScheduleBlock_</font>, describes instruction sequences for the control electronics. The following code uses the Pulse Builder to build a ScheduleBlock, which initialize a schedule:\r\n```python\r\nfrom qiskit import pulse\r\n \r\nwith pulse.build(name='my_example') as my_program:\r\n    # Add instructions here\r\n    pass\r\n```\r\n# You can check the <font style=\"background: lightgrey\">_ScheduleBlock_</font> object you created at the \"ScheduleBlock object\" node.\r\n&nbsp;\r\n# **You can see that there are no instructions yet. In the following nodes, we will show you all the instructions that can be added to a pulse.**\r\n&nbsp;\r\n# **Important:** For IBM® devices, pulse programs are used as subroutines to describe gates. IBM devices do not accept full programs in this format.\r\n",
+        "x": 600,
+        "y": 940,
+        "wires": [
+            [
+                "3e4ce8508968e517",
+                "841ee38fd14e8462"
+            ]
+        ]
+    },
+    {
+        "id": "fc942e668f5840f0",
+        "type": "pulse-introduction",
+        "z": "f965af6e921672a2",
+        "name": "What is pulse?",
+        "info": "# A **Pulse** specifies an arbitrary pulse envelope. There are many methods available for building pulses, such as those available in the Qiskit Pulse <font style=\"background: lightgrey\">_library_</font>.\r\n&nbsp;\r\n\r\n# Here, we will introduce two different methods to construct a pulse with an amplitude of 1, a standard deviation σ of 10, and 128 sample points:\r\n- # Parametric pulse\r\n- # Pulse waveforms described by examples\r\n&nbsp;\r\n# **Note:**  The amplitude norm is arbitrarily limited to 1.0. Each backend system may also impose further constraints. For instance, a minimum pulse size of 64. Any additional constraints are provided through [Target](https://docs.quantum.ibm.com/api/qiskit/qiskit.transpiler.Target).",
+        "x": 660,
+        "y": 440,
+        "wires": [
+            [
+                "b8f2ad75c6d8e3d8",
+                "9afa174e552f0d93"
+            ]
+        ]
+    },
+    {
+        "id": "b8f2ad75c6d8e3d8",
+        "type": "parametric-pulse",
+        "z": "f965af6e921672a2",
+        "name": "Build parametric pulse",
+        "info": "# You can build a <font style=\"background: lightgrey\">_Gaussian_</font> pulse by using the Gaussian parametric pulse. A parametric pulse sends the name of the function and its parameters to the backend, rather than every individual sample. Using parametric pulses makes the jobs much smaller to send. IBM Quantum backends limit the maximum job size that they accept, so parametric pulses might allow you to run larger programs.\r\n&nbsp;\r\n# Other parametric pulses in the library include <font style=\"background: lightgrey\">_GaussianSquare_</font>, <font style=\"background: lightgrey\">_Drag_</font>, and <font style=\"background: lightgrey\">_Constant_</font>. See the full list in [the API reference](https://docs.quantum.ibm.com/api/qiskit/pulse#parametric-pulse-representation).\r\n&nbsp;\r\n# **Note:** The backend is responsible for deciding how to sample the parametric pulses. It is possible to draw parametric pulses, but the samples displayed are not guaranteed to be the same as those executed on the backend.\r\n&nbsp;\r\n# Following code shows how to create pulse with parameters:\r\n```python\r\nfrom qiskit.pulse import library\r\n \r\namp = 1\r\nsigma = 10\r\nnum_samples = 128\r\n\r\ngaus = pulse.library.Gaussian(num_samples, amp, sigma,\r\n                              name=\"Parametric Gaus\")\r\n```\r\n# The image of the pulse 'gaus' is shown on the \"Parametric Pulse Output\" node\r\n",
+        "x": 1040,
+        "y": 240,
+        "wires": [
+            [
+                "af01534711e5729c"
+            ]
+        ]
+    },
+    {
+        "id": "9afa174e552f0d93",
+        "type": "pulse-waveforms",
+        "z": "f965af6e921672a2",
+        "name": "Build pulse by waveforms",
+        "info": "# A **Waveform** is a pulse signal specified as an array of time-ordered complex amplitudes, or <font style=\"background: lightgrey\">_samples_</font>. Each sample is played for one cycle, a timestep <font style=\"lightgrey\">dt</font>, determined by the backend. You must know the value of dt to determine a program's real-time dynamics. The (zero-indexed) <font style=\"background: lightgrey\">i_th</font> sample plays from time <font style=\"background: lightgrey\">i*dt</font> up to <font style=\"background: lightgrey\">(i + 1)*dt</font>, modulated by the qubit frequency.\r\n&nbsp;\r\n# The following code shows how to create samples by waveforms and specify your pulse by these samples:\r\n```python\r\nfrom qiskit.pulse import library\r\n \r\namp = 1\r\nsigma = 10\r\nnum_samples = 128\r\n\r\nimport numpy as np\r\n\r\n# Create samples\r\ntimes = np.arange(num_samples)\r\ngaussian_samples = np.exp(-1/2 *((times - num_samples / 2) ** 2 / sigma**2))\r\n \r\ngaus = library.Waveform(gaussian_samples, name=\"WF Gaus\")\r\n```\r\n# The image of the pulse 'gaus' is shown on the \"Pulse Waveform Output\" node.",
+        "x": 1050,
+        "y": 600,
+        "wires": [
+            [
+                "8b1e11bc0b14e2d0"
+            ]
+        ]
+    },
+    {
+        "id": "841ee38fd14e8462",
+        "type": "scheduleblock-set-channel",
+        "z": "f965af6e921672a2",
+        "name": "Set a channel",
+        "info": "# To add instructions to pulse, you need to specify at least one <font style=\"background: lightgrey\">_Channel_</font> where the instruction will be applied.\r\n&nbsp;\r\n# **Channels** are labels for signal lines from the control hardware to the quantum chip. There are four different types of channels:\r\n - # A <font style=\"background: lightgrey\">_DriveChannel_</font> is typically used for driving single-qubit rotations.\r\n - # A <font style=\"background: lightgrey\">_ControlChannel_</font> is typically used for multi-qubit gates or additional drive lines for tunable qubits.\r\n - # A <font style=\"background: lightgrey\">_MeasureChannel_</font> is specific to transmitting pulses that stimulate readout.\r\n - # An <font style=\"background: lightgrey\">_AcquireChannel_</font> is used to trigger digitizers which collect readout signals.\r\n# DriveChannels, ControlChannels, and MeasureChannels are all PulseChannels; this means that they support transmitting pulses, whereas the AcquireChannel is a receive channel only and cannot play waveforms.\r\n&nbsp;\r\n# The following code create one DriveChannel instance for each Instruction that accepts a PulseChannel. Most of the channels take one integer <font style=\"background: lightgrey\">_index_</font> argument. Except for ControlChannels, the index maps trivially to the qubit label.\r\n```python\r\nfrom qiskit.pulse import DriveChannel\r\n \r\nchannel = DriveChannel(0)\r\n```\r\n&nbsp;\r\n# On the other hand, you can also build your program in a context that is aware of the target backend by supplying it to pulse.build. By using the channel accessors <font style=\"background: lightgrey\">_`pulse.<type>_channel(<idx>)`_</font>, you ensure you are only using available device resources. When possible you should supply a backend.\r\n```python\r\nfrom qiskit_ibm_runtime.fake_provider import FakeValenciaV2\r\n \r\nbackend = FakeValenciaV2()\r\n \r\nwith pulse.build(backend=backend, name='backend_aware') as backend_aware_program:\r\n    channel = pulse.drive_channel(0)\r\n```\r\n# The Channel object you created is sent to \"Channel\" node, and you can check it at the debug palette.\r\n&nbsp;\r\n# **After setting up the channel, you can add different instructions to your pulse. Each instruction type has its own set of operands. We will introduce each instruction in the following nodes one by one.**",
+        "x": 1280,
+        "y": 940,
+        "wires": [
+            [
+                "58c30beeca94cb44",
+                "d9d94c6ad256d44d",
+                "642fd0106d5e2a82",
+                "5ddca52ad7b7e2db",
+                "09161051df8e795f",
+                "4e7ca04a98f9f5e3",
+                "5168a6d08c8c5e7f",
+                "1e842a7d12342c12"
+            ]
+        ]
+    },
+    {
+        "id": "d9d94c6ad256d44d",
+        "type": "pulse-play",
+        "z": "f965af6e921672a2",
+        "name": "play()",
+        "info": "# <font style=\"background:lightgrey\">**play(pulse, channel)**</font>\r\n&nbsp;\r\n# The <font style=\"background:lightgrey\">play</font> instruction is responsible for executing pulse. In the previous nodes, we introduced two methods for specifying pulses: <font style=\"background:lightgrey\">Parametric</font> and <font style=\"background:lightgrey\">Waveforms</font>, and created a pulse called \"gaus\". However, regardless of the method you use to specify a pulse, the <font style=\"background:lightgrey\">play</font> instruction is always added to your schedule in the same way as shown in the code below:\r\n```python\r\nwith pulse.build() as schedule:\r\n    pulse.play(gaus, channel)\r\n```\r\n# You may also supply a complex list or array directly to <font style=\"background:lightgrey\">play</font>.\r\n```python\r\nwith pulse.build() as schedule:\r\n    pulse.play([0.001*i for i in range(160)], channel)\r\n```\r\n# Note that the play instruction gets its duration from its <font style=\"background:lightgrey\">Pulse</font>: the duration of a parametrized pulse is an explicit argument, and the duration of a Waveform is the number of input samples.\r\n&nbsp;\r\n# The image of executed pulse is shown on \"Play Output\" node.",
+        "x": 1950,
+        "y": 940,
+        "wires": [
+            [
+                "29c988c011a64718"
+            ]
+        ]
+    },
+    {
+        "id": "642fd0106d5e2a82",
+        "type": "pulse-delay",
+        "z": "f965af6e921672a2",
+        "name": "delay()",
+        "info": "# <font style=\"background: lightgrey\">**delay(duration, channel)**</font>\r\n&nbsp;\r\n# One of the simplest instructions is <font style=\"background: lightgrey\">delay</font>. This is a blocking instruction that tells the control electronics to output no signal on the given channel for the duration specified. It is useful for controlling the timing of other instructions. The duration here and elsewhere is in terms of the backend's cycle time (1 / sample rate), <font style=\"background: lightgrey\">dt</font>. It must take an integer value.\r\n&nbsp;\r\n# To add a <font style=\"background: lightgrey\">delay</font> instruction, you need to pass a duration and a channel, where channel can be any kind of channel, including <font style=\"background: lightgrey\">AcquireChannel</font>. The following code uses <font style=\"background: lightgrey\">`pulse.build`</font> to begin a Pulse Builder context, and schedules the delay into the schedule 'delay_5dt'.\r\n```python\r\nwith pulse.build(backend) as delay_5dt:\r\n    pulse.delay(5, channel)\r\n    pulse.play(gaus, channel)\r\n```\r\n# Any instruction added after this delay on the same channel will execute five timesteps later than it would have without this delay.\r\n&nbsp;\r\n# The image in the \"Delay Output\" node shows a comparison between the pulse with the delay applied and the original pulse.",
+        "x": 1950,
+        "y": 1120,
+        "wires": [
+            [
+                "c55ff30b7631e6a7"
+            ]
+        ]
+    },
+    {
+        "id": "5ddca52ad7b7e2db",
+        "type": "pulse-set-freq",
+        "z": "f965af6e921672a2",
+        "name": "set_frequency()",
+        "info": "# <font style=\"background: lightgrey\">**set_frequency(frequency, channel)**</font>\r\n&nbsp;\r\n# Each channel has a default **frequency** listed in the <font style=\"background: lightgrey\">backend.defaults</font>, and the channel's frequency can be updated at any time within a <font style=\"background: lightgrey\">ScheduleBlock</font> by the <font style=\"background: lightgrey\">set_frequency</font> instruction. It takes a float frequency and a <font style=\"background: lightgrey\">PulseChannel</font> channel as input. All pulses on a channel following a <font style=\"background: lightgrey\">set_frequency</font> instruction are modulated by the given frequency until another <font style=\"background: lightgrey\">set_frequency</font> instruction is encountered or until the program ends. The instruction has an implicit duration of 0.\r\n&nbsp;\r\n# The following code set pulse's frequency with 4.5e9, and you can see the frequency-set pulse at \"Set Frequency Output\" node:\r\n```python\r\nwith pulse.build(backend) as schedule:\r\n    pulse.set_frequency(4.5e9, channel)\r\n    pulse.play(gaus,channel)\r\n```\r\n# **Note:** The frequencies that can be requested are limited by the total bandwidth and the instantaneous bandwidth of each hardware channel. In the future, these will be reported by the <font style=\"background: lightgrey\">backend</font>.",
+        "x": 1960,
+        "y": 1480,
+        "wires": [
+            [
+                "3bdae849afae659c"
+            ]
+        ]
+    },
+    {
+        "id": "09161051df8e795f",
+        "type": "pulse-shift-freq",
+        "z": "f965af6e921672a2",
+        "name": "shift_frequency()",
+        "info": "# <font style=\"background: lightgrey\">**shift_frequency(frequency, channel)**</font>\r\n&nbsp;\r\n# The <font style=\"background: lightgrey\">shift_frequency</font> instruction shifts the frequency of a pulse channel.\r\n&nbsp;\r\n# The follwoing code shows how to shifts the frequency of the specified channel by 1e9 within the context of the pulse program, and you can check the comparison between the frequency-shifted pulse and the original pulse at \"Shift Frequency Output\" node.\r\n```python\r\nwith pulse.build() as pulse_prog:\r\n    pulse.shift_frequency(1e9, channel)\r\n    pulse.play(gaus,channel)\r\n```\r\n&nbsp;\r\n# **Note:** The <font style=\"background: lightgrey\">shift_frequency</font> and <font style=\"background: lightgrey\">set_frequency</font> instructions change the frequency of following pulses and also change the channel's frame of reference. Because a qubit oscillates at its transition frequency, the controller needs to sync with its oscillation; otherwise, an unwanted Z drive is continuously applied. Usually, because the frame is matched with the drive's frequency, and drive matches with the transition's frequency, the Z drive is eliminated when the qubit frequency is calibrated properly. When you apply the <font style=\"background: lightgrey\">shift_frequency</font> instruction, it changes the drive frequency and impacts the frame. In other words, it accumulates the phase (Z) as a function of shifted frequency and duration of the program. Specifically, when you shift the frequency by <font style=\"background: lightgrey\">df</font> and spend <font style=\"background: lightgrey\">dt</font> on that frame, the qubit may experience a phase rotation of <font style=\"background: lightgrey\">df * dt</font>. The programmer needs to take this into account to control their qubits precisely.\r\n\r\n# Note also that these instructions are localized in the pulse gate in IBM devices. This means that accumulated phase and frequency shifts are not carried over. Each pulse gate always starts from the hardware default setting. This behavior is backend-dependent.\r\n",
+        "x": 1970,
+        "y": 1680,
+        "wires": [
+            [
+                "4fbe55e46cf6c1ce"
+            ]
+        ]
+    },
+    {
+        "id": "4e7ca04a98f9f5e3",
+        "type": "pulse-set-phase",
+        "z": "f965af6e921672a2",
+        "name": "set_phase()",
+        "info": "# <font style=\"background: lightgrey\">**set_phase(phase, channel)**</font>\r\n&nbsp;\r\n# The <font style=\"background: lightgrey\">set_phase</font> instruction sets the phase of a pulse channel. The following code snippet set pulse's phase to π:\r\n```python\r\nwith pulse.build() as pulse_prog:\r\n    pulse.set_phase(np.pi, channel)\r\n    pulse.play(gaus, channel)\r\n```\r\n# The image of phase-set pulse is shown in the \"Set Phase Output\" node.",
+        "x": 1970,
+        "y": 2080,
+        "wires": [
+            [
+                "4a19e82ead1ac2b2"
+            ]
+        ]
+    },
+    {
+        "id": "5168a6d08c8c5e7f",
+        "type": "pulse-shift-phase",
+        "z": "f965af6e921672a2",
+        "name": "shift_phase()",
+        "info": "# <font style=\"background: lightgrey\">**shift_phase(phase, channel)**</font>\r\n&nbsp;\r\n# The <font style=\"background: lightgrey\">shift_phase</font> instruction will increase the phase of the frequency modulation by <font style=\"background: lightgrey\">phase</font>. Like <font style=\"background: lightgrey\">set_frequency</font>, this phase shift will affect all following instructions on the same channel until the program ends. To undo the affect of a <font style=\"background: lightgrey\">shift_phase</font>, the **negative phase** can be passed to a new instruction. Note that like <font style=\"background: lightgrey\">set_frequency</font>, the instruction has an implicit duration of 0.\r\n&nbsp;\r\n# The code snippet below shift the phase of the pulse to π, and you can see its comparison with the original pulse in \"Shift Phase Output\" node:\r\n```python\r\nwith pulse.build(backend) as schedule:\r\n    pulse.shift_phase(np.pi, channel)\r\n    pulse.play(gaus, channel)\r\n```\r\n",
+        "x": 1970,
+        "y": 2300,
+        "wires": [
+            [
+                "085d585c6831be31"
+            ]
+        ]
+    },
+    {
+        "id": "1e842a7d12342c12",
+        "type": "pulse-acquire",
+        "z": "f965af6e921672a2",
+        "name": "acquire()",
+        "info": "# <font style=\"background: lightgrey\">**acquire(duration, channel, mem_slot, reg_slot)**</font>\r\n&nbsp;\r\n# The <font style=\"background: lightgrey\">acquire</font> instruction triggers data acquisition for readout. It takes a duration, an <font style=\"background: lightgrey\">AcquireChannel</font>, which maps to the qubit being measured, and a <font style=\"background: lightgrey\">MemorySlot</font> or a <font style=\"background: lightgrey\">RegisterSlot</font>. The <font style=\"background: lightgrey\">MemorySlot</font> is classical memory where the readout result will be stored. The <font style=\"background: lightgrey\">RegisterSlot</font> maps to a register in the control electronics that stores the readout result for fast feedback.\r\n&nbsp;\r\n# The <font style=\"background: lightgrey\">acquire</font> instruction can also take custom <font style=\"background: lightgrey\">Discriminator</font>s and <font style=\"background: lightgrey\">Kernel</font>s as keyword arguments. The <font style=\"background: lightgrey\">Kernel</font> subroutine integrates a time series of measurement responses and generates an IQ data point, which will be classified into a quantum state by the discriminator. This indicates that if you use a custom measurement stimulus, as in a measurement pulse, you might need to update the kernel setting to not deteriorate the measurement SNR.\r\n&nbsp;\r\n# The code snippet below acquires a quantum measurement for 1200 cycles on acquire channel 0 and stores the result in memory slot 0.\r\n```python\r\nfrom qiskit.pulse import Acquire, AcquireChannel, MemorySlot\r\n \r\nwith pulse.build(backend) as schedule:\r\n    pulse.acquire(1200, pulse.acquire_channel(0), MemorySlot(0))\r\n```\r\n",
+        "x": 1980,
+        "y": 2660,
+        "wires": [
+            []
+        ]
+    }
+]

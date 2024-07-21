@@ -1,0 +1,34 @@
+
+<script type="text/javascript">
+    RED.nodes.registerType("pulse-builder-align-right", {
+      category: "Feature of pulse builder",
+      color: "#aaaaaa",
+      defaults: {
+        name: { value: "align_right()" },
+        info: { value: "# <font style=\"background: lightgrey\">align_right</font> does the opposite of <font style=\"background: lightgrey\">align_left</font>. Left and right are also sometimes called \"as soon as possible\" and \"as late as possible\" scheduling, respectively.\r\n&nbsp;\r\n# In this code snippet, we create a pulse schedule where three Gaussian pulses(with duration 100 each) are played on two drive channels, all aligned to end at the same time. It chooses <font style=\"background: lightgrey\">t=100</font> in the above example to begin the Gaussian pulse on <font style=\"background: lightgrey\">D0</font>.\r\n```python\r\nwith pulse.build(backend, name='Right align example') as program:\r\n    with pulse.align_right():\r\n        gaussian_pulse = library.Gaussian(100, 0.5, 20)\r\n        pulse.play(gaussian_pulse, pulse.drive_channel(0))\r\n        pulse.play(gaussian_pulse, pulse.drive_channel(1))\r\n        pulse.play(gaussian_pulse, pulse.drive_channel(1))\r\n```" }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "align_right()";
+      },
+      
+    });
+
+  </script>
+  
+  <script type="text/html" data-template-name="pulse-builder-align-right">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="align_right()" />
+    </div>
+
+  </script>
+
+  
+  
+  <script type="text/html" data-help-name="pulse-builder-align-right">
+    <p>A simple node that align the context of builder to right.</p>
+  </script>
+  
