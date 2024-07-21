@@ -1,0 +1,49 @@
+<script type="text/javascript">
+    RED.nodes.registerType('draw-hinton-plot',{
+        category: 'Plot quantum states using draw',
+        color: '#aaaaaa',
+        defaults: {
+            name: {value:"Draw a Hinton Plot"},
+            info: {
+                value:"# [Plot quantum states guide.](https://docs.quantum.ibm.com/guides/plot-quantum-states#)\r\n" +
+                "&nbsp;\r\n" +
+                "# This plot is very similar to the \"city\" plot, but the magnitude of each element is represented by the size of a" +
+                " square rather than the height of a bar. White squares represent elements with positive values, and black" +
+                " squares represent elements with negative values. The state we're plotting has the following density matrix.\r\n" +
+                "# In this node, <font style='background: lightgrey'>_`draw()`_</font> is used to get the same output as the " +
+                "<font style='background: lightgrey'>_`plot_state_hinton()`_</font> function to plot the hinton diagram for the" +
+                " density matrix of a quantum state.\r\n" +
+                "```python\r\n" +
+                "from math import pi\r\n" +
+                "from qiskit import QuantumCircuit\r\n" +
+                "from qiskit.quantum_info import Statevector\r\n" + 
+                "\r\n" +
+                "# Create a Bell state for demonstration\r\n" +
+                "qc = QuantumCircuit(2)\r\n" +
+                "qc.h(0)\r\n" +
+                "qc.crx(pi/2, 0, 1)\r\n" +
+                "psi = Statevector(qc)\r\n" +
+                "\r\n" +
+                "psi.draw(\"hinton\")\r\n" +
+                "```\r\n "
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "file.svg",
+        label: function() {
+            return this.name||"draw-hinton-plot";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="draw-hinton-plot">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="draw-hinton-plot">
+    <p>A simple node for generating a "hinton" plot using draw</p>
+</script>
