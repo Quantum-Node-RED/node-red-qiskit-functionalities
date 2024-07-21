@@ -1,0 +1,137 @@
+<script type="text/javascript">
+  RED.nodes.registerType("Build-Gate", {
+    category: "function",
+    color: "#aaaaaa",
+    defaults: {
+      name: { value: "Build-Gate" },
+      gates: { value: [] },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    label: function () {
+      return this.name || "Build-Gate";
+    },
+    oneditprepare: function () {
+      var node = this;
+
+      function addGate(gate) {
+        var newRow = $("<tr>").append(
+          $("<td>").append(
+            $('<select class="gate-select">')
+              .append(
+                '<option value="">Select a gate</option>',
+                '<option value="x">X Gate</option>',
+                '<option value="cz">CZ Gate</option>',
+                '<option value="ccx">CCX Gate</option>',
+                '<option value="ccz">CCZ Gate</option>'
+              )
+              .val(gate ? gate.type : "")
+          ),
+          $("<td>").append(
+            '<input type="number" class="qubit-input qubit1-input" value="' +
+              ((gate && gate.qubits[0]) || "") +
+              '" style="display:none;">'
+          ),
+          $("<td>").append(
+            '<input type="number" class="qubit-input qubit2-input" value="' +
+              ((gate && gate.qubits[1]) || "") +
+              '" style="display:none;">'
+          ),
+          $("<td>").append(
+            '<input type="number" class="qubit-input qubit3-input" value="' +
+              ((gate && gate.qubits[2]) || "") +
+              '" style="display:none;">'
+          ),
+          $("<td>").append('<button class="delete-gate">Delete</button>')
+        );
+        $("#gates-table tbody").append(newRow);
+
+        newRow
+          .find(".gate-select")
+          .on("change", function () {
+            var selectedGate = $(this).val();
+            var row = $(this).closest("tr");
+            row.find(".qubit-input").hide();
+            if (selectedGate === "x") {
+              row.find(".qubit1-input").show();
+            } else if (selectedGate === "cz") {
+              row.find(".qubit1-input, .qubit2-input").show();
+            } else if (selectedGate === "ccx") {
+              row.find(".qubit1-input, .qubit2-input, .qubit3-input").show();
+            } else if (selectedGate === "ccz") {
+              row.find(".qubit1-input, .qubit2-input, .qubit3-input").show();
+            }
+          })
+          .change();
+
+        newRow.find(".delete-gate").on("click", function () {
+          $(this).closest("tr").remove();
+        });
+      }
+
+      $("#add-gate").on("click", function () {
+        addGate();
+      });
+
+      // Load existing gates
+      if (node.gates && node.gates.length) {
+        node.gates.forEach(function (gate) {
+          addGate(gate);
+        });
+      }
+      $("#node-input-name").val(this.name || "");
+    },
+    oneditsave: function () {
+      this.name = $("#node-input-name").val();
+      var gates = [];
+      $("#gates-table tbody tr").each(function () {
+        var type = $(this).find(".gate-select").val();
+        var qubits = [];
+        $(this)
+          .find(".qubit-input")
+          .each(function () {
+            if ($(this).is(":visible")) {
+              qubits.push($(this).val());
+            }
+          });
+        if (type) {
+          gates.push({ type: type, qubits: qubits });
+        }
+      });
+      this.gates = gates;
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="Build-Gate">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+
+  <div class="form-row">
+    <button id="add-gate" onclick="addGate()">
+      <i class="fa fa-plus"></i> Add Gate
+    </button>
+  </div>
+  <div class="form-row">
+    <table id="gates-table">
+      <thead>
+        <tr>
+          <!-- TODO Only not None parameters for now -->
+          <th>Gate Type</th>
+          <th>Parameter 1</th>
+          <th>Parameter 2</th>
+          <th>Parameter 3</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</script>
+
+<script type="text/html" data-help-name="Build-Gate">
+  <p>Build-Gate</p>
+</script>
