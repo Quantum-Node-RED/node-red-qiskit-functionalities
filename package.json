@@ -96,7 +96,16 @@
       "transpilation-coupling-map-lv0": "nodes/documentation/transpiler/pass-managers/quantum-computers/coupling-map-lv0.js",
       "transpilation-coupling-map-lv1": "nodes/documentation/transpiler/pass-managers/quantum-computers/coupling-map-lv1.js",
       "transpilation-basis-gates": "nodes/documentation/transpiler/pass-managers/quantum-computers/basis-gates.js",
-      "transpilation-error-rates": "nodes/documentation/transpiler/pass-managers/quantum-computers/error-rates.js"
+      "transpilation-error-rates": "nodes/documentation/transpiler/pass-managers/quantum-computers/error-rates.js",
+      "Grover": "nodes/algorithms/Grover/Grover.js",
+      "routing": "nodes/documentation/transpiler/introduction/routing/routing.js",
+      "translation": "nodes/documentation/transpiler/introduction/translation/translation.js",
+      "optimization": "nodes/documentation/transpiler/introduction/optimization/optimization.js",
+      "scheduling": "nodes/documentation/transpiler/introduction/scheduling/scheduling.js",
+      "pass-manager": "nodes/documentation/transpiler/introduction/passmanager/pass_manage.js",
+      "build-oracle": "nodes/algorithms/Grover/build_oracle.js",
+      "build-gate": "nodes/gate/utils/build_gate.js",
+      "grover_iteration": "nodes/algorithms/Grover/Grover_iteration.js"
     }
   },
   "dependencies": {

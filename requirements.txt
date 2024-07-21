@@ -1,5 +1,6 @@
 qiskit
 qiskit_aer
+qiskit-algorithms
 numpy
 qiskit_ibm_runtime
 python-dotenv
