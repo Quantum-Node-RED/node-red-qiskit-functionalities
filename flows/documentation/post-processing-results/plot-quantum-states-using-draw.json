@@ -1,0 +1,181 @@
+[
+    {
+        "id": "12601be5a7d7b908",
+        "type": "inject",
+        "z": "0a316f07676d9a20",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload.numQubits",
+                "v": "2",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 130,
+        "y": 380,
+        "wires": [
+            [
+                "c2f70faa6ea2d798"
+            ]
+        ]
+    },
+    {
+        "id": "69a1045780fddb54",
+        "type": "image",
+        "z": "0a316f07676d9a20",
+        "name": "",
+        "width": "500",
+        "data": "payload.result.circuit_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 480,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "9db7a1b0e4123a22",
+        "type": "image",
+        "z": "0a316f07676d9a20",
+        "name": "",
+        "width": "400",
+        "data": "payload.result.circuit_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 700,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "fab4b5216391cced",
+        "type": "image",
+        "z": "0a316f07676d9a20",
+        "name": "",
+        "width": "500",
+        "data": "payload.result.circuit_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1200,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "c048e1c620ef2759",
+        "type": "image",
+        "z": "0a316f07676d9a20",
+        "name": "",
+        "width": "350",
+        "data": "payload.result.circuit_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1020,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "09d8be200a65dacb",
+        "type": "image",
+        "z": "0a316f07676d9a20",
+        "name": "",
+        "width": "400",
+        "data": "payload.result.circuit_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1440,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "c2f70faa6ea2d798",
+        "type": "draw-city-plot",
+        "z": "0a316f07676d9a20",
+        "name": "Draw a City Plot",
+        "info": "# [Plot quantum states guide.](https://docs.quantum.ibm.com/guides/plot-quantum-states#)\r\n&nbsp;\r\n# This plot displays the real and imaginary parts of each density matrix element in two three-dimensional bar charts.It's called a \"city\" plot because the bars resemble skyscrapers in a city. The state we're plotting has the following density matrix.\r\n# In this node, <font style='background: lightgrey'>_`draw()`_</font> is used to get the same output as the <font style='background: lightgrey'>_`plot_state_city()`_</font> function to plot the cityscape of a quantum state\r\n```python\r\nfrom math import pi\r\nfrom qiskit import QuantumCircuit\r\nfrom qiskit.quantum_info import Statevector\r\n\r\n# Create a Bell state for demonstration\r\nqc = QuantumCircuit(2)\r\nqc.h(0)\r\nqc.crx(pi/2, 0, 1)\r\npsi = Statevector(qc)\r\n\r\npsi.draw(\"city\")\r\n```\r\n ",
+        "x": 280,
+        "y": 380,
+        "wires": [
+            [
+                "69a1045780fddb54",
+                "58c9bde81b1848bf"
+            ]
+        ]
+    },
+    {
+        "id": "58c9bde81b1848bf",
+        "type": "draw-hinton-plot",
+        "z": "0a316f07676d9a20",
+        "name": "Draw a Hinton Plot",
+        "info": "# [Plot quantum states guide.](https://docs.quantum.ibm.com/guides/plot-quantum-states#)\r\n&nbsp;\r\n# This plot is very similar to the \"city\" plot, but the magnitude of each element is represented by the size of a square rather than the height of a bar. White squares represent elements with positive values, and black squares represent elements with negative values. The state we're plotting has the following density matrix.\r\n# In this node, <font style='background: lightgrey'>_`draw()`_</font> is used to get the same output as the <font style='background: lightgrey'>_`plot_state_hinton()`_</font> function to plot the hinton diagram for the density matrix of a quantum state.\r\n```python\r\nfrom math import pi\r\nfrom qiskit import QuantumCircuit\r\nfrom qiskit.quantum_info import Statevector\r\n\r\n# Create a Bell state for demonstration\r\nqc = QuantumCircuit(2)\r\nqc.h(0)\r\nqc.crx(pi/2, 0, 1)\r\npsi = Statevector(qc)\r\n\r\npsi.draw(\"hinton\")\r\n```\r\n ",
+        "x": 490,
+        "y": 380,
+        "wires": [
+            [
+                "9db7a1b0e4123a22",
+                "8de202e79c43b3ca"
+            ]
+        ]
+    },
+    {
+        "id": "8de202e79c43b3ca",
+        "type": "draw-paulivec-plot",
+        "z": "0a316f07676d9a20",
+        "name": "Draw a Pauli vector Plot",
+        "info": "# [Plot quantum states guide.](https://docs.quantum.ibm.com/guides/plot-quantum-states#)\r\n&nbsp;\r\n# An observable is a way of measuring a quantum state such that the possible measurement outcomes are real numbers. The expected value of the outcome is also known as the expectation value of the observable on that state, and it can be thought of as the average of infinitely many observations of that state.\r\n# Tensor products of Pauli matrices are all observables that return +1 or -1. This plot displays the expectation values of the state on different Pauli operators as a bar chart. All density matrices can be written as a sum of these Pauli matrices, weighted by their expectation values.\r\n# In this node, <font style='background: lightgrey'>_`draw()`_</font> is used to get the same output as the  <font style='background: lightgrey'>_`plot_state_paulivec()`_</font> function to plot the Pauli-vector representation of a quantum state as bar graph.\r\n```python\r\nfrom math import pi\r\nfrom qiskit import QuantumCircuit\r\nfrom qiskit.quantum_info import Statevector\r\n\r\n# Create a Bell state for demonstration\r\nqc = QuantumCircuit(2)\r\nqc.h(0)\r\nqc.crx(pi/2, 0, 1)\r\npsi = Statevector(qc)\r\n\r\npsi.draw(\"paulivec\")\r\n```\r\n ",
+        "x": 730,
+        "y": 380,
+        "wires": [
+            [
+                "c048e1c620ef2759",
+                "f717c24d5b56ee64"
+            ]
+        ]
+    },
+    {
+        "id": "f717c24d5b56ee64",
+        "type": "draw-qsphere-plot",
+        "z": "0a316f07676d9a20",
+        "name": "Draw a QSphere Plot",
+        "info": "# [Plot quantum states guide.](https://docs.quantum.ibm.com/guides/plot-quantum-states#)\r\n&nbsp;\r\n# The \"QSphere\" is a Qiskit-unique view of a quantum state in which the amplitude and phase of each element in a statevector is plotted on the surface of a sphere. The thickness of each dot represents the amplitude, and the color represents the phase. For mixed states it will show a sphere for each component.\r\n# In this node, <font style='background: lightgrey'>_`draw()`_</font> is used to get the same output as the  <font style='background: lightgrey'>_`plot_state_qsphere()`_</font> function to plot the qsphere representation of a quantum state\r\n```python\r\nfrom math import pi\r\nfrom qiskit import QuantumCircuit\r\nfrom qiskit.quantum_info import Statevector\r\n\r\n# Create a Bell state for demonstration\r\nqc = QuantumCircuit(2)\r\nqc.h(0)\r\nqc.crx(pi/2, 0, 1)\r\npsi = Statevector(qc)\r\n\r\npsi.draw(\"qsphere\")\r\n```\r\n ",
+        "x": 980,
+        "y": 380,
+        "wires": [
+            [
+                "fab4b5216391cced",
+                "70b1cbfd16ac0ad0"
+            ]
+        ]
+    },
+    {
+        "id": "70b1cbfd16ac0ad0",
+        "type": "draw-bloch-plot",
+        "z": "0a316f07676d9a20",
+        "name": "Draw a Bloch Plot",
+        "info": "# [Plot quantum states guide.](https://docs.quantum.ibm.com/guides/plot-quantum-states#)\r\n&nbsp;\r\n# The Bloch vector of a qubit state is its expectation value in the X, Y, and Z Pauli observables mapped to the X, Y, and Z axes in three-dimensional space. This plot projects multi-qubit quantum states onto the single-qubit space and plots each qubit on a Bloch sphere. This visualization only shows the expectation values of individual qubits.It can't show correlations between qubits and so can't fully describe entangled quantum states.\r\n# In this node, <font style='background: lightgrey'>_`draw()`_</font> is used to get the same output as the <font style='background: lightgrey'>_`plot_bloch_multivector()`_</font> function to plot a Bloch sphere for each qubit\r\n```python\r\nfrom math import pi\r\nfrom qiskit import QuantumCircuit\r\nfrom qiskit.quantum_info import Statevector\r\n\r\n# Create a Bell state for demonstration\r\nqc = QuantumCircuit(2)\r\nqc.h(0)\r\nqc.crx(pi/2, 0, 1)\r\npsi = Statevector(qc)\r\n\r\npsi.draw(\"bloch\")\r\n```\r\n ",
+        "x": 1210,
+        "y": 380,
+        "wires": [
+            [
+                "09d8be200a65dacb"
+            ]
+        ]
+    }
+]

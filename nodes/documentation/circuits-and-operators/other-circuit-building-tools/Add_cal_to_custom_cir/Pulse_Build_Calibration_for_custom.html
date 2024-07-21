@@ -1,0 +1,33 @@
+
+<script type="text/javascript">
+    RED.nodes.registerType("pulse-build-calibration-for-custom", {
+      category: "Add calibrations to custom gate",
+      color: "#aaaaaa",
+      defaults: {
+        name: { value: "Build a calibration for custom gate" },
+        info: { value: "# This node defines a calibration for the gate you built in previous node by following python code.\r\n```python\r\nwith pulse.build(backend, name='custom') as my_schedule:\r\n    pulse.play(Gaussian(duration=64, amp=0.2, sigma=8), pulse.drive_channel(0))\r\n```\r\n&nbsp;\r\n# The image of the schedule we drew is shown in the \"Schedule Diagram\" node."}
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "Build a calibration for custom gate" ;
+      },
+    });
+
+  </script>
+  
+  <script type="text/html" data-template-name="pulse-build-calibration-for-custom">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Build a calibration for custom gate" />
+    </div>
+
+  </script>
+
+  
+  
+  <script type="text/html" data-help-name="pulse-build-calibration-for-custom">
+    <p>A simple node that build a calibration for the custom gate.</p>
+  </script>
+  
