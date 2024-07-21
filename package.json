@@ -36,7 +36,9 @@
       "translation": "nodes/documentation/transpiler/introduction/translation/translation.js",
       "optimization": "nodes/documentation/transpiler/introduction/optimization/optimization.js",
       "scheduling": "nodes/documentation/transpiler/introduction/scheduling/scheduling.js",
-      "pass-manager": "nodes/documentation/transpiler/introduction/passmanager/pass_manage.js"
+      "pass-manager": "nodes/documentation/transpiler/introduction/passmanager/pass_manage.js",
+      "build-oracle":"nodes/algorithms/Grover/build_oracle.js",
+      "build-gate": "nodes/gate/utils/build_gate.js"
     }
   },
   "dependencies": {
