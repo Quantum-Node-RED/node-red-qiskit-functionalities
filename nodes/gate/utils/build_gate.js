@@ -8,7 +8,7 @@ module.exports = function (RED) {
       const newMsg = {
         payload: {
           gates: node.gates 
-      }
+        }
       };
       node.send(newMsg);
     });

@@ -15,7 +15,7 @@ module.exports = function (RED) {
           input : node.input,
           growthRate: node.growthRate,
           sampleFromIterations: node.sampleFromIterations,
-          target : msg.payload.result.target,
+          target : msg.payload.result.target
         }; 
         runPythonScript(__dirname, "Grover_iteration.py", options, (err, results) => {
           if (err) {

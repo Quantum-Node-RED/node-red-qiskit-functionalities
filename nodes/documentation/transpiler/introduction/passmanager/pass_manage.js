@@ -9,7 +9,7 @@ module.exports = function (RED) {
     node.on('input', async function (msg) {
       const result = await new Promise((resolve, reject) => {
         const options = {
-            token: node.token
+          token: node.token
         };
         runPythonScript(__dirname, "pass_manage.py", options, (err, results) => {
           if (err) {
