@@ -1,0 +1,28 @@
+<script type="text/javascript">
+  RED.nodes.registerType('transpilation-default-configuration', {
+    category: 'transpiler-pass-managers',
+    color: '#aaaaaa',
+    defaults: {
+      name: { value: "" }
+    },
+    info: "## Default Configuration\n\n- **Optimize Circuit**: Transpile a circuit using the default `optimization_level=1` with the backend's `target`.\n- **Override Target**: Specifying a target in the `transpile` function will override the backend's target.\n\n### Example\n **Generate Pass Manager and Transpile**:\n   ```python\n   pass_manager = generate_preset_pass_manager(\n       optimization_level=1, target=target, seed_transpiler=12345\n   )\n   qc_t_target = pass_manager.run(qc)\n   qc_t_target.draw(\"mpl\", idle_wires=False, fold=-1)\n   ```\n",
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    paletteLabel: "default configuration",
+    label: function () {
+      return this.name || "default configuration";
+    }
+  });
+</script>
+
+<script type="text/html" data-template-name="transpilation-default-configuration">
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+
+<script type="text/html" data-help-name="transpilation-default-configuration">
+  <p>transpilation-default-configuration</p>
+</script>
