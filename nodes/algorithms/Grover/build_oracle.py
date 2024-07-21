@@ -28,22 +28,26 @@ for gate in gates_list:
     elif type == "ccz":
         oracle.ccz(int(qubits_para[0]), int(qubits_para[1]), int(qubits_para[2]))    
 
+# provide the user with circuit image they built 
+circuit_image = oracle.draw(output='mpl', filename='oracle.png')
+buffer = io.BytesIO()
+circuit_image.savefig(buffer, format='png')
+buffer.seek(0)
+image_b64 = base64.b64encode(buffer.read()).decode('utf-8')
+buffer.close()
+result = {
+    "image": image_b64,
+    "target": target,
+}
+print(json.dumps(result))        
 
 with open('oracle.pkl', 'wb') as f:
     pickle.dump(oracle, f) 
     
 # with open('oracle.pkl', 'rb') as f:
-#     oracle_test = pickle.load(f)    
+#     oracle_test = pickle.load(f)
     
-    
-
 # Test Script for nodes\test\flow\Build_Gate_Oracle_Test.json
-# circuit_image = oracle.draw(output='mpl', filename='oracle.png')
-# buffer = io.BytesIO()
-# circuit_image.savefig(buffer, format='png')
-# buffer.seek(0)
-# image_b64 = base64.b64encode(buffer.read()).decode('utf-8')
-# buffer.close()
 
 # print(json.dumps({"target": target, "gates": gates_list, "num_qubits": num_qubits, "image": image_b64}))
 

@@ -38,7 +38,8 @@
       "scheduling": "nodes/documentation/transpiler/introduction/scheduling/scheduling.js",
       "pass-manager": "nodes/documentation/transpiler/introduction/passmanager/pass_manage.js",
       "build-oracle":"nodes/algorithms/Grover/build_oracle.js",
-      "build-gate": "nodes/gate/utils/build_gate.js"
+      "build-gate": "nodes/gate/utils/build_gate.js",
+      "grover_iteration": "nodes/algorithms/Grover/Grover_iteration.js"
     }
   },
   "dependencies": {
