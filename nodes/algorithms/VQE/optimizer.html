@@ -1,13 +1,9 @@
 <script type="text/javascript">
-  RED.nodes.registerType("VQE", {
+  RED.nodes.registerType("optimizer", {
     category: "VQE",
     color: "#aaaaaa",
     defaults: {
-      name: { value: "VQE algorithm" },
-      rotationLayers: { value: "rx" },
-      entanglementLayers: { value: "rx" },
-      hamiltonianPauli: { value: '["II", "IZ", "ZI", "ZZ", "XX"]' },
-      hamiltonianCoeffs: { value: '[-1.05237, 0.39793, -0.39793, -0.01128, 0.1809]' },
+      name: { value: "optimizer" },
       optimizer: { value: "SLSQP" },
       maxiter: { value: 0 }
     },
@@ -15,7 +11,7 @@
     outputs: 1,
     icon: "file.svg",
     label: function () {
-      return this.name || "VQE";
+      return this.name || "optimizer";
     },
     oneditprepare: function () {
       document.getElementById("node-input-maxiter-slider").onchange = function () {
@@ -34,7 +30,7 @@
   });
 </script>
 
-<script type="text/html" data-template-name="VQE">
+<script type="text/html" data-template-name="optimizer">
   <div class="form-row">
     <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
     <input type="text" id="node-input-name" placeholder="Name" />
@@ -77,28 +73,4 @@
       /> 
     </div>
   </div>
-
-  <div class="form-row">
-    <label for="node-input-rotationLayers" style="width:40%"><i class="fa fa-tag"></i>Rotation Layers</label>
-    <input type="string" id="node-input-rotationLayers" placeholder="The gates used in the rotation layer. ex: 'ry' or 'RYGate'" style="width:40%; float:right;">
-  </div>
-  
-  <div class="form-row">
-    <label for="node-input-entanglementLayers" style="width:40%"><i class="fa fa-tag"></i>Entanglement Layers</label>
-    <input type="string" id="node-input-entanglementLayers" placeholder="The gates used in the entanglement layer. ex: 'ry' or 'RYGate'" style="width:40%; float:right;">
-  </div>
-
-  <div class="form-row">
-    <label for="node-input-hamiltonianPauli"  style="width:100%"><i class="fa fa-tag"></i>Hamiltonian's Pauli list of terms</label>
-    <input type="string" id="node-input-hamiltonianPauli" placeholder='Please use format ["a", "b", "c"]' style="width:100%">
-  </div>
-
-  <div class="form-row">
-    <label for="node-input-hamiltonianCoeffs" style="width:100%;"><i class="fa fa-tag"></i>Hamiltonian's complex coefficients for Pauli terms</label>
-    <input type="string" id="node-input-hamiltonianCoeffs" placeholder="Please use format [1.0, 2.0, 3.0]" style="width:100%">
-  </div>
-</script>
-
-<script type="text/html" data-help-name="VQE">
-  <p>A simple node that implements VQE algorithm.</p>
 </script>

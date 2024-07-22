@@ -141,7 +141,10 @@
       "build-oracle": "nodes/algorithms/Grover/build_oracle.js",
       "build-gate": "nodes/gate/utils/build_gate.js",
       "grover_iteration": "nodes/algorithms/Grover/Grover_iteration.js",
-      "VQE": "nodes/algorithms/VQE/VQE.js"
+      "VQE": "nodes/algorithms/VQE/VQE.js",
+      "ansatz": "nodes/algorithms/VQE/ansatz.js",
+      "optimizer": "nodes/algorithms/VQE/optimizer.js",
+      "hamiltonianPauli": "nodes/algorithms/VQE/hamiltonianPauli.js"
     }
   },
   "dependencies": {

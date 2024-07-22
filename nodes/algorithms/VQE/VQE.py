@@ -1,8 +1,6 @@
 import sys
 import json
-import numpy as np
 import pylab
-import matplotlib.pyplot as plt
 import base64
 import io
 
@@ -11,18 +9,6 @@ from qiskit.circuit.library import TwoLocal
 from qiskit.primitives import Estimator
 from qiskit_algorithms import VQE
 from qiskit_algorithms.optimizers import SLSQP, SPSA, COBYLA, L_BFGS_B
-
-# def convert_to_serializable(data):
-#     serializable_data = {}
-#     for key in data.__dict__:
-#         value = getattr(data, key)
-#         if isinstance(value, (np.ndarray, list)):
-#             serializable_data[key] = value.tolist() if isinstance(value, np.ndarray) else value
-#         elif isinstance(value, dict):
-#             serializable_data[key] = {str(k): v for k, v in value.items()}
-#         else:
-#             serializable_data[key] = str(value) if not isinstance(value, (int, float, type(None))) else value
-#     return serializable_data
 
 assert len(sys.argv) > 1, "No arguments found."
 input = sys.argv[1]
