@@ -1,0 +1,30 @@
+<script type="text/javascript">
+    RED.nodes.registerType('Re-synthesis', {
+      category: 'function',
+      color: '#aaaaaa',
+      defaults: {
+        name: { value: "Re-synthesis for circuit optimation" },
+        info: {
+          value: `Sometimes it is beneficial to re-synthesize a long series of single- and two-qubit gates, if the length can be reduced. For example, the following circuit uses three two-qubit gates.`,
+          required: false
+        }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "Re-synthesis for circuit optimation";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="Re-synthesis">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="Re-synthesis for circuit optimation">
+    <p>Re-synthesis for circuit optimization.</p>
+  </script>

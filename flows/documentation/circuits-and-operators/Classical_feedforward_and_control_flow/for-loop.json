@@ -1,0 +1,86 @@
+[
+    {
+        "id": "2223dd71286e972f",
+        "type": "tab",
+        "label": "for-loop",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "3e96ad675dd194f3",
+        "type": "inject",
+        "z": "2223dd71286e972f",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 120,
+        "wires": [
+            [
+                "d613531a2e63fae3"
+            ]
+        ]
+    },
+    {
+        "id": "9720e6e4634c7287",
+        "type": "image",
+        "z": "2223dd71286e972f",
+        "name": "Circuit Diagram",
+        "width": "251",
+        "data": "payload.result.circuit_diagram",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 720,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "d613531a2e63fae3",
+        "type": "for-loop",
+        "z": "2223dd71286e972f",
+        "name": "For-loop",
+        "info": "A for loop is used to iterate over a sequence of classical values and perform some operations during each iteration.\n          \n In the example below, we use a for loop to apply 5 X gates to a qubit and then measure it. Because we perform an odd number of X gates, the overall effect is to flip the qubit from the 0 state to the 1 state.",
+        "x": 420,
+        "y": 120,
+        "wires": [
+            [
+                "9720e6e4634c7287",
+                "903624d7aa9194a6"
+            ]
+        ]
+    },
+    {
+        "id": "903624d7aa9194a6",
+        "type": "debug",
+        "z": "2223dd71286e972f",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 360,
+        "wires": []
+    }
+]

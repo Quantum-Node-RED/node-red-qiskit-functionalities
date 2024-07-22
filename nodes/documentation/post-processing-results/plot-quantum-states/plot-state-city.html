@@ -1,0 +1,50 @@
+<script type="text/javascript">
+    RED.nodes.registerType('plot-state-city',{
+        category: 'Plot quantum states',
+        color: '#aaaaaa',
+        defaults: {
+            name: {value:"Visualization: Plot State City"},
+            info: {
+                value:"# [Plot quantum states guide.](https://docs.quantum.ibm.com/guides/plot-quantum-states#)\r\n" +
+                "&nbsp;\r\n" +
+                "# This plot displays the real and imaginary parts of each density matrix element in two three-dimensional bar charts." +
+                "It's called a \"city\" plot because the bars resemble skyscrapers in a city." +
+                " The state we're plotting has the following density matrix.\r\n" +
+                "# In this node, the <font style='background: lightgrey'>_`plot_state_city()`_</font> function of the " +
+                "<font style='background: lightgrey'>_`qiskit.visualization`_</font> module is used to plot the cityscape of a quantum state\r\n" +
+                "Alternitively <font style='background: lightgrey'>_`draw(\"city\")`_</font> can be used.\r\n" +
+                "```python\r\n" +
+                "from math import pi\r\n" +
+                "from qiskit import QuantumCircuit\r\n" +
+                "from qiskit.quantum_info import Statevector\r\n" + 
+                "from qiskit.visualization import plot_state_city\r\n" + 
+                "\r\n" +
+                "# Create a Bell state for demonstration\r\n" +
+                "qc = QuantumCircuit(2)\r\n" +
+                "qc.h(0)\r\n" +
+                "qc.crx(pi/2, 0, 1)\r\n" +
+                "psi = Statevector(qc)\r\n" +
+                "\r\n" +
+                "plot_state_city(psi)\r\n" +
+                "```\r\n "
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "file.svg",
+        label: function() {
+            return this.name||"plot-state-city";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="plot-state-city">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="plot-state-city">
+    <p>A simple node for generating a "city" plot using the plot_state_city visulization</p>
+</script>

@@ -1,0 +1,33 @@
+<script type="text/javascript">
+  RED.nodes.registerType('Synthesize_unitary_operators', {
+  category: 'function',
+  color: '#aaaaaa',
+  defaults: {
+    name: { value: "Synthesize_unitary_operators" },
+    info: {
+      value: `A unitary operation describes a norm-preserving change to a quantum system. For <i>n</i> qubits, this change is described by a <i>2<sup>n</sup> &times; 2<sup>n</sup></i> dimensional, complex matrix <i>U</i> whose adjoint equals the inverse, that is <i>U<sup>&dagger;</sup> U = 1</i>.
+      \nSynthesizing specific unitary operations into a set of quantum gates is a fundamental task used, for example, in the design and application of quantum algorithms or in compiling quantum circuits.
+      \nWhile efficient synthesis is possible for certain classes of unitaries – like those composed of Clifford gates or having a tensor product structure – most unitaries do not fall into these categories. For general unitary matrices, synthesis is a complex task with computational costs that increase exponentially with the number of qubits. Therefore, if you know an efficient decomposition for the unitary you would like to implement, it will likely be better than a general synthesis.`,
+      required: false
+    }
+  },
+  inputs: 1,
+  outputs: 1,
+  icon: "file.svg",
+  label: function () {
+    return this.name || "Synthesize_unitary_operators";
+  }
+});
+
+  </script>
+  
+  <script type="text/html" data-template-name="Synthesize_unitary_operators">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="Synthesize_unitary_operators">
+    <p>Synthesize unitary operations</p>
+  </script>

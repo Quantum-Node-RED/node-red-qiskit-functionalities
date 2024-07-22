@@ -1,0 +1,31 @@
+<script type="text/javascript">
+    RED.nodes.registerType('different-example', {
+      category: 'function',
+      color: '#aaaaaa',
+      defaults: {
+        name: { value: "different-example" },
+        info: {
+          value: `Because the example above used a single classical bit, there were only two possible cases, so we could have achieved the same result using an if-else statement. The switch case is mainly useful when branching on the value of a classical register composed of multiple bits, as demonstrated in the following example. Here, we also show how to construct a default case, which is executed if none of the preceding cases are. Note that in a switch statement, only one of the blocks are ever executed. There is no fallthrough.
+            \n In the example below, we apply Hadamard gates to two qubits and measure them. If the result is either 00 or 11, we apply a Z gate to the third qubit. If the result is 01, we apply a Y gate. If none of the preceding cases matched, we apply an X gate. Finally, measure the third qubit.`,
+          required: false
+        }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "different-example";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="different-example">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="different-example">
+    <p>Apply Hadamard gates to two qubits and measure them using switch statement.</p>
+  </script>

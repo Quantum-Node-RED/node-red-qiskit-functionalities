@@ -1,6 +1,10 @@
+numpy
+matplotlib
 qiskit
 qiskit_aer
-numpy
 qiskit-algorithms
-matplotlib
+qiskit_ibm_runtime
+python-dotenv
 pylatexenc
+seaborn
+Graphviz

@@ -1,0 +1,34 @@
+
+<script type="text/javascript">
+    RED.nodes.registerType("pulse-builder-phase-frequency-offset", {
+      category: "Feature of pulse builder",
+      color: "#aaaaaa",
+      defaults: {
+        name: { value: "Phase offset and Frequency offset" },
+        info: { value: "# The builder can also help temporarily offset the frequency or phase of pulses on a channel.\r\n&nbsp;\r\n# In following code, builds a pulse program named \"Offset example\" on a specified backend. It first applies a phase offset of <font style=\"background: lightgrey\">3.14</font> to a Gaussian pulse played on drive channel <font style=\"background: lightgrey\">D0</font>. Then, it applies a frequency offset of <font style=\"background: lightgrey\">10e6</font> to the pulse played on the same drive channel.\r\n```python\r\nwith pulse.build(backend, name='Offset example') as program:\r\n    with pulse.phase_offset(3.14, pulse.drive_channel(0)):\r\n        pulse.play(gaussian_pulse, pulse.drive_channel(0))\r\n        with pulse.frequency_offset(10e6, pulse.drive_channel(0)):\r\n            pulse.play(gaussian_pulse, pulse.drive_channel(0))\r\n```\r\n" }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "Phase offset and Frequency offset";
+      },
+      
+    });
+
+  </script>
+  
+  <script type="text/html" data-template-name="pulse-builder-phase-frequency-offset">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Phase offset and Frequency offset" />
+    </div>
+
+  </script>
+
+  
+  
+  <script type="text/html" data-help-name="pulse-builder-phase-frequency-offset">
+    <p>Node that set phase and frequency offset for the pulse.</p>
+  </script>
+  

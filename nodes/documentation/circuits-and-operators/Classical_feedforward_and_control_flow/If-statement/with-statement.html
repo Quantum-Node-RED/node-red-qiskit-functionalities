@@ -1,0 +1,31 @@
+<script type="text/javascript">
+    RED.nodes.registerType('with-statement', {
+      category: 'function',
+      color: '#aaaaaa',
+      defaults: {
+        name: { value: "with-statement" },
+        info: {
+          value: `The with statement can be given an assignment target which is itself a context manager that can be stored and subsequently used to create an else block, which is executed whenever the contents of the if block are not executed.
+                \nIn the example below, we initialize registers with two qubits and two classical bits. We apply a Hadamard gate to the first qubit and measure it. If the result is 1, then we apply a Hadamard gate on the second qubit; otherwise, we apply an X gate on the second qubit. Finally, we measure the second qubit as well.`,
+          required: false
+        }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "with-statement";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="with-statement">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="with-statement">
+    <p>A quantum circuit applied with the IF statement construct and with statement .</p>
+  </script>

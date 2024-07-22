@@ -1,0 +1,34 @@
+
+<script type="text/javascript">
+    RED.nodes.registerType("pulse-set-freq", {
+      category: "Build pulse schedule",
+      color: "#aaaaaa",
+      defaults: {
+        name: { value: "set_frequency()" },
+        info: { value: "# <font style=\"background: lightgrey\">**set_frequency(frequency, channel)**</font>\r\n&nbsp;\r\n# Each channel has a default **frequency** listed in the <font style=\"background: lightgrey\">backend.defaults</font>, and the channel's frequency can be updated at any time within a <font style=\"background: lightgrey\">ScheduleBlock</font> by the <font style=\"background: lightgrey\">set_frequency</font> instruction. It takes a float frequency and a <font style=\"background: lightgrey\">PulseChannel</font> channel as input. All pulses on a channel following a <font style=\"background: lightgrey\">set_frequency</font> instruction are modulated by the given frequency until another <font style=\"background: lightgrey\">set_frequency</font> instruction is encountered or until the program ends. The instruction has an implicit duration of 0.\r\n&nbsp;\r\n# The following code set pulse's frequency with 4.5e9, and you can see the frequency-set pulse at \"Set Frequency Output\" node:\r\n```python\r\nwith pulse.build(backend) as schedule:\r\n    pulse.set_frequency(4.5e9, channel)\r\n    pulse.play(gaus,channel)\r\n```\r\n# **Note:** The frequencies that can be requested are limited by the total bandwidth and the instantaneous bandwidth of each hardware channel. In the future, these will be reported by the <font style=\"background: lightgrey\">backend</font>." }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "set_frequency()";
+      },
+      
+    });
+
+  </script>
+  
+  <script type="text/html" data-template-name="pulse-set-freq">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="set_frequency()" />
+    </div>
+
+  </script>
+
+  
+  
+  <script type="text/html" data-help-name="pulse-set-freq">
+    <p>Node that set pulse with frequency 4.5e9</p>
+  </script>
+  
