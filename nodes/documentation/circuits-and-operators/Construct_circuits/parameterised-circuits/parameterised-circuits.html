@@ -1,0 +1,30 @@
+<script type="text/javascript">
+    RED.nodes.registerType('parameterised-circuits', {
+      category: 'function',
+      color: '#aaaaaa',
+      defaults: {
+        name: { value: "parameterised-circuits" },
+        info: {
+          value: `Many near-term quantum algorithms involve executing many variations of a quantum circuit. Since constructing and optimizing large circuits can be computationally expensive, Qiskit supports parameterized circuits. These circuits have undefined parameters, and their values do not need to be defined until just before executing the circuit. This lets you move circuit construction and optimization out of the main program loop. The following cell creates and displays a parameterized circuit.`,
+          required: false
+        }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "parameterised-circuits";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="parameterised-circuits">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="parameterised-circuits">
+    <p>A parameterised circuit.</p>
+  </script>

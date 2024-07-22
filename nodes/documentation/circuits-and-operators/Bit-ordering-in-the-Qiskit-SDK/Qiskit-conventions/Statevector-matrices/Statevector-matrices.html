@@ -1,0 +1,30 @@
+<script type="text/javascript">
+  RED.nodes.registerType('State_vector_matrices', {
+    category: 'function',
+    color: '#aaaaaa',
+    defaults: {
+      name: { value: "State vector matrices" },
+      info: {
+        value: `When interpreting bits as a number, bit 0 is the least significant bit, and bit n the most significant. This is helpful when coding because each bit has the value 2^label (label being the qubit's index in QuantumCircuit.qubits). For example, the following circuit execution ends with bit 0 being 0, and bit 1 being 1. This is interpreted as the decimal integer 2 (measured with probability 1.0).`,
+        required: false
+      }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    label: function () {
+      return this.name || "State_vector_matrices";
+    }
+  });
+</script>
+
+<script type="text/html" data-template-name="State_vector_matrices">
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+
+<script type="text/html" data-help-name="State_vector_matrices">
+  <p>Interpreting State_vector_matrices </p>
+</script>

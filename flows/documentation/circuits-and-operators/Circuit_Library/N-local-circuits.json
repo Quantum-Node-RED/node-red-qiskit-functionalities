@@ -1,0 +1,117 @@
+[
+    {
+        "id": "2223dd71286e972f",
+        "type": "tab",
+        "label": "N-local-circuits",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "3e96ad675dd194f3",
+        "type": "inject",
+        "z": "2223dd71286e972f",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 190,
+        "y": 40,
+        "wires": [
+            [
+                "87e8adb916d446f0"
+            ]
+        ]
+    },
+    {
+        "id": "9720e6e4634c7287",
+        "type": "image",
+        "z": "2223dd71286e972f",
+        "name": "",
+        "width": "800",
+        "data": "payload.result.circuit_diagram",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 580,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "79f531ac9a9e5578",
+        "type": "debug",
+        "z": "2223dd71286e972f",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 100,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "aa99d444dac31070",
+        "type": "image",
+        "z": "2223dd71286e972f",
+        "name": "",
+        "width": "800",
+        "data": "payload.result.circuit_diagram",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 660,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "87e8adb916d446f0",
+        "type": "N-local-circuits",
+        "z": "2223dd71286e972f",
+        "name": "N-local-circuits",
+        "info": "These circuits alternate layers of single-qubit rotation gates \n          with layers of multi-qubit entangling gates. This family of circuits is \n          popular in variational quantum algorithms because they can produce a wide \n          range of quantum states. Variational algorithms adjust the gate parameters \n          to find states that have certain properties (such as states that represent\n          a good solution to an optimization problem). For this purpose, many circuits\n          in the library are parameterized, which means you can define them without\n          fixed values. The following code cell imports a TwoLocal circuit, in which\n          the entangling gates are two-qubit gates. This circuit interleaves blocks\n          of parameterized single-qubit gates, followed by entangling blocks of\n          two-qubit gates. The following code creates a three-qubit circuit, with \n          single-qubit RX-gates and two-qubit CZ-gates.",
+        "x": 300,
+        "y": 140,
+        "wires": [
+            [
+                "9720e6e4634c7287",
+                "79f531ac9a9e5578",
+                "d88b34d53ab764a4"
+            ]
+        ]
+    },
+    {
+        "id": "d88b34d53ab764a4",
+        "type": "Parameters-N-local-circuits",
+        "z": "2223dd71286e972f",
+        "name": "Parameters-N-local-circuits",
+        "info": "You can also use this to assign these parameters to real values using a \n          dictionary of the form { Parameter: number }. To demonstrate, the following code\n          cell assigns each parameter in the circuit to 0.",
+        "x": 380,
+        "y": 260,
+        "wires": [
+            [
+                "aa99d444dac31070"
+            ]
+        ]
+    }
+]

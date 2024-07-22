@@ -1,0 +1,30 @@
+<script type="text/javascript">
+    RED.nodes.registerType('build-circuits', {
+      category: 'function',
+      color: '#aaaaaa',
+      defaults: {
+        name: { value: "build-circuits" },
+        info: {
+          value: `Methods such as QuantumCircuit.h and QuantumCircuit.cx add specific instructions to circuits. To add instructions to a circuit more generally, use the append method. This takes an instruction and a list of qubits to apply the instruction to. See the Circuit Library API documentation for a list of supported instructions.`,
+          required: false
+        }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "build-circuits";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="build-circuits">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="build-circuits">
+    <p>A quantum circuit.</p>
+  </script>

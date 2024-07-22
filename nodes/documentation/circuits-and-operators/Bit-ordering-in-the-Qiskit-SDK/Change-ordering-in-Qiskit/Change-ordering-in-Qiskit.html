@@ -1,0 +1,31 @@
+<script type="text/javascript">
+    RED.nodes.registerType('Change_ordering_in_Qiskit', {
+      category: 'function',
+      color: '#aaaaaa',
+      defaults: {
+        name: { value: "Change ordering in Qiskit" },
+        info: {
+          value: `To draw a circuit with qubits in reversed order (that is, qubit 0 at the bottom), use the reverse_bits argument. This only affects the generated diagram and does not affect the circuit; the X-gate still acts on qubit 0.
+          \nYou can use the reverse_bits method to return a new circuit with the qubits' labels reversed (this does not mutate the original circuit).`,
+          required: false
+        }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "Change_ordering_in_Qiskit";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="Change_ordering_in_Qiskit">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="Change_ordering_in_Qiskit">
+    <p>Change ordering in Qiskit.</p>
+  </script>
