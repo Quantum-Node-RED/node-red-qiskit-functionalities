@@ -26,7 +26,13 @@
       "intro-to-transpiler-pass": "nodes/documentation/transpiler/advanced-transpilation-resources/Write_a_custom_transpiler_pass/Introduction_to_transpiler_passes.js",
       "intro-to-dag": "nodes/documentation/transpiler/advanced-transpilation-resources/Write_a_custom_transpiler_pass/Introduction_to_DAG.js",
       "create-transpiler-pass": "nodes/documentation/transpiler/advanced-transpilation-resources/Write_a_custom_transpiler_pass/Create_a_transpiler_pass.js",
-      "use-the-transpiler-pass": "nodes/documentation/transpiler/advanced-transpilation-resources/Write_a_custom_transpiler_pass/Use_transpiler_pass.js"
+      "use-the-transpiler-pass": "nodes/documentation/transpiler/advanced-transpilation-resources/Write_a_custom_transpiler_pass/Use_transpiler_pass.js",
+      "create-custom-backend": "nodes/documentation/transpiler/advanced-transpilation-resources/Transpile_against_custom_backend/Create_custom_backend.js",
+      "intro-to-pbt": "nodes/documentation/transpiler/advanced-transpilation-resources/Transpile_against_custom_backend/Intro_to_PBT.js",
+      "visualize-custom-backend": "nodes/documentation/transpiler/advanced-transpilation-resources/Transpile_against_custom_backend/Visualize_custom_backend.js",
+      "create-circuit-for-custom-backend": "nodes/documentation/transpiler/advanced-transpilation-resources/Transpile_against_custom_backend/Create_circuit_for_custom_backend.js",
+      "run-circuit-on-custom-backend": "nodes/documentation/transpiler/advanced-transpilation-resources/Transpile_against_custom_backend/Run_circuit_on_custom_backend.js",
+      "create-unique-custom-backend": "nodes/documentation/transpiler/advanced-transpilation-resources/Transpile_against_custom_backend/Create_unique_backend.js"
     }
   },
   "dependencies": {
