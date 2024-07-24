@@ -1,0 +1,50 @@
+<script type="text/javascript">
+    RED.nodes.registerType('plot-state-qsphere',{
+        category: 'Plot quantum states',
+        color: '#aaaaaa',
+        defaults: {
+            name: {value:"Visualization: Plot State QSphere"},
+            info: {
+                value:"# [Plot quantum states guide.](https://docs.quantum.ibm.com/guides/plot-quantum-states#)\r\n" +
+                "&nbsp;\r\n" +
+                "# The \"QSphere\" is a Qiskit-unique view of a quantum state in which the amplitude and phase of each" +
+                " element in a statevector is plotted on the surface of a sphere. The thickness of each dot represents the" +
+                " amplitude, and the color represents the phase. For mixed states it will show a sphere for each component.\r\n" +
+                "# In this node, the <font style='background: lightgrey'>_`plot_state_qsphere()`_</font> function of the" +
+                " <font style='background: lightgrey'>_`qiskit.visualization`_</font> module is used to plot the qsphere representation of a quantum state\r\n" +
+                "Alternitively <font style='background: lightgrey'>_`draw(\"qsphere\")`_</font> can be used.\r\n" +
+                "```python\r\n" +
+                "from math import pi\r\n" +
+                "from qiskit import QuantumCircuit\r\n" +
+                "from qiskit.quantum_info import Statevector\r\n" + 
+                "from qiskit.visualization import plot_state_qsphere\r\n" + 
+                "\r\n" +
+                "# Create a Bell state for demonstration\r\n" +
+                "qc = QuantumCircuit(2)\r\n" +
+                "qc.h(0)\r\n" +
+                "qc.crx(pi/2, 0, 1)\r\n" +
+                "psi = Statevector(qc)\r\n" +
+                "\r\n" +
+                "plot_state_qsphere(psi)\r\n" +
+                "```\r\n "
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "file.svg",
+        label: function() {
+            return this.name||"plot-state-qsphere";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="plot-state-qsphere">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="plot-state-qsphere">
+    <p>A simple node for generating a "QSphere" plot using the plot_state_qsphere visulization</p>
+</script>

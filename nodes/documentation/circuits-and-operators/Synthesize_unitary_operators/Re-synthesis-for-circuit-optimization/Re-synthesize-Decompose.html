@@ -1,0 +1,31 @@
+<script type="text/javascript">
+    RED.nodes.registerType('Re-synthesize-decompose', {
+    category: 'function',
+    color: '#aaaaaa',
+    defaults: {
+      name: { value: "Re-synthesize-decompose" },
+      info: {
+        value: `However, after re-synthesizing with the following code, it only needs a single CX gate. (Here we use the QuantumCircuit.decompose() method to better visualize the gates used to re-synthesize the unitary.)`,
+        required: false
+      }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    label: function () {
+      return this.name || "Re-synthesize-decompose";
+    }
+  });
+  
+    </script>
+    
+    <script type="text/html" data-template-name="Re-synthesize-decompose">
+      <div class="form-row">
+          <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+          <input type="text" id="node-input-name" placeholder="Name">
+      </div>
+    </script>
+    
+    <script type="text/html" data-help-name="Re-synthesize-decompose">
+      <p>Synthesize unitary operations</p>
+    </script>

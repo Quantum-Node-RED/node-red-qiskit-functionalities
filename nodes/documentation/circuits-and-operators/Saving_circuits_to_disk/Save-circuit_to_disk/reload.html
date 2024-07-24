@@ -1,0 +1,30 @@
+<script type="text/javascript">
+    RED.nodes.registerType('reload', {
+      category: 'function',
+      color: '#aaaaaa',
+      defaults: {
+        name: { value: "reload" },
+        info: {
+          value: `This circuit is now saved to the file test.qpy. If you restart your Python kernel, you can re-load the circuit using the qpy.load function. Note that this always returns a list of circuits, even if you only serialized one circuit.`,
+          required: false
+        }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "reload";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="reload">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="reload">
+    <p>reload circuits from disk.</p>
+  </script>

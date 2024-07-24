@@ -1,0 +1,189 @@
+[
+    {
+        "id": "e9fed244fdc995a1",
+        "type": "tab",
+        "label": "流程 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "a84b7131e822539d",
+        "type": "Build-Oracle",
+        "z": "e9fed244fdc995a1",
+        "name": "Build-Oracle",
+        "target": "11",
+        "gates": [],
+        "x": 550,
+        "y": 300,
+        "wires": [
+            [
+                "cc8b73a05d0d4827",
+                "3050439af047dee7"
+            ]
+        ]
+    },
+    {
+        "id": "cc6d8971eefbfa45",
+        "type": "Build-Gate",
+        "z": "e9fed244fdc995a1",
+        "name": "Build-Gate",
+        "gates": [
+            {
+                "type": "cz",
+                "qubits": [
+                    "0",
+                    "1"
+                ]
+            }
+        ],
+        "x": 630,
+        "y": 120,
+        "wires": [
+            [
+                "a84b7131e822539d"
+            ]
+        ]
+    },
+    {
+        "id": "a2896cf1dd0a8abf",
+        "type": "inject",
+        "z": "e9fed244fdc995a1",
+        "name": "Build_Gate_Test",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 220,
+        "y": 120,
+        "wires": [
+            [
+                "cc6d8971eefbfa45"
+            ]
+        ]
+    },
+    {
+        "id": "cc8b73a05d0d4827",
+        "type": "image",
+        "z": "e9fed244fdc995a1",
+        "name": "",
+        "width": 160,
+        "data": "payload.result.image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 200,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "3050439af047dee7",
+        "type": "Grover_iteration",
+        "z": "e9fed244fdc995a1",
+        "name": "Grover_iteration",
+        "oracleType": "QuantumCircuit ",
+        "iterators": "None",
+        "input": "None",
+        "growthRate": "0.5",
+        "sampleFromIterations": null,
+        "target": "11",
+        "x": 920,
+        "y": 300,
+        "wires": [
+            [
+                "33df0350a3a580f5",
+                "65473fe4582708b8",
+                "8c21b09f44436f06",
+                "d666942e1c4c75e5",
+                "f42cd29ffa1c0ab3"
+            ]
+        ]
+    },
+    {
+        "id": "33df0350a3a580f5",
+        "type": "debug",
+        "z": "e9fed244fdc995a1",
+        "name": "oracle_evaluation",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result.oracle_evaluation",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1310,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "65473fe4582708b8",
+        "type": "debug",
+        "z": "e9fed244fdc995a1",
+        "name": "top_measurement",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result.top_measurement",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1310,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "8c21b09f44436f06",
+        "type": "debug",
+        "z": "e9fed244fdc995a1",
+        "name": "circuit_results",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result.circuit_results",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1300,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "d666942e1c4c75e5",
+        "type": "image",
+        "z": "e9fed244fdc995a1",
+        "name": "",
+        "width": "600",
+        "data": "payload.result.circuit_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1300,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "f42cd29ffa1c0ab3",
+        "type": "image",
+        "z": "e9fed244fdc995a1",
+        "name": "",
+        "width": "600",
+        "data": "payload.result.circuit_results_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 540,
+        "y": 540,
+        "wires": []
+    }
+]

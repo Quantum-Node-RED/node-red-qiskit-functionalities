@@ -1,0 +1,35 @@
+<script type="text/javascript">
+    RED.nodes.registerType('for-loop', {
+      category: 'function',
+      color: '#aaaaaa',
+      defaults: {
+        name: { value: "For-loop" },
+        info: {
+          value: `A for loop is used to iterate over a sequence of classical values and perform some operations during each iteration.
+          \n In the example below, we use a for loop to apply 5 X gates to a qubit and then measure it. Because we perform an odd number of X gates, the overall effect is to flip the qubit from the 0 state to the 1 state.`,
+          required: false
+        }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "For-loop";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="for-loop">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+      <label for="node-input-info"><i class="fa fa-tag"></i> Info</label>
+      <textarea type="text" id="node-input-info" placeholder="Info" readonly>
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="for-loop">
+    <p>Apply for loop to the node.</p>
+  </script>
