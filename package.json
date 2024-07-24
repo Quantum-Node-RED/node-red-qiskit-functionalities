@@ -14,7 +14,11 @@
     "nodes": {
       "lower-case": "templates/lower-case.js",
       "CHSH-game-classic": "nodes/CHSH-game-classic/CHSH-game-classic.js",
-      "CHSH-game-quantum": "nodes/CHSH-game-quantum/CHSH-game-quantum.js"
+      "CHSH-game-quantum": "nodes/CHSH-game-quantum/CHSH-game-quantum.js",
+      "intro-to-debug": "nodes/documentation/debugging-tools/exact-simulation/intro-to-debug.js",
+      "qiskit-primatives": "nodes/documentation/debugging-tools/exact-simulation/qiskit-primatives.js",
+      "use-reference-estimator": "nodes/documentation/debugging-tools/exact-simulation/use-reference-estimator.js",
+      "transpile-to-ISA": "nodes/documentation/debugging-tools/exact-simulation/transpile-to-ISA.js"
     }
   },
   "dependencies": {

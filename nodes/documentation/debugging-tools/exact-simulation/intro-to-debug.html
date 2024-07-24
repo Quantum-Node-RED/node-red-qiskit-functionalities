@@ -1,0 +1,38 @@
+<script type="text/javascript">
+    RED.nodes.registerType('intro-to-debug',{
+        category: 'Debugging tools',
+        color: '#ffa500',
+        defaults: {
+            name: {value:"Introduction to debugging tools"},
+            info: {
+                value: "# [Introduction to debugging tools.](https://docs.quantum.ibm.com/guides/debugging-tools#)\r\n" +
+                "&nbsp;\r\n" +
+                "# Quantum programs can be tested by running them on simulated devices and exploring their performance under realistic " +
+                "device noise models. This allows you to debug them before sending them to a physical system. Quantum simulators can " +
+                "be used to help develop and test programs before fine-tuning them and sending them to quantum hardware." +
+                "Local simulators can do this with good performance and efficiency.\r\n" +
+                "# However, due to the cost of classically simulating quantum circuits scales exponentially with the number of qubits, " +
+                "circuits that are larger than 50 qubits or so generally cannot run on simulators. For such circuits, you can test " +
+                "smaller versions of the circuits that can be simulated classically or you can modify the circuits so that they " +
+                "become classically simulable, although less accurate."
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "file.svg",
+        label: function() {
+            return this.name||"intro-to-debug";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="intro-to-debug">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="intro-to-debug">
+    <p>A simple node for introduction to debugging tools</p>
+</script>
