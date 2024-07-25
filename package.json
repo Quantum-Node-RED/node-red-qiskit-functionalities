@@ -145,7 +145,8 @@
       "ansatz": "nodes/algorithms/VQE/ansatz.js",
       "optimizer": "nodes/algorithms/VQE/optimizer.js",
       "hamiltonianPauli": "nodes/algorithms/VQE/hamiltonianPauli.js",
-      "VQEIteration": "nodes/algorithms/VQE/VQEIteration.js"
+      "VQEIteration": "nodes/algorithms/VQE/VQEIteration.js",
+      "classicEigensolver": "nodes/algorithms/VQE/classicEigensolver.js"
     }
   },
   "dependencies": {

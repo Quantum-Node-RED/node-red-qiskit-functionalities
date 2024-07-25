@@ -12,18 +12,18 @@ from qiskit_algorithms.optimizers import SLSQP, SPSA, COBYLA, L_BFGS_B
 
 assert len(sys.argv) > 1, "No arguments found."
 input = sys.argv[1]
-parse_input = json.loads(input)
+parsed_input = json.loads(input)
 
 # parese input
-num_qubits = parse_input["numQubits"]
-rotation_blocks = parse_input["rotationLayers"]
-entanglement_blocks = parse_input["entanglementLayers"]
-# hamiltonian_data = parse_input["hamiltonianPauli"].strip('[]').split(',')
+num_qubits = parsed_input["numQubits"]
+rotation_blocks = parsed_input["rotationLayers"]
+entanglement_blocks = parsed_input["entanglementLayers"]
+# hamiltonian_data = parsed_input["hamiltonianPauli"].strip('[]').split(',')
 # hamiltonian_data = [item.strip('" ').strip() for item in hamiltonian_data]
-pauli_list = parse_input["paulis"]
-# hamiltonian_coeffs = [float(f) for f in parse_input["hamiltonianCoeffs"].strip('[]').split(',')]
-chosen_optimizer = parse_input["optimizer"]
-chosen_maxiter = int(parse_input["maxiter"])
+pauli_list = parsed_input["paulis"]
+# hamiltonian_coeffs = [float(f) for f in parsed_input["hamiltonianCoeffs"].strip('[]').split(',')]
+chosen_optimizer = parsed_input["optimizer"]
+chosen_maxiter = int(parsed_input["maxiter"])
 
 # input error handling
 # assert len(hamiltonian_data) == len(hamiltonian_coeffs), "The Pauli list of terms for the Hamiltonian should be as long as the complex coefficients."
@@ -86,7 +86,8 @@ optimal_circuit_buffer.close()
 result = {
   "enegy_image": enegry_str, 
   "optimal_circuit_image": optimal_circuit_str,
-  "optimal_value": vqe_result.optimal_value
+  "optimal_value": vqe_result.optimal_value,
+  "paulis": pauli_list
 }
 
 print(json.dumps(result))
