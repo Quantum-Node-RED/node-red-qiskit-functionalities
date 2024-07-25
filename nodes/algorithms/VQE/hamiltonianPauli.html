@@ -4,14 +4,60 @@
     color: "#aaaaaa",
     defaults: {
       name: { value: "hamiltonianPauli" },
-      hamiltonianPauli: { value: '["II", "IZ", "ZI", "ZZ", "XX"]' },
-      hamiltonianCoeffs: { value: '[-1.05237, 0.39793, -0.39793, -0.01128, 0.1809]' },
+      paulis: { value: [] },
     },
     inputs: 1,
     outputs: 1,
     icon: "file.svg",
     label: function () {
       return this.name || "hamiltonianPauli";
+    },
+    oneditprepare: function () {
+      var node = this;
+      // Load existing paulis
+      if (node.paulis && node.paulis.length) {
+        node.paulis.forEach(function (pauli) {
+          addPauli(pauli);
+        });
+      }
+
+      function addPauli(pauli) {
+        var term = pauli ? pauli.term : "";
+        var coeff = pauli ? pauli.coeff : 0;
+        var newRow = $("<tr>").append(
+          $("<td>").append(
+            '<input type="string" class="pauli-term" value="' +
+            term +
+            '" style="display:block;">'
+          ),
+          $("<td>").append(
+            '<input type="number" class="pauli-coeff" value="' +
+            coeff +
+            '" style="display:block;">'
+          ),
+          $("<td>").append('<button class="delete-pauli">Delete</button>')
+        );
+        $("#paulis-table tbody").append(newRow);
+
+        newRow.find(".delete-pauli").on("click", function () {
+          $(this).closest("tr").remove();
+        });
+      }
+
+      $("#add-pauli").on("click", function () {
+        addPauli();
+      });
+    },
+    oneditsave: function () {
+      var paulis = [];
+      $("#paulis-table tbody tr").each(function () {
+        var term = $(this).find(".pauli-term").val();
+        var coeff = $(this).find(".pauli-coeff").val();
+        if (term && coeff) {
+          paulis.push({ term: term, coeff: coeff });
+        }
+      });
+      this.paulis = paulis;
     }
   });
 </script>
@@ -23,12 +69,24 @@
   </div>
 
   <div class="form-row">
-    <label for="node-input-hamiltonianPauli"  style="width:100%"><i class="fa fa-tag"></i>Hamiltonian's Pauli list of terms</label>
-    <input type="string" id="node-input-hamiltonianPauli" placeholder='Please use format ["a", "b", "c"]' style="width:100%">
+    <label for="node-input-pauli" style="width:100%;"><i class="fa fa-tag"></i> Add Hamiltonian written in terms of Pauli operators</label>
+    <button id="add-pauli" 
+    style="width:50%; display: block; flex-direction: row; justify-content: center; align-items: center;" 
+    onclick="addPauli()">
+      <i class="fa fa-plus"></i> Add Pauli
+    </button>
   </div>
-
   <div class="form-row">
-    <label for="node-input-hamiltonianCoeffs" style="width:100%;"><i class="fa fa-tag"></i>Hamiltonian's complex coefficients for Pauli terms</label>
-    <input type="string" id="node-input-hamiltonianCoeffs" placeholder="Please use format [1.0, 2.0, 3.0]" style="width:100%">
+    <table id="paulis-table">
+      <thead>
+        <tr>
+          <th>|Pauli Term|</th>
+          <th>|Pauli Coeffs|</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Paulis will be added here -->
+      </tbody>
+    </table>
   </div>
 </script>

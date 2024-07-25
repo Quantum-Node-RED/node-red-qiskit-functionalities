@@ -9,12 +9,12 @@ module.exports = function (RED) {
     node.on("input", async function (msg) {
       const result = await new Promise((resolve, reject) => {
         let options = {};
-        if(msg.payload && msg.payload.gates) {
+        if (msg.payload && msg.payload.gates) {
           options = {
             target: node.target,
             gates: msg.payload.gates
-          }; 
-        }else{
+          };
+        } else {
           options = {
             target: node.target,
             gates: node.gates

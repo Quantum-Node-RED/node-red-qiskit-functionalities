@@ -1,3 +1,5 @@
+const runPythonScript = require("../../pythonShell");
+
 module.exports = function (RED) {
   function ansatzNode(config) {
     RED.nodes.createNode(this, config);
@@ -7,12 +9,24 @@ module.exports = function (RED) {
 
     var node = this;
     node.on('input', async function (msg) {
-      msg.payload = {
+      const option = {
         numQubits: msg.payload.numQubits,
+        paulis: msg.payload.paulis,
         rotationLayers: node.rotationLayers,
         entanglementLayers: node.entanglementLayers
-      }
-      node.send(msg);
+      };
+      const result = await new Promise((resolve, reject) => {
+        runPythonScript(__dirname, "ansatz.py", option, (err, results) => {
+          if (err) throw err;
+          return resolve(results);
+        });
+      });
+
+      const newMsg = {
+        payload: option,
+        result: result
+      };
+      node.send(newMsg);
     });
   }
   RED.nodes.registerType("ansatz", ansatzNode);

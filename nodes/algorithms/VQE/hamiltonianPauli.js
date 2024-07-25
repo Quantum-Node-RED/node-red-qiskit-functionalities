@@ -2,14 +2,13 @@ module.exports = function (RED) {
   function hamiltonianPauliNode(config) {
     RED.nodes.createNode(this, config);
 
-    this.hamiltonianPauli = config.hamiltonianPauli;
-    this.hamiltonianCoeffs = config.hamiltonianCoeffs;
+    this.paulis = config.paulis;
 
     var node = this;
     node.on('input', function (msg) {
       msg.payload = {
-        hamiltonianPauli: node.hamiltonianPauli,
-        hamiltonianCoeffs: node.hamiltonianCoeffs
+        numQubits: msg.payload.numQubits,
+        paulis: node.paulis
       }
       node.send(msg);
     });

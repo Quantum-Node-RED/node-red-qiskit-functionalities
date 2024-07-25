@@ -1,0 +1,72 @@
+<script type="text/javascript">
+  RED.nodes.registerType("VQEIteration", {
+    category: "VQE",
+    color: "#aaaaaa",
+    defaults: {
+      name: { value: "VQEIteration" },
+      maxiter: { value: 80 }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    label: function () {
+      return this.name || "VQEIteration";
+    },
+    oneditprepare: function () {
+      $("#node-input-name").val(this.name || "");
+      document.getElementById("node-input-maxiter-slider").onchange = function () {
+        document.getElementById("node-input-maxiter").value = this.value;
+      };
+      document.getElementById("node-input-maxiter").onchange = function () {
+        let input = this.value;
+        if (input < 0 || input > 200) this.value = 100;
+        document.getElementById("node-input-maxiter-slider").value = this.value;
+      };
+
+      document.getElementById("node-input-maxiter").value = this.maxiter;
+      document.getElementById("node-input-maxiter-slider").value = this.maxiter;
+
+    },
+    oneditsave: function () {
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="VQEIteration">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+
+  <label for="node-input-maxiter" id="maxiter-label" style="width:100%;">Maximum number of iterations</label>
+    <div style="width:75%; float:left;">
+      <input
+        style="width:100%"
+        type="range"
+        id="node-input-maxiter-slider"
+        name="maxiter"
+        min="0"
+        max="200"
+        step="1"
+        list="labels"
+      /> 
+      <div style="width:33.33%; text-align:left; float:left;">0</div>
+      <div style="width:33.33%; text-align:center; float:left;">100</div>
+      <div style="width:33.33%; text-align:right; float:left;">200</div>
+    </div>
+    <div style="width:20%; float:left;">
+      <input
+        style="width:60%; float:right; text-align: right;"
+        type="number"
+        id="node-input-maxiter"
+        name="maxiter-text"
+        placeholder="0"
+        step="any"
+      /> 
+    </div>
+  </div>
+</script>
+
+<script type="text/html" data-help-name="VQEIteration">
+  <p>A simple node that implements VQEIteration algorithm.</p>
+</script>

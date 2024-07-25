@@ -3,13 +3,15 @@ module.exports = function (RED) {
     RED.nodes.createNode(this, config);
 
     this.optimizer = config.optimizer;
-    this.maxiter = config.maxiter;
 
     var node = this;
     node.on('input', function (msg) {
       msg.payload = {
-        optimizer: node.optimizer,
-        maxiter: node.maxiter
+        numQubits: msg.payload.numQubits,
+        paulis: msg.payload.paulis,
+        rotationLayers: msg.payload.rotationLayers,
+        entanglementLayers: msg.payload.entanglementLayers,
+        optimizer: node.optimizer
       }
       node.send(msg);
     });

@@ -9,7 +9,7 @@
       hamiltonianPauli: { value: '["II", "IZ", "ZI", "ZZ", "XX"]' },
       hamiltonianCoeffs: { value: '[-1.05237, 0.39793, -0.39793, -0.01128, 0.1809]' },
       optimizer: { value: "SLSQP" },
-      maxiter: { value: 0 }
+      maxiter: { value: 50 },
     },
     inputs: 1,
     outputs: 1,
@@ -18,19 +18,23 @@
       return this.name || "VQE";
     },
     oneditprepare: function () {
-      document.getElementById("node-input-maxiter-slider").onchange = function () {
-        document.getElementById("node-input-maxiter").value = this.value;
-      };
-      document.getElementById("node-input-maxiter").onchange = function () {
-        let input = this.value;
-        if (input < 0 || input > 200) this.value = 100;
-        document.getElementById("node-input-maxiter-slider").value = this.value;
-      };
-
-      document.getElementById("node-input-maxiter").value = this.maxiter;
-      document.getElementById("node-input-maxiter-slider").value = this.maxiter;
-
-    }
+      $("#node-input-name").val(this.name || "");
+      $("#node-input-optimizer").val(this.optimizer || "SLSQP");
+      $("#node-input-maxiter").val(this.maxiter || 50);
+      $("#node-input-rotationLayers").val(this.rotationLayers || "rx");
+      $("#node-input-entanglementLayers").val(this.entanglementLayers || "cz");
+      $("#node-input-hamiltonianPauli").val(this.hamiltonianPauli || '["II", "IZ", "ZI", "ZZ", "XX"]');
+      $("#node-input-hamiltonianCoeffs").val(hamiltonianCoeffs.target || '[-1.05237, 0.39793, -0.39793, -0.01128, 0.1809]');
+    },
+    oneditsave: function () {
+      this.name = $("#node-input-name").val();
+      this.optimizer = $("#node-input-optimizer").val();
+      this.maxiter = $("#node-input-maxiter").val();
+      this.rotationLayers = $("#node-input-rotationLayers").val();
+      this.entanglementLayers = $("#node-input-entanglementLayers").val();
+      this.hamiltonianPauli = $("#node-input-hamiltonianPauli").val();
+      this.hamiltonianCoeffs = $("#node-input-hamiltonianCoeffs").val();
+    },
   });
 </script>
 
@@ -50,32 +54,15 @@
     </select>
   </div>
 
-  <label for="node-input-maxiter" id="maxiter-label" style="width:100%;">Maximum number of iterations</label>
-    <div style="width:75%; float:left;">
-      <input
-        style="width:100%"
-        type="range"
-        id="node-input-maxiter-slider"
-        name="maxiter"
-        min="0"
-        max="200"
-        step="1"
-        list="labels"
-      /> 
-      <div style="width:33.33%; text-align:left; float:left;">0</div>
-      <div style="width:33.33%; text-align:center; float:left;">100</div>
-      <div style="width:33.33%; text-align:right; float:left;">200</div>
-    </div>
-    <div style="width:20%; float:left;">
-      <input
-        style="width:60%; float:right; text-align: right;"
-        type="number"
-        id="node-input-maxiter"
-        name="maxiter-text"
-        placeholder="0"
-        step="any"
-      /> 
-    </div>
+  <div class="form-row">
+    <label for="node-input-maxiter" style="width:40%;"><i class="fa fa-tag"></i>Maximum number of iterations</label>
+    <input
+      style="width:40%; float:right; text-align: right;"
+      type="number"
+      id="node-input-maxiter"
+      name="maxiter-text"
+      placeholder="0"
+    /> 
   </div>
 
   <div class="form-row">
