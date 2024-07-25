@@ -18,7 +18,10 @@
       "intro-to-debug": "nodes/documentation/debugging-tools/exact-simulation/intro-to-debug.js",
       "qiskit-primatives": "nodes/documentation/debugging-tools/exact-simulation/qiskit-primatives.js",
       "use-reference-estimator": "nodes/documentation/debugging-tools/exact-simulation/use-reference-estimator.js",
-      "transpile-to-ISA": "nodes/documentation/debugging-tools/exact-simulation/transpile-to-ISA.js"
+      "transpile-to-ISA": "nodes/documentation/debugging-tools/exact-simulation/transpile-to-ISA.js",
+      "initialize-estimator": "nodes/documentation/debugging-tools/exact-simulation/initialize-estimator.js",
+      "run-estimator": "nodes/documentation/debugging-tools/exact-simulation/run-estimator.js",
+      "estimator-run-options": "nodes/documentation/debugging-tools/exact-simulation/estimator-run-options.js"
     }
   },
   "dependencies": {
