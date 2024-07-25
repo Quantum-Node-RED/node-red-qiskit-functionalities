@@ -1,0 +1,34 @@
+
+<script type="text/javascript">
+    RED.nodes.registerType("run-circuit-on-custom-backend", {
+      category: "Transpile against custom backend",
+      color: "#aaaaaa",
+      defaults: {
+        name: { value: "Run circuit on the custom backend" },
+        info: { value: "# In this node, we transpiles created circuit against the backend constructed before.\r\n```python\r\nfrom qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager\r\n\r\npm = generate_preset_pass_manager(optimization_level=3, backend=backend)\r\ntranspiled_ghz = pm.run(ghz)\r\nop_counts = transpiled_ghz.count_ops()\r\n```\r\n# The number of each types of gate is sent to \"Gates after transpilation\" node and you can check them in the debug palette. You can also see which qubits and two-qubit channels were used in this circuit in \"Backend Usage Image Output\" node.\r\n&nbsp;\r\n# You should find that  transpiled circuit now contains a mixture of CZ and ECR gates,which we specified as the basis gates in the backend's <font style=\"background: lightgrey\">Target</font>. There are also quite a few more gates than you started with because of the need to insert SWAP instructions after choosing a layout.\r\n&nbsp;\r\n# **Note:** In this flow, we will directly show you the visualizations. However, if you want to manually try building the code yourself or customize your code, you will need to install the [graphviz](https://graphviz.org/) library for the diagram plotting functions." }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "Run circuit on the custom backend";
+      },
+      
+    });
+
+  </script>
+  
+  <script type="text/html" data-template-name="run-circuit-on-custom-backend">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Run circuit on the custom backend" />
+    </div>
+
+  </script>
+
+  
+  
+  <script type="text/html" data-help-name="run-circuit-on-custom-backend">
+    <p>A node that run circuit on the created custom backend.</p>
+  </script>
+  

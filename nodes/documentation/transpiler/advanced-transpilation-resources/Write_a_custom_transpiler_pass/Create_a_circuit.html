@@ -1,0 +1,34 @@
+
+<script type="text/javascript">
+    RED.nodes.registerType("create-circuit-for-dag", {
+      category: "Write a custom transpiler pass",
+      color: "#aaaaaa",
+      defaults: {
+        name: { value: "Create a circuit" },
+        info: { value: "# In our example, we will illustrate the DAG by creating a simple circuit that prepares a Bell state and applies an _Rz_ rotation, depending on the measurement outcome.\r\n&nbsp;\r\n# The following code snippet sets up a quantum circuit with three qubits and three classical bits. It applies a Hadamard gate to the first qubit, creates an entanglement between the first and second qubits using a CNOT gate, and measures the first qubit into the first classical bit. Finally, it applies a conditional Rz rotation to the second qubit based on the classical measurement outcome.\r\n```python\r\nqr = QuantumRegister(3, 'qr')\r\ncr = ClassicalRegister(3, 'cr')\r\nqc = QuantumCircuit(qr, cr)\r\n\r\nqc.h(qr[0])\r\nqc.cx(qr[0], qr[1])\r\nqc.measure(qr[0], cr[0])\r\nqc.rz(np.pi/2, qr[1]).c_if(cr, 2)\r\n```\r\n# You can check the image of this quantum circuit in the \"Circuit Image Output\" node." }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "Create a circuit";
+      },
+      
+    });
+
+  </script>
+  
+  <script type="text/html" data-template-name="create-circuit-for-dag">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Create a circuit" />
+    </div>
+
+  </script>
+
+  
+  
+  <script type="text/html" data-help-name="create-circuit-for-dag">
+    <p>A node that create a simple bell state circuit.</p>
+  </script>
+  
