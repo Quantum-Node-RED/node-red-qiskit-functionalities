@@ -1,0 +1,44 @@
+<script type="text/javascript">
+  RED.nodes.registerType("graph-construction", {
+    category: "function",
+    color: "#aaaaaa",
+    defaults: {
+      name: { value: "Graph Construction" },
+      matrix: { value: "" },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    label: function () {
+      return this.name || "Graph Construction";
+    },
+    oneditprepare: function () {
+      // Populate the existing matrix value
+      $("#node-input-matrix").val(this.matrix);
+    },
+    oneditsave: function () {
+      // Save the matrix value
+      this.matrix = $("#node-input-matrix").val();
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="graph-construction">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-matrix"
+      ><i class="fa fa-cogs"></i> Adjacency Matrix (JSON format)</label
+    >
+    <input type="text" id="node-input-matrix" placeholder="[[0, 1], [1, 0]]" />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="graph-construction">
+  <p>
+    This node constructs a graph based on an adjacency matrix provided in JSON
+    format.
+  </p>
+</script>

@@ -1,0 +1,26 @@
+<script type="text/javascript">
+  RED.nodes.registerType("QAOA-Circuit", {
+    category: "function",
+    color: "#aaaaaa",
+    defaults: {
+      name: { value: "QAOA-Circuit" },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    label: function () {
+      return this.name || "QAOA-Circuit";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="QAOA-Circuit">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="QAOA-Circuit">
+  <p>QAOA-Circuit</p>
+</script>
