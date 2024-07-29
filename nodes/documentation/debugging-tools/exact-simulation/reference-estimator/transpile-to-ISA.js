@@ -1,4 +1,4 @@
-const runPythonScript = require("../../../pythonShell");
+const runPythonScript = require("../../../../pythonShell");
 
 module.exports = function (RED) {
   function TranspileToISANode(config) {
@@ -10,5 +10,5 @@ module.exports = function (RED) {
       node.send(msg);
     });
   }
-  RED.nodes.registerType("initialize-estimator", TranspileToISANode);
+  RED.nodes.registerType("transpile-to-ISA", TranspileToISANode);
 }

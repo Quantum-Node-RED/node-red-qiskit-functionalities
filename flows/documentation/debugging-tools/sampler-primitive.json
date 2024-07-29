@@ -1,0 +1,167 @@
+[
+    {
+        "id": "37ae56f476ce383d",
+        "type": "image",
+        "z": "94423b440c78e613",
+        "name": "",
+        "width": "300",
+        "data": "payload.result.circuit_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 860,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "e1794602d6488a6f",
+        "type": "inject",
+        "z": "94423b440c78e613",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 200,
+        "wires": [
+            [
+                "e551819a2495f18b"
+            ]
+        ]
+    },
+    {
+        "id": "49e3ed707a1eb42c",
+        "type": "debug",
+        "z": "94423b440c78e613",
+        "name": "result",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 930,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "e551819a2495f18b",
+        "type": "intro-to-debug",
+        "z": "94423b440c78e613",
+        "name": "Introduction to debugging tools",
+        "info": "# [Introduction to debugging tools guide.](https://docs.quantum.ibm.com/guides/debugging-tools#)\r\n&nbsp;\r\n# Quantum programs can be tested by running them on simulated devices and exploring their performance under realistic device noise models. This allows you to debug them before sending them to a physical system. Quantum simulators can be used to help develop and test programs before fine-tuning them and sending them to quantum hardware.Local simulators can do this with good performance and efficiency.\r\n# However, due to the cost of classically simulating quantum circuits scales exponentially with the number of qubits, circuits that are larger than 50 qubits or so generally cannot run on simulators. For such circuits, you can test smaller versions of the circuits that can be simulated classically or you can modify the circuits so that they become classically simulable, although less accurate.",
+        "x": 330,
+        "y": 200,
+        "wires": [
+            [
+                "aacad0b7e1d9a649"
+            ]
+        ],
+        "icon": "font-awesome/fa-info-circle"
+    },
+    {
+        "id": "aacad0b7e1d9a649",
+        "type": "qiskit-primatives",
+        "z": "94423b440c78e613",
+        "name": "Qiskit SDK primatives",
+        "info": "# [Exact simulation with Qiskit SDK primitives guide.](https://docs.quantum.ibm.com/guides/simulate-with-qiskit-sdk-primitives#)\r\n&nbsp;\r\n# The reference primitives in the Qiskit SDK perform local statevector simulations. These simulations do not support modeling device noise, but are useful for quickly prototyping algorithms before looking into more advanced simulation techniques [using Qisker Aer](https://docs.quantum.ibm.com/guides/simulate-stabilizer-circuits) or running on real devices [Qiskit Runtime primitives](https://docs.quantum.ibm.com/guides/primitives).\r\n# The <font style='background: GhostWhite'>_`Estimator`_</font> primitive can compute expectation values of circuits, and the <font style='background: GhostWhite'>_`Sampler`_</font> primitive can sample from output distributions of circuits.",
+        "x": 380,
+        "y": 260,
+        "wires": [
+            [
+                "e7158549e863d67d"
+            ]
+        ],
+        "icon": "font-awesome/fa-info-circle"
+    },
+    {
+        "id": "82c0dbc2c45a8bd8",
+        "type": "transpile-to-ISA",
+        "z": "94423b440c78e613",
+        "name": "Transpile to ISA circuits and observables",
+        "info": "# [Exact simulation with Qiskit SDK primitives guide.](https://docs.quantum.ibm.com/guides/simulate-with-qiskit-sdk-primitives#)\r\n&nbsp;\r\n# The Qiskit Runtime primitives workflow requires circuits and observables to be transformed to only use instructions supported by the system (referred to as instruction set architecture (ISA) circuits and observables). The reference primitives still accept abstract instructions, as they rely on local statevectorsimulations, but transpiling the circuit might still be beneficial in terms of circuit optimization.\r\n```python\r\n# Generate a pass manager without providing a backend\r\nfrom qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager\r\n\r\npm = generate_preset_pass_manager(optimization_level=1)\r\nisa_circuit = pm.run(qc)\r\nisa_observable = observable.apply_layout(isa_circuit.layout)\r\n```\r\n ",
+        "x": 600,
+        "y": 380,
+        "wires": [
+            [
+                "261f66c9bfc8e0d5"
+            ]
+        ],
+        "icon": "font-awesome/fa-info-circle"
+    },
+    {
+        "id": "e7158549e863d67d",
+        "type": "use-reference-sampler",
+        "z": "94423b440c78e613",
+        "name": "Use the rerference Sampler",
+        "info": "# [Exact simulation with Qiskit SDK primitives guide.](https://docs.quantum.ibm.com/guides/simulate-with-qiskit-sdk-primitives#)\r\n&nbsp;\r\n# Similar to the Estimator, there are two reference implementations of Sampler in qiskit.primitives: the  [StatevectorSampler](https://docs.quantum.ibm.com/api/qiskit/qiskit.primitives.StatevectorSampler) class and the [Sampler](https://docs.quantum.ibm.com/api/qiskit/qiskit.primitives.Sampler) class. The <font style='background: GhostWhite'>_`StatevectorSampler`_</font> implements the new Estimator V2 interface introduced in Qiskit 1.0, and offers additional input vectorization features in comparison with the<font style='background: GhostWhite'>_`Sampler`_</font> class, which implements the legacy Sampler V1 interface. Both can take circuits and parameters as inputs and return the results from sampling from the output probability  distributions, but they are expressed in different terms:\r\n# - BThe new StatevectorSampler (V2) output can be expressed as an array of sampled values (bitstring) or \"counts\" for each bitstring present in the output distribution.\r\n# - The Sampler (V1) output is always expressed as a quasi-probability distribution of output states.\r\n# The following code prepares the inputs used in the examples that follow. Note that these examples run a single parametrized circuit, but you can also run the Sampler on non-parametrized circuits.\r\nNote that any quantum circuit passed to a Sampler must include measurements.\r\n```python\r\nfrom qiskit import QuantumCircuit\r\n\r\nqc = QuantumCircuit(2)\r\nqc.h(0)\r\nqc.cx(0,1)\r\nqc.measure_all()\r\nqc.draw(\"mpl\", style=\"iqp\")\r\n```\r\n ",
+        "x": 480,
+        "y": 320,
+        "wires": [
+            [
+                "37ae56f476ce383d",
+                "82c0dbc2c45a8bd8"
+            ]
+        ]
+    },
+    {
+        "id": "c8cbe01a62bdf9ac",
+        "type": "run-sampler",
+        "z": "94423b440c78e613",
+        "name": "Run the sampler",
+        "info": "# [Exact simulation with Qiskit SDK primitives guide.](https://docs.quantum.ibm.com/guides/simulate-with-qiskit-sdk-primitives#)\r\n&nbsp;\r\n# To run the Sampler and get results, more code has to be added. This node contains two examples\r\n# StatevectorSampler (V2)\r\n```python\r\n# execute 1 circuit with Sampler V2\r\njob = sampler.run([isa_circuit]) \r\npub_result = job.result()[0]\r\nprint(f\" > Result class: {type(pub_result)}\")\r\n```\r\n V2 primitives accept multiple PUBs as inputs, and each PUB gets its own result. Therefore, you can rundifferent circuits with various parameter/observable combinations, and retrieve the PUB results:\r\n```python\r\nfrom qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager\r\n\r\n# create two circuits\r\ncircuit1 = qc.copy()\r\ncircuit2 = qc.copy()\r\n\r\n# transpile circuits\r\npm = generate_preset_pass_manager(optimization_level=1)\r\nisa_circuit1 = pm.run(circuit1)\r\nisa_circuit2 = pm.run(circuit2)\r\n# execute 2 circuits using Sampler V2\r\njob = sampler.run([(isa_circuit1), (isa_circuit2)])\r\npub_result_1 = job.result()[0]\r\npub_result_2 = job.result()[1]\r\nprint(f\" > Result class: {type(pub_result_1)}\")\r\nprint(f\" > Result class: {type(pub_result_2)}\")\r\n```\r\n # Sampler (V1)\r\nRun Sampler by calling the <font style='background: GhostWhite'>_`qiskit.primitives.Sampler.run`_</font> method, which returns an instance of <font style='background: GhostWhite'>_`qiskit.providers.JobV1`_</font>. You can get the results from the job (as a <font style='background: GhostWhite'>_`qiskit.primitives.SamplerResult`_</font> object) with the <font style='background: GhostWhite'>_`qiskit.providers.JobV1.result`_</font> method. \r\n```python\r\njob = sampler.run(isa_circuit)\r\nresult = job.result()\r\nprint(result)\r\n```\r\n ",
+        "x": 680,
+        "y": 500,
+        "wires": [
+            [
+                "49e3ed707a1eb42c",
+                "88ecb2823bd01fee"
+            ]
+        ]
+    },
+    {
+        "id": "88ecb2823bd01fee",
+        "type": "sampler-run-options",
+        "z": "94423b440c78e613",
+        "name": "sampler-run-options",
+        "info": "# [Exact simulation with Qiskit SDK primitives guide.](https://docs.quantum.ibm.com/guides/simulate-with-qiskit-sdk-primitives#)\r\n&nbsp;\r\n# By default, the reference Sampler  performs an exact statevector calculation based on the <font style='background: GhostWhite'>_`quantum_info.Statevector`_</font> class. However, this can be modified to introduce the effect of the sampling overhead (also known as \"shot noise\").\r\n# With the introduction of the new V2 interface, the sampling overhead in the Sampler  is now more precisely defined. The new interface accepts a <font style='background: GhostWhite'>_`shots`_</font> argument that can be defined at the \"PUB level\".\r\n# StatevectorSampler (V2)\r\nThis example assumes you have defined two circuits.\r\n```python\r\n# Sample two circuits at 128 shots each.\r\nsampler.run([isa_circuit1, isa_circuit2], shots=128)\r\n# Sample two circuits at different amounts of shots. The \"None\"s are necessary\r\n# as placeholders\r\n# for the lack of parameter values in this example.\r\nsampler.run([(isa_circuit1, None, 123), (isa_circuit2, None, 456)])\r\n```\r\n For a full example, see the [Primitives examples](https://docs.quantum.ibm.com/guides/primitives-examples#sampler-examples) page.\r\n# Sampler (V1)\r\nThe V1 interface specifies shots in the following ways:\r\n- Setting keyword arguments in the <font style='background: GhostWhite'>_`Sampler.run`_</font> method.\r\n - Modifying the <font style='background: GhostWhite'>_`Sampler`_</font> options.\r\nobject) with the <font style='background: GhostWhite'>_`JobV1.result`_</font> method. \r\n```python\r\njob = sampler.run(isa_circuit,  shots=2048, seed=123)\r\nresult = job.result()\r\nprint(result)\r\n\r\n>> SamplerResult(quasi_dists=[{0: 0.5205078125, 3: 0.4794921875}], metadata=[{'shots': 2048}])```\r\n ",
+        "x": 820,
+        "y": 560,
+        "wires": [
+            []
+        ],
+        "icon": "font-awesome/fa-info-circle"
+    },
+    {
+        "id": "261f66c9bfc8e0d5",
+        "type": "initialize-sampler",
+        "z": "94423b440c78e613",
+        "name": "initialize-sampler",
+        "info": "# [Exact simulation with Qiskit SDK primitives guide.](https://docs.quantum.ibm.com/guides/simulate-with-qiskit-sdk-primitives#)\r\n&nbsp;\r\n# To use the Sampler  V2 implementation, follow the instructions to instantiate a <font style='background: GhostWhite'>_`qiskit.primitives.StatevectorSamplerr`_</font>. If you want to maintain your pre-existing workflow using an Sampler  V1 implementation, you can also use the <font style='background: GhostWhite'>_`qiskit.primitives.Sampler `_</font> class. \r\n# The nodes used in this flow use the Sampler V2 implementation, but each node will contain example code for both implementations.\r\n# StatevectorSampler (V2)\r\n```python\r\nfrom qiskit.primitives import StatevectorSampler\r\nsampler = StatevectorSampler()\r\n```\r\n # Sampler (V1)\r\n```python\r\nfrom qiskit.primitives import Sampler\r\nsampler = Sampler()\r\n```\r\n ",
+        "x": 610,
+        "y": 440,
+        "wires": [
+            [
+                "c8cbe01a62bdf9ac"
+            ]
+        ],
+        "icon": "font-awesome/fa-info-circle"
+    }
+]

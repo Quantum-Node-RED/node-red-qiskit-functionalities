@@ -1,7 +1,7 @@
-const runPythonScript = require("../../../pythonShell");
+const runPythonScript = require("../../../../pythonShell");
 
 module.exports = function (RED) {
-  function TranspileToISANode(config) {
+  function SamplerRunOptionsNode(config) {
     RED.nodes.createNode(this, config);
 
     var node = this;
@@ -10,5 +10,5 @@ module.exports = function (RED) {
       node.send(msg);
     });
   }
-  RED.nodes.registerType("transpile-to-ISA", TranspileToISANode);
+  RED.nodes.registerType("sampler-run-options", SamplerRunOptionsNode);
 }

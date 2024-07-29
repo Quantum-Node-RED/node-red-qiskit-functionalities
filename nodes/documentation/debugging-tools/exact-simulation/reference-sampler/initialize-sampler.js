@@ -1,7 +1,7 @@
-const runPythonScript = require("../../../pythonShell");
+const runPythonScript = require("../../../../pythonShell");
 
 module.exports = function (RED) {
-  function EstimatorRunOptionsNode(config) {
+  function InitializeSamplerNode(config) {
     RED.nodes.createNode(this, config);
 
     var node = this;
@@ -10,5 +10,5 @@ module.exports = function (RED) {
       node.send(msg);
     });
   }
-  RED.nodes.registerType("estimator-run-options", EstimatorRunOptionsNode);
+  RED.nodes.registerType("initialize-sampler", InitializeSamplerNode);
 }

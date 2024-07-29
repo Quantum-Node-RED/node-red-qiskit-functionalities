@@ -17,11 +17,15 @@
       "CHSH-game-quantum": "nodes/CHSH-game-quantum/CHSH-game-quantum.js",
       "intro-to-debug": "nodes/documentation/debugging-tools/exact-simulation/intro-to-debug.js",
       "qiskit-primatives": "nodes/documentation/debugging-tools/exact-simulation/qiskit-primatives.js",
-      "use-reference-estimator": "nodes/documentation/debugging-tools/exact-simulation/use-reference-estimator.js",
-      "transpile-to-ISA": "nodes/documentation/debugging-tools/exact-simulation/transpile-to-ISA.js",
-      "initialize-estimator": "nodes/documentation/debugging-tools/exact-simulation/initialize-estimator.js",
-      "run-estimator": "nodes/documentation/debugging-tools/exact-simulation/run-estimator.js",
-      "estimator-run-options": "nodes/documentation/debugging-tools/exact-simulation/estimator-run-options.js"
+      "use-reference-estimator": "nodes/documentation/debugging-tools/exact-simulation/reference-estimator/use-reference-estimator.js",
+      "transpile-to-ISA": "nodes/documentation/debugging-tools/exact-simulation/reference-estimator/transpile-to-ISA.js",
+      "initialize-estimator": "nodes/documentation/debugging-tools/exact-simulation/reference-estimator/initialize-estimator.js",
+      "run-estimator": "nodes/documentation/debugging-tools/exact-simulation/reference-estimator/run-estimator.js",
+      "estimator-run-options": "nodes/documentation/debugging-tools/exact-simulation/reference-estimator/estimator-run-options.js",
+      "use-reference-sampler": "nodes/documentation/debugging-tools/exact-simulation/reference-sampler/use-reference-sampler.js",
+      "initialize-sampler": "nodes/documentation/debugging-tools/exact-simulation/reference-sampler/initialize-sampler.js",
+      "run-sampler": "nodes/documentation/debugging-tools/exact-simulation/reference-sampler/run-sampler.js",
+      "sampler-run-options": "nodes/documentation/debugging-tools/exact-simulation/reference-sampler/sampler-run-options.js"
     }
   },
   "dependencies": {

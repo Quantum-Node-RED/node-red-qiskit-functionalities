@@ -1,0 +1,45 @@
+<script type="text/javascript">
+    RED.nodes.registerType('initialize-sampler',{
+        category: 'Debugging tools - sampler',
+        color: '#f5c77e',
+        defaults: {
+            name: {value:"initialize-sampler"},
+            info: {
+                value: "# [Exact simulation with Qiskit SDK primitives guide.](https://docs.quantum.ibm.com/guides/simulate-with-qiskit-sdk-primitives#)\r\n" +
+                "&nbsp;\r\n" +
+                "# To use the Sampler  V2 implementation, follow the instructions to instantiate a " +
+                "<font style='background: GhostWhite'>_`qiskit.primitives.StatevectorSamplerr`_</font>. If you want to maintain your " +
+                "pre-existing workflow using an Sampler  V1 implementation, you can also use the " +
+                "<font style='background: GhostWhite'>_`qiskit.primitives.Sampler `_</font> class. \r\n" +
+                "# The nodes used in this flow use the Sampler V2 implementation, but each node will contain example code for both implementations.\r\n" +
+                "# StatevectorSampler (V2)\r\n" +
+                "```python\r\n" +
+                "from qiskit.primitives import StatevectorSampler\r\n" + 
+                "sampler = StatevectorSampler()\r\n" +
+                "```\r\n " +
+                "# Sampler (V1)\r\n" +
+                "```python\r\n" +
+                "from qiskit.primitives import Sampler\r\n" + 
+                "sampler = Sampler()\r\n" +
+                "```\r\n "
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "file.svg",
+        label: function() {
+            return this.name||"initialize-sampler";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="initialize-sampler">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="initialize-sampler">
+    <p>A simple node for initializing a Sampler primative</p>
+</script>

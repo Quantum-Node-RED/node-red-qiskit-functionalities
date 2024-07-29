@@ -1,7 +1,7 @@
 <script type="text/javascript">
     RED.nodes.registerType('initialize-estimator',{
         category: 'Debugging tools',
-        color: '#ffa500',
+        color: '#f5c77e',
         defaults: {
             name: {value:"Initialize Estimator"},
             info: {
@@ -11,7 +11,7 @@
                 "<font style='background: GhostWhite'>_`qiskit.primitives.StatevectorEstimator`_</font>. If you want to maintain your " +
                 "pre-existing workflow using an Estimator V1 implementation, you can also use the " +
                 "<font style='background: GhostWhite'>_`qiskit.primitives.Estimator`_</font> class. \r\n" +
-                "# The nodes used in this flow use the Estimator V2 implementation, but each node will contain example code for both" +
+                "# The nodes used in this flow use the Estimator V2 implementation, but each node will contain example code for both implementations.\r\n" +
                 "# StatevectorEstimator (V2)\r\n" +
                 "Instantiate a <font style='background: GhostWhite'>_`qiskit.primitives.StatevectorEstimator`_</font>\r\n" +
                 "```python\r\n" +
@@ -43,5 +43,5 @@
 </script>
 
 <script type="text/html" data-help-name="initialize-estimator">
-    <p>A simple node for transpiling circuits and observables to ISA circuits and observables</p>
+    <p>A simple node for initializing a Estimator primitive</p>
 </script>

@@ -1,7 +1,7 @@
-const runPythonScript = require("../../../pythonShell");
+const runPythonScript = require("../../../../pythonShell");
 
 module.exports = function(RED) {
-    function UseReferenceEstimatorNode(config) {
+    function RunEstimatorNode(config) {
         RED.nodes.createNode(this,config);
         var node = this;
         node.on('input', async function(msg) {
@@ -9,7 +9,7 @@ module.exports = function(RED) {
                 const option = {
 
                 };
-                runPythonScript(__dirname, "use-reference-estimator.py", option, (err, results) => {
+                runPythonScript(__dirname, "run-estimator.py", option, (err, results) => {
                   if (err) throw err;
                   return resolve(results);
                 });
@@ -21,5 +21,5 @@ module.exports = function(RED) {
               node.send(newMsg);
         });
     }
-    RED.nodes.registerType("use-reference-estimator", UseReferenceEstimatorNode);
+    RED.nodes.registerType("run-estimator", RunEstimatorNode);
 }
