@@ -1,0 +1,27 @@
+<script type="text/javascript">
+    RED.nodes.registerType('intro-to-circuit-library', {
+      category: 'Circuit Library',
+      color: '#aaaaaa',
+      defaults: {
+        name: { value: "Introduction to circuit library" },
+        info: {value: "# The Qiskit SDK includes a library of popular circuits to use as building blocks in your own programs. Using pre-defined circuits saves time researching, writing code, and debugging. The library includes popular circuits in quantum computing, circuits that are difficult to simulate classically, and circuits useful for quantum hardware benchmarking.\r\n\r\n# This flow lists the different circuit categories the library provides. For a full list of circuits, see the [circuit library API documentation](https://docs.quantum.ibm.com/api/qiskit/circuit_library)."}
+      },
+      inputs: 0,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "Introduction to circuit library";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="intro-to-circuit-library">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Introduction to circuit library">
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="intro-to-circuit-library">
+    <p>Introduction to circuit library</p>
+  </script>

@@ -32,7 +32,7 @@
       "visualize-custom-backend": "nodes/documentation/transpiler/advanced-transpilation-resources/Transpile_against_custom_backend/Visualize_custom_backend.js",
       "create-circuit-for-custom-backend": "nodes/documentation/transpiler/advanced-transpilation-resources/Transpile_against_custom_backend/Create_circuit_for_custom_backend.js",
       "run-circuit-on-custom-backend": "nodes/documentation/transpiler/advanced-transpilation-resources/Transpile_against_custom_backend/Run_circuit_on_custom_backend.js",
-      "create-unique-custom-backend": "nodes/documentation/transpiler/advanced-transpilation-resources/Transpile_against_custom_backend/Create_unique_backend.js"
+      "create-unique-custom-backend": "nodes/documentation/transpiler/advanced-transpilation-resources/Transpile_against_custom_backend/Create_unique_backend.js",
       "Standard-Gates": "nodes/documentation/circuits-and-operators/Circuit_Library/Standard_gates/Standard_gates.js",
       "N-local-circuits": "nodes/documentation/circuits-and-operators/Circuit_Library/N-local-circuits/N-local-circuits.js",
       "Parameters-N-local-circuits": "nodes/documentation/circuits-and-operators/Circuit_Library/N-local-circuits/Parameters-N-local-circuits.js",
@@ -40,6 +40,7 @@
       "Arithmetic-circuits": "nodes/documentation/circuits-and-operators/Circuit_Library/Arithmetic-circuits/Arithmetic-circuits.js",
       "Benchmarking-and-complexity-theory-circuit": "nodes/documentation/circuits-and-operators/Circuit_Library/Benchmarking-and-complexity-theory-circuit/Benchmarking-and-complexity-theory-circuit.js",
       "Time-evolution-circuits": "nodes/documentation/circuits-and-operators/Circuit_Library/Time-evolution-circuits/Time-evolution-circuits.js",
+      "intro-to-circuit-library": "nodes/documentation/circuits-and-operators/Circuit_Library/Intro-to-circuit-library/Intro-to-circuit-library.js",
       "Quantum-circuits": "nodes/documentation/circuits-and-operators/Construct_circuits/quantum-circuits/quantum-circuits.js",
       "Add-x-gate": "nodes/documentation/circuits-and-operators/Construct_circuits/quantum-circuits/add-x-gate.js",
       "Definition": "nodes/documentation/circuits-and-operators/Construct_circuits/quantum-circuits/definition.js",

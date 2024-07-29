@@ -1,15 +1,10 @@
 <script type="text/javascript">
     RED.nodes.registerType('Parameters-N-local-circuits', {
-      category: 'function',
+      category: 'Circuit Library',
       color: '#aaaaaa',
       defaults: {
         name: { value: "Parameters-N-local-circuits" },
-        info: {
-          value: `You can also use this to assign these parameters to real values using a 
-          dictionary of the form { Parameter: number }. To demonstrate, the following code
-          cell assigns each parameter in the circuit to 0.`,
-          required: false
-        }
+        info: { value: "# You can also use a dictionary of the form <font style=\"background: lightgrey\">{ Parameter: number }</font> to assign the parameters obtained in the previous node to real values. The following code snippet demonstrates how to assign each parameter in the circuit to 0.\n```python\nbound_circuit = two_local.assign_parameters({ p: 0 for p in two_local.parameters})\nbound_circuit.decompose().draw('mpl')\n```\n# You can check the output image in \"Parameters N-Local Circuit Image Output\" node.\n&nbsp;\n# For more information, see [N-local gates](https://docs.quantum.ibm.com/api/qiskit/circuit_library#n-local-circuits) in the circuit library API documentation or take our [Variational algorithm design course](https://learning.quantum.ibm.com/course/variational-algorithm-design)."}
       },
       inputs: 1,
       outputs: 1,
