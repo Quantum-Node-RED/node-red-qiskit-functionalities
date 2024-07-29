@@ -3,12 +3,21 @@ import json
 import pylab
 import base64
 import io
+import numpy as np
 
 from qiskit.quantum_info import SparsePauliOp
 from qiskit.circuit.library import TwoLocal
 from qiskit.primitives import Estimator
 from qiskit_algorithms import VQE
 from qiskit_algorithms.optimizers import SLSQP, SPSA, COBYLA, L_BFGS_B
+
+def convert_to_serializable(data):
+  if isinstance(data, (np.ndarray, list)):
+    return data.tolist() if isinstance(data, np.ndarray) else data
+  elif isinstance(data, dict):
+    return {str(k): v for k, v in data.items()}
+  else:
+    return str(data) if not isinstance(data, (int, float, type(None))) else data
 
 assert len(sys.argv) > 1, "No arguments found."
 input = sys.argv[1]
@@ -38,7 +47,7 @@ operator = SparsePauliOp(hamiltonian_data, coeffs=hamiltonian_coeffs)
 
 estimator = Estimator()
 
-ansatz = TwoLocal(num_qubits=num_qubits, rotation_blocks=rotation_blocks, entanglement_blocks=entanglement_blocks)
+ansatz = TwoLocal(num_qubits=num_qubits, rotation_blocks=rotation_blocks, entanglement_blocks=entanglement_blocks, flatten=True)
 
 optimizer = SLSQP(maxiter=chosen_maxiter)
 if chosen_optimizer == "SPSA":
@@ -52,10 +61,12 @@ elif chosen_optimizer == "L_BFGS_B":
 # storing intermediate energy value while optimizing
 counts = []
 values = []
+parameter = []
 
 def store_intermediate_result(eval_count, parameters, mean, std):
-    counts.append(eval_count)
-    values.append(mean)
+  counts.append(eval_count)
+  values.append(mean)
+  parameter.append(parameters)
 
 vqe = VQE(estimator, ansatz, optimizer, callback=store_intermediate_result)
 
@@ -81,12 +92,31 @@ vqe_result.optimal_circuit.decompose().draw('mpl').savefig(optimal_circuit_buffe
 optimal_circuit_buffer.seek(0)
 optimal_circuit_str = base64.b64encode(optimal_circuit_buffer.read()).decode('utf-8')
 optimal_circuit_buffer.close()
+ 
+# bind the parameters after circuit to create a bound circuit
+bound_circuit_buffer = io.BytesIO()
+bc = ansatz.assign_parameters(parameter[1])
+bc.draw('mpl').savefig(bound_circuit_buffer, format='png')
+bound_circuit_buffer.seek(0)
+intermediate_circuit_str = base64.b64encode(bound_circuit_buffer.read()).decode('utf-8')
+bound_circuit_buffer.close()
+
+# bind the parameters after circuit to create a bound circuit
+bound_circuit_buffer = io.BytesIO()
+bc = ansatz.assign_parameters(vqe_result.optimal_parameters)
+bc.draw('mpl').savefig(bound_circuit_buffer, format='png')
+bound_circuit_buffer.seek(0)
+final_bound_circuit_str = base64.b64encode(bound_circuit_buffer.read()).decode('utf-8')
+bound_circuit_buffer.close()
 
 
 result = {
   "enegy_image": enegry_str, 
   "optimal_circuit_image": optimal_circuit_str,
   "optimal_value": vqe_result.optimal_value,
+  "parameter": convert_to_serializable(parameter),
+  "intermediate_circuit": intermediate_circuit_str,
+  "optimal_circuit": final_bound_circuit_str,
   "paulis": pauli_list
 }
 
