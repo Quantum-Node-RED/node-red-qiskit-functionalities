@@ -1,19 +1,16 @@
 <script type="text/javascript">
     RED.nodes.registerType('to-gate', {
-      category: 'function',
+      category: 'Construct circuits',
       color: '#aaaaaa',
       defaults: {
-        name: { value: "to-gate" },
-        info: {
-          value: `If your circuit is unitary, you can convert it to a Gate by using the to_gate method. Gate objects are specific types of instructions that have some extra features, such as the control method, which adds a quantum control.`,
-          required: false
-        }
+        name: { value: "Convert circuit to a Gate" },
+        info: {value: "# If your circuit is unitary, you can convert it to a [<font style=\"background: lightgrey\">Gate</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.Gate) by using the [<font style=\"background: lightgrey\">to_gate</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#to_gate) method. [<font style=\"background: lightgrey\">Gate</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.Gate) objects are specific types of instructions that have some extra features, such as the [<font style=\"background: lightgrey\">control</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.Gate#control) method, which adds a quantum control.\r\n&nbsp;\r\n# The code snippet below converts the quantum circuit qc_b you created in the previous node into a controlled gate and then appends it to another quantum circuit qc_a, applying it to qubits 0, 1, and 3.\r\n```python\r\ngate = qc_b.to_gate().control()\r\nqc_a.append(gate, [0, 1, 3])\r\nqc_a.draw(\"mpl\")\r\n```\r\n# You can check the image output in the \"Gate Image\" node."}
       },
       inputs: 1,
       outputs: 1,
       icon: "file.svg",
       label: function () {
-        return this.name || "to-gate";
+        return this.name || "Convert circuit to a Gate";
       }
     });
   </script>
@@ -21,10 +18,10 @@
   <script type="text/html" data-template-name="to-gate">
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
-        <input type="text" id="node-input-name" placeholder="Name">
+        <input type="text" id="node-input-name" placeholder="Convert circuit to a Gate">
     </div>
   </script>
   
   <script type="text/html" data-help-name="to-gate">
-    <p>Apply to-gate operation .</p>
+    <p>Apply to-gate operation to convert unitary circuit to a Gate.</p>
   </script>

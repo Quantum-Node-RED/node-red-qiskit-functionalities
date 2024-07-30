@@ -1,0 +1,27 @@
+<script type="text/javascript">
+    RED.nodes.registerType('variation-of-parameterised-circuits', {
+      category: 'Construct circuits',
+      color: '#aaaaaa',
+      defaults: {
+        name: { value: "Create variation of Parameterised Circuit" },
+        info: {value: "# This code snippet creates a list of variations for the parameterized circuits created in previous node, each with a parameterized angle that varies from 0 to 99. It then draws the circuit corresponding to the first angle (0).\r\n```python\r\ncircuits = []\r\nfor value in range(100):\r\n    circuits.append(\r\n        qc.assign_parameters({ angle: value })\r\n    )\r\n \r\ncircuits[0].draw(\"mpl\")\r\n```\r\n# You can check the image of this variation in the \"Variation of Parameterized Circuit\" node. "}
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "Create variation of Parameterised Circuit";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="variation-of-parameterised-circuits">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Create variation of Parameterised Circuit">
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="variation-of-parameterised-circuits">
+    <p>A variation of parameterised circuit.</p>
+  </script>

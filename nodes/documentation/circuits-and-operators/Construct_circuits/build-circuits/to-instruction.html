@@ -1,19 +1,16 @@
 <script type="text/javascript">
     RED.nodes.registerType('to-instruction', {
-      category: 'function',
+      category: 'Construct circuits',
       color: '#aaaaaa',
       defaults: {
-        name: { value: "to-instruction" },
-        info: {
-          value: `You might also want to-instruction into instructions to to-instruction organized. You can convert a circuit to an instruction by using the to_instruction method, then append this to another circuit as you would any other instruction. The circuit drawn in the following cell is functionally equivalent to the circuit drawn in the previous cell.`,
-          required: false
-        }
+        name: { value: "Compile circuits into instructions" },
+        info: { value: "# You might also want to compile circuits into instructions to keep your circuits organized. You can convert a circuit to an instruction by using the [<font style=\"background: lightgrey\">to_instruction</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#to_instruction) method, then append this to another circuit as you would any other instruction. The circuit drawn by the following code snippet is functionally equivalent to the circuit drawn in the previous node.\r\n```python\r\ninst = qc_b.to_instruction()\r\nqc_a.append(inst, [1, 3])\r\nqc_a.draw(\"mpl\")\r\n```\r\n# You can check the image of compiled circuit in the \"Compiled circuits Image\" node."}
       },
       inputs: 1,
       outputs: 1,
       icon: "file.svg",
       label: function () {
-        return this.name || "to-instruction";
+        return this.name || "Compile circuits into instructions";
       }
     });
   </script>
@@ -21,10 +18,10 @@
   <script type="text/html" data-template-name="to-instruction">
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
-        <input type="text" id="node-input-name" placeholder="Name">
+        <input type="text" id="node-input-name" placeholder="Compile circuits into instructions">
     </div>
   </script>
   
   <script type="text/html" data-help-name="to-instruction">
-    <p>Apply to-instruction operation.</p>
+    <p>Apply to-instruction operation to compile circuits into instructions.</p>
   </script>

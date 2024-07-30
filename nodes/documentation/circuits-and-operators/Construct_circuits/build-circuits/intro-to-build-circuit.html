@@ -1,0 +1,27 @@
+<script type="text/javascript">
+    RED.nodes.registerType('intro-to-build-circuit', {
+      category: 'Construct circuits',
+      color: '#aaaaaa',
+      defaults: {
+        name: { value: "What does 'build circuit' means?" },
+        info: { value: "# Building a quantum circuit involves designing and arranging a sequence of quantum instructions to manipulate quantum bits (qubits). Each instruction represents a specific quantum operation, such as a gate that changes the state of a qubit. By combining these instructions into a circuit, you create a blueprint for how qubits interact and evolve over time, ultimately allowing you to perform complex quantum computations and experiments.\r\n&nbsp;\r\n# Instructions and circuits are similar in that they both describe operations on bits and qubits, but they have different purposes:\r\n- # Instructions are treated as fixed, and their methods will usually return new instructions (without mutating the original object).\r\n- # Circuits are designed to be built over many lines of code, and [QuantumCircuit](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit) methods often mutate the existing object.\r\n&nbsp;\r\n# The rest of this flow illustrates how to manipulate quantum circuits."}
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "What does 'build circuit' means?";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="intro-to-build-circuit">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="What does 'build circuit' means?">
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="intro-to-build-circuit">
+    <p>Introduction to the meaning of 'building circuit'.</p>
+  </script>

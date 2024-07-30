@@ -1,19 +1,16 @@
 <script type="text/javascript">
     RED.nodes.registerType('add-x-gate', {
-      category: 'function',
+      category: 'Construct circuits',
       color: '#aaaaaa',
       defaults: {
-        name: { value: "add-x-gate" },
-        info: {
-          value: `Adding an instruction to the circuit appends the instruction to the circuit's data attribute. The following cell output shows data is a list of CircuitInstruction objects, each of which has an operation attribute, and a qubits attribute.`,
-          required: false
-        }
+        name: { value: "Add instruction to circuit" },
+        info: {value:"# Adding an instruction to the circuit appends the instruction to the circuit's [<font style=\"background: lightgrey\">data</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#data) attribute. The following code adds X-gate to qubit 0, and display its <font style=\"background: lightgrey\">data</font> attribute.\r\n```python\r\nqc.x(0)  # Add X-gate to qubit 0\r\nqc.data\r\n```\r\n# <font style=\"background: lightgrey\">data</font> is a list of [<font style=\"background: lightgrey\">CircuitInstruction</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.CircuitInstruction) objects, each of which has an <font style=\"background: lightgrey\">operation</font> attribute, and a <font style=\"background: lightgrey\">qubits</font> attribute. The output of those <font style=\"background: lightgrey\">data</font> attribute is sent to \"Data Output\" node and you can check them in the debug palette.\r\n&nbsp;\r\n# The easiest way to view circuit's information is through the <font style=\"background: lightgrey\">draw</font> method, which returns a visualization of a circuit. You can use the code snippet below to visualize the circuit.\r\n```python\r\nqc.draw(\"mpl\")\r\n```\r\n# You can check the image of the created circuit in the \"X-gate Image\" node. See [Visualize circuits](https://docs.quantum.ibm.com/guides/visualize-circuits) for different ways of displaying quantum circuits." }
       },
       inputs: 1,
       outputs: 1,
       icon: "file.svg",
       label: function () {
-        return this.name || "add-x-gate";
+        return this.name || "Add instruction to circuit";
       }
     });
   </script>
@@ -21,7 +18,7 @@
   <script type="text/html" data-template-name="add-x-gate">
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
-        <input type="text" id="node-input-name" placeholder="Name">
+        <input type="text" id="node-input-name" placeholder="Add instruction to circuit">
     </div>
   </script>
   

@@ -1,19 +1,16 @@
 <script type="text/javascript">
     RED.nodes.registerType('definition', {
-      category: 'function',
+      category: 'Construct circuits',
       color: '#aaaaaa',
       defaults: {
-        name: { value: "definition" },
-        info: {
-          value: `Circuit instruction objects can contain "definition" circuits that describe the instruction in terms of more fundamental instructions. For example, the X-gate is defined as a specific case of the U3-gate, a more general single-qubit gate.`,
-          required: false
-        }
+        name: { value: "Apply definition to circuit" },
+        info: { value: "# Circuit instruction objects can contain \"definition\" circuits that describe the instruction in terms of more fundamental instructions. For example, the [X-gate](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.XGate), which you added to your circuit in the previous node, is defined as a specific case of the [U3-gate](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.U3Gate), a more general single-qubit gate.\r\n&nbsp;\r\n# The code snippet below draw definition circuit of X-gate instruction in the circuit you created before.\r\n```python\r\n# Draw definition circuit of 0th instruction in `qc`\r\nqc.data[0].operation.definition.draw(\"mpl\")\r\n```\r\n# You can check the image output in the \"Definition Image\" node. You should observe that the X-gate previously on 0th qubit has now been replaced with a U3-gate."}
       },
       inputs: 1,
       outputs: 1,
       icon: "file.svg",
       label: function () {
-        return this.name || "definition";
+        return this.name || "Apply definition to circuit";
       }
     });
   </script>
@@ -21,7 +18,7 @@
   <script type="text/html" data-template-name="definition">
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
-        <input type="text" id="node-input-name" placeholder="Name">
+        <input type="text" id="node-input-name" placeholder="Apply definition to circuit">
     </div>
   </script>
   

@@ -1,19 +1,16 @@
 <script type="text/javascript">
     RED.nodes.registerType('quantum-circuits', {
-      category: 'function',
+      category: 'Construct circuits',
       color: '#aaaaaa',
       defaults: {
-        name: { value: "quantum-circuits" },
-        info: {
-          value: `A simple quantum circuit is a collection of qubits and a list of instructions that act on those qubits. To demonstrate, the following cell creates a new circuit with two new qubits, then displays the circuit's qubits attribute.`,
-          required: false
-        }
+        name: { value: "Create quantum circuits" },
+        info: {value:"# The following code snippet creates a new circuit with two new qubits, then displays the circuit's [<font style=\"background: lightgrey\">qubits</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#qubits) attribute.\r\n```python\r\nfrom qiskit import QuantumCircuit\r\n \r\nqc = QuantumCircuit(2)\r\nqc.qubits\r\n```\r\n# The output qubits is sent to \"Qubits Output\" node and you can check them in the debug palette." }
       },
       inputs: 1,
       outputs: 1,
       icon: "file.svg",
       label: function () {
-        return this.name || "quantum-circuits";
+        return this.name || "Create quantum circuits";
       }
     });
   </script>
@@ -21,10 +18,10 @@
   <script type="text/html" data-template-name="quantum-circuits">
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
-        <input type="text" id="node-input-name" placeholder="Name">
+        <input type="text" id="node-input-name" placeholder="Create quantum circuits">
     </div>
   </script>
   
   <script type="text/html" data-help-name="quantum-circuits">
-    <p>A quantum circuit.</p>
+    <p>A node that create a simple quantum circuit.</p>
   </script>

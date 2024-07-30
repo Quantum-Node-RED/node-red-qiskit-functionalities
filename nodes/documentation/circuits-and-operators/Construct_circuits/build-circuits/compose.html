@@ -1,19 +1,16 @@
 <script type="text/javascript">
     RED.nodes.registerType('compose', {
-      category: 'function',
+      category: 'Construct circuits',
       color: '#aaaaaa',
       defaults: {
-        name: { value: "compose" },
-        info: {
-          value: `The compose method returns a new circuit and does not mutate either circuit it acts on. To mutate the circuit on which you're calling the compose method, use the argument inplace=True.`,
-          required: false
-        }
+        name: { value: "Combine two circuits" },
+        info: {value: "# To combine two circuits, use the [<font style=\"background: lightgrey\">compose</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#compose) method. This accepts another [<font style=\"background: lightgrey\">QuantumCircuit</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit) and an optional list of qubit mappings.\r\n&nbsp;\r\n# This code creates two quantum circuits: qc_a with an X-gate on qubit 0, and qc_b with a Y-gate on qubit 0 and a Z-gate on qubit 1. It then composes qc_b into qc_a, applying the gates of qc_b to qubits 1 and 3 of qc_a respectively.\r\n```python\r\nqc_a = QuantumCircuit(4)\r\nqc_a.x(0)\r\n \r\nqc_b = QuantumCircuit(2, name=\"qc_b\")\r\nqc_b.y(0)\r\nqc_b.z(1)\r\n \r\n# compose qubits (0, 1) of qc_a to qubits (1, 3) of qc_b respectively\r\ncombined = qc_a.compose(qc_b, qubits=[1, 3])\r\ncombined.draw(\"mpl\")\r\n```\r\n# You can check the image of composed circuits in the \"Composed circuits Image\" node.\r\n&nbsp;\r\n# **Note:** The [<font style=\"background: lightgrey\">compose</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#compose) method returns a new circuit and does not mutate either circuit it acts on. To mutate the circuit on which you're calling the [<font style=\"background: lightgrey\">compose</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#compose) method, use the argument <font style=\"background: lightgrey\">inplace=True</font>."}
       },
       inputs: 1,
       outputs: 1,
       icon: "file.svg",
       label: function () {
-        return this.name || "compose";
+        return this.name || "Combine two circuits";
       }
     });
   </script>
@@ -21,10 +18,10 @@
   <script type="text/html" data-template-name="compose">
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
-        <input type="text" id="node-input-name" placeholder="Name">
+        <input type="text" id="node-input-name" placeholder="Combine two circuits">
     </div>
   </script>
   
   <script type="text/html" data-help-name="compose">
-    <p>Apply compose operation.</p>
+    <p>Apply compose operation to combine circuits.</p>
   </script>
