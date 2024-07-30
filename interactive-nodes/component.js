@@ -69,7 +69,7 @@ function addComponent(msg, newNode) {
     //Add to the list of structure
     msg.payload.structure.push(newNode);
     // Update the current node to the newly added node
-    msg.parentofCurrentNode = msg.payload.currentNode;
+    msg.payload.parentofCurrentNode = msg.payload.currentNode;
     // Update the parent of the current node
     msg.payload.currentNode = newNode;
     // Increment the number of components
