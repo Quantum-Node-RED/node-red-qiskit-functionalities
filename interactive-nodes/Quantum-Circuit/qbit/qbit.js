@@ -6,7 +6,7 @@ module.exports = function (RED) {
         node.on('input', function (msg) {
             msg.payload = msg.payload || {};
             const qbit_component = new component.Component("qbit", {});
-            component.addComponentasChild(msg, qbit_component);
+            component.addComponent(msg, qbit_component);
             node.send(msg);
         });
     }
