@@ -1,0 +1,66 @@
+
+<script type="text/javascript">
+  RED.nodes.registerType('Start',{
+      category: 'Flow',
+      color: '#a6bbcf',
+      defaults: {
+          name: {value:""},
+          topic: {value:""},
+          repeat: {value:"", validate:function(v) { return v === "" || (parseFloat(v) > 0); }}
+      },
+      inputs:0,
+      outputs:1,
+      icon: "inject.svg",
+      label: function() {
+          return this.name||"Start";
+      },
+      labelStyle: function() {
+          return this.name?"node_label_italic":"";
+      },
+      button: {
+          onclick: function() {
+              var node = this;
+              $.ajax({
+                  url: "inject/"+this.id,
+                  type:"POST",
+                  success: function(resp) {
+                      RED.notify("Successfully injected","success");
+                  },
+                  error: function(jqXHR,textStatus,errorThrown) {
+                      if (jqXHR.status === 404) {
+                          RED.notify("Node not deployed","error");
+                      } else if (jqXHR.status === 500) {
+                          RED.notify("Injection failed","error");
+                      } else if (jqXHR.status === 0) {
+                          RED.notify("Injection failed - no response","error");
+                      } else {
+                          RED.notify("Injection failed - unexpected error","error");
+                      }
+                  }
+              });
+          }
+      }
+  });
+</script>
+
+<script type="text/html" data-template-name="Start">
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+  <div class="form-row">
+      <label for="node-input-topic"><i class="fa fa-tasks"></i> Topic</label>
+      <input type="text" id="node-input-topic" placeholder="Topic">
+  </div>
+  <div class="form-row">
+      <label for="node-input-repeat"><i class="fa fa-repeat"></i> Repeat</label>
+      <input type="text" id="node-input-repeat" placeholder="Repeat interval in seconds">
+  </div>
+</script>
+
+<script type="text/html" data-help-name="Start">
+  <p>Injects a message into a flow with an empty JSON object as payload.</p>
+  <p>The message payload will always be an empty JSON object: <code>{}</code></p>
+  <p>The Repeat option allows the injection to be repeated at a regular interval.</p>
+  <p>The button on the left side of the node allows manual injection.</p>
+</script>

@@ -20,7 +20,22 @@
       "optimizer": "framework/nodes/optimizer/optimizer.js",
       "ansatz-construction": "framework/nodes/ansatz-construction/ansatz-construction.js",
       "script-generation": "framework/nodes/script-generation/script-generation.js",
-      "QAOA": "framework/algorithms/QAOA/QAOA.js"
+      "QAOA": "framework/algorithms/QAOA/QAOA.js",
+      "Start": "interactive-nodes/Flow/Start/Start.js",
+      "Quantum-Circuit-Begin": "interactive-nodes/Quantum-Circuit/Quantum-Circuit-Begin/Quantum-Circuit-Begin.js",
+      "Quantum-Circuit-End": "interactive-nodes/Quantum-Circuit/Quantum-Circuit-End/Quantum-Circuit-End.js",
+      "qbit": "interactive-nodes/Quantum-Circuit/qbit/qbit.js",
+      "CX-gate": "interactive-nodes/Gates/CX-gate/CX-gate.js",
+      "CZ-gate": "interactive-nodes/Gates/CZ-gate/CZ-gate.js",
+      "H-gate": "interactive-nodes/Gates/H-gate/H-gate.js",
+      "RX-gate": "interactive-nodes/Gates/RX-gate/RX-gate.js",
+      "RZ-gate": "interactive-nodes/Gates/RZ-gate/RZ-gate.js",
+      "SX-gate": "interactive-nodes/Gates/SX-gate/SX-gate.js",
+      "X-gate": "interactive-nodes/Gates/X-gate/X-gate.js",
+      "matrix": "interactive-nodes/Maths/matrix/matrix.js",
+      "transfomer-matrix-pauli": "interactive-nodes/Functions/Transformer-matrix-pauli/Transformer-matrix-pauli.js",
+      "Apply-transformer": "interactive-nodes/Functions/Apply-transformer/Apply-transformer.js"
+
     }
   },
   "dependencies": {

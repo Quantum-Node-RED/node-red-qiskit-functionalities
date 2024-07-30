@@ -1,0 +1,26 @@
+<script type="text/javascript">
+    RED.nodes.registerType('transformer_matrix_pauli', {
+      category: 'function',
+      color: '#aaaaaa',
+      defaults: {
+        name: { value: "" }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "transformer_matrix_pauli";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="transformer_matrix_pauli">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="transformer_matrix_pauli">
+    <p></p>
+  </script>
