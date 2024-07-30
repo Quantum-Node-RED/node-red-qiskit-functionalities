@@ -19,7 +19,7 @@ module.exports = function (RED) {
 
       // Add the qbit component as a child
       const qbit_component = new component.Component("qbit", {});
-      component.addComponentasChild(msg, qbit_component);
+      component.addComponent(msg, qbit_component);
 
       // Send the message onward
       node.send(msg);
