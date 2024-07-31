@@ -119,7 +119,7 @@ function addGateComponentasChild(msg, newNode) {
     msg.payload.structure[0].addChild(newNode);
     msg.payload.currentNode = newNode;
     msg.payload.parentofCurrentNode = msg.payload.structure[0];
-    msg.payload.no_of_components = msg.payload.no_of_components++;
+    msg.payload.no_of_components = msg.payload.no_of_components+1;
   }
 }
 

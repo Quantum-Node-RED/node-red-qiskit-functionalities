@@ -1,3 +1,5 @@
+#This is for import optimiztion, that is importing only the required modules, rather than using a wildcard import
+# "Component":["Module","Alias"]
 class Code_Component_Dependency:
     table={
         "Quantum_Circuit":["qiskit.QuantumCircuit"],
