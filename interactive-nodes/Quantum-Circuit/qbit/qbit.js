@@ -11,16 +11,16 @@ module.exports = function (RED) {
       // Access the flow context to get the current value of expectedQubits
       let expectedQubits = node.context().flow.get("expectedQubits") || 0;
 
+      // Add the qbit component as a child
+      const qbit_component = new component.Component("qbit", {});
+      qbit_component.parameters["id"] = expectedQubits;
+      component.addComponent(msg, qbit_component);
+
       // Increment the number of expected qubits
       expectedQubits += 1;
 
       // Update the flow context with the new value
       node.context().flow.set("expectedQubits", expectedQubits);
-
-      // Add the qbit component as a child
-      const qbit_component = new component.Component("qbit", {});
-      component.addComponent(msg, qbit_component);
-
       // Send the message onward
       node.send(msg);
     });
