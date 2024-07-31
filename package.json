@@ -34,7 +34,8 @@
       "X-gate": "interactive-nodes/Gates/X-gate/X-gate.js",
       "matrix": "interactive-nodes/Maths/matrix/matrix.js",
       "transfomer-matrix-pauli": "interactive-nodes/Functions/Transformer-matrix-pauli/Transformer-matrix-pauli.js",
-      "Apply-transformer": "interactive-nodes/Functions/Apply-transformer/Apply-transformer.js"
+      "Apply-transformer": "interactive-nodes/Functions/Apply-transformer/Apply-transformer.js",
+      "Qiskit-Runtime-Service": "interactive-nodes/Functions/Qiskit-Runtime-Service/Qiskit-Runtime-Service.js"
 
     }
   },

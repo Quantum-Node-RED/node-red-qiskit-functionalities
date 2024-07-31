@@ -11,6 +11,8 @@ class Code_Component:
     classical_register= "{var_name} = ClassicalRegister({num_qubits})"
     quantum_register= "{var_name} = QuantumRegister({num_qubits})"
     reset= "{circuit_name}.reset({qbit})"
+    #Functions
+    qiskit_runtime_service = "QiskitRuntimeService(channel={channel}, token={token})"
     #Maths
     matrix = "{var_name} = np.array({matrix})"
     #Gates
