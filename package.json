@@ -25,6 +25,7 @@
       "use-reference-sampler": "nodes/documentation/debugging-tools/exact-simulation/reference-sampler/use-reference-sampler.js",
       "initialize-sampler": "nodes/documentation/debugging-tools/exact-simulation/reference-sampler/initialize-sampler.js",
       "run-sampler": "nodes/documentation/debugging-tools/exact-simulation/reference-sampler/run-sampler.js",
+      "sampler-distribution": "nodes/documentation/debugging-tools/exact-simulation/reference-sampler/sampler-distribution.js",
       "sampler-run-options": "nodes/documentation/debugging-tools/exact-simulation/reference-sampler/sampler-run-options.js"
     }
   },
