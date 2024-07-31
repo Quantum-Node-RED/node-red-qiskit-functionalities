@@ -4,10 +4,10 @@ module.exports = function (RED) {
     RED.nodes.createNode(this, config);
     var node = this;
     node.on('input', function (msg) {
-     msg.payload = msg.payload || {};
-     const matrix_component = new component.Component("matrix",{});
-     component.addComponent(msg, matrix_component);
-     node.send(msg);
+      msg.payload = msg.payload || {};
+      const matrix_component = new component.Component("matrix",{});
+      component.addComponent(msg, matrix_component);
+      node.send(msg);
     });
   }
   RED.nodes.registerType("matrix", matrixNode);

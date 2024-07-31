@@ -5,7 +5,7 @@
 #Circuit_components will be their own class
 class Code_Component:
     #Circuits
-    Quantum_Circuit_Begin = "qc = QuantumCircuit({num_qubits})"
+    Quantum_Circuit_Begin = "{circuit_name} = QuantumCircuit({num_qubits})"
     measure = "{circuit_name}.meausre({qbit})"
     swap = "{circuit_name}.swap({qbit1}, {qbit2})"
     classical_register= "{var_name} = ClassicalRegister({num_qubits})"

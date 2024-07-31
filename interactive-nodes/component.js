@@ -15,7 +15,7 @@ class Component {
     return {
       name: this.name,
       parameters: this.parameters,
-      children: this.children.map((child) => child.toJSON()),
+      children: this.children.map((child) => child.toJSON())
     };
   }
 }
@@ -119,7 +119,7 @@ function addGateComponentasChild(msg, newNode) {
     msg.payload.structure[0].addChild(newNode);
     msg.payload.currentNode = newNode;
     msg.payload.parentofCurrentNode = msg.payload.structure[0];
-    msg.payload.no_of_components = msg.payload.no_of_components+1;
+    msg.payload.no_of_components = msg.payload.no_of_components + 1;
   }
 }
 
@@ -127,5 +127,5 @@ module.exports = {
   Component,
   addComponentasChild,
   addComponent,
-  addGateComponentasChild,
+  addGateComponentasChild
 };
