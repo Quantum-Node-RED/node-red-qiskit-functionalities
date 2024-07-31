@@ -53,9 +53,9 @@ module.exports = function (RED) {
         );
 
         output.push(Quantum_Circuit_End_component);
-        // msg.payload.parentofCurrentNode = msg.payload.parentofCurrentNode;
-        // msg.payload.currentNode = Quantum_Circuit_End_component;
-        // msg.payload.no_of_components = msg.payload.no_of_components + 1;
+        msg.payload.parentofCurrentNode = msg.payload.parentofCurrentNode;
+        msg.payload.currentNode = Quantum_Circuit_End_component;
+        msg.payload.no_of_components = msg.payload.no_of_components + 1;
 
         msg.payload.structure = output;
 
