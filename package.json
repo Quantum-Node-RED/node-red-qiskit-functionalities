@@ -22,6 +22,7 @@
       "script-generation": "framework/nodes/script-generation/script-generation.js",
       "QAOA": "framework/algorithms/QAOA/QAOA.js",
       "Start": "interactive-nodes/Flow/Start/Start.js",
+      "End": "interactive-nodes/Flow/End/End.js",
       "Quantum-Circuit-Begin": "interactive-nodes/Quantum-Circuit/Quantum-Circuit-Begin/Quantum-Circuit-Begin.js",
       "Quantum-Circuit-End": "interactive-nodes/Quantum-Circuit/Quantum-Circuit-End/Quantum-Circuit-End.js",
       "qbit": "interactive-nodes/Quantum-Circuit/qbit/qbit.js",
@@ -35,7 +36,6 @@
       "matrix": "interactive-nodes/Maths/matrix/matrix.js",
       "transfomer-matrix-pauli": "interactive-nodes/Functions/Transformer-matrix-pauli/Transformer-matrix-pauli.js",
       "Apply-transformer": "interactive-nodes/Functions/Apply-transformer/Apply-transformer.js"
-
     }
   },
   "dependencies": {
