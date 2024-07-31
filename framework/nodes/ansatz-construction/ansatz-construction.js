@@ -21,7 +21,7 @@ module.exports = function (RED) {
     // Example: return an ansatz object with given parameters
     return {
       type: parameters.type || "default",
-      depth: parameters.depth || 1,
+      depth: parameters.depth || 1
     };
   }
 };

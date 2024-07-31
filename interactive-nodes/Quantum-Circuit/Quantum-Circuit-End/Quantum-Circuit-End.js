@@ -9,7 +9,7 @@ module.exports = function (RED) {
     const state = {
       qubits: [],
       expectedQubits: 0, // Set to 0 initially to indicate it should be retrieved dynamically
-      receivedQubits: 0,
+      receivedQubits: 0
     };
 
     node.on("input", function (msg) {
@@ -24,6 +24,7 @@ module.exports = function (RED) {
       const qubitNode = currentStructure.find((node) => node.name === "qbit");
 
       // // Add the qubit to the temporary state
+      qubitNode.parameters["id"] = state.receivedQubits;
       state.qubits.push(qubitNode);
       state.receivedQubits++;
 

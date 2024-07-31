@@ -36,7 +36,7 @@ module.exports = function (RED) {
     terms.forEach((term, index) => {
       hamiltonianTerms.push({
         coeff: coefficients[index],
-        pauli: term,
+        pauli: term
       });
     });
 

@@ -6,7 +6,7 @@ const runPythonScript = (dirPath, filename, args, callback) => {
     pythonOptions: ["-u"],
     // pythonPath: 'path/to/python',
     scriptPath: dirPath,
-    args: JSON.stringify(args),
+    args: JSON.stringify(args)
   };
 
   let result;

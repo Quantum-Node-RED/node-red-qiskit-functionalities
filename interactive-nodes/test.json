@@ -1,0 +1,92 @@
+{
+  "structure": [
+    {
+      "name": "Quantum_Circuit_Begin",
+      "parameters": {},
+      "children": []
+    },
+    {
+      "name": "qbit",
+      "parameters": {
+        "id": 0
+      },
+      "children": [
+        {
+          "name": "RX_gate",
+          "parameters": {},
+          "children": []
+        },
+        {
+          "name": "H_gate",
+          "parameters": {},
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "qbit",
+      "parameters": {
+        "id": 1
+      },
+      "children": [
+        {
+          "name": "CZ_gate",
+          "parameters": {},
+          "children": []
+        },
+        {
+          "name": "CX_gate",
+          "parameters": {},
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "qbit",
+      "parameters": {
+        "id": 2
+      },
+      "children": [
+        {
+          "name": "X_gate",
+          "parameters": {},
+          "children": []
+        },
+        {
+          "name": "RZ_gate",
+          "parameters": {},
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "Quantum_Circuit_End",
+      "parameters": {},
+      "children": []
+    }
+  ],
+  "currentNode": {
+    "name": "RZ_gate",
+    "parameters": {},
+    "children": []
+  },
+  "parentofCurrentNode": {
+    "name": "qbit",
+    "parameters": {
+      "id": 2
+    },
+    "children": [
+      {
+        "name": "X_gate",
+        "parameters": {},
+        "children": []
+      },
+      {
+        "name": "RZ_gate",
+        "parameters": {},
+        "children": []
+      }
+    ]
+  },
+  "no_of_components": null
+}
