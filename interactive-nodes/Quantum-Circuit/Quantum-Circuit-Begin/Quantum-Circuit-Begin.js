@@ -21,6 +21,7 @@ module.exports = function (RED) {
         {}
       );
       Quantum_Circuit_Begin_component.parameters["name"] = nodeName;
+      Quantum_Circuit_Begin_component.parameters["num_qbits"] = 0;
       component.addComponent(msg, Quantum_Circuit_Begin_component);
 
       // Send the message with the updated payload

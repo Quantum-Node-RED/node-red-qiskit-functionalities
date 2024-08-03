@@ -1,26 +1,48 @@
 <script type="text/javascript">
-    RED.nodes.registerType('qbit', {
-      category: 'Quantum Circuit',
-      color: '#aaaaaa',
-      defaults: {
-        name: { value: "" }
-      },
-      inputs: 1,
-      outputs: 1,
-      icon: "file.svg",
-      label: function () {
-        return this.name || "qbit";
-      }
-    });
-  </script>
-  
-  <script type="text/html" data-template-name="qbit">
-    <div class="form-row">
-        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
-        <input type="text" id="node-input-name" placeholder="Name">
-    </div>
-  </script>
-  
-  <script type="text/html" data-help-name="qbit">
-    <p></p>
-  </script>
+  RED.nodes.registerType("measure_component", {
+    category: "Quantum Circuit",
+    color: "#aaaaaa",
+    defaults: {
+      name: { value: "" },
+      measure_qbit: { value: "" },
+      cbit: { value: "" },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    label: function () {
+      return this.name || "measure_component";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="measure_component">
+  <!-- <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div> -->
+
+  <div class="form-row">
+    <label for="node-input-measure_qbit"
+      ><i class="fa fa-tag"></i> measure qbit</label
+    >
+    <input
+      type="text"
+      id="node-input-measure_qbit"
+      placeholder="qubit(s) to measure"
+    />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-cbit"><i class="fa fa-tag"></i> cbit</label>
+    <input
+      type="text"
+      id="node-input-cbit"
+      placeholder="classical bit(s) to place the measurement result(s) in."
+    />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="measure_component">
+  <p></p>
+</script>
