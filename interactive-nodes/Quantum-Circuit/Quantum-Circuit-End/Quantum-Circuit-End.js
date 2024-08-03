@@ -36,7 +36,11 @@ module.exports = function (RED) {
       // Check if all expected qubits have been received
       if (state.receivedQubits === state.expectedQubits) {
         const output = [];
-
+        //Add root compoenent to the structure output
+        output.push(
+          currentStructure.find((node) => node.name === "root")
+        );
+        // Add Quantum_Circuit_Begin component to the structure output
         output.push(
           currentStructure.find((node) => node.name === "Quantum_Circuit_Begin")
         );
@@ -53,9 +57,9 @@ module.exports = function (RED) {
         );
 
         output.push(Quantum_Circuit_End_component);
-        // msg.payload.parentofCurrentNode = msg.payload.parentofCurrentNode;
-        // msg.payload.currentNode = Quantum_Circuit_End_component;
-        // msg.payload.no_of_components = msg.payload.no_of_components + 1;
+        msg.payload.parentofCurrentNode = msg.payload.parentofCurrentNode;
+        msg.payload.currentNode = Quantum_Circuit_End_component;
+        msg.payload.no_of_components = msg.payload.no_of_components + 1;
 
         msg.payload.structure = output;
 
