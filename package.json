@@ -38,7 +38,8 @@
       "Qiskit-Runtime-Service": "interactive-nodes/Functions/Qiskit-Runtime-Service/Qiskit-Runtime-Service.js",
       "measure": "interactive-nodes/Quantum-Circuit/measure/measure.js",
       "swap": "interactive-nodes/Quantum-Circuit/swap/swap.js",
-      "classic-register": "interactive-nodes/Functions/Classical-register/Classical-register.js"
+      "classic-register": "interactive-nodes/Functions/Classical-register/Classical-register.js",
+      "quantum-register": "interactive-nodes/Functions/Quantum-register/Quantum-register.js"
 
     }
   },
