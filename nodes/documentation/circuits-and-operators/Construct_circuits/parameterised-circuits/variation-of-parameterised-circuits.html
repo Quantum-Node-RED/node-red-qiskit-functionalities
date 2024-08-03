@@ -4,7 +4,7 @@
       color: '#aaaaaa',
       defaults: {
         name: { value: "Create variation of Parameterised Circuit" },
-        info: {value: "# This code snippet creates a list of variations for the parameterized circuits created in previous node, each with a parameterized angle that varies from 0 to 99. It then draws the circuit corresponding to the first angle (0).\r\n```python\r\ncircuits = []\r\nfor value in range(100):\r\n    circuits.append(\r\n        qc.assign_parameters({ angle: value })\r\n    )\r\n \r\ncircuits[0].draw(\"mpl\")\r\n```\r\n# You can check the image of this variation in the \"Variation of Parameterized Circuit\" node. "}
+        info: {value: "## **Node Input:**\r\n- # Object: `qc` (Type: _qiskit.QuantumCircuit_)\r\n\r\n***\r\n&nbsp;\r\n# This code snippet creates a list of variations for the parameterized circuits created in previous node, each with a parameterized angle that varies from 0 to 99. It then draws the circuit corresponding to the first angle (0).\r\n```python\r\ncircuits = []\r\nfor value in range(100):\r\n    circuits.append(\r\n        qc.assign_parameters({ angle: value })\r\n    )\r\n \r\ncircuits[0].draw(\"mpl\")\r\n```\r\n# You can check the image of this variation in the \"Variation of Parameterized Circuit\" node.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: Image of the variation of parameterized circuit `qc`"}
       },
       inputs: 1,
       outputs: 1,
