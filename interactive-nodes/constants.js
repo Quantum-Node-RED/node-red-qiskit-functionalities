@@ -3,6 +3,7 @@ const EXPECTED_QUBITS = "expectedQubits"
 const QUBITS_COMPONENT_NAME = "qbit"
 const MEASURE_COMPONENT_NAME = "measure"
 const SWAP_COMPONENT_NAME = "swap"
+const CLASSICAL_REGISTER_COMPONENT_NAME = "Classical_register"
 
 
 module.exports = {
@@ -10,5 +11,6 @@ module.exports = {
     EXPECTED_QUBITS,
     QUBITS_COMPONENT_NAME,
     MEASURE_COMPONENT_NAME,
-    SWAP_COMPONENT_NAME
+    SWAP_COMPONENT_NAME,
+    CLASSICAL_REGISTER_COMPONENT_NAME
   };
