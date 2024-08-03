@@ -36,7 +36,8 @@
       "transfomer-matrix-pauli": "interactive-nodes/Functions/Transformer-matrix-pauli/Transformer-matrix-pauli.js",
       "Apply-transformer": "interactive-nodes/Functions/Apply-transformer/Apply-transformer.js",
       "Qiskit-Runtime-Service": "interactive-nodes/Functions/Qiskit-Runtime-Service/Qiskit-Runtime-Service.js",
-      "measure": "interactive-nodes/Quantum-Circuit/measure/measure.js"
+      "measure": "interactive-nodes/Quantum-Circuit/measure/measure.js",
+      "swap": "interactive-nodes/Quantum-Circuit/swap/swap.js"
 
     }
   },
