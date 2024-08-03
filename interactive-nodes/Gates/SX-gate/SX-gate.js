@@ -6,7 +6,7 @@ module.exports = function (RED) {
     node.on('input', function (msg) {
       msg.payload = msg.payload || {};
       const SX_gate_component = new component.Component("SX_gate",{});
-      component.addGateComponentasChild(msg, SX_gate_component);
+      component.addComponent(msg, SX_gate_component);
       node.send(msg);
     });
   }

@@ -8,7 +8,7 @@ module.exports = function (RED) {
       msg.payload = msg.payload || {};
       const CX_gate_component = new component.Component("CX_gate",{});
       CX_gate_component.parameters["qbit"] = qbit;
-      component.addGateComponentasChild(msg, CX_gate_component);
+      component.addComponent(msg, CX_gate_component);
       node.send(msg);
     });
   }
