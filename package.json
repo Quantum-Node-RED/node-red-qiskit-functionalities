@@ -41,7 +41,8 @@
       "swap": "interactive-nodes/Quantum-Circuit/swap/swap.js",
       "classic-register": "interactive-nodes/Functions/Classical-register/Classical-register.js",
       "quantum-register": "interactive-nodes/Functions/Quantum-register/Quantum-register.js",
-      "reset": "interactive-nodes/Quantum-Circuit/reset/reset.js"
+      "reset": "interactive-nodes/Quantum-Circuit/reset/reset.js",
+      "CU-gate": "interactive-nodes/Gates/CU-gate/CU-gate.js"
 
     }
   },
