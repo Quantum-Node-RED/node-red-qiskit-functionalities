@@ -8,6 +8,7 @@ module.exports = function (RED) {
       msg.payload = msg.payload || {};
       const draw_component = new component.Component("draw",{});
       draw_component.parameters["output_type"] = output_type;
+      draw_component.parameters[constants.CIRCUIT_NAME] = node.context().flow.get(constants.CIRCUIT_NAME);
       component.addComponent(msg, draw_component);
       node.send(msg);
     });
