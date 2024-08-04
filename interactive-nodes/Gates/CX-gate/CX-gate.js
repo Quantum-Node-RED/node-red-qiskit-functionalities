@@ -8,7 +8,7 @@ module.exports = function (RED) {
       msg.payload = msg.payload || {};
       const CX_gate_component = new component.Component("CX_gate",{});
       CX_gate_component.parameters["control_qubit"] = config.control_qubit;
-      CX_gate_component.parameters["target_qubit"] = node.context().flow.get(constants.EXPECTED_QUBITS) || 0;
+      CX_gate_component.parameters["target_qubit"] = msg.payload["qubit_id"];
       CX_gate_component.parameters[constants.CIRCUIT_NAME] = node.context().flow.get(constants.CIRCUIT_NAME);
       component.addComponent(msg, CX_gate_component);
       node.send(msg);

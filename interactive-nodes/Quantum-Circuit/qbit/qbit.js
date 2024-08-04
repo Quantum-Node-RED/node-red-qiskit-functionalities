@@ -18,6 +18,7 @@ module.exports = function (RED) {
 
       // get the name of the circuit from Quantum CirCuit Begin component
       qbit_component.parameters[constants.CIRCUIT_NAME] = node.context().flow.get(constants.CIRCUIT_NAME);
+      msg.payload["qubit_id"]=qbit_component.parameters["id"];
 
       component.addComponent(msg, qbit_component);
 

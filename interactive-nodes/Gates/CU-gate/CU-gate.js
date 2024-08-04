@@ -12,7 +12,7 @@ module.exports = function (RED) {
       CU_gate.parameters["lam"] = config.lambda;
       CU_gate.parameters["gamma"] = config.gamma;
       CU_gate.parameters["control_qubit"] = config.control_qubit;
-      CU_gate.parameters["target_qubit"] = node.context().flow.get(constants.EXPECTED_QUBITS) || 0;
+      CU_gate.parameters["target_qubit"] = msg.payload["qubit_id"];
       CU_gate.parameters[constants.CIRCUIT_NAME] = node.context().flow.get(constants.CIRCUIT_NAME);
       component.addComponent(msg, CU_gate);
       node.send(msg);

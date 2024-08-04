@@ -16,7 +16,6 @@ module.exports = function (RED) {
       // Retrieve the number of expected qubits from flow context if not already set
       if (state.expectedQubits === 0) {
         state.expectedQubits = node.context().flow.get("expectedQubits") || 1; // Default to 1 if not set
-        node.log(`Expected Qubits retrieved: ${state.expectedQubits}`);
       }
 
       // Extract the qubit and its gates from the message
@@ -28,10 +27,6 @@ module.exports = function (RED) {
       state.qubits.push(qubitNode);
       state.receivedQubits++;
 
-      // Log the received qubits for debugging
-      node.log(
-        `Received Qubits: ${state.receivedQubits}/${state.expectedQubits}`
-      );
 
       // Check if all expected qubits have been received
       if (state.receivedQubits === state.expectedQubits) {
@@ -57,7 +52,6 @@ module.exports = function (RED) {
         );
 
         output.push(Quantum_Circuit_End_component);
-        msg.payload.parentofCurrentNode = msg.payload.parentofCurrentNode;
         msg.payload.currentNode = Quantum_Circuit_End_component;
         msg.payload.no_of_components = msg.payload.no_of_components + 1;
 
@@ -69,8 +63,10 @@ module.exports = function (RED) {
         // Reset state for next aggregation
         state.qubits = [];
         state.receivedQubits = 0;
-        state.expectedQubits = 0; // Reset to force re-fetch next time
-        node.context().flow.set("expectedQubits", 0);
+        state.expectedQubits = 0; 
+        node.context().flow.set("expectedQubits", undefined);
+        node.context().flow.set("expectedQubits",undefined);
+        node.context().flow.set("circuit_name",undefined);
       }
     });
   }

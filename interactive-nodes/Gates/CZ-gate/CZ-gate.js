@@ -9,7 +9,7 @@ module.exports = function (RED) {
       const CZ_gate_component = new component.Component("CZ_gate",{});
       CZ_gate_component.parameters["control_qubit"] = config.control_qubit;
       CZ_gate_component.parameters[constants.CIRCUIT_NAME] = node.context().flow.get(constants.CIRCUIT_NAME);
-      CZ_gate_component.parameters["target_qubit"] = node.context().flow.get(constants.EXPECTED_QUBITS) || 0;
+      CZ_gate_component.parameters["target_qubit"] = msg.payload["qubit_id"];
       component.addComponent(msg, CZ_gate_component);
       node.send(msg);
     });
