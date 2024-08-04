@@ -15,7 +15,7 @@ module.exports = function (RED) {
       // qubit: qubit(s) to measure.
       // cbit: classical bit(s) to place the measurement result(s) in.
       measure_component.parameters["qbit"] = [qbits, cbits];
-
+      measure_component.parameters[constants.CIRCUIT_NAME] = node.context().flow.get(constants.CIRCUIT_NAME);
       component.addComponent(msg, measure_component);
 
       // Send the message onward

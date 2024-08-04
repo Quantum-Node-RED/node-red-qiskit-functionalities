@@ -7,6 +7,7 @@ const CLASSICAL_REGISTER_COMPONENT_NAME = "Classical_register"
 const QUANTUM_REGISTER_COMPONENT_NAME = "Quantum_register"
 const RESET_COMPONENT_NAME = "reset"
 const MATRIX_COMPONENT_NAME = "matrix"
+const CIRCUIT_NAME = "circuit_name"
 
 
 module.exports = {
@@ -18,5 +19,6 @@ module.exports = {
     CLASSICAL_REGISTER_COMPONENT_NAME,
     QUANTUM_REGISTER_COMPONENT_NAME,
     RESET_COMPONENT_NAME,
-    MATRIX_COMPONENT_NAME
+    MATRIX_COMPONENT_NAME,
+    CIRCUIT_NAME
   };

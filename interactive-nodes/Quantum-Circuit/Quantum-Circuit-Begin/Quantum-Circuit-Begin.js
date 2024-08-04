@@ -25,6 +25,7 @@ module.exports = function (RED) {
       Quantum_Circuit_Begin_component.parameters["expectedQubits"]=connectedPaths;
       Quantum_Circuit_Begin_component.parameters["name"] = nodeName;
       Quantum_Circuit_Begin_component.parameters["num_qbits"] = 0;
+      node.context().flow.set(constants.CIRCUIT_NAME, nodeName)
       component.addComponent(msg, Quantum_Circuit_Begin_component);
 
       // Send the message with the updated payload

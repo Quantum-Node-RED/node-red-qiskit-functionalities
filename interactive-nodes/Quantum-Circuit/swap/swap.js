@@ -14,7 +14,7 @@ module.exports = function (RED) {
       const swap_component = new component.Component(constants.SWAP_COMPONENT_NAME, {});
       swap_component.parameters["control"] = control;
       swap_component.parameters["target"] = target;
-
+      swap_component.parameters[constants.CIRCUIT_NAME] = node.context().flow.get(constants.CIRCUIT_NAME);
       component.addComponent(msg, swap_component);
 
       // Send the message onward

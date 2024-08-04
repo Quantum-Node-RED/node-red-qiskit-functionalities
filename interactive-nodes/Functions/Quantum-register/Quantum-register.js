@@ -14,6 +14,7 @@ module.exports = function (RED) {
         const quantum_register_component = new component.Component(constants.QUANTUM_REGISTER_COMPONENT_NAME,{});
         quantum_register_component.parameters["var_name"] = var_name;
         quantum_register_component.parameters["num_bits"] = num_qubits;
+        quantum_register_component.parameters[constants.CIRCUIT_NAME] = node.context().flow.get(constants.CIRCUIT_NAME);
         component.addComponent(msg, quantum_register_component);
         node.send(msg);
       });

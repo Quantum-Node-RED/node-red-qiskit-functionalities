@@ -1,4 +1,5 @@
 const component = require("../../component.js");
+const constants = require('../../constants.js');
 module.exports = function (RED) {
   function RY_gateNode(config) {
     RED.nodes.createNode(this, config);
@@ -10,6 +11,7 @@ module.exports = function (RED) {
       const RY_gate_component = new component.Component("RY_gate",{});
       RY_gate_component.parameters["qbit"] = qbit;
       RY_gate_component.parameters["theta"] = theta;
+      RY_gate_component.parameters[constants.CIRCUIT_NAME] = node.context().flow.get(constants.CIRCUIT_NAME);
       component.addComponent(msg, RY_gate_component);
       node.send(msg);
     });

@@ -10,6 +10,7 @@ module.exports = function (RED) {
       const phase_component = new component.Component("phase",{});
       phase_component.parameters["qbit"] = qbit;
       phase_component.parameters["theta"] = theta;
+      phase_component.parameters[constants.CIRCUIT_NAME] = node.context().flow.get(constants.CIRCUIT_NAME);
       component.addComponent(msg, phase_component);
       node.send(msg);
     });

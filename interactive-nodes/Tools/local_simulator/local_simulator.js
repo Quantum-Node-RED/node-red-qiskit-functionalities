@@ -16,6 +16,7 @@ module.exports = function (RED) {
       local_simulator_component.parameters["var_name_result"] = var_name_result;
       local_simulator_component.parameters["circuit_name"] = circuit_name;
       local_simulator_component.parameters["var_name_counts"] = var_name_counts;
+      local_simulator_component.parameters[constants.CIRCUIT_NAME] = node.context().flow.get(constants.CIRCUIT_NAME);
       component.addComponent(msg, local_simulator_component);
       node.send(msg);
     });

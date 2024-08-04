@@ -13,7 +13,7 @@ module.exports = function (RED) {
       const reset_component = new component.Component(constants.RESET_COMPONENT_NAME, {});
       // qubit: qubit(s) to reset
       reset_component.parameters["qbit"] = qbits;
-
+      reset_component.parameters[constants.CIRCUIT_NAME] = node.context().flow.get(constants.CIRCUIT_NAME);
       component.addComponent(msg, reset_component);
 
       // Send the message onward

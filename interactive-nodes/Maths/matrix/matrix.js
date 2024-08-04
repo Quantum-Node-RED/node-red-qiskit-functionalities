@@ -13,6 +13,7 @@ module.exports = function (RED) {
       const matrix_component = new component.Component(constants.MATRIX_COMPONENT_NAME,{});
       matrix_component.parameters["var_name"] = var_name;
       matrix_component.parameters["matrix"] = matrix;
+      matrix_component.parameters[constants.CIRCUIT_NAME] = node.context().flow.get(constants.CIRCUIT_NAME);
       component.addComponent(msg, matrix_component);
       node.send(msg);
     });
