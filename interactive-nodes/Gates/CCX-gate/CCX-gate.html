@@ -1,5 +1,5 @@
 <script type="text/javascript">
-  RED.nodes.registerType("I_gate", {
+  RED.nodes.registerType("CCX_gate", {
     category: "Gates",
     color: "#aaaaaa",
     defaults: {
@@ -10,12 +10,12 @@
     outputs: 1,
     icon: "file.svg",
     label: function () {
-      return this.name || "I_gate";
+      return this.name || "CCX_gate";
     },
   });
 </script>
 
-<script type="text/html" data-template-name="I_gate">
+<script type="text/html" data-template-name="CCX_gate">
   <div class="form-row">
     <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
     <input type="text" id="node-input-name" placeholder="Name" />
@@ -27,6 +27,6 @@
   </div>
 </script>
 
-<script type="text/html" data-help-name="I_gate">
+<script type="text/html" data-help-name="CCX_gate">
   <p></p>
 </script>

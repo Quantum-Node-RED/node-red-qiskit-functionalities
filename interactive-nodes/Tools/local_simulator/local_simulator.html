@@ -1,0 +1,76 @@
+<script type="text/javascript">
+  RED.nodes.registerType("local_simulator", {
+    category: "Gates",
+    color: "#aaaaaa",
+    defaults: {
+      name: { value: "" },
+      var_name: { value: "" },
+      var_name_result: { value: "" },
+      circuit_name: { value: "" },
+      var_name_counts: { value: "" },
+      simulator: { value: "" },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    label: function () {
+      return this.name || "local_simulator";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="local_simulator">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-var_name"><i class="fa fa-tag"></i> var_name</label>
+    <input type="text" id="node-input-var_name" placeholder="var_name" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-var_name_result"
+      ><i class="fa fa-tag"></i> var_name_result</label
+    >
+    <input
+      type="text"
+      id="node-input-var_name_result"
+      placeholder="var_name_result"
+    />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-circuit_name"
+      ><i class="fa fa-tag"></i> circuit_name</label
+    >
+    <input
+      type="text"
+      id="node-input-circuit_name"
+      placeholder="circuit_name"
+    />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-var_name_counts"
+      ><i class="fa fa-tag"></i> var_name_counts</label
+    >
+    <input
+      type="text"
+      id="node-input-var_name_counts"
+      placeholder="var_name_counts"
+    />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-simulator"
+      ><i class="fa fa-tag"></i> simulator</label
+    >
+    <input type="text" id="node-input-simulator" placeholder="simulator" />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="local_simulator">
+  <p></p>
+</script>

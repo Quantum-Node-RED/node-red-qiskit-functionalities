@@ -1,32 +1,34 @@
 <script type="text/javascript">
-  RED.nodes.registerType("I_gate", {
+  RED.nodes.registerType("draw", {
     category: "Gates",
     color: "#aaaaaa",
     defaults: {
       name: { value: "" },
-      qbit: { value: "" },
+      output_type: { value: "" },
     },
     inputs: 1,
     outputs: 1,
     icon: "file.svg",
     label: function () {
-      return this.name || "I_gate";
+      return this.name || "draw";
     },
   });
 </script>
 
-<script type="text/html" data-template-name="I_gate">
+<script type="text/html" data-template-name="draw">
   <div class="form-row">
     <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
     <input type="text" id="node-input-name" placeholder="Name" />
   </div>
 
   <div class="form-row">
-    <label for="node-input-qbit"><i class="fa fa-tag"></i> qbit</label>
-    <input type="text" id="node-input-qbit" placeholder="qbit" />
+    <label for="node-input-output_type"
+      ><i class="fa fa-tag"></i> output_type</label
+    >
+    <input type="text" id="node-input-output_type" placeholder="output_type" />
   </div>
 </script>
 
-<script type="text/html" data-help-name="I_gate">
+<script type="text/html" data-help-name="draw">
   <p></p>
 </script>
