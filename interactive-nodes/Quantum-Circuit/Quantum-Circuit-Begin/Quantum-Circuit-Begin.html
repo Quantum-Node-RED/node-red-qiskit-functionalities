@@ -1,27 +1,31 @@
 <script type="text/javascript">
-    RED.nodes.registerType('Quantum_Circuit_Begin', {
+  RED.nodes.registerType('Quantum_Circuit_Begin', {
       category: 'Quantum Circuit',
       color: '#aaaaaa',
       defaults: {
-        name: { value: "" }
+          name: { value: "" },
+          circuit_name: { value: "" } 
       },
       inputs: 1,
       outputs: 1,
       icon: "file.svg",
       label: function () {
-        return this.name || "Quantum_Circuit_Begin";
+          return this.name || "Quantum_Circuit_Begin";
       }
-    });
-  </script>
-  
-  <script type="text/html" data-template-name="Quantum_Circuit_Begin">
-    <div class="form-row">
-        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
-        <input type="text" id="node-input-name" placeholder="Name">
-    </div>
-  </script>
-  
-  <script type="text/html" data-help-name="Quantum_Circuit_Begin">
-    <p></p>
-  </script>
-  
+  });
+</script>
+
+<script type="text/html" data-template-name="Quantum_Circuit_Begin">
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+  <div class="form-row">
+      <label for="node-input-circuit_name"><i class="fa fa-tag"></i> Circuit Name</label>
+      <input type="text" id="node-input-circuit_name" placeholder="Circuit Name">
+  </div>
+</script>
+
+<script type="text/html" data-help-name="Quantum_Circuit_Begin">
+  <p></p>
+</script>

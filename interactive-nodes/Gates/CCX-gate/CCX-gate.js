@@ -4,11 +4,12 @@ module.exports = function (RED) {
   function CCX_gateNode(config) {
     RED.nodes.createNode(this, config);
     var node = this;
-    const qbit = config.qbit
     node.on('input', function (msg) {
       msg.payload = msg.payload || {};
       const CCX_gate_component = new component.Component("CCX_gate",{});
-      CCX_gate_component.parameters["qbit"] = qbit;
+      CCX_gate_component.parameters["control_qubit1"] = config.control_qubit1;
+      CCX_gate_component.parameters["control_qubit2"] = config.control_qubit2;
+      CCX_gate_component.parameters["target_qubit"] = node.context().flow.get(constants.EXPECTED_QUBITS) || 0;
       CCX_gate_component.parameters[constants.CIRCUIT_NAME] = node.context().flow.get(constants.CIRCUIT_NAME);
       component.addComponent(msg, CCX_gate_component);
       node.send(msg);

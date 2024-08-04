@@ -11,27 +11,27 @@ class Code_Component:
     classical_register= "{var_name} = ClassicalRegister({num_qubits})"
     quantum_register= "{var_name} = QuantumRegister({num_qubits})"
     reset= "{circuit_name}.reset({qbit})"
+    barrier = "{circuit_name}.barrier({qbit})"
     #Functions
     qiskit_runtime_service = "QiskitRuntimeService(channel={channel}, token={token})"
     #Maths
     matrix = "{var_name} = np.array({matrix})"
     # Gates
-    CX_gate = "{circuit_name}.cx({qbit1}, {qbit2})"
-    CZ_gate = "{circuit_name}.cz({qbit1}, {qbit2})"
-    CU_gate= "{circuit_name}.cu({theta}, {phi}, {lam}, {qbit1}, {qbit2})"
+    CX_gate = "{circuit_name}.cx({control_qubit}, {target_qubit})"
+    CZ_gate = "{circuit_name}.cz({control_qubit}, {target_qubit})"
+    CU_gate= "{circuit_name}.cu({theta}, {phi}, {lam},{gamma}, {control_qubit}, {target_qubit})" #TODO:Here gamma is optional 
     H_gate = "{circuit_name}.h({qbit})"
     RX_gate = "{circuit_name}.rx({theta}, {qbit})"
     RZ_gate = "{circuit_name}.rz({theta}, {qbit})"
     RY_gate = "{circuit_name}.ry({theta}, {qbit})"
     SX_gate = "{circuit_name}.sx({qbit})"
     X_gate = "{circuit_name}.x({qbit})"
-    barrier = "{circuit_name}.barrier({qbit})"
     phase = "{circuit_name}.p({theta}, {qbit})"
     I_gate = "{circuit_name}.i({qbit})"
     U_gate = "{circuit_name}.u({theta}, {phi}, {lam}, {qbit})"
-    Toffoli_gate = "{circuit_name}.toffoli({qbit1}, {qbit2}, {qbit3})"
-    CCX_gate = "{circuit_name}.ccx({qbit1}, {qbit2}, {qbit3})"
-    mutli_controlled_U_gate="from qiskit.circuit.library import UGate\n{circuit_name}.mct({qbit1}, {qbit2}, {qbit3})"
+    Toffoli_gate = "{circuit_name}.toffoli({control_qubit1}, {control_qubit2}, {target_qubit})"
+    CCX_gate = "{circuit_name}.ccx({control_qubit1}, {control_qubit2}, {target_qubit})"
+    mutli_controlled_U_gate="from qiskit.circuit.library import UGate\n{circuit_name}.append(UGate({theta}, {phi}, {lam}).control({num_of_control_qubits}), {list_of_control_qubits}+{target_qubit}))"
     # Tools
     local_simulator = """
                 default='qasm_simulator'
