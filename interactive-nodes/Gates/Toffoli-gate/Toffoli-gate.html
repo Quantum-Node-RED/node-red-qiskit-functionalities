@@ -1,0 +1,32 @@
+<script type="text/javascript">
+  RED.nodes.registerType("Toffoli_gate", {
+    category: "Gates",
+    color: "#aaaaaa",
+    defaults: {
+      name: { value: "" },
+      qbit: { value: "" },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    label: function () {
+      return this.name || "Toffoli_gate";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="Toffoli_gate">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-qbit"><i class="fa fa-tag"></i> qbit</label>
+    <input type="text" id="node-input-qbit" placeholder="qbit" />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="Toffoli_gate">
+  <p></p>
+</script>

@@ -10,5 +10,6 @@ class Code_Component_Dependency:
         "RX_gate":["qiskit.circuit.library.RXGate"],
         "RZ_gate":["qiskit.circuit.library.RZGate"],
         "SX_gate":["qiskit.circuit.library.SXGate"],
-        "X_gate":["qiskit.circuit.library.XGate"],
+        "X_gate":["qiskit.circuit.library.XGate"], 
+        "qiskit_runtime_service":["qiskit_ibm_runtime.QiskitRuntimeService"]
     }

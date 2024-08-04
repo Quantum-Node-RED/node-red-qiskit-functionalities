@@ -1,26 +1,50 @@
 <script type="text/javascript">
-    RED.nodes.registerType('U_gate', {
-      category: 'Gates',
-      color: '#aaaaaa',
-      defaults: {
-        name: { value: "" }
-      },
-      inputs: 1,
-      outputs: 1,
-      icon: "file.svg",
-      label: function () {
-        return this.name || "U_gate";
-      }
-    });
-  </script>
-  
-  <script type="text/html" data-template-name="U_gate">
-    <div class="form-row">
-        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
-        <input type="text" id="node-input-name" placeholder="Name">
-    </div>
-  </script>
-  
-  <script type="text/html" data-help-name="U_gate">
-    <p></p>
-  </script>
+  RED.nodes.registerType("U_gate", {
+    category: "Gates",
+    color: "#aaaaaa",
+    defaults: {
+      name: { value: "" },
+      qbit: { value: "" },
+      theta: { value: "" },
+      phi: { value: "" },
+      lambda: { value: "" },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    label: function () {
+      return this.name || "U_gate";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="U_gate">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-theta"><i class="fa fa-tag"></i> theta</label>
+    <input type="text" id="node-input-theta" placeholder="theta" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-phi"><i class="fa fa-tag"></i> phi</label>
+    <input type="text" id="node-input-phi" placeholder="phi" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-lambda"><i class="fa fa-tag"></i> lambda</label>
+    <input type="text" id="node-input-lambda" placeholder="lambda" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-qbit"><i class="fa fa-tag"></i> qbit</label>
+    <input type="text" id="node-input-qbit" placeholder="qbit" />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="U_gate">
+  <p></p>
+</script>

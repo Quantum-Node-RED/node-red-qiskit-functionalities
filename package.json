@@ -35,7 +35,24 @@
       "X-gate": "interactive-nodes/Gates/X-gate/X-gate.js",
       "matrix": "interactive-nodes/Maths/matrix/matrix.js",
       "transfomer-matrix-pauli": "interactive-nodes/Functions/Transformer-matrix-pauli/Transformer-matrix-pauli.js",
-      "Apply-transformer": "interactive-nodes/Functions/Apply-transformer/Apply-transformer.js"
+      "Apply-transformer": "interactive-nodes/Functions/Apply-transformer/Apply-transformer.js",
+      "Qiskit-Runtime-Service": "interactive-nodes/Functions/Qiskit-Runtime-Service/Qiskit-Runtime-Service.js",
+      "measure": "interactive-nodes/Quantum-Circuit/measure/measure.js",
+      "swap": "interactive-nodes/Quantum-Circuit/swap/swap.js",
+      "classic-register": "interactive-nodes/Functions/Classical-register/Classical-register.js",
+      "quantum-register": "interactive-nodes/Functions/Quantum-register/Quantum-register.js",
+      "reset": "interactive-nodes/Quantum-Circuit/reset/reset.js",
+      "CU-gate": "interactive-nodes/Gates/CU-gate/CU-gate.js",
+      "RY-gate": "interactive-nodes/Gates/RY-gate/RY-gate.js",
+      "phase": "interactive-nodes/Quantum-Circuit/phase/phase.js",
+      "barrier": "interactive-nodes/Quantum-Circuit/barrier/barrier.js",
+      "I-gate": "interactive-nodes/Gates/I-gate/I-gate.js",
+      "U-gate": "interactive-nodes/Gates/U-gate/U-gate.js",
+      "Toffoli-gate": "interactive-nodes/Gates/Toffoli-gate/Toffoli-gate.js",
+      "CCX-gate": "interactive-nodes/Gates/CCX-gate/CCX-gate.js",
+      "mutli_controlled_U_gate": "interactive-nodes/Gates/mutli_controlled_U_gate/mutli_controlled_U_gate.js",
+      "local-simulator": "interactive-nodes/Tools/local_simulator/local_simulator.js",
+      "draw": "interactive-nodes/Tools/draw/draw.js"
     }
   },
   "dependencies": {
