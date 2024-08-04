@@ -1,5 +1,5 @@
 <script type="text/javascript">
-  RED.nodes.registerType("RZ_gate", {
+  RED.nodes.registerType("phase", {
     category: "Gates",
     color: "#aaaaaa",
     defaults: {
@@ -11,12 +11,12 @@
     outputs: 1,
     icon: "file.svg",
     label: function () {
-      return this.name || "RZ_gate";
+      return this.name || "phase";
     },
   });
 </script>
 
-<script type="text/html" data-template-name="RZ_gate">
+<script type="text/html" data-template-name="phase">
   <div class="form-row">
     <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
     <input type="text" id="node-input-name" placeholder="Name" />
@@ -33,6 +33,6 @@
   </div>
 </script>
 
-<script type="text/html" data-help-name="Z">
+<script type="text/html" data-help-name="phase">
   <p></p>
 </script>
