@@ -4,7 +4,34 @@
     color: '#aaaaaa',
     defaults: {
       name: { value: "Standard-Gates" },
-      info: { value: "# The circuit library also includes standard quantum gates. Some are more fundamental gates (such as the <font style=\"background: lightgrey\">UGate</font>), and others are multi-qubit gates that usually need building from single- and two-qubit gates. To add imported gates to your circuit, use the <font style=\"background: lightgrey\">append</font> method; the first argument is the gate, and the next argument is a list of qubits to apply the gate to.\r\n&nbsp;\r\n# In the following code snippet, it creates a quantum circuit with 4 qubits, applies a Hadamard gate to the first qubit, and then applies a 3-controlled-X (multi-controlled NOT) gate to the first three qubits controlling the fourth qubit.\r\n```python\r\nfrom qiskit import QuantumCircuit\r\nfrom qiskit.circuit.library import HGate, MCXGate\r\nmcx_gate = MCXGate(3)\r\nhadamard_gate = HGate()\r\n \r\nqc = QuantumCircuit(4)\r\nqc.append(hadamard_gate, [0])\r\nqc.append(mcx_gate, [0,1,2,3])\r\nqc.draw('mpl')\r\n```\r\n# You can check the image of generated circuit in the \"Standard Gates Image Output\" node.\r\n&nbsp;\r\n# See [Standard gates](https://docs.quantum.ibm.com/api/qiskit/circuit_library#standard-gates) in the circuit library API documentation for more information.\r\n&nbsp;\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: Image created for `qc`."}
+      info: { value: 
+          "# The circuit library also includes standard quantum gates. Some are more fundamental gates " +
+          "(such as the <font style=\"background: lightgrey\">UGate</font>), and others are multi-qubit gates that usually need " +
+          "building from single- and two-qubit gates. To add imported gates to your circuit, use the " +
+          "<font style=\"background: lightgrey\">append</font> method; the first argument is the gate, and the next argument is a list " +
+          "of qubits to apply the gate to.\r\n" +
+          "&nbsp;\r\n" +
+          "# In the following code snippet, it creates a quantum circuit with 4 qubits, applies a Hadamard gate to the first qubit, " +
+          "and then applies a 3-controlled-X (multi-controlled NOT) gate to the first three qubits controlling the fourth qubit.\r\n" +
+          "```python\r\n" +
+          "from qiskit import QuantumCircuit\r\n" +
+          "from qiskit.circuit.library import HGate, MCXGate\r\n" +
+          "mcx_gate = MCXGate(3)\r\n" +
+          "hadamard_gate = HGate()\r\n" +
+          "\r\n" +
+          "qc = QuantumCircuit(4)\r\n" +
+          "qc.append(hadamard_gate, [0])\r\n" +
+          "qc.append(mcx_gate, [0,1,2,3])\r\n" +
+          "qc.draw('mpl')\r\n" +
+          "```\r\n" +
+          "# You can check the image of generated circuit in the \"Standard Gates Image Output\" node.\r\n" +
+          "&nbsp;\r\n" +
+          "# See [Standard gates](https://docs.quantum.ibm.com/api/qiskit/circuit_library#standard-gates) in the circuit library API " +
+          "documentation for more information.\r\n" +
+          "&nbsp;\r\n\r\n***\r\n&nbsp;\r\n" +
+          "## **Node Output:**\r\n" +
+          "- # Image: Image created for `qc`."
+        }
     },
     inputs: 1,
     outputs: 1,
@@ -24,4 +51,26 @@
 
 <script type="text/html" data-help-name="Standard-Gates">
   <p>A quantum circuit having Hadamard gate and MCX gate applied.</p>
+
+  <h3>Outputs</h3>
+  <ol class="node-ports">
+    <li>Circuit Diagram
+      <dl class="message-properties">
+        <dt>circuit_diagram <span class="property-type">string (Base64)</span></dt>
+        <dd>The Base64-encoded string representing the visual diagram of the quantum circuit.</dd>
+      </dl>
+    </li>
+  </ol>
+
+  <h3>Details</h3>
+  <p>
+    The <code>QuantumCircuit</code> object, referred to as <code>qc</code>, is the central structure of your quantum circuit. As you add different nodes, such as gates, to your flow, these nodes interact with <code>qc</code> to modify the circuit's composition.
+  </p>
+  <p>
+    For instance, when a Hadamard gate node is added, it applies a Hadamard gate to a specified qubit in the <code>qc</code> object, transforming its state into a superposition. Similarly, adding a Multi-Controlled X (MCX) gate node uses multiple qubits as controls to flip the target qubit's state.
+  </p>
+  <p>
+    Each node appends a specific gate to the circuit, incrementally building the logic required for your quantum algorithms. These changes are made by invoking methods on the <code>qc</code> object, thus constructing your desired quantum operations.
+  </p>
+
 </script>
