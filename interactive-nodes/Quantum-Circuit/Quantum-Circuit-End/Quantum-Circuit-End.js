@@ -1,5 +1,5 @@
 const component = require("../../component.js");
-
+const constants = require('../../constants.js');
 module.exports = function (RED) {
   function Quantum_Circuit_EndNode(config) {
     RED.nodes.createNode(this, config);
@@ -7,9 +7,9 @@ module.exports = function (RED) {
 
     // State object to track qubits
     const state = {
-      qubits: [],
       expectedQubits: 0, // Set to 0 initially to indicate it should be retrieved dynamically
-      receivedQubits: 0
+      receivedQubits: 0,
+      structure:[]
     };
 
     node.on("input", function (msg) {
@@ -17,58 +17,74 @@ module.exports = function (RED) {
       if (state.expectedQubits === 0) {
         state.expectedQubits = node.context().flow.get("expectedQubits") || 1; // Default to 1 if not set
       }
+      let circuit_name=node.context().flow.get(constants.CIRCUIT_NAME); //Get the name for the current (this) Circuit
 
-      // Extract the qubit and its gates from the message
-      const currentStructure = msg.payload.structure;
-      const qubitNode = currentStructure.find((node) => node.name === "qbit");
-
-      // // Add the qubit to the temporary state
-      // qubitNode.parameters["id"] = state.receivedQubits;
-      state.qubits.push(qubitNode);
-      state.receivedQubits++;
-
-
-      // Check if all expected qubits have been received
-      if (state.receivedQubits === state.expectedQubits) {
-        const output = [];
-        //Add root compoenent to the structure output
-        output.push(
-          currentStructure.find((node) => node.name === "root")
-        );
-        // Add Quantum_Circuit_Begin component to the structure output
-        output.push(
-          currentStructure.find((node) => node.name === "Quantum_Circuit_Begin")
-        );
-
-        // Push each qubit in state qubits to output
-        state.qubits.forEach((qubit) => {
-          output.push(qubit);
-        });
-
-        // Add the Quantum_Circuit_End component
+      //Check if the qubit is the first qubit to reach the Quantum_Circuit_End
+      if (state.receivedQubits === 0){
+        //Extract all the components before the current (this) Quantum_Circuit_Begin 
+        //Now traverse the structure of the current payload and get all the components before the current (this) Quantum_Circuit_End
+        for (let component_ of msg.payload.structure){
+          state.structure.push(component_);
+          if (component_.name==="Quantum_Circuit_End" && component_.parameters.circuit_name === circuit_name){
+            break;
+          }
+        }
+        node.log("Payload: " + JSON.stringify(state.structure));
+      }
+      //For the last Qubit that reaches Quantum_Circuit_End take payload after Quantum_Circuit_Begin and add Quantum_Circuit_End
+      else if (state.receivedQubits === state.expectedQubits-1){
+        let collecting=false;
+        for (let component_ of msg.payload.structure){
+          if (component_.name==="Quantum_Circuit_Begin" && component_.parameters.circuit_name === circuit_name){
+            collecting=true;
+            continue;
+          }
+          if (collecting){
+            state.structure.push(component_);
+          }
+        }
+        //Add the Quantum_Circuit_End component
         const Quantum_Circuit_End_component = new component.Component(
           "Quantum_Circuit_End",
-          {}
+          {"circuit_name":circuit_name}
         );
+        state.structure.push(Quantum_Circuit_End_component);
+    
+        //Now pass the structure to the Quantum_Circuit_End
+        let new_payload={};
+        new_payload.structure=state.structure;
+        new_payload.currentNode=Quantum_Circuit_End_component;
+        msg.payload=new_payload
+        //Clear the states
+        state.expectedQubits=0;
+        state.receivedQubits=0;
+        state.structure=[];
+        node.log("Payload: " + JSON.stringify(msg.payload.structure));
+        node.log("\n");
 
-        output.push(Quantum_Circuit_End_component);
-        msg.payload.currentNode = Quantum_Circuit_End_component;
-        msg.payload.no_of_components = msg.payload.no_of_components + 1;
-
-        msg.payload.structure = output;
-
-        // Send the aggregated message
         node.send(msg);
-
-        // Reset state for next aggregation
-        state.qubits = [];
-        state.receivedQubits = 0;
-        state.expectedQubits = 0; 
-        node.context().flow.set("expectedQubits", undefined);
-        node.context().flow.set("expectedQubits",undefined);
-        node.context().flow.set("circuit_name",undefined);
       }
-    });
+      //For the qubits that are not first and last take only the payload after the Quantum_Circuit_Begin and exclude the Quantum_Circuit_End
+      else{
+       let collecting=false;
+       for (let component_ of msg.payload.structure){
+          if (component_.name==="Quantum_Circuit_Begin" && component_.parameters.circuit_name === circuit_name){
+            collecting=true;
+            continue;
+          }
+          if (collecting){
+            state.structure.push(component_);
+          }
+          if (component_.name==="Quantum_Circuit_End" && component_.parameters.circuit_name === circuit_name){
+            break;
+          }
+        }
+        node.log("Payload: " + JSON.stringify(state.structure));
+      }
+      state.receivedQubits += 1;
+      }
+   
+    );
   }
 
   RED.nodes.registerType("Quantum_Circuit_End", Quantum_Circuit_EndNode);
