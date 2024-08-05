@@ -4,7 +4,7 @@ import numpy as np
 from qiskit import QuantumCircuit
 from code_component_dependency import Code_Component_Dependency as Table
 from code_component_v3 import Code_Component, snippets
-
+from import_table import import_table
 
 def generate_qiskit_code(component, import_statements, functions, calling_code, defined_functions):
     code_obj = snippets.get(component.get("name"))
@@ -12,9 +12,10 @@ def generate_qiskit_code(component, import_statements, functions, calling_code, 
         try:
             # Format import statements and add them to the set if they exist
             if code_obj.import_statement:
-                formatted_import = code_obj.import_statement.format(**component.get("parameters", {})).strip()
-                if formatted_import not in import_statements:
-                    import_statements.add(formatted_import)
+                for import_key in code_obj.import_statement:
+                    formatted_import = import_table[import_key].format(**component.get("parameters", {})).strip()
+                    if formatted_import not in import_statements:
+                        import_statements.add(formatted_import)
 
             # Format function definitions and add them to the set if they exist and haven't been added before
             if code_obj.function and code_obj.function not in defined_functions:
@@ -32,28 +33,26 @@ def generate_qiskit_code(component, import_statements, functions, calling_code, 
     return calling_code
 
 def traverse_structure(structure, import_statements, functions, calling_code, defined_functions):
-    stack = []
-    circuit_name = None
+    has_circuit_begin = False
+    # circuit_name = None
     for index, component in enumerate(structure):
-        if component.get("name") == "root":
+        compoment_name = component.get("name")
+        if compoment_name == "root":
             if component.get("code"):
                 calling_code += component.get("code")
-        elif component.get("name") == "Quantum_Circuit_Begin":
+        elif compoment_name == "Quantum_Circuit_Begin":
             calling_code += f"# Quantum Circuit Begin {component.get('parameters').get('circuit_name')}\n"
-            circuit_name = component.get("parameters").get('circuit_name')
-            stack.append(circuit_name)
+            # circuit_name = component.get("parameters").get('circuit_name')
+            has_circuit_begin = True
             calling_code = generate_qiskit_code(component, import_statements, functions, calling_code, defined_functions)
-        elif component.get("name") == "Quantum_Circuit_End":
-            try:
-                name = stack.pop()
-            except IndexError:
-                name = None
-            if not name:
+        elif compoment_name == "Quantum_Circuit_End":
+            if not has_circuit_begin:
                 calling_code += f"[Error] Circuit End mismatch\n"
+                return calling_code
             calling_code += "# Quantum Circuit End\n"
-        elif component.get("name") == "qbit":
-            for child in component.get("children"):
-                calling_code = generate_qiskit_code(child, import_statements, functions, calling_code, defined_functions)
+            has_circuit_begin = False
+        elif compoment_name == "qbit":
+            continue
         else:
             calling_code = generate_qiskit_code(component, import_statements, functions, calling_code, defined_functions)
         print(f"Code: pass {index}\n" + calling_code + "\n", file=sys.stderr)

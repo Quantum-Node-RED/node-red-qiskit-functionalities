@@ -25,148 +25,148 @@ snippets = {
 
     # Circuit
     "Quantum_Circuit_Begin": Code_Component(
-        import_statement="from qiskit import QuantumCircuit",
+        import_statement=["QISKIT_QUANTUM_CIRCUIT"],
         function="",
         calling_function="{circuit_name} = QuantumCircuit({num_qbits})"
     ),
 
     "measure": Code_Component(
-        import_statement="",
+        import_statement=[],
         function="",
         calling_function="{circuit_name}.measure({qbit})"
     ),
 
     "swap": Code_Component(
-        import_statement="",
+        import_statement=[],
         function="",
         calling_function="{circuit_name}.swap({qbit1}, {qbit2})"
     ),
 
     "classical_register": Code_Component(
-        import_statement="from qiskit import ClassicalRegister",
+        import_statement=["QISKIT_CLASSICAL_REGISTER"],
         function="",
         calling_function="{var_name} = ClassicalRegister({num_qbits})"
     ),
 
     "quantum_register": Code_Component(
-        import_statement="from qiskit import QuantumRegister",
+        import_statement=["QISKIT_QUANTUM_REGISTER"],
         function="",
         calling_function="{var_name} = QuantumRegister({num_qbits})"
     ),
 
     "reset": Code_Component(
-        import_statement="",
+        import_statement=[],
         function="",
         calling_function="{circuit_name}.reset({qbit})"
     ),
 
     # Maths
     "matrix": Code_Component(
-        import_statement="import numpy as np",
+        import_statement=["NUMPY"],
         function="",
         calling_function="{var_name} = np.array(eval({matrix}))"
     ),
 
     # Gates
     "CX_gate": Code_Component(
-        import_statement="",
+        import_statement=[],
         function="",
         calling_function="{circuit_name}.cx({qbit1}, {qbit2})"
     ),
 
     "CZ_gate": Code_Component(
-        import_statement="",
+        import_statement=[],
         function="",
         calling_function="{circuit_name}.cz({qbit1}, {qbit2})"
     ),
 
     "CU_gate": Code_Component(
-        import_statement="",
+        import_statement=[],
         function="",
         calling_function="{circuit_name}.cu({theta}, {phi}, {lam}, {qbit1}, {qbit2})"
     ),
 
     "H_gate": Code_Component(
-        import_statement="",
+        import_statement=[],
         function="",
         calling_function="{circuit_name}.h({qbit})"
     ),
 
     "RX_gate": Code_Component(
-        import_statement="",
+        import_statement=[],
         function="",
         calling_function="{circuit_name}.rx({theta}, {qbit})"
     ),
 
     "RZ_gate": Code_Component(
-        import_statement="",
+        import_statement=[],
         function="",
         calling_function="{circuit_name}.rz({theta}, {qbit})"
     ),
 
     "RY_gate": Code_Component(
-        import_statement="",
+        import_statement=[],
         function="",
         calling_function="{circuit_name}.ry({theta}, {qbit})"
     ),
 
     "SX_gate": Code_Component(
-        import_statement="",
+        import_statement=[],
         function="",
         calling_function="{circuit_name}.sx({qbit})"
     ),
 
     "X_gate": Code_Component(
-        import_statement="",
+        import_statement=[],
         function="",
         calling_function="{circuit_name}.x({qbit})"
     ),
 
     "barrier": Code_Component(
-        import_statement="",
+        import_statement=[],
         function="",
         calling_function="{circuit_name}.barrier({qbit})"
     ),
 
     "phase": Code_Component(
-        import_statement="",
+        import_statement=[],
         function="",
         calling_function="{circuit_name}.p({theta}, {qbit})"
     ),
 
     "I_gate": Code_Component(
-        import_statement="",
+        import_statement=[],
         function="",
         calling_function="{circuit_name}.i({qbit})"
     ),
 
     "U_gate": Code_Component(
-        import_statement="",
+        import_statement=[],
         function="",
         calling_function="{circuit_name}.u({theta}, {phi}, {lam}, {qbit})"
     ),
 
     "Toffoli_gate": Code_Component(
-        import_statement="",
+        import_statement=[],
         function="",
         calling_function="{circuit_name}.toffoli({qbit1}, {qbit2}, {qbit3})"
     ),
 
     "CCX_gate": Code_Component(
-        import_statement="",
+        import_statement=[],
         function="",
         calling_function="{circuit_name}.ccx({qbit1}, {qbit2}, {qbit3})"
     ),
 
     "multi_controlled_U_gate": Code_Component(
-        import_statement="from qiskit.circuit.library import UGate",
+        import_statement=["QISKIT_CIRCUIT_LIBRARY"],
         function="",
         calling_function="{circuit_name}.mct({qbit1}, {qbit2}, {qbit3})"
     ),
 
     # Tools
     "local_simulator": Code_Component(
-        import_statement="from qiskit import Aer, execute",
+        import_statement=["QISKIT_AER_EXECUTE"],
         function="",
         calling_function="""
             default='qasm_simulator'
@@ -178,13 +178,17 @@ snippets = {
     ),
 
     "draw": Code_Component(
-        import_statement="",
+        import_statement=[],
         function="",
         calling_function="{circuit_name}.draw(output='{output_type}')"
     ),
 
     "encode_image": Code_Component(
-        import_statement="import matplotlib.pyplot as plt\nimport base64\nimport io\nimport warnings",
+        import_statement=[
+            "PYPLOT",
+            "IO",
+            "WARNINGS"
+        ],
         function="warnings.filterwarnings('ignore', category=UserWarning)",
         calling_function="""
             buffer = io.BytesIO()
@@ -197,7 +201,7 @@ snippets = {
     ),
 
     "histogram": Code_Component(
-        import_statement="from qiskit.visualization import plot_histogram",
+        import_statement=["QISKIT_VISUALIZATION_HISTOGRAM"],
         function="",
         calling_function="""
             simulator = Aer.get_backend('qasm_simulator')
@@ -208,14 +212,19 @@ snippets = {
 
     # Function
     "sparse_pauli_op": Code_Component(
-        import_statement="from qiskit.quantum_info import SparsePauliOp",
+        import_statement=["QISKIT_SPARSE_PAULI_OP"],
         function="",
         calling_function="SparsePauliOp({pauli_list}, coeffs={coeffs})"
     ),
 
     # Visualisation
     "draw_graph": Code_Component(
-        import_statement="import networkx as nx\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport os",
+        import_statement=[
+            "NETWORKX",
+            "NUMPY",
+            "PYPLOT",
+            "OS"
+        ],
         function="",
         calling_function="""
             G = nx.from_numpy_array({matrix})
@@ -234,7 +243,7 @@ snippets = {
 
     # Algorithms - QAOA
     "apply_objective_value": Code_Component(
-        import_statement="import numpy as np",
+        import_statement=["NUMPY"],
         function="""def objective_value(x, w):
     X = np.outer(x, (1 - x))
     w_01 = np.where(w != 0, 1, 0)
@@ -245,7 +254,7 @@ snippets = {
     ),
 
     "apply_bitfield": Code_Component(
-        import_statement="import numpy as np",
+        import_statement=["NUMPY"],
         function="""def bitfield(n, L):
     result = np.binary_repr(n, L)
     return [int(digit) for digit in result]""",
@@ -255,7 +264,10 @@ snippets = {
     ),
 
     "extract_most_likely_state": Code_Component(
-        import_statement="import numpy as np\nfrom qiskit.result import QuasiDistribution",
+        import_statement=[
+            "NUMPY", 
+            "QISKIT_RESULT_QUASI_DISTRIBUTION"  # Using the defined import for QuasiDistribution
+        ],
         function="""def extract_most_likely_state(state_vector):
     if isinstance(state_vector, QuasiDistribution):
         values = list(state_vector.values())
@@ -272,13 +284,16 @@ snippets = {
     ),
 
     "apply_hamiltonian": Code_Component(
-        import_statement="",
+        import_statement=[],
         function="",
         calling_function=""
     ),
 
     "QAOA": Code_Component(
-        import_statement="from qiskit_algorithms import QAOA\nfrom qiskit_algorithms.optimizers import {optimizer}",
+        import_statement=[
+            "QISKIT_ALGORITHMS_QAOA", 
+            "QISKIT_ALGORITHMS_OPTIMIZERS"  # Using the defined import for QAOA and Optimizer
+        ],
         function="",
         calling_function="{var_result} = QAOA({sampler}, {optimizer}(), reps={reps})"
     )
