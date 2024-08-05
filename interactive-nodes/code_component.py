@@ -11,11 +11,13 @@ class Code_Component:
     classical_register= "{var_name} = ClassicalRegister({num_qubits})"
     quantum_register= "{var_name} = QuantumRegister({num_qubits})"
     reset= "{circuit_name}.reset({qbit})"
+
     barrier = "{circuit_name}.barrier({qbit})"
     #Functions
     qiskit_runtime_service = "QiskitRuntimeService(channel={channel}, token={token})"
-    #Maths
-    matrix = "{var_name} = np.array({matrix})"
+  
+    # Maths
+    matrix = "{var_name} = np.array(eval({matrix}))"
     # Gates
     CX_gate = "{circuit_name}.cx({control_qubit}, {target_qubit})"
     CZ_gate = "{circuit_name}.cz({control_qubit}, {target_qubit})"
@@ -60,8 +62,7 @@ class Code_Component:
                 result = execute(qc, backend = simulator, shots = %s).result()
                 plot_histogram(result.get_counts(), color='midnightblue', title="Circuit Output")   
                 """
-
-
+    
     def code_import(self):
         import_code = "import numpy as np\nfrom qiskit import QuantumCircuit\n"
         return import_code

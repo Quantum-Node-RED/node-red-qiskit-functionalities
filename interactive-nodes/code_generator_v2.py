@@ -9,7 +9,7 @@ def generate_qiskit_code(component):
     code = Code_Component.snippets.get(component.get("name"))
     if code is not None:
         try:
-            code = code.format(**component.get("parameters", {}))
+            code = code.format(**component.get("parameters", {})).strip()
         except KeyError as e:
             return f"[Error] Missing parameter {e} for component: {component.get('name')}\n"
     else:
@@ -42,21 +42,24 @@ def traverse_structure(structure):
                 code += generate_qiskit_code(child)
         else:
             code += generate_qiskit_code(component)
-        print(f"Code: pass {index}\n"+code + "\n")
+        print(f"Code: pass {index}\n"+code + "\n", file=sys.stderr)
     return code
 
-
-
 if __name__ == "__main__":
-    json_file_path = "./test.json"
-    with open(json_file_path, 'r') as j:
-        data = json.loads(j.read())
+    # json_file_path = "./test.json"
+    # with open(json_file_path, 'r') as j:
+    #     data = json.loads(j.read())
 
-    # input_json = sys.argv[1]
-    # data = json.loads(input_json)
+    input_json = sys.argv[1]
+    data = json.loads(input_json)
 
     generated_code = Code_Component.code_import(data)
-    generated_code += traverse_structure(data['structure'])+""
+    generated_code += traverse_structure(data['structure']) + ""
 
-    print(generated_code)
+    result = {
+        "code": generated_code ,
+    }
+
+    # print(generated_code)
+    print(json.dumps(result))
     

@@ -19,4 +19,4 @@ module.exports = function (RED) {
     });
   }
   RED.nodes.registerType("matrix", matrixNode);
-}
+};

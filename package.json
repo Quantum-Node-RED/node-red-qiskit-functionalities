@@ -52,7 +52,13 @@
       "CCX-gate": "interactive-nodes/Gates/CCX-gate/CCX-gate.js",
       "mutli_controlled_U_gate": "interactive-nodes/Gates/mutli_controlled_U_gate/mutli_controlled_U_gate.js",
       "local-simulator": "interactive-nodes/Tools/local_simulator/local_simulator.js",
-      "draw": "interactive-nodes/Tools/draw/draw.js"
+      "draw": "interactive-nodes/Tools/draw/draw.js",
+      "Apply-bitfield": "interactive-nodes/Functions/Apply-bitfield/Apply-bitfield.js",
+      "Apply-objective-value": "interactive-nodes/Functions/Apply-objective-value/Apply-objective-value.js",
+      "Draw-graph": "interactive-nodes/Functions/draw-graph/draw-graph.js",
+      "Apply-Hamiltonian": "interactive-nodes/Functions/Apply-Hamiltonian/Apply-Hamiltonian.js",
+      "Extract-most-likely-state": "interactive-nodes/Functions/Extract-most-likely-state/Extract-most-likely-state.js",
+      "QAOA-Algorithm": "interactive-nodes/Algorithms/QAOA-Algorithm/QAOA-Algorithm.js"
     }
   },
   "dependencies": {

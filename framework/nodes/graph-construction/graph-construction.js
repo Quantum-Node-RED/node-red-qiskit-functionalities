@@ -14,7 +14,7 @@ module.exports = function (RED) {
 
       // Add graph data to the payload
       msg.payload.graph = {
-        adjacency_matrix: matrix
+        adjacency_matrix: matrix,
       };
       node.send(msg);
     });

@@ -1,0 +1,59 @@
+<script type="text/javascript">
+  RED.nodes.registerType("QAOA-Algorithm", {
+    category: "function",
+    color: "#aaaaaa",
+    defaults: {
+      name: { value: "QAOA-Algorithm" },
+      reps: { value: 2, required: true },
+      optimizer: { value: "COBLYA", required: true },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    label: function () {
+      return this.name || "QAOA-Algorithm";
+    },
+    oneditprepare: function () {
+      // Ensure the reps value is not less than 1
+      var repsInput = document.getElementById("node-input-reps");
+      repsInput.addEventListener("input", function () {
+        if (this.value < 1) {
+          this.value = 1;
+        }
+      });
+
+      // Populate initial dropdown options
+      var select = $("#node-input-optimizer");
+      var initialOptions = [
+        { value: "COBYLA", label: "COBYLA" },
+        { value: "SPSA", label: "SPSA" },
+      ];
+
+      initialOptions.forEach(function (option) {
+        select.append(
+          '<option value="' + option.value + '">' + option.label + "</option>"
+        );
+      });
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="QAOA-Algorithm">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Name" />
+    </div>
+    <div class="form-row">
+      <label for="node-input-reps"><i class="fa fa-repeat"></i> Reps</label>
+      <input type="number" id="node-input-reps" placeholder="2" min="1" />
+    </div>
+  </div>
+  <div class="form-row">
+    <label for="node-input-optimizer"><i class="fa fa-list"></i>Optimizer</label>
+    <select id="node-input-optimizer"></select>
+  </div>
+</script>
+
+<script type="text/html" data-help-name="QAOA-Algorithm">
+  <p>QAOA-Algorithm</p>
+</script>

@@ -87,7 +87,7 @@ def traverse_structure(structure, num_qubits):
     return "\n".join(code_lines)
 
 if __name__ == "__main__":
-    json_file_path = "./interactive-nodes/test.json"
+    json_file_path = "./test.json"
     with open(json_file_path, 'r') as j:
         data = json.loads(j.read())
 

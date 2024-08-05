@@ -13,7 +13,7 @@ class Code_Component:
             "quantum_register": "{var_name} = QuantumRegister({num_qubits})",
             "reset": "{circuit_name}.reset({qbit})",
             # Maths
-            "matrix": "{var_name} = np.array({matrix})",
+            "matrix": "{var_name} = np.array(eval({matrix}))",
             # Gates
             "CX_gate": "{circuit_name}.cx({qbit1}, {qbit2})",
             "CZ_gate": "{circuit_name}.cz({qbit1}, {qbit2})",
@@ -58,10 +58,71 @@ class Code_Component:
                 simulator = Aer.get_backend('qasm_simulator')
                 result = execute(qc, backend = simulator, shots = %s).result()
                 plot_histogram(result.get_counts(), color='midnightblue', title="Circuit Output")   
-                """
-    }
+                """,
 
+            # Function
+
+            "sparse_pauli_op": """
+            from qiskit.quantum_info import SparsePauliOp
+            SparsePauliOp({pauli_list}, coeffs={coeffs})
+            """,
+                
+            # Visualisation
+            "draw_graph" : """
+            G = nx.from_numpy_array({matrix})
+            layout = nx.random_layout(G, seed=10)
+                
+            # Ensure colors list matches the number of nodes
+            num_nodes = len(G.nodes)
+            colors = plt.cm.rainbow(np.linspace(0, 1, num_nodes))
+                
+            nx.draw(G, layout, node_color=colors)
+            labels = nx.get_edge_attributes(G, "weight")
+            nx.draw_networkx_edge_labels(G, pos=layout, edge_labels=labels)
+                        
+            # Ensure the folder exists
+            os.makedirs(folder, exist_ok=True)
+                    
+            # Save the plot as an image in the specified folder
+            filepath = os.path.join(folder, filename)
+            plt.savefig(filepath)
+            plt.close()
+            """,
+    
+            # Algorithms - QAOA
+            "apply_objective_value" : """
+import numpy as np
+X = np.outer({binary_vector}, (1 - {binary_vector}))
+w_01 = np.where({matrix} != 0, 1, 0)
+{var_result} = np.sum(w_01 * X)
+            """,
+                
+            "apply_bitfield" : """
+result = np.binary_repr({integer_value}, {bit_length})
+{var_result} = [int(digit) for digit in result]
+            """,
+                
+            "extract_most_likely_state" : """
+            import numpy as np
+from qiskit.result import QuasiDistribution
+values = {state_vector}
+n = int(np.log2(len(values)))
+k = np.argmax(np.abs(values))
+x = bitfield(k, n)
+x.reverse()
+{var_result} = np.asarray(x)
+            """,
+
+            "apply_hamiltonian": """""",
+
+            "QAOA":"""
+            from qiskit_algorithms import QAOA
+from qiskit_algorithms.optimizers import {optimizer}
+{var_result} = QAOA({sampler}, {optimizer}(), reps={reps})
+            """     
+    }
 
     def code_import(self):
         import_code = "import numpy as np\nfrom qiskit import QuantumCircuit\n"
         return import_code
+    
