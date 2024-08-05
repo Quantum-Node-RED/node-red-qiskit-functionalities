@@ -4,7 +4,21 @@
       color: '#dddddd',
       defaults: {
         name: { value: "What does 'build circuit' means?" },
-        //info: { value: "# Building a quantum circuit involves designing and arranging a sequence of quantum instructions to manipulate quantum bits (qubits). Each instruction represents a specific quantum operation, such as a gate that changes the state of a qubit. By combining these instructions into a circuit, you create a blueprint for how qubits interact and evolve over time, ultimately allowing you to perform complex quantum computations and experiments.\r\n&nbsp;\r\n# Instructions and circuits are similar in that they both describe operations on bits and qubits, but they have different purposes:\r\n- # Instructions are treated as fixed, and their methods will usually return new instructions (without mutating the original object).\r\n- # Circuits are designed to be built over many lines of code, and [QuantumCircuit](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit) methods often mutate the existing object.\r\n&nbsp;\r\n# The rest of this flow illustrates how to manipulate quantum circuits."}
+        info: { 
+            value: "# Building a quantum circuit involves designing and arranging a sequence of quantum instructions to " +
+            "manipulate quantum bits (qubits). Each instruction represents a specific quantum operation, such as a gate that " +
+            "changes the state of a qubit. By combining these instructions into a circuit, you create a blueprint for how qubits " +
+            "interact and evolve over time, ultimately allowing you to perform complex quantum computations and experiments.\r\n" +
+            "&nbsp;\r\n" +
+            "# Instructions and circuits are similar in that they both describe operations on bits and qubits, but they have " +
+            "different purposes:\r\n" +
+            "- # Instructions are treated as fixed, and their methods will usually return new instructions (without mutating the " +
+            "original object).\r\n" +
+            "- # Circuits are designed to be built over many lines of code, and " +
+            "[QuantumCircuit](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit) methods often mutate the " +
+            "existing object.\r\n" +
+            "&nbsp;\r\n" +
+            "# The rest of this flow illustrates how to manipulate quantum circuits."}
       },
       inputs: 1,
       outputs: 1,
@@ -23,5 +37,12 @@
   </script>
   
   <script type="text/html" data-help-name="intro-to-build-circuit">
-    <p>Introduction to the meaning of 'building circuit'.</p>
+    <p>A node that introduces the meaning of 'building circuit'.</p>
+
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to what 'build circuit' means. It is an information node that does not require any specific 
+      input and does not generate any output. Instead, it is intended to be a part of a chain of tutorial nodes that explain the 
+      basics of quantum computing.
+    </p>
   </script>
