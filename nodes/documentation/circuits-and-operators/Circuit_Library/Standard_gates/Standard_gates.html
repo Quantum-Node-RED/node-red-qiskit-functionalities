@@ -3,7 +3,7 @@
     category: 'Circuit Library',
     color: '#aaaaaa',
     defaults: {
-      name: { value: "Standard-Gates" },
+      name: { value: "Standard Gates" },
       info: { value: 
           "# The circuit library also includes standard quantum gates. Some are more fundamental gates " +
           "(such as the <font style=\"background: lightgrey\">UGate</font>), and others are multi-qubit gates that usually need " +
@@ -37,7 +37,7 @@
     outputs: 1,
     icon: "file.svg",
     label: function () {
-      return this.name || "Standard-Gates";
+      return this.name || "Standard Gates";
     }
   });
 </script>
@@ -50,7 +50,7 @@
 </script>
 
 <script type="text/html" data-help-name="Standard-Gates">
-  <p>A quantum circuit having Hadamard gate and MCX gate applied.</p>
+  <p>A node that introduce the standard gate in qiskit library.</p>
 
   <h3>Outputs</h3>
   <ol class="node-ports">
@@ -64,13 +64,7 @@
 
   <h3>Details</h3>
   <p>
-    The <code>QuantumCircuit</code> object, referred to as <code>qc</code>, is the central structure of your quantum circuit. As you add different nodes, such as gates, to your flow, these nodes interact with <code>qc</code> to modify the circuit's composition.
-  </p>
-  <p>
-    For instance, when a Hadamard gate node is added, it applies a Hadamard gate to a specified qubit in the <code>qc</code> object, transforming its state into a superposition. Similarly, adding a Multi-Controlled X (MCX) gate node uses multiple qubits as controls to flip the target qubit's state.
-  </p>
-  <p>
-    Each node appends a specific gate to the circuit, incrementally building the logic required for your quantum algorithms. These changes are made by invoking methods on the <code>qc</code> object, thus constructing your desired quantum operations.
+    This node provides an introduction to using standard quantum gates in a quantum circuit, based on the Qiskit documentation. The circuit library includes a variety of gates, some fundamental like the UGate, and others that are multi-qubit gates often constructed from single- and two-qubit gates.
   </p>
 
 </script>

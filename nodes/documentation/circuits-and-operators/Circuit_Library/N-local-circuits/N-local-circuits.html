@@ -3,14 +3,14 @@
       category: 'Circuit Library',
       color: '#aaaaaa',
       defaults: {
-        name: { value: "N-local-circuits" },
+        name: { value: "N-local circuits" },
         info: { value: "# N-local circuit alternate layers of single-qubit rotation gates with layers of multi-qubit entangling gates.\r\n&nbsp;\r\n# This family of circuits is popular in variational quantum algorithms because they can produce a wide range of quantum states. Variational algorithms adjust the gate parameters to find states that have certain properties (such as states that represent a good solution to an optimization problem). For this purpose, many circuits in the library are **parameterized**, which means you can define them without fixed values.\r\n&nbsp;\r\n# The following code imports a <font style=\"background: lightgrey\">TwoLocal</font> circuit, in which the entangling gates are two-qubit gates. This circuit interleaves blocks of parameterized single-qubit gates, followed by entangling blocks of two-qubit gates. The following code creates a three-qubit circuit, with single-qubit RX-gates and two-qubit CZ-gates.\r\n```python\r\nfrom qiskit.circuit.library import TwoLocal\r\ntwo_local = TwoLocal(3, 'rx', 'cz')\r\ntwo_local.decompose().draw('mpl')\r\n```\r\n# You can check the image of the N-local circuit in the \"N-Local Circuit Image Output\" node.\r\n&nbsp;\r\n# You can also get a list-like object of the circuit's parameters from the <font style=\"background: lightgrey\">parameters</font> attribute.\r\n```python\r\ntwo_local.parameters\r\n```\r\n# The output is sent to \"N-local parameters output\" node and you can check them in the debug palette.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Object: `two_local` (Type: _qiskit.circuit.library.TwoLocal_)\r\n- # Set: `two_local.parameters` (Type: _qiskit.circuit.Parameter_)\r\n- # Image: Image of decompsed circuit `two_local`\r\n\r\n"}
       },
       inputs: 1,
       outputs: 1,
       icon: "file.svg",
       label: function () {
-        return this.name || "N-local-circuits";
+        return this.name || "N-local circuits";
       }
     });
   </script>
@@ -23,5 +23,33 @@
   </script>
   
   <script type="text/html" data-help-name="N-local-circuits">
-    <p>A N local Circuit</p>
+    <p>A node that introduce the N-local Circuit</p>
+
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Object
+        <dl class="message-properties">
+          <dt>two_local <span class="property-type">qiskit.circuit.library.TwoLocal</span></dt>
+          <dd>The instance of the `TwoLocal` class from Qiskit's circuit library.</dd>
+        </dl>
+      </li>
+      <li>Set
+        <dl class="message-properties">
+          <dt>two_local.parameters<span class="property-type">qiskit.circuit.Parameter</span></dt>
+          <dd>A set of the `qiskit.circuit.Parameter` object which represents the parameters of circuit <code>two_local</code></dd>
+        </dl>
+      </li>
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the quantum circuit.</dd>
+        </dl>
+      </li>
+    </ol>
+
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to N-local circuits, which alternate between single-qubit rotation gates and multi-qubit entangling gates. These circuits are widely used in variational quantum algorithms due to their ability to represent a diverse range of quantum states. In this example, a TwoLocal circuit with three qubits is created, featuring RX (single-qubit) and CZ (two-qubit) gates.
+    </p>
   </script>
