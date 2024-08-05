@@ -18,7 +18,7 @@ module.exports = function (RED) {
       });
       console.log(result);
       const newMsg = {
-        payload: result,
+        payload: result
       };
       node.send(newMsg);
     });

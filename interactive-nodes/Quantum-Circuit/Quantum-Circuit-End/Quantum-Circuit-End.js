@@ -66,8 +66,8 @@ module.exports = function (RED) {
       }
       //For the qubits that are not first and last take only the payload after the Quantum_Circuit_Begin and exclude the Quantum_Circuit_End
       else{
-       let collecting=false;
-       for (let component_ of msg.payload.structure){
+        let collecting=false;
+        for (let component_ of msg.payload.structure){
           if (component_.name==="Quantum_Circuit_Begin" && component_.parameters.circuit_name === circuit_name){
             collecting=true;
             continue;
@@ -82,7 +82,7 @@ module.exports = function (RED) {
         node.log("Payload: " + JSON.stringify(state.structure));
       }
       state.receivedQubits += 1;
-      }
+    }
    
     );
   }

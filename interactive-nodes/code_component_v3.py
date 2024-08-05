@@ -27,7 +27,7 @@ snippets = {
     "Quantum_Circuit_Begin": Code_Component(
         import_statement="from qiskit import QuantumCircuit",
         function="",
-        calling_function="{circuit_name} = QuantumCircuit({num_qubits})"
+        calling_function="{circuit_name} = QuantumCircuit({num_qbits})"
     ),
 
     "measure": Code_Component(
@@ -45,13 +45,13 @@ snippets = {
     "classical_register": Code_Component(
         import_statement="from qiskit import ClassicalRegister",
         function="",
-        calling_function="{var_name} = ClassicalRegister({num_qubits})"
+        calling_function="{var_name} = ClassicalRegister({num_qbits})"
     ),
 
     "quantum_register": Code_Component(
         import_statement="from qiskit import QuantumRegister",
         function="",
-        calling_function="{var_name} = QuantumRegister({num_qubits})"
+        calling_function="{var_name} = QuantumRegister({num_qbits})"
     ),
 
     "reset": Code_Component(
