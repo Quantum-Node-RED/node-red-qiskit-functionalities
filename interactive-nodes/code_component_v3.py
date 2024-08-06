@@ -59,6 +59,12 @@ snippets = {
         function="",
         calling_function="{circuit_name}.reset({qbit})"
     ),
+    
+    "barrier": Code_Component(
+        import_statement=[],
+        function="",
+        calling_function="{circuit_name}.barrier({qbit})"
+    ),
 
     # Maths
     "matrix": Code_Component(
@@ -71,19 +77,19 @@ snippets = {
     "CX_gate": Code_Component(
         import_statement=[],
         function="",
-        calling_function="{circuit_name}.cx({qbit1}, {qbit2})"
+        calling_function="{circuit_name}.cx({control_qubit}, {target_qubit})"
     ),
 
     "CZ_gate": Code_Component(
         import_statement=[],
         function="",
-        calling_function="{circuit_name}.cz({qbit1}, {qbit2})"
+        calling_function="{circuit_name}.cz({control_qubit}, {target_qubit})"
     ),
 
     "CU_gate": Code_Component(
         import_statement=[],
         function="",
-        calling_function="{circuit_name}.cu({theta}, {phi}, {lam}, {qbit1}, {qbit2})"
+        calling_function="{circuit_name}.cu({theta}, {phi}, {lam},{gamma}, {control_qubit}, {target_qubit})"
     ),
 
     "H_gate": Code_Component(
@@ -122,12 +128,6 @@ snippets = {
         calling_function="{circuit_name}.x({qbit})"
     ),
 
-    "barrier": Code_Component(
-        import_statement=[],
-        function="",
-        calling_function="{circuit_name}.barrier({qbit})"
-    ),
-
     "phase": Code_Component(
         import_statement=[],
         function="",
@@ -149,19 +149,19 @@ snippets = {
     "Toffoli_gate": Code_Component(
         import_statement=[],
         function="",
-        calling_function="{circuit_name}.toffoli({qbit1}, {qbit2}, {qbit3})"
+        calling_function="{circuit_name}.toffoli({control_qubit1}, {control_qubit2}, {target_qubit})"
     ),
 
     "CCX_gate": Code_Component(
         import_statement=[],
         function="",
-        calling_function="{circuit_name}.ccx({qbit1}, {qbit2}, {qbit3})"
+        calling_function="{circuit_name}.ccx({control_qubit1}, {control_qubit2}, {target_qubit})"
     ),
 
     "multi_controlled_U_gate": Code_Component(
         import_statement=["QISKIT_CIRCUIT_LIBRARY"],
         function="",
-        calling_function="{circuit_name}.mct({qbit1}, {qbit2}, {qbit3})"
+        calling_function="{circuit_name}.append(UGate({theta}, {phi}, {lam}).control({num_of_control_qubits}), {list_of_control_qubits}+{target_qubit}))"
     ),
 
     # Tools
@@ -171,7 +171,7 @@ snippets = {
         calling_function="""
             default='qasm_simulator'
             {var_name} = Aer.get_backend({simulator} or default)
-            {var_name_result} = execute({circuit_name}, backend={var_name}, shots=%s).result()
+            {var_name_result} = execute({circuit_name}, backend={var_name}, shots={shots}).result()
             {var_name_counts} = {var_name_result}.get_counts()
             print({var_name_counts})
         """
