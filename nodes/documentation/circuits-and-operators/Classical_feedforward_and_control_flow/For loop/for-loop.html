@@ -1,20 +1,18 @@
 <script type="text/javascript">
     RED.nodes.registerType('for-loop', {
-      category: 'function',
+      category: 'Classical feedforward and control flow',
       color: '#aaaaaa',
       defaults: {
-        name: { value: "For-loop" },
+        name: { value: "For loop" },
         info: {
-          value: `A for loop is used to iterate over a sequence of classical values and perform some operations during each iteration.
-          \n In the example below, we use a for loop to apply 5 X gates to a qubit and then measure it. Because we perform an odd number of X gates, the overall effect is to flip the qubit from the 0 state to the 1 state.`,
-          required: false
+          value: "# A for loop is used to iterate over a sequence of classical values and perform some operations during each iteration.\n&nbsp;\n# In the code snippet below, we use a for loop to apply 5 X gates to a qubit and then measure it. Because we perform an odd number of X gates, the overall effect is to flip the qubit from the 0 state to the 1 state.\n```python\nqubits = QuantumRegister(1)\nclbits = ClassicalRegister(1)\ncircuit = QuantumCircuit(qubits, clbits)\n(q0,) = qubits\n(c0,) = clbits\n \nwith circuit.for_loop(range(5)) as _:\n    circuit.x(q0)\ncircuit.measure(q0, c0)\n \ncircuit.draw(\"mpl\")\n \n# example output counts: {'1': 1024}\n```\n# The code will use the code snippets from \"Introduction to classical feedforward and control flow\" node to run on the simulator and store the statistical results in the `counts` variable. The resulting measurement outcome should be 1 with 100% probability.\n&nbsp;\n# The result is sent to \"For loop Measure\" node and you can check it in the debug sidebar. You can also check the Image of the circuit in the \"For loop Circuit Diagram\" node.\n\n***\n&nbsp;\n## **Node Output:**\n- # Dictionary: `counts`\n- # Image: The image of `circuit`"
         }
       },
       inputs: 1,
       outputs: 1,
       icon: "file.svg",
       label: function () {
-        return this.name || "For-loop";
+        return this.name || "For loop";
       }
     });
   </script>
@@ -31,5 +29,26 @@
   </script>
   
   <script type="text/html" data-help-name="for-loop">
-    <p>Apply for loop to the node.</p>
+    <p>A node that introduce for loop in qiskit.</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Dictionary
+        <dl class="message-properties">
+          <dt>counts<span class="property-type">dict</span></dt>
+          <dd>The result of running circuits on simulator in 1024 shots. The key represents the quantum state, and the value is the number of times the quantum is in that state out of 1024 shots.</dd>
+        </dl>
+      </li>
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the quantum circuit.</dd>
+        </dl>
+      </li>
+    </ol>
+
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to using Qiskit's quantum circuit capabilities with for loops. It demonstrates how to iterate through a sequence of operations—in this case, applying multiple X gates to a qubit—using a for loop construct. 
+    </p>
   </script>

@@ -1,20 +1,18 @@
 <script type="text/javascript">
     RED.nodes.registerType('different-example', {
-      category: 'function',
+      category: 'Classical feedforward and control flow',
       color: '#aaaaaa',
       defaults: {
-        name: { value: "different-example" },
+        name: { value: "different example" },
         info: {
-          value: `Because the example above used a single classical bit, there were only two possible cases, so we could have achieved the same result using an if-else statement. The switch case is mainly useful when branching on the value of a classical register composed of multiple bits, as demonstrated in the following example. Here, we also show how to construct a default case, which is executed if none of the preceding cases are. Note that in a switch statement, only one of the blocks are ever executed. There is no fallthrough.
-            \n In the example below, we apply Hadamard gates to two qubits and measure them. If the result is either 00 or 11, we apply a Z gate to the third qubit. If the result is 01, we apply a Y gate. If none of the preceding cases matched, we apply an X gate. Finally, measure the third qubit.`,
-          required: false
+          value: "# Because the example in the node before used a single classical bit, there were only two possible cases, so we could have achieved the same result using an if-else statement. The switch case is mainly useful when branching on the value of a classical register composed of multiple bits, as demonstrated in the following example. Here, we also show how to construct a default case, which is executed if none of the preceding cases are. Note that in a switch statement, only one of the blocks are ever executed. There is no fallthrough.\n&nbsp;\n# In the example below, we apply Hadamard gates to two qubits and measure them. If the result is either 00 or 11, we apply a Z gate to the third qubit. If the result is 01, we apply a Y gate. If none of the preceding cases matched, we apply an X gate. Finally, measure the third qubit.\n```python\nqubits = QuantumRegister(3)\nclbits = ClassicalRegister(3)\ncircuit = QuantumCircuit(qubits, clbits)\n(q0, q1, q2) = qubits\n(c0, c1, c2) = clbits\n \ncircuit.h([q0, q1])\ncircuit.measure(q0, c0)\ncircuit.measure(q1, c1)\nwith circuit.switch(clbits) as case:\n    with case(0b000, 0b011):\n        circuit.z(q2)\n    with case(0b001):\n        circuit.y(q2)\n    with case(case.DEFAULT):\n        circuit.x(q2)\ncircuit.measure(q2, c2)\n \ncircuit.draw(\"mpl\")\n \n# example output counts: {'101': 267, '110': 249, '011': 265, '000': 243}\n```\n# The code will use the code snippets from \"Introduction to classical feedforward and control flow\" node to run on the simulator and store the statistical results in the `counts` variable. In the results, the proportions of occurrences for each condition should be generally consistent.\n&nbsp;\n# The result is sent to \"different example Measure\" node and you can check it in the debug sidebar. You can also check the Image of the circuit in the \"different example Circuit Diagram\" node.\n\n***\n&nbsp;\n## **Node Output:**\n- # Dictionary: `counts`\n- # Image: The image of `circuit`"
         }
       },
       inputs: 1,
       outputs: 1,
       icon: "file.svg",
       label: function () {
-        return this.name || "different-example";
+        return this.name || "different example";
       }
     });
   </script>
@@ -27,5 +25,26 @@
   </script>
   
   <script type="text/html" data-help-name="different-example">
-    <p>Apply Hadamard gates to two qubits and measure them using switch statement.</p>
+    <p>A node that introduce a different example of switch statement in qiskit.</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Dictionary
+        <dl class="message-properties">
+          <dt>counts<span class="property-type">dict</span></dt>
+          <dd>The result of running circuits on simulator in 1024 shots. The key represents the quantum state, and the value is the number of times the quantum is in that state out of 1024 shots.</dd>
+        </dl>
+      </li>
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the quantum circuit.</dd>
+        </dl>
+      </li>
+    </ol>
+
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to a different example of the switch statement in quantum circuits using Qiskit. It demonstrates how to branch based on the values of multiple classical bits obtained from measurements of quantum qubits. The switch statement allows the application of various quantum gates depending on the measured outcomes. Specifically, the example covers how to use the switch statement to conditionally apply different gates to a third qubit based on the results of measurements from two other qubits. If none of the specified cases match, a default operation is applied. 
+    </p>
   </script>

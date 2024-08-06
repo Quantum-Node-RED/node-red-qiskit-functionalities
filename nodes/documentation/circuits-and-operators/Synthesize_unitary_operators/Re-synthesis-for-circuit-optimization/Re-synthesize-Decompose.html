@@ -1,19 +1,18 @@
 <script type="text/javascript">
     RED.nodes.registerType('Re-synthesize-decompose', {
-    category: 'function',
+    category: 'Synthesis Unitary Operators',
     color: '#aaaaaa',
     defaults: {
-      name: { value: "Re-synthesize-decompose" },
+      name: { value: "Decompose Re-synthesized gates" },
       info: {
-        value: `However, after re-synthesizing with the following code, it only needs a single CX gate. (Here we use the QuantumCircuit.decompose() method to better visualize the gates used to re-synthesize the unitary.)`,
-        required: false
+        value: "## **Node Input:**\r\n- # Object: `better_circuit` (Type: _qiskit.circuit.quantumcircuit.QuantumCircuit_)\r\n\r\n***\r\n&nbsp;\r\n# In this node, we will decompose the re-synthesized circuit to better visualize the gates used to re-synthesize the unitary.\r\n```python\r\nbetter_circuit.decompose().draw()\r\n```\r\n# You can check the image of decomposed circuit in the \"Decompose Re-synthesized gates Circuit Diagram\" node. It should contain a single CX gate and 4 unitaries.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: the image of `better_circuit.decompose()`"
       }
     },
     inputs: 1,
     outputs: 1,
     icon: "file.svg",
     label: function () {
-      return this.name || "Re-synthesize-decompose";
+      return this.name || "Decompose Re-synthesized gates";
     }
   });
   
@@ -22,10 +21,25 @@
     <script type="text/html" data-template-name="Re-synthesize-decompose">
       <div class="form-row">
           <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
-          <input type="text" id="node-input-name" placeholder="Name">
+          <input type="text" id="node-input-name" placeholder="Decompose Re-synthesized gates">
       </div>
     </script>
     
     <script type="text/html" data-help-name="Re-synthesize-decompose">
-      <p>Synthesize unitary operations</p>
+      <p>A node that decompose re-Synthesized circuit.</p>
+
+      <h3>Outputs</h3>
+      <ol class="node-ports">
+        <li>Circuit Diagram
+          <dl class="message-properties">
+            <dt>circuit_diagram <span class="property-type">string (Base64)</span></dt>
+            <dd>The Base64-encoded string representing the visual diagram of the decomposed quantum circuit.</dd>
+          </dl>
+        </li>
+      </ol>
+    
+      <h3>Details</h3>
+      <p>
+        This node provides an introduction to visualizing the gates used in a re-synthesized quantum circuit. By utilizing the decompose method, this node helps you break down the re-synthesized circuit into its fundamental components, offering a clearer view of the gates involved. The output diagram will typically feature a single CX (CNOT) gate alongside four unitary gates.
+      </p>
     </script>

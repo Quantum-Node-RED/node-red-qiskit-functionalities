@@ -1,21 +1,18 @@
 <script type="text/javascript">
   RED.nodes.registerType('Synthesize_unitary_operators', {
-  category: 'function',
+  category: 'Synthesis Unitary Operators',
   color: '#aaaaaa',
   defaults: {
-    name: { value: "Synthesize_unitary_operators" },
+    name: { value: "Synthesize Unitary Operators" },
     info: {
-      value: `A unitary operation describes a norm-preserving change to a quantum system. For <i>n</i> qubits, this change is described by a <i>2<sup>n</sup> &times; 2<sup>n</sup></i> dimensional, complex matrix <i>U</i> whose adjoint equals the inverse, that is <i>U<sup>&dagger;</sup> U = 1</i>.
-      \nSynthesizing specific unitary operations into a set of quantum gates is a fundamental task used, for example, in the design and application of quantum algorithms or in compiling quantum circuits.
-      \nWhile efficient synthesis is possible for certain classes of unitaries – like those composed of Clifford gates or having a tensor product structure – most unitaries do not fall into these categories. For general unitary matrices, synthesis is a complex task with computational costs that increase exponentially with the number of qubits. Therefore, if you know an efficient decomposition for the unitary you would like to implement, it will likely be better than a general synthesis.`,
-      required: false
+      value: "# This code snippet demonstrates how to apply a specific unitary operation to a quantum circuit using the Qiskit framework. The <font style=\"background: lightgrey\">unitary</font> method in Qiskit sets the quantum circuit to perform the specified unitary operation on the qubits. This is particularly useful for implementing custom quantum gates or operations that are not built into the standard gate library. \r\n```python\r\nimport numpy as np\r\nfrom qiskit import QuantumCircuit\r\n \r\nU = 0.5 * np.array([\r\n    [1, 1, 1, 1],\r\n    [-1, 1, -1, 1],\r\n    [-1, -1, 1, 1],\r\n    [-1, 1, 1, -1]\r\n])\r\n \r\ncircuit = QuantumCircuit(2)\r\ncircuit.unitary(U, circuit.qubits)\r\n```\r\n# You can check the Image of the circuit that applied with this specific unitary operation _U_ in the \"Synthesis Unitary Operators Circuit Diagram\" node.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: the image of `circuit`"
     }
   },
   inputs: 1,
   outputs: 1,
   icon: "file.svg",
   label: function () {
-    return this.name || "Synthesize_unitary_operators";
+    return this.name || "Synthesize Unitary Operators";
   }
 });
 
@@ -24,10 +21,25 @@
   <script type="text/html" data-template-name="Synthesize_unitary_operators">
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
-        <input type="text" id="node-input-name" placeholder="Name">
+        <input type="text" id="node-input-name" placeholder="Synthesize Unitary Operators">
     </div>
   </script>
   
   <script type="text/html" data-help-name="Synthesize_unitary_operators">
-    <p>Synthesize unitary operations</p>
+    <p>A node that introduce Synthesize unitary operators.</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the synthesized quantum circuit.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to applying custom unitary operations within the Qiskit framework. It demonstrates how to utilize the unitary method to set a quantum circuit to perform a specified unitary operation on qubits. By synthesizing a unitary operator, this node facilitates the implementation of custom quantum gates or operations that are not available in the standard gate library, offering flexibility for advanced quantum circuit design and experimentation.
+    </p>
   </script>
