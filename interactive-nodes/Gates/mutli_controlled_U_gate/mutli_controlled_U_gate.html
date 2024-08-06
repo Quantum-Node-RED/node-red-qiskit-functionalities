@@ -9,7 +9,6 @@
       lambda: { value: "" },
       num_of_control_qbits: { value: "" },
       list_of_control_qbits: { value: "" },
-      target_qbit: { value: "" },
     },
     inputs: 1,
     outputs: 1,
@@ -28,33 +27,29 @@
 
   <div class="form-row">
     <label for="node-input-theta"><i class="fa fa-tag"></i> Theta</label>
-    <input type="text" id="node-input-theta" placeholder="Theta" />
+    <input type="number" min="0" step="any"  id="node-input-theta" placeholder="Theta" />
   </div>
   
   <div class="form-row">
     <label for="node-input-phi"><i class="fa fa-tag"></i> Phi</label>
-    <input type="text" id="node-input-phi" placeholder="Phi" />
+    <input type="number" min="0" step="any"  id="node-input-phi" placeholder="Phi" />
   </div>
 
   <div class="form-row">
     <label for="node-input-lambda"><i class="fa fa-tag"></i> Lambda</label>
-    <input type="text" id="node-input-lambda" placeholder="Lambda" />
+    <input type="number" min="0" step="any"  id="node-input-lambda" placeholder="Lambda" />
   </div>
 
   <div class="form-row">
     <label for="node-input-num_of_control_qbits"><i class="fa fa-tag"></i> Number of control qbits</label>
-    <input type="text" id="node-input-num_of_control_qbits" placeholder="Number of control qbits" />
+    <input type="number" id="node-input-num_of_control_qbits" placeholder="Number of control qbits" />
   </div>
 
   <div class="form-row">
     <label for="node-input-list_of_control_qbits"><i class="fa fa-tag"></i> List of control qbits</label>
-    <input type="text" id="node-input-list_of_control_qbits" placeholder="List of control qbits" />
+    <input type="number" id="node-input-list_of_control_qbits" placeholder="List of control qbits" />
   </div>
 
-  <div class="form-row">
-    <label for="node-input-target_qbit"><i class="fa fa-tag"></i> Target qbit</label>
-    <input type="text" id="node-input-target_qbit" placeholder="Target qbit" />
-  </div>
   
 </script>
 

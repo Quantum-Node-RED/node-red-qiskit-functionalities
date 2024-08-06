@@ -8,8 +8,8 @@ module.exports = function (RED) {
       msg.payload = msg.payload || {};
       const U_gate_component = new component.Component("U_gate",{});
       U_gate_component.parameters["theta"] = config.theta;
-      U_gate_component.parameters["phi"] = config.phi;
-      U_gate_component.parameters["lam"] = config.lambda;
+      U_gate_component.parameters["phi"] = parseFloat(config.phi);
+      U_gate_component.parameters["lam"] = parseFloat(config.lambda);
       U_gate_component.parameters["qbit"] = msg.payload["qubit_id"];
       U_gate_component.parameters[constants.CIRCUIT_NAME] = node.context().flow.get(constants.CIRCUIT_NAME);
       component.addComponent(msg, U_gate_component);

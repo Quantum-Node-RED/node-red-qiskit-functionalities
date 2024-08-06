@@ -4,7 +4,7 @@
     color: "#aaaaaa",
     defaults: {
       name: { value: "" },
-      qbit: { value: "" },
+      control_qubit: { value: "" },
       theta: { value: "" },
       phi: { value: "" },
       lambda: { value: "" },
@@ -27,27 +27,27 @@
 
   <div class="form-row">
     <label for="node-input-theta"><i class="fa fa-tag"></i> theta</label>
-    <input type="text" id="node-input-theta" placeholder="theta" />
+    <input type="number" min="0" step="any" id="node-input-theta" placeholder="theta" />
   </div>
 
   <div class="form-row">
     <label for="node-input-phi"><i class="fa fa-tag"></i> phi</label>
-    <input type="text" id="node-input-phi" placeholder="phi" />
+    <input type="number" min="0" step="any"  id="node-input-phi" placeholder="phi" />
   </div>
 
   <div class="form-row">
     <label for="node-input-lambda"><i class="fa fa-tag"></i> lambda</label>
-    <input type="text" id="node-input-lambda" placeholder="lambda" />
+    <input type="number" min="0" step="any"  id="node-input-lambda" placeholder="lambda" />
   </div>
 
   <div class="form-row">
     <label for="node-input-gamma"><i class="fa fa-tag"></i> gamma</label>
-    <input type="text" id="node-input-gamma" placeholder="gamma" />
+    <input type="number" min="0" step="any"  id="node-input-gamma" placeholder="gamma" />
   </div>
 
   <div class="form-row">
-    <label for="node-input-qbit"><i class="fa fa-tag"></i> qbit</label>
-    <input type="text" id="node-input-qbit" placeholder="qbit" />
+    <label for="node-input-control_qubit"><i class="fa fa-tag"></i> Control Qubit</label>
+    <input type="number" id="node-input-control_qubit" placeholder="Control Qubit" />
   </div>
 </script>
 
