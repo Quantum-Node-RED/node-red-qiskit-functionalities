@@ -5,7 +5,7 @@
       color: "#aaaaaa",
       defaults: {
         name: { value: "Build your custom gate" },
-        info: { value: "# In this node, we create a custom gate by following python code:\r\n```python\r\nfrom qiskit import QuantumCircuit\r\nfrom qiskit.circuit import Gate\r\n \r\ncirc = QuantumCircuit(1, 1)\r\ncustom_gate = Gate('my_custom_gate', 1, [3.14, 1])\r\n# 3.14 is an arbitrary parameter for demonstration\r\ncirc.append(custom_gate, [0])\r\ncirc.measure(0, 0)\r\n \r\ncirc.draw('mpl')\r\n```\r\n&nbsp;\r\n# The provided code snippet initializes a quantum circuit with one qubit and one classical bit using Qiskit. It defines a custom quantum gate named 'my_custom_gate' with a parameter list [3.14, 1]. This gate is applied to the qubit 0 in the circuit, followed by a measurement of the qubit's state.\r\n&nbsp;\r\n# The image of the circuit will be shown below in the \"Custom gate\" node.\r\n"}
+        info: { value: "# In this node, we create a custom gate by following python code:\r\n```python\r\nfrom qiskit import QuantumCircuit\r\nfrom qiskit.circuit import Gate\r\n \r\ncirc = QuantumCircuit(1, 1)\r\ncustom_gate = Gate('my_custom_gate', 1, [3.14, 1])\r\n# 3.14 is an arbitrary parameter for demonstration\r\ncirc.append(custom_gate, [0])\r\ncirc.measure(0, 0)\r\n \r\ncirc.draw('mpl')\r\n```\r\n&nbsp;\r\n# The provided code snippet initializes a quantum circuit with one qubit and one classical bit using Qiskit. It defines a custom quantum gate named 'my_custom_gate' with a parameter list [3.14, 1]. This gate is applied to the qubit 0 in the circuit, followed by a measurement of the qubit's state.\r\n&nbsp;\r\n# The image of the circuit will be shown below in the \"Custom gate\" node.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Object: `circ` (Type: _qiskit.circuit.quantumcircuit_)\r\n- # Image: The image of variable `circ`\r\n"}
       },
       inputs: 1,
       outputs: 1,
@@ -29,5 +29,26 @@
   
   <script type="text/html" data-help-name="pulse-build-custom-circuit">
     <p>A simple node that build a custom gate.</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Quantum Circuit
+        <dl class="message-properties">
+          <dt>circ<span class="property-type">qiskit.circuit.QuantumCircuit</span></dt>
+          <dd>The quantum circuit `circ` with customized gate.</dd>
+        </dl>
+      </li>
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the quantum circuit.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to creating a custom quantum gate in a quantum circuit using Qiskit. It showcases the process of initializing a quantum circuit with a single qubit and classical bit, followed by the definition of a custom quantum gate with specified parameters. This custom gate is then applied to the qubit in the circuit, and the qubit's state is subsequently measured. 
+    </p>
   </script>
   
