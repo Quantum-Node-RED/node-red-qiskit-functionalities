@@ -1,7 +1,7 @@
 <script type="text/javascript">
     RED.nodes.registerType('qiskit-primatives',{
         category: 'Debugging tools',
-        color: '#f5c77e',
+        color: '#dddddd',
         defaults: {
             name: {value:"Qiskit SDK primatives"},
             info: {
@@ -17,7 +17,7 @@
         },
         inputs: 1,
         outputs: 1,
-        icon: "file.svg",
+        icon: "white_info.svg",
         label: function() {
             return this.name||"qiskit-primatives";
         }
@@ -32,5 +32,14 @@
 </script>
 
 <script type="text/html" data-help-name="qiskit-primatives">
-    <p>A simple node for explaining simulations using Qiskit SDK primatives</p>
+    <p>A node that explains simulations using Qiskit SDK primatives</p>
+
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to the using Qiskit SDK primatives.
+      It is an information node that does not require any specific input and 
+      does not generate any output. Instead, it is intended to be a part of 
+      a chain of tutorial nodes that explain the basics of quantum computing.
+    </p>
+
 </script>

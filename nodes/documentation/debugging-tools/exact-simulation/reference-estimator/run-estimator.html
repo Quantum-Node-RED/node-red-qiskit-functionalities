@@ -71,5 +71,35 @@
 </script>
 
 <script type="text/html" data-help-name="run-estimator">
-    <p>A simple node for running the estimator and getting results</p>
+    <p>A node for running the Estimator and getting results</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Result Class
+        <dl class="message-properties">
+          <dt>payload.result.result_class <span class="property-type">string</span></dt>
+          <dd>A string representation of the results from an instance of a <code>PrimitiveJob</code> object.</dd>
+        </dl>
+      </li>
+      <li>Expectation Value
+        <dl class="message-properties">
+          <dt>payload.result.expectation_value <span class="property-type">array</span></dt>
+          <dd>The expectation value of the evaluations corresponding to every circuit-observable combination in the PUB.</dd>
+        </dl>
+      </li>
+      <li>Result Class
+        <dl class="message-properties">
+          <dt>payload.result.result_class <span class="property-type">object</span></dt>
+          <dd>Metadata associated with the evaluation, such as precision and other relevant details..</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+        This node shows an example Estimator code with one circuit
+        and one observable being run and the results generated, both
+        for StatevectorEstimator (V2) and Estimator (V1) implementations.
+    </p>
+
 </script>

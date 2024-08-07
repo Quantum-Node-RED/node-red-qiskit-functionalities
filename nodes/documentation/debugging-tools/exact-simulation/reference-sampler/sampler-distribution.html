@@ -1,6 +1,6 @@
 <script type="text/javascript">
     RED.nodes.registerType('sampler-distribution',{
-        category: 'Debugging tools - sampler',
+        category: 'Debugging tools',
         color: '#aaaaaa',
         defaults: {
             name: {value:"Get Sampler proability distribution"},
@@ -82,5 +82,33 @@
 </script>
 
 <script type="text/html" data-help-name="sampler-distribution">
-    <p>A simple node for getting the probability distribution or measurement outcome</p>
+    <p>A node that shows how to get the probability distribution or measurement outcome</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Circuit Text
+        <dl class="message-properties">
+          <dt>payload.result.circuit_text <span class="property-type">string</span></dt>
+          <dd>A text rendering of the circuit.</dd>
+        </dl>
+      </li>
+      <li>Number of Bitstrings
+        <dl class="message-properties">
+          <dt>payload.result.the_number_of_bitstrings_is <span class="property-type">string</span></dt>
+          <dd>A string representation of the length of the bitstring for the classical register "meas".</dd>
+        </dl>
+      </li>
+      <li>Counts
+        <dl class="message-properties">
+          <dt>payload.result.the_counts_are <span class="property-type">strnig</span></dt>
+          <dd>A string representation of the counts for the classical register "meas"</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+        This node shows how to get the probability distribution or measurement outcome,
+        for StatevectorSampler (V2) and Sampler (V1) implementations.
+    </p>
 </script>

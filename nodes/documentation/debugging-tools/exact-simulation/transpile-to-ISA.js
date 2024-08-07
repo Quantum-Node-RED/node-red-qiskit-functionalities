@@ -1,4 +1,4 @@
-const runPythonScript = require("../../../../pythonShell");
+const runPythonScript = require("../../../pythonShell");
 
 module.exports = function (RED) {
   function TranspileToISANode(config) {

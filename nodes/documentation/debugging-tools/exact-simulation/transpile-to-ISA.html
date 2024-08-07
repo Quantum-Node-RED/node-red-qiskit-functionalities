@@ -1,7 +1,7 @@
 <script type="text/javascript">
     RED.nodes.registerType('transpile-to-ISA',{
         category: 'Debugging tools',
-        color: '#f5c77e',
+        color: '#dddddd',
         defaults: {
             name: {value:"Transpile to ISA circuits and observables"},
             info: {
@@ -23,7 +23,7 @@
         },
         inputs: 1,
         outputs: 1,
-        icon: "file.svg",
+        icon: "white_info.svg",
         label: function() {
             return this.name||"transpile-to-ISA";
         }
@@ -38,5 +38,15 @@
 </script>
 
 <script type="text/html" data-help-name="transpile-to-ISA">
-    <p>A simple node for transpiling circuits and observables to ISA circuits and observables</p>
+    <p>A node that shows how to transpile circuits and observables to ISA circuits and observables</p>
+
+    <h3>Details</h3>
+    <p>
+      This node gives an exeample on how to transform circuits and 
+      observable to only use instructions supported by the QPU.
+      It is an information node that does not require any specific input and 
+      does not generate any output. Instead, it is intended to be a part of 
+      a chain of tutorial nodes that explain the basics of quantum computing.
+    </p>
+
 </script>

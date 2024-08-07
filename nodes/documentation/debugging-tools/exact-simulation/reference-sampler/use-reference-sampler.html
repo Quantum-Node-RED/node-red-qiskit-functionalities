@@ -1,6 +1,6 @@
 <script type="text/javascript">
     RED.nodes.registerType('use-reference-sampler',{
-        category: 'Debugging tools - sampler',
+        category: 'Debugging tools',
         color: '#aaaaaa',
         defaults: {
             name: {value:"Use the rerference Sampler"},
@@ -49,5 +49,21 @@
 </script>
 
 <script type="text/html" data-help-name="use-reference-sampler">
-    <p>A simple node preparing to use the Sampler reference</p>
+    <p>A node that shows how to prepare to use the Sampler reference</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>payload.result.circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the quantum circuit.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+        This node shows an example code and how to prepare the inputs
+        to use the <code>Sampler</code> reference.
+    </p>
 </script>

@@ -1,6 +1,6 @@
 <script type="text/javascript">
     RED.nodes.registerType('run-sampler',{
-        category: 'Debugging tools - sampler',
+        category: 'Debugging tools',
         color: '#aaaaaa',
         defaults: {
             name: {value:"Run the sampler"},
@@ -64,5 +64,22 @@
 </script>
 
 <script type="text/html" data-help-name="run-sampler">
-    <p>A simple node for running the sampler and getting results</p>
+    <p>A node for running the Sampler and getting results</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Result Class set
+        <dl class="message-properties">
+          <dt>payload.result.result_class_1_circuit <span class="property-type">object</span></dt>
+          <dd>A set of string representations of the result classes generated in example.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+        This node shows an example Sampler code with one circuit
+        and one observable being run and the results generated, both
+        for StatevectorSampler (V2) and Sampler (V1) implementations.
+    </p>
 </script>

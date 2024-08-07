@@ -1,7 +1,7 @@
 <script type="text/javascript">
     RED.nodes.registerType('intro-to-debug',{
         category: 'Debugging tools',
-        color: '#f5c77e',
+        color: '#dddddd',
         defaults: {
             name: {value:"Introduction to debugging tools"},
             info: {
@@ -19,7 +19,7 @@
         },
         inputs: 1,
         outputs: 1,
-        icon: "file.svg",
+        icon: "white_info.svg",
         label: function() {
             return this.name||"intro-to-debug";
         }
@@ -34,5 +34,13 @@
 </script>
 
 <script type="text/html" data-help-name="intro-to-debug">
-    <p>A simple node for introduction to debugging tools</p>
+    <p>A node that gives an introduction to debugging tools</p>
+ 
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to the 'Debugging tools' tutorial.
+      It is an information node that does not require any specific input and 
+      does not generate any output. Instead, it is intended to be a part of 
+      a chain of tutorial nodes that explain the basics of quantum computing.
+    </p>
 </script>

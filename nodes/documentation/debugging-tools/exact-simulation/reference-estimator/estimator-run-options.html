@@ -1,7 +1,7 @@
 <script type="text/javascript">
     RED.nodes.registerType('estimator-run-options',{
         category: 'Debugging tools',
-        color: '#f5c77e',
+        color: '#dddddd',
         defaults: {
             name: {value:"Set Estimator run options"},
             info: {
@@ -37,7 +37,7 @@
         },
         inputs: 1,
         outputs: 1,
-        icon: "file.svg",
+        icon: "white_info.svg",
         label: function() {
             return this.name||"estimator-run-options";
         }
@@ -52,5 +52,15 @@
 </script>
 
 <script type="text/html" data-help-name="estimator-run-options">
-    <p>A simple node showing how the Estimator run options can be modified</p>
+    <p>A node that shows how the Estimator run options can be modified</p>
+
+    <h3>Details</h3>
+    <p>
+        This node shows different ways to modify the Estimator run 
+        options to introduce the effect of the sampling overhead, 
+        for both StatevectorEstimator (V2) and Estimator (V1) implementations.
+        It is an information node that does not require any specific input and 
+        does not generate any output. Instead, it is intended to be a part of 
+        a chain of tutorial nodes that explain the basics of quantum computing.
+    </p>
 </script>

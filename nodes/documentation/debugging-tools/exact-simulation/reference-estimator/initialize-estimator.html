@@ -1,7 +1,7 @@
 <script type="text/javascript">
     RED.nodes.registerType('initialize-estimator',{
         category: 'Debugging tools',
-        color: '#f5c77e',
+        color: '#dddddd',
         defaults: {
             name: {value:"Initialize Estimator"},
             info: {
@@ -28,7 +28,7 @@
         },
         inputs: 1,
         outputs: 1,
-        icon: "file.svg",
+        icon: "white_info.svg",
         label: function() {
             return this.name||"initialize-estimator";
         }
@@ -43,5 +43,14 @@
 </script>
 
 <script type="text/html" data-help-name="initialize-estimator">
-    <p>A simple node for initializing a Estimator primitive</p>
+    <p>A node that shows how to initialize an Estimator primitive</p>
+
+    <h3>Details</h3>
+    <p>
+        This node shows how to initialize both the StatevectorEstimator (V2)
+        implementation and the Estimator (V1) implementation.
+        It is an information node that does not require any specific input and 
+        does not generate any output. Instead, it is intended to be a part of 
+        a chain of tutorial nodes that explain the basics of quantum computing.
+    </p>
 </script>
