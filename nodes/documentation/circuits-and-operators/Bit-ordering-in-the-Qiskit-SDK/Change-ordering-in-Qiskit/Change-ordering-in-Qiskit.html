@@ -1,13 +1,11 @@
 <script type="text/javascript">
     RED.nodes.registerType('Change_ordering_in_Qiskit', {
-      category: 'function',
+      category: 'Bit ordering in the Qiskit SDK',
       color: '#aaaaaa',
       defaults: {
         name: { value: "Change ordering in Qiskit" },
         info: {
-          value: `To draw a circuit with qubits in reversed order (that is, qubit 0 at the bottom), use the reverse_bits argument. This only affects the generated diagram and does not affect the circuit; the X-gate still acts on qubit 0.
-          \nYou can use the reverse_bits method to return a new circuit with the qubits' labels reversed (this does not mutate the original circuit).`,
-          required: false
+          value: "# To draw a circuit with qubits in reversed order (that is, qubit 0 at the bottom), use the <font style=\"background: lightgrey\">reverse_bits</font> argument. This only affects the generated diagram and does not affect the circuit; the X-gate still acts on qubit.\n&nbsp;\n# The following code snippet creates a 2-qubit quantum circuit using Qiskit. It applies an X gate (a bit-flip operation) to the first qubit (qubit 0). Finally, it draws the circuit diagram with qubit in reversed order.\n```python\nfrom qiskit import QuantumCircuit\nqc = QuantumCircuit(2)\nqc.x(0)\nqc.draw(reverse_bits=True)\n```\n# You can check the image in the \"Reversed Circuit Diagram\" node, the qubit 0 should now at the bottom.\n&nbsp;\n# You can also use the <font style=\"background: lightgrey\">reverse_bits</font> method to return a new circuit with the qubits' **labels** reversed (this does not mutate the original circuit).\n```python\nqc.reverse_bits().draw()\n```\n# You can check the image in the \"Circuit Diagram Reverse using the revese_bits method\" node. You should see although the X gate is added to qubit 0 before, now its label becomes \"qubit 1\" (the label is reversed).\n\n***\n&nbsp;\n## **Node Output:**\n- # Image: the image of variable `qc` with bits reversed\n- # Image: the image of `qc.reverse_bits()`"
         }
       },
       inputs: 1,
@@ -27,5 +25,26 @@
   </script>
   
   <script type="text/html" data-help-name="Change_ordering_in_Qiskit">
-    <p>Change ordering in Qiskit.</p>
+    <p>A node that introduce how to change the order of qubits in quantum circuit diagram.</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the quantum circuit.</dd>
+        </dl>
+      </li>
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>qc.reverse_bits().draw()<span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the quantum circuit with qubits' labels reversed.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to visualizing and manipulating quantum circuits with qubits using Qiskit. It demonstrates how to create a simple quantum circuit with two qubits and apply quantum gates, such as the X gate, to them. Additionally, it illustrates how to reverse the order of qubits in the circuit diagram for better visualization. The node offers a basic understanding of how to leverage the reverse_bits argument and the reverse_bits method to adjust qubit representation in circuit diagrams.
+    </p>
   </script>

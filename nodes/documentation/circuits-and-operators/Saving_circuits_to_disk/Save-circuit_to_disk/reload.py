@@ -1,7 +1,10 @@
 from qiskit import qpy
 import json, io, base64
+import os
+
 with open('test.qpy', 'rb') as handle:
     qc = qpy.load(handle)
+os.remove('test.qpy')
 buffer=io.BytesIO()
 qc[0].draw('mpl').savefig(buffer, format="png")
 buffer.seek(0)

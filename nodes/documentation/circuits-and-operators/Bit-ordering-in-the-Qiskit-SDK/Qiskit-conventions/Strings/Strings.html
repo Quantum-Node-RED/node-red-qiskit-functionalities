@@ -1,13 +1,11 @@
 <script type="text/javascript">
   RED.nodes.registerType('Strings', {
-    category: 'function',
+    category: 'Bit ordering in the Qiskit SDK',
     color: '#aaaaaa',
     defaults: {
       name: { value: "Strings" },
       info: {
-        value: `When displaying or interpreting a list of bits (or qubits) as a strings, bit 𝑛 is the leftmost bit, and bit 0 is the rightmost bit. This is because we usually write numbers with the most significant digit on the left, and in Qiskit, bit 𝑛 is interpreted as the most significant bit.
-                \nFor example, the following cell defines a Statevector from a string of single-qubit states. In this case, qubit 0 is in state ∣+⟩, and qubit 1 is in state ∣0⟩.`,
-        required: false
+        value: "# When displaying or interpreting a list of bits (or qubits) as a string, bit 𝑛 is the leftmost bit, and bit 0 is the rightmost bit. This is because we usually write numbers with the most significant digit on the left, and in Qiskit, bit 𝑛 is interpreted as the most significant bit.\n&nbsp;\n# For example, the following code snippet defines a <font style=\"background: lightgrey\">Statevector</font> from a string of single-qubit states. In this case, qubit 0 is in state ∣+⟩, and qubit 1 in state ∣0⟩.\n```python\nfrom qiskit.quantum_info import Statevector\nsv = Statevector.from_label(\"0+\")\nsv.probabilities_dict()\n```\n# The result is sent to \"Strings Output\" node and you can check it in the debug sidebar. Since qubit 0 is in the state ∣+⟩ and qubit 1 is in the state ∣0⟩, qubit 0 has approximately a 50% probability of being 0 and a 50% probability of being 1, while qubit 1 has a 100% probability of being 0.\n\n***\n&nbsp;\n## **Node Output:**\n- # Object: `sv` (Type: _qiskit.quantum_info.Statevector_)\n- # Dictionary: `sv.probabilities_dict()`"
       }
     },
     inputs: 1,
@@ -27,5 +25,26 @@
 </script>
 
 <script type="text/html" data-help-name="Strings">
-  <p>Interpreting Strings </p>
+  <p>A node that introduce the order of the bits when displayed as a string.</p>
+
+  <h3>Outputs</h3>
+  <ol class="node-ports">
+    <li>State Vector
+      <dl class="message-properties">
+        <dt>sv<span class="property-type">qiskit.quantum_info.Statevector</span></dt>
+        <dd>The state vector `sv` whose qubit 0 is in state ∣+⟩, and qubit 1 in state ∣0⟩.</dd>
+      </dl>
+    </li>
+    <li>Dictionary
+      <dl class="message-properties">
+        <dt>sv.probabilities_dict()<span class="property-type">dict</span></dt>
+        <dd>The key represents the state of two qubits and the value is the probability of two qubits are in that state.</dd>
+      </dl>
+    </li>
+  </ol>
+
+  <h3>Details</h3>
+  <p>
+    This node provides an introduction to the Qiskit Statevector.from_label method, which is used for creating quantum state vectors from string representations of single-qubit states. In the context of quantum computing, the most significant qubit is represented on the left, aligning with conventional numeric notation. 
+  </p>
 </script>

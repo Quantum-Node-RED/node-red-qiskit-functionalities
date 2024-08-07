@@ -1,12 +1,11 @@
 <script type="text/javascript">
   RED.nodes.registerType('State_vector_matrices', {
-    category: 'function',
+    category: 'Bit ordering in the Qiskit SDK',
     color: '#aaaaaa',
     defaults: {
       name: { value: "State vector matrices" },
       info: {
-        value: `When interpreting bits as a number, bit 0 is the least significant bit, and bit n the most significant. This is helpful when coding because each bit has the value 2^label (label being the qubit's index in QuantumCircuit.qubits). For example, the following circuit execution ends with bit 0 being 0, and bit 1 being 1. This is interpreted as the decimal integer 2 (measured with probability 1.0).`,
-        required: false
+        value: "## **Node Input:**\r\n- # Object: `sv` (Type: _qiskit.quantum_info.Statevector_)\r\n\r\n***\r\n&nbsp;\r\n# When representing a statevector as a list of complex numbers (amplitudes), Qiskit orders these amplitudes such that the amplitude at index 𝑥 represents the computational basis state ∣𝑥⟩.\r\n&nbsp;\r\n# In the following code snippet, we will output the second and third elements of the statevector created in the previous node to examine the amplitudes of the basis states ∣01⟩ and ∣10⟩.\r\n```python\r\nprint(sv[1])  # amplitude of state |01>\r\nprint(sv[2])  # amplitude of state |10>\r\n```\r\n# The Output is sent to \"Statevector matrices Output\" node and you can check them in the debug sidebar. Since qubit 0 of the statevector `sv` is in state ∣+⟩ and qubit 1 is in state ∣0⟩, the amplitude of the basis state ∣01⟩ should be 1 / sqrt(2), while the amplitude of the basis state ∣10⟩ should be 0.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Object: `sv[1]`, `sv[2]` (Type: _numpy.complex128_)\r\n\r\n"
       }
     },
     inputs: 1,
@@ -26,5 +25,35 @@
 </script>
 
 <script type="text/html" data-help-name="State_vector_matrices">
-  <p>Interpreting State_vector_matrices </p>
+  <p>A node that introduce how qubits are ordered in quantum circuit diagram.</p>
+
+  <h3>Inputs</h3>
+  <ol class="node-ports">
+    <li>State Vector
+      <dl class="message-properties">
+        <dt>sv<span class="property-type">qiskit.quantum_info.Statevector</span></dt>
+        <dd>The state vector `sv` whose qubit 0 is in state ∣+⟩, and qubit 1 in state ∣0⟩.</dd>
+      </dl>
+    </li>
+
+  <h3>Outputs</h3>
+  <ol class="node-ports">
+    <li>Complex number
+      <dl class="message-properties">
+        <dt>sv[1]<span class="property-type">numpy.complex128</span></dt>
+        <dd>The complex number of state ∣01⟩.</dd>
+      </dl>
+    </li>
+    <li>Complex number
+      <dl class="message-properties">
+        <dt>sv[2]<span class="property-type">numpy.complex128</span></dt>
+        <dd>The complex number of state ∣10⟩.</dd>
+      </dl>
+    </li>
+  </ol>
+
+  <h3>Details</h3>
+  <p>
+    This node provides an introduction to how Qiskit represents statevectors in quantum computing. Specifically, it explains the ordering of amplitudes in a statevector where each amplitude corresponds to a computational basis state. In Qiskit, the index of an amplitude in the statevector array directly maps to the computational basis state ∣x⟩, with the value at index 1 representing the amplitude of the state ∣01⟩ and the value at index 2 representing the amplitude of the state ∣10⟩. This helps users understand how to interpret the statevector and extract specific state amplitudes in quantum computations.
+  </p>
 </script>

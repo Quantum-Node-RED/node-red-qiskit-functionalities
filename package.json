@@ -66,6 +66,8 @@
       "resynthesis": "nodes/documentation/circuits-and-operators/Synthesize_unitary_operators/Re-synthesis-for-circuit-optimization/Re-synthesis-for-circuit-optimization.js",
       "synthesis": "nodes/documentation/circuits-and-operators/Synthesize_unitary_operators/Synthesize_unitary_operators/Synthesize_unitary_operators.js",
       "resynthesis-decompose": "nodes/documentation/circuits-and-operators/Synthesize_unitary_operators/Re-synthesis-for-circuit-optimization/Re-synthesize-Decompose.js",
+      "intro-to-bit-ordering": "nodes/documentation/circuits-and-operators/Bit-ordering-in-the-Qiskit-SDK/Intro-to-bit-ordering/intro-to-bit-ordering.js",
+      "intro-to-qiskit-convention": "nodes/documentation/circuits-and-operators/Bit-ordering-in-the-Qiskit-SDK/Qiskit-conventions/Intro-to-qiskit-convention/intro-to-qiskit-convention.js",
       "quantum-circuits": "nodes/documentation/circuits-and-operators/Bit-ordering-in-the-Qiskit-SDK/Qiskit-conventions/Quantum-circuits/Quantum-circuits.js",
       "circuit-diagrams": "nodes/documentation/circuits-and-operators/Bit-ordering-in-the-Qiskit-SDK/Qiskit-conventions/Circuit-diagrams/Circuit-diagrams.js",
       "integers": "nodes/documentation/circuits-and-operators/Bit-ordering-in-the-Qiskit-SDK/Qiskit-conventions/Integers/Integers.js",

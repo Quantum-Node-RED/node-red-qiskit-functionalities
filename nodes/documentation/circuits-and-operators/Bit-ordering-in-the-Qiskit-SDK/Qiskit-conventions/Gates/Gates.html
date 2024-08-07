@@ -1,13 +1,11 @@
 <script type="text/javascript">
     RED.nodes.registerType('Gates', {
-      category: 'function',
+      category: 'Bit ordering in the Qiskit SDK',
       color: '#aaaaaa',
       defaults: {
         name: { value: "Gates" },
         info: {
-          value: `Each gate in Qiskit can interpret a list of qubits in its own way, but controlled gates usually follow the convention (control, target).
-          \n For example, the following cell adds a controlled-X gate where qubit 0 is the control and qubit 1 is the target.`,
-          required: false
+          value: "# Each gate in Qiskit can interpret a list of qubits in its own way, but controlled gates usually follow the convention <font style=\"background: lightgrey\">(control, target)</font>.\n&nbsp;\n# For example, the following code snippet adds a controlled-X gate where qubit 0 is the control and qubit 1 is the target.\n```python\nfrom qiskit import QuantumCircuit\nqc = QuantumCircuit(2)\nqc.cx(0, 1)\nqc.draw()\n```\n# You can check the image of this circuit in the \"Gates Circuit Diagram\" node.\n&nbsp;\n# Following all the previously mentioned conventions in Qiskit, this CX-gate performs the transformation ∣01⟩↔∣11⟩, so has the following matrix.\n```python\n[[1, 0, 0, 0],\n [0, 0, 0, 1],\n [0, 0, 1, 0],\n [0, 1, 0, 0]]\n```\n\n***\n&nbsp;\n## **Node Output:**\n- # Image: the image of variable `qc`\n"
         }
       },
       inputs: 1,
@@ -27,5 +25,20 @@
   </script>
   
   <script type="text/html" data-help-name="Gates">
-    <p>Interpretting Gates</p>
+    <p>A node that introduce how qubits are ordered in gates.</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the quantum circuit.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to how qubits are represented in gates within Qiskit. It explains the conventions used for controlled gates, specifically the CX (controlled-X) gate, where one qubit acts as the control and another as the target. The node outlines the functionality of the CX gate, which performs a bit-flip on the target qubit if the control qubit is in the |1⟩ state. Additionally, it includes the matrix representation of the CX gate, illustrating how it transforms the quantum states |01⟩ and |11⟩.
+    </p>
   </script>
