@@ -1,0 +1,433 @@
+[
+    {
+        "id": "89193bd159b99669",
+        "type": "tab",
+        "label": "Circuit Library",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "73a417290fbfce6c",
+        "type": "intro-to-circuit-library",
+        "z": "89193bd159b99669",
+        "name": "Introduction to circuit library",
+        "info": "# The Qiskit SDK includes a library of popular circuits to use as building blocks in your own programs. Using pre-defined circuits saves time researching, writing code, and debugging. The library includes popular circuits in quantum computing, circuits that are difficult to simulate classically, and circuits useful for quantum hardware benchmarking.\r\n\r\n# This flow lists the different circuit categories the library provides. For a full list of circuits, see the [circuit library API documentation](https://docs.quantum.ibm.com/api/qiskit/circuit_library).",
+        "x": 200,
+        "y": 800,
+        "wires": [
+            [
+                "657e18402782e534",
+                "477eb9b2f649e1d0",
+                "45bbfd85dbfa67ae",
+                "4e3f8f8ef83679d0",
+                "fced9fcfe69bc7bb",
+                "ec1819edd9b0979b"
+            ]
+        ]
+    },
+    {
+        "id": "657e18402782e534",
+        "type": "Standard-Gates",
+        "z": "89193bd159b99669",
+        "name": "Standard Gates",
+        "info": "# The circuit library also includes standard quantum gates. Some are more fundamental gates (such as the <font style=\"background: lightgrey\">UGate</font>), and others are multi-qubit gates that usually need building from single- and two-qubit gates. To add imported gates to your circuit, use the <font style=\"background: lightgrey\">append</font> method; the first argument is the gate, and the next argument is a list of qubits to apply the gate to.\r\n&nbsp;\r\n# In the following code snippet, it creates a quantum circuit with 4 qubits, applies a Hadamard gate to the first qubit, and then applies a 3-controlled-X (multi-controlled NOT) gate to the first three qubits controlling the fourth qubit.\r\n```python\r\nfrom qiskit import QuantumCircuit\r\nfrom qiskit.circuit.library import HGate, MCXGate\r\nmcx_gate = MCXGate(3)\r\nhadamard_gate = HGate()\r\n \r\nqc = QuantumCircuit(4)\r\nqc.append(hadamard_gate, [0])\r\nqc.append(mcx_gate, [0,1,2,3])\r\nqc.draw('mpl')\r\n```\r\n# You can check the image of generated circuit in the \"Standard Gates Image Output\" node.\r\n&nbsp;\r\n# See [Standard gates](https://docs.quantum.ibm.com/api/qiskit/circuit_library#standard-gates) in the circuit library API documentation for more information.\r\n&nbsp;\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: Image created for `qc`.",
+        "x": 860,
+        "y": 20,
+        "wires": [
+            [
+                "47df906120fbfaec"
+            ]
+        ]
+    },
+    {
+        "id": "47df906120fbfaec",
+        "type": "image",
+        "z": "89193bd159b99669",
+        "name": "Standard Gates Image Output",
+        "width": "160",
+        "data": "payload.result.circuit_diagram",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1530,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "61c30eca6c7640ea",
+        "type": "inject",
+        "z": "89193bd159b99669",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 630,
+        "y": 20,
+        "wires": [
+            [
+                "657e18402782e534"
+            ]
+        ],
+        "info": "# This flow will demonstrate you what is **Standard Gates**, click the left button of the \"Start\" node to run this flow."
+    },
+    {
+        "id": "477eb9b2f649e1d0",
+        "type": "N-local-circuits",
+        "z": "89193bd159b99669",
+        "name": "N-local circuits",
+        "info": "# N-local circuit alternate layers of single-qubit rotation gates with layers of multi-qubit entangling gates.\r\n&nbsp;\r\n# This family of circuits is popular in variational quantum algorithms because they can produce a wide range of quantum states. Variational algorithms adjust the gate parameters to find states that have certain properties (such as states that represent a good solution to an optimization problem). For this purpose, many circuits in the library are **parameterized**, which means you can define them without fixed values.\r\n&nbsp;\r\n# The following code imports a <font style=\"background: lightgrey\">TwoLocal</font> circuit, in which the entangling gates are two-qubit gates. This circuit interleaves blocks of parameterized single-qubit gates, followed by entangling blocks of two-qubit gates. The following code creates a three-qubit circuit, with single-qubit RX-gates and two-qubit CZ-gates.\r\n```python\r\nfrom qiskit.circuit.library import TwoLocal\r\ntwo_local = TwoLocal(3, 'rx', 'cz')\r\ntwo_local.decompose().draw('mpl')\r\n```\r\n# You can check the image of the N-local circuit in the \"N-Local Circuit Image Output\" node.\r\n&nbsp;\r\n# You can also get a list-like object of the circuit's parameters from the <font style=\"background: lightgrey\">parameters</font> attribute.\r\n```python\r\ntwo_local.parameters\r\n```\r\n# The output is sent to \"N-local parameters output\" node and you can check them in the debug palette.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Object: `two_local` (Type: _qiskit.circuit.library.TwoLocal_)\r\n- # Set: `two_local.parameters` (Type: _qiskit.circuit.Parameter_)\r\n- # Image: Image of decompsed circuit `two_local`\r\n\r\n",
+        "x": 860,
+        "y": 280,
+        "wires": [
+            [
+                "67b6a24cf67a1300",
+                "94d388fad8bb7a6b",
+                "12bac62082b5ed8a"
+            ]
+        ]
+    },
+    {
+        "id": "9e0c638673776c47",
+        "type": "inject",
+        "z": "89193bd159b99669",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 630,
+        "y": 280,
+        "wires": [
+            [
+                "477eb9b2f649e1d0"
+            ]
+        ],
+        "info": "# This flow will demonstrate you what is **N-local Circuit**, click the left button of the \"Start\" node to run this flow."
+    },
+    {
+        "id": "94d388fad8bb7a6b",
+        "type": "image",
+        "z": "89193bd159b99669",
+        "name": "N-Local Circuit Image Output",
+        "width": "640",
+        "data": "payload.result.circuit_diagram",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1120,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "77f9271d29d5dcb5",
+        "type": "image",
+        "z": "89193bd159b99669",
+        "name": "Parameters N-Local Circuit Image Output",
+        "width": "640",
+        "data": "payload.result.circuit_diagram",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1820,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "45bbfd85dbfa67ae",
+        "type": "Data-encoding-circuits",
+        "z": "89193bd159b99669",
+        "name": "Data-encoding circuits",
+        "info": "# These parameterized circuits encode data onto quantum states for processing by quantum machine learning algorithms. Some circuits supported by Qiskit are:\r\n- # Amplitude encoding, which encodes each number into the amplitude of a basis state. This can store 2^n numbers in a single state, but can be costly to implement.\r\n- # Basis encoding, which encodes an integer k by preparing the corresponding basis state |k⟩.\r\n- # Angle encoding, which sets each number in the data as a rotation angle in a parameterized circuit.\r\n&nbsp;\r\n# The best approach depends upon the specifics of your application. On current quantum computers, however, we often use angle-encoding circuits such as the <font style=\"background: lightgrey\">ZZFeatureMap</font>. The following code uses Qiskit's <font style=\"background: lightgrey\">ZZFeatureMap</font> to encode a set of features into a quantum circuit. It then assigns the provided feature values to the parameters of the feature map and visualizes the resulting circuit.\r\n```python\r\nfrom qiskit.circuit.library import ZZFeatureMap\r\n \r\nfeatures = [0.2, 0.4, 0.8]\r\nfeature_map = ZZFeatureMap(feature_dimension=len(features))\r\n \r\nencoded = feature_map.assign_parameters(features)\r\nencoded.draw('mpl')\r\n```\r\n# You can check the image of generated circuit in the \"Data Encoding Circuit Image Output\" node.\r\n&nbsp;\r\n# See [Data encoding circuits](https://docs.quantum.ibm.com/api/qiskit/circuit_library#data-encoding-circuits) in the circuit library API documentation for more information.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: Image of circuit `encoded`",
+        "x": 880,
+        "y": 700,
+        "wires": [
+            [
+                "150c028e6f1495ed"
+            ]
+        ]
+    },
+    {
+        "id": "22b3cd9d85065e24",
+        "type": "inject",
+        "z": "89193bd159b99669",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 630,
+        "y": 700,
+        "wires": [
+            [
+                "45bbfd85dbfa67ae"
+            ]
+        ],
+        "info": "# This flow will demonstrate you what is **Data-Encoding Circuit**, click the left button of the \"Start\" node to run this flow."
+    },
+    {
+        "id": "150c028e6f1495ed",
+        "type": "image",
+        "z": "89193bd159b99669",
+        "name": "Data Encoding Circuit Image Output",
+        "width": "320",
+        "data": "payload.result.circuit_diagram",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1250,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "4e3f8f8ef83679d0",
+        "type": "Time-evolution-circuits",
+        "z": "89193bd159b99669",
+        "name": "Time-evolution circuits",
+        "info": "# Time-evolution circuits simulate a quantum state evolving in time. It is used to investigate physical effects such as heat transfer or phase transitions in a system. Time-evolution circuits are also a fundamental building block of chemistry wave functions (such as unitary coupled-cluster trial states) and of the QAOA algorithm we use for optimization problems.\r\n&nbsp;\r\n# The code snippet below  prepares a quantum circuit with three qubits, applying a Hadamard gate to the middle qubit. It then defines a Hamiltonian with specific Pauli operators and evolves the initial state by appending a Pauli evolution gate based on this Hamiltonian.\r\n```python\r\nfrom qiskit.circuit.library import PauliEvolutionGate\r\nfrom qiskit.circuit import QuantumCircuit\r\nfrom qiskit.quantum_info import SparsePauliOp\r\n \r\n \r\n# Prepare an initial state with a Hadamard on the middle qubit\r\nstate = QuantumCircuit(3)\r\nstate.h(1)\r\n \r\nhamiltonian = SparsePauliOp([\"ZZI\", \"IZZ\"])\r\nevolution = PauliEvolutionGate(hamiltonian, time=1)\r\n \r\n# Evolve state by appending the evolution gate\r\nstate.compose(evolution, inplace=True)\r\n \r\nstate.draw('mpl')\r\n```\r\n# You can check the generated circuit in the \"Time Evolution Circuit Image Output\" node.\r\n&nbsp;\r\n# Read the [PauliEvolutionGate API documentation](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.PauliEvolutionGate) for more information.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: Image of circuit `state`",
+        "x": 880,
+        "y": 960,
+        "wires": [
+            [
+                "3b6f96d7e0a79bba"
+            ]
+        ]
+    },
+    {
+        "id": "906f117021a4925a",
+        "type": "inject",
+        "z": "89193bd159b99669",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 630,
+        "y": 960,
+        "wires": [
+            [
+                "4e3f8f8ef83679d0"
+            ]
+        ],
+        "info": "# This flow will demonstrate you what is **Time-Evolution Circuit**, click the left button of the \"Start\" node to run this flow."
+    },
+    {
+        "id": "3b6f96d7e0a79bba",
+        "type": "image",
+        "z": "89193bd159b99669",
+        "name": "Time Evolution Circuit Image Output",
+        "width": "320",
+        "data": "payload.result.circuit_diagram",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1250,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "fced9fcfe69bc7bb",
+        "type": "Benchmarking-and-complexity-theory-circuit",
+        "z": "89193bd159b99669",
+        "name": "Benchmarking and complexity-theory circuit",
+        "info": "# **Benchmarking** circuits give us a sense of how well our hardware is actually working, and **complexity-theory** circuits help us understand how difficult the problems we want to solve are.\r\n&nbsp;\r\n# For example, the _\"quantum volume\"_ benchmark measures how accurately a quantum computer executes a type of random quantum circuit. The score of the quantum computer increases with the size of the circuit it can reliably run. This takes into account all aspects of the computer, including qubit count, instruction fidelity, qubit connectivity, and the software stack transpiling and post-processing results. Read more about quantum volume in the [original quantum volume paper](https://arxiv.org/abs/1811.12926).\r\n&nbsp;\r\n# The following code creates a Quantum Volume circuit with 4 qubits. It then decomposes the circuit into randomized two-qubit gates and draws the resulting circuit.\r\n```python\r\nfrom qiskit.circuit.library import QuantumVolume\r\nQuantumVolume(4).decompose().draw('mpl')\r\n```\r\n# You can check the image in the \"Benchmarking and Complexity Theory Circuit Image Output\" node.\r\n&nbsp;\r\n# The circuit library also includes circuits believed to be hard to simulate classically, such as instantaneous quantum polynomial (IQP) circuits. These circuits sandwich certain diagonal gates (in the computational basis) between blocks of Hadamard gates.\r\n&nbsp;\r\n# Other circuits include <font style=\"background: lightgrey\">GroverOperator</font> for use in Grover's algorithm, and the <font style=\"background: lightgrey\">FourierChecking</font> circuit for the Fourier checking problem. See these circuits in [Particular quantum circuits](https://docs.quantum.ibm.com/api/qiskit/circuit_library#particular-quantum-circuits) in the circuit library API documentation.\r\n\r\n***\r\n&nbsp;\r\n## **Node Ouput:**\r\n- # Image: Image of _Quantum Volumn_ circuit with 4 qubits",
+        "x": 950,
+        "y": 1200,
+        "wires": [
+            [
+                "7713b7d5a0ef2ebe"
+            ]
+        ]
+    },
+    {
+        "id": "dd656f4477b0180e",
+        "type": "inject",
+        "z": "89193bd159b99669",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 630,
+        "y": 1200,
+        "wires": [
+            [
+                "fced9fcfe69bc7bb"
+            ]
+        ],
+        "info": "# This flow will demonstrate you what is **Benchmarking and Complexity-theory Circuit**, click the left button of the \"Start\" node to run this flow."
+    },
+    {
+        "id": "7713b7d5a0ef2ebe",
+        "type": "image",
+        "z": "89193bd159b99669",
+        "name": "Benchmarking and Complexity Theory Circuit Image Output",
+        "width": "640",
+        "data": "payload.result.circuit_diagram",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1420,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "d63feb0a70f721d0",
+        "type": "inject",
+        "z": "89193bd159b99669",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 630,
+        "y": 1540,
+        "wires": [
+            [
+                "ec1819edd9b0979b"
+            ]
+        ],
+        "info": "# This flow will demonstrate you what is **Arithmetic Circuit**, click the left button of the \"Start\" node to run this flow."
+    },
+    {
+        "id": "eff23086ab72ac9b",
+        "type": "image",
+        "z": "89193bd159b99669",
+        "name": "Arithmetic Circuit Image Output",
+        "width": "640",
+        "data": "payload.result.circuit_diagram",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1250,
+        "y": 1580,
+        "wires": []
+    },
+    {
+        "id": "67b6a24cf67a1300",
+        "type": "Parameters-N-local-circuits",
+        "z": "89193bd159b99669",
+        "name": "Parameters of N-local circuits",
+        "info": "## **Node Input:**\n- # Object: `two_local` (Type: _qiskit.circuit.library.TwoLocal_)\n\n***\n&nbsp;\n# You can also use a dictionary of the form <font style=\"background: lightgrey\">{ Parameter: number }</font> to assign the parameters obtained in the previous node to real values. The following code snippet demonstrates how to assign each parameter in the circuit to 0.\n```python\nbound_circuit = two_local.assign_parameters({ p: 0 for p in two_local.parameters})\nbound_circuit.decompose().draw('mpl')\n```\n# You can check the output image in \"Parameters N-Local Circuit Image Output\" node.\n&nbsp;\n# For more information, see [N-local gates](https://docs.quantum.ibm.com/api/qiskit/circuit_library#n-local-circuits) in the circuit library API documentation or take our [Variational algorithm design course](https://learning.quantum.ibm.com/course/variational-algorithm-design).\n\n***\n&nbsp;\n## **Node Output:**\n- # Image: Image of decomposed circuit `bound_circuit`",
+        "x": 1360,
+        "y": 280,
+        "wires": [
+            [
+                "77f9271d29d5dcb5"
+            ]
+        ]
+    },
+    {
+        "id": "12bac62082b5ed8a",
+        "type": "debug",
+        "z": "89193bd159b99669",
+        "name": "N-local parameters output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result.two_local_params",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1110,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "837f7f89e4ff20ef",
+        "type": "debug",
+        "z": "89193bd159b99669",
+        "name": "Simulating the Circuit",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload.result.output",
+        "targetType": "msg",
+        "statusVal": "payload.result.output",
+        "statusType": "auto",
+        "x": 1220,
+        "y": 1540,
+        "wires": [],
+        "info": "Simulating the circuit shows that it outputs 5 (with probability 1.0)."
+    },
+    {
+        "id": "ec1819edd9b0979b",
+        "type": "Arithmetic-circuits",
+        "z": "89193bd159b99669",
+        "name": "Arithmetic circuits",
+        "info": "# Arithmetic operations are classical functions, such as adding integers and bit-wise operations. These may be useful with algorithms such as amplitude estimation for finance applications, and in algorithms like the HHL algorithm, which solves linear systems of equations.\r\n&nbsp;\r\n# As an example, let’s try adding two three-bit numbers using a \"ripple-carry\" circuit to perform in-place addition (<font style=\"background: lightgrey\">CDKMRippleCarryAdder</font>). This adder adds two numbers (we'll call them \"A\" and \"B\") and writes the result to the register that held B. In the following example, A=2 and B=3.\r\n```python\r\nfrom qiskit.circuit.library import CDKMRippleCarryAdder\r\nadder = CDKMRippleCarryAdder(3)  # Adder of 3-bit numbers\r\n \r\nfrom qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister\r\n \r\n# Create the number A=2\r\nreg_a = QuantumRegister(3, 'a')\r\nnumber_a = QuantumCircuit(reg_a)\r\nnumber_a.initialize(2) # Number 2; |010>\r\n \r\n# Create the number B=3\r\nreg_b = QuantumRegister(3, 'b')\r\nnumber_b = QuantumCircuit(reg_b)\r\nnumber_b.initialize(3)  # Number 3; |011>\r\n \r\n# Create a circuit to hold everything, including a classical register for\r\n# the result\r\nreg_result = ClassicalRegister(3)\r\ncircuit = QuantumCircuit(*adder.qregs, reg_result)\r\n \r\n# Compose number initializers with the adder. Adder stores the result to\r\n# register B, so we'll measure those qubits.\r\ncircuit = circuit.compose(number_a, qubits=reg_a).compose(number_b, qubits=reg_b).compose(adder)\r\ncircuit.measure(reg_b, reg_result)\r\ncircuit.draw('mpl')\r\n```\r\n# You can check generated image in \"Arithmetic Circuit Image Output\" node.\r\n&nbsp;\r\n# The following code simulate the circuit and it should show that the simulation outputs 5 (with probability 1.0).\r\n```python\r\nfrom qiskit.primitives import Sampler\r\n \r\nresult = Sampler().run(circuit).result()\r\nresult.quasi_dists[0]\r\n```\r\n# The output is sent to \"Simulating the Circuit\" node and you can check the output in the debug palette\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: Image of circuit `circuit`\r\n- # Dict: `result.quasi_dists[0]`",
+        "x": 870,
+        "y": 1540,
+        "wires": [
+            [
+                "837f7f89e4ff20ef",
+                "eff23086ab72ac9b"
+            ]
+        ]
+    }
+]

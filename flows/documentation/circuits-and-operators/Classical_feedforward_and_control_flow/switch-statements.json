@@ -1,0 +1,100 @@
+[
+    {
+        "id": "2223dd71286e972f",
+        "type": "tab",
+        "label": "Switch-statement",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "3e96ad675dd194f3",
+        "type": "inject",
+        "z": "2223dd71286e972f",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 120,
+        "wires": [
+            [
+                "ec79870ea9b56bed"
+            ]
+        ]
+    },
+    {
+        "id": "9720e6e4634c7287",
+        "type": "image",
+        "z": "2223dd71286e972f",
+        "name": "Circuit Diagram",
+        "width": "251",
+        "data": "payload.result.circuit_diagram",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 720,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "ec79870ea9b56bed",
+        "type": "Switch-statement",
+        "z": "2223dd71286e972f",
+        "name": "Switch-statment",
+        "info": "The switch statement is used to select actions based on the value of a classical bit or register. It is similar to an if statement, but allows one to specify more cases for the branching logic. In the example below, we apply a Hadamard gate to a qubit and measure it. If the result is 0, we apply an X gate on the qubit, and if the result is 1, we apply a Z gate. The resulting measurement outcome should be 1 with 100% probability.",
+        "x": 400,
+        "y": 120,
+        "wires": [
+            [
+                "9720e6e4634c7287",
+                "3f64d159d55ba668"
+            ]
+        ]
+    },
+    {
+        "id": "3f64d159d55ba668",
+        "type": "different-example",
+        "z": "2223dd71286e972f",
+        "name": "different-example",
+        "info": "Because the example above used a single classical bit, there were only two possible cases, so we could have achieved the same result using an if-else statement. The switch case is mainly useful when branching on the value of a classical register composed of multiple bits, as demonstrated in the following example. Here, we also show how to construct a default case, which is executed if none of the preceding cases are. Note that in a switch statement, only one of the blocks are ever executed. There is no fallthrough.\n            \n In the example below, we apply Hadamard gates to two qubits and measure them. If the result is either 00 or 11, we apply a Z gate to the third qubit. If the result is 01, we apply a Y gate. If none of the preceding cases matched, we apply an X gate. Finally, measure the third qubit.",
+        "x": 410,
+        "y": 500,
+        "wires": [
+            [
+                "5962f0e3acd095f7"
+            ]
+        ]
+    },
+    {
+        "id": "5962f0e3acd095f7",
+        "type": "image",
+        "z": "2223dd71286e972f",
+        "name": "Circuit Diagram",
+        "width": "251",
+        "data": "payload.result.circuit_diagram",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 760,
+        "y": 500,
+        "wires": []
+    }
+]

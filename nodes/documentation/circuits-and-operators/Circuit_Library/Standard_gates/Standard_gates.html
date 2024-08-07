@@ -1,0 +1,70 @@
+<script type="text/javascript">
+  RED.nodes.registerType('Standard-Gates', {
+    category: 'Circuit Library',
+    color: '#aaaaaa',
+    defaults: {
+      name: { value: "Standard Gates" },
+      info: { value: 
+          "# The circuit library also includes standard quantum gates. Some are more fundamental gates " +
+          "(such as the <font style=\"background: lightgrey\">UGate</font>), and others are multi-qubit gates that usually need " +
+          "building from single- and two-qubit gates. To add imported gates to your circuit, use the " +
+          "<font style=\"background: lightgrey\">append</font> method; the first argument is the gate, and the next argument is a list " +
+          "of qubits to apply the gate to.\r\n" +
+          "&nbsp;\r\n" +
+          "# In the following code snippet, it creates a quantum circuit with 4 qubits, applies a Hadamard gate to the first qubit, " +
+          "and then applies a 3-controlled-X (multi-controlled NOT) gate to the first three qubits controlling the fourth qubit.\r\n" +
+          "```python\r\n" +
+          "from qiskit import QuantumCircuit\r\n" +
+          "from qiskit.circuit.library import HGate, MCXGate\r\n" +
+          "mcx_gate = MCXGate(3)\r\n" +
+          "hadamard_gate = HGate()\r\n" +
+          "\r\n" +
+          "qc = QuantumCircuit(4)\r\n" +
+          "qc.append(hadamard_gate, [0])\r\n" +
+          "qc.append(mcx_gate, [0,1,2,3])\r\n" +
+          "qc.draw('mpl')\r\n" +
+          "```\r\n" +
+          "# You can check the image of generated circuit in the \"Standard Gates Image Output\" node.\r\n" +
+          "&nbsp;\r\n" +
+          "# See [Standard gates](https://docs.quantum.ibm.com/api/qiskit/circuit_library#standard-gates) in the circuit library API " +
+          "documentation for more information.\r\n" +
+          "&nbsp;\r\n\r\n***\r\n&nbsp;\r\n" +
+          "## **Node Output:**\r\n" +
+          "- # Image: Image created for `qc`."
+        }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    label: function () {
+      return this.name || "Standard Gates";
+    }
+  });
+</script>
+
+<script type="text/html" data-template-name="Standard-Gates">
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+
+<script type="text/html" data-help-name="Standard-Gates">
+  <p>A node that introduce the standard gate in qiskit library.</p>
+
+  <h3>Outputs</h3>
+  <ol class="node-ports">
+    <li>Circuit Diagram
+      <dl class="message-properties">
+        <dt>circuit_diagram <span class="property-type">string (Base64)</span></dt>
+        <dd>The Base64-encoded string representing the visual diagram of the quantum circuit.</dd>
+      </dl>
+    </li>
+  </ol>
+
+  <h3>Details</h3>
+  <p>
+    This node provides an introduction to using standard quantum gates in a quantum circuit, based on the Qiskit documentation. The circuit library includes a variety of gates, some fundamental like the UGate, and others that are multi-qubit gates often constructed from single- and two-qubit gates.
+  </p>
+
+</script>

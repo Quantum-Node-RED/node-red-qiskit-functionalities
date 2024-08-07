@@ -1,0 +1,43 @@
+[
+    {
+        "id": "7ae7fb1b607edee7",
+        "type": "Build-Gate",
+        "z": "b431518bae5051db",
+        "name": "Build-Gate",
+        "gates": [
+            {
+                "type": "x",
+                "qubits": [
+                    "1"
+                ]
+            },
+            {
+                "type": "x",
+                "qubits": [
+                    "0"
+                ]
+            },
+            {
+                "type": "cz",
+                "qubits": [
+                    "1",
+                    "0"
+                ]
+            },
+            {
+                "type": "cz",
+                "qubits": [
+                    "0",
+                    "1"
+                ]
+            }
+        ],
+        "x": 550,
+        "y": 100,
+        "wires": [
+            [
+                "5535cd2b164f9e9f"
+            ]
+        ]
+    }
+]

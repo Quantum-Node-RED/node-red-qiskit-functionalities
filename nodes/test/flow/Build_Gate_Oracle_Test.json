@@ -1,0 +1,144 @@
+[
+    {
+        "id": "b431518bae5051db",
+        "type": "tab",
+        "label": "Unit-Test",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "5535cd2b164f9e9f",
+        "type": "Build-Oracle",
+        "z": "b431518bae5051db",
+        "name": "Build-Oracle",
+        "target": "11",
+        "gates": [
+            {
+                "type": "x",
+                "qubits": [
+                    "0"
+                ]
+            },
+            {
+                "type": "cz",
+                "qubits": [
+                    "1",
+                    "0"
+                ]
+            }
+        ],
+        "x": 470,
+        "y": 280,
+        "wires": [
+            [
+                "19d31ac3b1d8fe81",
+                "58d461a4844a172d"
+            ]
+        ]
+    },
+    {
+        "id": "7ae7fb1b607edee7",
+        "type": "Build-Gate",
+        "z": "b431518bae5051db",
+        "name": "Build-Gate",
+        "gates": [
+            {
+                "type": "ccz",
+                "qubits": [
+                    "1",
+                    "0",
+                    "2"
+                ]
+            }
+        ],
+        "x": 550,
+        "y": 100,
+        "wires": [
+            [
+                "5535cd2b164f9e9f"
+            ]
+        ]
+    },
+    {
+        "id": "0a0a61e34c574f1d",
+        "type": "inject",
+        "z": "b431518bae5051db",
+        "name": "Build_Gate_Test",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 200,
+        "y": 100,
+        "wires": [
+            [
+                "7ae7fb1b607edee7"
+            ]
+        ]
+    },
+    {
+        "id": "19d31ac3b1d8fe81",
+        "type": "debug",
+        "z": "b431518bae5051db",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "decec921d9a8c1e9",
+        "type": "inject",
+        "z": "b431518bae5051db",
+        "name": "Build_Oracle_Test",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 190,
+        "y": 280,
+        "wires": [
+            [
+                "5535cd2b164f9e9f"
+            ]
+        ]
+    },
+    {
+        "id": "58d461a4844a172d",
+        "type": "image",
+        "z": "b431518bae5051db",
+        "name": "",
+        "width": 160,
+        "data": "payload.result.image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 700,
+        "y": 400,
+        "wires": []
+    }
+]

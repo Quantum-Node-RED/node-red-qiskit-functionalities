@@ -1,0 +1,58 @@
+<script type="text/javascript">
+    RED.nodes.registerType('barriers-mpl-draw',{
+        category: 'Visualize circuits',
+        color: '#aaaaaa',
+        defaults: {
+            name: {value:"Barriers Mpl Draw"},
+            info: {
+                value:"# Part 3 of the [Visualize circuits guide.](https://docs.quantum.ibm.com/guides/visualize-circuits#)\r\n" +
+                "&nbsp;\r\n" +
+                "# This node shows a bigger circuit diagram using matplotlib, plot barriers and normal bit ordering.\r\n" +
+                "```python\r\n" +
+                "from qiskit import QuantumCircuit, ClassicalRegister\r\n" +
+                "\r\n" +
+                "# Draw a new circuit with barriers and more registers\r\n" +
+                "q_a = QuantumRegister(3, name=\"a\")\r\n" +
+                "q_b = QuantumRegister(5, name=\"b\")\r\n" +
+                "c_a = ClassicalRegister(3)\r\n" +
+                "c_b = ClassicalRegister(5)\r\n" +
+                "\r\n" +
+                "circuit = QuantumCircuit(q_a, q_b, c_a, c_b)\r\n" +
+                "circuit.x(q_a[1])\r\n" +
+                "circuit.x(q_b[1])\r\n" +
+                "circuit.x(q_b[2])\r\n" +
+                "circuit.x(q_b[4])\r\n" +
+                "circuit.barrier()\r\n" +
+                "circuit.h(q_a)\r\n" +
+                "circuit.barrier(q_a)\r\n"+
+                "circuit.h(q_b)\r\n" +
+                "circuit.cswap(q_b[0], q_b[1], q_b[2])\r\n" +
+                "circuit.cswap(q_b[2], q_b[3], q_b[4])\r\n" +
+                "circuit.cswap(q_b[3], q_b[4], q_b[0])\r\n" +
+                "circuit.barrier(q_b)\r\n" +
+                "circuit.measure(q_a, c_a)\r\n" +
+                "circuit.measure(q_b, c_b);\r\n" +
+                "\r\n" +
+                "# Draw the circuit\r\n" +
+                "circuit.draw(output=\"mpl\")\r\n" +
+                "```\r\n "}
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "file.svg",
+        label: function() {
+            return this.name||"barriers-mpl-draw";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="barriers-mpl-draw">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="barriers-mpl-draw">
+    <p>A simple node to draw a circuit diagram with plot barriers, part 4? of IBM's guides/visualize-circuits</p>
+</script>

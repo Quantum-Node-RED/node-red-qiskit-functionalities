@@ -1,0 +1,49 @@
+<script type="text/javascript">
+    RED.nodes.registerType('draw-qsphere-plot',{
+        category: 'Plot quantum states using draw',
+        color: '#aaaaaa',
+        defaults: {
+            name: {value:"Draw a QSphere Plot"},
+            info: {
+                value:"# [Plot quantum states guide.](https://docs.quantum.ibm.com/guides/plot-quantum-states#)\r\n" +
+                "&nbsp;\r\n" +
+                "# The \"QSphere\" is a Qiskit-unique view of a quantum state in which the amplitude and phase of each" +
+                " element in a statevector is plotted on the surface of a sphere. The thickness of each dot represents the" +
+                " amplitude, and the color represents the phase. For mixed states it will show a sphere for each component.\r\n" +
+                "# In this node, <font style='background: lightgrey'>_`draw()`_</font> is used to get the same output as the " +
+                " <font style='background: lightgrey'>_`plot_state_qsphere()`_</font> function to plot the qsphere" +
+                " representation of a quantum state\r\n" +
+                "```python\r\n" +
+                "from math import pi\r\n" +
+                "from qiskit import QuantumCircuit\r\n" +
+                "from qiskit.quantum_info import Statevector\r\n" + 
+                "\r\n" +
+                "# Create a Bell state for demonstration\r\n" +
+                "qc = QuantumCircuit(2)\r\n" +
+                "qc.h(0)\r\n" +
+                "qc.crx(pi/2, 0, 1)\r\n" +
+                "psi = Statevector(qc)\r\n" +
+                "\r\n" +
+                "psi.draw(\"qsphere\")\r\n" +
+                "```\r\n "
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "file.svg",
+        label: function() {
+            return this.name||"draw-qsphere-plot";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="draw-qsphere-plot">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="draw-qsphere-plot">
+    <p>A simple node for generating a "QSphere" plot using draw</p>
+</script>

@@ -1,0 +1,196 @@
+[
+    {
+        "id": "a1573e18fb192910",
+        "type": "tab",
+        "label": "Add calibration to custom gate",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "aab45227d8cceb35",
+        "type": "inject",
+        "z": "a1573e18fb192910",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 530,
+        "y": 460,
+        "wires": [
+            [
+                "64fa2b5db4adc12e"
+            ]
+        ],
+        "info": "# **In this flow, we will show you how to add a calibration to nonstandard, completely custom gates, including a gate with parameters. To start the process, click the button in front of the 'Start' Node. You can view the details of each Node in the information palette during the process.**"
+    },
+    {
+        "id": "447312ec4b070c9a",
+        "type": "image",
+        "z": "a1573e18fb192910",
+        "name": "Custom gate",
+        "width": "320",
+        "data": "payload.result.result_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1210,
+        "y": 700,
+        "wires": [],
+        "info": "# This node shows the image of your custom gate."
+    },
+    {
+        "id": "4aea5cd56bed1592",
+        "type": "image",
+        "z": "a1573e18fb192910",
+        "name": "Schedule Diagram",
+        "width": "640",
+        "data": "payload.result.result_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1730,
+        "y": 720,
+        "wires": [],
+        "info": "# The image of the schedule you built"
+    },
+    {
+        "id": "0b86088bfc10b309",
+        "type": "image",
+        "z": "a1573e18fb192910",
+        "name": "Optimized custom gate",
+        "width": "320",
+        "data": "payload.result.result_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 2560,
+        "y": 460,
+        "wires": [],
+        "info": "# The image of optimized custom gate"
+    },
+    {
+        "id": "3f010da83c30a460",
+        "type": "debug",
+        "z": "a1573e18fb192910",
+        "name": "Error information",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result.result_error",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1590,
+        "y": 280,
+        "wires": [],
+        "info": "# This node shows the error information after you try to transpile your custom gate."
+    },
+    {
+        "id": "8c4d934de5c96c12",
+        "type": "image",
+        "z": "a1573e18fb192910",
+        "name": "Another optimized custom gate",
+        "width": "320",
+        "data": "payload.result.result_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 2650,
+        "y": 680,
+        "wires": [],
+        "info": "# The image of optimized custom gate"
+    },
+    {
+        "id": "64fa2b5db4adc12e",
+        "type": "pulse-build-custom-circuit",
+        "z": "a1573e18fb192910",
+        "name": "Build your custom gate",
+        "info": "# In this node, we create a custom gate by following python code:\r\n```python\r\nfrom qiskit import QuantumCircuit\r\nfrom qiskit.circuit import Gate\r\n \r\ncirc = QuantumCircuit(1, 1)\r\ncustom_gate = Gate('my_custom_gate', 1, [3.14, 1])\r\n# 3.14 is an arbitrary parameter for demonstration\r\ncirc.append(custom_gate, [0])\r\ncirc.measure(0, 0)\r\n \r\ncirc.draw('mpl')\r\n```\r\n&nbsp;\r\n# The provided code snippet initializes a quantum circuit with one qubit and one classical bit using Qiskit. It defines a custom quantum gate named 'my_custom_gate' with a parameter list [3.14, 1]. This gate is applied to the qubit 0 in the circuit, followed by a measurement of the qubit's state.\r\n&nbsp;\r\n# The image of the circuit will be shown below in the \"Custom gate\" node.\r\n",
+        "x": 840,
+        "y": 460,
+        "wires": [
+            [
+                "bd26d09a26bd2465",
+                "75b664ecf34d9d34",
+                "447312ec4b070c9a"
+            ]
+        ]
+    },
+    {
+        "id": "bd26d09a26bd2465",
+        "type": "pulse-try-transpile-on-custom",
+        "z": "a1573e18fb192910",
+        "name": "Try to transpile on your custom gate",
+        "info": "# Normally, if you tried to transpile your custom gate directly, you would get an error. This is because there was no functional definition provided for your custom gate, so the transpiler can't unroll it to the basis gate set of the target device. The following code shows this situation by trying to add \"my_custom_gate\"  you created before to another qubit that hasn't been calibrated.\r\n```python\r\ncirc = QuantumCircuit(2, 2)\r\ncirc.append(custom_gate, [1])\r\n \r\n \r\nfrom qiskit import QiskitError\r\ntry:\r\n    circ = passmanager.run(circ)\r\nexcept QiskitError as e:\r\n    print(e)\r\n```\r\n&nbsp;\r\n# The error message is sent to node \"Error information\" and you can check the message at debug palette.",
+        "x": 1220,
+        "y": 280,
+        "wires": [
+            [
+                "3f010da83c30a460"
+            ]
+        ]
+    },
+    {
+        "id": "75b664ecf34d9d34",
+        "type": "pulse-build-calibration-for-custom",
+        "z": "a1573e18fb192910",
+        "name": "Build a calibration for custom gate",
+        "info": "# This node defines a calibration for the gate you built in previous node by following python code.\r\n```python\r\nwith pulse.build(backend, name='custom') as my_schedule:\r\n    pulse.play(Gaussian(duration=64, amp=0.2, sigma=8), pulse.drive_channel(0))\r\n```\r\n&nbsp;\r\n# The image of the schedule we drew is shown in the \"Schedule Diagram\" node.",
+        "x": 1320,
+        "y": 460,
+        "wires": [
+            [
+                "4aea5cd56bed1592",
+                "004db2c0de061e82",
+                "2be5b097371cdb6d"
+            ]
+        ]
+    },
+    {
+        "id": "004db2c0de061e82",
+        "type": "pulse-link-cal-to-custom-cir",
+        "z": "a1573e18fb192910",
+        "name": "Link calibration to your custom gate",
+        "info": "# Once the calibration is built, you can link it to your custom gate by following python code:\r\n```python\r\ncirc.add_calibration('my_custom_gate', [0], my_schedule, [3.14, 1])\r\ncirc = passmanager.run(circ)\r\n```\r\n# Remember that the order of parameters is significant.\r\n&nbsp;\r\n# Also, there is another way to link calibration to your gate. You can you use the <font style='background: lightgrey'>_Gate_</font> instance variable 'custom_gate' to add the calibration, and the parameters are derived from that instance.\r\n```python\r\ncirc.add_calibration(custom_gate, [0], my_schedule)\r\ncirc = passmanager.run(circ)\r\n```\r\n# The diagram of optimized quantum circuit is displayed below the \"Optimized custom gate\" node\r\n",
+        "x": 2100,
+        "y": 460,
+        "wires": [
+            [
+                "0b86088bfc10b309"
+            ]
+        ]
+    },
+    {
+        "id": "2be5b097371cdb6d",
+        "type": "pulse-link-cal-to-custom-cir-another",
+        "z": "a1573e18fb192910",
+        "name": "Link calibration to your custom gate in another way",
+        "info": "# To link a calibration to your custom gate, you can also add to <font style='background: lightgrey'>_Target_</font> and transpile. A pass manager pass implicitly extracts calibration data from the target and calls <font style='background: lightgrey'>_`add_calibration`_</font>. This is convenient if you need to attach a calibration to multiple circuits or manage multiple calibrations.\r\n&nbsp;\r\n# The following code shows you how to add to <font style='background: lightgrey'>_Target_</font> and transpile.\r\n```python\r\nfrom qiskit_ibm_runtime.fake_provider import FakeKyoto\r\nfrom qiskit.circuit import QuantumCircuit, Gate\r\nfrom qiskit.pulse import builder, DriveChannel\r\nfrom qiskit.transpiler import InstructionProperties\r\n \r\nbackend = FakeKyoto()\r\n \r\ncustom_gate = Gate(\"my_gate\", 1, [])\r\nqc = QuantumCircuit(1, 1)\r\nqc.append(custom_gate, [0])\r\nqc.measure(0, 0)\r\n \r\nwith builder.build() as custom_sched_q0:\r\n    builder.play([0.1] * 160, DriveChannel(0))\r\n \r\nbackend.target.add_instruction(\r\n    custom_gate,\r\n    {(0,): InstructionProperties(calibration=custom_sched_q0)},\r\n)\r\n \r\n# Re-generate the passmanager with the new backend target\r\npassmanager = generate_preset_pass_manager(optimization_level=1, backend=backend)\r\nqc = passmanager.run(qc)\r\n```\r\n# The diagram of optimized quantum circuit is displayed below the \"Another optimized custom gate\" node.",
+        "x": 2150,
+        "y": 680,
+        "wires": [
+            [
+                "8c4d934de5c96c12"
+            ]
+        ]
+    }
+]

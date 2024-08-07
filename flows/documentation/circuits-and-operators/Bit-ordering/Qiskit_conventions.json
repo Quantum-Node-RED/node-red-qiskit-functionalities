@@ -1,0 +1,228 @@
+[
+    {
+        "id": "2223dd71286e972f",
+        "type": "tab",
+        "label": "Qiskit Conventions",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "3e96ad675dd194f3",
+        "type": "inject",
+        "z": "2223dd71286e972f",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 120,
+        "wires": [
+            [
+                "153efe4b4675d35c"
+            ]
+        ]
+    },
+    {
+        "id": "903624d7aa9194a6",
+        "type": "debug",
+        "z": "2223dd71286e972f",
+        "name": "QuantumCircuits",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload.result.result",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 790,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "153efe4b4675d35c",
+        "type": "Quantum-circuits",
+        "z": "2223dd71286e972f",
+        "name": "Quantum-circuits",
+        "info": "The QuantumCircuit class stores its qubits in a list (QuantumCircuit.qubits). The index of a qubit in this list defines the qubit's label.",
+        "x": 430,
+        "y": 120,
+        "wires": [
+            [
+                "903624d7aa9194a6",
+                "098912a6409c6c14"
+            ]
+        ]
+    },
+    {
+        "id": "098912a6409c6c14",
+        "type": "Circuit-diagrams",
+        "z": "2223dd71286e972f",
+        "name": "Circuit-diagrams",
+        "info": "On a circuit diagram, qubit 0,is the topmost qubit, and qubit 𝑛 the bottommost qubit. You can change this with the reverse_bits argument of QuantumCircuit.draw (see Change ordering in Qiskit).https://docs.quantum.ibm.com/guides/bit-ordering#change-ordering-in-qiskit",
+        "x": 460,
+        "y": 340,
+        "wires": [
+            [
+                "9e004bb1e2c2f825",
+                "1212d94e2bcfe738"
+            ]
+        ]
+    },
+    {
+        "id": "9e004bb1e2c2f825",
+        "type": "Integers",
+        "z": "2223dd71286e972f",
+        "name": "Integers",
+        "info": "When interpreting bits as a number, bit 0 is the least significant bit, and bit n the most significant. This is helpful when coding because each bit has the value 2^label (label being the qubit's index in QuantumCircuit.qubits). For example, the following circuit execution ends with bit 0 being 0, and bit 1 being 1. This is interpreted as the decimal integer 2 (measured with probability 1.0).",
+        "x": 460,
+        "y": 620,
+        "wires": [
+            [
+                "a27f4d3feff929a4",
+                "720aa3b23c2be68e"
+            ]
+        ]
+    },
+    {
+        "id": "a27f4d3feff929a4",
+        "type": "Strings",
+        "z": "2223dd71286e972f",
+        "name": "Strings",
+        "info": "When displaying or interpreting a list of bits (or qubits) as a strings, bit 𝑛 is the leftmost bit, and bit 0 is the rightmost bit. This is because we usually write numbers with the most significant digit on the left, and in Qiskit, bit 𝑛 is interpreted as the most significant bit.\n                \nFor example, the following cell defines a Statevector from a string of single-qubit states. In this case, qubit 0 is in state ∣+⟩, and qubit 1 is in state ∣0⟩.",
+        "x": 460,
+        "y": 800,
+        "wires": [
+            [
+                "72a14727ee4261a8",
+                "bc79ab6a4a692484"
+            ]
+        ]
+    },
+    {
+        "id": "72a14727ee4261a8",
+        "type": "State_vector_matrices",
+        "z": "2223dd71286e972f",
+        "name": "State vector matrices",
+        "info": "When interpreting bits as a number, bit 0 is the least significant bit, and bit n the most significant. This is helpful when coding because each bit has the value 2^label (label being the qubit's index in QuantumCircuit.qubits). For example, the following circuit execution ends with bit 0 being 0, and bit 1 being 1. This is interpreted as the decimal integer 2 (measured with probability 1.0).",
+        "x": 500,
+        "y": 1040,
+        "wires": [
+            [
+                "f3528c93e89bd805",
+                "34843c88447b2ef6"
+            ]
+        ]
+    },
+    {
+        "id": "f3528c93e89bd805",
+        "type": "Gates",
+        "z": "2223dd71286e972f",
+        "name": "Gates",
+        "info": "Each gate in Qiskit can interpret a list of qubits in its own way, but controlled gates usually follow the convention (control, target).\n          \n For example, the following cell adds a controlled-X gate where qubit 0 is the control and qubit 1 is the target.",
+        "x": 450,
+        "y": 1240,
+        "wires": [
+            [
+                "cce8414ba21b8dcc"
+            ]
+        ]
+    },
+    {
+        "id": "1212d94e2bcfe738",
+        "type": "image",
+        "z": "2223dd71286e972f",
+        "name": "Circuit Diagram",
+        "width": "251",
+        "data": "payload.result.circuit_diagram",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 760,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "cce8414ba21b8dcc",
+        "type": "image",
+        "z": "2223dd71286e972f",
+        "name": "Circuit Diagram",
+        "width": "251",
+        "data": "payload.result.circuit_diagram",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 840,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "720aa3b23c2be68e",
+        "type": "debug",
+        "z": "2223dd71286e972f",
+        "name": "Output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload.result.result",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 770,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "bc79ab6a4a692484",
+        "type": "debug",
+        "z": "2223dd71286e972f",
+        "name": "Output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload.result.result",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 790,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "34843c88447b2ef6",
+        "type": "debug",
+        "z": "2223dd71286e972f",
+        "name": "Output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload.result.result",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 815.5078125,
+        "y": 1037.5234375,
+        "wires": []
+    }
+]

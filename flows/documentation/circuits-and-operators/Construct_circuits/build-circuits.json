@@ -1,0 +1,193 @@
+[
+    {
+        "id": "2223dd71286e972f",
+        "type": "tab",
+        "label": "build-circuits",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "3e96ad675dd194f3",
+        "type": "inject",
+        "z": "2223dd71286e972f",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 170,
+        "y": 20,
+        "wires": [
+            [
+                "62f07e780930d6a9"
+            ]
+        ]
+    },
+    {
+        "id": "9720e6e4634c7287",
+        "type": "image",
+        "z": "2223dd71286e972f",
+        "name": "Circuit Diagram",
+        "width": "200",
+        "data": "payload.result.circuit_diagram",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 700,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "62f07e780930d6a9",
+        "type": "build-circuits",
+        "z": "2223dd71286e972f",
+        "name": "build-circuits",
+        "info": "Methods such as QuantumCircuit.h and QuantumCircuit.cx add specific instructions to circuits. To add instructions to a circuit more generally, use the append method. This takes an instruction and a list of qubits to apply the instruction to. See the Circuit Library API documentation for a list of supported instructions.",
+        "x": 350,
+        "y": 20,
+        "wires": [
+            [
+                "9720e6e4634c7287",
+                "690630cdd3e3428e"
+            ]
+        ]
+    },
+    {
+        "id": "690630cdd3e3428e",
+        "type": "compose",
+        "z": "2223dd71286e972f",
+        "name": "compose",
+        "info": "The compose method returns a new circuit and does not mutate either circuit it acts on. To mutate the circuit on which you're calling the compose method, use the argument inplace=True.",
+        "x": 340,
+        "y": 240,
+        "wires": [
+            [
+                "d16f8520a4e54e50",
+                "4aecc6f74c6d79d8"
+            ]
+        ]
+    },
+    {
+        "id": "d16f8520a4e54e50",
+        "type": "image",
+        "z": "2223dd71286e972f",
+        "name": "Circuit Diagram",
+        "width": "200",
+        "data": "payload.result.circuit_diagram",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 700,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "4aecc6f74c6d79d8",
+        "type": "to-instruction",
+        "z": "2223dd71286e972f",
+        "name": "to-instruction",
+        "info": "You might also want to-instruction into instructions to to-instruction organized. You can convert a circuit to an instruction by using the to_instruction method, then append this to another circuit as you would any other instruction. The circuit drawn in the following cell is functionally equivalent to the circuit drawn in the previous cell.",
+        "x": 310,
+        "y": 620,
+        "wires": [
+            [
+                "52fce0d209cd59e7",
+                "92d622d5013271b0"
+            ]
+        ]
+    },
+    {
+        "id": "52fce0d209cd59e7",
+        "type": "image",
+        "z": "2223dd71286e972f",
+        "name": "Circuit Diagram",
+        "width": "200",
+        "data": "payload.result.circuit_diagram",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 700,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "92d622d5013271b0",
+        "type": "to-gate",
+        "z": "2223dd71286e972f",
+        "name": "to-gate",
+        "info": "If your circuit is unitary, you can convert it to a Gate by using the to_gate method. Gate objects are specific types of instructions that have some extra features, such as the control method, which adds a quantum control.",
+        "x": 320,
+        "y": 920,
+        "wires": [
+            [
+                "500456dd7d25f5b1",
+                "fc7cfb1581381ad3"
+            ]
+        ]
+    },
+    {
+        "id": "500456dd7d25f5b1",
+        "type": "image",
+        "z": "2223dd71286e972f",
+        "name": "Circuit Diagram",
+        "width": "200",
+        "data": "payload.result.circuit_diagram",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 720,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "fc7cfb1581381ad3",
+        "type": "decompose",
+        "z": "2223dd71286e972f",
+        "name": "decompose",
+        "info": "The decompose method returns a new circuit and does not mutate the circuit it acts on.",
+        "x": 330,
+        "y": 1200,
+        "wires": [
+            [
+                "8f1aae0a33b709db"
+            ]
+        ]
+    },
+    {
+        "id": "8f1aae0a33b709db",
+        "type": "image",
+        "z": "2223dd71286e972f",
+        "name": "Circuit Diagram",
+        "width": "200",
+        "data": "payload.result.circuit_diagram",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 740,
+        "y": 1200,
+        "wires": []
+    }
+]

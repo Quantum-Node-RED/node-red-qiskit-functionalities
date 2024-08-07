@@ -1,0 +1,36 @@
+<script type="text/javascript">
+    RED.nodes.registerType('intro-to-quantum-circuits', {
+      category: 'Construct circuits',
+      color: '#dddddd',
+      defaults: {
+        name: { value: "What is quantum circuit?" },
+        info: {
+            value: "# A simple quantum circuit is a collection of **qubits** and a list of **instructions** that act on those qubits."}
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "white_info.svg",
+      label: function () {
+        return this.name || "What is quantum circuit?";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="intro-to-quantum-circuits">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="What is quantum circuit?">
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="intro-to-quantum-circuits">
+    <p>A node that explains what a quantum circuit is.</p>
+
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to what quantum circuits are. It is an information node that does not require any specific input
+      and does not generate any output. Instead, it is intended to be a part of a chain of tutorial nodes that explain the basics of 
+      quantum computing.
+    </p>
+
+  </script>
