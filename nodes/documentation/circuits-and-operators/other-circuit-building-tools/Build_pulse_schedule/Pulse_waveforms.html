@@ -5,7 +5,7 @@
       color: "#aaaaaa",
       defaults: {
         name: { value: "Build pulse by waveforms" },
-        //info: { value: "# A **Waveform** is a pulse signal specified as an array of time-ordered complex amplitudes, or <font style=\"background: lightgrey\">_samples_</font>. Each sample is played for one cycle, a timestep <font style=\"lightgrey\">dt</font>, determined by the backend. You must know the value of dt to determine a program's real-time dynamics. The (zero-indexed) <font style=\"background: lightgrey\">i_th</font> sample plays from time <font style=\"background: lightgrey\">i*dt</font> up to <font style=\"background: lightgrey\">(i + 1)*dt</font>, modulated by the qubit frequency.\r\n&nbsp;\r\n# The following code shows how to create samples by waveforms and specify your pulse by these samples:\r\n```python\r\nfrom qiskit.pulse import library\r\n \r\namp = 1\r\nsigma = 10\r\nnum_samples = 128\r\n\r\nimport numpy as np\r\n\r\n# Create samples\r\ntimes = np.arange(num_samples)\r\ngaussian_samples = np.exp(-1/2 *((times - num_samples / 2) ** 2 / sigma**2))\r\n \r\ngaus = library.Waveform(gaussian_samples, name=\"WF Gaus\")\r\n```\r\n# The image of the pulse 'gaus' is shown on the \"Pulse Waveform Output\" node." }
+        info: { value: "# A **Waveform** is a pulse signal specified as an array of time-ordered complex amplitudes, or <font style=\"background: lightgrey\">_samples_</font>. Each sample is played for one cycle, a timestep <font style=\"lightgrey\">dt</font>, determined by the backend. You must know the value of dt to determine a program's real-time dynamics. The (zero-indexed) <font style=\"background: lightgrey\">i_th</font> sample plays from time <font style=\"background: lightgrey\">i*dt</font> up to <font style=\"background: lightgrey\">(i + 1)*dt</font>, modulated by the qubit frequency.\r\n&nbsp;\r\n# The following code shows how to create samples by waveforms and specify your pulse by these samples:\r\n```python\r\nfrom qiskit.pulse import library\r\n \r\namp = 1\r\nsigma = 10\r\nnum_samples = 128\r\n\r\nimport numpy as np\r\n\r\n# Create samples\r\ntimes = np.arange(num_samples)\r\ngaussian_samples = np.exp(-1/2 *((times - num_samples / 2) ** 2 / sigma**2))\r\n \r\ngaus = library.Waveform(gaussian_samples, name=\"WF Gaus\")\r\n```\r\n# The image of the pulse 'gaus' is shown on the \"Pulse Waveform Output\" node.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: the image of pulse `gaus`" }
       },
       inputs: 1,
       outputs: 1,
@@ -30,5 +30,20 @@
   
   <script type="text/html" data-help-name="pulse-waveforms">
     <p>A simple node that build pulse by waveforms.</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Pulse Diagram
+        <dl class="message-properties">
+          <dt>result_image<span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the pulse `gaus`.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to waveform generation in quantum pulse programming using Qiskit. It explains how to create waveforms as sequences of time-ordered complex amplitudes, or samples, which represent pulse signals in a quantum circuit. Each sample corresponds to a specific time interval determined by the backend, during which it modulates the qubit's frequency. The node highlights the process of generating a Gaussian-shaped pulse by calculating the amplitude values over a set of time steps and then packaging these values into a waveform object.
+    </p>
   </script>
   
