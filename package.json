@@ -167,7 +167,8 @@
       "pass-manager": "nodes/documentation/transpiler/introduction/passmanager/pass_manage.js",
       "build-oracle": "nodes/algorithms/Grover/build_oracle.js",
       "build-gate": "nodes/gate/utils/build_gate.js",
-      "grover_iteration": "nodes/algorithms/Grover/Grover_iteration.js"
+      "grover_iteration": "nodes/algorithms/Grover/Grover_iteration.js",
+      "move-to-next-node": "nodes/documentation/functional-nodes/Next/move-to-next-node.js"
     }
   },
   "dependencies": {
