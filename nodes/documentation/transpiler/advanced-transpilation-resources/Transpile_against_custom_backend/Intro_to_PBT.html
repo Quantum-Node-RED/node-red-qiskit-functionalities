@@ -1,0 +1,34 @@
+
+<script type="text/javascript">
+    RED.nodes.registerType("intro-to-pbt", {
+      category: "Transpile against custom backend",
+      color: "#aaaaaa",
+      defaults: {
+        name: { value: "Introduction to Provider, BackendV2 and Target interface" },
+        info: { value: "# Before beginning, it is helpful to understand the usage and purpose of the [<font style=\"background: lightgrey\">Provider</font>](https://docs.quantum.ibm.com/api/qiskit/providers), [<font style=\"background: lightgrey\">BackendV2</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.providers.BackendV2), and [<font style=\"background: lightgrey\">Target</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.transpiler.Target) objects.\r\n&nbsp;\r\n# **Provider**\r\n# If you have a quantum device or simulator that you want to integrate into the Qiskit SDK, you need to write your own <font style=\"background: lightgrey\">Provider</font> class. This class serves a single purpose: to get backend objects that you provide. This is where any required credential and/or authentication tasks are handled. Once instantiated, the provider object will then provide a list of backends as well as the ability to acquire/instantiate backends.\r\n&nbsp;\r\n# **BackendV2 and Target**\r\n# Next, the backend classes provide the interface between the Qiskit SDK and the hardware or simulator that will execute circuits. They include all necessary information to describe a backend to the transpiler so that it can optimize any circuit according to its constraints. A <font style=\"background: lightgrey\">BackendV2</font> is built of four main parts:\r\n- # A <font style=\"background: lightgrey\">Target</font> property, which contains a description of the constraints of the backend and provides a model of the backend for the transpiler\r\n- # A <font style=\"background: lightgrey\">max_circuits</font> property that defines a limit on the number of circuits a backend can execute in a single job\r\n- # A <font style=\"background: lightgrey\">run()</font> method that accept job submissions\r\n- # A set of <font style=\"background: lightgrey\"> _default_options</font> to define the user configurable options and their default values" }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "Introduction to Provider, BackendV2 and Target interface";
+      }
+      
+    });
+
+  </script>
+  
+  <script type="text/html" data-template-name="intro-to-pbt">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Introduction to Provider, BackendV2 and Target interface" />
+    </div>
+
+  </script>
+
+  
+  
+  <script type="text/html" data-help-name="intro-to-pbt">
+    <p>A node that introduce provider, backendv2 and target interface.</p>
+  </script>
+  

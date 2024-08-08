@@ -1,0 +1,106 @@
+[
+    {
+        "id": "2223dd71286e972f",
+        "type": "tab",
+        "label": "Arithmetic-circuits",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "3e96ad675dd194f3",
+        "type": "inject",
+        "z": "2223dd71286e972f",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 190,
+        "y": 40,
+        "wires": [
+            [
+                "d87c9a0ec8f6c36d"
+            ]
+        ]
+    },
+    {
+        "id": "9720e6e4634c7287",
+        "type": "image",
+        "z": "2223dd71286e972f",
+        "name": "",
+        "width": "600",
+        "data": "payload.result.circuit_diagram",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 740,
+        "y": 100,
+        "wires": [],
+        "info": "The circuit library also includes circuits believed to be hard to simulate classically, such as instantaneous quantum polynomial (IQP) \r\ncircuits. These circuits sandwich certain diagonal gates (in the computational basis) between blocks of Hadamard gates.\r\nOther circuits include GroverOperator for use in Grover's algorithm, and the FourierChecking circuit for the Fourier checking problem.\r\n See these circuits in Particular quantum circuits in the circuit library API documentation.\r\n\r\n"
+    },
+    {
+        "id": "79f531ac9a9e5578",
+        "type": "debug",
+        "z": "2223dd71286e972f",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 100,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "d87c9a0ec8f6c36d",
+        "type": "Arithmetic-circuits",
+        "z": "2223dd71286e972f",
+        "name": "Arithmetic-circuits",
+        "info": "Arithmetic operations are classical functions, such as adding integers and bit-wise\n           operations. These may be useful with algorithms such as amplitude estimation for finance applications, \n           and in algorithms like the HHL algorithm, which solves linear systems of equations.\n          \n As an example, let’s try adding two three-bit numbers using a \"ripple-carry\" circuit to\n          perform in-place addition (CDKMRippleCarryAdder). This adder adds two numbers (we'll call them \"A\" and \"B\")\n          and writes the result to the register that held B. In the following example, A=2 and B=3.",
+        "x": 410,
+        "y": 100,
+        "wires": [
+            [
+                "9720e6e4634c7287",
+                "79f531ac9a9e5578",
+                "f2c62e8e51f6631b"
+            ]
+        ]
+    },
+    {
+        "id": "f2c62e8e51f6631b",
+        "type": "debug",
+        "z": "2223dd71286e972f",
+        "name": "Simulating the Circuit",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload.result.output",
+        "targetType": "msg",
+        "statusVal": "payload.result.output",
+        "statusType": "auto",
+        "x": 560,
+        "y": 260,
+        "wires": [],
+        "info": "Simulating the circuit shows that it outputs 5 (with probability 1.0)."
+    }
+]

@@ -1,0 +1,50 @@
+<script type="text/javascript">
+    RED.nodes.registerType('Re-synthesis', {
+      category: 'Synthesis Unitary Operators',
+      color: '#aaaaaa',
+      defaults: {
+        name: { value: "Re-synthesis for circuit optimation" },
+        info: {
+          value: "# Sometimes it is beneficial to re-synthesize a long series of single- and two-qubit gates, if the length can be reduced. For example, the following code snippet creates a circuit uses three two-qubit gates.\r\n```python\r\nfrom qiskit import QuantumRegister, ClassicalRegister, QuantumCircuit\r\nfrom numpy import pi\r\n \r\nqreg_q = QuantumRegister(2, 'q')\r\ncreg_c = ClassicalRegister(4, 'c')\r\ncircuit = QuantumCircuit(qreg_q, creg_c)\r\n \r\ncircuit.h(qreg_q[0])\r\ncircuit.cx(qreg_q[0], qreg_q[1])\r\ncircuit.sx(qreg_q[1])\r\ncircuit.cz(qreg_q[0], qreg_q[1])\r\ncircuit.x(qreg_q[1])\r\ncircuit.x(qreg_q[0])\r\ncircuit.cx(qreg_q[0], qreg_q[1])\r\ncircuit.h(qreg_q[0])\r\ncircuit.draw(\"mpl\")\r\n```\r\n# You can check the image of this created circuit in the \"Quantum Circuit Diagram\" node.\r\n&nbsp;\r\n# Then, we can re-synthesizing the circuits with following code:\r\n```python\r\nfrom qiskit.quantum_info import Operator\r\n \r\n# compute unitary matrix of circuit\r\nU = Operator(circuit)\r\n\r\n# re-synthesize\r\nbetter_circuit = QuantumCircuit(2)\r\nbetter_circuit.unitary(U, range(2))\r\n```\r\n# After re-synthesizing, the circuit only needs a single CX gate. We will decompose this circuit in the next node to better visualize it.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Object: `better_circuit` (Type: _qiskit.circuit.quantumcircuit.QuantumCircuit_)\r\n- # Image: the image of variable `circuit`"
+        }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "Re-synthesis for circuit optimation";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="Re-synthesis">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="Re-synthesis">
+    <p>A node that introduce how to re-synthesize circuit with unitary operators.</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Quantum Circuit
+        <dl class="message-properties">
+          <dt>better_circuit<span class="property-type">qiskit.circuit.quantumcircuit.QuantumCircuit</span></dt>
+          <dd>The quantum circuit `better_circuit` is re-synthesized by unitary operators.</dd>
+        </dl>
+      </li>
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the quantum circuit.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+      This node introduces how to re-synthesize a long series of single- and two-qubit gates, if the length can be reduced.
+    </p>
+  </script>

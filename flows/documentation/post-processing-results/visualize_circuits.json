@@ -1,0 +1,182 @@
+[
+    {
+        "id": "6a6321fe70fd4343",
+        "type": "inject",
+        "z": "eb28744cae45d1b8",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload.numQubits",
+                "v": "2",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 110,
+        "y": 360,
+        "wires": [
+            [
+                "89a1161d09743dd2"
+            ]
+        ]
+    },
+    {
+        "id": "3322611c91139e9f",
+        "type": "image",
+        "z": "eb28744cae45d1b8",
+        "name": "",
+        "width": "300",
+        "data": "payload.result.circuit_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 660,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "edb9747e50e13df8",
+        "type": "debug",
+        "z": "eb28744cae45d1b8",
+        "name": "Text circuit output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 490,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "edc9726f1a9d7f0c",
+        "type": "image",
+        "z": "eb28744cae45d1b8",
+        "name": "",
+        "width": "400",
+        "data": "payload.result.circuit_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 900,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "4d32a36756266f8e",
+        "type": "image",
+        "z": "eb28744cae45d1b8",
+        "name": "",
+        "width": "400",
+        "data": "payload.result.circuit_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1120,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "6b242d95050724c9",
+        "type": "image",
+        "z": "eb28744cae45d1b8",
+        "name": "",
+        "width": "400",
+        "data": "payload.result.circuit_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1420,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "89a1161d09743dd2",
+        "type": "default-draw",
+        "z": "eb28744cae45d1b8",
+        "name": "Default Draw",
+        "info": "# Part 1 of the [Visualize circuits guide.](https://docs.quantum.ibm.com/guides/visualize-circuits#)\r\n&nbsp;\r\n# This node shows a text output rendering for drawing a quantum circuit using <font style='background: lightgrey'>_`circuit.draw()`_</font>. The output is the diagram in text format.\r\n```python\r\nfrom qiskit import QuantumCircuit\r\n\r\n# Build a quantum circuit \r\ncircuit = QuantumCircuit(3, 3)\r\ncircuit.x(1)\r\ncircuit.h(range(3))\r\ncircuit.cx(0, 1)\r\ncircuit.measure(range(3), range(3));\r\n \r\ncirc.draw(output=\"mpl\")\r\n```\r\n ",
+        "x": 270,
+        "y": 360,
+        "wires": [
+            [
+                "edb9747e50e13df8",
+                "47f81385faca289f"
+            ]
+        ]
+    },
+    {
+        "id": "47f81385faca289f",
+        "type": "mpl-draw",
+        "z": "eb28744cae45d1b8",
+        "name": "Mpl Draw",
+        "info": "# Part 2 of the [Visualize circuits guide.](https://docs.quantum.ibm.com/guides/visualize-circuits#)\r\n&nbsp;\r\n# This node shows a Matplotlib output rendering for drawing a quantum circuit using the \"output\" argument <font style='background: lightgrey'>_`mpl`_</font>.\r\n```python\r\nfrom qiskit import QuantumCircuit\r\n \r\n# Build a quantum circuit \r\ncircuit = QuantumCircuit(3, 3)\r\ncircuit.x(1)\r\ncircuit.h(range(3))\r\ncircuit.cx(0, 1)\r\ncircuit.measure(range(3), range(3));\r\n \r\ncirc.draw(output='mpl')\r\n```\r\n ",
+        "x": 460,
+        "y": 360,
+        "wires": [
+            [
+                "3322611c91139e9f",
+                "cabef96109bcf605"
+            ]
+        ]
+    },
+    {
+        "id": "cabef96109bcf605",
+        "type": "barriers-mpl-draw",
+        "z": "eb28744cae45d1b8",
+        "name": "Barriers Mpl Draw",
+        "info": "# Part 3 of the [Visualize circuits guide.](https://docs.quantum.ibm.com/guides/visualize-circuits#)\r\n&nbsp;\r\n# This node shows a bigger circuit diagram using matplotlib, plot barriers and normal bit ordering.\r\n```python\r\nfrom qiskit import QuantumCircuit, ClassicalRegister\r\n\r\n# Draw a new circuit with barriers and more registers\r\nq_a = QuantumRegister(3, name=\"a\")\r\nq_b = QuantumRegister(5, name=\"b\")\r\nc_a = ClassicalRegister(3)\r\nc_b = ClassicalRegister(5)\r\n\r\ncircuit = QuantumCircuit(q_a, q_b, c_a, c_b)\r\ncircuit.x(q_a[1])\r\ncircuit.x(q_b[1])\r\ncircuit.x(q_b[2])\r\ncircuit.x(q_b[4])\r\ncircuit.barrier()\r\ncircuit.h(q_a)\r\ncircuit.barrier(q_a)\r\ncircuit.h(q_b)\r\ncircuit.cswap(q_b[0], q_b[1], q_b[2])\r\ncircuit.cswap(q_b[2], q_b[3], q_b[4])\r\ncircuit.cswap(q_b[3], q_b[4], q_b[0])\r\ncircuit.barrier(q_b)\r\ncircuit.measure(q_a, c_a)\r\ncircuit.measure(q_b, c_b);\r\n\r\n# Draw the circuit\r\ncircuit.draw(output=\"mpl\")\r\n```\r\n ",
+        "x": 670,
+        "y": 360,
+        "wires": [
+            [
+                "edc9726f1a9d7f0c",
+                "de2b405692a7e6dc"
+            ]
+        ]
+    },
+    {
+        "id": "de2b405692a7e6dc",
+        "type": "reverse-bits-mpl-draw",
+        "z": "eb28744cae45d1b8",
+        "name": "Reverse bits mpl draw",
+        "info": "# Part 4 of the [Visualize circuits guide.](https://docs.quantum.ibm.com/guides/visualize-circuits#)\r\n&nbsp;\r\n# This node shows a bigger circuit diagram using matplotlib, plot barriers and reverse bit ordering.\r\n```python\r\nfrom qiskit import QuantumCircuit, ClassicalRegister\r\n \r\n# Draw a new circuit with barriers and more registers\r\nq_a = QuantumRegister(3, name=\"a\")\r\nq_b = QuantumRegister(5, name=\"b\")\r\nc_a = ClassicalRegister(3)\r\nc_b = ClassicalRegister(5)\r\n \r\ncircuit = QuantumCircuit(q_a, q_b, c_a, c_b)\r\ncircuit.x(q_a[1])\r\ncircuit.x(q_b[1])\r\ncircuit.x(q_b[2])\r\ncircuit.x(q_b[4])\r\ncircuit.barrier()\r\ncircuit.h(q_a)\r\ncircuit.barrier(q_a)\r\ncircuit.h(q_b)\r\ncircuit.cswap(q_b[0], q_b[1], q_b[2])\r\ncircuit.cswap(q_b[2], q_b[3], q_b[4])\r\ncircuit.cswap(q_b[3], q_b[4], q_b[0])\r\ncircuit.barrier(q_b)\r\ncircuit.measure(q_a, c_a)\r\ncircuit.measure(q_b, c_b);\r\n \r\n# Draw the circuit with reversed bit order\r\ncircuit.draw(output=\"mpl\", reverse_bits=True)\r\n```\r\n ",
+        "x": 920,
+        "y": 360,
+        "wires": [
+            [
+                "4d32a36756266f8e",
+                "12e81c9f2c083b0c"
+            ]
+        ]
+    },
+    {
+        "id": "12e81c9f2c083b0c",
+        "type": "no-barriers-mpl-draw",
+        "z": "eb28744cae45d1b8",
+        "name": "No Barriers Mpl Draw",
+        "info": "# Part 5 of the [Visualize circuits guide.](https://docs.quantum.ibm.com/guides/visualize-circuits#)\r\n&nbsp;\r\n# This node shows a bigger circuit diagram using matplotlib, plot barriers and normal bit ordering.\r\n```python\r\nfrom qiskit import QuantumCircuit, ClassicalRegister\r\n \r\n# Draw a new circuit with barriers and more registers\r\nq_a = QuantumRegister(3, name=\"a\")\r\nq_b = QuantumRegister(5, name=\"b\")\r\nc_a = ClassicalRegister(3)\r\nc_b = ClassicalRegister(5)\r\n \r\ncircuit = QuantumCircuit(q_a, q_b, c_a, c_b)\r\ncircuit.x(q_a[1])\r\ncircuit.x(q_b[1])\r\ncircuit.x(q_b[2])\r\ncircuit.x(q_b[4])\r\ncircuit.barrier()\r\ncircuit.h(q_a)\r\ncircuit.barrier(q_a)\r\ncircuit.h(q_b)\r\ncircuit.cswap(q_b[0], q_b[1], q_b[2])\r\ncircuit.cswap(q_b[2], q_b[3], q_b[4])\r\ncircuit.cswap(q_b[3], q_b[4], q_b[0])\r\ncircuit.barrier(q_b)\r\ncircuit.measure(q_a, c_a)\r\ncircuit.measure(q_b, c_b);\r\n\r\n# Draw the circuit\r\ncircuit.draw(output=\"mpl\", plot_barriers=False)\r\n```\r\n ",
+        "x": 1180,
+        "y": 360,
+        "wires": [
+            [
+                "6b242d95050724c9"
+            ]
+        ]
+    }
+]

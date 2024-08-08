@@ -1,0 +1,28 @@
+<script type="text/javascript">
+  RED.nodes.registerType('transpilation-initial-layout', {
+    category: 'transpiler-pass-managers',
+    color: '#aaaaaa',
+    defaults: {
+      name: { value: "" }
+    },
+    info: "## Initial Layout\n\n### Purpose\n\n- **Virtual to Physical Qubits**: Maps virtual qubits in your circuit to physical qubits on the target backend.\n\n### Usage\n\n- **Parameter**: `initial_layout`\n- **Final Layout**: The final qubit layout may differ due to transpiler optimizations.\n\n### Example with Layout Object\n\n```python\nfrom qiskit_ibm_runtime.fake_provider import FakeSherbrooke\nfrom qiskit.transpiler import Layout\n\nbackend = FakeSherbrooke()\na, b = qubits\ninitial_layout = Layout({a: 5, b: 6})\n\npass_manager = generate_preset_pass_manager(\n    optimization_level=1, backend=backend, initial_layout=initial_layout\n)\ntranspiled_circ = pass_manager.run(qc)\ntranspiled_circ.draw(\"mpl\", idle_wires=False)\n```\n\n### Example with List of Integers\n\n```python\ninitial_layout = [5, 6]\n\npass_manager = generate_preset_pass_manager(\n    optimization_level=1, backend=backend, initial_layout=initial_layout\n)\ntranspiled_circ = pass_manager.run(qc)\ntranspiled_circ.draw(\"mpl\", idle_wires=False)\n```",
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    paletteLabel: "initial layout",
+    label: function () {
+      return this.name || "initial layout";
+    }
+  });
+</script>
+
+<script type="text/html" data-template-name="transpilation-initial-layout">
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+
+<script type="text/html" data-help-name="transpilation-initial-layout">
+  <p>transpilation-initial-layout</p>
+</script>

@@ -8,5 +8,6 @@
 # Optional npm cache directory
 .npm
 
-# virtual environment
+# environment
 /venv
+.env
