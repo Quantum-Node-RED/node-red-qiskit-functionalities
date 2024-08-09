@@ -5,7 +5,7 @@
       color: "#aaaaaa",
       defaults: {
         name: { value: "Import simple OpenQASM2 program from file" },
-        info: { value: "# **Example: import an OpenQASM 2 program from a file**\r\n&nbsp;\r\n# The other way for convertion is using <font style=\"background: lightgrey\">load()</font> to import an OpenQASM 2 program from a **file** into a QuantumCircuit.\r\n&nbsp;\r\n# In this code snippet, we first create a qiskit circuit which does the same thing as the string program we introduced before, and we save it as a <font style=\"background: lightgrey\">\".qasm\"</font> file.\r\n```python\r\n# Create a simple circuit\r\nqc = QuantumCircuit(2, 2)\r\nqc.h(0)\r\nqc.cx(0, 1)\r\nqc.measure([0, 1], [0, 1])\r\n\r\n\r\n# Save the circuit to a QASM file\r\nqasm_filename = \"myfile.qasm\"\r\nqiskit.qasm2.dump(qc, qasm_filename)\r\n```\r\n# Then, we use <font style=\"background: lightgrey\">qiskit.qasm2.load()</font> to load the circuit from the file we created.\r\n```python\r\n# Load the QASM file\r\ncircuit = qiskit.qasm2.load(qasm_filename)\r\n```\r\n# You can check the image of generated circuit in the \"Image Output for File\" node." }
+        info: { value: "# **Example: import an OpenQASM 2 program from a file**\r\n&nbsp;\r\n# The other way for convertion is using <font style=\"background: lightgrey\">load()</font> to import an OpenQASM 2 program from a **file** into a QuantumCircuit.\r\n&nbsp;\r\n# In this code snippet, we first create a qiskit circuit which does the same thing as the string program we introduced before, and we save it as a <font style=\"background: lightgrey\">\".qasm\"</font> file.\r\n```python\r\n# Create a simple circuit\r\nqc = QuantumCircuit(2, 2)\r\nqc.h(0)\r\nqc.cx(0, 1)\r\nqc.measure([0, 1], [0, 1])\r\n\r\n\r\n# Save the circuit to a QASM file\r\nqasm_filename = \"myfile.qasm\"\r\nqiskit.qasm2.dump(qc, qasm_filename)\r\n```\r\n# Then, we use <font style=\"background: lightgrey\">qiskit.qasm2.load()</font> to load the circuit from the file we created.\r\n```python\r\n# Load the QASM file\r\ncircuit = qiskit.qasm2.load(qasm_filename)\r\n```\r\n# You can check the image of generated circuit in the \"Image Output for File\" node.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: the image of loaded circuit." }
       },
       inputs: 1,
       outputs: 1,
@@ -30,5 +30,20 @@
   
   <script type="text/html" data-help-name="import-OpenQASM2-program-from-file">
     <p>A node that import OpenQASM2 program from file into Qiskit.</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the quantum circuit.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to the process of importing and exporting quantum circuits using the Qiskit framework with OpenQASM 2 format. It explains how to create a simple quantum circuit, save it as a ".qasm" file, and then reload it using Qiskit's qasm2 functions. This approach is useful for sharing and reusing quantum circuits across different platforms and environments.
+    </p>
   </script>
   

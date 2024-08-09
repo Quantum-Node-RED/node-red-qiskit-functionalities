@@ -2,14 +2,14 @@
 <script type="text/javascript">
     RED.nodes.registerType("openQASM2-strict-mode", {
       category: "Import OpenQASM 2 program",
-      color: "#aaaaaa",
+      color: "#dddddd",
       defaults: {
         name: { value: "Strict mode" },
         info: { value: "# By default, this parser is more relaxed than the official specification. It allows trailing commas in parameter lists; unnecessary (empty-statement) semicolons; omission of the <font style=\"background: lightgrey\">OPENQASM 2.0</font>; version statement; and several other quality-of-life improvements without emitting any errors. However, you can use the \"letter-of-the-spec\" mode with <font style=\"background: lightgrey\">strict=True</font>." }
       },
       inputs: 1,
       outputs: 0,
-      icon: "file.svg",
+      icon: "white_info.svg",
       label: function () {
         return this.name || "Strict mode";
       },
@@ -30,5 +30,10 @@
   
   <script type="text/html" data-help-name="openQASM2-strict-mode">
     <p>A node that briefly introduce the strict mode in OpenQASM 2.</p>
+
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to the flexibility offered by a custom parser for OPENQASM 2.0, as described in the Qiskit documentation. Unlike the official specification, this parser is designed to be more relaxed, allowing for several quality-of-life improvements without raising errors. 
+    </p>
   </script>
   

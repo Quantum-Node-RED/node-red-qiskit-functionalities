@@ -5,7 +5,7 @@
       color: "#aaaaaa",
       defaults: {
         name: { value: "Define new built-in gate in OpenQASM 2" },
-        info: { value: "# **Example: define a new built-in gate in an OpenQASM 2 program**\r\n&nbsp;\r\n# If the argument <font style=\"background: lightgrey\">builtin=True</font> is set, a custom gate does not need to have an associated definition.\r\n&nbsp;\r\n# Consider following code snippet:\r\n```python\r\n# Define a custom gate that takes one qubit and two angles.\r\nclass MyGate(Gate):\r\n    def __init__(self, theta, phi):\r\n        super().__init__(\"my\", 1, [theta, phi])\r\n \r\ncustom_instructions = [\r\n    qasm2.CustomInstruction(\"my\", 2, 1, MyGate, builtin=True),\r\n]\r\n```\r\n# In this code, we define a custom gate, 'MyGate', and creates a custom instruction to map OpenQASM 2 gate names 'my' to 'MyGate'.\r\n&nbsp;\r\n# However, since we set <font style=\"background: lightgrey\">builtin=True</font>, we don't have to define gate 'my' in OpenQASM2 program(like what we did in the 'particular gate class example'). Instead, we can just simply call 'my' gate in the OpenQASM2 program.\r\n```python\r\nprogram = \"\"\"\r\n    OPENQASM 2.0;\r\n    qreg q[1];\r\n \r\n    my(0.25, 0.125) q[0];\r\n\"\"\"\r\n \r\ncircuit = qasm2.loads(\r\n    program,\r\n    custom_instructions=custom_instructions,\r\n)\r\n```\r\n# You can check the image of constructed circuit in the \"Image Output for New Built-in Gate\" node. The qiskit instructions is sent to \"Instruction-new built-in gate\" and you can see them in the debug palette." }
+        info: { value: "# **Example: define a new built-in gate in an OpenQASM 2 program**\r\n&nbsp;\r\n# If the argument <font style=\"background: lightgrey\">builtin=True</font> is set, a custom gate does not need to have an associated definition.\r\n&nbsp;\r\n# Consider following code snippet:\r\n```python\r\n# Define a custom gate that takes one qubit and two angles.\r\nclass MyGate(Gate):\r\n    def __init__(self, theta, phi):\r\n        super().__init__(\"my\", 1, [theta, phi])\r\n \r\ncustom_instructions = [\r\n    qasm2.CustomInstruction(\"my\", 2, 1, MyGate, builtin=True),\r\n]\r\n```\r\n# In this code, we define a custom gate, 'MyGate', and creates a custom instruction to map OpenQASM 2 gate names 'my' to 'MyGate'.\r\n&nbsp;\r\n# However, since we set <font style=\"background: lightgrey\">builtin=True</font>, we don't have to define gate 'my' in OpenQASM2 program(like what we did in the 'particular gate class example'). Instead, we can just simply call 'my' gate in the OpenQASM2 program.\r\n```python\r\nprogram = \"\"\"\r\n    OPENQASM 2.0;\r\n    qreg q[1];\r\n \r\n    my(0.25, 0.125) q[0];\r\n\"\"\"\r\n \r\ncircuit = qasm2.loads(\r\n    program,\r\n    custom_instructions=custom_instructions,\r\n)\r\n```\r\n# You can check the image of constructed circuit in the \"Image Output for New Built-in Gate\" node. The qiskit instructions is sent to \"Instruction-new built-in gate\" and you can see them in the debug palette.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # List: instructions (Type: _string_)\r\n- # Image: the image of loaded circuit with custom instructions." }
       },
       inputs: 1,
       outputs: 1,
@@ -30,5 +30,26 @@
   
   <script type="text/html" data-help-name="link-define-new-built-in-gate">
     <p>A node that define a new built-in gate in an OpenQASM 2 program.</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>List
+        <dl class="message-properties">
+          <dt>custom_instructions<span class="property-type">list</span></dt>
+          <dd>The customed instructions that optimized the circuit.</dd>
+        </dl>
+      </li>
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the quantum circuit.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to defining and using custom gates in OpenQASM 2 programs with Qiskit. It demonstrates how to define a new gate using a built-in approach where the gate does not require a traditional OpenQASM 2 definition. By setting the builtin=True argument, you can seamlessly integrate custom gates into your quantum circuit programs. 
+    </p>
   </script>
   
