@@ -106,6 +106,7 @@ image_path = os.path.join(current_directory, image_filename)
 # Read the image file as a base64 string
 with open(image_path, "rb") as image_file:
     base64_image = base64.b64encode(image_file.read()).decode('utf-8')
+image_file.close()
  
 
 # print(f"CZ gates: {op_counts['cz']}")

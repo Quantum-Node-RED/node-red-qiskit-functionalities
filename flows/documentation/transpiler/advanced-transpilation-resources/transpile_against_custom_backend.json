@@ -12,29 +12,29 @@
         "type": "create-custom-backend",
         "z": "79b981448e230525",
         "name": "Create a Custom Backend",
-        "x": 880,
+        "info": "# The <font style=\"background: lightgrey\">BackendV2</font> object is an abstract class used for all backend objects created by a provider (either within <font style=\"background: lightgrey\">qiskit.providers</font> or another library such as [<font style=\"background: lightgrey\">qiskit_ibm_runtime.IBMBackend</font>](https://docs.quantum.ibm.com/api/qiskit-ibm-runtime/qiskit_ibm_runtime.IBMBackend)). As mentioned above, these objects contain several attributes, including a <font style=\"background: lightgrey\">Target</font>. The <font style=\"background: lightgrey\">Target</font> contains information that specifies the backend's attributes - such as the [<font style=\"background: lightgrey\">Coupling Map</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.transpiler.CouplingMap), list of [<font style=\"background: lightgrey\">Instructions</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.Instruction), and others - to the transpiler. In addition to the Target, one can also define pulse-level details such as the [<font style=\"background: lightgrey\">DriveChannel</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.pulse.channels.DriveChannel) or [<font style=\"background: lightgrey\">ControlChannel</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.pulse.channels.ControlChannel).\r\n&nbsp;\r\n# The following example demonstrates this customization by creating a simulated multi-chip backend, where each chip possesses a heavy-hex connectivity. The example specifies the backend's two-qubit gate set to be [<font style=\"background: lightgrey\">CZGates</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.CZGate) within each chip and [<font style=\"background: lightgrey\">CXGates</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.ECRGate) between chips. First, create your own <font style=\"background: lightgrey\">BackendV2</font> and customize its <font style=\"background: lightgrey\">Target</font> with single and two-qubit gates according to the previously described constraints.\r\n```python\r\nimport numpy as np\r\nimport rustworkx as rx\r\n \r\nfrom qiskit.providers import BackendV2, Options\r\nfrom qiskit.transpiler import Target, InstructionProperties\r\nfrom qiskit.circuit.library import XGate, SXGate, RZGate, CZGate, ECRGate\r\nfrom qiskit.circuit import Measure, Delay, Parameter, IfElseOp, Reset\r\nfrom qiskit import QuantumCircuit, transpile\r\nfrom qiskit.visualization import plot_gate_map, plot_coupling_map\r\n \r\n \r\n \r\nclass FakeLOCCBackend(BackendV2):\r\n    \"\"\"Fake multi chip backend.\"\"\"\r\n \r\n    def __init__(self, distance=3, number_of_chips=3):\r\n        \"\"\"Instantiate a new fake multi chip backend.\r\n \r\n        Args:\r\n            distance (int): The heavy hex code distance to use for each chips'\r\n                coupling map. This number **must** be odd. The distance relates\r\n                to the number of qubits by:\r\n                :math:`n = \\\\frac{5d^2 - 2d - 1}{2}` where :math:`n` is the\r\n                number of qubits and :math:`d` is the ``distance``\r\n            number_of_chips (int): The number of chips to have in the multichip backend\r\n                each chip will be a heavy hex graph of ``distance`` code distance.\r\n        \"\"\"\r\n        super().__init__(name='Fake LOCC backend')\r\n        # Create a heavy-hex graph using the rustworkx library, then instantiate a new target\r\n        self._graph = rx.generators.directed_heavy_hex_graph(distance, bidirectional=False)\r\n        num_qubits = len(self._graph) * number_of_chips\r\n        self._target = Target(\"Fake multi-chip backend\", num_qubits=num_qubits)\r\n \r\n        # Generate instruction properties for single qubit gates and a measurement, delay,\r\n        #  and reset operation to every qubit in the backend.\r\n        rng = np.random.default_rng(seed=12345678942)\r\n        rz_props = {}\r\n        x_props = {}\r\n        sx_props = {}\r\n        measure_props = {}\r\n        delay_props = {}\r\n \r\n        # Add 1q gates. Globally use virtual rz, x, sx, and measure\r\n        for i in range(num_qubits):\r\n            qarg = (i,)\r\n            rz_props[qarg] = InstructionProperties(error=0.0, duration=0.0)\r\n            x_props[qarg] = InstructionProperties(\r\n                error=rng.uniform(1e-6, 1e-4), duration=rng.uniform(1e-8, 9e-7)\r\n            )\r\n            sx_props[qarg] = InstructionProperties(\r\n                error=rng.uniform(1e-6, 1e-4), duration=rng.uniform(1e-8, 9e-7)\r\n            )\r\n            measure_props[qarg] = InstructionProperties(\r\n                error=rng.uniform(1e-3, 1e-1), duration=rng.uniform(1e-8, 9e-7)\r\n            )\r\n            delay_props[qarg] = None\r\n        self._target.add_instruction(XGate(), x_props)\r\n        self._target.add_instruction(SXGate(), sx_props)\r\n        self._target.add_instruction(RZGate(Parameter(\"theta\")), rz_props)\r\n        self._target.add_instruction(Measure(), measure_props)\r\n        self._target.add_instruction(Reset(), measure_props)\r\n \r\n        self._target.add_instruction(Delay(Parameter(\"t\")), delay_props)\r\n        # Add chip local 2q gate which is CZ\r\n        cz_props = {}\r\n        for i in range(number_of_chips):\r\n            for root_edge in self._graph.edge_list():\r\n                offset = i * len(self._graph)\r\n                edge = (root_edge[0] + offset, root_edge[1] + offset)\r\n                cz_props[edge] = InstructionProperties(\r\n                    error=rng.uniform(7e-4, 5e-3), duration=rng.uniform(1e-8, 9e-7)\r\n                )\r\n        self._target.add_instruction(CZGate(), cz_props)\r\n \r\n        cx_props = {}\r\n        # Add interchip 2q gates which are ecr (effectively CX)\r\n        # First determine which nodes to connect\r\n        node_indices = self._graph.node_indices()\r\n        edge_list = self._graph.edge_list()\r\n        inter_chip_nodes = {}\r\n        for node in node_indices:\r\n            count = 0\r\n            for edge in edge_list:\r\n                if node == edge[0]:\r\n                    count+=1\r\n            if count == 1:\r\n                inter_chip_nodes[node] = count\r\n        # Create inter-chip ecr props\r\n        cx_props = {}\r\n        inter_chip_edges = list(inter_chip_nodes.keys())\r\n        for i in range(1, number_of_chips):\r\n            offset = i * len(self._graph)\r\n            edge = (inter_chip_edges[1] + (len(self._graph) * (i-1)) , inter_chip_edges[0] + offset)\r\n            cx_props[edge] = InstructionProperties(\r\n                error=rng.uniform(7e-4, 5e-3), duration=rng.uniform(1e-8, 9e-7)\r\n            )\r\n \r\n        self._target.add_instruction(ECRGate(), cx_props)\r\n \r\n    @property\r\n    def target(self):\r\n        return self._target\r\n \r\n    @property\r\n    def max_circuits(self):\r\n        return None\r\n \r\n    @property\r\n    def graph(self):\r\n        return self._graph\r\n \r\n \r\n    @classmethod\r\n    def _default_options(cls):\r\n        return Options(shots=1024)\r\n \r\n    def run(self, circuit, **kwargs):\r\n        raise NotImplementedError(\"This backend does not contain a run method\")\r\n```\r\n",
+        "x": 960,
         "y": 580,
         "wires": [
             [
-                "ee134b7adec1e371",
-                "4ebd90459009386c"
+                "3be709b5f023490b",
+                "7143f0cfad746287"
             ]
-        ],
-        "info": "# The <font style=\"background: lightgrey\">BackendV2</font> object is an abstract class used for all backend objects created by a provider (either within <font style=\"background: lightgrey\">qiskit.providers</font> or another library such as [<font style=\"background: lightgrey\">qiskit_ibm_runtime.IBMBackend</font>](https://docs.quantum.ibm.com/api/qiskit-ibm-runtime/qiskit_ibm_runtime.IBMBackend)). As mentioned above, these objects contain several attributes, including a <font style=\"background: lightgrey\">Target</font>. The <font style=\"background: lightgrey\">Target</font> contains information that specifies the backend's attributes - such as the [<font style=\"background: lightgrey\">Coupling Map</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.transpiler.CouplingMap), list of [<font style=\"background: lightgrey\">Instructions</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.Instruction), and others - to the transpiler. In addition to the Target, one can also define pulse-level details such as the [<font style=\"background: lightgrey\">DriveChannel</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.pulse.channels.DriveChannel) or [<font style=\"background: lightgrey\">ControlChannel</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.pulse.channels.ControlChannel).\r\n&nbsp;\r\n# The following example demonstrates this customization by creating a simulated multi-chip backend, where each chip possesses a heavy-hex connectivity. The example specifies the backend's two-qubit gate set to be [<font style=\"background: lightgrey\">CZGates</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.CZGate) within each chip and [<font style=\"background: lightgrey\">CXGates</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.ECRGate) between chips. First, create your own <font style=\"background: lightgrey\">BackendV2</font> and customize its <font style=\"background: lightgrey\">Target</font> with single and two-qubit gates according to the previously described constraints.\r\n```python\r\nimport numpy as np\r\nimport rustworkx as rx\r\n \r\nfrom qiskit.providers import BackendV2, Options\r\nfrom qiskit.transpiler import Target, InstructionProperties\r\nfrom qiskit.circuit.library import XGate, SXGate, RZGate, CZGate, ECRGate\r\nfrom qiskit.circuit import Measure, Delay, Parameter, IfElseOp, Reset\r\nfrom qiskit import QuantumCircuit, transpile\r\nfrom qiskit.visualization import plot_gate_map, plot_coupling_map\r\n \r\n \r\n \r\nclass FakeLOCCBackend(BackendV2):\r\n    \"\"\"Fake multi chip backend.\"\"\"\r\n \r\n    def __init__(self, distance=3, number_of_chips=3):\r\n        \"\"\"Instantiate a new fake multi chip backend.\r\n \r\n        Args:\r\n            distance (int): The heavy hex code distance to use for each chips'\r\n                coupling map. This number **must** be odd. The distance relates\r\n                to the number of qubits by:\r\n                :math:`n = \\\\frac{5d^2 - 2d - 1}{2}` where :math:`n` is the\r\n                number of qubits and :math:`d` is the ``distance``\r\n            number_of_chips (int): The number of chips to have in the multichip backend\r\n                each chip will be a heavy hex graph of ``distance`` code distance.\r\n        \"\"\"\r\n        super().__init__(name='Fake LOCC backend')\r\n        # Create a heavy-hex graph using the rustworkx library, then instantiate a new target\r\n        self._graph = rx.generators.directed_heavy_hex_graph(distance, bidirectional=False)\r\n        num_qubits = len(self._graph) * number_of_chips\r\n        self._target = Target(\"Fake multi-chip backend\", num_qubits=num_qubits)\r\n \r\n        # Generate instruction properties for single qubit gates and a measurement, delay,\r\n        #  and reset operation to every qubit in the backend.\r\n        rng = np.random.default_rng(seed=12345678942)\r\n        rz_props = {}\r\n        x_props = {}\r\n        sx_props = {}\r\n        measure_props = {}\r\n        delay_props = {}\r\n \r\n        # Add 1q gates. Globally use virtual rz, x, sx, and measure\r\n        for i in range(num_qubits):\r\n            qarg = (i,)\r\n            rz_props[qarg] = InstructionProperties(error=0.0, duration=0.0)\r\n            x_props[qarg] = InstructionProperties(\r\n                error=rng.uniform(1e-6, 1e-4), duration=rng.uniform(1e-8, 9e-7)\r\n            )\r\n            sx_props[qarg] = InstructionProperties(\r\n                error=rng.uniform(1e-6, 1e-4), duration=rng.uniform(1e-8, 9e-7)\r\n            )\r\n            measure_props[qarg] = InstructionProperties(\r\n                error=rng.uniform(1e-3, 1e-1), duration=rng.uniform(1e-8, 9e-7)\r\n            )\r\n            delay_props[qarg] = None\r\n        self._target.add_instruction(XGate(), x_props)\r\n        self._target.add_instruction(SXGate(), sx_props)\r\n        self._target.add_instruction(RZGate(Parameter(\"theta\")), rz_props)\r\n        self._target.add_instruction(Measure(), measure_props)\r\n        self._target.add_instruction(Reset(), measure_props)\r\n \r\n        self._target.add_instruction(Delay(Parameter(\"t\")), delay_props)\r\n        # Add chip local 2q gate which is CZ\r\n        cz_props = {}\r\n        for i in range(number_of_chips):\r\n            for root_edge in self._graph.edge_list():\r\n                offset = i * len(self._graph)\r\n                edge = (root_edge[0] + offset, root_edge[1] + offset)\r\n                cz_props[edge] = InstructionProperties(\r\n                    error=rng.uniform(7e-4, 5e-3), duration=rng.uniform(1e-8, 9e-7)\r\n                )\r\n        self._target.add_instruction(CZGate(), cz_props)\r\n \r\n        cx_props = {}\r\n        # Add interchip 2q gates which are ecr (effectively CX)\r\n        # First determine which nodes to connect\r\n        node_indices = self._graph.node_indices()\r\n        edge_list = self._graph.edge_list()\r\n        inter_chip_nodes = {}\r\n        for node in node_indices:\r\n            count = 0\r\n            for edge in edge_list:\r\n                if node == edge[0]:\r\n                    count+=1\r\n            if count == 1:\r\n                inter_chip_nodes[node] = count\r\n        # Create inter-chip ecr props\r\n        cx_props = {}\r\n        inter_chip_edges = list(inter_chip_nodes.keys())\r\n        for i in range(1, number_of_chips):\r\n            offset = i * len(self._graph)\r\n            edge = (inter_chip_edges[1] + (len(self._graph) * (i-1)) , inter_chip_edges[0] + offset)\r\n            cx_props[edge] = InstructionProperties(\r\n                error=rng.uniform(7e-4, 5e-3), duration=rng.uniform(1e-8, 9e-7)\r\n            )\r\n \r\n        self._target.add_instruction(ECRGate(), cx_props)\r\n \r\n    @property\r\n    def target(self):\r\n        return self._target\r\n \r\n    @property\r\n    def max_circuits(self):\r\n        return None\r\n \r\n    @property\r\n    def graph(self):\r\n        return self._graph\r\n \r\n \r\n    @classmethod\r\n    def _default_options(cls):\r\n        return Options(shots=1024)\r\n \r\n    def run(self, circuit, **kwargs):\r\n        raise NotImplementedError(\"This backend does not contain a run method\")\r\n```\r\n"
+        ]
     },
     {
         "id": "60dc193d57808af4",
         "type": "intro-to-pbt",
         "z": "79b981448e230525",
         "name": "Introduction to Provider, BackendV2 and Target interface",
+        "info": "# Before beginning, it is helpful to understand the usage and purpose of the [<font style=\"background: lightgrey\">Provider</font>](https://docs.quantum.ibm.com/api/qiskit/providers), [<font style=\"background: lightgrey\">BackendV2</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.providers.BackendV2), and [<font style=\"background: lightgrey\">Target</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.transpiler.Target) objects.\r\n&nbsp;\r\n# **Provider**\r\n# If you have a quantum device or simulator that you want to integrate into the Qiskit SDK, you need to write your own <font style=\"background: lightgrey\">Provider</font> class. This class serves a single purpose: to get backend objects that you provide. This is where any required credential and/or authentication tasks are handled. Once instantiated, the provider object will then provide a list of backends as well as the ability to acquire/instantiate backends.\r\n&nbsp;\r\n# **BackendV2 and Target**\r\n# Next, the backend classes provide the interface between the Qiskit SDK and the hardware or simulator that will execute circuits. They include all necessary information to describe a backend to the transpiler so that it can optimize any circuit according to its constraints. A <font style=\"background: lightgrey\">BackendV2</font> is built of four main parts:\r\n- # A <font style=\"background: lightgrey\">Target</font> property, which contains a description of the constraints of the backend and provides a model of the backend for the transpiler\r\n- # A <font style=\"background: lightgrey\">max_circuits</font> property that defines a limit on the number of circuits a backend can execute in a single job\r\n- # A <font style=\"background: lightgrey\">run()</font> method that accept job submissions\r\n- # A set of <font style=\"background: lightgrey\"> _default_options</font> to define the user configurable options and their default values",
         "x": 430,
         "y": 580,
         "wires": [
             [
-                "777f6dc3186f00fd"
+                "5f71ecde26c8cd41"
             ]
-        ],
-        "info": "# Before beginning, it is helpful to understand the usage and purpose of the [<font style=\"background: lightgrey\">Provider</font>](https://docs.quantum.ibm.com/api/qiskit/providers), [<font style=\"background: lightgrey\">BackendV2</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.providers.BackendV2), and [<font style=\"background: lightgrey\">Target</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.transpiler.Target) objects.\r\n&nbsp;\r\n# **Provider**\r\n# If you have a quantum device or simulator that you want to integrate into the Qiskit SDK, you need to write your own <font style=\"background: lightgrey\">Provider</font> class. This class serves a single purpose: to get backend objects that you provide. This is where any required credential and/or authentication tasks are handled. Once instantiated, the provider object will then provide a list of backends as well as the ability to acquire/instantiate backends.\r\n&nbsp;\r\n# **BackendV2 and Target**\r\n# Next, the backend classes provide the interface between the Qiskit SDK and the hardware or simulator that will execute circuits. They include all necessary information to describe a backend to the transpiler so that it can optimize any circuit according to its constraints. A <font style=\"background: lightgrey\">BackendV2</font> is built of four main parts:\r\n- # A <font style=\"background: lightgrey\">Target</font> property, which contains a description of the constraints of the backend and provides a model of the backend for the transpiler\r\n- # A <font style=\"background: lightgrey\">max_circuits</font> property that defines a limit on the number of circuits a backend can execute in a single job\r\n- # A <font style=\"background: lightgrey\">run()</font> method that accept job submissions\r\n- # A set of <font style=\"background: lightgrey\"> _default_options</font> to define the user configurable options and their default values"
+        ]
     },
     {
         "id": "dc304aefc97bb868",
@@ -74,8 +74,8 @@
         "active": true,
         "pass": false,
         "outputs": 0,
-        "x": 1620,
-        "y": 800,
+        "x": 1820,
+        "y": 820,
         "wires": []
     },
     {
@@ -83,29 +83,29 @@
         "type": "visualize-custom-backend",
         "z": "79b981448e230525",
         "name": "Visualize a Custom Backend",
-        "x": 1260,
-        "y": 800,
+        "info": "# You can view the connectivity graph of this new class with the [<font style=\"background: lightgrey\">plot_gate_map()</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.visualization.plot_gate_map) method from the <font style=\"background: lightgrey\">qiskit.visualization</font> module. This method, along with [<font style=\"background: lightgrey\">plot_coupling_map()</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.visualization.plot_coupling_map) and [<font style=\"background: lightgrey\">plot_circuit_layout()</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.visualization.plot_circuit_layout), are helpful tools for visualizing the qubit arrangement of a backend, as well as how a circuit is laid out across the qubits of a backend. This example creates a backend containing three small heavy-hex chips. It specifies a set of coordinates to arrange the qubits, as well as a set of custom colors for the differing two-qubit gates.\r\n&nbsp;\r\n# **Note:** In this flow, we will directly show you the visualizations. However, if you want to manually try building the code yourself or customize your code, you will need to install the [graphviz](https://graphviz.org/) library for the diagram plotting functions.\r\n```python\r\nbackend = FakeLOCCBackend(3, 3)\r\n \r\n \r\ntarget = backend.target\r\ncoupling_map_backend = target.build_coupling_map()\r\n \r\n \r\ncoordinates = [(3, 1),\r\n               (3, -1),\r\n               (2, -2),\r\n               (1,1),\r\n               (0,0),\r\n               (-1, -1),\r\n               (-2, 2),\r\n               (-3, 1),\r\n               (-3, -1),\r\n               (2, 1),\r\n               (1, -1),\r\n               (-1, 1),\r\n               (-2, -1),\r\n               (3, 0),\r\n               (2, -1),\r\n               (0, 1),\r\n               (0, -1),\r\n               (-2, 1),\r\n               (-3, 0)]\r\n \r\nsingle_qubit_coordinates = []\r\ntotal_qubit_coordinates = []\r\n \r\n \r\nfor coordinate in coordinates:\r\n    total_qubit_coordinates.append(coordinate)\r\n \r\nfor coordinate in coordinates:\r\n    total_qubit_coordinates.append((-1*coordinate[0]+1, coordinate[1]+4))\r\n \r\nfor coordinate in coordinates:\r\n    total_qubit_coordinates.append((coordinate[0], coordinate[1]+8))\r\n \r\n \r\n \r\n \r\nline_colors = [\"#adaaab\" for edge in coupling_map_backend.get_edges()]\r\necr_edges = []\r\n \r\n# Get tuples for the edges which have an ecr instruction attached\r\nfor instruction in target.instructions:\r\n    if instruction[0].name == 'ecr':\r\n        ecr_edges.append(instruction[1])\r\n \r\nfor i, edge in enumerate(coupling_map_backend.get_edges()):\r\n    if edge in ecr_edges:\r\n        line_colors[i] = \"#000000\"\r\n\r\nplot_gate_map(backend, plot_directed=True, qubit_coordinates=total_qubit_coordinates, line_color=line_colors)\r\n```\r\n# You can check the image of the created backend in \"Backend Image Output\" node.\r\n&nbsp;\r\n# In the image, each qubit is labeled, and colored arrows represent the two-qubit gates. Gray arrows are the CZ gates and the black arrows are the inter-chip CX gates (these connect qubits 6→21 and 25→40). The direction of the arrow indicates the default direction in which these gates are executed; they specify which qubits are control/targets by default for each two-qubit channel.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: The image of the customized backend",
+        "x": 1480,
+        "y": 820,
         "wires": [
             [
                 "21ce969929b469e5"
             ]
-        ],
-        "info": "# You can view the connectivity graph of this new class with the [<font style=\"background: lightgrey\">plot_gate_map()</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.visualization.plot_gate_map) method from the <font style=\"background: lightgrey\">qiskit.visualization</font> module. This method, along with [<font style=\"background: lightgrey\">plot_coupling_map()</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.visualization.plot_coupling_map) and [<font style=\"background: lightgrey\">plot_circuit_layout()</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.visualization.plot_circuit_layout), are helpful tools for visualizing the qubit arrangement of a backend, as well as how a circuit is laid out across the qubits of a backend. This example creates a backend containing three small heavy-hex chips. It specifies a set of coordinates to arrange the qubits, as well as a set of custom colors for the differing two-qubit gates.\r\n&nbsp;\r\n# **Note:** In this flow, we will directly show you the visualizations. However, if you want to manually try building the code yourself or customize your code, you will need to install the [graphviz](https://graphviz.org/) library for the diagram plotting functions.\r\n```python\r\nbackend = FakeLOCCBackend(3, 3)\r\n \r\n \r\ntarget = backend.target\r\ncoupling_map_backend = target.build_coupling_map()\r\n \r\n \r\ncoordinates = [(3, 1),\r\n               (3, -1),\r\n               (2, -2),\r\n               (1,1),\r\n               (0,0),\r\n               (-1, -1),\r\n               (-2, 2),\r\n               (-3, 1),\r\n               (-3, -1),\r\n               (2, 1),\r\n               (1, -1),\r\n               (-1, 1),\r\n               (-2, -1),\r\n               (3, 0),\r\n               (2, -1),\r\n               (0, 1),\r\n               (0, -1),\r\n               (-2, 1),\r\n               (-3, 0)]\r\n \r\nsingle_qubit_coordinates = []\r\ntotal_qubit_coordinates = []\r\n \r\n \r\nfor coordinate in coordinates:\r\n    total_qubit_coordinates.append(coordinate)\r\n \r\nfor coordinate in coordinates:\r\n    total_qubit_coordinates.append((-1*coordinate[0]+1, coordinate[1]+4))\r\n \r\nfor coordinate in coordinates:\r\n    total_qubit_coordinates.append((coordinate[0], coordinate[1]+8))\r\n \r\n \r\n \r\n \r\nline_colors = [\"#adaaab\" for edge in coupling_map_backend.get_edges()]\r\necr_edges = []\r\n \r\n# Get tuples for the edges which have an ecr instruction attached\r\nfor instruction in target.instructions:\r\n    if instruction[0].name == 'ecr':\r\n        ecr_edges.append(instruction[1])\r\n \r\nfor i, edge in enumerate(coupling_map_backend.get_edges()):\r\n    if edge in ecr_edges:\r\n        line_colors[i] = \"#000000\"\r\n\r\nplot_gate_map(backend, plot_directed=True, qubit_coordinates=total_qubit_coordinates, line_color=line_colors)\r\n```\r\n# You can check the image of the created backend in \"Backend Image Output\" node.\r\n&nbsp;\r\n# In the image, each qubit is labeled, and colored arrows represent the two-qubit gates. Gray arrows are the CZ gates and the black arrows are the inter-chip CX gates (these connect qubits 6→21 and 25→40). The direction of the arrow indicates the default direction in which these gates are executed; they specify which qubits are control/targets by default for each two-qubit channel.\r\n"
+        ]
     },
     {
         "id": "4ebd90459009386c",
         "type": "create-circuit-for-custom-backend",
         "z": "79b981448e230525",
         "name": "Create circuit for the custom backend",
-        "x": 1350,
+        "info": "# Now that a custom backend with its own unique [<font style=\"background: lightgrey\">Target</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.transpiler.Target) has been defined, it is straightforward to transpile quantum circuits against this backend, since all the relevant constraints (basis gates, qubit connectivity, and so forth) needed for transpiler passes are contained within this attribute. \r\n&nbsp;\r\n# The code snippet below builds a circuit that creates a large GHZ state to be transpiled.\r\n```python\r\nfrom qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager\r\nfrom qiskit import QuantumCircuit\r\n \r\nnum_qubits = 50\r\nghz = QuantumCircuit(num_qubits)\r\nghz.h(range(num_qubits))\r\nghz.cx(0, range(1, num_qubits))\r\nop_counts = ghz.count_ops()\r\n```\r\n# The number of each types of gate is sent to \"Gates before transpilation\" node and you can check them in the debug palette.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Object: `ghz` (Type: _qiskit.circuit.Quantumcircuit_)\r\n- # Dictionary: `op_counts` (Type: _dict_)",
+        "x": 1510,
         "y": 580,
         "wires": [
             [
                 "f6faead3be14e109",
-                "bc9d5480fb35a7c6"
+                "fa9fab11c8a01140"
             ]
-        ],
-        "info": "# Now that a custom backend with its own unique [<font style=\"background: lightgrey\">Target</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.transpiler.Target) has been defined, it is straightforward to transpile quantum circuits against this backend, since all the relevant constraints (basis gates, qubit connectivity, and so forth) needed for transpiler passes are contained within this attribute. \r\n&nbsp;\r\n# The code snippet below builds a circuit that creates a large GHZ state to be transpiled.\r\n```python\r\nfrom qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager\r\nfrom qiskit import QuantumCircuit\r\n \r\nnum_qubits = 50\r\nghz = QuantumCircuit(num_qubits)\r\nghz.h(range(num_qubits))\r\nghz.cx(0, range(1, num_qubits))\r\nop_counts = ghz.count_ops()\r\n```\r\n# The number of each types of gate is sent to \"Gates before transpilation\" node and you can check them in the debug palette."
+        ]
     },
     {
         "id": "f6faead3be14e109",
@@ -120,8 +120,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1710,
-        "y": 300,
+        "x": 1830,
+        "y": 740,
         "wires": []
     },
     {
@@ -129,16 +129,16 @@
         "type": "run-circuit-on-custom-backend",
         "z": "79b981448e230525",
         "name": "Run circuit on the custom backend",
-        "x": 1840,
+        "info": "## **Node Input:**\r\n- # Object: `ghz` (Type: _qiskit.circuit.Quantumcircuit_)\r\n\r\n***\r\n&nbsp;\r\n# In this node, we transpiles created circuit against the backend constructed before.\r\n```python\r\nfrom qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager\r\n\r\npm = generate_preset_pass_manager(optimization_level=3, backend=backend)\r\ntranspiled_ghz = pm.run(ghz)\r\nop_counts = transpiled_ghz.count_ops()\r\n```\r\n# The number of each types of gate is sent to \"Gates after transpilation\" node and you can check them in the debug palette. You can also see which qubits and two-qubit channels were used in this circuit in \"Backend Usage Image Output\" node.\r\n&nbsp;\r\n# You should find that  transpiled circuit now contains a mixture of CZ and ECR gates,which we specified as the basis gates in the backend's <font style=\"background: lightgrey\">Target</font>. There are also quite a few more gates than you started with because of the need to insert SWAP instructions after choosing a layout.\r\n&nbsp;\r\n# **Note:** In this flow, we will directly show you the visualizations. However, if you want to manually try building the code yourself or customize your code, you will need to install the [graphviz](https://graphviz.org/) library for the diagram plotting functions.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Dictionary: `op_counts` (Type: _dict_)\r\n- # Image: The image of which qubits and two-qubit channels were used in the circuit\r\n",
+        "x": 2160,
         "y": 580,
         "wires": [
             [
                 "f41ece767bbce9f3",
                 "27d394effa5936dc",
-                "e5ee5dac75ff341e"
+                "0caf05f4661010f6"
             ]
-        ],
-        "info": "# In this node, we transpiles created circuit against the backend constructed before.\r\n```python\r\nfrom qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager\r\n\r\npm = generate_preset_pass_manager(optimization_level=3, backend=backend)\r\ntranspiled_ghz = pm.run(ghz)\r\nop_counts = transpiled_ghz.count_ops()\r\n```\r\n# The number of each types of gate is sent to \"Gates after transpilation\" node and you can check them in the debug palette. You can also see which qubits and two-qubit channels were used in this circuit in \"Backend Usage Image Output\" node.\r\n&nbsp;\r\n# You should find that  transpiled circuit now contains a mixture of CZ and ECR gates,which we specified as the basis gates in the backend's <font style=\"background: lightgrey\">Target</font>. There are also quite a few more gates than you started with because of the need to insert SWAP instructions after choosing a layout.\r\n&nbsp;\r\n# **Note:** In this flow, we will directly show you the visualizations. However, if you want to manually try building the code yourself or customize your code, you will need to install the [graphviz](https://graphviz.org/) library for the diagram plotting functions."
+        ]
     },
     {
         "id": "f41ece767bbce9f3",
@@ -152,7 +152,7 @@
         "active": true,
         "pass": false,
         "outputs": 0,
-        "x": 2270,
+        "x": 2650,
         "y": 800,
         "wires": []
     },
@@ -169,8 +169,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 2230,
-        "y": 300,
+        "x": 2630,
+        "y": 760,
         "wires": []
     },
     {
@@ -178,15 +178,15 @@
         "type": "create-unique-custom-backend",
         "z": "79b981448e230525",
         "name": "Create a unique custom backend",
-        "x": 2520,
+        "info": "# The [rustworkx](https://www.rustworkx.org/) package contains a large library of different graphs and enables the creation of custom graphs. The visually interesting code below creates a backend inspired by the toric code. You can then visualize the backend using the functions from the \"Visualize a Custom Backend\" node.\r\n```python\r\nclass FakeTorusBackend(BackendV2):\r\n    \"\"\"Fake multi chip backend.\"\"\"\r\n \r\n    def __init__(self):\r\n        \"\"\"Instantiate a new backend that is inspired by a toric code\"\"\"\r\n        super().__init__(name='Fake LOCC backend')\r\n        graph = rx.generators.directed_grid_graph(20, 20)\r\n        for column in range(20):\r\n            graph.add_edge(column, 19*20 + column, None)\r\n        for row in range(20):\r\n            graph.add_edge(row * 20, row * 20 + 19, None)\r\n        num_qubits = len(graph)\r\n        rng = np.random.default_rng(seed=12345678942)\r\n        rz_props = {}\r\n        x_props = {}\r\n        sx_props = {}\r\n        measure_props = {}\r\n        delay_props = {}\r\n        self._target = Target(\"Fake Kookaburra\", num_qubits=num_qubits)\r\n        # Add 1q gates. Globally use virtual rz, x, sx, and measure\r\n        for i in range(num_qubits):\r\n            qarg = (i,)\r\n            rz_props[qarg] = InstructionProperties(error=0.0, duration=0.0)\r\n            x_props[qarg] = InstructionProperties(\r\n                error=rng.uniform(1e-6, 1e-4), duration=rng.uniform(1e-8, 9e-7)\r\n            )\r\n            sx_props[qarg] = InstructionProperties(\r\n                error=rng.uniform(1e-6, 1e-4), duration=rng.uniform(1e-8, 9e-7)\r\n            )\r\n            measure_props[qarg] = InstructionProperties(\r\n                error=rng.uniform(1e-3, 1e-1), duration=rng.uniform(1e-8, 9e-7)\r\n            )\r\n            delay_props[qarg] = None\r\n        self._target.add_instruction(XGate(), x_props)\r\n        self._target.add_instruction(SXGate(), sx_props)\r\n        self._target.add_instruction(RZGate(Parameter(\"theta\")), rz_props)\r\n        self._target.add_instruction(Measure(), measure_props)\r\n        self._target.add_instruction(Reset(), measure_props)\r\n        self._target.add_instruction(Delay(Parameter(\"t\")), delay_props)\r\n        cz_props = {}\r\n        for edge in graph.edge_list():\r\n            offset = i * len(graph)\r\n            cz_props[edge] = InstructionProperties(\r\n                error=rng.uniform(7e-4, 5e-3), duration=rng.uniform(1e-8, 9e-7)\r\n            )\r\n        self._target.add_instruction(CZGate(), cz_props)\r\n \r\n    @property\r\n    def target(self):\r\n        return self._target\r\n \r\n    @property\r\n    def max_circuits(self):\r\n        return None\r\n \r\n    @classmethod\r\n    def _default_options(cls):\r\n        return Options(shots=1024)\r\n \r\n    def run(self, circuit, **kwargs):\r\n        raise NotImplementedError(\"Lasciate ogne speranza, voi ch'intrate\")\r\n\r\n\r\nbackend = FakeTorusBackend()\r\n# We set `figsize` to a smaller size to make the documentation website faster\r\n# to load. Normally, you do not need to set the argument.\r\nplot_gate_map(backend, figsize=(4, 4))\r\n```\r\n# You can check the image in the \"Unique Custom Backend Image Output\" node\r\n# **Note:** In this flow, we will directly show you the visualizations. However, if you want to manually try building the code yourself or customize your code, you will need to install the [graphviz](https://graphviz.org/) library for the diagram plotting functions.\r\n&nbsp;\r\n# In addition, we can also construct and prepare a quantum circuit, then transpiles it for the unique custom backend we created.\r\n```python\r\nnum_qubits = int(backend.num_qubits / 2)\r\nfull_device_bv = QuantumCircuit(num_qubits, num_qubits - 1)\r\nfull_device_bv.x(num_qubits - 1)\r\nfull_device_bv.h(range(num_qubits))\r\nfull_device_bv.cx(range(num_qubits - 1), num_qubits - 1)\r\nfull_device_bv.h(range(num_qubits))\r\nfull_device_bv.measure(range(num_qubits - 1), range(num_qubits - 1));\r\ntqc = transpile(full_device_bv, backend, optimization_level=3)\r\nop_counts = tqc.count_ops()\r\n```\r\n# The number of each type of gates is sent to \"Gates After Transpilation (Unique)\" node and you can check them in debug palette.\r\n&nbsp;\r\n# <font color=\"red\">**Note:** The code snippet for this node takes a relatively long time to run, approximately one to two minutes. Please be patient while waiting for the output.</font>\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Dictionary: `op_counts` (Type: _dict_)\r\n- # Image: The image of the customized backend",
+        "x": 2900,
         "y": 580,
         "wires": [
             [
                 "8963c24c0fca0e5a",
                 "a940033882d8f088"
             ]
-        ],
-        "info": "# The [rustworkx](https://www.rustworkx.org/) package contains a large library of different graphs and enables the creation of custom graphs. The visually interesting code below creates a backend inspired by the toric code. You can then visualize the backend using the functions from the \"Visualize a Custom Backend\" node.\r\n```python\r\nclass FakeTorusBackend(BackendV2):\r\n    \"\"\"Fake multi chip backend.\"\"\"\r\n \r\n    def __init__(self):\r\n        \"\"\"Instantiate a new backend that is inspired by a toric code\"\"\"\r\n        super().__init__(name='Fake LOCC backend')\r\n        graph = rx.generators.directed_grid_graph(20, 20)\r\n        for column in range(20):\r\n            graph.add_edge(column, 19*20 + column, None)\r\n        for row in range(20):\r\n            graph.add_edge(row * 20, row * 20 + 19, None)\r\n        num_qubits = len(graph)\r\n        rng = np.random.default_rng(seed=12345678942)\r\n        rz_props = {}\r\n        x_props = {}\r\n        sx_props = {}\r\n        measure_props = {}\r\n        delay_props = {}\r\n        self._target = Target(\"Fake Kookaburra\", num_qubits=num_qubits)\r\n        # Add 1q gates. Globally use virtual rz, x, sx, and measure\r\n        for i in range(num_qubits):\r\n            qarg = (i,)\r\n            rz_props[qarg] = InstructionProperties(error=0.0, duration=0.0)\r\n            x_props[qarg] = InstructionProperties(\r\n                error=rng.uniform(1e-6, 1e-4), duration=rng.uniform(1e-8, 9e-7)\r\n            )\r\n            sx_props[qarg] = InstructionProperties(\r\n                error=rng.uniform(1e-6, 1e-4), duration=rng.uniform(1e-8, 9e-7)\r\n            )\r\n            measure_props[qarg] = InstructionProperties(\r\n                error=rng.uniform(1e-3, 1e-1), duration=rng.uniform(1e-8, 9e-7)\r\n            )\r\n            delay_props[qarg] = None\r\n        self._target.add_instruction(XGate(), x_props)\r\n        self._target.add_instruction(SXGate(), sx_props)\r\n        self._target.add_instruction(RZGate(Parameter(\"theta\")), rz_props)\r\n        self._target.add_instruction(Measure(), measure_props)\r\n        self._target.add_instruction(Reset(), measure_props)\r\n        self._target.add_instruction(Delay(Parameter(\"t\")), delay_props)\r\n        cz_props = {}\r\n        for edge in graph.edge_list():\r\n            offset = i * len(graph)\r\n            cz_props[edge] = InstructionProperties(\r\n                error=rng.uniform(7e-4, 5e-3), duration=rng.uniform(1e-8, 9e-7)\r\n            )\r\n        self._target.add_instruction(CZGate(), cz_props)\r\n \r\n    @property\r\n    def target(self):\r\n        return self._target\r\n \r\n    @property\r\n    def max_circuits(self):\r\n        return None\r\n \r\n    @classmethod\r\n    def _default_options(cls):\r\n        return Options(shots=1024)\r\n \r\n    def run(self, circuit, **kwargs):\r\n        raise NotImplementedError(\"Lasciate ogne speranza, voi ch'intrate\")\r\n\r\n\r\nbackend = FakeTorusBackend()\r\n# We set `figsize` to a smaller size to make the documentation website faster\r\n# to load. Normally, you do not need to set the argument.\r\nplot_gate_map(backend, figsize=(4, 4))\r\n```\r\n# You can check the image in the \"Unique Custom Backend Image Output\" node\r\n# **Note:** In this flow, we will directly show you the visualizations. However, if you want to manually try building the code yourself or customize your code, you will need to install the [graphviz](https://graphviz.org/) library for the diagram plotting functions.\r\n&nbsp;\r\n# In addition, we can also construct and prepare a quantum circuit, then transpiles it for the unique custom backend we created.\r\n```python\r\nnum_qubits = int(backend.num_qubits / 2)\r\nfull_device_bv = QuantumCircuit(num_qubits, num_qubits - 1)\r\nfull_device_bv.x(num_qubits - 1)\r\nfull_device_bv.h(range(num_qubits))\r\nfull_device_bv.cx(range(num_qubits - 1), num_qubits - 1)\r\nfull_device_bv.h(range(num_qubits))\r\nfull_device_bv.measure(range(num_qubits - 1), range(num_qubits - 1));\r\ntqc = transpile(full_device_bv, backend, optimization_level=3)\r\nop_counts = tqc.count_ops()\r\n```\r\n# The number of each type of gates is sent to \"Gates After Transpilation (Unique)\" node and you can check them in debug palette.\r\n&nbsp;\r\n# <font color=\"red\">**Note:** The code snippet for this node takes a relatively long time to run, approximately one to two minutes. Please be patient while waiting for the output.</font>"
+        ]
     },
     {
         "id": "8963c24c0fca0e5a",
@@ -201,8 +201,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 3060,
-        "y": 320,
+        "x": 3400,
+        "y": 580,
         "wires": []
     },
     {
@@ -217,8 +217,73 @@
         "active": true,
         "pass": false,
         "outputs": 0,
-        "x": 3030,
-        "y": 800,
+        "x": 3410,
+        "y": 620,
         "wires": []
+    },
+    {
+        "id": "5f71ecde26c8cd41",
+        "type": "move-to-next-node",
+        "z": "79b981448e230525",
+        "name": "Next",
+        "x": 730,
+        "y": 580,
+        "wires": [
+            [
+                "777f6dc3186f00fd"
+            ]
+        ]
+    },
+    {
+        "id": "3be709b5f023490b",
+        "type": "move-to-next-node",
+        "z": "79b981448e230525",
+        "name": "Next",
+        "x": 1170,
+        "y": 580,
+        "wires": [
+            [
+                "4ebd90459009386c"
+            ]
+        ]
+    },
+    {
+        "id": "fa9fab11c8a01140",
+        "type": "move-to-next-node",
+        "z": "79b981448e230525",
+        "name": "Next",
+        "x": 1750,
+        "y": 580,
+        "wires": [
+            [
+                "bc9d5480fb35a7c6"
+            ]
+        ]
+    },
+    {
+        "id": "0caf05f4661010f6",
+        "type": "move-to-next-node",
+        "z": "79b981448e230525",
+        "name": "Next",
+        "x": 2430,
+        "y": 580,
+        "wires": [
+            [
+                "e5ee5dac75ff341e"
+            ]
+        ]
+    },
+    {
+        "id": "7143f0cfad746287",
+        "type": "move-to-next-node",
+        "z": "79b981448e230525",
+        "name": "Next",
+        "x": 1170,
+        "y": 820,
+        "wires": [
+            [
+                "ee134b7adec1e371"
+            ]
+        ]
     }
 ]

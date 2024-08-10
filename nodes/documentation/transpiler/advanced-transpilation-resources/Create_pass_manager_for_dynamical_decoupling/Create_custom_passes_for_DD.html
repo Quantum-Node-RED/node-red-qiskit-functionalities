@@ -5,7 +5,7 @@
       color: "#aaaaaa",
       defaults: {
         name: { value: "Create Custom Passes for Dynamical Decoupling" },
-        info: { value: "# A _dynamical decoupling sequence_ is a series of gates that compose to the identity and are spaced regularly in time. For example, in this code snippet, we start by creating a simple sequence called XY4 consisting of four gates.\r\n```python\r\nfrom qiskit.circuit.library import XGate, YGate\r\n \r\nX = XGate()\r\nY = YGate()\r\n \r\ndd_sequence = [X, Y, X, Y]\r\n```\r\n# Then, because of the regular timing of dynamical decoupling sequences, information about the <font style=\"background: lightgrey\">YGate</font> must be added to the <font style=\"background: lightgrey\">target</font> because it is not a basis gate, whereas the <font style=\"background: lightgrey\">XGate</font> is. We know a _priori_ that the <font style=\"background: lightgrey\">YGate</font> has the same duration and error as the <font style=\"background: lightgrey\">XGate</font>, however, so we can just retrieve those properties from the <font style=\"background: lightgrey\">target</font> and add them back for the <font style=\"background: lightgrey\">YGates</font>. This is also why the list 'basis_gates' were saved separately in the previous node, since we are adding the <font style=\"background: lightgrey\">YGate</font> instruction to the <font style=\"background: lightgrey\">target</font> although it is not an actual basis gate of <font style=\"background: lightgrey\">ibm_brisbane</font>.\r\n&nbsp;\r\n# In this code, we copy the duration and error properties of the <font style=\"background: lightgrey\">X gate</font> to the <font style=\"background: lightgrey\">Y gate</font> for each qubit in the target quantum device and then adds the <font style=\"background: lightgrey\">Y gate</font> with these properties to the <font style=\"background: lightgrey\">target</font>.\r\n```python\r\nfrom qiskit.transpiler import InstructionProperties\r\n \r\ny_gate_properties = {}\r\nfor qubit in range(target.num_qubits):\r\n    y_gate_properties.update(\r\n        {\r\n            (qubit,): InstructionProperties(\r\n                duration=target[\"x\"][(qubit,)].duration,\r\n                error=target[\"x\"][(qubit,)].error,\r\n            )\r\n        }\r\n    )\r\n \r\ntarget.add_instruction(YGate(), y_gate_properties)\r\n```\r\n# The new operation name list is set to \"New Target Operation Names\" node, and you can check the instruction names in debug palette. Compare to the previous instructions, Compared to the previous instructions, the <font style=\"background: lightgrey\">target</font> should now include an additional instruction called <font style=\"background: lightgrey\">'y'</font>, while all other instructions should remain the same as before. " }
+        info: { value: "## **Node Input:**\r\n- # Object: `target` (Type: _qiskit.transpiler.Target_)\r\n- # Object: `qc_t` (Type: _qiskit.circuit.QuantumCircuit_)\r\n- # List: `basis_gates` (Type: _string_)\r\n\r\n***\r\n&nbsp;\r\n# A _dynamical decoupling sequence_ is a series of gates that compose to the identity and are spaced regularly in time. For example, in this code snippet, we start by creating a simple sequence called XY4 consisting of four gates.\r\n```python\r\nfrom qiskit.circuit.library import XGate, YGate\r\n \r\nX = XGate()\r\nY = YGate()\r\n \r\ndd_sequence = [X, Y, X, Y]\r\n```\r\n# Then, because of the regular timing of dynamical decoupling sequences, information about the <font style=\"background: lightgrey\">YGate</font> must be added to the <font style=\"background: lightgrey\">target</font> because it is not a basis gate, whereas the <font style=\"background: lightgrey\">XGate</font> is. We know a _priori_ that the <font style=\"background: lightgrey\">YGate</font> has the same duration and error as the <font style=\"background: lightgrey\">XGate</font>, however, so we can just retrieve those properties from the <font style=\"background: lightgrey\">target</font> and add them back for the <font style=\"background: lightgrey\">YGates</font>. This is also why the list 'basis_gates' were saved separately in the previous node, since we are adding the <font style=\"background: lightgrey\">YGate</font> instruction to the <font style=\"background: lightgrey\">target</font> although it is not an actual basis gate of <font style=\"background: lightgrey\">ibm_brisbane</font>.\r\n&nbsp;\r\n# In this code, we copy the duration and error properties of the <font style=\"background: lightgrey\">X gate</font> to the <font style=\"background: lightgrey\">Y gate</font> for each qubit in the target quantum device and then adds the <font style=\"background: lightgrey\">Y gate</font> with these properties to the <font style=\"background: lightgrey\">target</font>.\r\n```python\r\nfrom qiskit.transpiler import InstructionProperties\r\n \r\ny_gate_properties = {}\r\nfor qubit in range(target.num_qubits):\r\n    y_gate_properties.update(\r\n        {\r\n            (qubit,): InstructionProperties(\r\n                duration=target[\"x\"][(qubit,)].duration,\r\n                error=target[\"x\"][(qubit,)].error,\r\n            )\r\n        }\r\n    )\r\n \r\ntarget.add_instruction(YGate(), y_gate_properties)\r\n```\r\n# The new operation name list is set to \"New Target Operation Names\" node, and you can check the instruction names in debug palette. Compare to the previous instructions, Compared to the previous instructions, the <font style=\"background: lightgrey\">target</font> should now include an additional instruction called <font style=\"background: lightgrey\">'y'</font>, while all other instructions should remain the same as before. \r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Object: `target` (Type: _qiskit.transpiler.Target_)\r\n- # Object: `qc_t` (Type: _qiskit.circuit.QuantumCircuit_)\r\n- # List: `basis_gates` (Type: _string_)\r\n- # List: target.operation_names (Type: _string_)" }
       },
       inputs: 1,
       outputs: 1,
@@ -30,5 +30,60 @@
   
   <script type="text/html" data-help-name="create-custom-pass-for-dd">
     <p>A node that create a custom passes for Dynamical Decoupling.</p>
+
+    <h3>Inputs</h3>
+    <ol class="node-ports">
+      <li>Target
+        <dl class="message-properties">
+          <dt>target<span class="property-type">qiskit.transpiler.Target</span></dt>
+          <dd>The target object of backend "ibm_brisbane"</dd>
+        </dl>
+      </li>
+      <li>Quantum Circuit
+        <dl class="message-properties">
+          <dt>qc_t<span class="property-type">qiskit.circuit.Quantumcircuit</span></dt>
+          <dd>The created EfficientSU2 circuit</dd>
+        </dl>
+      </li>
+      <li>List
+        <dl class="message-properties">
+          <dt>basis_gates<span class="property-type">list</span></dt>
+          <dd>The list of operation names of target</dd>
+        </dl>
+      </li>
+    </ol>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Target
+        <dl class="message-properties">
+          <dt>target<span class="property-type">qiskit.transpiler.Target</span></dt>
+          <dd>The target object of backend "ibm_brisbane"</dd>
+        </dl>
+      </li>
+      <li>Quantum Circuit
+        <dl class="message-properties">
+          <dt>qc_t<span class="property-type">qiskit.circuit.Quantumcircuit</span></dt>
+          <dd>The created EfficientSU2 circuit</dd>
+        </dl>
+      </li>
+      <li>List
+        <dl class="message-properties">
+          <dt>basis_gates<span class="property-type">list</span></dt>
+          <dd>The list of operation names of target</dd>
+        </dl>
+      </li>
+      <li>List
+        <dl class="message-properties">
+          <dt>target.opration_names<span class="property-type">list</span></dt>
+          <dd>The list of operation names of target which a new operation is added.</dd>
+        </dl>
+      </li>
+    </ol>
+
+    <h3>Details</h3>
+    <p>     
+      This node provides an introduction to the concept of dynamical decoupling sequences in quantum computing, specifically using Qiskit. Dynamical decoupling sequences are series of quantum gates designed to protect quantum information from decoherence by effectively canceling out certain types of errors. The node explains how to create a simple XY4 sequence, composed of alternating X and Y gates, and discusses the importance of ensuring that non-basis gates like the Y gate have the same properties (such as duration and error) as their basis counterparts. Additionally, it covers how to add these gates to the target quantum device configuration, ensuring that the sequence can be accurately implemented on hardware like IBM's quantum processors.
+    </p>
   </script>
   

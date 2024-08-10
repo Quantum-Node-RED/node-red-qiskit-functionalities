@@ -8,7 +8,10 @@ module.exports = function (RED) {
     var node = this;
     this.token = config.token;
 
+    node.status({ fill: "red", shape: "dot", text: "You haven't learned this node yet." });
+
     node.on('input',  async function (msg) {
+      node.status({ fill: "green", shape: "dot", text: "You have  learned this node." });
 
       if(!node.token){
         node.error("Token is not provided. Please configure the node with a valid token.", msg);
@@ -42,6 +45,10 @@ module.exports = function (RED) {
       }catch(error){
         node.error(`Error running Python script: ${error.message}`, msg);
       }
+    });
+
+    node.on('close', function () {
+      node.status({ fill: "red", shape: "dot", text: "You haven't learned this node yet." });
     });
   }
   RED.nodes.registerType("get-backend-operations", GetBackendOperationsNode);

@@ -8,6 +8,7 @@ import io
 from qiskit.visualization import plot_circuit_layout
 from qiskit_aer import Aer
 import pickle
+import os
 
 # take a 15-qubit GHZ circuit executed 100 times, using a “bad” (disconnected) initial_layout. 
 backend = FakeAuckland()
@@ -48,13 +49,25 @@ buffer.close()
 # Plot the hardware graph and indicate which hardware qubits were chosen to run the circuit
 transpiled_circ = pass_manager.run(ghz)
 
+current_directory = os.path.dirname(os.path.abspath(__file__))
+
+# Read the image file
+image_filename = "routing.png"
+
+# Get the full path to the image file
+image_path = os.path.join(current_directory, image_filename)
+
+# Read the image file as a base64 string
+with open(image_path, "rb") as image_file:
+   qubits_used_image_b64 = base64.b64encode(image_file.read()).decode('utf-8')
+
 # https://graphviz.org/download/ to download the graphvizs
-qubits_used_image = plot_circuit_layout(transpiled_circ, backend)
-buffer = io.BytesIO()
-qubits_used_image.savefig(buffer, format='png') 
-buffer.seek(0)
-qubits_used_image_b64 = base64.b64encode(buffer.read()).decode('utf-8')
-buffer.close()
+# qubits_used_image = plot_circuit_layout(transpiled_circ, backend)
+# buffer = io.BytesIO()
+# qubits_used_image.savefig(buffer, format='png') 
+# buffer.seek(0)
+# qubits_used_image_b64 = base64.b64encode(buffer.read()).decode('utf-8')
+# buffer.close()
 
 result = {
     "layout_image": layout,

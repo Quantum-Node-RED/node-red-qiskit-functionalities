@@ -5,7 +5,7 @@
       color: "#aaaaaa",
       defaults: {
         name: { value: "Create and Optimize a quantum circuit" },
-        info: { value: "# First, you need to create a circuit, and transpile the circuit to the backend because dynamical decoupling pulses need to be added after the circuit has been transpiled and scheduled.\r\n&nbsp;\r\n# Dynamical decoupling often works best when there is a lot of idle time in the quantum circuits - that is, there are qubits that are not being used while others are active. \r\n&nbsp;\r\n# In this example, we create a <font style=\"background: lightgrey\">EfficientSU2</font> circuit and transpile it by following code. This ansatz has lots of idle time because it applies two-qubit <font style=\"background: lightgrey\">ecr</font> gates sequentially. \r\n```python\r\nfrom qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager\r\nfrom qiskit.circuit.library import EfficientSU2\r\n \r\nqc = EfficientSU2(12, entanglement=\"circular\", reps=1)\r\npm = generate_preset_pass_manager(1, target=target, seed_transpiler=12345)\r\nqc_t = pm.run(qc)\r\n```\r\n&nbsp;\r\n# You can check the image of this circuit in \"EfficientSU2 Image\" node." }
+        info: { value: "## **Node Input:**\r\n- # Object: `target` (Type: _qiskit.transpiler.Target_)\r\n- # List: `basis_gates` (Type: _string_)\r\n\r\n***\r\n&nbsp;\r\n# First, you need to create a circuit, and transpile the circuit to the backend because dynamical decoupling pulses need to be added after the circuit has been transpiled and scheduled.\r\n&nbsp;\r\n# Dynamical decoupling often works best when there is a lot of idle time in the quantum circuits - that is, there are qubits that are not being used while others are active. \r\n&nbsp;\r\n# In this example, we create a <font style=\"background: lightgrey\">EfficientSU2</font> circuit and transpile it by following code. This ansatz has lots of idle time because it applies two-qubit <font style=\"background: lightgrey\">ecr</font> gates sequentially. \r\n```python\r\nfrom qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager\r\nfrom qiskit.circuit.library import EfficientSU2\r\n \r\nqc = EfficientSU2(12, entanglement=\"circular\", reps=1)\r\npm = generate_preset_pass_manager(1, target=target, seed_transpiler=12345)\r\nqc_t = pm.run(qc)\r\n```\r\n&nbsp;\r\n# You can check the image of this circuit in \"EfficientSU2 Image\" node.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Object: `target` (Type: _qiskit.transpiler.Target_)\r\n- # Object: `qc_t` (Type: _qiskit.circuit.QuantumCircuit_)\r\n- # List: `basis_gates` (Type: _string_)\r\n- # Image: The image of circuit `qc_t`" }
       },
       inputs: 1,
       outputs: 1,
@@ -30,5 +30,54 @@
   
   <script type="text/html" data-help-name="create-and-optimize-quantum-circuit">
     <p>A node that create an EfficientSU2 circuit and optimize it by preset pass manager.</p>
+
+    <h3>Inputs</h3>
+    <ol class="node-ports">
+      <li>Target
+        <dl class="message-properties">
+          <dt>target<span class="property-type">qiskit.transpiler.Target</span></dt>
+          <dd>The target object of backend "ibm_brisbane"</dd>
+        </dl>
+      </li>
+      <li>List
+        <dl class="message-properties">
+          <dt>basis_gates<span class="property-type">list</span></dt>
+          <dd>The list of operation names of target</dd>
+        </dl>
+      </li>
+    </ol>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Target
+        <dl class="message-properties">
+          <dt>target<span class="property-type">qiskit.transpiler.Target</span></dt>
+          <dd>The target object of backend "ibm_brisbane"</dd>
+        </dl>
+      </li>
+      <li>Quantum Circuit
+        <dl class="message-properties">
+          <dt>qc_t<span class="property-type">qiskit.circuit.Quantumcircuit</span></dt>
+          <dd>The created EfficientSU2 circuit</dd>
+        </dl>
+      </li>
+      <li>List
+        <dl class="message-properties">
+          <dt>basis_gates<span class="property-type">list</span></dt>
+          <dd>The list of operation names of target</dd>
+        </dl>
+      </li>
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the quantum circuit.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>     
+      This node provides an introduction to the process of preparing quantum circuits for dynamical decoupling using Qiskit. It demonstrates how to create a quantum circuit with the EfficientSU2 ansatz, which is designed to generate circuits with significant idle times between operations. The node then shows how to transpile the circuit using a preset pass manager tailored for a specific target device, optimizing the circuit layout while maintaining these idle periods. This approach is beneficial for implementing dynamical decoupling pulses, which are used to combat errors in quantum computing by taking advantage of the idle times in the circuit.
+    </p>
   </script>
   

@@ -6,7 +6,7 @@
       defaults: {
         name: { value: "Get Backend Operations Name" },
         token: { value: null },
-        info: { value: "# This example uses <font style=\"background: lightgrey\">ibm_brisbane</font>, which is a quantum simulator backend provided by IBM Quantum for running and testing quantum algorithms without accessing real quantum hardware. Before adding dynamical decoupling sequence to the circuit, you need to get the <font style=\"background: lightgrey\">target</font> information from the <font style=\"background: lightgrey\">backend</font> and save it, because the <font style=\"background: lightgrey\">target</font> will need to be modified to add timing information for the gates used in dynamical decoupling.\r\n&nbsp;\r\n# In the code snippet below, we created a <font style=\"background: lightgrey\">QiskitRuntimeService</font> instance to get the backend <font style=\"background: lightgrey\">\"ibm_brisbane\"</font>. Then, we get the <font style=\"background: lightgrey\">target</font> information from the backend and save the operation names as <font style=\"background: lightgrey\">basis_gates</font>.\r\n```python\r\nfrom qiskit_ibm_runtime import QiskitRuntimeService\r\n \r\nservice = QiskitRuntimeService(channel = \"ibm_quantum\", token = \"Your-IBM-API-token\")\r\nbackend = service.backend(\"ibm_brisbane\")\r\n \r\ntarget = backend.target\r\nbasis_gates = list(target.operation_names)\r\n```\r\n&nbsp;\r\n# **Note:** When you create a <font style=\"background: lightgrey\">QiskitRuntimwService</font> instance, you have to replace _token_ argument with your **IBM Quantum API key**, which you can find in [IBM Quantum account page](https://quantum.ibm.com/account).\r\n&nbsp;\r\n# The operation names of <font style=\"background: lightgrey\">target</font> are sent to \"Target Operation Names\" node and you can check them in debug palette." }
+        info: { value: "# This example uses <font style=\"background: lightgrey\">ibm_brisbane</font>, which is a quantum simulator backend provided by IBM Quantum for running and testing quantum algorithms without accessing real quantum hardware. Before adding dynamical decoupling sequence to the circuit, you need to get the <font style=\"background: lightgrey\">target</font> information from the <font style=\"background: lightgrey\">backend</font> and save it, because the <font style=\"background: lightgrey\">target</font> will need to be modified to add timing information for the gates used in dynamical decoupling.\r\n&nbsp;\r\n# In the code snippet below, we created a <font style=\"background: lightgrey\">QiskitRuntimeService</font> instance to get the backend <font style=\"background: lightgrey\">\"ibm_brisbane\"</font>. Then, we get the <font style=\"background: lightgrey\">target</font> information from the backend and save the operation names as <font style=\"background: lightgrey\">basis_gates</font>.\r\n```python\r\nfrom qiskit_ibm_runtime import QiskitRuntimeService\r\n \r\nservice = QiskitRuntimeService(channel = \"ibm_quantum\", token = \"Your-IBM-API-token\")\r\nbackend = service.backend(\"ibm_brisbane\")\r\n \r\ntarget = backend.target\r\nbasis_gates = list(target.operation_names)\r\n```\r\n&nbsp;\r\n# **Note:** When you create a <font style=\"background: lightgrey\">QiskitRuntimwService</font> instance, you have to replace _token_ argument with your **IBM Quantum API key**, which you can find in [IBM Quantum account page](https://quantum.ibm.com/account).\r\n&nbsp;\r\n# The operation names of <font style=\"background: lightgrey\">target</font> are sent to \"Target Operation Names\" node and you can check them in debug palette.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Object: `target` (Type: _qiskit.transpiler.Target_)\r\n- # List: `basis_gates` (Type: _string_)" }
       },
       inputs: 1,
       outputs: 1,
@@ -36,5 +36,26 @@
   
   <script type="text/html" data-help-name="get-backend-operations">
     <p>A node that get operation names from backend.</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Target
+        <dl class="message-properties">
+          <dt>target<span class="property-type">qiskit.transpiler.Target</span></dt>
+          <dd>The target object of backend "ibm_brisbane"</dd>
+        </dl>
+      </li>
+      <li>List
+        <dl class="message-properties">
+          <dt>basis_gates<span class="property-type">list</span></dt>
+          <dd>The list of operation names of target</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>     
+      This node provides an introduction to integrating IBM Quantum's simulator backend, ibm_brisbane, with Node-RED for quantum algorithm testing. It demonstrates how to connect to IBM Quantum's services using the QiskitRuntimeService, retrieve the backend target information, and access the operation names, known as basis gates, from the backend. This setup is crucial for adding dynamical decoupling sequences to quantum circuits by modifying the target with timing information for gates.
+    </p>
   </script>
   

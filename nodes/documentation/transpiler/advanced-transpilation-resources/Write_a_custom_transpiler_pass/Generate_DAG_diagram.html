@@ -5,7 +5,7 @@
       color: "#aaaaaa",
       defaults: {
         name: { value: "Generate DAG Diagram" },
-        info: { value: "# After creating the circuit, you can use the <font style=\"background: lightgrey\">qiskit.tools.visualization.dag_drawer()</font> function to view this circuit's DAG(You need to install the [graphviz library](https://graphviz.org/download/) first to plot DAG yourself). There are three kinds of graph nodes: qubit/clbit nodes (green), operation nodes (blue), and output nodes (red). Each edge indicates data flow (or dependency) between two nodes.\r\n```python\r\nfrom qiskit.converters import circuit_to_dag\r\nfrom qiskit.tools.visualization import dag_drawer\r\n \r\ndag = circuit_to_dag(qc)\r\ndag_drawer(dag)\r\n```\r\n# You can check the DAG diagram in \"DAG Output\" node." }
+        info: { value: "## **Node Input:**\r\n- # Object: `qc` (Type: _qiskit.circuit.Quantumcircuit_)\r\n\r\n***\r\n&nbsp;\r\n# After creating the circuit, you can use the <font style=\"background: lightgrey\">qiskit.tools.visualization.dag_drawer()</font> function to view this circuit's DAG(You need to install the [graphviz library](https://graphviz.org/download/) first to plot DAG yourself). There are three kinds of graph nodes: qubit/clbit nodes (green), operation nodes (blue), and output nodes (red). Each edge indicates data flow (or dependency) between two nodes.\r\n```python\r\nfrom qiskit.converters import circuit_to_dag\r\nfrom qiskit.tools.visualization import dag_drawer\r\n \r\ndag = circuit_to_dag(qc)\r\ndag_drawer(dag)\r\n```\r\n# You can check the DAG diagram in \"DAG Output\" node.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: The image of the DAG diagram." }
       },
       inputs: 1,
       outputs: 1,
@@ -30,5 +30,30 @@
   
   <script type="text/html" data-help-name="generate-dag-for-circuit">
     <p>A node that generate DAG diagram for the circuit.</p>
+
+    <h3>Inputs</h3>
+    <ol class="node-ports">
+      <li>Quantum Circuit
+        <dl class="message-properties">
+          <dt>qc<span class="property-type">qiskit.circuit.Quantumcircuit</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the quantum circuit.</dd>
+        </dl>
+      </li>
+    </ol>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>DAG Diagram
+        <dl class="message-properties">
+          <dt>dag_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the DAG diagram of the quantum circuit.</dd>
+        </dl>
+      </li>
+    </ol>
+
+    <h3>Details</h3>
+    <p>     
+      This node provides an introduction to visualizing quantum circuits as Directed Acyclic Graphs (DAGs) using Qiskit. A DAG is a graphical representation of a quantum circuit, where each node represents either a qubit/clbit, an operation, or an output, with edges indicating the data flow or dependencies between these elements. This node offers an overview of how DAGs can be used to understand the structure and flow of quantum circuits, emphasizing the different types of nodes (green for qubits/clbits, blue for operations, and red for outputs). The graphviz library is required for generating the DAG visualization.
+    </p>
   </script>
   

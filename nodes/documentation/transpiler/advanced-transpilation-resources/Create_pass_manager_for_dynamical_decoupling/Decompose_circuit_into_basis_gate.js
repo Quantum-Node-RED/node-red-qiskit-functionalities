@@ -7,12 +7,16 @@ module.exports = function (RED) {
 
     var node = this;
 
-    node.on('input',  async function (msg) {
+    node.status({ fill: "red", shape: "dot", text: "You haven't learned this node yet." });
 
-      if(!msg.token){
-        node.error("Token is not provided. Please configure 'Get Backend Operation Names' node with a valid token.", msg);
-        return;
-      }
+
+    node.on('input',  async function (msg) {
+      node.status({ fill: "green", shape: "dot", text: "You have  learned this node." });
+
+      // if(!msg.token){
+      //   node.error("Token is not provided. Please configure 'Get Backend Operation Names' node with a valid token.", msg);
+      //   return;
+      // }
 
 
       try{
@@ -41,6 +45,10 @@ module.exports = function (RED) {
       }catch(error){
         node.error(`Error running Python script: ${error.message}`, msg);
       }
+    });
+
+    node.on('close', function () {
+      node.status({ fill: "red", shape: "dot", text: "You haven't learned this node yet." });
     });
   }
   RED.nodes.registerType("decompose-circuit-into-basis-gate", DecomposeCircuitIntoBasisGateNode);

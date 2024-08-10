@@ -5,7 +5,7 @@
       color: "#aaaaaa",
       defaults: {
         name: { value: "Create circuit for the custom backend" },
-        info: { value: "# Now that a custom backend with its own unique [<font style=\"background: lightgrey\">Target</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.transpiler.Target) has been defined, it is straightforward to transpile quantum circuits against this backend, since all the relevant constraints (basis gates, qubit connectivity, and so forth) needed for transpiler passes are contained within this attribute. \r\n&nbsp;\r\n# The code snippet below builds a circuit that creates a large GHZ state to be transpiled.\r\n```python\r\nfrom qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager\r\nfrom qiskit import QuantumCircuit\r\n \r\nnum_qubits = 50\r\nghz = QuantumCircuit(num_qubits)\r\nghz.h(range(num_qubits))\r\nghz.cx(0, range(1, num_qubits))\r\nop_counts = ghz.count_ops()\r\n```\r\n# The number of each types of gate is sent to \"Gates before transpilation\" node and you can check them in the debug palette." }
+        info: { value: "# Now that a custom backend with its own unique [<font style=\"background: lightgrey\">Target</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.transpiler.Target) has been defined, it is straightforward to transpile quantum circuits against this backend, since all the relevant constraints (basis gates, qubit connectivity, and so forth) needed for transpiler passes are contained within this attribute. \r\n&nbsp;\r\n# The code snippet below builds a circuit that creates a large GHZ state to be transpiled.\r\n```python\r\nfrom qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager\r\nfrom qiskit import QuantumCircuit\r\n \r\nnum_qubits = 50\r\nghz = QuantumCircuit(num_qubits)\r\nghz.h(range(num_qubits))\r\nghz.cx(0, range(1, num_qubits))\r\nop_counts = ghz.count_ops()\r\n```\r\n# The number of each types of gate is sent to \"Gates before transpilation\" node and you can check them in the debug palette.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Object: `ghz` (Type: _qiskit.circuit.Quantumcircuit_)\r\n- # Dictionary: `op_counts` (Type: _dict_)" }
       },
       inputs: 1,
       outputs: 1,
@@ -30,5 +30,26 @@
   
   <script type="text/html" data-help-name="create-circuit-for-custom-backend">
     <p>A node that create circuit for the created custom backend.</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Quantum Circuit
+        <dl class="message-properties">
+          <dt>ghz<span class="property-type">qiskit.circuit.Quantumcircuit</span></dt>
+          <dd>The created quantum circuit</dd>
+        </dl>
+      </li>
+      <li>Dictionary
+        <dl class="message-properties">
+          <dt>op_counts<span class="property-type">dict</span></dt>
+          <dd>The key is  gate and the value is the number of this gate</dd>
+        </dl>
+      </li>
+    </ol>
+
+    <h3>Details</h3>
+    <p>     
+      This node provides an introduction to the Qiskit transpilation process for quantum circuits. It showcases how to build and analyze a large GHZ (Greenberger-Horne-Zeilinger) state circuit using Qiskit. The node highlights the significance of transpiling circuits against a custom backend with specific constraints, such as basis gates and qubit connectivity. By integrating this node into your Node-RED workflow, you can understand how Qiskit’s transpiler operates before and after optimization, giving you insights into the number and types of gates used in your quantum circuits. 
+    </p>
   </script>
   
