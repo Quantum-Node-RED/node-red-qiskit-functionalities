@@ -1,20 +1,20 @@
 const runPythonScript = require("../../../../pythonShell");
 
 module.exports = function (RED) {
-  function TranslationNode(config) {
+  function CreateOwnPassmanagerNode(config) {
     RED.nodes.createNode(this, config);
+    this.token = config.token;
 
     var node = this;
     node.status({ fill: "red", shape: "dot", text: "You haven't learned this node yet." });
 
     node.on('input', async function (msg) {
       node.status({ fill: "green", shape: "dot", text: "You have  learned this node." });
-
       const result = await new Promise((resolve, reject) => {
         const options = {
-          
+          token: node.token
         };
-        runPythonScript(__dirname, "translation.py", options, (err, results) => {
+        runPythonScript(__dirname, "create-own-pass-manager.py", options, (err, results) => {
           if (err) {
             node.error("Error running Python script: " + err);
             return reject(err);
@@ -33,5 +33,5 @@ module.exports = function (RED) {
       node.status({ fill: "red", shape: "dot", text: "You haven't learned this node yet." });
     });
   }
-  RED.nodes.registerType("translation", TranslationNode);
+  RED.nodes.registerType("create-own-pass-manager", CreateOwnPassmanagerNode);
 }

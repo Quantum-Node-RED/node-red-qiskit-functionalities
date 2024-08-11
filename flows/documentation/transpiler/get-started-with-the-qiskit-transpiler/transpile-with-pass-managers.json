@@ -1,0 +1,179 @@
+[
+    {
+        "id": "a5cc357c526c3889",
+        "type": "tab",
+        "label": "Transpile with pass managers",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "39913153a46f0ce8",
+        "type": "inject",
+        "z": "a5cc357c526c3889",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 70,
+        "y": 340,
+        "wires": [
+            [
+                "3f60e1881bd30b33"
+            ]
+        ],
+        "info": "# The recommended way to transpile a circuit is to create a staged pass manager and then execute its run method with the circuit as input. This flow explains how to transpile quantum circuits this way."
+    },
+    {
+        "id": "b8a7a7441c9e2432",
+        "type": "image",
+        "z": "a5cc357c526c3889",
+        "name": "Circuit Diagram Output",
+        "width": "360",
+        "data": "payload.result.own_pass_manager_example_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1760,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "bf55104aa825c98d",
+        "type": "image",
+        "z": "a5cc357c526c3889",
+        "name": "Transpiled Circuit Diagram",
+        "width": "500",
+        "data": "payload.result.transpiled_circuit_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1140,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "99edb36be37c4caa",
+        "type": "image",
+        "z": "a5cc357c526c3889",
+        "name": "Transpiled Circuit Diagram Output",
+        "width": "500",
+        "data": "payload.result.translated_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1800,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "4fd910ea9ac939ea",
+        "type": "pass_manage",
+        "z": "a5cc357c526c3889",
+        "name": "Generate a preset staged pass manager",
+        "token": "None",
+        "info": "# To create a preset staged pass manager with reasonable defaults, use the [<font style=\"background: lightgrey\">generate_preset_pass_manager</font>](https://docs.quantum.ibm.com/api/qiskit/transpiler_preset#qiskit.transpiler.preset_passmanagers.generate_preset_pass_manager) function:\r\n```python\r\nfrom qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager\r\nfrom qiskit_ibm_runtime import QiskitRuntimeService\r\n \r\nservice = QiskitRuntimeService(channel=\"ibm_quantum\", token=\"Your API token\")\r\nbackend = service.backend(\"ibm_brisbane\")\r\npass_manager = generate_preset_pass_manager(optimization_level=3, backend=backend)\r\n```\r\n# To use <font style=\"background: lightgrey\">QiskitRuntimeService</font>, you need to replace the token parameters in the code with your own API token. You can find your token from the [IBM Quantum Account page](https://quantum.ibm.com/account).\r\n&nbsp;\r\n# To transpile a circuit or list of circuits with a pass manager, pass the circuit or list of circuits to the <font style=\"background: lightgrey\">run</font> method. Let's do this on a two-qubit circuit consisting of a Hadamard followed by two adjacent CX gates:\r\n```python\r\nfrom qiskit import QuantumRegister, QuantumCircuit\r\n \r\n# Create a circuit\r\nqubits = QuantumRegister(2, name=\"q\")\r\ncircuit = QuantumCircuit(qubits)\r\na, b = qubits\r\ncircuit.h(a)\r\ncircuit.cx(a, b)\r\ncircuit.cx(b, a)\r\n \r\n# Transpile it by calling the run method of the pass manager\r\ntranspiled = pass_manager.run(circuit)\r\n \r\n# Draw it, excluding idle qubits from the diagram\r\ntranspiled.draw(\"mpl\", idle_wires=False)\r\n```\r\n# You can check the transpiled circuit in the 'Transpiled Circuit Diagram\" node.\r\n&nbsp;\r\n# See [Transpilation defaults and configuration options](https://docs.quantum.ibm.com/guides/defaults-and-configuration-options) for a description of the possible arguments to the <font style=\"background: lightgrey\">generate_preset_pass_manager</font> function. The arguments to <font style=\"background: lightgrey\">generate_preset_pass_manager</font> match the arguments to the [<font style=\"background: lightgrey\">transpile</font>](https://docs.quantum.ibm.com/api/qiskit/compiler#qiskit.compiler.transpile) function.\r\n&nbsp;\r\n# If the preset pass managers don't fulfill your needs, customize transpilation by creating (staged) pass managers or even transpilation passes. The rest of this page describes how to create pass managers. For instructions on how to create transpilation passes, see [Write your own transpiler pass](https://docs.quantum.ibm.com/guides/custom-transpiler-pass).\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: The image of transpiled circuit `transpiled`",
+        "x": 800,
+        "y": 340,
+        "wires": [
+            [
+                "bf55104aa825c98d",
+                "1061bff2110b09c2"
+            ]
+        ]
+    },
+    {
+        "id": "bc1d45305d2fc886",
+        "type": "create-own-pass-manager",
+        "z": "a5cc357c526c3889",
+        "name": "Create your own pass manager",
+        "info": "# The [qiskit.transpiler.passes](https://docs.quantum.ibm.com/api/qiskit/transpiler_passes) module includes many transpiler passes that can be used to create pass managers. To create a pass manager, initialize a <font style=\"background: lightgrey\">PassManager</font> with a list of passes. For example, the following code creates a transpiler pass that merges adjacent two-qubit gates and then synthesizes them into a basis of [𝑅𝑦](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.RYGate), [𝑅𝑧](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.RZGate), and [𝑅𝑥𝑥](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.RXXGate) gates.\r\n```python\r\nfrom qiskit.transpiler import PassManager\r\nfrom qiskit.transpiler.passes import (\r\n    Collect2qBlocks,\r\n    ConsolidateBlocks,\r\n    UnitarySynthesis,\r\n)\r\n \r\nbasis_gates = [\"rx\", \"ry\", \"rxx\"]\r\ntranslate = PassManager(\r\n    [\r\n        Collect2qBlocks(),\r\n        ConsolidateBlocks(basis_gates=basis_gates),\r\n        UnitarySynthesis(basis_gates),\r\n    ]\r\n)\r\n```\r\n# To demonstrate this pass manager in action, test it on a two-qubit circuit consisting of a Hadamard followed by two adjacent CX gates by using following code snippet:\r\n```python\r\nfrom qiskit import QuantumRegister, QuantumCircuit\r\n \r\nqubits = QuantumRegister(2, name=\"q\")\r\ncircuit = QuantumCircuit(qubits)\r\n \r\na, b = qubits\r\ncircuit.h(a)\r\ncircuit.cx(a, b)\r\ncircuit.cx(b, a)\r\n \r\ncircuit.draw(\"mpl\")\r\n```\r\n# You can check the image of  created circuit in \"Circuit Diagram Output\" node.\r\n&nbsp;\r\n# To run the pass manager on the circuit, call the <font style=\"background: lightgrey\">run</font> method.\r\n```python\r\ntranslated = translate.run(circuit)\r\ntranslated.draw(\"mpl\")\r\n```\r\n# You can check the image of transpiled circuit in \"Transpiled Circuit Diagram Output\" node. It should only contains those 3 types of gates we mentioned before.\r\n&nbsp;\r\n# For a more advanced example that shows how to create a pass manager to implement the error suppression technique known as dynamical decoupling, see Create a pass manager for dynamical decoupling flow.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: The image of circuit `circuit`\r\n- # Image: The image of circuit after transpilation",
+        "x": 1450,
+        "y": 340,
+        "wires": [
+            [
+                "b8a7a7441c9e2432",
+                "99edb36be37c4caa",
+                "c613a869256de60a"
+            ]
+        ]
+    },
+    {
+        "id": "3f60e1881bd30b33",
+        "type": "intro-to-pass-manager",
+        "z": "a5cc357c526c3889",
+        "name": "Introduction to pass manager",
+        "info": "# In the context of the Qiskit SDK, transpilation refers to the process of transforming an input circuit into a form that is suitable for execution on a quantum device. Transpilation typically occurs in a sequence of steps called transpiler passes. The circuit is processed by each transpiler pass in sequence, with the output of one pass becoming the input to the next. For example, one pass could go through the circuit and merge all consecutive sequences of single-qubit gates, and then the next pass could synthesize these gates into the basis set of the target device. The transpiler passes included with Qiskit are located in the [qiskit.transpiler.passes](https://docs.quantum.ibm.com/api/qiskit/transpiler_passes) module.\r\n&nbsp;\r\n# A pass manager is an object that stores a list of transpiler passes and can execute them on a circuit. Create a pass manager by initializing a [<font style=\"background: lightgrey\">PassManager</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.transpiler.PassManager) with a list of transpiler passes. To run the transpilation on a circuit, call the [<font style=\"background: lightgrey\">run</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.transpiler.PassManager#run) method with a circuit as input.\r\n&nbsp;\r\n# A staged pass manager is a special kind of pass manager that represents a level of abstraction above that of a normal pass manager. While a normal pass manager is composed of several transpiler passes, a staged pass manager is composed of several pass managers. This is a useful abstraction because transpilation typically happens in discrete stages, as described in [Transpiler stages](https://docs.quantum.ibm.com/guides/transpiler-stages), with each stage being represented by a pass manager. Staged pass managers are represented by the [<font style=\"background: lightgrey\">StagedPassManager</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.transpiler.StagedPassManager) class. The rest of this page describes how to create and customize (staged) pass managers.",
+        "x": 320,
+        "y": 340,
+        "wires": [
+            [
+                "9a5cc2e4cc794dd0"
+            ]
+        ]
+    },
+    {
+        "id": "601eb06c79fd79cb",
+        "type": "create-staged-pass-manager",
+        "z": "a5cc357c526c3889",
+        "name": "Create a staged pass manager",
+        "info": "# A <font style=\"background: lightgrey\">StagedPassManager</font> is a pass manager that is composed of individual stages, where each stage is defined by a <font style=\"background: lightgrey\">PassManager</font> instance. You can create a <font style=\"background: lightgrey\">StagedPassManager</font> by specifying the desired stages. For example, the following code creates a staged pass manager with two stages, <font style=\"background: lightgrey\">init</font> and <font style=\"background: lightgrey\">translation</font>. The <font style=\"background: lightgrey\">translation</font> stage is defined by the pass manager that was created previously.\r\n```python\r\nfrom qiskit.transpiler import PassManager, StagedPassManager\r\nfrom qiskit.transpiler.passes import UnitarySynthesis, Unroll3qOrMore\r\n \r\nbasis_gates = [\"rx\", \"ry\", \"rxx\"]\r\ninit = PassManager([UnitarySynthesis(basis_gates, min_qubits=3), Unroll3qOrMore()])\r\nstaged_pm = StagedPassManager(\r\n    stages=[\"init\", \"translation\"], init=init, translation=translate\r\n)\r\n```\r\n# There is no limit on the number of stages you can put in a staged pass manager.\r\n&nbsp;\r\n# Another useful way to create a staged pass manager is to begin with a preset staged pass manager and then swap out some of the stages. For example, the following code generates a preset pass manager with optimization level 3, and then specifies a custom <font style=\"background: lightgrey\">pre_layout</font> stage.\r\n```python\r\nimport numpy as np\r\nfrom qiskit.circuit.library import HGate, PhaseGate, RXGate, TdgGate, TGate\r\nfrom qiskit.transpiler.passes import CXCancellation, InverseCancellation\r\n \r\npass_manager = generate_preset_pass_manager(3, backend)\r\ninverse_gate_list = [\r\n    HGate(),\r\n    (RXGate(np.pi / 4), RXGate(-np.pi / 4)),\r\n    (PhaseGate(np.pi / 4), PhaseGate(-np.pi / 4)),\r\n    (TGate(), TdgGate()),\r\n]\r\nlogical_opt = PassManager(\r\n    [\r\n        CXCancellation(),\r\n        InverseCancellation(inverse_gate_list),\r\n    ]\r\n)\r\n \r\n# Add pre-layout stage to run extra logical optimization\r\npass_manager.pre_layout = logical_opt\r\n```\r\n# The [stage generator functions](https://docs.quantum.ibm.com/api/qiskit/transpiler_preset#stage-generator-functions) might be useful for constructing custom pass managers. They generate stages that provide common functionality used in many pass managers. For example, [<font style=\"background: lightgrey\">generate_embed_passmanager</font>](https://docs.quantum.ibm.com/api/qiskit/transpiler_preset#qiskit.transpiler.preset_passmanagers.common.generate_embed_passmanager) can be used to generate a stage to \"embed\" a selected initial <font style=\"background: lightgrey\">Layout</font> from a layout pass to the specified target device.",
+        "x": 1970,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "9a5cc2e4cc794dd0",
+        "type": "move-to-next-node",
+        "z": "a5cc357c526c3889",
+        "name": "Next",
+        "x": 530,
+        "y": 340,
+        "wires": [
+            [
+                "4fd910ea9ac939ea"
+            ]
+        ]
+    },
+    {
+        "id": "1061bff2110b09c2",
+        "type": "move-to-next-node",
+        "z": "a5cc357c526c3889",
+        "name": "Next",
+        "x": 1050,
+        "y": 340,
+        "wires": [
+            [
+                "bc1d45305d2fc886"
+            ]
+        ]
+    },
+    {
+        "id": "c613a869256de60a",
+        "type": "move-to-next-node",
+        "z": "a5cc357c526c3889",
+        "name": "Next",
+        "x": 1670,
+        "y": 340,
+        "wires": [
+            [
+                "601eb06c79fd79cb"
+            ]
+        ]
+    }
+]

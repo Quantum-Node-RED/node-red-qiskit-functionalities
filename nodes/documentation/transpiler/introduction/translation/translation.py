@@ -16,7 +16,7 @@ with open(file_path, 'rb') as f:
     
 # os.remove(file_path)    
 
-native_gates = str(backend.operation_names)
+native_gates = "native gates: "+str(backend.operation_names)
 qc = QuantumCircuit(2)
 qc.swap(0, 1)
 qubit_circuit = qc.decompose().draw('mpl')

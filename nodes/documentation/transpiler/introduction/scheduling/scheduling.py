@@ -32,7 +32,7 @@ pass_manager = generate_preset_pass_manager(
 circ = pass_manager.run(ghz, backend)
 circ_image = circ.draw(output="mpl", idle_wires=False)
 # This method marked as Deprecated since version 1.1.0_pending
-circ_timeline_image = timeline.draw(program=circ, show_delays=True, plot_barriers=True, show_clbits=True)
+circ_timeline_image = timeline.draw(program=circ, idle_wires=False)
 
 buffer = io.BytesIO()
 circ_image.savefig(buffer, format='png')

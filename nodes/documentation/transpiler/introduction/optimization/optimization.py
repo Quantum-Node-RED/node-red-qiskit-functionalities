@@ -8,10 +8,13 @@ import io
 from qiskit.visualization import plot_circuit_layout
 from qiskit_aer import Aer
 import pickle
+import os
 
 file_path = 'backend_state.pkl'
 with open(file_path, 'rb') as f:
     backend = pickle.load(f)
+
+os.remove(file_path)
 
 ghz = QuantumCircuit(15)
 ghz.h(0)
@@ -51,8 +54,25 @@ buffer.seek(0)
 optimization_b64 = base64.b64encode(buffer.read()).decode('utf-8')
 buffer.close()
 
+
+
+current_directory = os.path.dirname(os.path.abspath(__file__))
+
+# Read the image file
+image_filename = "optimization.webp"
+
+# Get the full path to the image file
+image_path = os.path.join(current_directory, image_filename)
+
+# Read the image file as a base64 string
+with open(image_path, "rb") as image_file:
+    base64_image = base64.b64encode(image_file.read()).decode('utf-8')
+
+
+
 result = {
-    "optimization_image": optimization_b64
+    "optimization_image": optimization_b64,
+    "result_image": base64_image
 }
 
 print(json.dumps(result))

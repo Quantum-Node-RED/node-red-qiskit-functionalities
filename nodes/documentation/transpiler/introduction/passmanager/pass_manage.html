@@ -1,16 +1,17 @@
 <script type="text/javascript">
   RED.nodes.registerType("pass_manage", {
-    category: "function",
+    category: "Transpile with pass manager",
     color: "#aaaaaa",
     defaults: {
-      name: { value: "pass_manage" },
+      name: { value: "Generate a preset staged pass manager" },
       token: { value: "None" },
+      info: { value: "# To create a preset staged pass manager with reasonable defaults, use the [<font style=\"background: lightgrey\">generate_preset_pass_manager</font>](https://docs.quantum.ibm.com/api/qiskit/transpiler_preset#qiskit.transpiler.preset_passmanagers.generate_preset_pass_manager) function:\r\n```python\r\nfrom qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager\r\nfrom qiskit_ibm_runtime import QiskitRuntimeService\r\n \r\nservice = QiskitRuntimeService(channel=\"ibm_quantum\", token=\"Your API token\")\r\nbackend = service.backend(\"ibm_brisbane\")\r\npass_manager = generate_preset_pass_manager(optimization_level=3, backend=backend)\r\n```\r\n# To use <font style=\"background: lightgrey\">QiskitRuntimeService</font>, you need to replace the token parameters in the code with your own API token. You can find your token from the [IBM Quantum Account page](https://quantum.ibm.com/account).\r\n&nbsp;\r\n# To transpile a circuit or list of circuits with a pass manager, pass the circuit or list of circuits to the <font style=\"background: lightgrey\">run</font> method. Let's do this on a two-qubit circuit consisting of a Hadamard followed by two adjacent CX gates:\r\n```python\r\nfrom qiskit import QuantumRegister, QuantumCircuit\r\n \r\n# Create a circuit\r\nqubits = QuantumRegister(2, name=\"q\")\r\ncircuit = QuantumCircuit(qubits)\r\na, b = qubits\r\ncircuit.h(a)\r\ncircuit.cx(a, b)\r\ncircuit.cx(b, a)\r\n \r\n# Transpile it by calling the run method of the pass manager\r\ntranspiled = pass_manager.run(circuit)\r\n \r\n# Draw it, excluding idle qubits from the diagram\r\ntranspiled.draw(\"mpl\", idle_wires=False)\r\n```\r\n# You can check the transpiled circuit in the 'Transpiled Circuit Diagram\" node.\r\n&nbsp;\r\n# See [Transpilation defaults and configuration options](https://docs.quantum.ibm.com/guides/defaults-and-configuration-options) for a description of the possible arguments to the <font style=\"background: lightgrey\">generate_preset_pass_manager</font> function. The arguments to <font style=\"background: lightgrey\">generate_preset_pass_manager</font> match the arguments to the [<font style=\"background: lightgrey\">transpile</font>](https://docs.quantum.ibm.com/api/qiskit/compiler#qiskit.compiler.transpile) function.\r\n&nbsp;\r\n# If the preset pass managers don't fulfill your needs, customize transpilation by creating (staged) pass managers or even transpilation passes. The rest of this page describes how to create pass managers. For instructions on how to create transpilation passes, see [Write your own transpiler pass](https://docs.quantum.ibm.com/guides/custom-transpiler-pass).\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: The image of transpiled circuit `transpiled`" },
     },
     inputs: 1,
     outputs: 1,
     icon: "file.svg",
     label: function () {
-      return this.name || "pass_manage";
+      return this.name || "Generate a preset staged pass manager";
     },
     oneditprepare: function () {
       $("#node-input-name").val(this.name || "");
@@ -26,7 +27,7 @@
 <script type="text/html" data-template-name="pass_manage">
   <div class="form-row">
     <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
-    <input type="text" id="node-input-name" placeholder="Name" />
+    <input type="text" id="node-input-name" placeholder="Generate a preset staged pass manager" />
   </div>
 
   <div class="form-row">
@@ -37,7 +38,21 @@
 
 <script type="text/html" data-help-name="pass_manage">
   <p>
-    A simple node that a 15-qubit GHZ circuit executed 100 times, using a “bad”
-    (disconnected) initial_layout.
+    A simple node that introduce how to generate a preset staged pass manager.
+  </p>
+
+  <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the circuit.</dd>
+        </dl>
+      </li>
+    </ol>
+
+  <h3>Details</h3>
+  <p>     
+    This node provides an introduction to the process of using Qiskit to optimize and transpile quantum circuits through the QiskitRuntimeService. It outlines how to set up a preset pass manager with reasonable defaults tailored to a specific IBM Quantum backend. The node explains the steps needed to obtain your API token, create and transpile a quantum circuit, and visualize the resulting optimized circuit. Although this node focuses on providing an overview, it highlights the flexibility and customization options available when working with Qiskit's transpilation tools, making it a valuable resource for users looking to understand and leverage Qiskit's capabilities in quantum circuit optimization.
   </p>
 </script>
