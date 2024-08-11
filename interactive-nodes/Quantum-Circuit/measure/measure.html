@@ -1,5 +1,5 @@
 <script type="text/javascript">
-  RED.nodes.registerType("measure_component", {
+  RED.nodes.registerType("measure", {
     category: "Quantum Circuit",
     color: "#E6B9D7",
     defaults: {
@@ -11,12 +11,12 @@
     outputs: 1,
     icon: "font-awesome/fa-chain",
     label: function () {
-      return this.name || "measure_component";
+      return this.name || "measure";
     },
   });
 </script>
 
-<script type="text/html" data-template-name="measure_component">
+<script type="text/html" data-template-name="measure">
   <!-- <div class="form-row">
     <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
     <input type="text" id="node-input-name" placeholder="Name" />
@@ -43,6 +43,6 @@
   </div>
 </script>
 
-<script type="text/html" data-help-name="measure_component">
+<script type="text/html" data-help-name="measure">
   <p></p>
 </script>

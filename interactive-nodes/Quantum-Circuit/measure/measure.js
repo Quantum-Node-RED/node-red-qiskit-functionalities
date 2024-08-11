@@ -12,9 +12,7 @@ module.exports = function (RED) {
       msg.payload = msg.payload || {};
 
       const measure_component = new component.Component(constants.MEASURE_COMPONENT_NAME, {});
-      // qubit: qubit(s) to measure.
-      // cbit: classical bit(s) to place the measurement result(s) in.
-      measure_component.parameters["qbit"] = [qbits, cbits];
+      measure_component.parameters["qbit"] = msg.payload["qubit_id"];
       measure_component.parameters[constants.CIRCUIT_NAME] = node.context().flow.get(constants.CIRCUIT_NAME);
       component.addComponent(msg, measure_component);
 
@@ -23,5 +21,5 @@ module.exports = function (RED) {
     });
   }
 
-  RED.nodes.registerType("measure_component", measureNode);
+  RED.nodes.registerType("measure", measureNode);
 };
