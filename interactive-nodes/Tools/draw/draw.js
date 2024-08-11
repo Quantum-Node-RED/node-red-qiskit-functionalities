@@ -1,4 +1,5 @@
 const component = require("../../component.js");
+const constants = require('../../constants.js');
 module.exports = function (RED) {
   function drawNode(config) {
     RED.nodes.createNode(this, config);

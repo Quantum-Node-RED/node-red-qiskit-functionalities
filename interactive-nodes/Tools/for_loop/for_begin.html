@@ -1,0 +1,93 @@
+<script type="text/javascript">
+  RED.nodes.registerType("for_begin", {
+    category: "Tools",
+    color: "#D3E7B5",
+    defaults: {
+      choice: { value: "" },
+      times: { value: "" },
+      var1: { value: "" },
+      var2: { value: "" },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "font-awesome/fa-area-chart",
+    label: function () {
+      return "for_begin";
+    },
+    oneditprepare: function () {
+      $("#choice").val(this.choice);
+      $("#times").val(this.times);
+      $("#var1").val(this.var1);
+      $("#var2").val(this.var2);
+
+      // Show/hide fields based on the selected choice
+      showFields();
+    },
+    oneditsave: function () {
+      this.choice = $("#choice").val();
+      this.times = $("#times").val();
+      this.var1 = $("#var1").val();
+      this.var2 = $("#var2").val();
+    },
+  });
+</script>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Dynamic Form Example</title>
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
+  <script>
+    function showFields() {
+      var dropdown = document.getElementById("choice");
+      var generalField = document.getElementById("generalField");
+      var objectFields = document.getElementById("objectFields");
+
+      if (dropdown.value === "general") {
+        $("#var1").val("");
+        $("#var2").val("");
+        generalField.classList.remove("hidden");
+        objectFields.classList.add("hidden");
+      } else if (dropdown.value === "object") {
+        $("#times").val("");
+        objectFields.classList.remove("hidden");
+        generalField.classList.add("hidden");
+      }
+    }
+  </script>
+</head>
+
+<script type="text/html" data-template-name="for_begin">
+  <div class="form-row">
+    <label for="node-input-choice"><i class="fa fa-list-ul"></i> Choice</label>
+    <select id="choice" onchange="showFields()">
+      <option value="">Choose...</option>
+      <option value="general">General</option>
+      <option value="object">Object</option>
+    </select>
+  </div>
+
+  <div id="generalField" class="hidden form-row">
+    <label for="node-input-times"><i class="fa fa-clock-o"></i> Times</label>
+    <input type="text" id="times" name="times" placeholder="Enter times" />
+  </div>
+
+  <div id="objectFields" class="hidden form-row">
+    <label for="node-input-var1"
+      ><i class="fa fa-variable"></i> Variable 1</label
+    >
+    <input type="text" id="var1" name="var1" placeholder="Enter variable 1" />
+    <br />
+    <label for="node-input-var2"
+      ><i class="fa fa-variable"></i> Variable 2</label
+    >
+    <input type="text" id="var2" name="var2" placeholder="Enter variable 2" />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="for_begin">
+  <p></p>
+</script>
