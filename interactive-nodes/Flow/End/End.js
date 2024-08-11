@@ -8,7 +8,7 @@ module.exports = function (RED) {
       const result = await new Promise((resolve, reject) => {
         runPythonScript(
           __dirname,
-          "../../code_generator_v3.py",
+          "../../code_generator.py",
           msg.payload,
           (err, results) => {
             if (err) throw err;

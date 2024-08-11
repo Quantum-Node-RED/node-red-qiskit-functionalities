@@ -69,6 +69,7 @@
   "dependencies": {
     "canvas": "^2.11.2",
     "mocha": "^10.7.3",
+    "node-red-node-test-helper": "^0.3.4",
     "python-shell": "^5.0.0"
   },
   "devDependencies": {

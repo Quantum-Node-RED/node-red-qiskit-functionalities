@@ -1,7 +1,8 @@
 import sys
 import json
 from code_component_dependency import Code_Component_Dependency as Table
-from code_component_v3 import Code_Component, snippets
+from code_component import Code_Component, snippets
+from import_table import import_table
 from params_schemas import schemas
 
 def validate_parameters(component_name, parameters):
@@ -25,9 +26,10 @@ def generate_qiskit_code(component, import_statements, functions, calling_code, 
         try:
             # Format import statements and add them to the set if they exist
             if code_obj.import_statement:
-                formatted_import = code_obj.import_statement.format(**component.get("parameters", {})).strip()
-                if formatted_import not in import_statements:
-                    import_statements.add(formatted_import)
+                for import_key in code_obj.import_statement:
+                    formatted_import = import_table[import_key].format(**component.get("parameters", {})).strip()
+                    if formatted_import not in import_statements:
+                        import_statements.add(formatted_import)
 
             # Format function definitions and add them to the set if they exist and haven't been added before
             if code_obj.function and code_obj.function not in defined_functions:

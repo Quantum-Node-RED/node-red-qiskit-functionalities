@@ -26,27 +26,31 @@ schemas = {
         "circuit_name": str,
         "qbit": int
     },
+    "barrier": {
+        "circuit_name": str,
+        "qbit": int
+    },
     "matrix": {
         "var_name": str,
         "matrix": str
     },
     "CX_gate": {
         "circuit_name": str,
-        "qbit1": int,
-        "qbit2": int
+        "control_qubit": int,
+        "target_qubit": int
     },
     "CZ_gate": {
         "circuit_name": str,
-        "qbit1": int,
-        "qbit2": int
+        "control_qubit": int,
+        "target_qubit": int
     },
     "CU_gate": {
         "circuit_name": str,
         "theta": float,
         "phi": float,
         "lam": float,
-        "qbit1": int,
-        "qbit2": int
+        "control_qubit": int,
+        "target_qubit": int
     },
     "H_gate": {
         "circuit_name": str,
@@ -97,21 +101,21 @@ schemas = {
     },
     "Toffoli_gate": {
         "circuit_name": str,
-        "qbit1": int,
-        "qbit2": int,
-        "qbit3": int
+        "control_qubit1": int,
+        "control_qubit2": int,
+        "target_qubit": int
     },
     "CCX_gate": {
         "circuit_name": str,
-        "qbit1": int,
-        "qbit2": int,
-        "qbit3": int
+        "control_qubit1": int,
+        "control_qubit2": int,
+        "target_qubit": int
     },
     "multi_controlled_U_gate": {
         "circuit_name": str,
-        "qbit1": int,
-        "qbit2": int,
-        "qbit3": int
+        "num_of_control_qubits": int,
+        "list_of_control_qubits": int,
+        "target_qubit": int
     },
     "local_simulator": {
         "var_name": str,
