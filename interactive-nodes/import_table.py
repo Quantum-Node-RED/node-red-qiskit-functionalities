@@ -16,5 +16,6 @@ import_table = {
     "WARNINGS": "import warnings",
     "NETWORKX": "import networkx as nx",
     "OS": "import os",
+    "JSON": "import json",
 }
 

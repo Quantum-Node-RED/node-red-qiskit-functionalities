@@ -187,7 +187,8 @@ snippets = {
         import_statement=[
             "PYPLOT",
             "IO",
-            "WARNINGS"
+            "WARNINGS",
+            "BASE64"
         ],
         function="warnings.filterwarnings('ignore', category=UserWarning)",
         calling_function="""
@@ -198,6 +199,24 @@ snippets = {
             print(b64_str)
             buffer.close()
         """
+    ),
+
+    "draw_circuit": Code_Component(
+        import_statement=[
+            "PYPLOT",
+            "IO",
+            "BASE64",
+            "JSON"
+        ],
+        function="",
+        calling_function="""
+buffer = io.BytesIO()
+{circuit_name}.draw(output='mpl').savefig(buffer, format='png')
+buffer.seek(0)
+b64_str = base64.b64encode(buffer.read()).decode('utf-8')
+buffer.close()
+print(json.dumps(b64_str))
+"""
     ),
 
     "histogram": Code_Component(

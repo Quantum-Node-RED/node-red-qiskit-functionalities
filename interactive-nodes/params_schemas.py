@@ -125,6 +125,9 @@ schemas = {
         "output_type": str
     },
     "encode_image": {},
+    "draw_circuit": {
+        "circuit_name": str,
+    },
     "histogram": {},
     "sparse_pauli_op": {
         "pauli_list":  str,
