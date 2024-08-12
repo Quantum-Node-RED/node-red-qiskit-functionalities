@@ -31,8 +31,8 @@
         "y": 560,
         "wires": [
             [
-                "e83a3258617b76f4",
-                "34d826037d8d91e5"
+                "057f12540c04e20a",
+                "99430f0d296d3460"
             ]
         ]
     },
@@ -154,5 +154,31 @@
         "y": 860,
         "wires": [],
         "info": "# Output the string you created."
+    },
+    {
+        "id": "057f12540c04e20a",
+        "type": "move-to-next-node",
+        "z": "2abb279f01f2d561",
+        "name": "Next",
+        "x": 670,
+        "y": 360,
+        "wires": [
+            [
+                "e83a3258617b76f4"
+            ]
+        ]
+    },
+    {
+        "id": "99430f0d296d3460",
+        "type": "move-to-next-node",
+        "z": "2abb279f01f2d561",
+        "name": "Next",
+        "x": 650,
+        "y": 780,
+        "wires": [
+            [
+                "34d826037d8d91e5"
+            ]
+        ]
     }
 ]

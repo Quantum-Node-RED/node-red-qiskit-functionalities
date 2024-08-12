@@ -99,7 +99,7 @@
         "active": true,
         "pass": false,
         "outputs": 0,
-        "x": 1390,
+        "x": 1410,
         "y": 600,
         "wires": [],
         "info": "# The image of the pulse specified by waveform"
@@ -217,7 +217,7 @@
         "wires": [
             [
                 "3e4ce8508968e517",
-                "841ee38fd14e8462"
+                "85247af76220388a"
             ]
         ]
     },
@@ -231,8 +231,8 @@
         "y": 440,
         "wires": [
             [
-                "b8f2ad75c6d8e3d8",
-                "9afa174e552f0d93"
+                "741ad287feaafdbc",
+                "99e7c27686e11573"
             ]
         ]
     },
@@ -242,7 +242,7 @@
         "z": "f965af6e921672a2",
         "name": "Build parametric pulse",
         "info": "# You can build a <font style=\"background: lightgrey\">_Gaussian_</font> pulse by using the Gaussian parametric pulse. A parametric pulse sends the name of the function and its parameters to the backend, rather than every individual sample. Using parametric pulses makes the jobs much smaller to send. IBM Quantum backends limit the maximum job size that they accept, so parametric pulses might allow you to run larger programs.\r\n&nbsp;\r\n# Other parametric pulses in the library include <font style=\"background: lightgrey\">_GaussianSquare_</font>, <font style=\"background: lightgrey\">_Drag_</font>, and <font style=\"background: lightgrey\">_Constant_</font>. See the full list in [the API reference](https://docs.quantum.ibm.com/api/qiskit/pulse#parametric-pulse-representation).\r\n&nbsp;\r\n# **Note:** The backend is responsible for deciding how to sample the parametric pulses. It is possible to draw parametric pulses, but the samples displayed are not guaranteed to be the same as those executed on the backend.\r\n&nbsp;\r\n# Following code shows how to create pulse with parameters:\r\n```python\r\nfrom qiskit.pulse import library\r\n \r\namp = 1\r\nsigma = 10\r\nnum_samples = 128\r\n\r\ngaus = pulse.library.Gaussian(num_samples, amp, sigma,\r\n                              name=\"Parametric Gaus\")\r\n```\r\n# The image of the pulse 'gaus' is shown on the \"Parametric Pulse Output\" node\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: the image of parametric pulse `gaus`\r\n",
-        "x": 1040,
+        "x": 1120,
         "y": 240,
         "wires": [
             [
@@ -256,7 +256,7 @@
         "z": "f965af6e921672a2",
         "name": "Build pulse by waveforms",
         "info": "# A **Waveform** is a pulse signal specified as an array of time-ordered complex amplitudes, or <font style=\"background: lightgrey\">_samples_</font>. Each sample is played for one cycle, a timestep <font style=\"lightgrey\">dt</font>, determined by the backend. You must know the value of dt to determine a program's real-time dynamics. The (zero-indexed) <font style=\"background: lightgrey\">i_th</font> sample plays from time <font style=\"background: lightgrey\">i*dt</font> up to <font style=\"background: lightgrey\">(i + 1)*dt</font>, modulated by the qubit frequency.\r\n&nbsp;\r\n# The following code shows how to create samples by waveforms and specify your pulse by these samples:\r\n```python\r\nfrom qiskit.pulse import library\r\n \r\namp = 1\r\nsigma = 10\r\nnum_samples = 128\r\n\r\nimport numpy as np\r\n\r\n# Create samples\r\ntimes = np.arange(num_samples)\r\ngaussian_samples = np.exp(-1/2 *((times - num_samples / 2) ** 2 / sigma**2))\r\n \r\ngaus = library.Waveform(gaussian_samples, name=\"WF Gaus\")\r\n```\r\n# The image of the pulse 'gaus' is shown on the \"Pulse Waveform Output\" node.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: the image of pulse `gaus`",
-        "x": 1050,
+        "x": 1130,
         "y": 600,
         "wires": [
             [
@@ -275,13 +275,13 @@
         "wires": [
             [
                 "58c30beeca94cb44",
-                "d9d94c6ad256d44d",
-                "642fd0106d5e2a82",
-                "5ddca52ad7b7e2db",
-                "09161051df8e795f",
-                "4e7ca04a98f9f5e3",
-                "5168a6d08c8c5e7f",
-                "1e842a7d12342c12"
+                "058b1e6511cc872a",
+                "be948f4b19903b49",
+                "0fae650aacd32ef4",
+                "42c69ecb9db97caf",
+                "0a4ee2c0a4623fb6",
+                "e012287320b094f2",
+                "fab0baca96bb7868"
             ]
         ]
     },
@@ -378,5 +378,135 @@
         "x": 1980,
         "y": 2660,
         "wires": []
+    },
+    {
+        "id": "741ad287feaafdbc",
+        "type": "move-to-next-node",
+        "z": "f965af6e921672a2",
+        "name": "Next",
+        "x": 870,
+        "y": 240,
+        "wires": [
+            [
+                "b8f2ad75c6d8e3d8"
+            ]
+        ]
+    },
+    {
+        "id": "99e7c27686e11573",
+        "type": "move-to-next-node",
+        "z": "f965af6e921672a2",
+        "name": "Next",
+        "x": 870,
+        "y": 600,
+        "wires": [
+            [
+                "9afa174e552f0d93"
+            ]
+        ]
+    },
+    {
+        "id": "85247af76220388a",
+        "type": "move-to-next-node",
+        "z": "f965af6e921672a2",
+        "name": "Next",
+        "x": 810,
+        "y": 940,
+        "wires": [
+            [
+                "841ee38fd14e8462"
+            ]
+        ]
+    },
+    {
+        "id": "058b1e6511cc872a",
+        "type": "move-to-next-node",
+        "z": "f965af6e921672a2",
+        "name": "Next",
+        "x": 1670,
+        "y": 940,
+        "wires": [
+            [
+                "d9d94c6ad256d44d"
+            ]
+        ]
+    },
+    {
+        "id": "be948f4b19903b49",
+        "type": "move-to-next-node",
+        "z": "f965af6e921672a2",
+        "name": "Next",
+        "x": 1690,
+        "y": 1120,
+        "wires": [
+            [
+                "642fd0106d5e2a82"
+            ]
+        ]
+    },
+    {
+        "id": "0fae650aacd32ef4",
+        "type": "move-to-next-node",
+        "z": "f965af6e921672a2",
+        "name": "Next",
+        "x": 1690,
+        "y": 1480,
+        "wires": [
+            [
+                "5ddca52ad7b7e2db"
+            ]
+        ]
+    },
+    {
+        "id": "42c69ecb9db97caf",
+        "type": "move-to-next-node",
+        "z": "f965af6e921672a2",
+        "name": "Next",
+        "x": 1690,
+        "y": 1680,
+        "wires": [
+            [
+                "09161051df8e795f"
+            ]
+        ]
+    },
+    {
+        "id": "0a4ee2c0a4623fb6",
+        "type": "move-to-next-node",
+        "z": "f965af6e921672a2",
+        "name": "Next",
+        "x": 1690,
+        "y": 2080,
+        "wires": [
+            [
+                "4e7ca04a98f9f5e3"
+            ]
+        ]
+    },
+    {
+        "id": "e012287320b094f2",
+        "type": "move-to-next-node",
+        "z": "f965af6e921672a2",
+        "name": "Next",
+        "x": 1690,
+        "y": 2300,
+        "wires": [
+            [
+                "5168a6d08c8c5e7f"
+            ]
+        ]
+    },
+    {
+        "id": "fab0baca96bb7868",
+        "type": "move-to-next-node",
+        "z": "f965af6e921672a2",
+        "name": "Next",
+        "x": 1710,
+        "y": 2660,
+        "wires": [
+            [
+                "1e842a7d12342c12"
+            ]
+        ]
     }
 ]

@@ -18,7 +18,7 @@
         "wires": [
             [
                 "6e35518d93e41aa7",
-                "a6a216888e51582e"
+                "b430f43b1cecc01c"
             ]
         ]
     },
@@ -60,8 +60,8 @@
         "active": true,
         "pass": false,
         "outputs": 0,
-        "x": 980,
-        "y": 700,
+        "x": 960,
+        "y": 500,
         "wires": [],
         "info": "# The image of circuit you built"
     },
@@ -71,12 +71,12 @@
         "z": "3c6c5802d21e0121",
         "name": "Build a calibration",
         "info": "## **Node Input:**\r\n- # Object: `circ` (Type: _qiskit.circuit.quantumcircuit_)\r\n\r\n***\r\n&nbsp;\r\n# This node defines a calibration for the Hadamard gate on qubit 0 which built in previous node.\r\n&nbsp;\r\n# In practice, the pulse shape and its parameters would be optimized through a series of calibration experiments. For this demonstration, the Hadamard will be a Gaussian pulse. You play the pulse on the drive channel of qubit 0.\r\n&nbsp;\r\n# The python code is shown below. For more information on calibrations, see the [Qiskit Experiments tutorial.](https://qiskit-extensions.github.io/qiskit-experiments/tutorials/calibrations.html#)\r\n```python\r\nfrom qiskit import pulse\r\nfrom qiskit.pulse.library import Gaussian\r\nfrom qiskit_ibm_runtime.fake_provider import FakeValenciaV2\r\n \r\nbackend = FakeValenciaV2()\r\n \r\nwith pulse.build(backend, name='hadamard') as h_q0:\r\n    pulse.play(Gaussian(duration=128, amp=0.1, sigma=16), pulse.drive_channel(0))\r\n```\r\n# The image of the schedule we drew is shown in the \"Schedule Diagram\" node.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Object: `circ` (Type: _qiskit.circuit.quantumcircuit_)\r\n- # Object: `h_q0` (Type: _qiskit.pulse.schedule.ScheduleBlock_)\r\n- # Image: The image of variable `h_q0`\r\n",
-        "x": 1090,
+        "x": 1270,
         "y": 340,
         "wires": [
             [
                 "f99f0ab3d0501039",
-                "e4109d8c6c99efda"
+                "d8f87b56772aa4fa"
             ]
         ]
     },
@@ -92,8 +92,8 @@
         "active": true,
         "pass": false,
         "outputs": 0,
-        "x": 1410,
-        "y": 700,
+        "x": 1490,
+        "y": 500,
         "wires": [],
         "info": "# The image of the schedule you built"
     },
@@ -109,7 +109,7 @@
         "active": true,
         "pass": false,
         "outputs": 0,
-        "x": 1850,
+        "x": 2110,
         "y": 460,
         "wires": [],
         "info": "# The image of optimized circuit"
@@ -127,7 +127,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1880,
+        "x": 2140,
         "y": 340,
         "wires": [],
         "info": "# The instructions for optimizing your circuit"
@@ -138,12 +138,38 @@
         "z": "3c6c5802d21e0121",
         "name": "Link calibration to circuit",
         "info": "## **Node Input:**\r\n- # Object: `circ` (Type: _qiskit.circuit.quantumcircuit_)\r\n- # Object: `h_q0` (Type: _qiskit.pulse.schedule.ScheduleBlock_)\r\n\r\n***\r\n&nbsp;\r\n# Now we need to map the calibration to the circuit. The circuit method <font style='background: lightgrey'>_`add_calibration`_</font> needs information about the gate and a reference to the schedule to complete the mapping:\r\n```python\r\nQuantumCircuit.add_calibration(gate, qubits, schedule, parameters)\r\n```\r\n&nbsp;\r\n# The gate can be either a circuit.Gate object or the name of the gate. Usually, you'll need a different schedule for each unique set of qubits and parameters. Since the Hadamard gate doesn't have any parameters, there is no need to supply any. So we can link the calibration 'h_q0' to circuit 'circ' by using following python code:\r\n```python\r\ncirc.add_calibration('h', [0], h_q0)\r\n```\r\n&nbsp;\r\n# Lastly, note that the transpiler will respect your calibrations. In other words, the transpiler will generate a series of instructions aimed at optimizing your circuit. Use it as you normally would.\r\n```python\r\nfrom qiskit_ibm_runtime.fake_provider import FakeHanoiV2\r\nfrom qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager\r\n \r\nbackend = FakeHanoiV2()\r\npassmanager = generate_preset_pass_manager(optimization_level=1, backend=backend)\r\ncirc = passmanager.run(circ)\r\n \r\n# Print instructions that only affect qubits 0 and 1\r\nfor instruction, qubits in FakeHanoiV2().instructions:\r\n    if qubits and set(qubits).issubset({0, 1}):\r\n        print(instruction, qubits)\r\ncirc.draw('mpl', idle_wires=False)\r\n```\r\n&nbsp;\r\n# The generated optimization instructions are transmitted to the \"Show optimizing instruction\" node, and you can open the debug palette on the right to view these instructions. The diagram of optimized quantum circuit is displayed below the \"Optimized circuit\" node  (our example is too simple for the transpiler to optimize, so the output circuit is the same as what we built before).\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # List: A list of optimized instructions (Type: _qiskit.circuit.Instruction_)\r\n- # Image: The image of optimized circuit `circ`\r\n",
-        "x": 1490,
+        "x": 1750,
         "y": 340,
         "wires": [
             [
                 "9d948bb61e1226ba",
                 "4f83db6523a60d8b"
+            ]
+        ]
+    },
+    {
+        "id": "b430f43b1cecc01c",
+        "type": "move-to-next-node",
+        "z": "3c6c5802d21e0121",
+        "name": "Next",
+        "x": 890,
+        "y": 340,
+        "wires": [
+            [
+                "a6a216888e51582e"
+            ]
+        ]
+    },
+    {
+        "id": "d8f87b56772aa4fa",
+        "type": "move-to-next-node",
+        "z": "3c6c5802d21e0121",
+        "name": "Next",
+        "x": 1450,
+        "y": 340,
+        "wires": [
+            [
+                "e4109d8c6c99efda"
             ]
         ]
     }

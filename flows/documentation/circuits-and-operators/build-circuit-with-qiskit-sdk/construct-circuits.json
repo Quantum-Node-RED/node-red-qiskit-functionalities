@@ -20,7 +20,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1160,
+        "x": 1340,
         "y": 260,
         "wires": []
     },
@@ -36,7 +36,7 @@
         "active": true,
         "pass": false,
         "outputs": 0,
-        "x": 1510,
+        "x": 1870,
         "y": 300,
         "wires": []
     },
@@ -53,7 +53,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1510,
+        "x": 1870,
         "y": 260,
         "wires": []
     },
@@ -69,7 +69,7 @@
         "active": true,
         "pass": false,
         "outputs": 0,
-        "x": 2000,
+        "x": 2420,
         "y": 120,
         "wires": []
     },
@@ -78,14 +78,14 @@
         "type": "intro-to-quantum-circuits",
         "z": "f5bb63cfebfdc24a",
         "name": "What is quantum circuit?",
+        "info": "# A simple quantum circuit is a collection of **qubits** and a list of **instructions** that act on those qubits.",
         "x": 610,
         "y": 120,
         "wires": [
             [
-                "4f2bec659afbc1c3"
+                "36b05fb20f58e24f"
             ]
-        ],
-        "info": "# A simple quantum circuit is a collection of **qubits** and a list of **instructions** that act on those qubits."
+        ]
     },
     {
         "id": "52abae5dbdf7e22e",
@@ -99,7 +99,7 @@
         "active": true,
         "pass": false,
         "outputs": 0,
-        "x": 1200,
+        "x": 1320,
         "y": 760,
         "wires": []
     },
@@ -115,7 +115,7 @@
         "active": true,
         "pass": false,
         "outputs": 0,
-        "x": 1650,
+        "x": 1970,
         "y": 760,
         "wires": []
     },
@@ -131,7 +131,7 @@
         "active": true,
         "pass": false,
         "outputs": 0,
-        "x": 2030,
+        "x": 2470,
         "y": 760,
         "wires": []
     },
@@ -147,7 +147,7 @@
         "active": true,
         "pass": false,
         "outputs": 0,
-        "x": 2430,
+        "x": 3050,
         "y": 760,
         "wires": []
     },
@@ -163,7 +163,7 @@
         "active": true,
         "pass": false,
         "outputs": 0,
-        "x": 2840,
+        "x": 3660,
         "y": 620,
         "wires": []
     },
@@ -224,14 +224,14 @@
         "type": "intro-to-build-circuit",
         "z": "f5bb63cfebfdc24a",
         "name": "What does 'build circuit' means?",
+        "info": "# Building a quantum circuit involves designing and arranging a sequence of quantum instructions to manipulate quantum bits (qubits). Each instruction represents a specific quantum operation, such as a gate that changes the state of a qubit. By combining these instructions into a circuit, you create a blueprint for how qubits interact and evolve over time, ultimately allowing you to perform complex quantum computations and experiments.\r\n&nbsp;\r\n# Instructions and circuits are similar in that they both describe operations on bits and qubits, but they have different purposes:\r\n- # Instructions are treated as fixed, and their methods will usually return new instructions (without mutating the original object).\r\n- # Circuits are designed to be built over many lines of code, and [QuantumCircuit](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit) methods often mutate the existing object.\r\n&nbsp;\r\n# The rest of this flow illustrates how to manipulate quantum circuits.",
         "x": 630,
         "y": 620,
         "wires": [
             [
-                "3dd27b035a1cc220"
+                "f9fd4aa500bd9d1c"
             ]
-        ],
-        "info": "# Building a quantum circuit involves designing and arranging a sequence of quantum instructions to manipulate quantum bits (qubits). Each instruction represents a specific quantum operation, such as a gate that changes the state of a qubit. By combining these instructions into a circuit, you create a blueprint for how qubits interact and evolve over time, ultimately allowing you to perform complex quantum computations and experiments.\r\n&nbsp;\r\n# Instructions and circuits are similar in that they both describe operations on bits and qubits, but they have different purposes:\r\n- # Instructions are treated as fixed, and their methods will usually return new instructions (without mutating the original object).\r\n- # Circuits are designed to be built over many lines of code, and [QuantumCircuit](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit) methods often mutate the existing object.\r\n&nbsp;\r\n# The rest of this flow illustrates how to manipulate quantum circuits."
+        ]
     },
     {
         "id": "ee09172c90025934",
@@ -297,14 +297,14 @@
         "type": "variation-of-parameterised-circuits",
         "z": "f5bb63cfebfdc24a",
         "name": "Variation of Parameterised Circuit",
-        "x": 1060,
+        "info": "## **Node Input:**\r\n- # Object: `qc` (Type: _qiskit.QuantumCircuit_)\r\n\r\n***\r\n&nbsp;\r\n# This code snippet creates a list of variations for the parameterized circuits created in previous node, each with a parameterized angle that varies from 0 to 99. It then draws the circuit corresponding to the first angle (0).\r\n```python\r\ncircuits = []\r\nfor value in range(100):\r\n    circuits.append(\r\n        qc.assign_parameters({ angle: value })\r\n    )\r\n \r\ncircuits[0].draw(\"mpl\")\r\n```\r\n# You can check the image of this variation in the \"Variation of Parameterized Circuit\" node.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: Image of the variation of parameterized circuit `qc`",
+        "x": 1120,
         "y": 1040,
         "wires": [
             [
                 "b42a4a807dcc80e4"
             ]
-        ],
-        "info": "## **Node Input:**\r\n- # Object: `qc` (Type: _qiskit.QuantumCircuit_)\r\n\r\n***\r\n&nbsp;\r\n# This code snippet creates a list of variations for the parameterized circuits created in previous node, each with a parameterized angle that varies from 0 to 99. It then draws the circuit corresponding to the first angle (0).\r\n```python\r\ncircuits = []\r\nfor value in range(100):\r\n    circuits.append(\r\n        qc.assign_parameters({ angle: value })\r\n    )\r\n \r\ncircuits[0].draw(\"mpl\")\r\n```\r\n# You can check the image of this variation in the \"Variation of Parameterized Circuit\" node.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: Image of the variation of parameterized circuit `qc`"
+        ]
     },
     {
         "id": "b42a4a807dcc80e4",
@@ -318,7 +318,7 @@
         "active": true,
         "pass": false,
         "outputs": 0,
-        "x": 1360,
+        "x": 1420,
         "y": 1040,
         "wires": []
     },
@@ -327,6 +327,7 @@
         "type": "intro-to-construct-circuits",
         "z": "f5bb63cfebfdc24a",
         "name": "Construct circuits",
+        "info": "# These flows take a closer look at the [<font style=\"background: lightgrey\">QuantumCircuit</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit) class in the Qiskit SDK, including some more advanced methods you can use to create quantum circuits.",
         "x": 100,
         "y": 620,
         "wires": [
@@ -335,142 +336,258 @@
                 "f1c6bf301bd224a8",
                 "d848b839a62588e7"
             ]
-        ],
-        "info": "# These flows take a closer look at the [<font style=\"background: lightgrey\">QuantumCircuit</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit) class in the Qiskit SDK, including some more advanced methods you can use to create quantum circuits."
+        ]
     },
     {
         "id": "4f2bec659afbc1c3",
         "type": "quantum-circuits",
         "z": "f5bb63cfebfdc24a",
         "name": "Create quantum circuits",
-        "x": 910,
+        "info": "# The following code snippet creates a new circuit with two new qubits, then displays the circuit's [<font style=\"background: lightgrey\">qubits</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#qubits) attribute.\r\n```python\r\nfrom qiskit import QuantumCircuit\r\n \r\nqc = QuantumCircuit(2)\r\nqc.qubits\r\n```\r\n# The output qubits is sent to \"Qubits Output\" node and you can check them in the debug palette.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Object: `qc` (Type: _qiskit.QuantumCircuit_)\r\n- # List: `qc.qubits` (Type: _qiskit.circuit.Qubit_)",
+        "x": 1090,
         "y": 120,
         "wires": [
             [
                 "545ba4fb25f24796",
-                "6fb0af33aaaab30d"
+                "dd749f45df9a3df8"
             ]
-        ],
-        "info": "# The following code snippet creates a new circuit with two new qubits, then displays the circuit's [<font style=\"background: lightgrey\">qubits</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#qubits) attribute.\r\n```python\r\nfrom qiskit import QuantumCircuit\r\n \r\nqc = QuantumCircuit(2)\r\nqc.qubits\r\n```\r\n# The output qubits is sent to \"Qubits Output\" node and you can check them in the debug palette.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Object: `qc` (Type: _qiskit.QuantumCircuit_)\r\n- # List: `qc.qubits` (Type: _qiskit.circuit.Qubit_)"
+        ]
     },
     {
         "id": "6fb0af33aaaab30d",
         "type": "add-x-gate",
         "z": "f5bb63cfebfdc24a",
         "name": "Add instruction to circuit",
-        "x": 1270,
+        "info": "## **Node Input:**\r\n- # Object: `qc` (Type: _qiskit.QuantumCircuit_)\r\n\r\n***\r\n&nbsp;\r\n# Adding an instruction to the circuit appends the instruction to the circuit's [<font style=\"background: lightgrey\">data</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#data) attribute. The following code adds X-gate to qubit 0, and display its <font style=\"background: lightgrey\">data</font> attribute.\r\n```python\r\nqc.x(0)  # Add X-gate to qubit 0\r\nqc.data\r\n```\r\n# <font style=\"background: lightgrey\">data</font> is a list of [<font style=\"background: lightgrey\">CircuitInstruction</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.CircuitInstruction) objects, each of which has an <font style=\"background: lightgrey\">operation</font> attribute, and a <font style=\"background: lightgrey\">qubits</font> attribute. The output of those <font style=\"background: lightgrey\">data</font> attribute is sent to \"Data Output\" node and you can check them in the debug palette.\r\n&nbsp;\r\n# The easiest way to view circuit's information is through the <font style=\"background: lightgrey\">draw</font> method, which returns a visualization of a circuit. You can use the code snippet below to visualize the circuit.\r\n```python\r\nqc.draw(\"mpl\")\r\n```\r\n# You can check the image of the created circuit in the \"X-gate Image\" node. See [Visualize circuits](https://docs.quantum.ibm.com/guides/visualize-circuits) for different ways of displaying quantum circuits.\r\n\r\n***\r\n&nbsp;\r\n## **Node Ouput:**\r\n- # List: `qc.data` (Type: _qiskit.circuit.CircuitInstruction_)\r\n- # Image: Image of circuit `qc`",
+        "x": 1630,
         "y": 120,
         "wires": [
             [
                 "03c0265c8e6f8479",
                 "70a75b5d97842aaf",
-                "668eeb491bf26da2"
+                "5f5e4980eb011332"
             ]
-        ],
-        "info": "## **Node Input:**\r\n- # Object: `qc` (Type: _qiskit.QuantumCircuit_)\r\n\r\n***\r\n&nbsp;\r\n# Adding an instruction to the circuit appends the instruction to the circuit's [<font style=\"background: lightgrey\">data</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#data) attribute. The following code adds X-gate to qubit 0, and display its <font style=\"background: lightgrey\">data</font> attribute.\r\n```python\r\nqc.x(0)  # Add X-gate to qubit 0\r\nqc.data\r\n```\r\n# <font style=\"background: lightgrey\">data</font> is a list of [<font style=\"background: lightgrey\">CircuitInstruction</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.CircuitInstruction) objects, each of which has an <font style=\"background: lightgrey\">operation</font> attribute, and a <font style=\"background: lightgrey\">qubits</font> attribute. The output of those <font style=\"background: lightgrey\">data</font> attribute is sent to \"Data Output\" node and you can check them in the debug palette.\r\n&nbsp;\r\n# The easiest way to view circuit's information is through the <font style=\"background: lightgrey\">draw</font> method, which returns a visualization of a circuit. You can use the code snippet below to visualize the circuit.\r\n```python\r\nqc.draw(\"mpl\")\r\n```\r\n# You can check the image of the created circuit in the \"X-gate Image\" node. See [Visualize circuits](https://docs.quantum.ibm.com/guides/visualize-circuits) for different ways of displaying quantum circuits.\r\n\r\n***\r\n&nbsp;\r\n## **Node Ouput:**\r\n- # List: `qc.data` (Type: _qiskit.circuit.CircuitInstruction_)\r\n- # Image: Image of circuit `qc`"
+        ]
     },
     {
         "id": "668eeb491bf26da2",
         "type": "definition",
         "z": "f5bb63cfebfdc24a",
         "name": "Apply definition to circuit",
-        "x": 1710,
+        "info": "## **Node Input:**\r\n- # List: `qc.data` (Type: _qiskit.circuit.CircuitInstruction_)\r\n\r\n***\r\n&nbsp;\r\n# Circuit instruction objects can contain \"definition\" circuits that describe the instruction in terms of more fundamental instructions. For example, the [X-gate](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.XGate), which you added to your circuit in the previous node, is defined as a specific case of the [U3-gate](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.U3Gate), a more general single-qubit gate.\r\n&nbsp;\r\n# The code snippet below draw definition circuit of X-gate instruction in the circuit you created before.\r\n```python\r\n# Draw definition circuit of 0th instruction in `qc`\r\nqc.data[0].operation.definition.draw(\"mpl\")\r\n```\r\n# You can check the image output in the \"Definition Image\" node. You should observe that the X-gate previously on 0th qubit has now been replaced with a U3-gate.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: Image of the definition circuit for the 0th element in `qc.data`",
+        "x": 2130,
         "y": 120,
         "wires": [
             [
                 "de51a96b5eba63b2"
             ]
-        ],
-        "info": "## **Node Input:**\r\n- # List: `qc.data` (Type: _qiskit.circuit.CircuitInstruction_)\r\n\r\n***\r\n&nbsp;\r\n# Circuit instruction objects can contain \"definition\" circuits that describe the instruction in terms of more fundamental instructions. For example, the [X-gate](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.XGate), which you added to your circuit in the previous node, is defined as a specific case of the [U3-gate](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.U3Gate), a more general single-qubit gate.\r\n&nbsp;\r\n# The code snippet below draw definition circuit of X-gate instruction in the circuit you created before.\r\n```python\r\n# Draw definition circuit of 0th instruction in `qc`\r\nqc.data[0].operation.definition.draw(\"mpl\")\r\n```\r\n# You can check the image output in the \"Definition Image\" node. You should observe that the X-gate previously on 0th qubit has now been replaced with a U3-gate.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: Image of the definition circuit for the 0th element in `qc.data`"
+        ]
     },
     {
         "id": "3dd27b035a1cc220",
         "type": "build-circuits",
         "z": "f5bb63cfebfdc24a",
         "name": "Add instruction to circuit",
-        "x": 970,
+        "info": "# Methods such as [<font style=\"background: lightgrey\">QuantumCircuit.h</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#h) and [<font style=\"background: lightgrey\">QuantumCircuit.cx</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#cx) add specific instructions to circuits. To add instructions to a circuit more generally, use the [<font style=\"background: lightgrey\">append</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#append) method. This takes an instruction and a list of qubits to apply the instruction to.\r\n&nbsp;\r\n# The following code snippet creates a quantum circuit with one qubit and applies a Hadamard gate (HGate) to that qubit.\r\n```python\r\nfrom qiskit.circuit.library import HGate\r\n \r\nqc = QuantumCircuit(1)\r\nqc.append(\r\n    HGate(),  # New HGate instruction\r\n    [0]       # Apply to qubit 0\r\n)\r\nqc.draw(\"mpl\")\r\n```\r\n# You can check the image of this circuit in the \"H gate Image\" node.\r\n&nbsp;\r\n# See the [Circuit Library API documentation](https://docs.quantum.ibm.com/api/qiskit/circuit_library) for a list of supported instructions.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: Image of circuit `qc`\r\n",
+        "x": 1090,
         "y": 620,
         "wires": [
             [
                 "52abae5dbdf7e22e",
-                "425b0eafcdfa378f"
+                "b28c394b63efc79b"
             ]
-        ],
-        "info": "# Methods such as [<font style=\"background: lightgrey\">QuantumCircuit.h</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#h) and [<font style=\"background: lightgrey\">QuantumCircuit.cx</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#cx) add specific instructions to circuits. To add instructions to a circuit more generally, use the [<font style=\"background: lightgrey\">append</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#append) method. This takes an instruction and a list of qubits to apply the instruction to.\r\n&nbsp;\r\n# The following code snippet creates a quantum circuit with one qubit and applies a Hadamard gate (HGate) to that qubit.\r\n```python\r\nfrom qiskit.circuit.library import HGate\r\n \r\nqc = QuantumCircuit(1)\r\nqc.append(\r\n    HGate(),  # New HGate instruction\r\n    [0]       # Apply to qubit 0\r\n)\r\nqc.draw(\"mpl\")\r\n```\r\n# You can check the image of this circuit in the \"H gate Image\" node.\r\n&nbsp;\r\n# See the [Circuit Library API documentation](https://docs.quantum.ibm.com/api/qiskit/circuit_library) for a list of supported instructions.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: Image of circuit `qc`\r\n"
+        ]
     },
     {
         "id": "425b0eafcdfa378f",
         "type": "compose",
         "z": "f5bb63cfebfdc24a",
         "name": "Combine two circuits",
-        "x": 1300,
+        "info": "# To combine two circuits, use the [<font style=\"background: lightgrey\">compose</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#compose) method. This accepts another [<font style=\"background: lightgrey\">QuantumCircuit</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit) and an optional list of qubit mappings.\r\n&nbsp;\r\n# This code creates two quantum circuits: qc_a with an X-gate on qubit 0, and qc_b with a Y-gate on qubit 0 and a Z-gate on qubit 1. It then composes qc_b into qc_a, applying the gates of qc_b to qubits 1 and 3 of qc_a respectively.\r\n```python\r\nqc_a = QuantumCircuit(4)\r\nqc_a.x(0)\r\n \r\nqc_b = QuantumCircuit(2, name=\"qc_b\")\r\nqc_b.y(0)\r\nqc_b.z(1)\r\n \r\n# compose qubits (0, 1) of qc_a to qubits (1, 3) of qc_b respectively\r\ncombined = qc_a.compose(qc_b, qubits=[1, 3])\r\ncombined.draw(\"mpl\")\r\n```\r\n# You can check the image of composed circuits in the \"Composed circuits Image\" node.\r\n&nbsp;\r\n# **Note:** The [<font style=\"background: lightgrey\">compose</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#compose) method returns a new circuit and does not mutate either circuit it acts on. To mutate the circuit on which you're calling the [<font style=\"background: lightgrey\">compose</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#compose) method, use the argument <font style=\"background: lightgrey\">inplace=True</font>.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Object: `qc_a` (Type: _qiskit.QuantumCircuit_)\r\n- # Object: `qc_b` (Type: _qiskit.QuantumCircuit_)\r\n- # Image: Image of `qc_a` composed with `qc_b`",
+        "x": 1620,
         "y": 620,
         "wires": [
             [
                 "4063a1c2d5383307",
-                "7e4f923fa107ec78"
+                "35ef9ca702ef3166"
             ]
-        ],
-        "info": "# To combine two circuits, use the [<font style=\"background: lightgrey\">compose</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#compose) method. This accepts another [<font style=\"background: lightgrey\">QuantumCircuit</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit) and an optional list of qubit mappings.\r\n&nbsp;\r\n# This code creates two quantum circuits: qc_a with an X-gate on qubit 0, and qc_b with a Y-gate on qubit 0 and a Z-gate on qubit 1. It then composes qc_b into qc_a, applying the gates of qc_b to qubits 1 and 3 of qc_a respectively.\r\n```python\r\nqc_a = QuantumCircuit(4)\r\nqc_a.x(0)\r\n \r\nqc_b = QuantumCircuit(2, name=\"qc_b\")\r\nqc_b.y(0)\r\nqc_b.z(1)\r\n \r\n# compose qubits (0, 1) of qc_a to qubits (1, 3) of qc_b respectively\r\ncombined = qc_a.compose(qc_b, qubits=[1, 3])\r\ncombined.draw(\"mpl\")\r\n```\r\n# You can check the image of composed circuits in the \"Composed circuits Image\" node.\r\n&nbsp;\r\n# **Note:** The [<font style=\"background: lightgrey\">compose</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#compose) method returns a new circuit and does not mutate either circuit it acts on. To mutate the circuit on which you're calling the [<font style=\"background: lightgrey\">compose</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#compose) method, use the argument <font style=\"background: lightgrey\">inplace=True</font>.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Object: `qc_a` (Type: _qiskit.QuantumCircuit_)\r\n- # Object: `qc_b` (Type: _qiskit.QuantumCircuit_)\r\n- # Image: Image of `qc_a` composed with `qc_b`"
+        ]
     },
     {
         "id": "7e4f923fa107ec78",
         "type": "to-instruction",
         "z": "f5bb63cfebfdc24a",
         "name": "Compile circuits into instructions",
-        "x": 1710,
+        "info": "## **Node Input:**\r\n- # Object: `qc_a` (Type: _qiskit.QuantumCircuit_)\r\n- # Object: `qc_b` (Type: _qiskit.QuantumCircuit_)\r\n\r\n***\r\n&nbsp;\r\n# You might also want to compile circuits into instructions to keep your circuits organized. You can convert a circuit to an instruction by using the [<font style=\"background: lightgrey\">to_instruction</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#to_instruction) method, then append this to another circuit as you would any other instruction. The circuit drawn by the following code snippet is functionally equivalent to the circuit drawn in the previous node.\r\n```python\r\ninst = qc_b.to_instruction()\r\nqc_a.append(inst, [1, 3])\r\nqc_a.draw(\"mpl\")\r\n```\r\n# You can check the image of compiled circuit in the \"Compiled circuits Image\" node.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Object: `qc_a` (Type: _qiskit.QuantumCircuit_)\r\n- # Object: `qc_b` (Type: _qiskit.QuantumCircuit_)\r\n- # Image: Image of circuit `qc_a` appened by instructions of `qc_b`",
+        "x": 2150,
         "y": 620,
         "wires": [
             [
-                "6861edacd39498e4",
-                "a9ec2e93ca992673"
+                "a9ec2e93ca992673",
+                "079ebe3f1a207c63"
             ]
-        ],
-        "info": "## **Node Input:**\r\n- # Object: `qc_a` (Type: _qiskit.QuantumCircuit_)\r\n- # Object: `qc_b` (Type: _qiskit.QuantumCircuit_)\r\n\r\n***\r\n&nbsp;\r\n# You might also want to compile circuits into instructions to keep your circuits organized. You can convert a circuit to an instruction by using the [<font style=\"background: lightgrey\">to_instruction</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#to_instruction) method, then append this to another circuit as you would any other instruction. The circuit drawn by the following code snippet is functionally equivalent to the circuit drawn in the previous node.\r\n```python\r\ninst = qc_b.to_instruction()\r\nqc_a.append(inst, [1, 3])\r\nqc_a.draw(\"mpl\")\r\n```\r\n# You can check the image of compiled circuit in the \"Compiled circuits Image\" node.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Object: `qc_a` (Type: _qiskit.QuantumCircuit_)\r\n- # Object: `qc_b` (Type: _qiskit.QuantumCircuit_)\r\n- # Image: Image of circuit `qc_a` appened by instructions of `qc_b`"
+        ]
     },
     {
         "id": "6861edacd39498e4",
         "type": "to-gate",
         "z": "f5bb63cfebfdc24a",
         "name": "Convert circuit to a Gate",
-        "x": 2110,
+        "info": "## **Node Input:**\r\n- # Object: `qc_a` (Type: _qiskit.QuantumCircuit_)\r\n- # Object: `qc_b` (Type: _qiskit.QuantumCircuit_)\r\n\r\n***\r\n&nbsp;\r\n# If your circuit is unitary, you can convert it to a [<font style=\"background: lightgrey\">Gate</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.Gate) by using the [<font style=\"background: lightgrey\">to_gate</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#to_gate) method. [<font style=\"background: lightgrey\">Gate</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.Gate) objects are specific types of instructions that have some extra features, such as the [<font style=\"background: lightgrey\">control</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.Gate#control) method, which adds a quantum control.\r\n&nbsp;\r\n# The code snippet below converts the quantum circuit qc_b you created in the previous node into a controlled gate and then appends it to another quantum circuit qc_a, applying it to qubits 0, 1, and 3.\r\n```python\r\ngate = qc_b.to_gate().control()\r\nqc_a.append(gate, [0, 1, 3])\r\nqc_a.draw(\"mpl\")\r\n```\r\n# You can check the image output in the \"Gate Image\" node.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Object: `qc_a` (Type: _qiskit.QuantumCircuit_)\r\n- # Image: Image of circuit `qc_a` appended by gates of `qc_b`",
+        "x": 2730,
         "y": 620,
         "wires": [
             [
-                "0334b76d5c9d3682",
-                "8dc2bff5971bd64b"
+                "8dc2bff5971bd64b",
+                "7f8c653495ddcaa5"
             ]
-        ],
-        "info": "## **Node Input:**\r\n- # Object: `qc_a` (Type: _qiskit.QuantumCircuit_)\r\n- # Object: `qc_b` (Type: _qiskit.QuantumCircuit_)\r\n\r\n***\r\n&nbsp;\r\n# If your circuit is unitary, you can convert it to a [<font style=\"background: lightgrey\">Gate</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.Gate) by using the [<font style=\"background: lightgrey\">to_gate</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#to_gate) method. [<font style=\"background: lightgrey\">Gate</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.Gate) objects are specific types of instructions that have some extra features, such as the [<font style=\"background: lightgrey\">control</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.Gate#control) method, which adds a quantum control.\r\n&nbsp;\r\n# The code snippet below converts the quantum circuit qc_b you created in the previous node into a controlled gate and then appends it to another quantum circuit qc_a, applying it to qubits 0, 1, and 3.\r\n```python\r\ngate = qc_b.to_gate().control()\r\nqc_a.append(gate, [0, 1, 3])\r\nqc_a.draw(\"mpl\")\r\n```\r\n# You can check the image output in the \"Gate Image\" node.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Object: `qc_a` (Type: _qiskit.QuantumCircuit_)\r\n- # Image: Image of circuit `qc_a` appended by gates of `qc_b`"
+        ]
     },
     {
         "id": "0334b76d5c9d3682",
         "type": "decompose",
         "z": "f5bb63cfebfdc24a",
         "name": " Expand instruction into definition",
-        "x": 2490,
+        "info": "## **Node Input:**\r\n- # Object: `qc_a` (Type: _qiskit.QuantumCircuit_)\r\n\r\n***\r\n&nbsp;\r\n# To understand what's going on in the circuit you created, you can use the [<font style=\"background: lightgrey\">decompose</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#decompose) method to expand each instruction into its definition.\r\n```python\r\nqc_a.decompose().draw(\"mpl\")\r\n```\r\n# You can check the decomposed circuit in the \"Decomposed circuits Image\" node.\r\n&nbsp;\r\n# **Note:** The [<font style=\"background: lightgrey\">decompose</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#decompose) method returns a new circuit and does **not** mutate the circuit it acts on.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: Image of decomposed circuit `qc_a`.",
+        "x": 3310,
         "y": 620,
         "wires": [
             [
                 "2489b9d433ec28d9"
             ]
-        ],
-        "info": "## **Node Input:**\r\n- # Object: `qc_a` (Type: _qiskit.QuantumCircuit_)\r\n\r\n***\r\n&nbsp;\r\n# To understand what's going on in the circuit you created, you can use the [<font style=\"background: lightgrey\">decompose</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#decompose) method to expand each instruction into its definition.\r\n```python\r\nqc_a.decompose().draw(\"mpl\")\r\n```\r\n# You can check the decomposed circuit in the \"Decomposed circuits Image\" node.\r\n&nbsp;\r\n# **Note:** The [<font style=\"background: lightgrey\">decompose</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#decompose) method returns a new circuit and does **not** mutate the circuit it acts on.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: Image of decomposed circuit `qc_a`."
+        ]
     },
     {
         "id": "d848b839a62588e7",
         "type": "parameterised-circuits",
         "z": "f5bb63cfebfdc24a",
         "name": "Create a parameterized circuit",
+        "info": "# Many near-term quantum algorithms involve executing many variations of a quantum circuit. Since constructing and optimizing large circuits can be computationally expensive, Qiskit supports **parameterized circuits**. These circuits have undefined parameters, and their values do not need to be defined until just before executing the circuit. This lets you move circuit construction and optimization out of the main program loop.\r\n&nbsp;\r\n# The code snippet below  defines a parameterized quantum circuit with a single qubit and applies an Rx rotation gate with a variable 'angle'. It then optimizes the circuit using a preset pass manager at the highest optimization level, with specified basis gates.\r\n```python\r\nfrom qiskit.circuit import Parameter\r\nangle = Parameter(\"angle\")  # undefined number\r\n \r\n# Create and optimize circuit once\r\nqc = QuantumCircuit(1)\r\nqc.rx(angle, 0)\r\n \r\nfrom qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager\r\nqc = generate_preset_pass_manager(optimization_level=3, basis_gates=['u', 'cx']).run(qc)\r\n \r\nqc.draw(\"mpl\")\r\n```\r\n# You can check the image of this parameterized quantum circuit in \"Parameterized circuit Image\" node.\r\n&nbsp;\r\n# You can also find a list of a circuit's undefined parameters in its <font style=\"background: lightgrey\">parameters</font> attribute by using following code.\r\n```python\r\nqc.parameters\r\n```\r\n# The Output is sent to \"Parameters\" node and you can check them in the debug palette.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Object: `qc` (Type: _qiskit.QuantumCircuit_)\r\n- # Set: `qc.parameters` (Type: _qiskit.circuit.Parameter_)\r\n- # Image: Image of parameterized circuit `qc`",
         "x": 630,
         "y": 1040,
         "wires": [
             [
-                "8d0c838abb3fce68",
                 "a332b559e31eb306",
-                "ec950a55fd7f5162"
+                "ec950a55fd7f5162",
+                "199497cf7c141a75"
             ]
-        ],
-        "info": "# Many near-term quantum algorithms involve executing many variations of a quantum circuit. Since constructing and optimizing large circuits can be computationally expensive, Qiskit supports **parameterized circuits**. These circuits have undefined parameters, and their values do not need to be defined until just before executing the circuit. This lets you move circuit construction and optimization out of the main program loop.\r\n&nbsp;\r\n# The code snippet below  defines a parameterized quantum circuit with a single qubit and applies an Rx rotation gate with a variable 'angle'. It then optimizes the circuit using a preset pass manager at the highest optimization level, with specified basis gates.\r\n```python\r\nfrom qiskit.circuit import Parameter\r\nangle = Parameter(\"angle\")  # undefined number\r\n \r\n# Create and optimize circuit once\r\nqc = QuantumCircuit(1)\r\nqc.rx(angle, 0)\r\n \r\nfrom qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager\r\nqc = generate_preset_pass_manager(optimization_level=3, basis_gates=['u', 'cx']).run(qc)\r\n \r\nqc.draw(\"mpl\")\r\n```\r\n# You can check the image of this parameterized quantum circuit in \"Parameterized circuit Image\" node.\r\n&nbsp;\r\n# You can also find a list of a circuit's undefined parameters in its <font style=\"background: lightgrey\">parameters</font> attribute by using following code.\r\n```python\r\nqc.parameters\r\n```\r\n# The Output is sent to \"Parameters\" node and you can check them in the debug palette.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Object: `qc` (Type: _qiskit.QuantumCircuit_)\r\n- # Set: `qc.parameters` (Type: _qiskit.circuit.Parameter_)\r\n- # Image: Image of parameterized circuit `qc`"
+        ]
+    },
+    {
+        "id": "36b05fb20f58e24f",
+        "type": "move-to-next-node",
+        "z": "f5bb63cfebfdc24a",
+        "name": "Next",
+        "x": 810,
+        "y": 120,
+        "wires": [
+            [
+                "4f2bec659afbc1c3"
+            ]
+        ]
+    },
+    {
+        "id": "dd749f45df9a3df8",
+        "type": "move-to-next-node",
+        "z": "f5bb63cfebfdc24a",
+        "name": "Next",
+        "x": 1310,
+        "y": 120,
+        "wires": [
+            [
+                "6fb0af33aaaab30d"
+            ]
+        ]
+    },
+    {
+        "id": "5f5e4980eb011332",
+        "type": "move-to-next-node",
+        "z": "f5bb63cfebfdc24a",
+        "name": "Next",
+        "x": 1850,
+        "y": 120,
+        "wires": [
+            [
+                "668eeb491bf26da2"
+            ]
+        ]
+    },
+    {
+        "id": "f9fd4aa500bd9d1c",
+        "type": "move-to-next-node",
+        "z": "f5bb63cfebfdc24a",
+        "name": "Next",
+        "x": 850,
+        "y": 620,
+        "wires": [
+            [
+                "3dd27b035a1cc220"
+            ]
+        ]
+    },
+    {
+        "id": "b28c394b63efc79b",
+        "type": "move-to-next-node",
+        "z": "f5bb63cfebfdc24a",
+        "name": "Next",
+        "x": 1310,
+        "y": 620,
+        "wires": [
+            [
+                "425b0eafcdfa378f"
+            ]
+        ]
+    },
+    {
+        "id": "35ef9ca702ef3166",
+        "type": "move-to-next-node",
+        "z": "f5bb63cfebfdc24a",
+        "name": "Next",
+        "x": 1830,
+        "y": 620,
+        "wires": [
+            [
+                "7e4f923fa107ec78"
+            ]
+        ]
+    },
+    {
+        "id": "079ebe3f1a207c63",
+        "type": "move-to-next-node",
+        "z": "f5bb63cfebfdc24a",
+        "name": "Next",
+        "x": 2390,
+        "y": 620,
+        "wires": [
+            [
+                "6861edacd39498e4"
+            ]
+        ]
+    },
+    {
+        "id": "7f8c653495ddcaa5",
+        "type": "move-to-next-node",
+        "z": "f5bb63cfebfdc24a",
+        "name": "Next",
+        "x": 2970,
+        "y": 620,
+        "wires": [
+            [
+                "0334b76d5c9d3682"
+            ]
+        ]
+    },
+    {
+        "id": "199497cf7c141a75",
+        "type": "move-to-next-node",
+        "z": "f5bb63cfebfdc24a",
+        "name": "Next",
+        "x": 850,
+        "y": 1040,
+        "wires": [
+            [
+                "8d0c838abb3fce68"
+            ]
+        ]
     }
 ]

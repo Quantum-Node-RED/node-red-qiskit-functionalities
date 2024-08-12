@@ -62,8 +62,8 @@
         "active": true,
         "pass": false,
         "outputs": 0,
-        "x": 1730,
-        "y": 720,
+        "x": 1550,
+        "y": 700,
         "wires": [],
         "info": "# The image of the schedule you built"
     },
@@ -97,7 +97,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1590,
+        "x": 1690,
         "y": 280,
         "wires": [],
         "info": "# This node shows the error information after you try to transpile your custom gate."
@@ -129,9 +129,9 @@
         "y": 460,
         "wires": [
             [
-                "bd26d09a26bd2465",
-                "75b664ecf34d9d34",
-                "447312ec4b070c9a"
+                "447312ec4b070c9a",
+                "20de051f19ab6bbb",
+                "917c01f197ddd95f"
             ]
         ]
     },
@@ -141,7 +141,7 @@
         "z": "a1573e18fb192910",
         "name": "Try to transpile on your custom gate",
         "info": "# Normally, if you tried to transpile your custom gate directly, you would get an error. This is because there was no functional definition provided for your custom gate, so the transpiler can't unroll it to the basis gate set of the target device. The following code shows this situation by trying to add \"my_custom_gate\"  you created before to another qubit that hasn't been calibrated.\r\n```python\r\ncirc = QuantumCircuit(2, 2)\r\ncirc.append(custom_gate, [1])\r\n \r\n \r\nfrom qiskit import QiskitError\r\ntry:\r\n    circ = passmanager.run(circ)\r\nexcept QiskitError as e:\r\n    print(e)\r\n```\r\n&nbsp;\r\n# The error message is sent to node \"Error information\" and you can check the message at debug palette.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # String: `e` (Type: _qiskit.transpiler.exceptions.TranspilerError_)",
-        "x": 1220,
+        "x": 1320,
         "y": 280,
         "wires": [
             [
@@ -160,8 +160,8 @@
         "wires": [
             [
                 "4aea5cd56bed1592",
-                "004db2c0de061e82",
-                "2be5b097371cdb6d"
+                "2fd48d7d38a3c9de",
+                "2a64db1901478dd1"
             ]
         ]
     },
@@ -190,6 +190,58 @@
         "wires": [
             [
                 "8c4d934de5c96c12"
+            ]
+        ]
+    },
+    {
+        "id": "20de051f19ab6bbb",
+        "type": "move-to-next-node",
+        "z": "a1573e18fb192910",
+        "name": "Next",
+        "x": 1070,
+        "y": 280,
+        "wires": [
+            [
+                "bd26d09a26bd2465"
+            ]
+        ]
+    },
+    {
+        "id": "917c01f197ddd95f",
+        "type": "move-to-next-node",
+        "z": "a1573e18fb192910",
+        "name": "Next",
+        "x": 1070,
+        "y": 460,
+        "wires": [
+            [
+                "75b664ecf34d9d34"
+            ]
+        ]
+    },
+    {
+        "id": "2fd48d7d38a3c9de",
+        "type": "move-to-next-node",
+        "z": "a1573e18fb192910",
+        "name": "Next",
+        "x": 1570,
+        "y": 460,
+        "wires": [
+            [
+                "004db2c0de061e82"
+            ]
+        ]
+    },
+    {
+        "id": "2a64db1901478dd1",
+        "type": "move-to-next-node",
+        "z": "a1573e18fb192910",
+        "name": "Next",
+        "x": 1790,
+        "y": 680,
+        "wires": [
+            [
+                "2be5b097371cdb6d"
             ]
         ]
     }

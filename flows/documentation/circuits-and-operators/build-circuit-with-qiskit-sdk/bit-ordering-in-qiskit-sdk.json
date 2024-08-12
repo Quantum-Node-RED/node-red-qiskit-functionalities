@@ -32,9 +32,9 @@
         "y": 480,
         "wires": [
             [
-                "e7b0c2350dd60d28",
-                "e32b17177aa9b7a9",
-                "59b346cc00dc657b"
+                "92abbd022cf41687",
+                "e134ee7bfbf7dcb2",
+                "297bf2f8ef7f9484"
             ]
         ]
     },
@@ -70,12 +70,12 @@
         "z": "514658e90288fa39",
         "name": "Quantum circuits",
         "info": "# The <font style=\"background: lightgrey\">QuantumCircuit</font> class stores its qubits in a list (<font style=\"background: lightgrey\">QuantumCircuit.qubits</font>). The index of a qubit in this list defines the qubit's label.\r\n&nbsp;\r\n# The following code snippet creates a quantum circuit with 2 qubits using Qiskit. Then, it references the first qubit (qubit \"0\") of the quantum circuit.\r\n```python\r\nfrom qiskit import QuantumCircuit\r\nqc = QuantumCircuit(2)\r\nqc.qubits[0]  # qubit \"0\"\r\n```\r\n# The object of the first qubit is sent to \"Qubit 0\" node and you can check its information in the debug sidebar.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Object: `qc` (Type: _qiskit.circuit.QuantumCircuit_)\r\n- # Object: `qc.qubits[0]` (Type: _qiskit.circuit.Qubit_)",
-        "x": 830,
+        "x": 870,
         "y": 80,
         "wires": [
             [
-                "197f3f2bad202a79",
-                "574544223c741578"
+                "574544223c741578",
+                "585ca0073b563aa3"
             ]
         ]
     },
@@ -85,12 +85,12 @@
         "z": "514658e90288fa39",
         "name": "Circuit diagrams",
         "info": "## **Node Input:**\r\n- # Object: `qc` (Type: _qiskit.circuit.QuantumCircuit_)\r\n\r\n***\r\n&nbsp;\r\n# On a circuit diagram, qubit 0 is the topmost qubit, and qubit 𝑛 the bottommost qubit. You can change this with the <font style=\"background: lightgrey\">reverse_bits</font> argument of <font style=\"background: lightgrey\">QuantumCircuit.draw</font> (see \"Change ordering in Qiskit\" node below).\r\n&nbsp;\r\n# This code snippet add a X Gate to qubit 1 of the circuit we created in previous node, and draw a diagram for this circuit.\r\n```python\r\nqc.x(1)\r\nqc.draw()\r\n```\r\n# You can check the image of this circuit in \"Circuit Diagram\" node. You should see qubit 0 at the top and qubit 1 with X gate at the bottom.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Object: `qc` (Type: _qiskit.circuit.QuantumCircuit_)\r\n- # Image: the image of variable `qc`",
-        "x": 1200,
+        "x": 1360,
         "y": 80,
         "wires": [
             [
-                "9653300aefc94abf",
-                "1cda52ec89391a73"
+                "1cda52ec89391a73",
+                "ff64af6be9c93545"
             ]
         ]
     },
@@ -100,7 +100,7 @@
         "z": "514658e90288fa39",
         "name": "Integers",
         "info": "## **Node Input:**\r\n- # Object: `qc` (Type: _qiskit.circuit.QuantumCircuit_)\r\n\r\n***\r\n&nbsp;\r\n# When interpreting bits as a number, bit 0 is the least significant bit, and bit 𝑛 the most significant. This is helpful when coding because each bit has the value 2^_label_ (_label_ being the qubit's index in <font style=\"background: lightgrey\">QuantumCircuit.qubits</font>). \r\n&nbsp;\r\n# For example, executing the circuit we created before ends with bit 0 being 0, and bit 1 being 1. This is interpreted as the decimal integer 2， which is the decimal representation of the binary \"10\" (measured with probability 1.0).\r\n```python\r\nfrom qiskit.primitives import Sampler\r\nqc.measure_all()\r\n \r\nSampler().run(qc).result().quasi_dists[0]\r\n```\r\n# The output of the result is sent to \"Integer Output\" node and you can check it in the debug sidebar.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Dictionary: `Sampler().run(qc).result().quasi_dists[0]`",
-        "x": 1520,
+        "x": 1800,
         "y": 80,
         "wires": [
             [
@@ -121,7 +121,7 @@
         "targetType": "msg",
         "statusVal": "payload",
         "statusType": "auto",
-        "x": 1040,
+        "x": 1080,
         "y": 180,
         "wires": []
     },
@@ -137,7 +137,7 @@
         "active": true,
         "pass": false,
         "outputs": 0,
-        "x": 1420,
+        "x": 1580,
         "y": 180,
         "wires": []
     },
@@ -154,7 +154,7 @@
         "targetType": "msg",
         "statusVal": "payload",
         "statusType": "auto",
-        "x": 1780,
+        "x": 2060,
         "y": 80,
         "wires": []
     },
@@ -168,8 +168,8 @@
         "y": 480,
         "wires": [
             [
-                "a5dcf34fb5307574",
-                "5184557b0abccf37"
+                "5184557b0abccf37",
+                "921d0c9a78a15eaa"
             ]
         ]
     },
@@ -323,5 +323,83 @@
         "x": 920,
         "y": 1200,
         "wires": []
+    },
+    {
+        "id": "92abbd022cf41687",
+        "type": "move-to-next-node",
+        "z": "514658e90288fa39",
+        "name": "Next",
+        "x": 650,
+        "y": 80,
+        "wires": [
+            [
+                "e7b0c2350dd60d28"
+            ]
+        ]
+    },
+    {
+        "id": "585ca0073b563aa3",
+        "type": "move-to-next-node",
+        "z": "514658e90288fa39",
+        "name": "Next",
+        "x": 1070,
+        "y": 80,
+        "wires": [
+            [
+                "197f3f2bad202a79"
+            ]
+        ]
+    },
+    {
+        "id": "ff64af6be9c93545",
+        "type": "move-to-next-node",
+        "z": "514658e90288fa39",
+        "name": "Next",
+        "x": 1550,
+        "y": 80,
+        "wires": [
+            [
+                "9653300aefc94abf"
+            ]
+        ]
+    },
+    {
+        "id": "e134ee7bfbf7dcb2",
+        "type": "move-to-next-node",
+        "z": "514658e90288fa39",
+        "name": "Next",
+        "x": 650,
+        "y": 480,
+        "wires": [
+            [
+                "e32b17177aa9b7a9"
+            ]
+        ]
+    },
+    {
+        "id": "921d0c9a78a15eaa",
+        "type": "move-to-next-node",
+        "z": "514658e90288fa39",
+        "name": "Next",
+        "x": 1010,
+        "y": 480,
+        "wires": [
+            [
+                "a5dcf34fb5307574"
+            ]
+        ]
+    },
+    {
+        "id": "297bf2f8ef7f9484",
+        "type": "move-to-next-node",
+        "z": "514658e90288fa39",
+        "name": "Next",
+        "x": 650,
+        "y": 740,
+        "wires": [
+            [
+                "59b346cc00dc657b"
+            ]
+        ]
     }
 ]

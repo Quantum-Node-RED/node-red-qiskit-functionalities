@@ -7,6 +7,7 @@ module.exports = function (RED) {
 
     var node = this;
 
+
     node.on('input',  async function (msg) {
       // const result = await new Promise((resolve,reject) => {
 
@@ -25,6 +26,8 @@ module.exports = function (RED) {
 
       node.send(msg);
     });
+
+
   }
   RED.nodes.registerType("pulse-builder-alignment-context", AlignmentContextNode);
 }
