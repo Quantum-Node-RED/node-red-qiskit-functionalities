@@ -84,7 +84,7 @@ if __name__ == "__main__":
     # Join the import statements, functions, and calling code into a single code string
     import_code = "\n".join(import_statements)
     function_code = "\n\n".join(functions)
-    full_code = f"{import_code}\n\n{function_code}\n\n{calling_code}"
+    full_code = f"{import_code}\n{function_code}\n{calling_code}"
 
     result = {
         "code": full_code,

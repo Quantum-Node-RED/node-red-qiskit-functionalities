@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "node-red",
     "lint": "eslint \"**/**/*.js\"",
-    "lint-fix": "eslint --fix \"**/**/*.js\""
+    "lint-fix": "eslint --fix \"**/**/*.js\"",
+    "test": "mocha \"test/**/*_spec.js\""
   },
   "author": "wangyiyuelva",
   "license": "Apache-2.0",
@@ -67,10 +68,13 @@
   },
   "dependencies": {
     "canvas": "^2.11.2",
+    "mocha": "^10.7.3",
     "python-shell": "^5.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.5.0",
-    "eslint": "^9.5.0"
+    "eslint": "^9.5.0",
+    "node-red": "^3.1.9",
+    "node-red-node-test-helper": "^0.3.4"
   }
 }

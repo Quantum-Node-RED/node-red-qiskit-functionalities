@@ -22,7 +22,7 @@ module.exports = function (RED) {
       // Retrieve or initialize the current execution state
       let state = node.context().flow.get("executionState") || {
         receivedQubits: 0,
-        structure: [],
+        structure: []
       };
 
       if (state.receivedQubits === 0) {

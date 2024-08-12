@@ -11,7 +11,7 @@ module.exports = function (RED) {
         structure: [root],
         currentNode: root,
         parentofCurrentNode: null,
-        no_of_components: 0,
+        no_of_components: 0
       };
 
       const keys = node.context().flow.keys();
