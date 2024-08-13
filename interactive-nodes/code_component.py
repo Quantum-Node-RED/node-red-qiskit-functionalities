@@ -1,3 +1,4 @@
+from code_component_dependency import Component_Dependency
 class Code_Component:
     # Class variables
     import_statement = ""
@@ -25,7 +26,7 @@ snippets = {
 
     # Circuit
     "Quantum_Circuit_Begin": Code_Component(
-        import_statement=["QISKIT_QUANTUM_CIRCUIT"],
+        import_statement=[Component_Dependency.Quantum_Circuit,],
         function="",
         calling_function="{circuit_name} = QuantumCircuit({num_qbits})"
     ),
@@ -43,13 +44,13 @@ snippets = {
     ),
 
     "classical_register": Code_Component(
-        import_statement=["QISKIT_CLASSICAL_REGISTER"],
+        import_statement=[Component_Dependency.Classical_Register],
         function="",
         calling_function="{var_name} = ClassicalRegister({num_qbits})"
     ),
 
     "quantum_register": Code_Component(
-        import_statement=["QISKIT_QUANTUM_REGISTER"],
+        import_statement=[Component_Dependency.Quantum_Register],
         function="",
         calling_function="{var_name} = QuantumRegister({num_qbits})"
     ),
@@ -68,7 +69,7 @@ snippets = {
 
     # Maths
     "matrix": Code_Component(
-        import_statement=["NUMPY"],
+        import_statement=[Component_Dependency.Numpy],
         function="",
         calling_function="{var_name} = np.array(eval({matrix}))"
     ),
@@ -159,14 +160,14 @@ snippets = {
     ),
 
     "multi_controlled_U_gate": Code_Component(
-        import_statement=["QISKIT_CIRCUIT_LIBRARY"],
+        import_statement=[Component_Dependency.U_gate],
         function="",
         calling_function="{circuit_name}.append(UGate({theta}, {phi}, {lam}).control({num_of_control_qubits}), {list_of_control_qubits}+{target_qubit}))"
     ),
 
     # Tools
     "local_simulator": Code_Component(
-        import_statement=["QISKIT_AER_EXECUTE"],
+        import_statement=[Component_Dependency.Aer, Component_Dependency.Execute],
         function="",
         calling_function="""
             default='qasm_simulator'
@@ -185,10 +186,10 @@ snippets = {
 
     "encode_image": Code_Component(
         import_statement=[
-            "PYPLOT",
-            "IO",
-            "WARNINGS",
-            "BASE64"
+            Component_Dependency.Pyplot,
+            Component_Dependency.IO,
+            Component_Dependency.Warnings,
+            Component_Dependency.Base64
         ],
         function="warnings.filterwarnings('ignore', category=UserWarning)",
         calling_function="""
@@ -203,10 +204,10 @@ snippets = {
 
     "draw_circuit": Code_Component(
         import_statement=[
-            "PYPLOT",
-            "IO",
-            "BASE64",
-            "JSON"
+            Component_Dependency.Pyplot,
+            Component_Dependency.IO,
+            Component_Dependency.Base64,
+            Component_Dependency.JSON
         ],
         function="",
         calling_function="""
@@ -220,7 +221,7 @@ print(json.dumps(b64_str))
     ),
 
     "histogram": Code_Component(
-        import_statement=["QISKIT_VISUALIZATION_HISTOGRAM"],
+        import_statement=[Component_Dependency.Plot_histogram],
         function="",
         calling_function="""
             simulator = Aer.get_backend('qasm_simulator')
@@ -231,7 +232,7 @@ print(json.dumps(b64_str))
 
     # Function
     "sparse_pauli_op": Code_Component(
-        import_statement=["QISKIT_SPARSE_PAULI_OP"],
+        import_statement=[Component_Dependency.SparsePauliOp],
         function="",
         calling_function="SparsePauliOp({pauli_list}, coeffs={coeffs})"
     ),
@@ -239,10 +240,10 @@ print(json.dumps(b64_str))
     # Visualisation
     "draw_graph": Code_Component(
         import_statement=[
-            "NETWORKX",
-            "NUMPY",
-            "PYPLOT",
-            "OS"
+            Component_Dependency.NetworkX,
+            Component_Dependency.Numpy,
+            Component_Dependency.Pyplot,
+            Component_Dependency.OS
         ],
         function="",
         calling_function="""
@@ -262,7 +263,7 @@ print(json.dumps(b64_str))
 
     # Algorithms - QAOA
     "apply_objective_value": Code_Component(
-        import_statement=["NUMPY"],
+        import_statement=[Component_Dependency.Numpy],
         function="""def objective_value(x, w):
     X = np.outer(x, (1 - x))
     w_01 = np.where(w != 0, 1, 0)
@@ -273,7 +274,7 @@ print(json.dumps(b64_str))
     ),
 
     "apply_bitfield": Code_Component(
-        import_statement=["NUMPY"],
+        import_statement=[Component_Dependency.Numpy],
         function="""def bitfield(n, L):
     result = np.binary_repr(n, L)
     return [int(digit) for digit in result]""",
@@ -284,8 +285,8 @@ print(json.dumps(b64_str))
 
     "extract_most_likely_state": Code_Component(
         import_statement=[
-            "NUMPY", 
-            "QISKIT_RESULT_QUASI_DISTRIBUTION"  # Using the defined import for QuasiDistribution
+            Component_Dependency.Numpy, 
+            Component_Dependency.QuasiDistribution  # Using the defined import for QuasiDistribution
         ],
         function="""def extract_most_likely_state(state_vector):
     if isinstance(state_vector, QuasiDistribution):
@@ -310,8 +311,8 @@ print(json.dumps(b64_str))
 
     "QAOA": Code_Component(
         import_statement=[
-            "QISKIT_ALGORITHMS_QAOA", 
-            "QISKIT_ALGORITHMS_OPTIMIZERS"  # Using the defined import for QAOA and Optimizer
+            Component_Dependency.QAOA, 
+            Component_Dependency.Optimizers  # Using the defined import for QAOA and Optimizer
         ],
         function="",
         calling_function="{var_result} = QAOA({sampler}, {optimizer}(), reps={reps})"
