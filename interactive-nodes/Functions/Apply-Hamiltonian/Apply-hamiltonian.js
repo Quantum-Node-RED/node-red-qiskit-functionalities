@@ -1,7 +1,7 @@
 const component = require("../../component.js");
 
 module.exports = function (RED) {
-  function ApplyHamiltonianNode(config) {
+  function applyHamiltonianNode(config) {
     RED.nodes.createNode(this, config);
     var node = this;
 
@@ -22,16 +22,16 @@ module.exports = function (RED) {
       msg.payload.hamiltonian = hamiltonian;
 
       // Add the Hamiltonian Construction component
-      const ApplyHamiltonian_component = new component.Component(
-        "Apply-Hamiltonian",
+      const apply_hamiltonian_component = new component.Component(
+        "apply_hamiltonian",
         {}
       );
-      component.addComponent(msg, ApplyHamiltonian_component);
+      component.addComponent(msg, apply_hamiltonian_component);
 
       node.send(msg);
     });
   }
-  RED.nodes.registerType("Apply-Hamiltonian", ApplyHamiltonianNode);
+  RED.nodes.registerType("apply_hamiltonian", applyHamiltonianNode);
 
   function constructHamiltonian(terms, coefficients) {
     const hamiltonianTerms = [];
@@ -39,7 +39,7 @@ module.exports = function (RED) {
     terms.forEach((term, index) => {
       hamiltonianTerms.push({
         coeff: coefficients[index],
-        pauli: term
+        pauli: term,
       });
     });
 

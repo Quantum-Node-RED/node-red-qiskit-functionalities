@@ -1,0 +1,29 @@
+<script type="text/javascript">
+  RED.nodes.registerType("apply_energy_cost_objective_function", {
+    category: "function",
+    color: "#E6BCB9",
+    defaults: {
+      name: { value: "" },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "function.svg",
+    label: function () {
+      return this.name || "apply_energy_cost_objective_function";
+    },
+  });
+</script>
+
+<script
+  type="text/html"
+  data-template-name="apply_energy_cost_objective_function"
+>
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="apply_energy_cost_objective_function">
+  <p></p>
+</script>

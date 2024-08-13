@@ -28,13 +28,13 @@ snippets = {
     "Quantum_Circuit_Begin": Code_Component(
         import_statement=[Component_Dependency.Quantum_Circuit,],
         function="",
-        calling_function="{circuit_name} = QuantumCircuit({num_qbits})"
+        calling_function="{circuit_name} = QuantumCircuit({num_qbits}, {num_cbits})"
     ),
 
     "measure": Code_Component(
         import_statement=[],
         function="",
-        calling_function="{circuit_name}.measure({qbit})"
+        calling_function="{circuit_name}.measure({qbit}, {cbit})"
     ),
 
     "swap": Code_Component(
@@ -71,7 +71,7 @@ snippets = {
     "matrix": Code_Component(
         import_statement=[Component_Dependency.Numpy],
         function="",
-        calling_function="{var_name} = np.array(eval({matrix}))"
+        calling_function="""{var_name} = np.array(eval({matrix}))"""
     ),
 
     # Gates
@@ -269,7 +269,7 @@ print(json.dumps(b64_str))
     w_01 = np.where(w != 0, 1, 0)
     return np.sum(w_01 * X)""",
         calling_function="""
-            {var_result} = objective_value({binary_vector}, {matrix})
+            {variable} = objective_value({binary_vector}, {matrix})
         """
     ),
 
@@ -288,25 +288,99 @@ print(json.dumps(b64_str))
             Component_Dependency.Numpy, 
             Component_Dependency.QuasiDistribution  # Using the defined import for QuasiDistribution
         ],
-        function="""def extract_most_likely_state(state_vector):
+        function="""def extract_most_likely_state(state_vector, num_qubits):
     if isinstance(state_vector, QuasiDistribution):
         values = list(state_vector.values())
     else:
         values = state_vector
-    n = int(np.log2(len(values)))
     k = np.argmax(np.abs(values))
-    x = bitfield(k, n)
+    result = np.binary_repr(k, num_qubits)
+    x = [int(digit) for digit in result]
     x.reverse()
     return np.asarray(x)""",
         calling_function="""
-            {var_result} = extract_most_likely_state({state_vector})
+            {variable} = extract_most_likely_state({state_vector}.quasi_dists[0], {num_qubits})
         """
     ),
 
     "apply_hamiltonian": Code_Component(
+        import_statement=["QISKIT_PAULI", "QISKIT_SPARSE_PAULI_OP", "NUMPY"],
+        function="""def get_operator(weight_matrix):
+    num_nodes = len(weight_matrix)
+    pauli_list = []
+    coeffs = []
+    shift = 0
+
+    for i in range(num_nodes):
+        for j in range(i):
+            if weight_matrix[i, j] != 0:
+                x_p = np.zeros(num_nodes, dtype=bool)
+                z_p = np.zeros(num_nodes, dtype=bool)
+                z_p[i] = True
+                z_p[j] = True
+                pauli_list.append(Pauli((z_p, x_p)))
+                coeffs.append(-0.5)
+                shift += 0.5
+
+    for i in range(num_nodes):
+        for j in range(num_nodes):
+            if i != j:
+                x_p = np.zeros(num_nodes, dtype=bool)
+                z_p = np.zeros(num_nodes, dtype=bool)
+                z_p[i] = True
+                z_p[j] = True
+                pauli_list.append(Pauli((z_p, x_p)))
+                coeffs.append(1.0)
+            else:
+                shift += 1
+
+    return SparsePauliOp(pauli_list, coeffs=coeffs), shift""",
+        calling_function="qubit_op, offset = get_operator(weight_matrix)"
+    ),
+
+    "define_sampler": Code_Component(
+        import_statement=["QISKIT_PRIMITIVES_SAMPLER"],
+        function="",
+        calling_function="{variable} = Sampler()"
+    ),
+
+    "apply_optimizer": Code_Component(
+        import_statement=["QISKIT_ALGORITHMS_OPTIMIZERS"],
+        function="",
+        calling_function="{var_result} = {optimizer}.minimize({objective_function}, x0={initial_point})"
+    ),
+
+    "apply_energy_cost_objective_function": Code_Component(
+        import_statement=["NUMPY"],
+        function="""def objective_function(params):
+        qc, _ = ansatz(params)
+        job = sampler.run(qc)
+        result = job.result()
+        counts = result.quasi_dists[0].binary_probabilities()
+        energy = calculate_expectation_value(counts, hamiltonian)
+        return np.real(energy)
+        """,
+        calling_function=""
+    ),
+
+    "execute_quantum_circuit_with_sampler": Code_Component(
+        import_statement=[],
+        function="""
+    def execute_circuit_with_sampler(qc, sampler):
+        job = sampler.run(qc)
+        result = job.result()
+        return result
+    """,
+        calling_function="""
+    {circuit_name}.measure(range(4), range(4))
+{variable} = execute_circuit_with_sampler({circuit_name}, {sampler})
+    """
+    ),
+
+    "print": Code_Component(
         import_statement=[],
         function="",
-        calling_function=""
+        calling_function="""print("result: ", {variable})"""
     ),
 
     "QAOA": Code_Component(

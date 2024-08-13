@@ -24,6 +24,8 @@ module.exports = function (RED) {
       Quantum_Circuit_Begin_component.parameters["circuit_name"] =
         config.circuit_name;
       Quantum_Circuit_Begin_component.parameters["num_qbits"] = connectedPaths;
+      Quantum_Circuit_Begin_component.parameters["num_cbits"] =
+        config.cbits || connectedPaths;
 
       component.addComponent(msg, Quantum_Circuit_Begin_component);
 

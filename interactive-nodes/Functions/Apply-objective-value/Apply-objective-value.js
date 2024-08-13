@@ -9,11 +9,10 @@ module.exports = function (RED) {
         "apply_objective_value",
         {}
       );
+      apply_objective_value_component.parameters["variable"] = config.variable;
       apply_objective_value_component.parameters["binary_vector"] =
-        "objective_value";
-      apply_objective_value_component.parameters["matrix"] = [];
-      apply_objective_value_component.parameters["var_result"] =
-        "objective_value";
+        config.binary_vector;
+      apply_objective_value_component.parameters["matrix"] = config.matrix;
       component.addComponent(msg, apply_objective_value_component);
       node.send(msg);
     });

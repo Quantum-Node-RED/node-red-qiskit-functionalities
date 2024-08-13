@@ -1,9 +1,9 @@
 <script type="text/javascript">
-  RED.nodes.registerType("Apply-Hamiltonian", {
+  RED.nodes.registerType("apply_hamiltonian", {
     category: "function",
     color: "#E6BCB9",
     defaults: {
-      name: { value: "Apply Hamiltonian" },
+      name: { value: "apply Hamiltonian" },
       terms: { value: "" },
       coefficients: { value: "" },
     },
@@ -11,7 +11,7 @@
     outputs: 1,
     icon: "function.svg",
     label: function () {
-      return this.name || "Apply Hamiltonian";
+      return this.name || "apply Hamiltonian";
     },
     oneditprepare: function () {
       // Populate the existing terms and coefficients
@@ -26,7 +26,7 @@
   });
 </script>
 
-<script type="text/html" data-template-name="Apply-Hamiltonian">
+<script type="text/html" data-template-name="apply_hamiltonian">
   <div class="form-row">
     <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
     <input type="text" id="node-input-name" placeholder="Name" />
@@ -53,7 +53,7 @@
   </div>
 </script>
 
-<script type="text/html" data-help-name="Apply-Hamiltonian">
+<script type="text/html" data-help-name="apply_hamiltonian">
   <p>
     This node constructs a Hamiltonian based on input Pauli terms and
     coefficients.

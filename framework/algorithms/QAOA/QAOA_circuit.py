@@ -11,7 +11,8 @@ from qiskit_algorithms.utils import algorithm_globals
 from qiskit.circuit.library import PauliEvolutionGate
 from utils.image_helper import visualize_graph, save_circuit_image, encode_image_to_base64, combine_images
 from utils.JSON_helper import NumpyEncoder
-import matplotlib.pyplot as plt 
+import matplotlib.pyplot as plt
+from functools import partial
 
 def objective_value(x, w):
     X = np.outer(x, (1 - x))
@@ -132,6 +133,59 @@ def qaoa_circuit(num_qubits, params, hamiltonian, reps, save_images=False, image
     
     return qc, step_images
 
+
+# def qaoa_circuit(num_qubits, params, hamiltonian, reps, save_images=False, image_dir='images'):
+#     gamma, beta = params[:reps], params[reps:]
+
+#     qc = QuantumCircuit(num_qubits, num_qubits)  # Add classical registers equal to the number of qubits
+#     qc.h(range(num_qubits))  # Apply Hadamard gates to all qubits
+
+#     step_images = []
+#     os.makedirs(image_dir, exist_ok=True)
+
+#     for i in range(reps):
+#         print(f"--- Iteration {i+1} ---")
+        
+#         # Apply the Cost Hamiltonian for any number of qubits involved
+#         for pauli_term, coeff in zip(hamiltonian.paulis, hamiltonian.coeffs):
+#             z_mask = pauli_term.z
+#             qubits = [idx for idx, z in enumerate(z_mask) if z]  # Identify qubits where Z is applied
+
+#             if len(qubits) == 1:  # Single-qubit Z term
+#                 print(f"RZ gate on qubit {qubits[0]} with angle {2 * gamma[i] * coeff.real}")
+#                 qc.rz(2 * gamma[i] * coeff.real, qubits[0])
+
+#             elif len(qubits) == 2:  # Two-qubit ZZ term (as before)
+#                 j, k = qubits
+#                 print(f"CX gate with control {j} and target {k}")
+#                 qc.cx(j, k)
+#                 print(f"RZ gate on qubit {k} with angle {2 * gamma[i] * coeff.real}")
+#                 qc.rz(2 * gamma[i] * coeff.real, k)
+#                 print(f"CX gate with control {j} and target {k}")
+#                 qc.cx(j, k)
+
+#             elif len(qubits) > 2:  # Multi-qubit interaction
+#                 # Apply a sequence of CNOT gates and RZ for a multi-qubit term
+#                 for j in range(len(qubits) - 1):
+#                     print(f"CX gate with control {qubits[j]} and target {qubits[j+1]}")
+#                     qc.cx(qubits[j], qubits[j + 1])
+#                 print(f"RZ gate on qubit {qubits[-1]} with angle {2 * gamma[i] * coeff.real}")
+#                 qc.rz(2 * gamma[i] * coeff.real, qubits[-1])
+#                 for j in range(len(qubits) - 2, -1, -1):
+#                     print(f"CX gate with control {qubits[j]} and target {qubits[j+1]}")
+#                     qc.cx(qubits[j], qubits[j + 1])
+
+#         # Apply the Mixer Hamiltonian using RX rotations
+#         print(f"RX gates on all qubits with angle {2 * beta[i]}")
+#         qc.rx(2 * beta[i], range(num_qubits))
+
+#         print("---------------------")
+
+#     # Add measurement operations
+#     qc.measure(range(num_qubits), range(num_qubits))
+    
+#     return qc, step_images
+
 # def qaoa_circuit(num_qubits, params, hamiltonian, reps, save_images=False, image_dir='images'):
 #     gamma, beta = params[:reps], params[reps:]
 
@@ -162,6 +216,39 @@ def qaoa_circuit(num_qubits, params, hamiltonian, reps, save_images=False, image
     
 #     return qc, step_images
 
+def calculate_expectation_value(counts, hamiltonian):
+    energy = 0
+    total_counts = sum(counts.values())
+
+    for bitstring, count in counts.items():
+        probability = count / total_counts
+        state = np.array([int(bit) for bit in bitstring])
+        value = 0
+
+        for pauli_term, coeff in zip(hamiltonian.paulis, hamiltonian.coeffs):
+            parity = 1
+            for i, z in enumerate(pauli_term.z):
+                if z and state[i] == 1:
+                    parity *= -1
+            value += coeff * parity
+
+        energy += probability * value
+        
+    return energy
+
+def objective_function(params, sampler, ansatz, hamiltonian, num_qubits, reps):
+    # iteration_num += 1
+    # print(f"Iteration {iteration_num}")
+    qc, _ = ansatz(params, num_qubits, hamiltonian, reps)
+    job = sampler.run(qc)
+    result = job.result()
+    counts = result.quasi_dists[0].binary_probabilities()
+    energy = calculate_expectation_value(counts, hamiltonian)
+    min_value.append(np.real(energy))
+    return np.real(energy)
+
+def ansatz(params, num_qubits, hamiltonian, reps, save_images=False, image_dir='images'):
+    return qaoa_circuit(num_qubits, params, hamiltonian, reps, save_images, image_dir)
 
 def run_general_qaoa(hamiltonian, num_qubits, reps=2, seed=10598, optimizer_type="COBYLA", save_images=False, image_dir='images'):
     algorithm_globals.random_seed = seed
@@ -171,13 +258,10 @@ def run_general_qaoa(hamiltonian, num_qubits, reps=2, seed=10598, optimizer_type
     os.makedirs(image_dir, exist_ok=True)
     initial_point = np.random.rand(2 * reps)
     
-    def ansatz(params):
-        return qaoa_circuit(num_qubits, params, hamiltonian, reps, save_images, image_dir)
-    
-    initial_qc, step_images = ansatz(initial_point)
-    if save_images:
-        save_circuit_image(initial_qc, os.path.join(image_dir, "initial_qaoa_circuit.png"))
-        plt.close()
+    # initial_qc, step_images = ansatz(initial_point, num_qubits, hamiltonian, reps)
+    # if save_images:
+    #     save_circuit_image(initial_qc, os.path.join(image_dir, "initial_qaoa_circuit.png"))
+    #     plt.close()
 
     sampler = Sampler()
     
@@ -197,34 +281,6 @@ def run_general_qaoa(hamiltonian, num_qubits, reps=2, seed=10598, optimizer_type
     #     # Since we're maximizing the cut value, return -max_cut_value for the optimizer to minimize
     #     return -max_cut_value
 
-    def calculate_expectation_value(counts, hamiltonian):
-        energy = 0
-        total_counts = sum(counts.values())
-
-        for bitstring, count in counts.items():
-            probability = count / total_counts
-            state = np.array([int(bit) for bit in bitstring])
-            value = 0
-
-            for pauli_term, coeff in zip(hamiltonian.paulis, hamiltonian.coeffs):
-                parity = 1
-                for i, z in enumerate(pauli_term.z):
-                    if z and state[i] == 1:
-                        parity *= -1
-                value += coeff * parity
-
-            energy += probability * value
-        
-        return energy
-
-    def objective_function(params):
-        qc, _ = ansatz(params)
-        job = sampler.run(qc)
-        result = job.result()
-        counts = result.quasi_dists[0].binary_probabilities()
-        energy = calculate_expectation_value(counts, hamiltonian)
-        return np.real(energy)
-
     # def objective_function(params):
     #     # Generate the quantum circuit based on the current parameters
     #     qc, _ = ansatz(params)
@@ -236,14 +292,18 @@ def run_general_qaoa(hamiltonian, num_qubits, reps=2, seed=10598, optimizer_type
         
     #     # Return the real part of the energy to avoid issues with complex numbers
     #     return np.real(energy)
+
+    objective_function_with_fixed_arg = partial(objective_function, sampler=sampler, ansatz=ansatz, hamiltonian=hamiltonian, num_qubits=num_qubits, reps=reps)
     
-    result = optimizer.minimize(objective_function, x0=initial_point)
+    result = optimizer.minimize(objective_function_with_fixed_arg, x0=initial_point)
     print(f"Optimization Result: {result}")
 
     # Generate the final quantum circuit with the optimized parameters
-    qc, _ = ansatz(result.x)
+    qc, _ = ansatz(result.x, num_qubits, hamiltonian, reps)
     job = sampler.run(qc)
     final_result = job.result()
+
+    print(f"Final min value: {len(min_value)}")
 
     # Get the most likely bitstring from the final result
     x = sample_most_likely(final_result.quasi_dists[0], num_qubits)
@@ -253,13 +313,14 @@ def run_general_qaoa(hamiltonian, num_qubits, reps=2, seed=10598, optimizer_type
     final_cut_value = objective_value(x, weight_matrix)
     print(f"Final objective (cut) value: {final_cut_value}")
 
-    optimized_params = result.x
-    optimized_qc, _ = ansatz(optimized_params)
+    # optimized_params = result.x
+    # optimized_qc, _ = ansatz(optimized_params)
+    save_images = True
     if save_images:
-        save_circuit_image(optimized_qc, os.path.join(image_dir, "optimized_qaoa_circuit.png"))
+        save_circuit_image(qc, os.path.join(image_dir, "optimized_qaoa_circuit.png"))
         plt.close()
 
-    return x, optimized_qc, final_cut_value, step_images
+    return x, qc, final_cut_value
 
 if __name__ == "__main__":
 
@@ -276,13 +337,19 @@ if __name__ == "__main__":
 
     image_dir = "qaoa_images"
 
+    global iteration_num
+    iteration_num = 0
+
+    global min_value
+    min_value = []
+
     # graph = None
 
     if "graph" in input_data and "adjacency_matrix" in input_data["graph"]:
         adjacency_matrices = np.array(eval(input_data["graph"]["adjacency_matrix"]))
         visualize_graph(adjacency_matrices, image_dir, "graph.png")
         graph = encode_image_to_base64(os.path.join(image_dir, "graph.png"))
-        qubit_op, _ = get_operator(adjacency_matrices)
+        qubit_op, offset = get_operator(adjacency_matrices)
         global weight_matrix  # Define weight_matrix globally for the objective function
         weight_matrix = adjacency_matrices
     elif "hamiltonian" in input_data:
@@ -294,7 +361,7 @@ if __name__ == "__main__":
 
     save_images = input_data.get("save_images", False)
 
-    x, ansatz, output, step_images = run_general_qaoa(qubit_op, len(qubit_op.paulis[0]), reps, seed, optimizer_type, save_images, image_dir)
+    x, ansatz, output = run_general_qaoa(qubit_op, len(qubit_op.paulis[0]), reps, seed, optimizer_type, save_images, image_dir)
     if(save_images):
         initial_circuit_image = encode_image_to_base64(os.path.join(image_dir, "initial_qaoa_circuit.png"))
         optimized_circuit_image = encode_image_to_base64(os.path.join(image_dir, "optimized_qaoa_circuit.png"))

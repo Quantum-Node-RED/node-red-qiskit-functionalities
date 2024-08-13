@@ -1,0 +1,47 @@
+<script type="text/javascript">
+  RED.nodes.registerType("apply_optimizer", {
+    category: "function",
+    color: "#E6BCB9",
+    defaults: {
+      name: { value: "" },
+      optimizer: { value: "COBLYA", required: true },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "function.svg",
+    label: function () {
+      return this.name || "apply_optimizer";
+    },
+    oneditprepare: function () {
+      // Populate initial dropdown options
+      var select = $("#node-input-optimizer");
+      var initialOptions = [
+        { value: "COBYLA", label: "COBYLA" },
+        { value: "SPSA", label: "SPSA" },
+      ];
+
+      initialOptions.forEach(function (option) {
+        select.append(
+          '<option value="' + option.value + '">' + option.label + "</option>"
+        );
+      });
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="apply_optimizer">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-optimizer"
+      ><i class="fa fa-list"></i>Optimizer</label
+    >
+    <select id="node-input-optimizer"></select>
+  </div>
+</script>
+
+<script type="text/html" data-help-name="apply_optimizer">
+  <p></p>
+</script>
