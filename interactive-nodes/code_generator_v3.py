@@ -3,7 +3,7 @@ import json
 import numpy as np
 from qiskit import QuantumCircuit
 from code_component_dependency import Code_Component_Dependency as Table
-from code_component_v3 import Code_Component, snippets
+from code_component import Code_Component, snippets
 from import_table import import_table
 
 def generate_qiskit_code(component, import_statements, functions, calling_code, defined_functions):
