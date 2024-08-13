@@ -20,8 +20,6 @@ module.exports = function (RED) {
         node.context().flow.set(key, null);
       });
 
-      node.log(JSON.stringify(msg.payload));
-
       node.send(msg);
     });
 

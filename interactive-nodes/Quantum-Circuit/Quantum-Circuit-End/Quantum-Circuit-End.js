@@ -34,14 +34,8 @@ module.exports = function (RED) {
 
       let circuit_name = node.context().flow.get(constants.CIRCUIT_NAME);
 
-      // Log the current state for debugging
-      node.log(
-        `Received qubits: ${state.receivedQubits}, Expected qubits: ${expectedQubits}`
-      );
-
       // First Qubit Logic
       if (state.receivedQubits === 0) {
-        node.log("First Qubit");
         for (let component_ of msg.payload.structure) {
           state.structure.push(component_);
           if (
@@ -54,7 +48,6 @@ module.exports = function (RED) {
       }
       // Last Qubit Logic
       else if (state.receivedQubits === expectedQubits - 1) {
-        node.log("Last Qubit");
         let collecting = false;
         for (let component_ of msg.payload.structure) {
           if (
@@ -90,7 +83,6 @@ module.exports = function (RED) {
       }
       // Middle Qubit Logic
       else {
-        node.log("Middle Qubit");
         let collecting = false;
         for (let component_ of msg.payload.structure) {
           if (
