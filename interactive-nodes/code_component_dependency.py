@@ -28,6 +28,8 @@ class Component_Dependency:
     NetworkX = ["networkx", "nx"]
     OS = ["os"]
     JSON = ["json"]
+    Pauli=["qiskit.quantum_info.Pauli"]
+    Sampler=["qiskit.primitives.Sampler"]
 
 
 

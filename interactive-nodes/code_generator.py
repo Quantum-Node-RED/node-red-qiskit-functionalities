@@ -1,8 +1,12 @@
 import sys
 import json
+import os
+import subprocess
 from code_component import  snippets
-from import_table import import_table
 from params_schemas import schemas
+import matplotlib.pyplot as plt
+import base64
+from io import BytesIO
 
 def validate_parameters(component_name, parameters):
     if component_name in schemas:
@@ -113,7 +117,37 @@ def generate_import_statements(import_statements):
 
     return "\n".join(result)
 
+def save_code_as_image_base64(code_str):
+    """
+    Save a given Python code string as an image and return it as a Base64-encoded string.
 
+    Parameters:
+    - code_str (str): The Python code to render as an image.
+
+    Returns:
+    - str: Base64-encoded string of the image.
+    """
+    # Set up the plot
+    fig, ax = plt.subplots(figsize=(10, 6))
+    
+    # Add the code as text to the plot
+    ax.text(0.05, 0.95, code_str, fontsize=12, fontfamily='monospace', ha='left', va='top')
+    
+    # Remove axes
+    ax.axis('off')
+    
+    # Save the figure to a BytesIO object
+    buffer = BytesIO()
+    plt.savefig(buffer, format='png', bbox_inches='tight', dpi=300)
+    
+    # Close the plot to free memory
+    plt.close(fig)
+    
+    # Encode the image in Base64
+    buffer.seek(0)
+    image_base64 = base64.b64encode(buffer.read()).decode('utf-8')
+    
+    return image_base64
 
 
 
@@ -130,9 +164,55 @@ if __name__ == "__main__":
     # Consolidate and print the imports
     import_code = generate_import_statements(import_statements)
     function_code = "\n\n".join(functions)
-    full_code = f"{import_code}\n{function_code}\n{calling_code}"
+    # Properly format the wrapped code without f-string issues
+    indented_calling_code = calling_code.replace('\n', '\n    ')
+    # Properly format the wrapped code with indentation
+    indented_calling_code = calling_code.replace('\n', '\n    ')
+    wrapped_calling_code = (
+        "import traceback\n"
+        "try:\n"
+        f"    {indented_calling_code}\n"  # Indent the entire block by four spaces
+        "except Exception as e:\n"
+        "    print(f'An error occurred: {e}')\n"
+        "    print(traceback.format_exc())\n"  # Add traceback information
+    )
+    full_code = f"{import_code}\n\n{function_code}\n\n{wrapped_calling_code}"
+
+    # Dump the full code into a Python file
+    script_directory = os.path.dirname(os.path.abspath(__file__))
+    file_name = "generated_code.py"
+    file_path = os.path.join(script_directory, file_name)
+    try:
+        with open(file_path, "w") as code_file:
+            code_file.write(full_code)
+    except Exception as e:
+        result = {
+            "error": f"Failed to create file {file_name}: {e}"
+        }
+        print(json.dumps(result))
+        sys.exit(1)
+
+    # Save the generated code as an image
+    code_snapshot = save_code_as_image_base64(full_code)
+
+    # Execute the Python file and capture the output
+    try:
+        process = subprocess.run([sys.executable, file_path], capture_output=True, text=True)
+        execution_result = process.stdout + process.stderr
+    except Exception as e:
+        execution_result = str(e)
+
     result = {
         "code": full_code,
+        "code_snapshot": code_snapshot,
+        "result": execution_result,
     }
+
+    # Cleanup the generated Python file
+    # os.remove(file_path)
+
+    # Cleanup the generated Python file
+    # os.remove(file_name)
+    
     print(json.dumps(result))
 

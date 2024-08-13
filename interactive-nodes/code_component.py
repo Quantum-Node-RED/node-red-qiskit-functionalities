@@ -304,7 +304,10 @@ print(json.dumps(b64_str))
     ),
 
     "apply_hamiltonian": Code_Component(
-        import_statement=["QISKIT_PAULI", "QISKIT_SPARSE_PAULI_OP", "NUMPY"],
+        import_statement=[
+                    Component_Dependency.Pauli,
+                    Component_Dependency.SparsePauliOp,
+                    Component_Dependency.Numpy],
         function="""def get_operator(weight_matrix):
     num_nodes = len(weight_matrix)
     pauli_list = []
@@ -339,19 +342,19 @@ print(json.dumps(b64_str))
     ),
 
     "define_sampler": Code_Component(
-        import_statement=["QISKIT_PRIMITIVES_SAMPLER"],
+        import_statement=[Component_Dependency.Sampler],
         function="",
         calling_function="{variable} = Sampler()"
     ),
 
     "apply_optimizer": Code_Component(
-        import_statement=["QISKIT_ALGORITHMS_OPTIMIZERS"],
+        import_statement=[Component_Dependency.Optimizers],
         function="",
         calling_function="{var_result} = {optimizer}.minimize({objective_function}, x0={initial_point})"
     ),
 
     "apply_energy_cost_objective_function": Code_Component(
-        import_statement=["NUMPY"],
+        import_statement=[Component_Dependency.Numpy],
         function="""def objective_function(params):
         qc, _ = ansatz(params)
         job = sampler.run(qc)
