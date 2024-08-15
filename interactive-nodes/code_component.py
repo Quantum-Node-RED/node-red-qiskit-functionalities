@@ -234,7 +234,10 @@ print(json.dumps(b64_str))
     "sparse_pauli_op": Code_Component(
         import_statement=[Component_Dependency.SparsePauliOp],
         function="",
-        calling_function="SparsePauliOp({pauli_list}, coeffs={coeffs})"
+        calling_function="""pauli_list = {pauli_list}
+coeffs = {coeffs}
+{variable} = SparsePauliOp(pauli_list, coeffs=coeffs)
+        """
     ),
 
     # Visualisation

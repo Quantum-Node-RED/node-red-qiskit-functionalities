@@ -134,6 +134,7 @@ schemas = {
     },
     "histogram": {},
     "sparse_pauli_op": {
+        "variable": str,
         "pauli_list":  str,
         "coeffs":  str
     },
