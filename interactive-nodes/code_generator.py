@@ -51,6 +51,9 @@ def generate_qiskit_code(component, import_statements, functions, calling_code, 
 
 def traverse_structure(structure, import_statements, functions, calling_code, defined_functions):
     has_circuit_begin = False
+    in_circuit_loop= False
+    stack=[]
+    iterations=0
     for  component in structure:
         component_name = component.get("name")
         if component_name == "root":
@@ -66,7 +69,19 @@ def traverse_structure(structure, import_statements, functions, calling_code, de
                 return calling_code
             calling_code += "# Quantum Circuit End\n"
             has_circuit_begin = False
-        elif component_name == "qbit":
+        elif has_circuit_begin and component_name=="Circuit_Loop_Begin":
+                iterations=component.get("parameters").get("iterations")
+                calling_code += f"# Circuit Loop: Iterations {iterations}\n"
+                in_circuit_loop=True
+        elif has_circuit_begin and component_name=="Circuit_Loop_End":
+                for i in range(iterations):
+                    for component__ in stack:
+                        calling_code = generate_qiskit_code(component__, import_statements, functions, calling_code, defined_functions)
+                in_circuit_loop=False
+                calling_code += f"# Circuit Loop End\n"
+        elif has_circuit_begin and in_circuit_loop and component_name!="qubit":
+            stack.append(component)
+        elif component_name == "qubit":
             continue
         else:
             calling_code = generate_qiskit_code(component, import_statements, functions, calling_code, defined_functions)
@@ -213,6 +228,4 @@ if __name__ == "__main__":
 
     # Cleanup the generated Python file
     # os.remove(file_name)
-    
     print(json.dumps(result))
-
