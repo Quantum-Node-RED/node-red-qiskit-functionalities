@@ -1,5 +1,7 @@
 import numpy as np
 from qiskit.quantum_info import SparsePauliOp
+import json
+
 
 def create_hamiltonian(n, interaction_coeff=1, field_coeff=-1):
     """
@@ -57,15 +59,15 @@ if __name__ == "__main__":
     
     # Create Hamiltonian
     hamiltonian = create_hamiltonian(n)
-    print("Hamiltonian:")
-    print(hamiltonian)
-    print()
+    # print("Hamiltonian:")
+    # print(hamiltonian)
+    # print()
 
     # Measure magnetization
     magnetization = measure_magnetization(n)
-    print("Magnetization:")
-    print(magnetization)
-    print()
+    # print("Magnetization:")
+    # print(magnetization)
+    # print()
     
     # Decompose a given matrix into Pauli terms
     matrix = np.array([[-1, 0, 0.5, -1],
@@ -74,5 +76,12 @@ if __name__ == "__main__":
                        [-1, 0.5, 0, 1]])
     
     observable = decompose_matrix(matrix)
-    print("Observable from Matrix:")
-    print(observable)
+    # print("Observable from Matrix:")
+    # print(observable)
+
+    result = {
+        "observable": str(observable)
+    }
+
+    print(json.dumps(result))
+

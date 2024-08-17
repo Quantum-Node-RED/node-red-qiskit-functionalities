@@ -1,26 +1,21 @@
 const runPythonScript = require("../../../../pythonShell");
 
 module.exports = function (RED) {
-  function PauliOperationsNode(config) {
+  function OperatorsObjectNode(config) {
     RED.nodes.createNode(this, config);
     var node = this;
     node.name = config.name;
-    node.operator = config.operator;
+    node.matrix = config.matrix;
 
     node.on("input", async function (msg) {
       const option = {
-        operator: node.operator,
+        matrix: node.matrix,
       };
       const result = await new Promise((resolve, reject) => {
-        runPythonScript(
-          __dirname,
-          "pauli-operations.py",
-          option,
-          (err, results) => {
-            if (err) reject(err);
-            resolve(results);
-          }
-        );
+        runPythonScript(__dirname, "operators-object.py", option, (err, results) => {
+          if (err) reject(err);
+          resolve(results);
+        });
       });
 
       try {
@@ -33,5 +28,5 @@ module.exports = function (RED) {
       }
     });
   }
-  RED.nodes.registerType("pauli-operations", PauliOperationsNode);
+  RED.nodes.registerType("operators-object", OperatorsObjectNode);
 };

@@ -1,5 +1,5 @@
 import numpy as np
-from qiskit.quantum_info.operators import Operator
+from qiskit.quantum_info.operators import SparsePauliOp
 import json
 import sys
 
@@ -13,12 +13,13 @@ if __name__ == "__main__":
     input_json = sys.argv[1]
     input_data = json.loads(input_json)
 
-    matrix = Operator(np.array(eval(input_data["matrix"])))
-
-    
+    # Create the first SparsePauliOp object
+    op1 = SparsePauliOp.from_sparse_list(
+        eval(input_data["op1"]["sparse_list"]), num_qubits=input_data["op1"]["num_qubits"]
+    )
 
     result = {
-        "matrix": str(matrix)
+        "SparsePauliOp_list": op1.to_list()
     }
 
     # Output the result in JSON format

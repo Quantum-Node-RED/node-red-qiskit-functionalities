@@ -1,0 +1,105 @@
+[
+    {
+        "id": "b292a99201adebe2",
+        "type": "tab",
+        "label": "Pauli Basis Observables",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c9945e2a3bd3d6ee",
+        "type": "image",
+        "z": "b292a99201adebe2",
+        "name": "Circuit Image",
+        "width": "500",
+        "data": "payload.result.circuit_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1150,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "9531b19eb38e6e2f",
+        "type": "debug",
+        "z": "b292a99201adebe2",
+        "name": "Observable",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result.observable",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 890,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "d58becc8fb4445f8",
+        "type": "inject",
+        "z": "b292a99201adebe2",
+        "name": "Start",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 110,
+        "y": 260,
+        "wires": [
+            [
+                "34d84c182f9a3287"
+            ]
+        ]
+    },
+    {
+        "id": "34d84c182f9a3287",
+        "type": "intro-pauli-basis-observables",
+        "z": "b292a99201adebe2",
+        "name": "Intro to Pauli basis observables",
+        "info": "# [Specify observables in the Pauli basis guide.](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n&nbsp;\r\n# In quantum mechanics, observables correspond to physical properties that can be measured. When considering a system of spins, for example, you could be interested in measuring the system's energy or obtaining information about the alignment of the spins, such as the magnetization or the correlations between spins.\r\n # To measure an n-qubit observable *O* on a quantum computer, you must represent it as a sum of tensor products of Pauli operators, that is\r\n# *O = Σ<sub>k=1</sub><sup>K</sup> α<sub>k</sub> P<sub>k</sub>, where P<sub>k</sub> ∈ {I, X, Y, Z}<sup>⊗n</sup> and α<sub>k</sub> ∈ ℝ.*\r\n# where \r\n# *I = [[1,0],[0,1]], X = [[0,1],[1,0]], Y = [[0,-i],[i,0]] and Z = [[1,0],[0,-1]]*\r\n# and you use the fact that an observable is Hermitian, as in,*O<sup>†</sup> = O*. If *O* is not Hermitiona  it can still be decomposed as a sum of Paulis, but the coefficient α<sub>k</sub> becomes complex.\r\n# In many cases, the observable is naturally specified in this representation after mapping the system of interest to qubits. For example, a spin-1/2 system can be mapped to an Ising Hamiltonian\r\n# *H = Σ<sub>&lt;i,j&gt;</sub> Z<sub>i</sub>Z<sub>j</sub> - Σ<sub>i=1</sub><sup>n</sup> X<sub>i</sub>*,\r\n# where the indices *⟨i,j⟩*  run over interacting spins and the spins are subject to a transversal field in *X*. The subscript index indicates which qubit the Pauli operator acts on, i.e. *X<sub>i</sub>* applies an *X* operator on qubit *i* and leaves the rest unchanged. In the Qiskit SDK, this Hamiltonian could be constructed as \r\n```python\r\nfrom qiskit.quantum_info import SparsePauliOp\r\n# define the number of qubits\r\nn = 12\r\n\r\n# define the single Pauli terms as (\"Paulis\", [indices], coefficient)\r\ninteractions = [(\"ZZ\", [i, i + 1], 1) for i in range(n - 1)]  # we assume spins on a 1D line\r\nfield = [(\"X\", [i], -1) for i in range(n)]\r\n\r\n# build the operator\r\nhamiltonian = SparsePauliOp.from_sparse_list(interactions + field, num_qubits=n)\r\n```\r\n ",
+        "x": 350,
+        "y": 260,
+        "wires": [
+            [
+                "f216c39730877e86"
+            ]
+        ]
+    },
+    {
+        "id": "f216c39730877e86",
+        "type": "observable-pauli-basis",
+        "z": "b292a99201adebe2",
+        "name": "Pauli Basis from_operator",
+        "info": "# [Specify observables in the Pauli basis guide.](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n&nbsp;\r\n# Alternatively, we could be interested in measuring system properties like the average magnetization by counting the number of spins aligned in the *Z*-direction with the observable\r\n # *O = <sup>1</sup>&frasl;<sub>n</sub> Σ<sub>i=1</sub> Z<sub>i</sub>* \r\n# For observables that are not given in terms of Pauli operators but in a matrix for, we first have to reformulate them in the Pauli basis in order to evaluate them on a quantum computer. We are always able to find such a representation as the Pauli matrices form a basis for the Hermitian *2<sup>n</sup> X 2<sup>n</sup>* matrices. We expand the observable *O* as \r\n# O = Σ<sub>P∈{I,X,Y,Z}<sup>⊗n</sup></sub> Tr(OP)P,\r\n# where the sum runs over all possible *n*-qubit Pauli terms and *Tr(⋅)* is the trace of a matrix, which acts as inner product. You can implement this decomposition from a matrix to Pauli terms using the <font style='background: GhostWhite'>_`SparsePauliOp.from_operator`_</font> method, like so: \r\n```python\r\nimport numpy as np\r\nfrom qiskit.quantum_info import SparsePauliOp\r\n\r\nmatrix = np.array([[-1, 0, 0.5, -1],\r\n\t\t   [0, 1, 1, 0.5],\r\n\t\t   [0.5, 1, -1, 0],\r\n\t\t   [-1, 0.5, 0, 1]])\r\n\r\nobservable = SparsePauliOp.from_operator(matrix)\r\nprint(observable)  \r\n```\r\n # This means the matrix can be written as Pauli terms as *O = - Z<sub>1</sub> + 0.5 X<sub>2</sub> + Y<sub>2</sub>Y<sub>1</sub>.*",
+        "x": 650,
+        "y": 260,
+        "wires": [
+            [
+                "9531b19eb38e6e2f",
+                "94b5528e15ae3456"
+            ]
+        ]
+    },
+    {
+        "id": "94b5528e15ae3456",
+        "type": "Measure-Pauli-Bases",
+        "z": "b292a99201adebe2",
+        "name": "Measue Pauli bases",
+        "info": "# [Specify observables in the Pauli basis guide.](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n&nbsp;\r\n# A measurement projects the qubit state to the computational basis *{∣0⟩,∣1⟩}*. This implies that you can only measure observables that are diagonal in this basis, such as Paulis consisting only of *I* and *Z* terms. Measuring arbitrary Pauli terms therefore requires a change of basis to diagonalize them. \r\n# *X → Z =  HXH* \r\n# *Y → Z =  HS<sup>†</sup>YSH* \r\n# Where *H* is the Hadamard gate and *S = &radic;<span style=\"text-decoration: overline;\">Z</span> is *is sometimes referred to as the phase gate. If you are using an Estimator to compute expectation values, the basis transformations are automatically performed.\r\n# Below is an example demonstrating how to prepare a quantum circuit and manually measure the qubit 0 in the X basis, qubit 1 in the Y basis and qubit 2 in the Z basis. We apply the transformations shown in the previous equation and obtain the following circuit:\r\n```python\r\nfrom qiskit.circuit import QuantumCircuit\r\n\r\n# create a circuit, where we would like to measure\r\n# q0 in the X basis, q1 in the Y basis and q2 in the Z basis\r\ncircuit = QuantumCircuit(3)\r\ncircuit.ry(0.8, 0)\r\ncircuit.cx(0, 1)\r\ncircuit.cx(1, 2)\r\ncircuit.barrier()\r\n\r\n# diagonalize X with the Hadamard gate \r\ncircuit.h(0)\r\n\r\n# diagonalize Y with Hadamard as S^dagger\r\ncircuit.h(1)\r\ncircuit.sdg(1)\r\n\r\n# the Z basis is the default, no action required here\r\n\r\n# measure all qubits\r\ncircuit.measure_all()\r\ncircuit.draw(\"mpl\")\r\n```\r\n ",
+        "x": 920,
+        "y": 260,
+        "wires": [
+            [
+                "c9945e2a3bd3d6ee"
+            ]
+        ]
+    }
+]

@@ -1,0 +1,521 @@
+[
+    {
+        "id": "688947b1f997c20d",
+        "type": "tab",
+        "label": "Operator Class",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "aa91eda4094d58d3",
+        "type": "intro-operator-class",
+        "z": "688947b1f997c20d",
+        "name": "Intro to Operator class",
+        "info": "# [The Operator class guide](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n&nbsp;\r\n# This page shows how to use the <font style='background: GhostWhite'>_`Operator`_</font> class For a high-level overview of operator representations in Qiskit, including the Operator class and others, see [Overview of operator classes](https://docs.quantum.ibm.com/guides/operators-overview#)\r\n```python\r\nimport numpy as np\r\nfrom qiskit.circuit import QuantumCircuit\r\nfrom qiskit.circuit.library import CXGate, RXGate, XGate\r\nfrom qiskit.quantum_info import Operator, Pauli, process_fidelity\r\n",
+        "x": 120,
+        "y": 440,
+        "wires": [
+            [
+                "9d7c71d59c4aa67a",
+                "6e5220389df065a9",
+                "0ca4bc915fac138c"
+            ]
+        ]
+    },
+    {
+        "id": "9d7c71d59c4aa67a",
+        "type": "Operator-From-Pauli",
+        "z": "688947b1f997c20d",
+        "name": "Operator from Pauli",
+        "info": "# [The Operator class guide](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n&nbsp;\r\n# Several other classes in Qiskit can be directly converted to an <font style='background: GhostWhite'>_`Operator`_</font> object using the operator initialization method. For example:\r\nMeasuring arbitrary Pauli terms therefore requires a change of basis to diagonalize them. \r\n- <font style='background: GhostWhite'>_`Pauli`_</font> objects\r\n- <font style='background: GhostWhite'>_`Gate`_</font> and <font style='background: GhostWhite'>_`Instruction`_</font> objects\r\n- <font style='background: GhostWhite'>_`QuantumCircuit `_</font> objects\r\n# Note that the last point means you can use the <font style='background: GhostWhite'>_`Operator`_</font> class as a unitary simulator to compute the final unitary matrix for a quantum circuit, without having to call a simulator backend. If the circuit contains any unsupported operations, an exception is raised. Unsupported operations are: measure, reset, conditional operations, or a gate that does not have a matrix definition or decomposition in terms of gate with matrix definitions.\r\nPauli object example:\r\n```python\r\n# Create an Operator from a Pauli object\r\n\r\npauliXX = Pauli(\"XX\")\r\noperator = Operator(pauliXX)\r\n\r\nprintprint(f\"operator: {operator.to_matrix()}\")\r\nprint(f\"dim: {operator.dim}\")\r\nprint(f\"input_dims: {operator.input_dims()}\")\r\nprint(f\"output_dims: {operator.output_dims()}\")\r\n```\r\n ",
+        "pauli": "XX",
+        "x": 490,
+        "y": 120,
+        "wires": [
+            [
+                "c55f656019442c51",
+                "b12a7b5327ddf373"
+            ]
+        ]
+    },
+    {
+        "id": "c55f656019442c51",
+        "type": "Operator-For-Gate-Object",
+        "z": "688947b1f997c20d",
+        "name": "Operator for gate object",
+        "info": "# [The Operator class guide](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n&nbsp;\r\nGate object example:\r\n```python\r\n# Create an Operator for a Gate object\r\noperator = Operator(CXGate())\r\n\r\nprintprint(f\"operator: {operator.to_matrix()}\")\r\nprint(f\"dim: {operator.dim}\")\r\nprint(f\"input_dims: {operator.input_dims()}\")\r\nprint(f\"output_dims: {operator.output_dims()}\")\r\n```\r\n ",
+        "x": 770,
+        "y": 120,
+        "wires": [
+            [
+                "1871d84babd1d31e",
+                "c3da2329f0987861"
+            ]
+        ]
+    },
+    {
+        "id": "1871d84babd1d31e",
+        "type": "Operator-From-Parameterized-Gate-Object",
+        "z": "688947b1f997c20d",
+        "name": "Operator from parameterized Gate object",
+        "info": "# [The Operator class guide](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n&nbsp;\r\nParameterized Gate object example:\r\n```python\r\n# Create an operator from a parameterized Gate object\r\noperator = Operator(RXGate(np.pi / 2))\r\n\r\nprintprint(f\"operator: {operator.to_matrix()}\")\r\nprint(f\"dim: {operator.dim}\")\r\nprint(f\"input_dims: {operator.input_dims()}\")\r\nprint(f\"output_dims: {operator.output_dims()}\")\r\n```\r\n ",
+        "x": 1120,
+        "y": 120,
+        "wires": [
+            [
+                "9a17ef3221c43898",
+                "fe5a8530e4cff5e9"
+            ]
+        ]
+    },
+    {
+        "id": "9a17ef3221c43898",
+        "type": "Operator-From-Quantum-Circuit-Object",
+        "z": "688947b1f997c20d",
+        "name": "Operator from QuantumCircuit object",
+        "info": "# [The Operator class guide](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n&nbsp;\r\nQuantumCircuit object example:\r\n```python\r\n# Create an operator from a QuantumCircuit object\r\ncirc = QuantumCircuit(10)\r\ncirc.h(0)\r\nfor j in range(1, 10):\r\n    circ.cx(j - 1, j)\r\n\r\n# Convert circuit to an operator by implicit unitary simulation\r\noperator = Operator(circ)\r\n\r\nprintprint(f\"operator: {operator.to_matrix()}\")\r\nprint(f\"dim: {operator.dim}\")\r\nprint(f\"input_dims: {operator.input_dims()}\")\r\nprint(f\"output_dims: {operator.output_dims()}\")\r\n```\r\n ",
+        "x": 1510,
+        "y": 120,
+        "wires": [
+            [
+                "fb90ba31d3a4953a"
+            ]
+        ]
+    },
+    {
+        "id": "99a45a36f2b7a19c",
+        "type": "inject",
+        "z": "688947b1f997c20d",
+        "name": "Start",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 270,
+        "y": 120,
+        "wires": [
+            [
+                "9d7c71d59c4aa67a"
+            ]
+        ]
+    },
+    {
+        "id": "b12a7b5327ddf373",
+        "type": "debug",
+        "z": "688947b1f997c20d",
+        "name": "Puali to Operator output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 770,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "c3da2329f0987861",
+        "type": "debug",
+        "z": "688947b1f997c20d",
+        "name": "Gate to Operator output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1070,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "fe5a8530e4cff5e9",
+        "type": "debug",
+        "z": "688947b1f997c20d",
+        "name": "Para. Gate to Operator output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1490,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "fb90ba31d3a4953a",
+        "type": "debug",
+        "z": "688947b1f997c20d",
+        "name": "QuantumCircuit ot Operator output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1880,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "bd68a0a036a635ae",
+        "type": "inject",
+        "z": "688947b1f997c20d",
+        "name": "Start",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 270,
+        "y": 300,
+        "wires": [
+            [
+                "db119564adf94dd2"
+            ]
+        ]
+    },
+    {
+        "id": "bcb63c9e6b26ac7b",
+        "type": "image",
+        "z": "688947b1f997c20d",
+        "name": "Circuit Image",
+        "width": "300",
+        "data": "payload.result.circuit_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 790,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "ef4b1c2437f029c4",
+        "type": "image",
+        "z": "688947b1f997c20d",
+        "name": "Circuit Image",
+        "width": "300",
+        "data": "payload.result.circuit_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1130,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "db119564adf94dd2",
+        "type": "Use-Unitary-Operator-In-Circuit",
+        "z": "688947b1f997c20d",
+        "name": "Use unitary Operator in Circuit",
+        "info": "# [The Operator class guide](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n&nbsp;\r\n# Unitary <font style='background: GhostWhite'>_`Operators`_</font> can be directly inserted into a <font style='background: GhostWhite'>_`QuantumCircuit`_</font> using the <font style='background: GhostWhite'>_`QuantumCircuit.append`_</font> method. This converts the <font style='background: GhostWhite'>_`Operator`_</font> into a <font style='background: GhostWhite'>_`UnitaryGate `_</font> object, which is added to the circuit.\r\n# If the operator is not unitary, an exception is raised. This can be checked using the <font style='background: GhostWhite'>_`Operator.is_unitary()`_</font> function, which returns True if the operator is unitary and False otherwise.\r\n```python\r\n# Create an operator\r\nXX = Operator(Pauli(\"XX\"))\r\n\r\n# Add to a circuit\r\ncirc = QuantumCircuit(2, 2)\r\ncirc.append(XX, [0, 1])\r\ncirc.measure([0, 1], [0, 1])\r\ncirc.draw(\"mpl\")\r\n```\r\n ",
+        "pauli": "XX",
+        "x": 530,
+        "y": 300,
+        "wires": [
+            [
+                "c15d14a93e95fbbb",
+                "bcb63c9e6b26ac7b"
+            ]
+        ]
+    },
+    {
+        "id": "c15d14a93e95fbbb",
+        "type": "Use-Pauli-In-Circuit",
+        "z": "688947b1f997c20d",
+        "name": "Use Pauli in circuit",
+        "info": "# [The Operator class guide](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n&nbsp;\r\n# Note that in the example in the previous node (Use unitary Operator in circuit) the operator is initialized from a <font style='background: GhostWhite'>_`Pauli`_</font> object. However, the <font style='background: GhostWhite'>_`Pauli`_</font> object may also be directly inserted into the circuit itself and will be converted into a sequence of single-qubit Pauli gates:\r\n```python\r\n# Add to a circuit\r\ncirc2 = QuantumCircuit(2, 2)\r\ncirc2.append(Pauli(\"XX\"), [0, 1])\r\ncirc2.measure([0, 1], [0, 1])\r\ncirc2.draw(\"mpl\")\r\n```\r\n ",
+        "pauli": "XX",
+        "x": 910,
+        "y": 300,
+        "wires": [
+            [
+                "ef4b1c2437f029c4"
+            ]
+        ]
+    },
+    {
+        "id": "6e5220389df065a9",
+        "type": "Tensor-Product",
+        "z": "688947b1f997c20d",
+        "name": "Tensor product",
+        "info": "# [The Operator class guide](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n&nbsp;\r\n# Operators may be combined using several methods. \r\n# Tensor product \r\n# Two operators *A* and *B* can be combined into a tensor product operator *A⊗B* using the <font style='background: GhostWhite'>_`Operator.tensor`_</font> function. Note that if both *A* and *B* are single-qubit operators, then <font style='background: GhostWhite'>_`A.tensor(B)`_</font> = *A⊗B* will have the subsystems indexed as matrix *B* on subsystem 0, and matrix *A* on subsystem 1.\r\n```python\r\nA = Operator(Pauli(\"X\"))\r\nB = Operator(Pauli(\"Z\"))\r\ntensor_product = A.tensor(B)\r\n\r\nprintprint(f\"tensor_product: {tensor_product.to_matrix()}\")\r\nprint(f\"dim: {tensor_product.dim}\")\r\nprint(f\"input_dims: {tensor_product.input_dims()}\")\r\nprint(f\"output_dims: {tensor_product.output_dims()}\")\r\n```\r\n ",
+        "pauli_1": "X",
+        "pauli_2": "Z",
+        "x": 480,
+        "y": 560,
+        "wires": [
+            [
+                "342a2421bb26d752",
+                "c3bdb2ff031ec41d"
+            ]
+        ]
+    },
+    {
+        "id": "55c2d90957c70009",
+        "type": "inject",
+        "z": "688947b1f997c20d",
+        "name": "Start",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 270,
+        "y": 560,
+        "wires": [
+            [
+                "6e5220389df065a9"
+            ]
+        ]
+    },
+    {
+        "id": "342a2421bb26d752",
+        "type": "Tensor-Expansion",
+        "z": "688947b1f997c20d",
+        "name": "Tensor expansion",
+        "info": "# [The Operator class guide](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n&nbsp;\r\n# Tensor expansion \r\n# A closely related operation is <font style='background: GhostWhite'>_`Operator.expand`_</font>, which acts like a tensor product but in the reverse order. Hence, for two operators *A* and *B* you have <font style='background: GhostWhite'>_`A.expand(B)`_</font> = *B⊗A* where the subsystems are indexed as matrix *A* on subsystem 0, and matrix *B* on subsystem 1.\r\n```python\r\nA = Operator(Pauli(\"X\"))\r\nB = Operator(Pauli(\"Z\"))\r\ntensor_expansion = A.expand(B)\r\n\r\nprintprint(f\"tensor_expansion: {tensor_expansion.to_matrix()}\")\r\nprint(f\"dim: {tensor_expansion.dim}\")\r\nprint(f\"input_dims: {tensor_expansion.input_dims()}\")\r\nprint(f\"output_dims: {tensor_expansion.output_dims()}\")\r\n```\r\n ",
+        "pauli_1": "X",
+        "pauli_2": "Z",
+        "x": 730,
+        "y": 560,
+        "wires": [
+            [
+                "93a878545582a5c1",
+                "edfe33383cee983a"
+            ]
+        ]
+    },
+    {
+        "id": "93a878545582a5c1",
+        "type": "Composition",
+        "z": "688947b1f997c20d",
+        "name": "Composition",
+        "info": "# [The Operator class guide](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n&nbsp;\r\n# Composition \r\n# You can also compose two operators *A* and *B* to implement matrix multiplication using the <font style='background: GhostWhite'>_`Operator.compose`_</font> method. <font style='background: GhostWhite'>_`A.compose(B)`_</font>  returns the operator with matrix *B.A*:\r\n Example 1, output not in node:\r\n ```python\r\nA = Operator(Pauli(\"X\"))\r\nB = Operator(Pauli(\"Z\"))\r\nprint(A.compose(B))\r\n```\r\n Output:\r\n ```python\r\nOperator([[ 0.+0.j,  1.+0.j],\r\n          [-1.+0.j,  0.+0.j]],\r\n         input_dims=(2,), output_dims=(2,))\r\n```\r\n # You can also compose in the reverse order by applying *B* in front of *A* using the <font style='background: GhostWhite'>_`front `_</font> kwarg of <font style='background: GhostWhite'>_`compose `_</font>: <font style='background: GhostWhite'>_`A.compose(B, front=True) `_</font> = *A.B*:\r\n Example 2, output in node:\r\n ```python\r\nA = Operator(Pauli(\"X\"))\r\nB = Operator(Pauli(\"Z\"))\r\ncomposition= A.compose(B, front=True)\r\n\r\nprintprint(f\"composition: {composition.to_matrix()}\")\r\nprint(f\"dim: {composition.dim}\")\r\nprint(f\"input_dims: {composition.input_dims()}\")\r\nprint(f\"output_dims: {composition.output_dims()}\")\r\n```\r\n ",
+        "pauli_1": "X",
+        "pauli_2": "Z",
+        "x": 970,
+        "y": 560,
+        "wires": [
+            [
+                "7220576918a292dd",
+                "db808620838551a7"
+            ]
+        ]
+    },
+    {
+        "id": "7220576918a292dd",
+        "type": "Subsystem-Composition",
+        "z": "688947b1f997c20d",
+        "name": "Subsystem composition",
+        "info": "# [The Operator class guide](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n&nbsp;\r\n# Subsystem composition \r\n# Note that the previous compose requires that the total output dimension of the first operator *A* is equal to the total input dimension of the composed operator *B* (and similarly, the output dimension of *B* must be equal to the input dimension of *A* when composing with <font style='background: GhostWhite'>_`front=True`_</font>).\r\n# You can also compose a smaller operator with a selection of subsystems on a larger operator using the <font style='background: GhostWhite'>_`qargs`_</font> kwarg of <font style='background: GhostWhite'>_`compose`_</font>, either with or without <font style='background: GhostWhite'>_`front=True`_</font>. In this case, the relevant input and output dimensions of the subsystems being composed must match. Note that the smaller operator must always be the argument of the <font style='background: GhostWhite'>_`compose`_</font> method.\r\n# For example, to compose a two-qubit gate with a three-qubit operator:\r\nExample 1, output in node:\r\n ```python\r\n# Compose XZ with a 3-qubit identity operator\r\nop = Operator(np.eye(2**3))\r\nXZ = Operator(Pauli(\"XZ\"))\r\nsubsystem_composition= op.compose(XZ, qargs=[0, 2])\r\n\r\nprintprint(f\"subsystem_composition: {subsystem_composition.to_matrix()}\")\r\nprint(f\"dim: {subsystem_composition.dim}\")\r\nprint(f\"input_dims: {subsystem_composition.input_dims()}\")\r\nprint(f\"output_dims: {subsystem_composition.output_dims()}\")\r\n```\r\n Example 2, output not in node:\r\n ```python\r\n# Compose YX in front of the previous operator\r\nop = Operator(np.eye(2**3))\r\nYX = Operator(Pauli(\"YX\"))\r\nprint(op.compose(YX, qargs=[0, 2], front=True))\r\n```\r\n Output:\r\n ```python\r\nOperator([[0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.-1.j, 0.+0.j, 0.+0.j],\r\n          [0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.-1.j, 0.+0.j, 0.+0.j, 0.+0.j],\r\n          [0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.-1.j],\r\n          [0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.-1.j, 0.+0.j],\r\n          [0.+0.j, 0.+1.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j],\r\n          [0.+1.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j],\r\n          [0.+0.j, 0.+0.j, 0.+0.j, 0.+1.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j],\r\n          [0.+0.j, 0.+0.j, 0.+1.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j]],\r\n         input_dims=(2, 2, 2), output_dims=(2, 2, 2))\r\n```\r\n ",
+        "x": 1210,
+        "y": 560,
+        "wires": [
+            [
+                "10b460514c5b1c24",
+                "9554033052d8ddc1"
+            ]
+        ]
+    },
+    {
+        "id": "10b460514c5b1c24",
+        "type": "Linear-Combinations",
+        "z": "688947b1f997c20d",
+        "name": "",
+        "info": "# [The Operator class guide](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n&nbsp;\r\n# Linear combinations \r\n# Operators may also be combined using standard linear operators for addition,subtraction, and scalar multiplication by complex numbers. \r\nExample 1, output in node:\r\n ```python\r\nXX = Operator(Pauli(\"XX\"))\r\nYY = Operator(Pauli(\"YY\"))\r\nZZ = Operator(Pauli(\"ZZ\"))\r\nop = 0.5 * (XX + YY - 3 * ZZ)\r\n\r\nprintprint(f\"linear_combinations: {op.to_matrix()}\")\r\nprint(f\"dim: {op.dim}\")\r\nprint(f\"input_dims: {op.input_dims()}\")\r\nprint(f\"output_dims: {op.output_dims()}\")\r\n```\r\n # An important point is that while <font style='background: GhostWhite'>_`tensor`_</font>, <font style='background: GhostWhite'>_`expand`_</font>, and <font style='background: GhostWhite'>_`compose`_</font>, preserves the unitarity of unitary operators, linear combinations do not; hence, adding two unitary operators will, in general, result in a non-unitary operator:\r\nExample 2, output not in node:\r\n ```python\r\nprint(op.is_unitary())\r\n```\r\n Output:\r\n ```python\r\nFalse```\r\n ",
+        "x": 1500,
+        "y": 560,
+        "wires": [
+            [
+                "7fd08b64068d8307"
+            ]
+        ]
+    },
+    {
+        "id": "c3bdb2ff031ec41d",
+        "type": "debug",
+        "z": "688947b1f997c20d",
+        "name": "Tensor product",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "edfe33383cee983a",
+        "type": "debug",
+        "z": "688947b1f997c20d",
+        "name": "Tensor expansion",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 970,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "db808620838551a7",
+        "type": "debug",
+        "z": "688947b1f997c20d",
+        "name": "Composition",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1210,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "9554033052d8ddc1",
+        "type": "debug",
+        "z": "688947b1f997c20d",
+        "name": "Subsystem comp.",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1490,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "7fd08b64068d8307",
+        "type": "debug",
+        "z": "688947b1f997c20d",
+        "name": "Linear comp.",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1750,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "86d1825877beacca",
+        "type": "Equality-Operator",
+        "z": "688947b1f997c20d",
+        "name": "Equality Operator",
+        "info": "# [The Operator class guide](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n&nbsp;\r\n# Compare Operators \r\n# Operators implement an equality method that can be used to check if two operators are approximately equal.\r\nexample 1:\r\n ```python\r\nequality_operator = Operator(Pauli(\"X\")) == Operator(XGate())\r\nprint(f\"equality_operator: {equality_operator}\")\r\n```\r\n # Note that this checks that each matrix element of the operators is approximately  equal; two unitaries that differ by a global phase are not considered equal:\r\nexample 2:\r\n ```python\r\nequality_operator_2 = Operator(XGate()) == np.exp(1j * 0.5) * Operator(XGate())\r\nprint(f\"equality_operator_with_different_global_phase: {equality_operator_2}\")\r\n```\r\n ",
+        "x": 730,
+        "y": 760,
+        "wires": [
+            [
+                "78a4213fa88e2426"
+            ]
+        ]
+    },
+    {
+        "id": "0ca4bc915fac138c",
+        "type": "Process-Fidelity",
+        "z": "688947b1f997c20d",
+        "name": "Process fidelity",
+        "info": "# [The Operator class guide](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n&nbsp;\r\n# Process fidelity \r\n# You can also compare operators using the <font style='background: GhostWhite'>_`process_fidelity`_</font> function from the Quantum Information module. This is an information-theoretic quantity for how close two quantum channels are to each other, and in the case of unitary operators it does not depend on global phase.\r\n```python\r\n# Two operators which differ only by phase\r\nop_a = Operator(XGate())\r\nop_b = np.exp(1j * 0.5) * Operator(XGate())\r\n\r\n# Compute process fidelity\r\nF = process_fidelity(op_a, op_b)\r\nprint(\"Process_fidelity =\", F)\r\n ```\r\n # Note that process fidelity is generally only a valid measure of closeness if the input operators are unitary (or CP in the case of quantum channels), and an exception is raised if the inputs are not CP.",
+        "x": 480,
+        "y": 760,
+        "wires": [
+            [
+                "86d1825877beacca",
+                "5c77f9d910c6587d"
+            ]
+        ]
+    },
+    {
+        "id": "81745e07405ccd07",
+        "type": "inject",
+        "z": "688947b1f997c20d",
+        "name": "Start",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 270,
+        "y": 760,
+        "wires": [
+            [
+                "0ca4bc915fac138c"
+            ]
+        ]
+    },
+    {
+        "id": "5c77f9d910c6587d",
+        "type": "debug",
+        "z": "688947b1f997c20d",
+        "name": "Operator comparison",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "78a4213fa88e2426",
+        "type": "debug",
+        "z": "688947b1f997c20d",
+        "name": "Fidelity output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1000,
+        "y": 840,
+        "wires": []
+    }
+]

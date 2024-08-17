@@ -1,9 +1,41 @@
 <script type="text/javascript">
   RED.nodes.registerType("Linear-Combinations", {
-    category: "function",
+    category: "The operator class",
     color: "#aaaaaa",
     defaults: {
       name: { value: "" },
+      info: {
+        value: "# [The Operator class guide](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n" +
+            "&nbsp;\r\n" +
+            "# Linear combinations \r\n" +
+            "# Operators may also be combined using standard linear operators for addition," +
+            "subtraction, and scalar multiplication by complex numbers. \r\n" +
+            "Example 1, output in node:\r\n " +
+            "```python\r\n" +
+            "XX = Operator(Pauli(\"XX\"))\r\n" + 
+            "YY = Operator(Pauli(\"YY\"))\r\n" + 
+            "ZZ = Operator(Pauli(\"ZZ\"))\r\n" +
+            "op = 0.5 * (XX + YY - 3 * ZZ)\r\n" +
+            "\r\n" +
+            "printprint(f\"linear_combinations: {op.to_matrix()}\")\r\n" +
+            "print(f\"dim: {op.dim}\")\r\n" +
+            "print(f\"input_dims: {op.input_dims()}\")\r\n" +
+            "print(f\"output_dims: {op.output_dims()}\")\r\n" +
+            "```\r\n " +
+            "# An important point is that while <font style='background: GhostWhite'>_`tensor`_</font>, " +
+            "<font style='background: GhostWhite'>_`expand`_</font>, and " +
+            "<font style='background: GhostWhite'>_`compose`_</font>, preserves the unitarity of unitary operators, " +
+            "linear combinations do not; hence, adding two unitary operators will, in general, " +
+            "result in a non-unitary operator:\r\n" +
+            "Example 2, output not in node:\r\n " +
+            "```python\r\n" +
+            "print(op.is_unitary())\r\n" + 
+            "```\r\n " +
+            "Output:\r\n " +
+            "```python\r\n" +
+            "False" +
+            "```\r\n "
+        },
     },
     inputs: 1,
     outputs: 1,
@@ -22,5 +54,38 @@
 </script>
 
 <script type="text/html" data-help-name="Linear-Combinations">
-  <p>Linear Combinations</p>
+  <p>A node that shows how operators can be combined with a linear composition example</p>
+
+  <h3>Outputs</h3>
+  <ol class="node-ports">
+    <li>Matrix operator data
+      <dl class="message-properties">
+        <dt>payload.result.linear_combinations <span class="property-type">string</span></dt>
+        <dd>Data (QuantumCircuit orOperation or BaseOperator or matrix) to initialize operator.</dd>
+      </dl>
+    </li>
+    <li>Matrix operator input dimensions 
+      <dl class="message-properties">
+        <dt>payload.result.dim <span class="property-type">string</span></dt>
+        <dd>The total input and output dimension of the operator</dd>
+      </dl>
+    </li>
+    <li>Matrix operator input dimensions 
+      <dl class="message-properties">
+        <dt>payload.result.input_dims <span class="property-type">string</span></dt>
+        <dd>String representation of a Tuple input subsystem dimensions</dd>
+      </dl>
+    </li>
+    <li>Matrix operator output dimensions
+      <dl class="message-properties">
+        <dt>payload.result.output_dims <span class="property-type">string</span></dt>
+        <dd>String representation of a Tuple output subsystem dimensions</dd>
+      </dl>
+    </li>
+  </ol>
+  
+  <h3>Details</h3>
+  <p>
+    This node shows how <code>Operators</code> can be combined using a example using the linear composition method.
+  </p>
 </script>

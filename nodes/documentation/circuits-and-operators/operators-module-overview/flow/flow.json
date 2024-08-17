@@ -9,7 +9,7 @@
   },
   {
     "id": "7315c5bfa132afb3",
-    "type": "Sparse-Pauli-Op-Operations",
+    "type": "sparse-pauli-op-operations",
     "z": "5fd5b59e1e696733",
     "name": "",
     "op1": "[(\"ZX\", [1, 4], 1.0), (\"YY\", [0, 3], -1 + 1j)]",

@@ -1,9 +1,28 @@
 <script type="text/javascript">
   RED.nodes.registerType("Process-Fidelity", {
-    category: "function",
+    category: "The operator class",
     color: "#aaaaaa",
     defaults: {
-      name: { value: "" },
+      name: { value: "Process fidelity" },
+      info: {
+        value: "# [The Operator class guide](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n" +
+            "&nbsp;\r\n" +
+            "# Process fidelity \r\n" +
+            "# You can also compare operators using the <font style='background: GhostWhite'>_`process_fidelity`_</font> " +
+            "function from the Quantum Information module. This is an information-theoretic quantity for how close two " +
+            "quantum channels are to each other, and in the case of unitary operators it does not depend on global phase.\r\n" +
+            "```python\r\n" +
+            "# Two operators which differ only by phase\r\n" +
+            "op_a = Operator(XGate())\r\n" + 
+            "op_b = np.exp(1j * 0.5) * Operator(XGate())\r\n" + 
+            "\r\n" + 
+            "# Compute process fidelity\r\n" +
+            "F = process_fidelity(op_a, op_b)\r\n" +
+            "print(\"Process_fidelity =\", F)\r\n " +
+            "```\r\n " +
+            "# Note that process fidelity is generally only a valid measure of closeness if the input operators are " +
+            "unitary (or CP in the case of quantum channels), and an exception is raised if the inputs are not CP."
+        },
     },
     inputs: 1,
     outputs: 1,
@@ -22,5 +41,20 @@
 </script>
 
 <script type="text/html" data-help-name="Process-Fidelity">
-  <p>Process Fidelity</p>
+  <p>A node that introduces how to process fidelity</p>
+
+  <h3>Outputs</h3>
+  <ol class="node-ports">
+    <li>Process fidelity
+      <dl class="message-properties">
+        <dt>payload.result.process_fidelity <span class="property-type">string</span></dt>
+        <dd>String representation of whether two operators are approximately equal.</dd>
+      </dl>
+    </li>
+  </ol>
+  
+  <h3>Details</h3>
+  <p>
+    This node introduces how to process fidelity.
+  </p>
 </script>

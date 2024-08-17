@@ -3,7 +3,46 @@
     category: "function",
     color: "#aaaaaa",
     defaults: {
-      name: { value: "" },
+      name: { value: "Measue Pauli bases" },
+      info: {
+          value: "# [Specify observables in the Pauli basis guide.](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n" +
+          "&nbsp;\r\n" +
+          "# A measurement projects the qubit state to the computational basis *{∣0⟩,∣1⟩}*. This implies that you can " +
+          "only measure observables that are diagonal in this basis, such as Paulis consisting only of *I* and *Z* terms. " +
+          "Measuring arbitrary Pauli terms therefore requires a change of basis to diagonalize them. \r\n" +
+          "# *X → Z =  HXH* \r\n" +
+          "# *Y → Z =  HS<sup>†</sup>YSH* \r\n" +
+          "# Where *H* is the Hadamard gate and *S = &radic;<span style=\"text-decoration: overline;\">Z</span> is *" +
+          "is sometimes referred to as the phase gate. If you are using an Estimator to compute expectation values" +
+          ", the basis transformations are automatically performed.\r\n" +
+          "# Below is an example demonstrating how to prepare a quantum circuit and manually measure the qubit 0 " +
+          "in the X basis, qubit 1 in the Y basis and qubit 2 in the Z basis. We apply the transformations shown " +
+          "in the previous equation and obtain the following circuit:\r\n" +
+          "```python\r\n" +
+          "from qiskit.circuit import QuantumCircuit\r\n" + 
+          "\r\n" +
+          "# create a circuit, where we would like to measure\r\n" +
+          "# q0 in the X basis, q1 in the Y basis and q2 in the Z basis\r\n" +
+          "circuit = QuantumCircuit(3)\r\n" +
+          "circuit.ry(0.8, 0)\r\n" +
+          "circuit.cx(0, 1)\r\n" + 
+          "circuit.cx(1, 2)\r\n" + 
+          "circuit.barrier()\r\n" + 
+          "\r\n" +
+          "# diagonalize X with the Hadamard gate \r\n" +
+          "circuit.h(0)\r\n" +
+          "\r\n" +
+          "# diagonalize Y with Hadamard as S^\dagger\r\n" +
+          "circuit.h(1)\r\n" +
+          "circuit.sdg(1)\r\n" +
+          "\r\n" +
+          "# the Z basis is the default, no action required here\r\n" +
+          "\r\n" +
+          "# measure all qubits\r\n" +
+          "circuit.measure_all()\r\n" +
+          "circuit.draw(\"mpl\")\r\n" +
+          "```\r\n "
+      }
     },
     inputs: 1,
     outputs: 1,
@@ -22,5 +61,20 @@
 </script>
 
 <script type="text/html" data-help-name="Measure-Pauli-Bases">
-  <p>Measure-Pauli-Bases</p>
+  <p>A node that shows how to measure in Pauli bases</p>
+
+  <h3>Outputs</h3>
+  <ol class="node-ports">
+    <li>Circuit image
+      <dl class="message-properties">
+        <dt>payload.result.circuit_image <span class="property-type">string (Base64)</span></dt>
+        <dd>The Base64-encoded string representing the visual diagram of the quantum circuit.</dd>
+      </dl>
+    </li>
+  </ol>
+
+  <h3>Details</h3>
+  <p>
+    This node shows an example of how to measure in Pauli bases
+  </p>
 </script>

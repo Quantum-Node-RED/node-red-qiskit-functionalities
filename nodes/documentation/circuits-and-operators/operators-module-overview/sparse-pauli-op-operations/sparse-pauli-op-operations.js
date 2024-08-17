@@ -1,7 +1,7 @@
 const runPythonScript = require("../../../../pythonShell");
 
 module.exports = function (RED) {
-  function SparsePauliOpOperations(config) {
+  function SparsePauliOpOperationsNode(config) {
     RED.nodes.createNode(this, config);
     var node = this;
     node.name = config.name;
@@ -39,5 +39,5 @@ module.exports = function (RED) {
       node.send(newMsg);
     });
   }
-  RED.nodes.registerType("Sparse-Pauli-Op-Operations", SparsePauliOpOperations);
+  RED.nodes.registerType("sparse-pauli-op-operations", SparsePauliOpOperationsNode);
 };

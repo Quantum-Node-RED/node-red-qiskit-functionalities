@@ -1,7 +1,7 @@
 const runPythonScript = require("../../../../pythonShell");
 
 module.exports = function (RED) {
-  function Operators(config) {
+  function OperatorsNode(config) {
     RED.nodes.createNode(this, config);
     var node = this;
     node.name = config.name;
@@ -28,5 +28,5 @@ module.exports = function (RED) {
       }
     });
   }
-  RED.nodes.registerType("Operators", Operators);
+  RED.nodes.registerType("operators", OperatorsNode);
 };
