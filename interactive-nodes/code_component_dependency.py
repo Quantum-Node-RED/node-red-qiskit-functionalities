@@ -32,6 +32,7 @@ class Component_Dependency:
     Sampler=["qiskit.primitives.Sampler"]
     ParameterVector=["qiskit.circuit.ParameterVector"]
     Estimator=["qiskit.primitives.Estimator"]
+    Minimize=["scipy.optimize.minimize"]
 
 
 

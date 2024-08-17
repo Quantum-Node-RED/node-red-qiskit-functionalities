@@ -5,9 +5,9 @@ module.exports = function (RED) {
     var node = this;
     node.on('input', function (msg) {
       msg.payload = msg.payload || {};
-      const draw_component = new component.Component("initialize_parameters", {});
-      draw_component.parameters["num_thetas"] = config.num_thetas || 0;
-      component.addComponent(msg, draw_component);
+      const initialize_parameters_component = new component.Component("initialize_parameters", {});
+      initialize_parameters_component.parameters["num_thetas"] = config.num_thetas || 0;
+      component.addComponent(msg, initialize_parameters_component);
       node.send(msg);
     });
   }

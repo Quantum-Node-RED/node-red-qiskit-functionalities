@@ -413,6 +413,30 @@ initial_params = 2 * np.pi * np.random.random({num_thetas})
             Component_Dependency.Estimator,
         ],
         function="",
-        calling_function="estimator = Estimator()"
+        calling_function="estimator = Estimator()\n"
+    ),
+    "minimize-cost-function": Code_Component(
+        import_statement=[
+            Component_Dependency.Minimize,
+        ],
+        function="""def cost_func(params, ansatz, hamiltonian, estimator, cost_history_dict):
+    result = estimator.run(circuits=ansatz, observables=hamiltonian, parameter_values=params).result()
+    energy = result.values[0]
+
+    cost_history_dict["iters"] += 1
+    cost_history_dict["prev_vector"] = params
+    cost_history_dict["cost_history"].append(energy)
+
+    return energy""",
+        calling_function="""cost_history_dict = dict(prev_vector=None, iters=0, cost_history=[])
+
+res = minimize(
+        cost_func,
+        initial_params,
+        args=({circuit_name}, {hamiltonian_name}, estimator, cost_history_dict),
+        method="cobyla",
+    )
+print(res.fun)\n
+    """
     ),
 }

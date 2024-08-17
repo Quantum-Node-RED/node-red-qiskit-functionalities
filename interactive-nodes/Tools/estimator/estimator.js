@@ -5,8 +5,8 @@ module.exports = function (RED) {
     var node = this;
     node.on('input', function (msg) {
       msg.payload = msg.payload || {};
-      const draw_component = new component.Component("estimator", {});
-      component.addComponent(msg, draw_component);
+      const estimator_component = new component.Component("estimator", {});
+      component.addComponent(msg, estimator_component);
       node.send(msg);
     });
   }
