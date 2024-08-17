@@ -53,13 +53,16 @@ def traverse_structure(structure, import_statements, functions, calling_code, de
     has_circuit_begin = False
     in_circuit_loop= False
     stack=[]
-    iterations=0
+    iterations = 0
+    theta_count = 0
     for  component in structure:
         component_name = component.get("name")
         if component_name == "root":
             if component.get("code"):
                 calling_code += component.get("code")
         elif component_name == "Quantum_Circuit_Begin":
+            if has_circuit_begin:
+                calling_code += f"[Error] Circuit Begin exist.\n"
             calling_code += f"# Quantum Circuit Begin {component.get('parameters').get('circuit_name')}\n"
             has_circuit_begin = True
             calling_code = generate_qiskit_code(component, import_statements, functions, calling_code, defined_functions)
@@ -81,6 +84,11 @@ def traverse_structure(structure, import_statements, functions, calling_code, de
                 calling_code += f"# Circuit Loop End\n"
         elif has_circuit_begin and in_circuit_loop and component_name!="qubit":
             stack.append(component)
+        elif component_name == "RX_gate" or component_name == "RY_gate" or component_name == "RZ_gate":
+            if (component['parameters']['mode'] == "parameters"):
+                component['parameters']['theta'] = f"theta[{theta_count}]"
+                theta_count += 1
+            calling_code = generate_qiskit_code(component, import_statements, functions, calling_code, defined_functions)
         elif component_name == "qubit":
             continue
         else:

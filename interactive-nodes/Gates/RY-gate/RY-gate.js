@@ -6,9 +6,10 @@ module.exports = function (RED) {
     var node = this;
     node.on('input', function (msg) {
       msg.payload = msg.payload || {};
-      const RY_gate_component = new component.Component("RY_gate",{});
-      RY_gate_component.parameters["qbit"] = msg.payload["qubit_id"];  
+      const RY_gate_component = new component.Component("RY_gate", {});
+      RY_gate_component.parameters["qbit"] = msg.payload["qubit_id"];
       RY_gate_component.parameters["theta"] = parseFloat(config.theta);
+      RY_gate_component.parameters["mode"] = config.mode;
       RY_gate_component.parameters[constants.CIRCUIT_NAME] = node.context().flow.get(constants.CIRCUIT_NAME);
       component.addComponent(msg, RY_gate_component);
       node.send(msg);

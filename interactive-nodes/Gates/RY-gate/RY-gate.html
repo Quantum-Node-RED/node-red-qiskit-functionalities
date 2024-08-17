@@ -5,6 +5,7 @@
     defaults: {
       name: { value: "" },
       theta: { value: "" },
+      mode: { value: "number" },
     },
     inputs: 1,
     outputs: 1,
@@ -24,6 +25,14 @@
   <div class="form-row">
     <label for="node-input-theta"><i class="fa fa-tag"></i> theta</label>
     <input type="number" min="0" step="any"  id="node-input-theta" placeholder="theta" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-mode"><i class="fa fa-list"></i>Theta Mode</label>
+    <select name="mode" id="node-input-mode">
+      <option value="number">Number</option>
+      <option value="parameters">Parameters</option>
+    </select>
   </div>
 
 </script>

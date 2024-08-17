@@ -58,17 +58,17 @@ schemas = {
     },
     "RX_gate": {
         "circuit_name": str,
-        "theta": float,
+        "theta": float | str,
         "qbit": int
     },
     "RZ_gate": {
         "circuit_name": str,
-        "theta": float,
+        "theta": float | str,
         "qbit": int
     },
     "RY_gate": {
         "circuit_name": str,
-        "theta": float,
+        "theta": float | str,
         "qbit": int
     },
     "SX_gate": {

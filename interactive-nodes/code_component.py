@@ -396,5 +396,23 @@ coeffs = {coeffs}
         ],
         function="",
         calling_function="{var_result} = QAOA({sampler}, {optimizer}(), reps={reps})"
-    )
+    ),
+    # VQE: 
+    "initialize_parameters": Code_Component(
+        import_statement=[
+            Component_Dependency.ParameterVector,
+            Component_Dependency.Numpy
+        ],
+        function="",
+        calling_function="""theta = ParameterVector('θ', {num_thetas})
+initial_params = 2 * np.pi * np.random.random({num_thetas})
+        """
+    ),
+    "estimator": Code_Component(
+        import_statement=[
+            Component_Dependency.Estimator,
+        ],
+        function="",
+        calling_function="estimator = Estimator()"
+    ),
 }

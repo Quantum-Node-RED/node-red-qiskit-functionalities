@@ -30,6 +30,8 @@ class Component_Dependency:
     JSON = ["json"]
     Pauli=["qiskit.quantum_info.Pauli"]
     Sampler=["qiskit.primitives.Sampler"]
+    ParameterVector=["qiskit.circuit.ParameterVector"]
+    Estimator=["qiskit.primitives.Estimator"]
 
 
 
