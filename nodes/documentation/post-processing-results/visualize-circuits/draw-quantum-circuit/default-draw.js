@@ -1,15 +1,15 @@
-const runPythonScript = require("../../../pythonShell");
+const runPythonScript = require("../../../../pythonShell");
 
 module.exports = function(RED) {
-  function NoBarriersMplDrawNode(config) {
+  function DefaultDrawNode(config) {
     RED.nodes.createNode(this,config);
     var node = this;
     node.on('input', async function(msg) {
       const result = await new Promise((resolve, reject) => {
         const option = {
-
+                
         };
-        runPythonScript(__dirname, "no-barriers-mpl-draw.py", option, (err, results) => {
+        runPythonScript(__dirname, "default-draw.py", option, (err, results) => {
           if (err) throw err;
           return resolve(results);
         });
@@ -19,7 +19,8 @@ module.exports = function(RED) {
         payload: result
       };
       node.send(newMsg);
+
     });
   }
-  RED.nodes.registerType("no-barriers-mpl-draw", NoBarriersMplDrawNode);
+  RED.nodes.registerType("default-draw", DefaultDrawNode);
 }
