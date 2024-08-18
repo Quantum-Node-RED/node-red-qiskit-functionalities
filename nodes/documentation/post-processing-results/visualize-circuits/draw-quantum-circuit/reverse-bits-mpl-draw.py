@@ -35,7 +35,7 @@ customize_mpl_draw_str_b64 = base64.b64encode(buffer.read()).decode('utf-8')
 buffer.close()
 
 result = {
-    "circuit_image": customize_mpl_draw_str_b64
+    "circuit_diagram": customize_mpl_draw_str_b64
 }
 
 print(json.dumps(result))

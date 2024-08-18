@@ -1,7 +1,7 @@
 // const runPythonScript = require("../../../../pythonShell");
 
 module.exports = function (RED) {
-  function IntroToVisualizeCircuitNode(config) {
+  function ControlCircuitDrawingsNode(config) {
     RED.nodes.createNode(this, config);
     var node = this;
     node.name = config.name;
@@ -16,5 +16,5 @@ module.exports = function (RED) {
 
     
   }
-  RED.nodes.registerType("intro-to-visualize-circuits", IntroToVisualizeCircuitNode);
+  RED.nodes.registerType("control-circuit-drawings", ControlCircuitDrawingsNode);
 };

@@ -7,7 +7,13 @@
             info: {
                 value:"# [Visualize circuits guide.](https://docs.quantum.ibm.com/guides/visualize-circuits#)\r\n" +
                 "&nbsp;\r\n" +
-                "# This node shows a bigger circuit diagram using matplotlib, plot barriers and normal bit ordering.\r\n" +
+                "# Depending on the output, there are also options to customize the circuit diagram. It is possible" +
+                "to disable plot barriers and reverse bit order. The first two options are shared among all three " +
+                "backends. They allow you to configure both the bit orders and whether or not you draw barriers. " +
+                "These can be set by the <font style='background: lightgrey'>_`reverse_bits`_</font> kwarg and " +
+                "<font style='background: lightgrey'>_`plot_barriers`_</font> kwarg, respectively.\r\n" +
+                "# This node shows a bigger circuit diagram that contains plot barriers and normal bit ordering. " +
+                "The following examples work with any output renderer; mpl is used here for brevity.\r\n" +
                 "```python\r\n" +
                 "from qiskit import QuantumCircuit, ClassicalRegister\r\n" +
                 "\r\n" +
@@ -54,5 +60,20 @@
 </script>
 
 <script type="text/html" data-help-name="barriers-mpl-draw">
-    <p>A simple node to draw a circuit diagram with plot barriers, part 4? of IBM's guides/visualize-circuits</p>
+    <p>A node that shows how to draw a circuit diagram with plot barriers and non-reversed order using mpl</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>payload.result.circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the quantum circuit.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+        This node shows a bigger example where plot barriers are visualized and bits are not reversed.
+    </p>
 </script>

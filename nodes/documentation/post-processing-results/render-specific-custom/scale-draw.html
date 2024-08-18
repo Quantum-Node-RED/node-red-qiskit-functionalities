@@ -5,8 +5,12 @@
         defaults: {
             name: {value:"Scale Draw"},
             info: {
-                value:"# Part 8 of the [Visualize circuits guide.](https://docs.quantum.ibm.com/guides/visualize-circuits#)\r\n" +
+                value:"# [Visualize circuits guide.](https://docs.quantum.ibm.com/guides/visualize-circuits#)\r\n" +
                 "&nbsp;\r\n" +
+                "# Some available customizing options are specific to a renderer.\r\n" +
+                "# The <font style='background: lightgrey'>_`scale`_</font> option scales the output of the " +
+                "<font style='background: lightgrey'>_`mpl`_</font> and " +
+                "<font style='background: lightgrey'>_`latex`_</font> renders.\r\n" +
                 "# This node shows a text output rendering for drawing a quantum circuit using <font style='background: " +
                 "lightgrey'>_`circuit.draw()`_</font> and the <font style='background: lightgrey'>_`scale`_</font> argument. " +
                 "The output is a diagram with the mpl renderer with a scaled output.\r\n" +
@@ -37,5 +41,21 @@
 </script>
 
 <script type="text/html" data-help-name="scale-draw">
-    <p>A simple node for the mpl rendering of circuit diagrams using the scale argument</p>
+    <p>A node that shows how to draw a mpl rendering of circuit diagrams using the scale argument</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>payload.result.circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the quantum circuit.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+        This node shows an example of how to use the <code>scale</code> argument with 
+        <code>circuit.draw(output='mpl')</code> to scale the output.
+    </p>
 </script>
