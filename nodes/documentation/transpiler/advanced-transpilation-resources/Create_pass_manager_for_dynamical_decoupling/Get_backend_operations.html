@@ -1,0 +1,40 @@
+
+<script type="text/javascript">
+    RED.nodes.registerType("get-backend-operations", {
+      category: "Create a pass manager for dynamical decoupling",
+      color: "#aaaaaa",
+      defaults: {
+        name: { value: "Get Backend Operations Name" },
+        token: { value: null },
+        info: { value: "# This example uses <font style=\"background: lightgrey\">ibm_brisbane</font>, which is a quantum simulator backend provided by IBM Quantum for running and testing quantum algorithms without accessing real quantum hardware. Before adding dynamical decoupling sequence to the circuit, you need to get the <font style=\"background: lightgrey\">target</font> information from the <font style=\"background: lightgrey\">backend</font> and save it, because the <font style=\"background: lightgrey\">target</font> will need to be modified to add timing information for the gates used in dynamical decoupling.\r\n&nbsp;\r\n# In the code snippet below, we created a <font style=\"background: lightgrey\">QiskitRuntimeService</font> instance to get the backend <font style=\"background: lightgrey\">\"ibm_brisbane\"</font>. Then, we get the <font style=\"background: lightgrey\">target</font> information from the backend and save the operation names as <font style=\"background: lightgrey\">basis_gates</font>.\r\n```python\r\nfrom qiskit_ibm_runtime import QiskitRuntimeService\r\n \r\nservice = QiskitRuntimeService(channel = \"ibm_quantum\", token = \"Your-IBM-API-token\")\r\nbackend = service.backend(\"ibm_brisbane\")\r\n \r\ntarget = backend.target\r\nbasis_gates = list(target.operation_names)\r\n```\r\n&nbsp;\r\n# **Note:** When you create a <font style=\"background: lightgrey\">QiskitRuntimwService</font> instance, you have to replace _token_ argument with your **IBM Quantum API key**, which you can find in [IBM Quantum account page](https://quantum.ibm.com/account).\r\n&nbsp;\r\n# The operation names of <font style=\"background: lightgrey\">target</font> are sent to \"Target Operation Names\" node and you can check them in debug palette." }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "Get Backend Operations Name";
+      },
+      
+    });
+
+  </script>
+  
+  <script type="text/html" data-template-name="get-backend-operations">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Get Backend Operations Name" />
+    </div>
+
+    <div class="form-row">
+      <label for="node-input-token"><i class="fa fa-tag"></i> IBM API Token</label>
+      <input type="text" id="node-input-token" placeholder="Enter your IBM API token" />
+    </div>
+
+  </script>
+
+  
+  
+  <script type="text/html" data-help-name="get-backend-operations">
+    <p>A node that get operation names from backend.</p>
+  </script>
+  
