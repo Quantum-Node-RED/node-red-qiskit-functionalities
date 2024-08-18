@@ -222,6 +222,7 @@ if __name__ == "__main__":
     try:
         process = subprocess.run([sys.executable, file_path], capture_output=True, text=True)
         execution_result = process.stdout + process.stderr
+        execution_result = execution_result.strip('"')
     except Exception as e:
         execution_result = str(e)
 

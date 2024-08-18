@@ -1,0 +1,46 @@
+<script type="text/javascript">
+  RED.nodes.registerType("custom_programming", {
+    category: "function",
+    color: "#E6BCB9",
+    defaults: {
+      name: { value: "" },
+      exampleText: { value: "" }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "function.svg",
+    label: function () {
+      return this.name || "custom_programming";
+    },
+    oneditprepare: function () {
+      this.editor = RED.editor.createEditor({
+      id: 'node-input-example-editor',
+      mode: 'ace/mode/text',
+      value: this.exampleText
+    });
+    },
+    oneditsave: function() {
+    this.exampleText = this.editor.getValue();
+    this.editor.destroy();
+    delete this.editor;
+    },
+    oneditcancel: function() {
+        this.editor.destroy();
+        delete this.editor;
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="custom_programming">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+
+  <div style="height: 250px; min-height:150px;" class="node-text-editor" id="node-input-example-editor"></div>
+</script>
+
+<script type="text/html" data-help-name="custom_programming">
+  <p></p>
+</script>
+

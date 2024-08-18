@@ -58,17 +58,17 @@ schemas = {
     },
     "RX_gate": {
         "circuit_name": str,
-        "theta": float | str,
+        # "theta": float | str,
         "qbit": int
     },
     "RZ_gate": {
         "circuit_name": str,
-        "theta": float | str,
+        # "theta": float | str,
         "qbit": int
     },
     "RY_gate": {
         "circuit_name": str,
-        "theta": float | str,
+        # "theta": float | str,
         "qbit": int
     },
     "SX_gate": {
@@ -163,5 +163,8 @@ schemas = {
         "optimizer": str,
         "reps": int,
         "var_result": str
+    },
+    "custom_programming": {
+        "custom_code": str
     }
 }

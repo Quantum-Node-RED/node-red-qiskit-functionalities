@@ -75,7 +75,8 @@
       "minimize-cost-function": "interactive-nodes/Functions/minimize-cost-function/minimize-cost-function.js",
       "QAOA-Algorithm": "interactive-nodes/Algorithms/QAOA-Algorithm/QAOA-Algorithm.js",
       "Circuit-Loop-Begin": "interactive-nodes/Quantum-Circuit/Circuit-Loop/Circuit-Loop-Begin.js",
-      "Circuit-Loop-End": "interactive-nodes/Quantum-Circuit/Circuit-Loop/Circuit-Loop-End.js"
+      "Circuit-Loop-End": "interactive-nodes/Quantum-Circuit/Circuit-Loop/Circuit-Loop-End.js",
+      "custom_programming": "interactive-nodes/Functions/Custom-programming/Custom-programming.js"
     }
   },
   "dependencies": {

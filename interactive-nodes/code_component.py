@@ -240,6 +240,12 @@ coeffs = {coeffs}
         """
     ),
 
+    "custom_programming": Code_Component(
+        import_statement=[],
+        function="",
+        calling_function="{custom_code}"
+    ),
+
     # Visualisation
     "draw_graph": Code_Component(
         import_statement=[
