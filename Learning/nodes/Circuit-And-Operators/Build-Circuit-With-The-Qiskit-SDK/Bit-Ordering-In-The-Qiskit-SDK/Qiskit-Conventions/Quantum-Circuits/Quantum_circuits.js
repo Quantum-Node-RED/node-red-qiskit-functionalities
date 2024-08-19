@@ -13,7 +13,7 @@ module.exports = function (RED) {
       node.status({ fill: "green", shape: "dot", text: "You have  learned this node." });
 
       const result = await new Promise((resolve, reject) => {
-        runPythonScript(__dirname, "Quantum-circuits.py", arg=null, (err, results) => {
+        runPythonScript(__dirname, "Quantum_circuits.py", arg=null, (err, results) => {
           if (err) reject(err);
           else resolve(results);
         });

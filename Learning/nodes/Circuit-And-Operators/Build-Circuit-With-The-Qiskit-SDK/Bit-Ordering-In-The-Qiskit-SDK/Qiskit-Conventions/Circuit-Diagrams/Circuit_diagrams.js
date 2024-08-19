@@ -1,7 +1,7 @@
 const runPythonScript = require("../../.././../../pythonShell");
 
 module.exports = function (RED) {
-  function State_vector_matricesNodes(config) {
+  function Circuits_diagramsNodes(config) {
     RED.nodes.createNode(this, config);
     var node = this;
     node.name = config.name;
@@ -13,7 +13,7 @@ module.exports = function (RED) {
       node.status({ fill: "green", shape: "dot", text: "You have  learned this node." });
 
       const result = await new Promise((resolve, reject) => {
-        runPythonScript(__dirname, "Statevector-matrices.py", arg=null, (err, results) => {
+        runPythonScript(__dirname, "Circuit_diagrams.py", arg=null, (err, results) => {
           if (err) reject(err);
           else resolve(results);
         });
@@ -29,5 +29,5 @@ module.exports = function (RED) {
       node.status({ fill: "red", shape: "dot", text: "You haven't learned this node yet." });
     });
   }
-  RED.nodes.registerType("State_vector_matrices", State_vector_matricesNodes);
+  RED.nodes.registerType("Circuit-diagrams", Circuits_diagramsNodes);
 };

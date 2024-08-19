@@ -1,5 +1,3 @@
-// const runPythonScript = require("../.././../../pythonShell");
-
 module.exports = function (RED) {
   function IntroToBitOrderingNode(config) {
     RED.nodes.createNode(this, config);

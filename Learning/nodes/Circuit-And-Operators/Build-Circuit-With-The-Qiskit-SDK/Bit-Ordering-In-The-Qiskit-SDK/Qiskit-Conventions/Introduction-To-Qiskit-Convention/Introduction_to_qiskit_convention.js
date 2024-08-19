@@ -1,5 +1,3 @@
-// const runPythonScript = require("../.././../../pythonShell");
-
 module.exports = function (RED) {
   function IntroToQiskitConventionNode(config) {
     RED.nodes.createNode(this, config);
