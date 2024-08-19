@@ -77,6 +77,10 @@ function aggregatePaths(expectedQubits,circuit_name,connectedPaths,node,msg)
   else if (state.receivedQubits === expectedQubits - 1) {
     let collecting = false;
     for (let component_ of msg.payload.structure) {
+      if (component_.name==="hyper_parameters" || component_.name==="condition")
+      {
+        continue;
+      }
       if (
         component_.name === "Circuit_Loop_Begin" &&
         component_.parameters.circuit_name === circuit_name
@@ -116,6 +120,10 @@ function aggregatePaths(expectedQubits,circuit_name,connectedPaths,node,msg)
   else {
     let collecting = false;
     for (let component_ of msg.payload.structure) {
+      if (component_.name==="hyper_parameters" || component_.name==="condition")
+      {
+        continue;
+      }
       if (
         component_.name === "Circuit_Loop_Begin" &&
         component_.parameters.circuit_name === circuit_name

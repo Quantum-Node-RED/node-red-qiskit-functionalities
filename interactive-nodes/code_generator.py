@@ -55,6 +55,8 @@ def traverse_structure(structure, import_statements, functions, calling_code, de
     stack=[]
     iterations = 0
     theta_count = 0
+    circuit_hyperparameters =None
+    circuit_loop_conditions=None
     for  component in structure:
         component_name = component.get("name")
         if component_name == "root":
@@ -78,17 +80,31 @@ def traverse_structure(structure, import_statements, functions, calling_code, de
                 in_circuit_loop=True
         elif has_circuit_begin and component_name=="Circuit_Loop_End":
                 for i in range(iterations):
+                    calling_code+=f"# Circuit Loop Iteration {i+1}\n"
                     for component__ in stack:
-                        calling_code = generate_qiskit_code(component__, import_statements, functions, calling_code, defined_functions)
+                        if circuit_loop_conditions and circuit_hyperparameters:
+                            calling_code = process_component_with_condition(component__, circuit_loop_conditions, circuit_hyperparameters, i, calling_code)
+                        else:
+                            calling_code = generate_qiskit_code(component__, import_statements, functions, calling_code, defined_functions)
                 in_circuit_loop=False
                 calling_code += f"# Circuit Loop End\n"
-        elif has_circuit_begin and in_circuit_loop and component_name!="qubit":
+        elif has_circuit_begin and in_circuit_loop and component_name!="qubit" and  component_name!="condition" and component_name!="hyper_parameters":
             stack.append(component)
         elif component_name == "RX_gate" or component_name == "RY_gate" or component_name == "RZ_gate":
             if (component['parameters']['mode'] == "parameters"):
                 component['parameters']['theta'] = f"theta[{theta_count}]"
                 theta_count += 1
             calling_code = generate_qiskit_code(component, import_statements, functions, calling_code, defined_functions)
+        elif component_name == "condition":
+            try:
+                circuit_loop_conditions=json.loads(component['parameters']['condition'])
+            except Exception as e:
+                calling_code+=f"[Error] Failed to parse condition {e}\n"
+        elif component_name == "hyper_parameters":
+            try:
+                circuit_hyperparameters= json.loads(component['parameters']['hyper_parameters'])
+            except Exception as e:
+                calling_code+=f"[Error] Failed to parse hyper_parameters: {e}\n"
         elif component_name == "qubit":
             continue
         else:
@@ -171,6 +187,32 @@ def save_code_as_image_base64(code_str):
     image_base64 = base64.b64encode(buffer.read()).decode('utf-8')
     
     return image_base64
+
+def process_component_with_condition(component, conditions, hyperparameters, iteration_index, calling_code):
+    component_name = component.get("name")
+
+    # Check if hte component is in the condition
+    if component_name in conditions:
+        try:
+            # For a particular component, there can be many conditions, ie component have many parameters thus many conditions
+            for param_condition in conditions[component_name]:
+                parameter_name = param_condition["parameter"] 
+                value_expression = param_condition["value"]  
+                # Check for that paticular parameter in the hyperparameters
+                for hyperparam_name in hyperparameters:
+                    if hyperparam_name in value_expression:
+                        if len(hyperparameters[hyperparam_name]) > iteration_index:
+                            value_expression = value_expression.replace(hyperparam_name, f"{hyperparameters[hyperparam_name][iteration_index]}")
+                        else:
+                            raise ValueError(f"Index {iteration_index} out of range for hyperparameter '{hyperparam_name}'")
+                component['parameters'][parameter_name] = value_expression
+                calling_code = generate_qiskit_code(component, import_statements, functions, calling_code, defined_functions)
+                return calling_code
+
+        except Exception as e:
+            calling_code += f"[Error] Failed to apply condition for {component_name}: {e}\n"
+    
+    return calling_code
 
 
 

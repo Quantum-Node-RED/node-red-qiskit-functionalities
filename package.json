@@ -76,7 +76,9 @@
       "QAOA-Algorithm": "interactive-nodes/Algorithms/QAOA-Algorithm/QAOA-Algorithm.js",
       "Circuit-Loop-Begin": "interactive-nodes/Quantum-Circuit/Circuit-Loop/Circuit-Loop-Begin.js",
       "Circuit-Loop-End": "interactive-nodes/Quantum-Circuit/Circuit-Loop/Circuit-Loop-End.js",
-      "custom_programming": "interactive-nodes/Functions/Custom-programming/Custom-programming.js"
+      "custom_programming": "interactive-nodes/Functions/Custom-programming/Custom-programming.js",
+      "hyper-parameters": "interactive-nodes/Quantum-Circuit/hyper-parameters/hyper-parameters.js",
+      "condition": "interactive-nodes/Quantum-Circuit/condition/condition.js"
     }
   },
   "dependencies": {
