@@ -1,7 +1,7 @@
-const runPythonScript = require("../../.././../../pythonShell");
+const runPythonScript = require("../../.././../pythonShell");
 
 module.exports = function (RED) {
-  function IntegersNodes(config) {
+  function State_vector_matricesNodes(config) {
     RED.nodes.createNode(this, config);
     var node = this;
     node.name = config.name;
@@ -13,7 +13,7 @@ module.exports = function (RED) {
       node.status({ fill: "green", shape: "dot", text: "You have  learned this node." });
 
       const result = await new Promise((resolve, reject) => {
-        runPythonScript(__dirname, "Integers.py", arg=null, (err, results) => {
+        runPythonScript(__dirname, "Statevector_matrices.py", arg=null, (err, results) => {
           if (err) reject(err);
           else resolve(results);
         });
@@ -29,5 +29,5 @@ module.exports = function (RED) {
       node.status({ fill: "red", shape: "dot", text: "You haven't learned this node yet." });
     });
   }
-  RED.nodes.registerType("Integers", IntegersNodes);
+  RED.nodes.registerType("State_vector_matrices", State_vector_matricesNodes);
 };
