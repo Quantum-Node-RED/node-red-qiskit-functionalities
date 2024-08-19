@@ -1,7 +1,7 @@
 const runPythonScript = require("../../../pythonShell");
 
 module.exports = function(RED) {
-  function StatevectorNode(config) {
+  function PlotLatexNode(config) {
     RED.nodes.createNode(this,config);
     var node = this;
     node.on('input', async function(msg) {
@@ -9,7 +9,7 @@ module.exports = function(RED) {
         const option = {
                 
         };
-        runPythonScript(__dirname, "statevector.py", option, (err, results) => {
+        runPythonScript(__dirname, "plot-latex.py", option, (err, results) => {
           if (err) throw err;
           return resolve(results);
         });
@@ -22,5 +22,5 @@ module.exports = function(RED) {
 
     });
   }
-  RED.nodes.registerType("statevector", StatevectorNode);
+  RED.nodes.registerType("plot-latex", PlotLatexNode);
 }

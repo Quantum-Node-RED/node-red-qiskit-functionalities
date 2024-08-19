@@ -19,7 +19,7 @@ draw_str_b64 = base64.b64encode(buffer.read()).decode('utf-8')
 buffer.close()
 
 result = {
-    "circuit_image": draw_str_b64
+    "circuit_diagram": draw_str_b64
 }
 
 print(json.dumps(result))

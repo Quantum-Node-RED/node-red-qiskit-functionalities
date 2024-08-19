@@ -8,10 +8,7 @@
                 value:"# [Plot quantum states guide.](https://docs.quantum.ibm.com/guides/plot-quantum-states#)\r\n" +
                 "&nbsp;\r\n" +
                 "# This plot displays the real and imaginary parts of each density matrix element in two three-dimensional bar charts." +
-                "It's called a \"city\" plot because the bars resemble skyscrapers in a city." +
-                " The state we're plotting has the following density matrix.\r\n" +
-                "# In this node, <font style='background: lightgrey'>_`draw()`_</font> is used to get the same output as the " +
-                "<font style='background: lightgrey'>_`plot_state_city()`_</font> function to plot the cityscape of a quantum state\r\n" +
+                "It's called a \"city\" plot because the bars resemble skyscrapers in a cityr\n" +
                 "```python\r\n" +
                 "from math import pi\r\n" +
                 "from qiskit import QuantumCircuit\r\n" +
@@ -44,5 +41,21 @@
 </script>
 
 <script type="text/html" data-help-name="draw-city-plot">
-    <p>A simple node for generating a "city" plot using draw</p>
+    <p>A node that shows how to generate a "city" plot using draw</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>City plot
+        <dl class="message-properties">
+          <dt>payload.result.circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the city plot.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+        This node shows an example of how to plot a city plot using <code>draw("city")</code>.
+        Alternitively the <code>plot_state_city()</code> function can be used.
+    </p>
 </script>

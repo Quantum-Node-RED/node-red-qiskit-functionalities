@@ -3,6 +3,7 @@ import json
 from math import pi
 from qiskit import QuantumCircuit
 from qiskit.quantum_info import Statevector
+from qiskit.quantum_info import DensityMatrix
 import io
 
 # Create a Bell state for demonstration
@@ -12,12 +13,15 @@ qc.crx(pi/2, 0, 1)
 psi = Statevector(qc)
 
 # psi is a Statevector object
-fold_draw = psi.draw(output="latex_source")
+statevector_draw = psi.draw(output="latex_source")
+density_matrix_draw = psi.draw(output="latex_source")
 
-fold_draw_str = str(fold_draw)
+statevector_draw_str = str(statevector_draw)
+density_matrix_str = str(density_matrix_draw)
 
 result = {
-    "circuit_text": fold_draw_str
+    "statevector": statevector_draw,
+    "density_matrix": density_matrix_str
 }
 
 print(json.dumps(result))

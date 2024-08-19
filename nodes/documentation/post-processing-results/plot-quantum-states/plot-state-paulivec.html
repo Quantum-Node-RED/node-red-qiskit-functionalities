@@ -13,9 +13,6 @@
                 "# Tensor products of Pauli matrices are all observables that return +1 or -1. This plot displays the" +
                 " expectation values of the state on different Pauli operators as a bar chart. All density matrices can be" +
                 " written as a sum of these Pauli matrices, weighted by their expectation values.\r\n" +
-                "# In this node, the <font style='background: lightgrey'>_`plot_state_paulivec()`_</font> function of the" +
-                " <font style='background: lightgrey'>_`qiskit.visualization`_</font> module is used to plot the Pauli-vector representation of a quantum state as bar graph.\r\n" +
-                "Alternitively <font style='background: lightgrey'>_`draw(\"paulivec\")`_</font> can be used.\r\n" +
                 "```python\r\n" +
                 "from math import pi\r\n" +
                 "from qiskit import QuantumCircuit\r\n" +
@@ -49,5 +46,22 @@
 </script>
 
 <script type="text/html" data-help-name="plot-state-paulivec">
-    <p>A simple node for generating a "Pauli vector" plot using the plot_state_paulivec visulization</p>
+    <p>A node that shows how to generate a "Pauli vector" plot using the plot_state_paulivec visulization</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Pauli vector plot
+        <dl class="message-properties">
+          <dt>payload.result.circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the Pauli vector plot.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+        This node shows an example of how a <code>plot_state_paulivec()</code> function of the 
+        <code>qiskit.visualization</code> module is used to create a Pauli vector plot. 
+        Alternitively <code>draw("paulivec")</code> can be used.
+    </p>
 </script>

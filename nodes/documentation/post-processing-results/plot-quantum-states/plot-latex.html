@@ -1,0 +1,95 @@
+<script type="text/javascript">
+    RED.nodes.registerType('plot-latex',{
+        category: 'Plot quantum states',
+        color: '#aaaaaa',
+        defaults: {
+            name: {value:"Plot latex"},
+            info: {
+                value:"# [Plot quantum states guide.](https://docs.quantum.ibm.com/guides/plot-quantum-states#)\r\n" +
+                "&nbsp;\r\n" +
+                "# While not technically a \"plot\", Qiskit can render LaTeX representations of both " +
+                "<font style='background: lightgrey'>_`Statevector`_</font> and <font style='background: lightgrey'>_`DensityMatrix`_</font> " +
+                "objects that display nicely in Jupyter notebooks. These follow the standard mathematical " +
+                "conventions for writing down quantum states. Read more in " +
+                "[Basics of quantum information: Single systems.](https://learning.quantum.ibm.com/course/basics-of-quantum-information/single-systems#quantum-state-vectors#)\r\n" +
+                "# Statevectors default to \"ket notation\", whereas density matrices are displayed as a 2×2 matrix.\r\n" +
+                "# The examples and outputs shown under the information tab in this node use the 'latex' argument, " +
+                "however, please be aware that the 'latex' output shown in this tab is not identical to the actual " +
+                "latex output due to the limitations of markdown. Additionally, due to the limitations of NodeRED " +
+                "the output from the actual node uses text. Note: It is also "+
+                "possible to use the 'latex_source' to ge the raw LaTeX string.\r\n" +
+                "Example 1:\r\n" +
+                "```python\r\n" +
+                "from math import pi\r\n" +
+                "from qiskit import QuantumCircuit\r\n" +
+                "from qiskit.quantum_info import Statevector\r\n" + 
+                "\r\n" +
+                "# Create a Bell state for demonstration\r\n" +
+                "qc = QuantumCircuit(2)\r\n" +
+                "qc.h(0)\r\n" +
+                "qc.crx(pi/2, 0, 1)\r\n" +
+                "psi = Statevector(qc)\r\n" +
+                "\r\n" +
+                "psi.draw(\"latex\")  # psi is a Statevector object\r\n" +
+                "```\r\n " +
+                "Output:\r\n" +
+                "# (&radic;2/2) |00⟩ + (1/2) |01⟩ - (i/2) |11⟩\r\n" +
+                "Example 1:\r\n" +
+                "```python\r\n" +
+                "from math import pi\r\n" +
+                "from qiskit import QuantumCircuit\r\n" +
+                "from qiskit.quantum_info import DensityMatrix\r\n" + 
+                "\r\n" +
+                "# Create a Bell state for demonstration\r\n" +
+                "qc = QuantumCircuit(2)\r\n" +
+                "qc.h(0)\r\n" +
+                "qc.crx(pi/2, 0, 1)\r\n" +
+                "psi = Statevector(qc)\r\n" +
+                "\r\n" +
+                "DensityMatrix(psi).draw(\"latex\")  # convert to a DensityMatrix and draw\r\n" +
+                "```\r\n " +
+                "Output:\r\n" +
+                "<table><tr><td rowspan=\"4\" style=\"vertical-align: middle;\">[</td><td>(1/2)</td><td>(√2/4)</td><td>0</td><td>(√2i/4)</td><td rowspan=\"4\" style=\"vertical-align: middle;\">]</td></tr><tr><td>(√2/4)</td><td>(1/4)</td><td>0</td><td>(i/4)</td></tr><tr><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>(-√2i/4)</td><td>(-i/4)</td><td>0</td><td>(1/4)</td></tr></table>"
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "file.svg",
+        label: function() {
+            return this.name||"Plot latex";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="plot-latex">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="plot-latex">
+    <p>A node that show how to draw a Statevector object and a DensityMatrix</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Statevector
+        <dl class="message-properties">
+          <dt>payload.result.statevector <span class="property-type">string</span></dt>
+          <dd>A string representaton of an ASCII art version of the Statevector object</dd>
+        </dl>
+      </li>
+      <li>Density Matrix
+        <dl class="message-properties">
+          <dt>payload.result.density_matrix <span class="property-type">string</span></dt>
+          <dd>A string representaton of an ASCII art version of the DensityMatrix.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+        This node shows how Qiskit can render LaTeX representations of both <code>Statevector</code> and 
+        <code>DensityMatrix</code> objects.
+    </p>
+</script>
