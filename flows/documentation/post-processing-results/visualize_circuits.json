@@ -2,7 +2,7 @@
     {
         "id": "ae4c0b28ad13f1f3",
         "type": "tab",
-        "label": "Visualize circuits",
+        "label": "Vizualize Circuits",
         "disabled": false,
         "info": "",
         "env": []
@@ -30,12 +30,12 @@
         "z": "ae4c0b28ad13f1f3",
         "name": "Default Draw",
         "info": "# [Visualize circuits guide.](https://docs.quantum.ibm.com/guides/visualize-circuits#)\r\n&nbsp;\r\n# The <font style='background: lightgrey'>_`QuantumCircuit`_</font>  class supports drawing circuits through the <font style='background: lightgrey'>_`draw()`_</font> method, or by printing the the circuit object. By default, both render an ASCII art version of the circuit diagram.\r\n# Note that <font style='background: lightgrey'>_`print`_</font> returns <font style='background: lightgrey'>_`None`_</font> but has the side effect of printing the diagram, whereas <font style='background: lightgrey'>_`QuantumCircuit.draw`_</font> returns the diagram with no side effects. Since Jupyter notebooks display the output of the last line of each cell, they appear to have the same effect.\r\n```python\r\nfrom qiskit import QuantumCircuit\r\n\r\n# Build a quantum circuit \r\ncircuit = QuantumCircuit(3, 3)\r\ncircuit.x(1)\r\ncircuit.h(range(3))\r\ncircuit.cx(0, 1)\r\ncircuit.measure(range(3), range(3));\r\n \r\n#You can also use print(circuit) herecirc.draw(output=\"mpl\")\r\n```\r\n ",
-        "x": 590,
+        "x": 550,
         "y": 80,
         "wires": [
             [
-                "6c81a904f9db6e8d",
-                "3184ba3565416f77"
+                "3184ba3565416f77",
+                "1046011d9d56f352"
             ]
         ]
     },
@@ -45,7 +45,7 @@
         "z": "ae4c0b28ad13f1f3",
         "name": "Mpl Draw",
         "info": "# [Visualize circuits guide.](https://docs.quantum.ibm.com/guides/visualize-circuits#)\r\n&nbsp;\r\n# A text output is useful for quickly seeing the output while developing a circuit, but it doesn't provide the most flexibility. There are two alternative output renderers for the quantum circuit. One uses [Matplotlib](https://matplotlib.org/#) and the other uses [Latex](https://www.latex-project.org/#). The LaTeX renderer requires the qcircuit package. Select these renderers by setting the \"output\" argument argument to the strings <font style='background: lightgrey'>_`mpl`_</font> and <font style='background: lightgrey'>_`latex`_</font>. This node shows how to draw using the mpl argument.\r\n```python\r\nfrom qiskit import QuantumCircuit\r\n \r\n# Build a quantum circuit \r\ncircuit = QuantumCircuit(3, 3)\r\ncircuit.x(1)\r\ncircuit.h(range(3))\r\ncircuit.cx(0, 1)\r\ncircuit.measure(range(3), range(3));\r\n \r\n# Matplotlib drawing\r\ncirc.draw(output='mpl')\r\n#To create a Latex drawing, replace 'mpl' with 'latex'\r\n```\r\n ",
-        "x": 820,
+        "x": 960,
         "y": 80,
         "wires": [
             [
@@ -59,7 +59,7 @@
         "z": "ae4c0b28ad13f1f3",
         "name": "Control Circuit Drawings",
         "info": "# [Visualize circuits guide](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit)\r\n# By default, the <font style='background: lightgrey'>_`draw()`_</font> method returns the rendered image as an object and does not output anything. The exact class returned depends on the output specified: <font style='background: lightgrey'>_`'text'`_</font> (the default) returns a <font style='background: lightgrey'>_`TextDrawer`_</font> object, <font style='background: lightgrey'>_`'mpl'`_</font> retruns a <font style='background: lightgrey'>_`matplotlib.Figure`_</font> object, and retruns a <font style='background: lightgrey'>_`latex `_</font> returns a retruns a <font style='background: lightgrey'>_`PIL.Image`_</font> object. Jupyter notebooks understand these return types and render them properly, but when running outside of Jupyter, images will not display automatically.\r\n# The <font style='background: lightgrey'>_`draw()`_</font> method has optional arguments to display or save the output. When specified, the <font style='background: lightgrey'>_`filename`_</font> kwarg takes a path to which it saves the rendered output. Alternatively, if you're using the <font style='background: lightgrey'>_`mpl`_</font> or <font style='background: lightgrey'>_`latex`_</font> outputs, you can use the <font style='background: lightgrey'>_`interactive `_</font> kwarg to open the image in a new window (this will not always work from within a notebook).",
-        "x": 630,
+        "x": 590,
         "y": 360,
         "wires": [
             []
@@ -71,12 +71,12 @@
         "z": "ae4c0b28ad13f1f3",
         "name": "Barriers Mpl Draw",
         "info": "# [Visualize circuits guide.](https://docs.quantum.ibm.com/guides/visualize-circuits#)\r\n&nbsp;\r\n# Depending on the output, there are also options to customize the circuit diagram. It is possibleto disable plot barriers and reverse bit order. The first two options are shared among all three backends. They allow you to configure both the bit orders and whether or not you draw barriers. These can be set by the <font style='background: lightgrey'>_`reverse_bits`_</font> kwarg and <font style='background: lightgrey'>_`plot_barriers`_</font> kwarg, respectively.\r\n# This node shows a bigger circuit diagram that contains plot barriers and normal bit ordering. The following examples work with any output renderer; mpl is used here for brevity.\r\n```python\r\nfrom qiskit import QuantumCircuit, ClassicalRegister\r\n\r\n# Draw a new circuit with barriers and more registers\r\nq_a = QuantumRegister(3, name=\"a\")\r\nq_b = QuantumRegister(5, name=\"b\")\r\nc_a = ClassicalRegister(3)\r\nc_b = ClassicalRegister(5)\r\n\r\ncircuit = QuantumCircuit(q_a, q_b, c_a, c_b)\r\ncircuit.x(q_a[1])\r\ncircuit.x(q_b[1])\r\ncircuit.x(q_b[2])\r\ncircuit.x(q_b[4])\r\ncircuit.barrier()\r\ncircuit.h(q_a)\r\ncircuit.barrier(q_a)\r\ncircuit.h(q_b)\r\ncircuit.cswap(q_b[0], q_b[1], q_b[2])\r\ncircuit.cswap(q_b[2], q_b[3], q_b[4])\r\ncircuit.cswap(q_b[3], q_b[4], q_b[0])\r\ncircuit.barrier(q_b)\r\ncircuit.measure(q_a, c_a)\r\ncircuit.measure(q_b, c_b);\r\n\r\n# Draw the circuit\r\ncircuit.draw(output=\"mpl\")\r\n```\r\n ",
-        "x": 610,
+        "x": 570,
         "y": 560,
         "wires": [
             [
-                "302878defe8bf910",
-                "670724ee1d33ddac"
+                "670724ee1d33ddac",
+                "a0e7cda971fa5235"
             ]
         ]
     },
@@ -86,12 +86,12 @@
         "z": "ae4c0b28ad13f1f3",
         "name": "Reverse bits mpl draw",
         "info": "# [Visualize circuits guide.](https://docs.quantum.ibm.com/guides/visualize-circuits#)\r\n&nbsp;\r\n# This node shows a bigger circuit diagram using matplotlib, plot barriers and reverse bit ordering.\r\n```python\r\nfrom qiskit import QuantumCircuit, ClassicalRegister\r\n \r\n# Draw a new circuit with barriers and more registers\r\nq_a = QuantumRegister(3, name=\"a\")\r\nq_b = QuantumRegister(5, name=\"b\")\r\nc_a = ClassicalRegister(3)\r\nc_b = ClassicalRegister(5)\r\n \r\ncircuit = QuantumCircuit(q_a, q_b, c_a, c_b)\r\ncircuit.x(q_a[1])\r\ncircuit.x(q_b[1])\r\ncircuit.x(q_b[2])\r\ncircuit.x(q_b[4])\r\ncircuit.barrier()\r\ncircuit.h(q_a)\r\ncircuit.barrier(q_a)\r\ncircuit.h(q_b)\r\ncircuit.cswap(q_b[0], q_b[1], q_b[2])\r\ncircuit.cswap(q_b[2], q_b[3], q_b[4])\r\ncircuit.cswap(q_b[3], q_b[4], q_b[0])\r\ncircuit.barrier(q_b)\r\ncircuit.measure(q_a, c_a)\r\ncircuit.measure(q_b, c_b);\r\n \r\n# Draw the circuit with reversed bit order\r\ncircuit.draw(output=\"mpl\", reverse_bits=True)\r\n```\r\n ",
-        "x": 900,
+        "x": 1000,
         "y": 560,
         "wires": [
             [
-                "b38606da071814fa",
-                "5375859062e2b553"
+                "5375859062e2b553",
+                "3b56ae192b477ca6"
             ]
         ]
     },
@@ -101,7 +101,7 @@
         "z": "ae4c0b28ad13f1f3",
         "name": "No Barriers Mpl Draw",
         "info": "# [Visualize circuits guide.](https://docs.quantum.ibm.com/guides/visualize-circuits#)\r\n&nbsp;\r\n# This node shows a bigger circuit diagram using matplotlib, no plot barriers and normal bit ordering.\r\n```python\r\nfrom qiskit import QuantumCircuit, ClassicalRegister\r\n \r\n# Draw a new circuit with barriers and more registers\r\nq_a = QuantumRegister(3, name=\"a\")\r\nq_b = QuantumRegister(5, name=\"b\")\r\nc_a = ClassicalRegister(3)\r\nc_b = ClassicalRegister(5)\r\n \r\ncircuit = QuantumCircuit(q_a, q_b, c_a, c_b)\r\ncircuit.x(q_a[1])\r\ncircuit.x(q_b[1])\r\ncircuit.x(q_b[2])\r\ncircuit.x(q_b[4])\r\ncircuit.barrier()\r\ncircuit.h(q_a)\r\ncircuit.barrier(q_a)\r\ncircuit.h(q_b)\r\ncircuit.cswap(q_b[0], q_b[1], q_b[2])\r\ncircuit.cswap(q_b[2], q_b[3], q_b[4])\r\ncircuit.cswap(q_b[3], q_b[4], q_b[0])\r\ncircuit.barrier(q_b)\r\ncircuit.measure(q_a, c_a)\r\ncircuit.measure(q_b, c_b);\r\n\r\n# Draw the circuit\r\ncircuit.draw(output=\"mpl\", plot_barriers=False)\r\n```\r\n ",
-        "x": 1200,
+        "x": 1440,
         "y": 560,
         "wires": [
             [
@@ -115,12 +115,12 @@
         "z": "ae4c0b28ad13f1f3",
         "name": "Fold Draw",
         "info": "# [Visualize circuits guide.](https://docs.quantum.ibm.com/guides/visualize-circuits#)\r\n&nbsp;\r\n# Some available customizing options are specific to a renderer.\r\n# The <font style='background: lightgrey'>_`fold`_</font> argument sets a maximum width for the output. In the The <font style='background: lightgrey'>_`text`_</font> renderer, this sets the length of the lines of the diagram before it is wrapped to the next line. When using the 'mpl' renderer, this is the number of (visual) layers before folding to the next line.\r\n# This node shows a text output rendering for drawing a quantum circuit using <font style='background: lightgrey'>_`circuit.draw()`_</font> and the <font style='background: lightgrey'>_`fold`_</font> argument. The output is the diagram in text format and sets the maximum width for the output.\r\n```python\r\nfrom qiskit import QuantumCircuit\r\n \r\ncircuit = QuantumCircuit(1) \r\nfor _ in range(10):\r\n    circuit.h(0)\r\n# limit line length to 40 characters\r\ncircuit.draw(output=\"text\", fold=40)\r\n```\r\n ",
-        "x": 590,
+        "x": 550,
         "y": 1020,
         "wires": [
             [
-                "1ee335a0293b8a20",
-                "444f7da2d11b7bb8"
+                "444f7da2d11b7bb8",
+                "57cadc32055493c5"
             ]
         ]
     },
@@ -130,12 +130,12 @@
         "z": "ae4c0b28ad13f1f3",
         "name": "Style Draw",
         "info": "# [Visualize circuits guide.](https://docs.quantum.ibm.com/guides/visualize-circuits#)\r\n&nbsp;\r\n# Some available customizing options are specific to a renderer.\r\n# The <font style='background: lightgrey'>_`mpl`_</font> renderer has the <font style='background: lightgrey'>_`style`_</font> kwarg, which changes the colors and outlines. See the [API documentation](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#draw#) for more details.\r\n# This node shows a text output rendering for drawing a quantum circuit using <font style='background: lightgrey'>_`circuit.draw()`_</font> and the <font style='background: lightgrey'>_`style`_</font> argument. The output is a diagram using the mpl renderer with changes to the colors and outlines.\r\n```python\r\nfrom qiskit import QuantumCircuit\r\n \r\ncircuit = QuantumCircuit(1) \r\nfor _ in range(10):\r\n    circuit.h(0)\r\nstyle = {\"backgroundcolor\": \"lightgreen\"}\r\ncircuit.draw(output=\"mpl\", style=style)\r\n```\r\n ",
-        "x": 830,
+        "x": 930,
         "y": 1020,
         "wires": [
             [
-                "2717ada7f4bb0d41",
-                "e1ea614da2519706"
+                "e1ea614da2519706",
+                "2a90afbdeaa81960"
             ]
         ]
     },
@@ -145,7 +145,7 @@
         "z": "ae4c0b28ad13f1f3",
         "name": "Scale Draw",
         "info": "# [Visualize circuits guide.](https://docs.quantum.ibm.com/guides/visualize-circuits#)\r\n&nbsp;\r\n# Some available customizing options are specific to a renderer.\r\n# The <font style='background: lightgrey'>_`scale`_</font> option scales the output of the <font style='background: lightgrey'>_`mpl`_</font> and <font style='background: lightgrey'>_`latex`_</font> renders.\r\n# This node shows a text output rendering for drawing a quantum circuit using <font style='background: lightgrey'>_`circuit.draw()`_</font> and the <font style='background: lightgrey'>_`scale`_</font> argument. The output is a diagram with the mpl renderer with a scaled output.\r\n```python\r\nfrom qiskit import QuantumCircuit\r\n \r\ncircuit = QuantumCircuit(1) \r\nfor _ in range(10):\r\n    circuit.h(0)\r\n# Scale the mpl output to 1/2 the normal size\r\ncircuit.draw(output=\"mpl\", scale=0.5)\r\n```\r\n ",
-        "x": 1070,
+        "x": 1310,
         "y": 1020,
         "wires": [
             [
@@ -160,7 +160,7 @@
         "z": "ae4c0b28ad13f1f3",
         "name": "Standalone Draw",
         "info": "# [Visualize circuits guide.](https://docs.quantum.ibm.com/guides/visualize-circuits#)\r\n&nbsp;\r\n# If you have an application where you prefer to draw a circuit with a self-contained function instead of as a method of a circuit object, you can directly use the <font style='background: lightgrey'>_`circuit_drawer()`_</font> function, which is part of the public stable interface from <font style='background: lightgrey'>_`qiskit.visualization`_</font>. The function behaves identically to the <font style='background: lightgrey'>_`circuit.draw()`_</font> method, except that it takes in a circuit object as a required argument.\r\n```python\r\nfrom qiskit import QuantumCircuit\r\nfrom qiskit.visualization import circuit_drawer\r\n \r\ncircuit = QuantumCircuit(1) \r\nfor _ in range(10):\r\n    circuit.h(0)\r\ncircuit_drawer(circuit, output=\"mpl\", plot_barriers=False)\r\n```\r\n ",
-        "x": 1330,
+        "x": 1710,
         "y": 1020,
         "wires": [
             [
@@ -281,7 +281,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 810,
+        "x": 770,
         "y": 160,
         "wires": []
     },
@@ -297,7 +297,7 @@
         "active": true,
         "pass": false,
         "outputs": 0,
-        "x": 1070,
+        "x": 1150,
         "y": 160,
         "wires": []
     },
@@ -313,7 +313,7 @@
         "active": true,
         "pass": false,
         "outputs": 0,
-        "x": 720,
+        "x": 780,
         "y": 640,
         "wires": []
     },
@@ -329,7 +329,7 @@
         "active": true,
         "pass": false,
         "outputs": 0,
-        "x": 1200,
+        "x": 1300,
         "y": 640,
         "wires": []
     },
@@ -345,7 +345,7 @@
         "active": true,
         "pass": false,
         "outputs": 0,
-        "x": 1580,
+        "x": 1720,
         "y": 640,
         "wires": []
     },
@@ -361,7 +361,7 @@
         "active": true,
         "pass": false,
         "outputs": 0,
-        "x": 960,
+        "x": 940,
         "y": 1100,
         "wires": []
     },
@@ -377,7 +377,7 @@
         "active": true,
         "pass": false,
         "outputs": 0,
-        "x": 1380,
+        "x": 1420,
         "y": 1100,
         "wires": []
     },
@@ -393,7 +393,7 @@
         "active": true,
         "pass": false,
         "outputs": 0,
-        "x": 1700,
+        "x": 1900,
         "y": 1100,
         "wires": []
     },
@@ -410,8 +410,84 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 670,
+        "x": 630,
         "y": 1100,
         "wires": []
+    },
+    {
+        "id": "1046011d9d56f352",
+        "type": "move-to-next-node",
+        "z": "ae4c0b28ad13f1f3",
+        "name": "Next",
+        "x": 770,
+        "y": 80,
+        "wires": [
+            [
+                "6c81a904f9db6e8d"
+            ]
+        ]
+    },
+    {
+        "id": "a0e7cda971fa5235",
+        "type": "move-to-next-node",
+        "z": "ae4c0b28ad13f1f3",
+        "name": "Next",
+        "x": 810,
+        "y": 560,
+        "wires": [
+            [
+                "302878defe8bf910"
+            ]
+        ]
+    },
+    {
+        "id": "3b56ae192b477ca6",
+        "type": "move-to-next-node",
+        "z": "ae4c0b28ad13f1f3",
+        "name": "Next",
+        "x": 1230,
+        "y": 560,
+        "wires": [
+            [
+                "b38606da071814fa"
+            ]
+        ]
+    },
+    {
+        "id": "57cadc32055493c5",
+        "type": "move-to-next-node",
+        "z": "ae4c0b28ad13f1f3",
+        "name": "Next",
+        "x": 750,
+        "y": 1020,
+        "wires": [
+            [
+                "1ee335a0293b8a20"
+            ]
+        ]
+    },
+    {
+        "id": "2a90afbdeaa81960",
+        "type": "move-to-next-node",
+        "z": "ae4c0b28ad13f1f3",
+        "name": "Next",
+        "x": 1130,
+        "y": 1020,
+        "wires": [
+            [
+                "2717ada7f4bb0d41"
+            ]
+        ]
+    },
+    {
+        "id": "9a81ca2a85327385",
+        "type": "move-to-next-node",
+        "z": "ae4c0b28ad13f1f3",
+        "name": "Next",
+        "x": 1510,
+        "y": 1020,
+        "wires": [
+            []
+        ]
     }
 ]
