@@ -9,7 +9,13 @@ module.exports = function (RED) {
         "apply_optimizer",
         {}
       );
-      apply_optimizer_component.parameters["var_result"] = "optimizer_result";
+      apply_optimizer_component.parameters["variable"] = config.variable;
+      apply_optimizer_component.parameters["cost_function"] =
+        config.costFunction;
+      apply_optimizer_component.parameters["circuit_name"] = config.circuit;
+      apply_optimizer_component.parameters["param_vector"] = config.paramVector;
+      apply_optimizer_component.parameters["hamiltonian"] = config.hamiltonian;
+      apply_optimizer_component.parameters["estimator"] = config.estimator;
       apply_optimizer_component.parameters["optimizer"] = config.optimizer;
       component.addComponent(msg, apply_optimizer_component);
       node.send(msg);

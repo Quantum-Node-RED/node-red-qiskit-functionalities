@@ -347,7 +347,7 @@ coeffs = {coeffs}
                 shift += 1
 
     return SparsePauliOp(pauli_list, coeffs=coeffs), shift""",
-        calling_function="qubit_op, offset = get_operator(weight_matrix)"
+        calling_function="{operator_name}, offset = get_operator(weight_matrix)"
     ),
 
     "define_sampler": Code_Component(
@@ -357,20 +357,17 @@ coeffs = {coeffs}
     ),
 
     "apply_optimizer": Code_Component(
-        import_statement=[Component_Dependency.Optimizers],
+        import_statement=[Component_Dependency.Minimize],
         function="",
-        calling_function="{var_result} = {optimizer}.minimize({objective_function}, x0={initial_point})"
+        calling_function="""{variable}= minimize({cost_function}, initial_params, args=({circuit_name}, {param_vector}, {hamiltonian}, {estimator}), method="{optimizer}")"""
     ),
 
     "apply_energy_cost_objective_function": Code_Component(
         import_statement=[Component_Dependency.Numpy],
-        function="""def objective_function(params):
-        qc, _ = ansatz(params)
-        job = sampler.run(qc)
-        result = job.result()
-        counts = result.quasi_dists[0].binary_probabilities()
-        energy = calculate_expectation_value(counts, hamiltonian)
-        return np.real(energy)
+        function="""def objective_function(params, qc, param_vector, hamiltonian, estimator):
+    assigned_qc = qc.assign_parameters({{param_vector: params}})
+    energy = estimator.run(circuits=[assigned_qc], observables=[hamiltonian]).result().values[0]
+    return np.real(energy)
         """,
         calling_function=""
     ),
@@ -403,6 +400,20 @@ coeffs = {coeffs}
         function="",
         calling_function="{var_result} = QAOA({sampler}, {optimizer}(), reps={reps})"
     ),
+
+    "define_parameter": Code_Component(
+        import_statement=[Component_Dependency.ParameterVector],
+        function="",
+        calling_function="""initial_params = {initial_param}
+{variable} = ParameterVector('θ', length={number_of_parameter} * {number_of_reps})"""
+    ),
+
+    "hyper_parameters": Code_Component(
+        import_statement=[],
+        function="",
+        calling_function="{variable} = {value}"
+    ),
+
     # VQE: 
     "initialize_parameters": Code_Component(
         import_statement=[
@@ -419,7 +430,7 @@ initial_params = 2 * np.pi * np.random.random({num_thetas})
             Component_Dependency.Estimator,
         ],
         function="",
-        calling_function="estimator = Estimator()\n"
+        calling_function="{variable} = Estimator()\n"
     ),
     "minimize-cost-function": Code_Component(
         import_statement=[

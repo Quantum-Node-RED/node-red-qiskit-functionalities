@@ -19,13 +19,13 @@ module.exports = function (RED) {
 
       // Construct the Hamiltonian
       const hamiltonian = constructHamiltonian(terms, coefficients);
-      msg.payload.hamiltonian = hamiltonian;
 
       // Add the Hamiltonian Construction component
       const apply_hamiltonian_component = new component.Component(
         "apply_hamiltonian",
         {}
       );
+      apply_hamiltonian_component.parameters["operator_name"] = config.operator;
       component.addComponent(msg, apply_hamiltonian_component);
 
       node.send(msg);
@@ -39,7 +39,7 @@ module.exports = function (RED) {
     terms.forEach((term, index) => {
       hamiltonianTerms.push({
         coeff: coefficients[index],
-        pauli: term
+        pauli: term,
       });
     });
 

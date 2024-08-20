@@ -1,16 +1,26 @@
-import io
-import json
-from qiskit import QuantumCircuit
-import base64
-import matplotlib.pyplot as plt
-import base64
-import io
-from qiskit.primitives import Sampler
-from qiskit.quantum_info import Pauli
-from qiskit.result import QuasiDistribution
-from qiskit import QuantumCircuit
 import numpy as np
-from qiskit.quantum_info import SparsePauliOp
+from qiskit import QuantumCircuit
+from qiskit.circuit import ParameterVector
+from qiskit.primitives import Estimator, Sampler
+from qiskit.quantum_info import Pauli, SparsePauliOp
+from qiskit.result import QuasiDistribution
+from scipy.optimize import minimize
+
+def extract_most_likely_state(state_vector, num_qubits):
+    if isinstance(state_vector, QuasiDistribution):
+        values = list(state_vector.values())
+    else:
+        values = state_vector
+    k = np.argmax(np.abs(values))
+    result = np.binary_repr(k, num_qubits)
+    x = [int(digit) for digit in result]
+    x.reverse()
+    return np.asarray(x)
+
+def objective_function(params, qc, param_vector, hamiltonian, estimator):
+    assigned_qc = qc.assign_parameters({param_vector: params})
+    energy = estimator.run(circuits=[assigned_qc], observables=[hamiltonian]).result().values[0]
+    return np.real(energy)
 
 def get_operator(weight_matrix):
     num_nodes = len(weight_matrix)
@@ -43,94 +53,75 @@ def get_operator(weight_matrix):
 
     return SparsePauliOp(pauli_list, coeffs=coeffs), shift
 
-def execute_circuit_with_sampler(qc, sampler):
-        job = sampler.run(qc)
-        result = job.result()
-        return result
-
 def objective_value(x, w):
     X = np.outer(x, (1 - x))
     w_01 = np.where(w != 0, 1, 0)
     return np.sum(w_01 * X)
 
-def extract_most_likely_state(state_vector, num_qubits):
-    if isinstance(state_vector, QuasiDistribution):
-        values = list(state_vector.values())
-    else:
-        values = state_vector
-    k = np.argmax(np.abs(values))
-    result = np.binary_repr(k, num_qubits)
-    x = [int(digit) for digit in result]
-    x.reverse()
-    return np.asarray(x)
+def execute_circuit_with_sampler(qc, sampler):
+        job = sampler.run(qc)
+        result = job.result()
+        return result
 
 import traceback
 try:
     weight_matrix = np.array(eval("[[0.0, 1.0, 1.0, 0.0], [1.0, 0.0, 1.0, 1.0], [1.0, 1.0, 0.0, 1.0], [0.0, 1.0, 1.0, 0.0]]"))
-    qubit_op, offset = get_operator(weight_matrix)
+    operator, offset = get_operator(weight_matrix)
     sampler = Sampler()
+    initial_params = [0.1, 0.2, 0.3, 0.4]
+    param_vector = ParameterVector('θ', length=2 * 2)
     # Quantum Circuit Begin qc
     qc = QuantumCircuit(4, 4)
-    qc.h(0)
+    # Circuit Loop: Iterations 2
+    # Circuit Loop Iteration 1
     qc.rx(0.647, 0)
-    qc.h(1)
-    qc.cx(0, 1)
-    qc.rz(-1.12, 1)
-    qc.cx(0, 1)
-    qc.cx(0, 1)
-    qc.rz(2.25, 1)
-    qc.cx(0, 1)
-    qc.cx(0, 1)
-    qc.rz(2.25, 1)
-    qc.cx(0, 1)
+    qc.rz(0.1*2*0.1, 1)
+    qc.rz(0.1*2*0.1, 1)
+    qc.rz(0.1*2*0.1, 1)
     qc.rx(0.647, 1)
-    qc.h(2)
-    qc.cx(0, 2)
-    qc.rz(-1.12, 2)
-    qc.cx(0, 2)
-    qc.cx(1, 2)
-    qc.rz(-1.12, 2)
-    qc.cx(1, 2)
-    qc.cx(0, 2)
-    qc.rz(2.25, 2)
-    qc.cx(0, 2)
-    qc.cx(1, 2)
-    qc.rz(2.25, 2)
-    qc.cx(1, 2)
-    qc.cx(0, 2)
-    qc.rz(2.25, 2)
-    qc.cx(0, 2)
-    qc.cx(1, 2)
-    qc.rz(2.25, 2)
-    qc.cx(1, 2)
+    qc.rz(0.1*2*0.1, 2)
+    qc.rz(0.1*2*0.1, 2)
+    qc.rz(0.1*2*0.1, 2)
+    qc.rz(0.1*2*0.1, 2)
+    qc.rz(0.1*2*0.1, 2)
+    qc.rz(0.1*2*0.1, 2)
     qc.rx(0.647, 2)
-    qc.h(3)
-    qc.cx(1, 3)
-    qc.rz(-1.12, 3)
-    qc.cx(1, 3)
-    qc.cx(2, 3)
-    qc.rz(-1.12, 3)
-    qc.cx(2, 3)
-    qc.cx(0, 3)
-    qc.rz(2.25, 3)
-    qc.cx(0, 3)
-    qc.cx(1, 3)
-    qc.rz(2.25, 3)
-    qc.cx(1, 3)
-    qc.cx(2, 3)
-    qc.rz(2.25, 3)
-    qc.cx(2, 3)
-    qc.cx(0, 3)
-    qc.rz(2.25, 3)
-    qc.cx(0, 3)
-    qc.cx(1, 3)
-    qc.rz(2.25, 3)
-    qc.cx(1, 3)
-    qc.cx(2, 3)
-    qc.rz(2.25, 3)
-    qc.cx(2, 3)
+    qc.rz(0.1*2*0.1, 3)
+    qc.rz(0.1*2*0.1, 3)
+    qc.rz(0.1*2*0.1, 3)
+    qc.rz(0.1*2*0.1, 3)
+    qc.rz(0.1*2*0.1, 3)
+    qc.rz(0.1*2*0.1, 3)
+    qc.rz(0.1*2*0.1, 3)
+    qc.rz(0.1*2*0.1, 3)
     qc.rx(0.647, 3)
+    # Circuit Loop Iteration 2
+    qc.rx(0.647, 0)
+    qc.rz(0.2*2*0.1, 1)
+    qc.rz(0.2*2*0.1, 1)
+    qc.rz(0.2*2*0.1, 1)
+    qc.rx(0.647, 1)
+    qc.rz(0.2*2*0.1, 2)
+    qc.rz(0.2*2*0.1, 2)
+    qc.rz(0.2*2*0.1, 2)
+    qc.rz(0.2*2*0.1, 2)
+    qc.rz(0.2*2*0.1, 2)
+    qc.rz(0.2*2*0.1, 2)
+    qc.rx(0.647, 2)
+    qc.rz(0.2*2*0.1, 3)
+    qc.rz(0.2*2*0.1, 3)
+    qc.rz(0.2*2*0.1, 3)
+    qc.rz(0.2*2*0.1, 3)
+    qc.rz(0.2*2*0.1, 3)
+    qc.rz(0.2*2*0.1, 3)
+    qc.rz(0.2*2*0.1, 3)
+    qc.rz(0.2*2*0.1, 3)
+    qc.rx(0.647, 3)
+    # Circuit Loop End
     # Quantum Circuit End
+    estimator = Estimator()
+    
+    result= minimize(objective_function, initial_params, args=(qc, param_vector, operator, estimator), method="COBYLA")
     qc.measure(range(4), range(4))
     optimised_result = execute_circuit_with_sampler(qc, sampler)
     x = extract_most_likely_state(optimised_result.quasi_dists[0], 4)

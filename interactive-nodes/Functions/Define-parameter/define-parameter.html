@@ -1,0 +1,63 @@
+<script type="text/javascript">
+  RED.nodes.registerType("define_parameter", {
+    category: "function",
+    color: "#E6BCB9",
+    defaults: {
+      name: { value: "" },
+      variable: { value: "" },
+      parameters: { value: "", required: true },
+      numberOfRepetitions: { value: 1 },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "function.svg",
+    label: function () {
+      return this.name || "define_parameter";
+    },
+    oneditprepare: function () {
+      $("#node-input-parameters").typedInput({
+        type: "json",
+        types: ["json"],
+      });
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="define_parameter">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-variable"><i class="fa fa-tag"></i> Variable</label>
+    <input type="text" id="node-input-variable" placeholder="Variable" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-parameters"
+      ><i class="fa fa-code"></i> Parameters</label
+    >
+    <input
+      type="text"
+      id="node-input-parameters"
+      placeholder='{"gamma":[1,2],"beta":[3,4]}'
+    />
+  </div>
+  <div class="form-row">
+    <label for="node-input-numberOfRepetitions"
+      ><i class="fa fa-tag"></i> Number of repetitions</label
+    >
+    <input
+      type="number"
+      id="node-input-numberOfRepetitions"
+      placeholder="Number of repetitions"
+    />
+  </div>
+  <div class="form-tips">
+    Enter parameters as a JSON object with parameter names as keys and arrays as
+    values.
+  </div>
+</script>
+
+<script type="text/html" data-help-name="define_parameter">
+  <p></p>
+</script>

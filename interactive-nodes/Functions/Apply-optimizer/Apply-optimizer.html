@@ -4,6 +4,12 @@
     color: "#E6BCB9",
     defaults: {
       name: { value: "" },
+      variable: { value: "" },
+      costFunction: { value: "" },
+      circuit: { value: "" },
+      paramVector: { value: "" },
+      hamiltonian: { value: "" },
+      estimator: { value: "" },
       optimizer: { value: "COBLYA", required: true },
     },
     inputs: 1,
@@ -33,6 +39,46 @@
   <div class="form-row">
     <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
     <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-variable"><i class="fa fa-tag"></i>Variable</label>
+    <input type="text" id="node-input-variable" placeholder="Variable" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-costFunction"
+      ><i class="fa fa-tag"></i>Cost function</label
+    >
+    <input
+      type="text"
+      id="node-input-costFunction"
+      placeholder="Cost function"
+    />
+  </div>
+  <div class="form-row">
+    <label for="node-input-circuit"
+      ><i class="fa fa-tag"></i>Circuit name</label
+    >
+    <input type="text" id="node-input-circuit" placeholder="Circuit name" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-paramVector"
+      ><i class="fa fa-tag"></i>Param vector</label
+    >
+    <input
+      type="text"
+      id="node-input-paramVector"
+      placeholder="Parameter vector"
+    />
+  </div>
+  <div class="form-row">
+    <label for="node-input-hamiltonian"
+      ><i class="fa fa-tag"></i>Hamiltonian</label
+    >
+    <input type="text" id="node-input-hamiltonian" placeholder="Hamiltonian" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-estimator"><i class="fa fa-tag"></i>Estimator</label>
+    <input type="text" id="node-input-estimator" placeholder="Estimator" />
   </div>
   <div class="form-row">
     <label for="node-input-optimizer"

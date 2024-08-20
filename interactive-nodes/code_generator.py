@@ -55,7 +55,7 @@ def traverse_structure(structure, import_statements, functions, calling_code, de
     stack=[]
     iterations = 0
     theta_count = 0
-    circuit_hyperparameters =None
+    circuit_parameters =None
     circuit_loop_conditions=None
     for  component in structure:
         component_name = component.get("name")
@@ -82,13 +82,13 @@ def traverse_structure(structure, import_statements, functions, calling_code, de
                 for i in range(iterations):
                     calling_code+=f"# Circuit Loop Iteration {i+1}\n"
                     for component__ in stack:
-                        if circuit_loop_conditions and circuit_hyperparameters:
-                            calling_code = process_component_with_condition(component__, circuit_loop_conditions, circuit_hyperparameters, i, calling_code)
+                        if circuit_loop_conditions and circuit_parameters:
+                            calling_code = process_component_with_condition(component__, circuit_loop_conditions, circuit_parameters, i, calling_code)
                         else:
                             calling_code = generate_qiskit_code(component__, import_statements, functions, calling_code, defined_functions)
                 in_circuit_loop=False
                 calling_code += f"# Circuit Loop End\n"
-        elif has_circuit_begin and in_circuit_loop and component_name!="qubit" and  component_name!="condition" and component_name!="hyper_parameters":
+        elif has_circuit_begin and in_circuit_loop and component_name!="qubit" and  component_name!="condition" and component_name!="define_parameter":
             stack.append(component)
         elif component_name == "RX_gate" or component_name == "RY_gate" or component_name == "RZ_gate":
             if (component['parameters']['mode'] == "parameters"):
@@ -100,11 +100,12 @@ def traverse_structure(structure, import_statements, functions, calling_code, de
                 circuit_loop_conditions=json.loads(component['parameters']['condition'])
             except Exception as e:
                 calling_code+=f"[Error] Failed to parse condition {e}\n"
-        elif component_name == "hyper_parameters":
+        elif component_name == "define_parameter":
             try:
-                circuit_hyperparameters= json.loads(component['parameters']['hyper_parameters'])
+                circuit_parameters= json.loads(component['parameters']['parameters'])
+                calling_code = generate_qiskit_code(component, import_statements, functions, calling_code, defined_functions)
             except Exception as e:
-                calling_code+=f"[Error] Failed to parse hyper_parameters: {e}\n"
+                calling_code+=f"[Error] Failed to parse parameter: {e}\n"
         elif component_name == "qubit":
             continue
         else:
@@ -188,23 +189,23 @@ def save_code_as_image_base64(code_str):
     
     return image_base64
 
-def process_component_with_condition(component, conditions, hyperparameters, iteration_index, calling_code):
+def process_component_with_condition(component, conditions, parameters, iteration_index, calling_code):
     component_name = component.get("name")
 
-    # Check if hte component is in the condition
+    # Check if the component is in the condition
     if component_name in conditions:
         try:
             # For a particular component, there can be many conditions, ie component have many parameters thus many conditions
             for param_condition in conditions[component_name]:
                 parameter_name = param_condition["parameter"] 
                 value_expression = param_condition["value"]  
-                # Check for that paticular parameter in the hyperparameters
-                for hyperparam_name in hyperparameters:
-                    if hyperparam_name in value_expression:
-                        if len(hyperparameters[hyperparam_name]) > iteration_index:
-                            value_expression = value_expression.replace(hyperparam_name, f"{hyperparameters[hyperparam_name][iteration_index]}")
+                # Check for that paticular parameter in the parameters
+                for param_name in parameters:
+                    if param_name in value_expression:
+                        if len(parameters[param_name]) > iteration_index:
+                            value_expression = value_expression.replace(param_name, f"{parameters[param_name][iteration_index]}")
                         else:
-                            raise ValueError(f"Index {iteration_index} out of range for hyperparameter '{hyperparam_name}'")
+                            raise ValueError(f"Index {iteration_index} out of range for parameter '{param_name}'")
                 component['parameters'][parameter_name] = value_expression
                 calling_code = generate_qiskit_code(component, import_statements, functions, calling_code, defined_functions)
                 return calling_code
@@ -277,6 +278,4 @@ if __name__ == "__main__":
     # Cleanup the generated Python file
     # os.remove(file_path)
 
-    # Cleanup the generated Python file
-    # os.remove(file_name)
     print(json.dumps(result))

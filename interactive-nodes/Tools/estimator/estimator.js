@@ -3,12 +3,13 @@ module.exports = function (RED) {
   function estimatorNode(config) {
     RED.nodes.createNode(this, config);
     var node = this;
-    node.on('input', function (msg) {
+    node.on("input", function (msg) {
       msg.payload = msg.payload || {};
       const estimator_component = new component.Component("estimator", {});
+      estimator_component.parameters["variable"] = config.variable;
       component.addComponent(msg, estimator_component);
       node.send(msg);
     });
   }
   RED.nodes.registerType("estimator", estimatorNode);
-}
+};

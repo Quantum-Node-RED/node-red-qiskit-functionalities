@@ -10,5 +10,5 @@
   },
   "optimizer": "COBYLA",
   "algorithm": "QAOA",
-  "reps": "1"
+  "reps": "3"
 }
