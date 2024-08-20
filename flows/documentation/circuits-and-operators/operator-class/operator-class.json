@@ -34,8 +34,8 @@
         "y": 120,
         "wires": [
             [
-                "c55f656019442c51",
-                "b12a7b5327ddf373"
+                "b12a7b5327ddf373",
+                "662e6ab2dba8d7ad"
             ]
         ]
     },
@@ -45,12 +45,12 @@
         "z": "688947b1f997c20d",
         "name": "Operator for gate object",
         "info": "# [The Operator class guide](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n&nbsp;\r\nGate object example:\r\n```python\r\n# Create an Operator for a Gate object\r\noperator = Operator(CXGate())\r\n\r\nprintprint(f\"operator: {operator.to_matrix()}\")\r\nprint(f\"dim: {operator.dim}\")\r\nprint(f\"input_dims: {operator.input_dims()}\")\r\nprint(f\"output_dims: {operator.output_dims()}\")\r\n```\r\n ",
-        "x": 770,
+        "x": 890,
         "y": 120,
         "wires": [
             [
-                "1871d84babd1d31e",
-                "c3da2329f0987861"
+                "c3da2329f0987861",
+                "11ab5a9040e53d36"
             ]
         ]
     },
@@ -60,12 +60,12 @@
         "z": "688947b1f997c20d",
         "name": "Operator from parameterized Gate object",
         "info": "# [The Operator class guide](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n&nbsp;\r\nParameterized Gate object example:\r\n```python\r\n# Create an operator from a parameterized Gate object\r\noperator = Operator(RXGate(np.pi / 2))\r\n\r\nprintprint(f\"operator: {operator.to_matrix()}\")\r\nprint(f\"dim: {operator.dim}\")\r\nprint(f\"input_dims: {operator.input_dims()}\")\r\nprint(f\"output_dims: {operator.output_dims()}\")\r\n```\r\n ",
-        "x": 1120,
+        "x": 1360,
         "y": 120,
         "wires": [
             [
-                "9a17ef3221c43898",
-                "fe5a8530e4cff5e9"
+                "fe5a8530e4cff5e9",
+                "fe3bae1bd1ded9b5"
             ]
         ]
     },
@@ -75,7 +75,7 @@
         "z": "688947b1f997c20d",
         "name": "Operator from QuantumCircuit object",
         "info": "# [The Operator class guide](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n&nbsp;\r\nQuantumCircuit object example:\r\n```python\r\n# Create an operator from a QuantumCircuit object\r\ncirc = QuantumCircuit(10)\r\ncirc.h(0)\r\nfor j in range(1, 10):\r\n    circ.cx(j - 1, j)\r\n\r\n# Convert circuit to an operator by implicit unitary simulation\r\noperator = Operator(circ)\r\n\r\nprintprint(f\"operator: {operator.to_matrix()}\")\r\nprint(f\"dim: {operator.dim}\")\r\nprint(f\"input_dims: {operator.input_dims()}\")\r\nprint(f\"output_dims: {operator.output_dims()}\")\r\n```\r\n ",
-        "x": 1510,
+        "x": 1870,
         "y": 120,
         "wires": [
             [
@@ -115,8 +115,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 770,
-        "y": 180,
+        "x": 750,
+        "y": 200,
         "wires": []
     },
     {
@@ -132,8 +132,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1070,
-        "y": 180,
+        "x": 1170,
+        "y": 200,
         "wires": []
     },
     {
@@ -149,8 +149,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1490,
-        "y": 180,
+        "x": 1710,
+        "y": 200,
         "wires": []
     },
     {
@@ -166,8 +166,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1880,
-        "y": 180,
+        "x": 2220,
+        "y": 200,
         "wires": []
     },
     {
@@ -202,7 +202,7 @@
         "pass": false,
         "outputs": 0,
         "x": 790,
-        "y": 360,
+        "y": 380,
         "wires": []
     },
     {
@@ -217,8 +217,8 @@
         "active": true,
         "pass": false,
         "outputs": 0,
-        "x": 1130,
-        "y": 360,
+        "x": 1170,
+        "y": 380,
         "wires": []
     },
     {
@@ -232,8 +232,8 @@
         "y": 300,
         "wires": [
             [
-                "c15d14a93e95fbbb",
-                "bcb63c9e6b26ac7b"
+                "bcb63c9e6b26ac7b",
+                "45babf41140488c2"
             ]
         ]
     },
@@ -244,7 +244,7 @@
         "name": "Use Pauli in circuit",
         "info": "# [The Operator class guide](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n&nbsp;\r\n# Note that in the example in the previous node (Use unitary Operator in circuit) the operator is initialized from a <font style='background: GhostWhite'>_`Pauli`_</font> object. However, the <font style='background: GhostWhite'>_`Pauli`_</font> object may also be directly inserted into the circuit itself and will be converted into a sequence of single-qubit Pauli gates:\r\n```python\r\n# Add to a circuit\r\ncirc2 = QuantumCircuit(2, 2)\r\ncirc2.append(Pauli(\"XX\"), [0, 1])\r\ncirc2.measure([0, 1], [0, 1])\r\ncirc2.draw(\"mpl\")\r\n```\r\n ",
         "pauli": "XX",
-        "x": 910,
+        "x": 950,
         "y": 300,
         "wires": [
             [
@@ -261,11 +261,11 @@
         "pauli_1": "X",
         "pauli_2": "Z",
         "x": 480,
-        "y": 560,
+        "y": 640,
         "wires": [
             [
-                "342a2421bb26d752",
-                "c3bdb2ff031ec41d"
+                "c3bdb2ff031ec41d",
+                "a9744cb51538fccf"
             ]
         ]
     },
@@ -281,7 +281,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "x": 270,
-        "y": 560,
+        "y": 640,
         "wires": [
             [
                 "6e5220389df065a9"
@@ -296,12 +296,12 @@
         "info": "# [The Operator class guide](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n&nbsp;\r\n# Tensor expansion \r\n# A closely related operation is <font style='background: GhostWhite'>_`Operator.expand`_</font>, which acts like a tensor product but in the reverse order. Hence, for two operators *A* and *B* you have <font style='background: GhostWhite'>_`A.expand(B)`_</font> = *B⊗A* where the subsystems are indexed as matrix *A* on subsystem 0, and matrix *B* on subsystem 1.\r\n```python\r\nA = Operator(Pauli(\"X\"))\r\nB = Operator(Pauli(\"Z\"))\r\ntensor_expansion = A.expand(B)\r\n\r\nprintprint(f\"tensor_expansion: {tensor_expansion.to_matrix()}\")\r\nprint(f\"dim: {tensor_expansion.dim}\")\r\nprint(f\"input_dims: {tensor_expansion.input_dims()}\")\r\nprint(f\"output_dims: {tensor_expansion.output_dims()}\")\r\n```\r\n ",
         "pauli_1": "X",
         "pauli_2": "Z",
-        "x": 730,
-        "y": 560,
+        "x": 850,
+        "y": 640,
         "wires": [
             [
-                "93a878545582a5c1",
-                "edfe33383cee983a"
+                "edfe33383cee983a",
+                "8e89ca7db3966d91"
             ]
         ]
     },
@@ -313,12 +313,12 @@
         "info": "# [The Operator class guide](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n&nbsp;\r\n# Composition \r\n# You can also compose two operators *A* and *B* to implement matrix multiplication using the <font style='background: GhostWhite'>_`Operator.compose`_</font> method. <font style='background: GhostWhite'>_`A.compose(B)`_</font>  returns the operator with matrix *B.A*:\r\n Example 1, output not in node:\r\n ```python\r\nA = Operator(Pauli(\"X\"))\r\nB = Operator(Pauli(\"Z\"))\r\nprint(A.compose(B))\r\n```\r\n Output:\r\n ```python\r\nOperator([[ 0.+0.j,  1.+0.j],\r\n          [-1.+0.j,  0.+0.j]],\r\n         input_dims=(2,), output_dims=(2,))\r\n```\r\n # You can also compose in the reverse order by applying *B* in front of *A* using the <font style='background: GhostWhite'>_`front `_</font> kwarg of <font style='background: GhostWhite'>_`compose `_</font>: <font style='background: GhostWhite'>_`A.compose(B, front=True) `_</font> = *A.B*:\r\n Example 2, output in node:\r\n ```python\r\nA = Operator(Pauli(\"X\"))\r\nB = Operator(Pauli(\"Z\"))\r\ncomposition= A.compose(B, front=True)\r\n\r\nprintprint(f\"composition: {composition.to_matrix()}\")\r\nprint(f\"dim: {composition.dim}\")\r\nprint(f\"input_dims: {composition.input_dims()}\")\r\nprint(f\"output_dims: {composition.output_dims()}\")\r\n```\r\n ",
         "pauli_1": "X",
         "pauli_2": "Z",
-        "x": 970,
-        "y": 560,
+        "x": 1210,
+        "y": 640,
         "wires": [
             [
-                "7220576918a292dd",
-                "db808620838551a7"
+                "db808620838551a7",
+                "3823c3b8e40a07af"
             ]
         ]
     },
@@ -328,12 +328,12 @@
         "z": "688947b1f997c20d",
         "name": "Subsystem composition",
         "info": "# [The Operator class guide](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n&nbsp;\r\n# Subsystem composition \r\n# Note that the previous compose requires that the total output dimension of the first operator *A* is equal to the total input dimension of the composed operator *B* (and similarly, the output dimension of *B* must be equal to the input dimension of *A* when composing with <font style='background: GhostWhite'>_`front=True`_</font>).\r\n# You can also compose a smaller operator with a selection of subsystems on a larger operator using the <font style='background: GhostWhite'>_`qargs`_</font> kwarg of <font style='background: GhostWhite'>_`compose`_</font>, either with or without <font style='background: GhostWhite'>_`front=True`_</font>. In this case, the relevant input and output dimensions of the subsystems being composed must match. Note that the smaller operator must always be the argument of the <font style='background: GhostWhite'>_`compose`_</font> method.\r\n# For example, to compose a two-qubit gate with a three-qubit operator:\r\nExample 1, output in node:\r\n ```python\r\n# Compose XZ with a 3-qubit identity operator\r\nop = Operator(np.eye(2**3))\r\nXZ = Operator(Pauli(\"XZ\"))\r\nsubsystem_composition= op.compose(XZ, qargs=[0, 2])\r\n\r\nprintprint(f\"subsystem_composition: {subsystem_composition.to_matrix()}\")\r\nprint(f\"dim: {subsystem_composition.dim}\")\r\nprint(f\"input_dims: {subsystem_composition.input_dims()}\")\r\nprint(f\"output_dims: {subsystem_composition.output_dims()}\")\r\n```\r\n Example 2, output not in node:\r\n ```python\r\n# Compose YX in front of the previous operator\r\nop = Operator(np.eye(2**3))\r\nYX = Operator(Pauli(\"YX\"))\r\nprint(op.compose(YX, qargs=[0, 2], front=True))\r\n```\r\n Output:\r\n ```python\r\nOperator([[0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.-1.j, 0.+0.j, 0.+0.j],\r\n          [0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.-1.j, 0.+0.j, 0.+0.j, 0.+0.j],\r\n          [0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.-1.j],\r\n          [0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.-1.j, 0.+0.j],\r\n          [0.+0.j, 0.+1.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j],\r\n          [0.+1.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j],\r\n          [0.+0.j, 0.+0.j, 0.+0.j, 0.+1.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j],\r\n          [0.+0.j, 0.+0.j, 0.+1.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j]],\r\n         input_dims=(2, 2, 2), output_dims=(2, 2, 2))\r\n```\r\n ",
-        "x": 1210,
-        "y": 560,
+        "x": 1590,
+        "y": 640,
         "wires": [
             [
-                "10b460514c5b1c24",
-                "9554033052d8ddc1"
+                "9554033052d8ddc1",
+                "7e334817f7153e9e"
             ]
         ]
     },
@@ -343,8 +343,8 @@
         "z": "688947b1f997c20d",
         "name": "",
         "info": "# [The Operator class guide](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n&nbsp;\r\n# Linear combinations \r\n# Operators may also be combined using standard linear operators for addition,subtraction, and scalar multiplication by complex numbers. \r\nExample 1, output in node:\r\n ```python\r\nXX = Operator(Pauli(\"XX\"))\r\nYY = Operator(Pauli(\"YY\"))\r\nZZ = Operator(Pauli(\"ZZ\"))\r\nop = 0.5 * (XX + YY - 3 * ZZ)\r\n\r\nprintprint(f\"linear_combinations: {op.to_matrix()}\")\r\nprint(f\"dim: {op.dim}\")\r\nprint(f\"input_dims: {op.input_dims()}\")\r\nprint(f\"output_dims: {op.output_dims()}\")\r\n```\r\n # An important point is that while <font style='background: GhostWhite'>_`tensor`_</font>, <font style='background: GhostWhite'>_`expand`_</font>, and <font style='background: GhostWhite'>_`compose`_</font>, preserves the unitarity of unitary operators, linear combinations do not; hence, adding two unitary operators will, in general, result in a non-unitary operator:\r\nExample 2, output not in node:\r\n ```python\r\nprint(op.is_unitary())\r\n```\r\n Output:\r\n ```python\r\nFalse```\r\n ",
-        "x": 1500,
-        "y": 560,
+        "x": 2000,
+        "y": 640,
         "wires": [
             [
                 "7fd08b64068d8307"
@@ -364,8 +364,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 720,
-        "y": 640,
+        "x": 700,
+        "y": 720,
         "wires": []
     },
     {
@@ -381,8 +381,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 970,
-        "y": 640,
+        "x": 1090,
+        "y": 720,
         "wires": []
     },
     {
@@ -398,8 +398,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1210,
-        "y": 640,
+        "x": 1410,
+        "y": 720,
         "wires": []
     },
     {
@@ -415,8 +415,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1490,
-        "y": 640,
+        "x": 1850,
+        "y": 720,
         "wires": []
     },
     {
@@ -432,8 +432,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1750,
-        "y": 640,
+        "x": 2230,
+        "y": 720,
         "wires": []
     },
     {
@@ -442,8 +442,8 @@
         "z": "688947b1f997c20d",
         "name": "Equality Operator",
         "info": "# [The Operator class guide](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n&nbsp;\r\n# Compare Operators \r\n# Operators implement an equality method that can be used to check if two operators are approximately equal.\r\nexample 1:\r\n ```python\r\nequality_operator = Operator(Pauli(\"X\")) == Operator(XGate())\r\nprint(f\"equality_operator: {equality_operator}\")\r\n```\r\n # Note that this checks that each matrix element of the operators is approximately  equal; two unitaries that differ by a global phase are not considered equal:\r\nexample 2:\r\n ```python\r\nequality_operator_2 = Operator(XGate()) == np.exp(1j * 0.5) * Operator(XGate())\r\nprint(f\"equality_operator_with_different_global_phase: {equality_operator_2}\")\r\n```\r\n ",
-        "x": 730,
-        "y": 760,
+        "x": 850,
+        "y": 840,
         "wires": [
             [
                 "78a4213fa88e2426"
@@ -457,11 +457,11 @@
         "name": "Process fidelity",
         "info": "# [The Operator class guide](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n&nbsp;\r\n# Process fidelity \r\n# You can also compare operators using the <font style='background: GhostWhite'>_`process_fidelity`_</font> function from the Quantum Information module. This is an information-theoretic quantity for how close two quantum channels are to each other, and in the case of unitary operators it does not depend on global phase.\r\n```python\r\n# Two operators which differ only by phase\r\nop_a = Operator(XGate())\r\nop_b = np.exp(1j * 0.5) * Operator(XGate())\r\n\r\n# Compute process fidelity\r\nF = process_fidelity(op_a, op_b)\r\nprint(\"Process_fidelity =\", F)\r\n ```\r\n # Note that process fidelity is generally only a valid measure of closeness if the input operators are unitary (or CP in the case of quantum channels), and an exception is raised if the inputs are not CP.",
         "x": 480,
-        "y": 760,
+        "y": 840,
         "wires": [
             [
-                "86d1825877beacca",
-                "5c77f9d910c6587d"
+                "5c77f9d910c6587d",
+                "7399d2b2f566535d"
             ]
         ]
     },
@@ -477,7 +477,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "x": 270,
-        "y": 760,
+        "y": 840,
         "wires": [
             [
                 "0ca4bc915fac138c"
@@ -498,7 +498,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 740,
-        "y": 840,
+        "y": 920,
         "wires": []
     },
     {
@@ -514,8 +514,125 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1000,
-        "y": 840,
+        "x": 1080,
+        "y": 920,
         "wires": []
+    },
+    {
+        "id": "a9744cb51538fccf",
+        "type": "move-to-next-node",
+        "z": "688947b1f997c20d",
+        "name": "Next",
+        "x": 670,
+        "y": 640,
+        "wires": [
+            [
+                "342a2421bb26d752"
+            ]
+        ]
+    },
+    {
+        "id": "7399d2b2f566535d",
+        "type": "move-to-next-node",
+        "z": "688947b1f997c20d",
+        "name": "Next",
+        "x": 670,
+        "y": 840,
+        "wires": [
+            [
+                "86d1825877beacca"
+            ]
+        ]
+    },
+    {
+        "id": "45babf41140488c2",
+        "type": "move-to-next-node",
+        "z": "688947b1f997c20d",
+        "name": "Next",
+        "x": 770,
+        "y": 300,
+        "wires": [
+            [
+                "c15d14a93e95fbbb"
+            ]
+        ]
+    },
+    {
+        "id": "662e6ab2dba8d7ad",
+        "type": "move-to-next-node",
+        "z": "688947b1f997c20d",
+        "name": "Next",
+        "x": 690,
+        "y": 120,
+        "wires": [
+            [
+                "c55f656019442c51"
+            ]
+        ]
+    },
+    {
+        "id": "11ab5a9040e53d36",
+        "type": "move-to-next-node",
+        "z": "688947b1f997c20d",
+        "name": "Next",
+        "x": 1110,
+        "y": 120,
+        "wires": [
+            [
+                "1871d84babd1d31e"
+            ]
+        ]
+    },
+    {
+        "id": "fe3bae1bd1ded9b5",
+        "type": "move-to-next-node",
+        "z": "688947b1f997c20d",
+        "name": "Next",
+        "x": 1630,
+        "y": 120,
+        "wires": [
+            [
+                "9a17ef3221c43898"
+            ]
+        ]
+    },
+    {
+        "id": "8e89ca7db3966d91",
+        "type": "move-to-next-node",
+        "z": "688947b1f997c20d",
+        "name": "Next",
+        "x": 1050,
+        "y": 640,
+        "wires": [
+            [
+                "93a878545582a5c1"
+            ]
+        ]
+    },
+    {
+        "id": "3823c3b8e40a07af",
+        "type": "move-to-next-node",
+        "z": "688947b1f997c20d",
+        "name": "Next",
+        "x": 1390,
+        "y": 640,
+        "wires": [
+            [
+                "7220576918a292dd"
+            ]
+        ]
+    },
+    {
+        "id": "7e334817f7153e9e",
+        "type": "move-to-next-node",
+        "z": "688947b1f997c20d",
+        "name": "Next",
+        "x": 1810,
+        "y": 640,
+        "wires": [
+            [
+                "10b460514c5b1c24"
+            ]
+        ]
     }
 ]

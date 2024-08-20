@@ -10,7 +10,10 @@ module.exports = function (RED) {
     node.op2 = config.op2;
     node.op2_num_qubits = config.op2_num_qubits;
 
+    node.status({ fill: "red", shape: "dot", text: "You haven't learned this node yet." });
+
     node.on("input", async function (msg) {
+      node.status({ fill: "green", shape: "dot", text: "You have learned this node." });
       const option = {
         op1: {
           sparse_list: node.op1,
@@ -37,6 +40,10 @@ module.exports = function (RED) {
         payload: result,
       };
       node.send(newMsg);
+    });
+
+    node.on('close', function () {
+      node.status({ fill: "red", shape: "dot", text: "You haven't learned this node yet." });
     });
   }
   RED.nodes.registerType("sparse-pauli-op-operations", SparsePauliOpOperationsNode);

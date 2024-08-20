@@ -7,7 +7,10 @@ module.exports = function (RED) {
     node.name = config.name;
     node.operator = config.operator;
 
+    node.status({ fill: "red", shape: "dot", text: "You haven't learned this node yet." });
+
     node.on("input", async function (msg) {
+      node.status({ fill: "green", shape: "dot", text: "You have learned this node." });
       const option = {
         operator: node.operator,
       };
@@ -31,6 +34,10 @@ module.exports = function (RED) {
       } catch (e) {
         node.error(e);
       }
+    });
+
+    node.on('close', function () {
+      node.status({ fill: "red", shape: "dot", text: "You haven't learned this node yet." });
     });
   }
   RED.nodes.registerType("pauli-operations", PauliOperationsNode);

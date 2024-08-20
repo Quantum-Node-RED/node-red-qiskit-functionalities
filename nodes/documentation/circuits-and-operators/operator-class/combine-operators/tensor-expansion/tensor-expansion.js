@@ -8,7 +8,10 @@ module.exports = function (RED) {
     node.pauli_1 = config.pauli_1;
     node.pauli_2 = config.pauli_2;
 
+    node.status({ fill: "red", shape: "dot", text: "You haven't learned this node yet." });
+
     node.on("input", async function (msg) {
+      node.status({ fill: "green", shape: "dot", text: "You have learned this node." });
       const option = {
         pauli_1: node.pauli_1,
         pauli_2: node.pauli_2,
@@ -29,6 +32,10 @@ module.exports = function (RED) {
         payload: result,
       };
       node.send(newMsg);
+    });
+
+    node.on('close', function () {
+      node.status({ fill: "red", shape: "dot", text: "You haven't learned this node yet." });
     });
   }
   RED.nodes.registerType("Tensor-Expansion", TensorExpansion);
