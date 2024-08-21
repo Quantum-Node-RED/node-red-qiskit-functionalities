@@ -1,0 +1,70 @@
+<script type="text/javascript">
+    RED.nodes.registerType('build-circuits', {
+      category: 'Construct circuits',
+      color: '#AAAA66',
+      defaults: {
+        name: { value: "Add instruction to circuit" },
+        info: {
+            value: "# Methods such as " +
+            "[<font style=\"background: lightgrey\">QuantumCircuit.h</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#h) " +
+            "and [<font style=\"background: lightgrey\">QuantumCircuit.cx</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#cx) " +
+            "add specific instructions to circuits. To add instructions to a circuit more generally, use the " +
+            "[<font style=\"background: lightgrey\">append</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#append) " +
+            "method. This takes an instruction and a list of qubits to apply the instruction to.\r\n" +
+            "&nbsp;\r\n" +
+            "# The following code snippet creates a quantum circuit with one qubit and applies a Hadamard gate (HGate) to that qubit.\r\n" +
+            "```python\r\n" +
+            "from qiskit.circuit.library import HGate\r\n" +
+            "\r\n" +
+            "qc = QuantumCircuit(1)\r\n" +
+            "qc.append(\r\n" +
+            "    HGate(),  # New HGate instruction\r\n" +
+            "    [0]       # Apply to qubit 0\r\n" +
+            "\r\n" +
+            "qc.draw(\"mpl\")\r\n" +
+            "```\r\n" +
+            "# You can check the image of this circuit in the \"H gate Image\" node.\r\n" +
+            "&nbsp;\r\n" +
+            "# See the [Circuit Library API documentation](https://docs.quantum.ibm.com/api/qiskit/circuit_library) " +
+            "for a list of supported instructions.\r\n" +
+            "\r\n" +
+            "***\r\n" +
+            "&nbsp;\r\n" +
+            "## **Node Output:**\r\n" +
+            "- # Image: Image of circuit `qc`\r\n"}
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "Add instruction to circuit";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="build-circuits">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Add instruction to circuit">
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="build-circuits">
+    <p>A node that adds an HGate instruction to a quantum circuit.</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>payload.result.circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the quantum circuit.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+      This node demonstrates how an HGate instruction can be added to a circuit using the <code>append</code> method and how that
+      instruction changes the visualization of the circuit. 
+    </p>
+  </script>

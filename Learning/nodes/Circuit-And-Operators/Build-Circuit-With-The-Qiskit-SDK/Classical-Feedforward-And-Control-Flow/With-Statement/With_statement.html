@@ -1,0 +1,50 @@
+<script type="text/javascript">
+    RED.nodes.registerType('with-statement', {
+      category: 'Classical feedforward and control flow',
+      color: '#C0DEED',
+      defaults: {
+        name: { value: "with statement" },
+        info: {
+          value: "# The <font style=\"background: lightgrey\">with</font> statement can be given an assignment target which is itself a context manager that can be stored and subsequently used to create an else block, which is executed whenever the contents of the if block are _not_ executed.\n&nbsp;\n# In the following code snippet, we initialize registers with two qubits and two classical bits. We apply a Hadamard gate to the first qubit and measure it. If the result is 1, then we apply a Hadamard gate on the second qubit; otherwise, we apply an X gate on the second qubit. Finally, we measure the second qubit as well.\n```python\nqubits = QuantumRegister(2)\nclbits = ClassicalRegister(2)\ncircuit = QuantumCircuit(qubits, clbits)\n(q0, q1) = qubits\n(c0, c1) = clbits\n \ncircuit.h(q0)\ncircuit.measure(q0, c0)\nwith circuit.if_test((c0, 1)) as else_:\n    circuit.h(q1)\nwith else_:\n    circuit.x(q1)\ncircuit.measure(q1, c1)\n \ncircuit.draw(\"mpl\")\n \n# example output counts: {'01': 260, '11': 272, '10': 492}\n```\n# The code will use the code snippets from \"Introduction to classical feedforward and control flow\" node to run on the simulator and store the statistical results in the `counts` variable.The frequencies of '01', '11', and '10' in the results should be close to a 1:1:2 ratio.\n&nbsp;\n# The result is sent to \"with statement Measure\" node and you can check it in the debug sidebar. You can also check the Image of the circuit in the \"with statement Circuit Diagram\" node.\n\n***\n&nbsp;\n## **Node Output:**\n- # Dictionary: `counts`\n- # Image: The image of `circuit`"
+        }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "with statement";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="with-statement">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="with-statement">
+    <p>A node that introduce with statement in qiskit.</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Dictionary
+        <dl class="message-properties">
+          <dt>counts<span class="property-type">dict</span></dt>
+          <dd>The result of running circuits on simulator in 1024 shots. The key represents the quantum state, and the value is the number of times the quantum is in that state out of 1024 shots.</dd>
+        </dl>
+      </li>
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the quantum circuit.</dd>
+        </dl>
+      </li>
+    </ol>
+
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to the with statement in Qiskit, demonstrating its usage in quantum circuits. The with statement can be used with an assignment target that serves as a context manager, allowing the creation of an else block executed when the if block conditions are not met. 
+    </p>
+  </script>

@@ -1,0 +1,42 @@
+<script type="text/javascript">
+    RED.nodes.registerType('Time-evolution-circuits', {
+      category: 'Circuit Library',
+      color: '#A6BBCF',
+      defaults: {
+        name: { value: "Time-evolution circuits" },
+        info: { value: "# Time-evolution circuits simulate a quantum state evolving in time. It is used to investigate physical effects such as heat transfer or phase transitions in a system. Time-evolution circuits are also a fundamental building block of chemistry wave functions (such as unitary coupled-cluster trial states) and of the QAOA algorithm we use for optimization problems.\r\n&nbsp;\r\n# The code snippet below  prepares a quantum circuit with three qubits, applying a Hadamard gate to the middle qubit. It then defines a Hamiltonian with specific Pauli operators and evolves the initial state by appending a Pauli evolution gate based on this Hamiltonian.\r\n```python\r\nfrom qiskit.circuit.library import PauliEvolutionGate\r\nfrom qiskit.circuit import QuantumCircuit\r\nfrom qiskit.quantum_info import SparsePauliOp\r\n \r\n \r\n# Prepare an initial state with a Hadamard on the middle qubit\r\nstate = QuantumCircuit(3)\r\nstate.h(1)\r\n \r\nhamiltonian = SparsePauliOp([\"ZZI\", \"IZZ\"])\r\nevolution = PauliEvolutionGate(hamiltonian, time=1)\r\n \r\n# Evolve state by appending the evolution gate\r\nstate.compose(evolution, inplace=True)\r\n \r\nstate.draw('mpl')\r\n```\r\n# You can check the generated circuit in the \"Time Evolution Circuit Image Output\" node.\r\n&nbsp;\r\n# Read the [PauliEvolutionGate API documentation](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.PauliEvolutionGate) for more information.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: Image of circuit `state`"}
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "Time-evolution circuits";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="Time-evolution-circuits">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="Time-evolution-circuits">
+    <p>A node that introduce time-evolution circuit</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the time-evolution quantum circuit.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+      This node introduces a time-evolution circuit based on Qiskit's PauliEvolutionGate. It simulates the evolution of a quantum state over time, using a Hamiltonian specified by a <code>SparsePauliOp</code>. It prepares an initial quantum state, applies a Pauli-based evolution, and visualizes the resulting circuit. 
+    </p>
+  </script>
