@@ -39,6 +39,15 @@ module.exports = function (RED) {
       // Circuit loop set up is done
       else if (currentNode.name==constants.QUANTUM_CIRCUIT_BEGIN_COMPONENT_NAME){
         node.context().flow.set(constants.EXPECTED_QUBITS, 0);
+        if (msg.payload && msg.payload.structure) {
+          for (let i = 0; i < msg.payload.structure.length; i++) {
+              if (msg.payload.structure[i].name === constants.QUANTUM_CIRCUIT_BEGIN_COMPONENT_NAME) {
+                  msg.payload.structure[i].parameters.num_qbits = connectedPaths; 
+                  msg.payload.structure[i].parameters.num_cbits = connectedPaths;
+                  break;
+              }
+          }
+      }
         const Circuit_Loop_Begin_component = new component.Component(
           constants.CIRCUIT_LOOP_BEGIN_COMPONENT_NAME,
           { circuit_name: circuit_name,
