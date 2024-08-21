@@ -1,14 +1,14 @@
 <script type="text/javascript">
   RED.nodes.registerType('condition', {
-      category: 'quantum',
+      category: 'Quantum Circuit',
       color: '#a6bbcf',
       defaults: {
           name: {value:""},
-          condition: {value:"", required:true}
+          condition: {value:{}, required:true}
       },
       inputs:1,
       outputs:1,
-      icon: "file.png",
+      icon: "alert.svg",
       label: function() {
           return this.name||"condition";
       },

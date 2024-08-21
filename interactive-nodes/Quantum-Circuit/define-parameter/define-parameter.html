@@ -1,16 +1,16 @@
 <script type="text/javascript">
   RED.nodes.registerType("define_parameter", {
-    category: "function",
-    color: "#E6BCB9",
+    category: "Quantum Circuit",
+    color: "#a6bbcf",
     defaults: {
       name: { value: "" },
       variable: { value: "" },
-      parameters: { value: "", required: true },
+      parameters: { value: {}, required: true },
       numberOfRepetitions: { value: 1 },
     },
     inputs: 1,
     outputs: 1,
-    icon: "function.svg",
+    icon: "font-awesome/fa-file-excel-o",
     label: function () {
       return this.name || "define_parameter";
     },

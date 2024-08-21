@@ -13,7 +13,6 @@
   "license": "Apache-2.0",
   "node-red": {
     "nodes": {
-      "lower-case": "templates/lower-case.js",
       "CHSH-game-classic": "nodes/CHSH-game-classic/CHSH-game-classic.js",
       "CHSH-game-quantum": "nodes/CHSH-game-quantum/CHSH-game-quantum.js",
       "graph-construction": "framework/nodes/graph-construction/graph-construction.js",
@@ -62,8 +61,8 @@
       "Draw-graph": "interactive-nodes/Functions/draw-graph/draw-graph.js",
       "Apply-Hamiltonian": "interactive-nodes/Functions/Apply-Hamiltonian/Apply-Hamiltonian.js",
       "Extract-most-likely-state": "interactive-nodes/Functions/Extract-most-likely-state/Extract-most-likely-state.js",
-      "for_begin": "interactive-nodes/Tools/for_loop/for_begin.js",
-      "for_end": "interactive-nodes/Tools/for_loop/for_end.js",
+      "for_begin": "interactive-nodes/Programming/for_loop/for_begin.js",
+      "for_end": "interactive-nodes/Programming/for_loop/for_end.js",
       "initialize_parameters": "interactive-nodes/Tools/initialize_parameters/initialize_parameters.js",
       "estimator": "interactive-nodes/Tools/estimator/estimator.js",
       "Apply-optimizer": "interactive-nodes/Functions/Apply-optimizer/Apply-optimizer.js",
@@ -76,10 +75,9 @@
       "QAOA-Algorithm": "interactive-nodes/Algorithms/QAOA-Algorithm/QAOA-Algorithm.js",
       "Circuit-Loop-Begin": "interactive-nodes/Quantum-Circuit/Circuit-Loop/Circuit-Loop-Begin.js",
       "Circuit-Loop-End": "interactive-nodes/Quantum-Circuit/Circuit-Loop/Circuit-Loop-End.js",
-      "custom_programming": "interactive-nodes/Functions/Custom-programming/Custom-programming.js",
-      "hyper-parameters": "interactive-nodes/Quantum-Circuit/hyper-parameters/hyper-parameters.js",
+      "custom_programming": "interactive-nodes/Programming/Custom-programming/Custom-programming.js",
       "condition": "interactive-nodes/Quantum-Circuit/condition/condition.js",
-      "Define-parameter": "interactive-nodes/Functions/Define-parameter/Define-parameter.js"
+      "define-parameter": "interactive-nodes/Quantum-Circuit/define-parameter/define-parameter.js"
     }
   },
   "dependencies": {
