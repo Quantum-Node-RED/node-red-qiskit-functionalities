@@ -1,0 +1,34 @@
+<script type="text/javascript">
+  RED.nodes.registerType('parameter_condition', {
+      category: 'Quantum Circuit',
+      color: '#a6bbcf',
+      defaults: {
+          name: {value:""},
+          parameter_condition: {value:{}, required:true}
+      },
+      inputs:1,
+      outputs:1,
+      icon: "alert.svg",
+      label: function() {
+          return this.name||"parameter_condition";
+      },
+      oneditprepare: function() {
+          $("#node-input-parameter_condition").typedInput({
+              type:"json",
+              types:["json"]
+          });
+      }
+  });
+</script>
+
+<script type="text/html" data-template-name="parameter_condition">
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+  <div class="form-row">
+      <label for="node-input-parameter_condition"><i class="fa fa-code"></i> Condition</label>
+      <input type="text" id="node-input-parameter_condition" placeholder='{"RZ_gate":[{"value":"gamma*2","parameter":"theta"},{"value":"beta+1.5","parameter":"another_param"}]}'>
+  </div>
+  <div class="form-tips">Enter conditions as a JSON object with component names as keys and arrays of parameter_condition objects as values.</div>
+</script>
