@@ -1,0 +1,49 @@
+
+<script type="text/javascript">
+    RED.nodes.registerType("import-OpenQASM3", {
+      category: "Import and Export OpenQASM 3 program",
+      color: "#FDD0A2",
+      defaults: {
+        name: { value: "Import OpenQASM3 program" },
+        info: { value: "# To import and OpenQASM 3 program into Qiskit, You must install the package <font style=\"background: lightgrey\">qiskit_qasm3_import</font> to use this function. Install using the following command.\r\n```python\r\npip install qiskit-qasm3-import\r\n```\r\n# Currently two high-level functions are available for importing from OpenQASM 3 into Qiskit. These functions are <font style=\"background: lightgrey\">load()</font>, which takes a file name, and <font style=\"background: lightgrey\">loads()</font>, which takes the program itself as a string.\r\n&nbsp;\r\n# In the following code snippet, we  define a quantum program using OpenQASM 3, and use <font style=\"background: lightgrey\">loads()</font> to directly convert it into a QuantumCircuit.\r\n```python\r\nimport qiskit.qasm3\r\n \r\nprogram = \"\"\"\r\n    OPENQASM 3.0;\r\n    include \"stdgates.inc\";\r\n \r\n    input float[64] a;\r\n    qubit[3] q;\r\n    bit[2] mid;\r\n    bit[3] out;\r\n \r\n    let aliased = q[0:1];\r\n \r\n    gate my_gate(a) c, t {\r\n      gphase(a / 2);\r\n      ry(a) c;\r\n      cx c, t;\r\n    }\r\n    gate my_phase(a) c {\r\n      ctrl @ inv @ gphase(a) c;\r\n    }\r\n \r\n    my_gate(a * 2) aliased[0], q[{1, 2}][0];\r\n    measure q[0] -> mid[0];\r\n    measure q[1] -> mid[1];\r\n \r\n    while (mid == \"00\") {\r\n      reset q[0];\r\n      reset q[1];\r\n      my_gate(a) q[0], q[1];\r\n      my_phase(a - pi/2) q[1];\r\n      mid[0] = measure q[0];\r\n      mid[1] = measure q[1];\r\n    }\r\n \r\n    if (mid[0]) {\r\n      let inner_alias = q[{0, 1}];\r\n      reset inner_alias;\r\n    }\r\n \r\n    out = measure q;\r\n\"\"\"\r\n\r\ncircuit = qiskit.qasm3.loads(program)\r\n```\r\n# You can check the image of the output circuit in the \"Circuit Output\" node.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: the image of the loaded circuit." }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "Import OpenQASM3 program";
+      },
+      
+    });
+
+  </script>
+  
+  <script type="text/html" data-template-name="import-OpenQASM3">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Import OpenQASM3 program" />
+    </div>
+
+  </script>
+
+  
+  
+  <script type="text/html" data-help-name="import-OpenQASM3">
+    <p>A node that import OpenQASM3 program into Qiskit.</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the quantum circuit.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to importing OpenQASM 3 programs into Qiskit. It demonstrates how to use the qiskit_qasm3_import package to convert OpenQASM 3 code into Qiskit’s QuantumCircuit format. The node highlights two high-level functions available for this process: load() for importing from a file and loads() for importing from a string. 
+    </p>
+  </script>
+  

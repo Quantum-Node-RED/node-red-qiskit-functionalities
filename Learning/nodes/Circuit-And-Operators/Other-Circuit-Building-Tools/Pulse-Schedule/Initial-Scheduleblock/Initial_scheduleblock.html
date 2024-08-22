@@ -1,0 +1,49 @@
+
+<script type="text/javascript">
+    RED.nodes.registerType("initial-scheduleblock", {
+      category: "Build pulse schedule",
+      color: "#E6E0F8",
+      defaults: {
+        name: { value: "Initiate the schedule" },
+        info: { value: "# Pulse gates define a low-level, exact representation for a circuit gate. A single operation can be implemented with a pulse program, which is comprised of multiple low-level instructions. Regardless of how the program is used, the syntax for building the program is the same.\r\n&nbsp;\r\n# A pulse program, which is called a <font style=\"background: lightgrey\">_ScheduleBlock_</font>, describes instruction sequences for the control electronics. The following code uses the Pulse Builder to build a ScheduleBlock, which initialize a schedule:\r\n```python\r\nfrom qiskit import pulse\r\n \r\nwith pulse.build(name='my_example') as my_program:\r\n    # Add instructions here\r\n    pass\r\n```\r\n# You can check the <font style=\"background: lightgrey\">_ScheduleBlock_</font> object you created at the \"ScheduleBlock object\" node.\r\n&nbsp;\r\n# **You can see that there are no instructions yet. In the following nodes, we will show you all the instructions that can be added to a pulse.**\r\n&nbsp;\r\n# **Important:** For IBM® devices, pulse programs are used as subroutines to describe gates. IBM devices do not accept full programs in this format.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Object: `my_program` (Type: _qiskit.pulse.ScheduleBlock_)\r\n" }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "Initiate the schedule";
+      },
+      
+    });
+
+  </script>
+  
+  <script type="text/html" data-template-name="initial-scheduleblock">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Initiate the schedule" />
+    </div>
+
+  </script>
+
+  
+  
+  <script type="text/html" data-help-name="initial-scheduleblock">
+    <p>A simple node that initiate the schedule.</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Schedule Block
+        <dl class="message-properties">
+          <dt>my_program<span class="property-type">qiskit.pulse.ScheduleBlock</span></dt>
+          <dd>The schedule block object .</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to building quantum pulse programs using the Pulse Builder in Qiskit. A pulse program, represented as a ScheduleBlock, defines a sequence of low-level instructions that control quantum hardware at a very granular level. These pulse programs are crucial for defining the exact behavior of quantum gates, allowing precise control over quantum operations. 
+    </p>
+  </script>
+  

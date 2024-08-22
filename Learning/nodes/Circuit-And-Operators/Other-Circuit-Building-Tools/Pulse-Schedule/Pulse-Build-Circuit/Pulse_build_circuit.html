@@ -1,0 +1,55 @@
+
+<script type="text/javascript">
+    RED.nodes.registerType("pulse-build-circuit", {
+      category: "Add calibrations to circuits",
+      color: "#D8BFD8",
+      defaults: {
+        name: { value: "Build a circuit" },
+        info: { value: "# This Node build a simple Bell state circuit using following python code.\r\n```python\r\nfrom qiskit import QuantumCircuit\r\n \r\ncirc = QuantumCircuit(2, 2)\r\ncirc.h(0)\r\ncirc.cx(0, 1)\r\ncirc.measure(0, 0)\r\ncirc.measure(1, 1)\r\n \r\ncirc.draw('mpl')\r\n```\r\n# This code snippet defines a quantum circuit consisting of two qubits and two classical bits. It begins by applying a Hadamard gate (circ.h(0)) to the first qubit, placing it in a superposition state. Subsequently, a CNOT gate (circ.cx(0, 1)) is applied, entangling the two qubits. The circuit then measures both qubits (circ.measure(0, 0) and circ.measure(1, 1)) and stores the measurement outcomes in corresponding classical bits.\r\n&nbsp;\r\n# The image of the circuit will be shown below in the \"Bell state circuit\" node.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Object: `circ` (Type: _qiskit.circuit.quantumcircuit_)\r\n- # Image: The image of variable `circ`" }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "Build a circuit";
+      },
+      
+    });
+
+  </script>
+  
+  <script type="text/html" data-template-name="pulse-build-circuit">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Build a Circuit" />
+    </div>
+
+  </script>
+
+  
+  
+  <script type="text/html" data-help-name="pulse-build-circuit">
+    <p>A simple node that build a circuit.</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Quantum Circuit
+        <dl class="message-properties">
+          <dt>circ<span class="property-type">qiskit.circuit.QuantumCircuit</span></dt>
+          <dd>The quantum circuit `circ` which contains one hardamard gate and one cx gate.</dd>
+        </dl>
+      </li>
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the quantum circuit.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to creating a simple Bell state circuit using Qiskit. It demonstrates the fundamental concepts of quantum entanglement by initializing a quantum circuit with two qubits and two classical bits. The first qubit is put into a superposition state using a Hadamard gate, and then a CNOT gate is applied to entangle the two qubits. Finally, both qubits are measured, with the results stored in classical bits. 
+    </p>
+  </script>
+  
