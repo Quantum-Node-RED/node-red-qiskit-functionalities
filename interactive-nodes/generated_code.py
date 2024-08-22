@@ -17,11 +17,6 @@ def extract_most_likely_state(state_vector, num_qubits):
     x.reverse()
     return np.asarray(x)
 
-def objective_function(params, qc, param_vector, hamiltonian, estimator):
-    assigned_qc = qc.assign_parameters({param_vector: params})
-    energy = estimator.run(circuits=[assigned_qc], observables=[hamiltonian]).result().values[0]
-    return np.real(energy)
-
 def get_operator(weight_matrix):
     num_nodes = len(weight_matrix)
     pauli_list = []
@@ -53,15 +48,20 @@ def get_operator(weight_matrix):
 
     return SparsePauliOp(pauli_list, coeffs=coeffs), shift
 
-def objective_value(x, w):
-    X = np.outer(x, (1 - x))
-    w_01 = np.where(w != 0, 1, 0)
-    return np.sum(w_01 * X)
+def objective_function(params, qc, param_vector, hamiltonian, estimator):
+    assigned_qc = qc.assign_parameters({param_vector: params})
+    energy = estimator.run(circuits=[assigned_qc], observables=[hamiltonian]).result().values[0]
+    return np.real(energy)
 
 def execute_circuit_with_sampler(qc, sampler):
         job = sampler.run(qc)
         result = job.result()
         return result
+
+def objective_value(x, w):
+    X = np.outer(x, (1 - x))
+    w_01 = np.where(w != 0, 1, 0)
+    return np.sum(w_01 * X)
 
 import traceback
 try:
@@ -74,49 +74,49 @@ try:
     qc = QuantumCircuit(4, 4)
     # Circuit Loop: Iterations 2
     # Circuit Loop Iteration 1
-    qc.rx(0.647, 0)
-    qc.rz(0.1*2*0.1, 1)
-    qc.rz(0.1*2*0.1, 1)
-    qc.rz(0.1*2*0.1, 1)
-    qc.rx(0.647, 1)
-    qc.rz(0.1*2*0.1, 2)
-    qc.rz(0.1*2*0.1, 2)
-    qc.rz(0.1*2*0.1, 2)
-    qc.rz(0.1*2*0.1, 2)
-    qc.rz(0.1*2*0.1, 2)
-    qc.rz(0.1*2*0.1, 2)
-    qc.rx(0.647, 2)
-    qc.rz(0.1*2*0.1, 3)
-    qc.rz(0.1*2*0.1, 3)
-    qc.rz(0.1*2*0.1, 3)
-    qc.rz(0.1*2*0.1, 3)
-    qc.rz(0.1*2*0.1, 3)
-    qc.rz(0.1*2*0.1, 3)
-    qc.rz(0.1*2*0.1, 3)
-    qc.rz(0.1*2*0.1, 3)
-    qc.rx(0.647, 3)
+    [Error] Failed to apply condition for RX_gate: 0
+    [Error] Failed to apply condition for RZ_gate: 0
+    [Error] Failed to apply condition for RZ_gate: 0
+    [Error] Failed to apply condition for RZ_gate: 0
+    [Error] Failed to apply condition for RX_gate: 0
+    [Error] Failed to apply condition for RZ_gate: 0
+    [Error] Failed to apply condition for RZ_gate: 0
+    [Error] Failed to apply condition for RZ_gate: 0
+    [Error] Failed to apply condition for RZ_gate: 0
+    [Error] Failed to apply condition for RZ_gate: 0
+    [Error] Failed to apply condition for RZ_gate: 0
+    [Error] Failed to apply condition for RX_gate: 0
+    [Error] Failed to apply condition for RZ_gate: 0
+    [Error] Failed to apply condition for RZ_gate: 0
+    [Error] Failed to apply condition for RZ_gate: 0
+    [Error] Failed to apply condition for RZ_gate: 0
+    [Error] Failed to apply condition for RZ_gate: 0
+    [Error] Failed to apply condition for RZ_gate: 0
+    [Error] Failed to apply condition for RZ_gate: 0
+    [Error] Failed to apply condition for RZ_gate: 0
+    [Error] Failed to apply condition for RX_gate: 0
     # Circuit Loop Iteration 2
-    qc.rx(0.647, 0)
-    qc.rz(0.2*2*0.1, 1)
-    qc.rz(0.2*2*0.1, 1)
-    qc.rz(0.2*2*0.1, 1)
-    qc.rx(0.647, 1)
-    qc.rz(0.2*2*0.1, 2)
-    qc.rz(0.2*2*0.1, 2)
-    qc.rz(0.2*2*0.1, 2)
-    qc.rz(0.2*2*0.1, 2)
-    qc.rz(0.2*2*0.1, 2)
-    qc.rz(0.2*2*0.1, 2)
-    qc.rx(0.647, 2)
-    qc.rz(0.2*2*0.1, 3)
-    qc.rz(0.2*2*0.1, 3)
-    qc.rz(0.2*2*0.1, 3)
-    qc.rz(0.2*2*0.1, 3)
-    qc.rz(0.2*2*0.1, 3)
-    qc.rz(0.2*2*0.1, 3)
-    qc.rz(0.2*2*0.1, 3)
-    qc.rz(0.2*2*0.1, 3)
-    qc.rx(0.647, 3)
+    [Error] Failed to apply condition for RX_gate: 0
+    [Error] Failed to apply condition for RZ_gate: 0
+    [Error] Failed to apply condition for RZ_gate: 0
+    [Error] Failed to apply condition for RZ_gate: 0
+    [Error] Failed to apply condition for RX_gate: 0
+    [Error] Failed to apply condition for RZ_gate: 0
+    [Error] Failed to apply condition for RZ_gate: 0
+    [Error] Failed to apply condition for RZ_gate: 0
+    [Error] Failed to apply condition for RZ_gate: 0
+    [Error] Failed to apply condition for RZ_gate: 0
+    [Error] Failed to apply condition for RZ_gate: 0
+    [Error] Failed to apply condition for RX_gate: 0
+    [Error] Failed to apply condition for RZ_gate: 0
+    [Error] Failed to apply condition for RZ_gate: 0
+    [Error] Failed to apply condition for RZ_gate: 0
+    [Error] Failed to apply condition for RZ_gate: 0
+    [Error] Failed to apply condition for RZ_gate: 0
+    [Error] Failed to apply condition for RZ_gate: 0
+    [Error] Failed to apply condition for RZ_gate: 0
+    [Error] Failed to apply condition for RZ_gate: 0
+    [Error] Failed to apply condition for RX_gate: 0
     # Circuit Loop End
     # Quantum Circuit End
     estimator = Estimator()
