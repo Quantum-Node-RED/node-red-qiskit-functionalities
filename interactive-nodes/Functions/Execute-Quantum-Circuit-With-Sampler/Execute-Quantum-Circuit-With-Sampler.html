@@ -7,6 +7,8 @@
       circuit_name: { value: "", required: true },
       variable: { value: "", required: true },
       sampler: { value: "", required: true },
+      result: { value: "", required: true },
+      parameterVector: { value: "", required: true },
     },
     inputs: 1,
     outputs: 1,
@@ -46,6 +48,20 @@
       ><i class="fa fa-tag"></i> Sampler name</label
     >
     <input type="text" id="node-input-sampler" placeholder="Sampler" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-result"><i class="fa fa-tag"></i> Result name</label>
+    <input type="text" id="node-input-result" placeholder="Result" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-parameterVector"
+      ><i class="fa fa-tag"></i> Parameter Vector</label
+    >
+    <input
+      type="text"
+      id="node-input-parameterVector"
+      placeholder="Parameter Vector"
+    />
   </div>
 </script>
 

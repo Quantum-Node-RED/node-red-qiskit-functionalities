@@ -88,16 +88,16 @@ def traverse_structure(structure, import_statements, functions, calling_code, de
                             calling_code = generate_qiskit_code(component__, import_statements, functions, calling_code, defined_functions)
                 in_circuit_loop=False
                 calling_code += f"# Circuit Loop End\n"
-        elif has_circuit_begin and in_circuit_loop and component_name!="qubit" and  component_name!="condition" and component_name!="define_parameter":
+        elif has_circuit_begin and in_circuit_loop and component_name!="qubit" and  component_name!="parameter_condition" and component_name!="define_parameter":
             stack.append(component)
         elif component_name == "RX_gate" or component_name == "RY_gate" or component_name == "RZ_gate":
             if (component['parameters']['mode'] == "parameters"):
                 component['parameters']['theta'] = f"theta[{theta_count}]"
                 theta_count += 1
             calling_code = generate_qiskit_code(component, import_statements, functions, calling_code, defined_functions)
-        elif component_name == "condition":
+        elif component_name == "parameter_condition":
             try:
-                circuit_loop_conditions=json.loads(component['parameters']['condition'])
+                circuit_loop_conditions=json.loads(component['parameters']['parameter_condition'])
             except Exception as e:
                 calling_code+=f"[Error] Failed to parse condition {e}\n"
         elif component_name == "define_parameter":

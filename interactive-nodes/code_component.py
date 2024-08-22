@@ -375,14 +375,15 @@ coeffs = {coeffs}
     "execute_quantum_circuit_with_sampler": Code_Component(
         import_statement=[],
         function="""
-    def execute_circuit_with_sampler(qc, sampler):
-        job = sampler.run(qc)
+    def execute_circuit_with_sampler(qc, sampler, params, param_vector):
+        assigned_qc = qc.assign_parameters({{param_vector: params}})
+        job = sampler.run(assigned_qc)
         result = job.result()
         return result
     """,
         calling_function="""
     {circuit_name}.measure(range(4), range(4))
-{variable} = execute_circuit_with_sampler({circuit_name}, {sampler})
+{variable} = execute_circuit_with_sampler({circuit_name}, {sampler}, {result}.x, {param_vector})
     """
     ),
 

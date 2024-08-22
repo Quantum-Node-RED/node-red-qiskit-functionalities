@@ -14,6 +14,11 @@ module.exports = function (RED) {
       ] = config.circuit_name;
       execute_quantum_circuit_with_sampler_component.parameters["sampler"] =
         config.sampler;
+      execute_quantum_circuit_with_sampler_component.parameters["result"] =
+        config.result;
+      execute_quantum_circuit_with_sampler_component.parameters[
+        "param_vector"
+      ] = config.parameterVector;
       component.addComponent(
         msg,
         execute_quantum_circuit_with_sampler_component

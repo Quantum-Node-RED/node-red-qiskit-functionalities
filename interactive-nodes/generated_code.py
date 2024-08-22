@@ -6,16 +6,16 @@ from qiskit.quantum_info import Pauli, SparsePauliOp
 from qiskit.result import QuasiDistribution
 from scipy.optimize import minimize
 
-def extract_most_likely_state(state_vector, num_qubits):
-    if isinstance(state_vector, QuasiDistribution):
-        values = list(state_vector.values())
-    else:
-        values = state_vector
-    k = np.argmax(np.abs(values))
-    result = np.binary_repr(k, num_qubits)
-    x = [int(digit) for digit in result]
-    x.reverse()
-    return np.asarray(x)
+def objective_function(params, qc, param_vector, hamiltonian, estimator):
+    assigned_qc = qc.assign_parameters({param_vector: params})
+    energy = estimator.run(circuits=[assigned_qc], observables=[hamiltonian]).result().values[0]
+    return np.real(energy)
+
+def execute_circuit_with_sampler(qc, sampler, params, param_vector):
+        assigned_qc = qc.assign_parameters({param_vector: params})
+        job = sampler.run(assigned_qc)
+        result = job.result()
+        return result
 
 def get_operator(weight_matrix):
     num_nodes = len(weight_matrix)
@@ -48,15 +48,16 @@ def get_operator(weight_matrix):
 
     return SparsePauliOp(pauli_list, coeffs=coeffs), shift
 
-def objective_function(params, qc, param_vector, hamiltonian, estimator):
-    assigned_qc = qc.assign_parameters({param_vector: params})
-    energy = estimator.run(circuits=[assigned_qc], observables=[hamiltonian]).result().values[0]
-    return np.real(energy)
-
-def execute_circuit_with_sampler(qc, sampler):
-        job = sampler.run(qc)
-        result = job.result()
-        return result
+def extract_most_likely_state(state_vector, num_qubits):
+    if isinstance(state_vector, QuasiDistribution):
+        values = list(state_vector.values())
+    else:
+        values = state_vector
+    k = np.argmax(np.abs(values))
+    result = np.binary_repr(k, num_qubits)
+    x = [int(digit) for digit in result]
+    x.reverse()
+    return np.asarray(x)
 
 def objective_value(x, w):
     X = np.outer(x, (1 - x))
@@ -74,56 +75,132 @@ try:
     qc = QuantumCircuit(4, 4)
     # Circuit Loop: Iterations 2
     # Circuit Loop Iteration 1
-    [Error] Failed to apply condition for RX_gate: 0
-    [Error] Failed to apply condition for RZ_gate: 0
-    [Error] Failed to apply condition for RZ_gate: 0
-    [Error] Failed to apply condition for RZ_gate: 0
-    [Error] Failed to apply condition for RX_gate: 0
-    [Error] Failed to apply condition for RZ_gate: 0
-    [Error] Failed to apply condition for RZ_gate: 0
-    [Error] Failed to apply condition for RZ_gate: 0
-    [Error] Failed to apply condition for RZ_gate: 0
-    [Error] Failed to apply condition for RZ_gate: 0
-    [Error] Failed to apply condition for RZ_gate: 0
-    [Error] Failed to apply condition for RX_gate: 0
-    [Error] Failed to apply condition for RZ_gate: 0
-    [Error] Failed to apply condition for RZ_gate: 0
-    [Error] Failed to apply condition for RZ_gate: 0
-    [Error] Failed to apply condition for RZ_gate: 0
-    [Error] Failed to apply condition for RZ_gate: 0
-    [Error] Failed to apply condition for RZ_gate: 0
-    [Error] Failed to apply condition for RZ_gate: 0
-    [Error] Failed to apply condition for RZ_gate: 0
-    [Error] Failed to apply condition for RX_gate: 0
+    qc.h(0)
+    qc.rx(param_vector[2]*2*0.1, 0)
+    qc.h(1)
+    qc.cx(0, 1)
+    qc.rz(param_vector[0]*2*0.1, 1)
+    qc.cx(0, 1)
+    qc.cx(0, 1)
+    qc.rz(param_vector[0]*2*0.1, 1)
+    qc.cx(0, 1)
+    qc.cx(0, 1)
+    qc.rz(param_vector[0]*2*0.1, 1)
+    qc.cx(0, 1)
+    qc.rx(param_vector[2]*2*0.1, 1)
+    qc.h(2)
+    qc.cx(0, 2)
+    qc.rz(param_vector[0]*2*0.1, 2)
+    qc.cx(0, 2)
+    qc.cx(1, 2)
+    qc.rz(param_vector[0]*2*0.1, 2)
+    qc.cx(1, 2)
+    qc.cx(0, 2)
+    qc.rz(param_vector[0]*2*0.1, 2)
+    qc.cx(0, 2)
+    qc.cx(1, 2)
+    qc.rz(param_vector[0]*2*0.1, 2)
+    qc.cx(1, 2)
+    qc.cx(0, 2)
+    qc.rz(param_vector[0]*2*0.1, 2)
+    qc.cx(0, 2)
+    qc.cx(1, 2)
+    qc.rz(param_vector[0]*2*0.1, 2)
+    qc.cx(1, 2)
+    qc.rx(param_vector[2]*2*0.1, 2)
+    qc.h(3)
+    qc.cx(1, 3)
+    qc.rz(param_vector[0]*2*0.1, 3)
+    qc.cx(1, 3)
+    qc.cx(2, 3)
+    qc.rz(param_vector[0]*2*0.1, 3)
+    qc.cx(2, 3)
+    qc.cx(0, 3)
+    qc.rz(param_vector[0]*2*0.1, 3)
+    qc.cx(0, 3)
+    qc.cx(1, 3)
+    qc.rz(param_vector[0]*2*0.1, 3)
+    qc.cx(1, 3)
+    qc.cx(2, 3)
+    qc.rz(param_vector[0]*2*0.1, 3)
+    qc.cx(2, 3)
+    qc.cx(0, 3)
+    qc.rz(param_vector[0]*2*0.1, 3)
+    qc.cx(0, 3)
+    qc.cx(1, 3)
+    qc.rz(param_vector[0]*2*0.1, 3)
+    qc.cx(1, 3)
+    qc.cx(2, 3)
+    qc.rz(param_vector[0]*2*0.1, 3)
+    qc.cx(2, 3)
+    qc.rx(param_vector[2]*2*0.1, 3)
     # Circuit Loop Iteration 2
-    [Error] Failed to apply condition for RX_gate: 0
-    [Error] Failed to apply condition for RZ_gate: 0
-    [Error] Failed to apply condition for RZ_gate: 0
-    [Error] Failed to apply condition for RZ_gate: 0
-    [Error] Failed to apply condition for RX_gate: 0
-    [Error] Failed to apply condition for RZ_gate: 0
-    [Error] Failed to apply condition for RZ_gate: 0
-    [Error] Failed to apply condition for RZ_gate: 0
-    [Error] Failed to apply condition for RZ_gate: 0
-    [Error] Failed to apply condition for RZ_gate: 0
-    [Error] Failed to apply condition for RZ_gate: 0
-    [Error] Failed to apply condition for RX_gate: 0
-    [Error] Failed to apply condition for RZ_gate: 0
-    [Error] Failed to apply condition for RZ_gate: 0
-    [Error] Failed to apply condition for RZ_gate: 0
-    [Error] Failed to apply condition for RZ_gate: 0
-    [Error] Failed to apply condition for RZ_gate: 0
-    [Error] Failed to apply condition for RZ_gate: 0
-    [Error] Failed to apply condition for RZ_gate: 0
-    [Error] Failed to apply condition for RZ_gate: 0
-    [Error] Failed to apply condition for RX_gate: 0
+    qc.h(0)
+    qc.rx(param_vector[3]*2*0.1, 0)
+    qc.h(1)
+    qc.cx(0, 1)
+    qc.rz(param_vector[1]*2*0.1, 1)
+    qc.cx(0, 1)
+    qc.cx(0, 1)
+    qc.rz(param_vector[1]*2*0.1, 1)
+    qc.cx(0, 1)
+    qc.cx(0, 1)
+    qc.rz(param_vector[1]*2*0.1, 1)
+    qc.cx(0, 1)
+    qc.rx(param_vector[3]*2*0.1, 1)
+    qc.h(2)
+    qc.cx(0, 2)
+    qc.rz(param_vector[1]*2*0.1, 2)
+    qc.cx(0, 2)
+    qc.cx(1, 2)
+    qc.rz(param_vector[1]*2*0.1, 2)
+    qc.cx(1, 2)
+    qc.cx(0, 2)
+    qc.rz(param_vector[1]*2*0.1, 2)
+    qc.cx(0, 2)
+    qc.cx(1, 2)
+    qc.rz(param_vector[1]*2*0.1, 2)
+    qc.cx(1, 2)
+    qc.cx(0, 2)
+    qc.rz(param_vector[1]*2*0.1, 2)
+    qc.cx(0, 2)
+    qc.cx(1, 2)
+    qc.rz(param_vector[1]*2*0.1, 2)
+    qc.cx(1, 2)
+    qc.rx(param_vector[3]*2*0.1, 2)
+    qc.h(3)
+    qc.cx(1, 3)
+    qc.rz(param_vector[1]*2*0.1, 3)
+    qc.cx(1, 3)
+    qc.cx(2, 3)
+    qc.rz(param_vector[1]*2*0.1, 3)
+    qc.cx(2, 3)
+    qc.cx(0, 3)
+    qc.rz(param_vector[1]*2*0.1, 3)
+    qc.cx(0, 3)
+    qc.cx(1, 3)
+    qc.rz(param_vector[1]*2*0.1, 3)
+    qc.cx(1, 3)
+    qc.cx(2, 3)
+    qc.rz(param_vector[1]*2*0.1, 3)
+    qc.cx(2, 3)
+    qc.cx(0, 3)
+    qc.rz(param_vector[1]*2*0.1, 3)
+    qc.cx(0, 3)
+    qc.cx(1, 3)
+    qc.rz(param_vector[1]*2*0.1, 3)
+    qc.cx(1, 3)
+    qc.cx(2, 3)
+    qc.rz(param_vector[1]*2*0.1, 3)
+    qc.cx(2, 3)
+    qc.rx(param_vector[3]*2*0.1, 3)
     # Circuit Loop End
     # Quantum Circuit End
     estimator = Estimator()
     
     result= minimize(objective_function, initial_params, args=(qc, param_vector, operator, estimator), method="COBYLA")
     qc.measure(range(4), range(4))
-    optimised_result = execute_circuit_with_sampler(qc, sampler)
+    optimised_result = execute_circuit_with_sampler(qc, sampler, result.x, param_vector)
     x = extract_most_likely_state(optimised_result.quasi_dists[0], 4)
     objective_value = objective_value(x, weight_matrix)
     print("result: ", objective_value)
