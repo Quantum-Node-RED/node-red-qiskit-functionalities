@@ -192,7 +192,6 @@ def save_code_as_image_base64(code_str):
 
 def process_component_with_condition(component, conditions, parameters, reps, iteration_index, calling_code):
     component_name = component.get("name")
-
     # Check if the component is in the condition
     if component_name in conditions:
         try:
@@ -201,21 +200,20 @@ def process_component_with_condition(component, conditions, parameters, reps, it
                 parameter_name = param_condition["parameter"] 
                 value_expression = param_condition["value"]  
                 # Check for that paticular parameter in the parameters
-                param_index = 0
-                for param_name in parameters:
+                for index, param_name in enumerate(parameters):
                     if param_name in value_expression:
                         if len(parameters[param_name]) > iteration_index:
-                            value_expression = value_expression.replace(param_name, f"{param_index * int(reps) + iteration_index}")
-                            param_index += 1
+                            value_expression = value_expression.replace(param_name, f"{index * int(reps) + iteration_index}")
                         else:
                             raise ValueError(f"Index {iteration_index} out of range for parameter '{param_name}'")
                 component['parameters'][parameter_name] = value_expression
                 calling_code = generate_qiskit_code(component, import_statements, functions, calling_code, defined_functions)
                 return calling_code
-
         except Exception as e:
             calling_code += f"[Error] Failed to apply condition for {component_name}: {e}\n"
-    
+    else :
+        calling_code = generate_qiskit_code(component, import_statements, functions, calling_code, defined_functions)
+       
     return calling_code
 
 if __name__ == "__main__":
