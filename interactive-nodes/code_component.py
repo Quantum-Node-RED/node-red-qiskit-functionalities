@@ -138,7 +138,7 @@ snippets = {
     "I_gate": Code_Component(
         import_statement=[],
         function="",
-        calling_function="{circuit_name}.i({qbit})"
+        calling_function="{circuit_name}.id({qbit})"
     ),
 
     "U_gate": Code_Component(

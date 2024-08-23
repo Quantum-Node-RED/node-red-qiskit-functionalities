@@ -54,5 +54,30 @@
 </script>
 
 <script type="text/html" data-help-name="mutli_controlled_U_gate">
-  <p></p>
+  <p>
+    <h2>Introduction:</h2>
+    <p>The multi-controlled U gate, also known as the multi-controlled unitary gate, 
+      is a generalization of the controlled-U gate to multiple control qubits. This gate applies a unitary operation 
+      U to a target qubit only if all specified control qubits are in the <code>|1⟩</code> state.
+    </p>
+    <h2>Placement:</h2>
+    <ul>
+      <li>It should follow a qubit node directly or indirectly. This qubit will become the target qubit of the multi-controlled U gate.</li>
+      <li>It should be placed inside the range [Quantum-Circuit-Begin, Quantum-Circuit-END].</li>
+      <li>There should be at least 2 qubits inside the circuit.</li>
+    </ul>
+    
+    <h2>Properties:</h2>
+    <ul>
+      <li><strong>Theta (θ):</strong> Represents the rotation angle around the X-axis in the Bloch sphere. 
+        Used in unitary operations like <code>R<sub>x</sub>(θ)</code>.</li>
+      <li><strong>Phi (φ):</strong> Represents the rotation angle around the Z-axis in the Bloch sphere. 
+        Used in unitary operations like <code>R<sub>z</sub>(φ)</code>.</li>
+      <li><strong>Lambda (λ):</strong> Represents an additional phase or rotation angle. 
+        Used in unitary operations like <code>R<sub>y</sub>(λ)</code>.</li>
+      <li><strong>Number of Control Qubits:</strong> The number of qubits that act as control qubits.</li>
+      <li><strong>List of Control Qubits:</strong> Specifies which qubits are used as control qubits. 
+        The target qubit will receive the unitary operation U if all qubits in this list are in the <code>|1⟩</code> state.</li>
+    </ul>
+  </p>
 </script>

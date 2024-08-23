@@ -52,5 +52,26 @@
 </script>
 
 <script type="text/html" data-help-name="CU_gate">
-  <p></p>
+  <p>
+    <h2>Introduction:</h2>
+    <p>The CU gate, or Controlled-U gate, is a general quantum gate in Qiskit that applies a unitary operation 
+      U to a target qubit, but only when the control qubit is in the state <code>|1⟩</code>.</p>
+    
+    <h2>Placement:</h2>
+    <ul>
+      <li>It should follow a qubit node directly or indirectly. This qubit will become the target qubit of the CU gate.</li>
+      <li>It should be placed inside the range [Quantum-Circuit-Begin, Quantum-Circuit-END].</li>
+      <li>There should be at least 2 qubits inside the circuit.</li>
+    </ul>
+    
+    <h2>Properties:</h2>
+    <ul>
+      <li><strong>θ (theta):</strong> Rotation angle around the Y-axis.</li> 
+      <li><strong>ϕ (phi):</strong> Phase shift before the rotation.</li>
+      <li><strong>λ (lambda):</strong> Phase shift after the rotation.</li>
+      <li><strong>𝛾 (gamma):</strong> Global phase</li>
+      <li><strong>Control Qubit:</strong> Should be the ID of a qubit (0-index).</li>
+      <li>Control Qubit and the target qubit should have different IDs.</li>
+    </ul>
+  </p>
 </script>
