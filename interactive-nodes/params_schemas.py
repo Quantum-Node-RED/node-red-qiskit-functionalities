@@ -115,11 +115,8 @@ schemas = {
         "target_qubit": int
     },
     "local_simulator": {
-        "var_name": str,
         "circuit_name": str,
-        "simulator": str,
-        "var_name_result": str,
-        "var_name_counts": str
+        "optimization_level": str,
     },
     "draw": {
         "circuit_name": str,

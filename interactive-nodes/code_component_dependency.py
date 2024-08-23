@@ -14,7 +14,7 @@ class Component_Dependency:
     X_gate = ["qiskit.circuit.library.XGate"]
     U_gate = ["qiskit.circuit.library.UGate"]
     Qiskit_runtime_service = ["qiskit_ibm_runtime.QiskitRuntimeService"]
-    Aer = ["qiskit.Aer"]
+    Aer = ["qiskit_aer.AerSimulator"]
     Execute = ["qiskit.execute"]
     Plot_histogram = ["qiskit.visualization.plot_histogram"]
     SparsePauliOp = ["qiskit.quantum_info.SparsePauliOp"]
@@ -33,7 +33,9 @@ class Component_Dependency:
     ParameterVector=["qiskit.circuit.ParameterVector"]
     Estimator=["qiskit.primitives.Estimator"]
     Minimize=["scipy.optimize.minimize"]
-
+    Session=["qiskit_ibm_runtime.Session"]
+    Sampler=["qiskit_ibm_runtime.SamplerV2", "Sampler"]
+    Generate_preset_pass_manager=["qiskit.transpiler.preset_passmanagers.generate_preset_pass_manager"]
 
 
 

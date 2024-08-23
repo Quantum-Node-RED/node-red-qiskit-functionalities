@@ -167,14 +167,19 @@ snippets = {
 
     # Tools
     "local_simulator": Code_Component(
-        import_statement=[Component_Dependency.Aer, Component_Dependency.Execute],
+        import_statement=[Component_Dependency.Aer,
+                         Component_Dependency.Session,
+                         Component_Dependency.Sampler,
+                         Component_Dependency.Generate_preset_pass_manager],
         function="",
         calling_function="""
-            default='qasm_simulator'
-            {var_name} = Aer.get_backend({simulator} or default)
-            {var_name_result} = execute({circuit_name}, backend={var_name}, shots={shots}).result()
-            {var_name_counts} = {var_name_result}.get_counts()
-            print({var_name_counts})
+aer_sim = AerSimulator()
+pm=generate_preset_pass_manager(backend=aer_sim, optimization_level={optimization_level})
+isa_qc=pm.run({circuit_name})
+with Session (backend=aer_sim) as session:
+    sampler = Sampler()
+    result = sampler.run([isa_qc]).result()
+print(result)
         """
     ),
 
