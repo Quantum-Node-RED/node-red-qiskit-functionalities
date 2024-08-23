@@ -76,7 +76,6 @@ def traverse_structure(structure, import_statements, functions, calling_code, de
             has_circuit_begin = False
         elif has_circuit_begin and component_name=="Circuit_Loop_Begin":
                 iterations=component.get("parameters").get("iterations")
-                calling_code += f"# Circuit Loop: Iterations {iterations}\n"
                 in_circuit_loop=True
         elif has_circuit_begin and component_name=="Circuit_Loop_End":
                 for i in range(iterations):
