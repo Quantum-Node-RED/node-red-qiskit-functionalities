@@ -60,7 +60,7 @@
       "Apply-optimizer": "interactive-nodes/Functions/Apply-optimizer/Apply-optimizer.js",
       "Define-sampler": "interactive-nodes/Functions/Define-sampler/Define-sampler.js",
       "Apply-energy-cost-objective-function": "interactive-nodes/Functions/Apply-energy-cost-objective-function/Apply-energy-cost-objective-function.js",
-      "Define-hyperparameter": "interactive-nodes/Functions/Define-hyperparameter/Define-hyperparameter.js",
+      "Define-hyperparameter": "interactive-nodes/Quantum-Circuit/Define-hyperparameter/Define-hyperparameter.js",
       "Execute-quantum-circuit-with-sampler": "interactive-nodes/Functions/Execute-quantum-circuit-with-sampler/Execute-quantum-circuit-with-sampler.js",
       "Print": "interactive-nodes/Tools/print/print.js",
       "minimize-cost-function": "interactive-nodes/Functions/minimize-cost-function/minimize-cost-function.js",

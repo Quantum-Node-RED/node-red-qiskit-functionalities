@@ -110,6 +110,13 @@ def traverse_structure(structure, import_statements, functions, calling_code, de
             else:
                 component['parameters']['initial_param'] = f"2 * np.pi * np.random.random({component['parameters']['number_of_parameter']})"
                 calling_code = generate_qiskit_code(component, import_statements, functions, calling_code, defined_functions)
+        elif component_name == "define_hyperparameter":
+            circuit_hyperparameters = json.loads(component['parameters']['hyperparameters'])
+            for hyperparameter, value in circuit_hyperparameters.items():
+                if isinstance(value, str):
+                    calling_code += f"{hyperparameter} = '{value}'\n"
+                else:
+                    calling_code += f"{hyperparameter} = {value}\n"
         elif component_name == "qubit":
             continue
         else:
