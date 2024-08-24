@@ -169,7 +169,7 @@ snippets = {
     "local_simulator": Code_Component(
         import_statement=[Component_Dependency.Aer,
                          Component_Dependency.Session,
-                         Component_Dependency.Sampler,
+                         Component_Dependency.SamplerV2,
                          Component_Dependency.Generate_preset_pass_manager],
         function="",
         calling_function="""

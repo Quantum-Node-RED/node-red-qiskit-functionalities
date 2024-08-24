@@ -34,7 +34,7 @@ class Component_Dependency:
     Estimator=["qiskit.primitives.Estimator"]
     Minimize=["scipy.optimize.minimize"]
     Session=["qiskit_ibm_runtime.Session"]
-    Sampler=["qiskit_ibm_runtime.SamplerV2", "Sampler"]
+    SamplerV2=["qiskit_ibm_runtime.SamplerV2", "Sampler"]
     Generate_preset_pass_manager=["qiskit.transpiler.preset_passmanagers.generate_preset_pass_manager"]
 
 
