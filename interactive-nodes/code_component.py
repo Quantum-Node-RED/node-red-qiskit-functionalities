@@ -37,6 +37,12 @@ snippets = {
         calling_function="{circuit_name}.measure({qbit}, {cbit})"
     ),
 
+    "measure_all": Code_Component(
+        import_statement=[],
+        function="",
+        calling_function="{circuit_name}.measure(range({num_qbits}), range({num_cbits}))"
+    ),
+
     "swap": Code_Component(
         import_statement=[],
         function="",
@@ -387,10 +393,7 @@ print(json.dumps({variable}))"""
         result = job.result()
         return result
     """,
-        calling_function="""
-    {circuit_name}.measure(range(4), range(4))
-{variable} = execute_circuit_with_sampler({circuit_name}, {sampler}, {result}.x, {param_vector})
-    """
+        calling_function="""{variable} = execute_circuit_with_sampler({circuit_name}, {sampler}, {result}.x, {param_vector})"""
     ),
 
     "print": Code_Component(

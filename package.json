@@ -69,7 +69,8 @@
       "Circuit-Loop-End": "interactive-nodes/Quantum-Circuit/Circuit-Loop/Circuit-Loop-End.js",
       "custom_programming": "interactive-nodes/Programming/Custom-programming/Custom-programming.js",
       "parameter-condition": "interactive-nodes/Quantum-Circuit/parameter-condition/parameter-condition.js",
-      "define-parameter": "interactive-nodes/Quantum-Circuit/define-parameter/define-parameter.js"
+      "define-parameter": "interactive-nodes/Quantum-Circuit/define-parameter/define-parameter.js",
+      "measure_all": "interactive-nodes/Quantum-Circuit/measure-all/measure-all.js"
     }
   },
   "dependencies": {
