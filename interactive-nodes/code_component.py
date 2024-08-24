@@ -189,24 +189,6 @@ print(result)
         calling_function="{circuit_name}.draw(output='{output_type}')"
     ),
 
-    "encode_image": Code_Component(
-        import_statement=[
-            Component_Dependency.Pyplot,
-            Component_Dependency.IO,
-            Component_Dependency.Warnings,
-            Component_Dependency.Base64
-        ],
-        function="warnings.filterwarnings('ignore', category=UserWarning)",
-        calling_function="""
-            buffer = io.BytesIO()
-            plt.savefig(buffer, format='png')
-            buffer.seek(0)
-            b64_str = base64.b64encode(buffer.read())
-            print(b64_str)
-            buffer.close()
-        """
-    ),
-
     "draw_circuit": Code_Component(
         import_statement=[
             Component_Dependency.Pyplot,
@@ -251,28 +233,47 @@ coeffs = {coeffs}
         calling_function="{custom_code}"
     ),
 
-    # Visualisation
     "draw_graph": Code_Component(
         import_statement=[
-            Component_Dependency.NetworkX,
-            Component_Dependency.Numpy,
-            Component_Dependency.Pyplot,
-            Component_Dependency.OS
-        ],
-        function="",
-        calling_function="""
-            G = nx.from_numpy_array({matrix})
-            layout = nx.random_layout(G, seed=10)
-            num_nodes = len(G.nodes)
-            colors = plt.cm.rainbow(np.linspace(0, 1, num_nodes))
-            nx.draw(G, layout, node_color=colors)
-            labels = nx.get_edge_attributes(G, 'weight')
-            nx.draw_networkx_edge_labels(G, pos=layout, edge_labels=labels)
-            os.makedirs(folder, exist_ok=True)
-            filepath = os.path.join(folder, filename)
-            plt.savefig(filepath)
-            plt.close()
-        """
+        Component_Dependency.NetworkX,
+        Component_Dependency.Numpy,
+        Component_Dependency.Pyplot,
+        Component_Dependency.IO,
+        Component_Dependency.Base64,
+        Component_Dependency.Warnings,
+        Component_Dependency.JSON
+    ],
+        function="""def visualise_graph(matrix):
+        
+    # Suppress specific warnings
+    warnings.filterwarnings('ignore', category=UserWarning)
+        
+    # Create graph from numpy matrix
+    G = nx.from_numpy_array(matrix)
+    layout = nx.random_layout(G, seed=10)
+        
+    # Generate node colors
+    num_nodes = len(G.nodes)
+    colors = plt.cm.rainbow(np.linspace(0, 1, num_nodes))
+        
+    # Draw graph
+    nx.draw(G, layout, node_color=colors)
+    labels = nx.get_edge_attributes(G, 'weight')
+    nx.draw_networkx_edge_labels(G, pos=layout, edge_labels=labels)
+        
+    # Save graph to a buffer instead of a file
+    buffer = io.BytesIO()
+    plt.savefig(buffer, format='png')
+    plt.close()
+        
+    # Encode buffer contents to base64
+    buffer.seek(0)
+    b64_str = base64.b64encode(buffer.read()).decode('utf-8')
+    buffer.close()
+        
+    return b64_str""",
+        calling_function="""{variable} = visualise_graph({matrix})
+print(json.dumps({variable}))"""
     ),
 
     # Algorithms - QAOA

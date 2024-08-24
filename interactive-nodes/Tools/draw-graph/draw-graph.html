@@ -1,16 +1,17 @@
 <script type="text/javascript">
   RED.nodes.registerType("draw-graph", {
-    category: "function",
-    color: "#E6BCB9",
+    category: "Tools",
+    color: "#D3E7B5",
     defaults: {
-      name: { value: "Draw Graph" },
+      name: { value: "draw_graph" },
+      variable: { value: "" },
       matrix: { value: "" },
     },
     inputs: 1,
     outputs: 1,
-    icon: "function.svg",
+    icon: "font-awesome/fa-area-chart",
     label: function () {
-      return this.name || "Draw Graph";
+      return this.name || "draw_graph";
     },
     oneditprepare: function () {
       // Populate the existing matrix value
@@ -29,10 +30,14 @@
     <input type="text" id="node-input-name" placeholder="Name" />
   </div>
   <div class="form-row">
-    <label for="node-input-matrix"
-      ><i class="fa fa-cogs"></i> Adjacency Matrix (JSON format)</label
+    <label for="node-input-variable"
+      ><i class="fa fa-tag"></i> Variable Name</label
     >
-    <input type="text" id="node-input-matrix" placeholder="[[0, 1], [1, 0]]" />
+    <input type="text" id="node-input-variable" placeholder="variable name" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-matrix"><i class="fa fa-cogs"></i> Matrix</label>
+    <input type="text" id="node-input-matrix" placeholder="matrix name" />
   </div>
 </script>
 
