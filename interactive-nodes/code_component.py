@@ -364,7 +364,7 @@ coeffs = {coeffs}
     "apply_optimizer": Code_Component(
         import_statement=[Component_Dependency.Minimize],
         function="",
-        calling_function="""{variable}= minimize({cost_function}, initial_params, args=({circuit_name}, {param_vector}, {hamiltonian}, {estimator}), method="{optimizer}")"""
+        calling_function="""{variable} = minimize({cost_function}, initial_params, args=({circuit_name}, {param_vector}, {hamiltonian}, {estimator}), method="{optimizer}")"""
     ),
 
     "apply_energy_cost_objective_function": Code_Component(
@@ -423,36 +423,11 @@ coeffs = {coeffs}
         calling_function="{variable} = {value}"
     ),
 
-    # VQE:
     "estimator": Code_Component(
         import_statement=[
             Component_Dependency.Estimator,
         ],
         function="",
         calling_function="{variable} = Estimator()\n"
-    ),
-    "minimize-cost-function": Code_Component(
-        import_statement=[
-            Component_Dependency.Minimize,
-        ],
-        function="""def cost_func(params, ansatz, hamiltonian, estimator, cost_history_dict):
-    result = estimator.run(circuits=ansatz, observables=hamiltonian, parameter_values=params).result()
-    energy = result.values[0]
-
-    cost_history_dict["iters"] += 1
-    cost_history_dict["prev_vector"] = params
-    cost_history_dict["cost_history"].append(energy)
-
-    return energy""",
-        calling_function="""cost_history_dict = dict(prev_vector=None, iters=0, cost_history=[])
-
-res = minimize(
-        cost_func,
-        initial_params,
-        args=({circuit_name}, {hamiltonian_name}, estimator, cost_history_dict),
-        method="cobyla",
-    )
-print(res.fun)\n
-    """
     ),
 }
