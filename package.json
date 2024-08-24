@@ -15,12 +15,6 @@
     "nodes": {
       "CHSH-game-classic": "nodes/CHSH-game-classic/CHSH-game-classic.js",
       "CHSH-game-quantum": "nodes/CHSH-game-quantum/CHSH-game-quantum.js",
-      "graph-construction": "framework/nodes/graph-construction/graph-construction.js",
-      "hamiltonian-construction": "framework/nodes/hamiltonian-construction/hamiltonian-construction.js",
-      "optimizer": "framework/nodes/optimizer/optimizer.js",
-      "ansatz-construction": "framework/nodes/ansatz-construction/ansatz-construction.js",
-      "script-generation": "framework/nodes/script-generation/script-generation.js",
-      "QAOA": "framework/algorithms/QAOA/QAOA.js",
       "Start": "interactive-nodes/Flow/Start/Start.js",
       "End": "interactive-nodes/Flow/End/End.js",
       "Display": "interactive-nodes/Flow/Display/Display.js",

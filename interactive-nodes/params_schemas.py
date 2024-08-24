@@ -151,7 +151,6 @@ schemas = {
         "state_vector":  str,
         "var_result": str
     },
-    "apply_hamiltonian": {},
     "QAOA": {
         "sampler": str,
         "optimizer": str,
