@@ -100,12 +100,16 @@ def traverse_structure(structure, import_statements, functions, calling_code, de
             except Exception as e:
                 calling_code+=f"[Error] Failed to parse condition {e}\n"
         elif component_name == "define_parameter":
-            try:
-                circuit_parameters= json.loads(component['parameters']['parameters'])
-                circuit_repetition = component['parameters']['number_of_reps']
+            if component['parameters']['mode'] == "customize":
+                try:
+                    circuit_parameters = json.loads(component['parameters']['parameters'])
+                    circuit_repetition = component['parameters']['number_of_reps']
+                    calling_code = generate_qiskit_code(component, import_statements, functions, calling_code, defined_functions)
+                except Exception as e:
+                    calling_code+=f"[Error] Failed to parse parameter: {e}\n"
+            else:
+                component['parameters']['initial_param'] = f"2 * np.pi * np.random.random({component['parameters']['number_of_parameter']})"
                 calling_code = generate_qiskit_code(component, import_statements, functions, calling_code, defined_functions)
-            except Exception as e:
-                calling_code+=f"[Error] Failed to parse parameter: {e}\n"
         elif component_name == "qubit":
             continue
         else:

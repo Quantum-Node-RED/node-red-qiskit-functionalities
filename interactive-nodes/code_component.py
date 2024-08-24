@@ -408,7 +408,10 @@ coeffs = {coeffs}
     ),
 
     "define_parameter": Code_Component(
-        import_statement=[Component_Dependency.ParameterVector],
+        import_statement=[
+            Component_Dependency.ParameterVector, 
+            Component_Dependency.Numpy
+        ],
         function="",
         calling_function="""initial_params = {initial_param}
 {variable} = ParameterVector('θ', length={number_of_parameter} * {number_of_reps})"""
@@ -420,17 +423,7 @@ coeffs = {coeffs}
         calling_function="{variable} = {value}"
     ),
 
-    # VQE: 
-    "initialize_parameters": Code_Component(
-        import_statement=[
-            Component_Dependency.ParameterVector,
-            Component_Dependency.Numpy
-        ],
-        function="",
-        calling_function="""theta = ParameterVector('θ', {num_thetas})
-initial_params = 2 * np.pi * np.random.random({num_thetas})
-        """
-    ),
+    # VQE:
     "estimator": Code_Component(
         import_statement=[
             Component_Dependency.Estimator,

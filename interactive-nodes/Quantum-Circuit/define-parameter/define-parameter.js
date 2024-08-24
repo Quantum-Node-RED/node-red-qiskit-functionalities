@@ -12,11 +12,15 @@ module.exports = function (RED) {
       // Flatten the parameters JSON into a single list (initial_point format)
       let initial_param = [];
       let numberOfParameter = 0;
-      for (let key in parameters) {
-        if (parameters.hasOwnProperty(key)) {
-          numberOfParameter += 1;
-          initial_param = initial_param.concat(parameters[key]);
+      if (config.mode == "customize") {
+        for (let key in parameters) {
+          if (parameters.hasOwnProperty(key)) {
+            numberOfParameter += 1;
+            initial_param = initial_param.concat(parameters[key]);
+          }
         }
+      } else {
+        numberOfParameter = config.numberOfParams;
       }
 
       const define_parameter_component = new component.Component(
@@ -32,6 +36,7 @@ module.exports = function (RED) {
       define_parameter_component.parameters["number_of_reps"] =
         config.numberOfRepetitions;
       define_parameter_component.parameters["initial_param"] = initial_param;
+      define_parameter_component.parameters["mode"] = config.mode;
 
       component.addComponent(msg, define_parameter_component);
       node.send(msg);
