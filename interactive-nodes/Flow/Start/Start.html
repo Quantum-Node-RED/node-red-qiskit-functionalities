@@ -48,18 +48,30 @@
       <input type="text" id="node-input-name" placeholder="Name">
   </div>
   <div class="form-row">
-      <label for="node-input-topic"><i class="fa fa-tasks"></i> Topic</label>
-      <input type="text" id="node-input-topic" placeholder="Topic">
-  </div>
-  <div class="form-row">
       <label for="node-input-repeat"><i class="fa fa-repeat"></i> Repeat</label>
       <input type="text" id="node-input-repeat" placeholder="Repeat interval in seconds">
   </div>
 </script>
 
+
 <script type="text/html" data-help-name="Start">
-  <p>Injects a message into a flow with an empty JSON object as payload.</p>
-  <p>The message payload will always be an empty JSON object: <code>{}</code></p>
-  <p>The Repeat option allows the injection to be repeated at a regular interval.</p>
-  <p>The button on the left side of the node allows manual injection.</p>
+  <p>
+    <h2>Introduction:</h2>
+    <p>The purpose of the Start node is to serve as the starting point for the entire flow. 
+      It injects a message into a flow with an empty JSON object as payload. 
+      This JSON object is passed along the flow, gradually building a tree structure as it moves through the nodes.
+      This structure enables the End node to generate the final code snippet based on the constructed tree.</p>
+    
+    <h2>Placement:</h2>
+    <ul>
+      <li>It should be placed at the beginning of the whole flow.</li>
+    </ul>
+    
+    <h2>Properties:</h2>
+    <ul>
+      <li>The Repeat option allows the injection to be repeated at a regular interval.</li>
+      <li><strong>Repeat:</strong> Should enter a number to specify the interval (in seconds) between sending messages.</li>
+      <li>The button on the left side of the node allows manual injection.</li>
+    </ul>
+  </p>
 </script>

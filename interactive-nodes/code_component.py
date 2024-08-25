@@ -37,6 +37,12 @@ snippets = {
         calling_function="{circuit_name}.measure({qbit}, {cbit})"
     ),
 
+    "measure_all": Code_Component(
+        import_statement=[],
+        function="",
+        calling_function="{circuit_name}.measure(range({num_qbits}), range({num_cbits}))"
+    ),
+
     "swap": Code_Component(
         import_statement=[],
         function="",
@@ -167,14 +173,19 @@ snippets = {
 
     # Tools
     "local_simulator": Code_Component(
-        import_statement=[Component_Dependency.Aer, Component_Dependency.Execute],
+        import_statement=[Component_Dependency.Aer,
+                         Component_Dependency.Session,
+                         Component_Dependency.SamplerV2,
+                         Component_Dependency.Generate_preset_pass_manager],
         function="",
         calling_function="""
-            default='qasm_simulator'
-            {var_name} = Aer.get_backend({simulator} or default)
-            {var_name_result} = execute({circuit_name}, backend={var_name}, shots={shots}).result()
-            {var_name_counts} = {var_name_result}.get_counts()
-            print({var_name_counts})
+aer_sim = AerSimulator()
+pm=generate_preset_pass_manager(backend=aer_sim, optimization_level={optimization_level})
+isa_qc=pm.run({circuit_name})
+with Session (backend=aer_sim) as session:
+    sampler = Sampler()
+    result = sampler.run([isa_qc]).result()
+print(result)
         """
     ),
 
@@ -182,24 +193,6 @@ snippets = {
         import_statement=[],
         function="",
         calling_function="{circuit_name}.draw(output='{output_type}')"
-    ),
-
-    "encode_image": Code_Component(
-        import_statement=[
-            Component_Dependency.Pyplot,
-            Component_Dependency.IO,
-            Component_Dependency.Warnings,
-            Component_Dependency.Base64
-        ],
-        function="warnings.filterwarnings('ignore', category=UserWarning)",
-        calling_function="""
-            buffer = io.BytesIO()
-            plt.savefig(buffer, format='png')
-            buffer.seek(0)
-            b64_str = base64.b64encode(buffer.read())
-            print(b64_str)
-            buffer.close()
-        """
     ),
 
     "draw_circuit": Code_Component(
@@ -246,28 +239,47 @@ coeffs = {coeffs}
         calling_function="{custom_code}"
     ),
 
-    # Visualisation
     "draw_graph": Code_Component(
         import_statement=[
-            Component_Dependency.NetworkX,
-            Component_Dependency.Numpy,
-            Component_Dependency.Pyplot,
-            Component_Dependency.OS
-        ],
-        function="",
-        calling_function="""
-            G = nx.from_numpy_array({matrix})
-            layout = nx.random_layout(G, seed=10)
-            num_nodes = len(G.nodes)
-            colors = plt.cm.rainbow(np.linspace(0, 1, num_nodes))
-            nx.draw(G, layout, node_color=colors)
-            labels = nx.get_edge_attributes(G, 'weight')
-            nx.draw_networkx_edge_labels(G, pos=layout, edge_labels=labels)
-            os.makedirs(folder, exist_ok=True)
-            filepath = os.path.join(folder, filename)
-            plt.savefig(filepath)
-            plt.close()
-        """
+        Component_Dependency.NetworkX,
+        Component_Dependency.Numpy,
+        Component_Dependency.Pyplot,
+        Component_Dependency.IO,
+        Component_Dependency.Base64,
+        Component_Dependency.Warnings,
+        Component_Dependency.JSON
+    ],
+        function="""def visualise_graph(matrix):
+        
+    # Suppress specific warnings
+    warnings.filterwarnings('ignore', category=UserWarning)
+        
+    # Create graph from numpy matrix
+    G = nx.from_numpy_array(matrix)
+    layout = nx.random_layout(G, seed=10)
+        
+    # Generate node colors
+    num_nodes = len(G.nodes)
+    colors = plt.cm.rainbow(np.linspace(0, 1, num_nodes))
+        
+    # Draw graph
+    nx.draw(G, layout, node_color=colors)
+    labels = nx.get_edge_attributes(G, 'weight')
+    nx.draw_networkx_edge_labels(G, pos=layout, edge_labels=labels)
+        
+    # Save graph to a buffer instead of a file
+    buffer = io.BytesIO()
+    plt.savefig(buffer, format='png')
+    plt.close()
+        
+    # Encode buffer contents to base64
+    buffer.seek(0)
+    b64_str = base64.b64encode(buffer.read()).decode('utf-8')
+    buffer.close()
+        
+    return b64_str""",
+        calling_function="""{variable} = visualise_graph({matrix})
+print(json.dumps({variable}))"""
     ),
 
     # Algorithms - QAOA
@@ -359,7 +371,7 @@ coeffs = {coeffs}
     "apply_optimizer": Code_Component(
         import_statement=[Component_Dependency.Minimize],
         function="",
-        calling_function="""{variable}= minimize({cost_function}, initial_params, args=({circuit_name}, {param_vector}, {hamiltonian}, {estimator}), method="{optimizer}")"""
+        calling_function="""{variable} = minimize({cost_function}, initial_params, args=({circuit_name}, {param_vector}, {hamiltonian}, {estimator}), method="{optimizer}")"""
     ),
 
     "apply_energy_cost_objective_function": Code_Component(
@@ -381,10 +393,7 @@ coeffs = {coeffs}
         result = job.result()
         return result
     """,
-        calling_function="""
-    {circuit_name}.measure(range(4), range(4))
-{variable} = execute_circuit_with_sampler({circuit_name}, {sampler}, {result}.x, {param_vector})
-    """
+        calling_function="""{variable} = execute_circuit_with_sampler({circuit_name}, {sampler}, {result}.x, {param_vector})"""
     ),
 
     "print": Code_Component(
@@ -403,7 +412,10 @@ coeffs = {coeffs}
     ),
 
     "define_parameter": Code_Component(
-        import_statement=[Component_Dependency.ParameterVector],
+        import_statement=[
+            Component_Dependency.ParameterVector, 
+            Component_Dependency.Numpy
+        ],
         function="",
         calling_function="""initial_params = {initial_param}
 {variable} = ParameterVector('θ', length={number_of_parameter} * {number_of_reps})"""
@@ -415,46 +427,11 @@ coeffs = {coeffs}
         calling_function="{variable} = {value}"
     ),
 
-    # VQE: 
-    "initialize_parameters": Code_Component(
-        import_statement=[
-            Component_Dependency.ParameterVector,
-            Component_Dependency.Numpy
-        ],
-        function="",
-        calling_function="""theta = ParameterVector('θ', {num_thetas})
-initial_params = 2 * np.pi * np.random.random({num_thetas})
-        """
-    ),
     "estimator": Code_Component(
         import_statement=[
             Component_Dependency.Estimator,
         ],
         function="",
         calling_function="{variable} = Estimator()\n"
-    ),
-    "minimize-cost-function": Code_Component(
-        import_statement=[
-            Component_Dependency.Minimize,
-        ],
-        function="""def cost_func(params, ansatz, hamiltonian, estimator, cost_history_dict):
-    result = estimator.run(circuits=ansatz, observables=hamiltonian, parameter_values=params).result()
-    energy = result.values[0]
-
-    cost_history_dict["iters"] += 1
-    cost_history_dict["prev_vector"] = params
-    cost_history_dict["cost_history"].append(energy)
-
-    return energy""",
-        calling_function="""cost_history_dict = dict(prev_vector=None, iters=0, cost_history=[])
-
-res = minimize(
-        cost_func,
-        initial_params,
-        args=({circuit_name}, {hamiltonian_name}, estimator, cost_history_dict),
-        method="cobyla",
-    )
-print(res.fun)\n
-    """
     ),
 }

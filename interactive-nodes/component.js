@@ -1,4 +1,4 @@
-// component.js
+const constants = require("./constants.js");
 
 class Component {
   constructor(name, parameters = {}) {
@@ -123,9 +123,197 @@ function addGateComponentasChild(msg, newNode) {
   }
 }
 
+function aggregatePaths(type, expectedQubits, circuit_name, connectedPaths, node, msg, iterations = null) {
+  if (expectedQubits === null || expectedQubits === undefined) {
+    node.error(
+      "expectedQubits not initialized. Ensure Quantum_Circuit_Begin node is setting this correctly."
+    );
+    return;
+  }
+
+  let state = node.context().flow.get("executionState") || {
+    receivedQubits: 0,
+    structure: []
+  };
+
+  if (state.receivedQubits === 0) {
+    node.log(`Starting aggregation for ${type}.`);
+    node.log(`Expected qubits initialized to ${expectedQubits}`);
+    state.structure = [];
+  }
+
+  const has_circuit_loop = node.context().flow.get("has_circuit_loop");
+  let collecting = false;
+
+  // First Qubit is also the Last Qubit
+  if (state.receivedQubits === 0 && state.receivedQubits === expectedQubits - 1) {
+    let endComponent = null;
+    if (type === constants.TYPE_CIRCUIT_LOOP_BEFORE_BEGIN) {
+      endComponent = new Component(
+        constants.CIRCUIT_LOOP_BEGIN_COMPONENT_NAME,
+        { circuit_name: circuit_name, num_qbits: connectedPaths, iterations: iterations }
+      );
+    } else if (type === constants.TYPE_CIRCUIT_LOOP) {
+      endComponent = new Component(
+        constants.CIRCUIT_LOOP_END_COMPONENT_NAME,
+        { circuit_name: circuit_name, num_qbits: connectedPaths }
+      );
+    } else if (type === constants.TYPE_QUANTUM_CIRCUIT) {
+      endComponent = new Component(
+        constants.QUANTUM_CIRCUIT_END_COMPONENT_NAME,
+        { circuit_name: circuit_name }
+      );
+    }
+    msg.payload.structure.push(endComponent);
+    node.send(msg);
+  }
+  // First Qubit Logic
+  else if (state.receivedQubits === 0) {
+    for (let component_ of msg.payload.structure) {
+      state.structure.push(component_);
+      
+      if (type === constants.TYPE_CIRCUIT_LOOP_BEFORE_BEGIN) {
+        if (component_.name === constants.CIRCUIT_LOOP_BEGIN_COMPONENT_NAME &&
+            component_.parameters.circuit_name === circuit_name) {
+          break;
+        }
+      } else if (type === constants.TYPE_CIRCUIT_LOOP) {
+        if (component_.name === constants.CIRCUIT_LOOP_END_COMPONENT_NAME &&
+            component_.parameters.circuit_name === circuit_name) {
+          break;
+        }
+      } else if (type === constants.TYPE_QUANTUM_CIRCUIT) {
+        if (component_.name === constants.QUANTUM_CIRCUIT_END_COMPONENT_NAME &&
+            component_.parameters.circuit_name === circuit_name) {
+          break;
+        }
+      }
+    }
+  }
+
+  // Last Qubit Logic
+  else if (state.receivedQubits === expectedQubits - 1) {
+    for (let component_ of msg.payload.structure) {
+      if (type === constants.TYPE_CIRCUIT_LOOP_BEFORE_BEGIN) {
+        if (component_.name === constants.QUANTUM_CIRCUIT_BEGIN_COMPONENT_NAME &&
+            component_.parameters.circuit_name === circuit_name) {
+          collecting = true;
+          continue;
+        }
+      } else if (type === constants.TYPE_CIRCUIT_LOOP) {
+        if (component_.name === constants.CIRCUIT_LOOP_BEGIN_COMPONENT_NAME &&
+            component_.parameters.circuit_name === circuit_name) {
+          collecting = true;
+          continue;
+        }
+      } else if (type === constants.TYPE_QUANTUM_CIRCUIT) {
+        if ((!has_circuit_loop && component_.name === constants.QUANTUM_CIRCUIT_BEGIN_COMPONENT_NAME &&
+             component_.parameters.circuit_name === circuit_name) ||
+            (has_circuit_loop && component_.name === constants.CIRCUIT_LOOP_END_COMPONENT_NAME &&
+             component_.parameters.circuit_name === circuit_name)) {
+          collecting = true;
+          continue;
+        }
+      }
+
+      if (collecting) {
+        state.structure.push(component_);
+      }
+    }
+
+    let endComponent = null;
+
+    if (type === constants.TYPE_CIRCUIT_LOOP_BEFORE_BEGIN) {
+      endComponent = new Component(
+        constants.CIRCUIT_LOOP_BEGIN_COMPONENT_NAME,
+        { circuit_name: circuit_name, num_qbits: connectedPaths, iterations: iterations }
+      );
+    } else if (type === constants.TYPE_CIRCUIT_LOOP) {
+      endComponent = new Component(
+        constants.CIRCUIT_LOOP_END_COMPONENT_NAME,
+        { circuit_name: circuit_name, num_qbits: connectedPaths }
+      );
+    } else if (type === constants.TYPE_QUANTUM_CIRCUIT) {
+      endComponent = new Component(
+        constants.QUANTUM_CIRCUIT_END_COMPONENT_NAME,
+        { circuit_name: circuit_name }
+      );
+    }
+
+    state.structure.push(endComponent);
+
+    let new_payload = {};
+    new_payload.structure = state.structure;
+    new_payload.currentNode = endComponent;
+    msg.payload = new_payload;
+
+    // Reset flow context after completing the execution
+    node.context().flow.set("expectedQubits", type === "quantumCircuit" ? null : 0);
+    node.context().flow.set(constants.CIRCUIT_NAME, type === "quantumCircuit" ? null : node.context().flow.get(constants.CIRCUIT_NAME));
+    node.context().flow.set("executionState", null);
+    if (type === "quantumCircuit") {
+      node.context().flow.set("has_circuit_loop", null);
+    }
+
+    node.send(msg);
+    return; // Exit after sending the last qubit
+  }
+
+  // Middle Qubit Logic
+  else {
+    for (let component_ of msg.payload.structure) {
+      if (type === constants.TYPE_CIRCUIT_LOOP_BEFORE_BEGIN) {
+        if (component_.name === constants.QUANTUM_CIRCUIT_BEGIN_COMPONENT_NAME &&
+            component_.parameters.circuit_name === circuit_name) {
+          collecting = true;
+          continue;
+        }
+      } else if (type === constants.TYPE_CIRCUIT_LOOP) {
+        if (component_.name === "Circuit_Loop_Begin" &&
+            component_.parameters.circuit_name === circuit_name) {
+          collecting = true;
+          continue;
+        }
+      } else if (type === constants.TYPE_QUANTUM_CIRCUIT) {
+        if ((!has_circuit_loop && component_.name === constants.QUANTUM_CIRCUIT_BEGIN_COMPONENT_NAME &&
+             component_.parameters.circuit_name === circuit_name) ||
+            (has_circuit_loop && component_.name === constants.CIRCUIT_LOOP_END_COMPONENT_NAME &&
+             component_.parameters.circuit_name === circuit_name)) {
+          collecting = true;
+          continue;
+        }
+      }
+
+      if (collecting) {
+        state.structure.push(component_);
+      }
+
+      if (type === constants.TYPE_CIRCUIT_LOOP_BEFORE_BEGIN &&
+          component_.name === constants.CIRCUIT_LOOP_BEGIN_COMPONENT_NAME &&
+          component_.parameters.circuit_name === circuit_name) {
+        break;
+      } else if (type === constants.TYPE_CIRCUIT_LOOP &&
+                 component_.name === constants.CIRCUIT_LOOP_END_COMPONENT_NAME &&
+                 component_.parameters.circuit_name === circuit_name) {
+        break;
+      } else if (type === constants.TYPE_QUANTUM_CIRCUIT &&
+                 component_.name === constants.QUANTUM_CIRCUIT_END_COMPONENT_NAME &&
+                 component_.parameters.circuit_name === circuit_name) {
+        break;
+      }
+    }
+  }
+
+  // Increment the received qubits counter and save the state
+  state.receivedQubits += 1;
+  node.context().flow.set("executionState", state);
+}
+
+
 module.exports = {
   Component,
   addComponentasChild,
   addComponent,
-  addGateComponentasChild
+  addGateComponentasChild,
+  aggregatePaths
 };

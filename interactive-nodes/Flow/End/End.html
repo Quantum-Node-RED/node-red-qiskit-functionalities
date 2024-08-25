@@ -25,5 +25,17 @@
 </script>
 
 <script type="text/html" data-help-name="End">
-  <p>The message payload will always be an empty JSON object: <code>{}</code></p>
+  <p>
+    <h2>Introduction:</h2>
+    <p>The purpose of the Start node is to serve as the ending point for the entire flow. 
+      The End node generates and executes the final code snippet based on the input JSON object. 
+      Its outputs include the final code snippet in both string and image formats, as well as the execution results.</p>
+    
+    <h2>Placement:</h2>
+    <ul>
+      <li>It should be placed at the end of the whole flow.</li>
+      <li>It should be followed by output nodes, such as debug nodes or image output nodes, and not by any functional nodes.</li>
+    </ul>
+    
+  </p>
 </script>

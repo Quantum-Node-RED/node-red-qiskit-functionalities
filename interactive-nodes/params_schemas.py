@@ -115,11 +115,8 @@ schemas = {
         "target_qubit": int
     },
     "local_simulator": {
-        "var_name": str,
         "circuit_name": str,
-        "simulator": str,
-        "var_name_result": str,
-        "var_name_counts": str
+        "optimization_level": str,
     },
     "draw": {
         "circuit_name": str,
@@ -154,7 +151,6 @@ schemas = {
         "state_vector":  str,
         "var_result": str
     },
-    "apply_hamiltonian": {},
     "QAOA": {
         "sampler": str,
         "optimizer": str,

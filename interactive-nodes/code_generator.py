@@ -76,7 +76,6 @@ def traverse_structure(structure, import_statements, functions, calling_code, de
             has_circuit_begin = False
         elif has_circuit_begin and component_name=="Circuit_Loop_Begin":
                 iterations=component.get("parameters").get("iterations")
-                calling_code += f"# Circuit Loop: Iterations {iterations}\n"
                 in_circuit_loop=True
         elif has_circuit_begin and component_name=="Circuit_Loop_End":
                 for i in range(iterations):
@@ -101,12 +100,23 @@ def traverse_structure(structure, import_statements, functions, calling_code, de
             except Exception as e:
                 calling_code+=f"[Error] Failed to parse condition {e}\n"
         elif component_name == "define_parameter":
-            try:
-                circuit_parameters= json.loads(component['parameters']['parameters'])
-                circuit_repetition = component['parameters']['number_of_reps']
+            if component['parameters']['mode'] == "customize":
+                try:
+                    circuit_parameters = json.loads(component['parameters']['parameters'])
+                    circuit_repetition = component['parameters']['number_of_reps']
+                    calling_code = generate_qiskit_code(component, import_statements, functions, calling_code, defined_functions)
+                except Exception as e:
+                    calling_code+=f"[Error] Failed to parse parameter: {e}\n"
+            else:
+                component['parameters']['initial_param'] = f"2 * np.pi * np.random.random({component['parameters']['number_of_parameter']})"
                 calling_code = generate_qiskit_code(component, import_statements, functions, calling_code, defined_functions)
-            except Exception as e:
-                calling_code+=f"[Error] Failed to parse parameter: {e}\n"
+        elif component_name == "define_hyperparameter":
+            circuit_hyperparameters = json.loads(component['parameters']['hyperparameters'])
+            for hyperparameter, value in circuit_hyperparameters.items():
+                if isinstance(value, str):
+                    calling_code += f"{hyperparameter} = '{value}'\n"
+                else:
+                    calling_code += f"{hyperparameter} = {value}\n"
         elif component_name == "qubit":
             continue
         else:
@@ -190,6 +200,16 @@ def save_code_as_image_base64(code_str):
     
     return image_base64
 
+def is_base64_png(b64_str):
+    b64_str = b64_str.rstrip('\n').strip('"')
+    try:
+        # Try to decode the Base64 string
+        decoded_data = base64.b64decode(b64_str)
+        # Check if the decoded data is a PNG image
+        return decoded_data.startswith(b'\x89PNG\r\n\x1a\n')
+    except Exception:
+        return False
+
 def process_component_with_condition(component, conditions, parameters, reps, iteration_index, calling_code):
     component_name = component.get("name")
     # Check if the component is in the condition
@@ -264,7 +284,8 @@ if __name__ == "__main__":
     try:
         process = subprocess.run([sys.executable, file_path], capture_output=True, text=True)
         execution_result = process.stdout + process.stderr
-        execution_result = execution_result.strip('"')
+        if is_base64_png(execution_result):
+            execution_result = execution_result.rstrip('\n').strip('"')
     except Exception as e:
         execution_result = str(e)
 
@@ -275,6 +296,6 @@ if __name__ == "__main__":
     }
 
     # Cleanup the generated Python file
-    # os.remove(file_path)
+    os.remove(file_path)
 
     print(json.dumps(result))
