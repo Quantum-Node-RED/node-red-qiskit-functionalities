@@ -200,6 +200,16 @@ def save_code_as_image_base64(code_str):
     
     return image_base64
 
+def is_base64_png(b64_str):
+    b64_str = b64_str.rstrip('\n').strip('"')
+    try:
+        # Try to decode the Base64 string
+        decoded_data = base64.b64decode(b64_str)
+        # Check if the decoded data is a PNG image
+        return decoded_data.startswith(b'\x89PNG\r\n\x1a\n')
+    except Exception:
+        return False
+
 def process_component_with_condition(component, conditions, parameters, reps, iteration_index, calling_code):
     component_name = component.get("name")
     # Check if the component is in the condition
@@ -274,7 +284,8 @@ if __name__ == "__main__":
     try:
         process = subprocess.run([sys.executable, file_path], capture_output=True, text=True)
         execution_result = process.stdout + process.stderr
-        execution_result = execution_result.strip('"')
+        if is_base64_png(execution_result):
+            execution_result = execution_result.rstrip('\n').strip('"')
     except Exception as e:
         execution_result = str(e)
 
