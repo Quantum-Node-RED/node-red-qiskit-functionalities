@@ -1,5 +1,5 @@
 <script type="text/javascript">
-  RED.nodes.registerType("swap_component", {
+  RED.nodes.registerType("swap", {
     category: "Quantum Circuit",
     color: "#E6B9D7",
     defaults: {
@@ -11,17 +11,12 @@
     outputs: 1,
     icon: "font-awesome/fa-chain",
     label: function () {
-      return this.name || "swap_component";
+      return this.name || "swap";
     },
   });
 </script>
 
-<script type="text/html" data-template-name="swap_component">
-  <!-- <div class="form-row">
-    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
-    <input type="text" id="node-input-name" placeholder="Name" />
-  </div> -->
-
+<script type="text/html" data-template-name="swap">
   <div class="form-row">
     <label for="node-input-control"
       ><i class="fa fa-tag"></i> control qbit</label
@@ -35,6 +30,20 @@
   </div>
 </script>
 
-<script type="text/html" data-help-name="measure_component">
-  <p></p>
+<script type="text/html" data-help-name="swap">
+  <p>
+    <h2>Introduction:</h2>
+    <p>The <strong>SWAP gate</strong> is a quantum gate that exchanges the states of two qubits.</p>
+    </p>
+    <h2>Placement:</h2>
+    <ul>
+      <li>It should follow a qubit node directly or indirectly.</li>
+      <li>It should be placed inside the range [Quantum-Circuit-Begin, Quantum-Circuit-END].</li>
+      <li>There should be at least 1 qubit inside the circuit.</li>
+    </ul>
+    <h2>Properties:</h2>
+    <ul>
+      <li><strong> control qbit/target qbit:</strong> The IDs of the two qubits whose states will be exchanged.</li>
+    </ul>
+  </p>
 </script>

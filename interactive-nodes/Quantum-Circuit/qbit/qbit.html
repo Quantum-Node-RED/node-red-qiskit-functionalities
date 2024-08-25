@@ -1,26 +1,39 @@
 <script type="text/javascript">
-    RED.nodes.registerType('qbit', {
-      category: 'Quantum Circuit',
-      color: '#E6B9D7',
-      defaults: {
-        name: { value: "" }
-      },
-      inputs: 1,
-      outputs: 1,
-      icon: "font-awesome/fa-chain",
-      label: function () {
-        return this.name || "qbit";
-      }
-    });
-  </script>
-  
-  <script type="text/html" data-template-name="qbit">
+  RED.nodes.registerType('qbit', {
+    category: 'Quantum Circuit',
+    color: '#E6B9D7',
+    defaults: {
+      name: { value: "" }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "font-awesome/fa-chain",
+    label: function () {
+      return this.name || "qbit";
+    }
+  });
+</script>
+
+<script type="text/html" data-template-name="qbit">
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
     </div>
   </script>
-  
-  <script type="text/html" data-help-name="qbit">
-    <p></p>
+
+<script type="text/html" data-help-name="qbit">
+    <p>
+      <h2>Introduction:</h2>
+      <p>A <strong>qubit</strong> (quantum bit) is the basic unit of information in quantum computing.
+         A qubit can be in both <code>|0⟩</code> and <code>|1⟩</code> states at the same time.
+         When measured, a qubit will collapse to either <code>|0⟩</code> or <code>|1⟩</code>.</p>
+      <p>In a quantum circuit, a qubit can be in a state like:</p>
+      <pre><code>α|0⟩ + β|1⟩</code></pre>
+      <p>Where α and β are numbers that determine the probabilities of <code>|0⟩</code> and <code>|1⟩</code>.</p>
+      <h2>Placement:</h2>
+      <ul>
+        <li>The gate should follow a <strong>Quantum-Circuit-Begin</strong>.</li>
+        <li>It may be preceded by other gates.</li>
+      </ul>
+    </p>
   </script>

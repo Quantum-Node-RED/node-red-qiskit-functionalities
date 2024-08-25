@@ -22,27 +22,35 @@
     <input type="text" id="node-input-name" placeholder="Name" />
   </div> -->
 
-  <div class="form-row">
-    <label for="node-input-measure_qbit"
-      ><i class="fa fa-tag"></i> measure qbit</label
-    >
-    <input
-      type="text"
-      id="node-input-measure_qbit"
-      placeholder="qubit(s) to measure"
-    />
-  </div>
+<div class="form-row">
+  <label for="node-input-measure_qbit"><i class="fa fa-tag"></i> measure qbit</label>
+  <input type="text" id="node-input-measure_qbit" placeholder="qubit(s) to measure" />
+</div>
 
-  <div class="form-row">
-    <label for="node-input-cbit"><i class="fa fa-tag"></i> cbit</label>
-    <input
-      type="text"
-      id="node-input-cbit"
-      placeholder="classical bit(s) to place the measurement result(s) in."
-    />
-  </div>
+<div class="form-row">
+  <label for="node-input-cbit"><i class="fa fa-tag"></i> cbit</label>
+  <input type="text" id="node-input-cbit" placeholder="classical bit(s) to place the measurement result(s) in." />
+</div>
 </script>
 
 <script type="text/html" data-help-name="measure">
-  <p></p>
+  <p>
+    <h2>Introduction:</h2>
+    <p>Before measurement, a qubit can be in a superposition of <code>|0⟩</code> and <code>|1⟩</code>. 
+      The <strong>measure</strong> operation collapses a qubit's quantum state 
+      into one of the states, <code>|0⟩</code> or <code>|1⟩</code>.
+      The probability of measuring <code>|0⟩</code> is <code>|α|^2</code>, 
+      and the probability of measuring <code>|1⟩</code> is <code>|β|^2</code>.</p>
+    <h2>Placement:</h2>
+    <ul>
+      <li>It should follow a qubit node directly or indirectly.</li>
+      <li>It should be placed inside the range [Quantum-Circuit-Begin, Quantum-Circuit-END].</li>
+      <li>There should be at least 1 qubit inside the circuit.</li>
+    </ul>
+    <h2>Properties:</h2>
+    <ul>
+      <li><strong> measure qbit:</strong> The index of a qubit to be measured. (0-index) </li>
+      <li><strong> cbit:</strong>  Save the outcome of the measurement in the classical bit with this index.  </li>
+    </ul>
+  </p>
 </script>

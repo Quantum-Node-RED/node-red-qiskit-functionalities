@@ -1,26 +1,36 @@
 <script type="text/javascript">
-    RED.nodes.registerType('Quantum_Circuit_End', {
-      category: 'Quantum Circuit',
-      color: '#A390E4',
-      defaults: {
-        name: { value: "" }
-      },
-      inputs: 1,
-      outputs: 1,
-      icon: "font-awesome/fa-chain",
-      label: function () {
-        return this.name || "Quantum_Circuit_End";
-      }
-    });
-  </script>
-  
-  <script type="text/html" data-template-name="Quantum_Circuit_End">
+  RED.nodes.registerType('Quantum_Circuit_End', {
+    category: 'Quantum Circuit',
+    color: '#A390E4',
+    defaults: {
+      name: { value: "" }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "font-awesome/fa-chain",
+    label: function () {
+      return this.name || "Quantum_Circuit_End";
+    }
+  });
+</script>
+
+<script type="text/html" data-template-name="Quantum_Circuit_End">
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
     </div>
   </script>
-  
-  <script type="text/html" data-help-name="Quantum_Circuit_End">
-    <p></p>
+
+<script type="text/html" data-help-name="Quantum_Circuit_End">
+    <p>
+      <h2>Introduction:</h2>
+      <p>Quantum Circuit End is a node that indicates the end of a quantum circuit.</p>
+      </p>
+      <h2>Placement:</h2>
+      <ul>
+        <li>It must be preceded by a Quantum Circuit Begin indirectly.
+        <li>It cannot be preceded by a Quantum Circuit End.</li> 
+        <li>Only qubits and gates are allowed between it and the Quantum Circuit Begin.</li>
+      </ul>
+    </p>
   </script>

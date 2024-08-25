@@ -18,7 +18,7 @@
 
 <script type="text/html" data-template-name="phase">
   <div class="form-row">
-    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
     <input type="text" id="node-input-name" placeholder="Name" />
   </div>
 
@@ -34,5 +34,23 @@
 </script>
 
 <script type="text/html" data-help-name="phase">
-  <p></p>
+  <p>
+    <h2>Introduction:</h2>
+    <p><strong>Phase</strong> refers to the shift in the phase of a qubit's quantum state, 
+      which affects the relative phase between the <code>|0⟩</code> and <code>|1⟩</code> states.
+      <p>A phase shift changes the state from <code>α|0⟩ + β|1⟩</code> to 
+        <code>α|0⟩ + e<sup>iθ</sup>β|1⟩</code>, where θ is the phase angle.</p>
+    </p>
+    <h2>Placement:</h2>
+    <ul>
+      <li>It should follow a qubit node directly or indirectly.</li>
+      <li>It should be placed inside the range [Quantum-Circuit-Begin, Quantum-Circuit-END].</li>
+      <li>There should be at least 1 qubit inside the circuit.</li>
+    </ul>
+    <h2>Properties:</h2>
+    <ul>
+      <li><strong> qbit:</strong> The index of a qubit that the phase is applied to. (0-index) </li>
+      <li><strong> Theta (θ):</strong>  Controls the amount of phase shift applied to the <code>|1⟩</code> state of a qubit. </li>
+    </ul>
+  </p>
 </script>

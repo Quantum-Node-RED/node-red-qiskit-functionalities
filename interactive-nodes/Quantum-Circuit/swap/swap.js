@@ -22,5 +22,5 @@ module.exports = function (RED) {
     });
   }
 
-  RED.nodes.registerType("swap_component", swapNode);
+  RED.nodes.registerType("swap", swapNode);
 };

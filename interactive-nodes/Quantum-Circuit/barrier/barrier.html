@@ -28,5 +28,19 @@
 </script>
 
 <script type="text/html" data-help-name="barrier">
-  <p></p>
+  <p>
+    <h2>Introduction:</h2>
+    <p>Barriers are used to visually separate different sections of a quantum circuit. 
+      This can prevent certain optimizations or transformations from being applied to the qubits between the barriers. </p>
+    <h2>Placement:</h2>
+    <ul>
+      <li>It should follow a qubit node directly or indirectly. It can follow gates directly or indirectly</li>
+      <li>It should be placed inside the range [Quantum-Circuit-Begin, Quantum-Circuit-END].</li>
+      <li>There should be at least 1 qubit inside the circuit.</li>
+    </ul>
+    <h2>Properties:</h2>
+    <ul>
+      <li><strong> qbit:</strong> The index of a particular qubit that the barrier is applied to. (0-index) </li>
+    </ul>
+  </p>
 </script>
