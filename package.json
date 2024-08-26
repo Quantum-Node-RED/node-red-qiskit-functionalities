@@ -51,7 +51,7 @@
       "Apply-bitfield": "interactive-nodes/Functions/Apply-bitfield/Apply-bitfield.js",
       "Apply-objective-value": "interactive-nodes/Functions/Apply-objective-value/Apply-objective-value.js",
       "Draw-graph": "interactive-nodes/Tools/draw-graph/draw-graph.js",
-      "Apply-Hamiltonian": "interactive-nodes/Functions/Apply-Hamiltonian/Apply-Hamiltonian.js",
+      "Build-hamiltonian-operator-from-weight_matrix": "interactive-nodes/Functions/Build-hamiltonian-operator-from-weight-matrix/Build-hamiltonian-operator-from-weight-matrix.js",
       "Extract-most-likely-state": "interactive-nodes/Functions/Extract-most-likely-state/Extract-most-likely-state.js",
       "for_begin": "interactive-nodes/Programming/for_loop/for_begin.js",
       "for_end": "interactive-nodes/Programming/for_loop/for_end.js",

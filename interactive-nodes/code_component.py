@@ -324,7 +324,7 @@ print(json.dumps({variable}))"""
         """
     ),
 
-    "apply_hamiltonian": Code_Component(
+    "build_hamiltonian_operator_from_weight_matrix": Code_Component(
         import_statement=[
                     Component_Dependency.Pauli,
                     Component_Dependency.SparsePauliOp,
@@ -359,7 +359,7 @@ print(json.dumps({variable}))"""
                 shift += 1
 
     return SparsePauliOp(pauli_list, coeffs=coeffs), shift""",
-        calling_function="{operator_name}, offset = get_operator(weight_matrix)"
+        calling_function="{operator_name}, offset = get_operator({weight_matrix})"
     ),
 
     "define_sampler": Code_Component(
