@@ -4,7 +4,8 @@
     color: "#D3E7B5",
     defaults: {
       name: { value: "" },
-      variable: { value: "" },
+      variable_name: { value: "", required: true },
+      variable: { value: "", required: true },
     },
     inputs: 1,
     outputs: 1,
@@ -19,6 +20,12 @@
   <div class="form-row">
     <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
     <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-variable_name"
+      ><i class="fa fa-tag"></i> Print Name</label
+    >
+    <input type="text" id="node-input-variable_name" placeholder="Print Name" />
   </div>
   <div class="form-row">
     <label for="node-input-variable"

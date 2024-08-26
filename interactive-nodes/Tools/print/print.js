@@ -6,6 +6,7 @@ module.exports = function (RED) {
     node.on("input", function (msg) {
       msg.payload = msg.payload || {};
       const print_component = new component.Component("print", {});
+      print_component.parameters["variable_name"] = config.variable_name;
       print_component.parameters["variable"] = config.variable;
       component.addComponent(msg, print_component);
       node.send(msg);

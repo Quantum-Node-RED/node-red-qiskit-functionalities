@@ -399,7 +399,7 @@ print(json.dumps({variable}))"""
     "print": Code_Component(
         import_statement=[],
         function="",
-        calling_function="""print("result: ", {variable})"""
+        calling_function="""print("{variable_name}: ", {variable})"""
     ),
 
     "QAOA": Code_Component(
