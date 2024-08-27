@@ -2,7 +2,7 @@ const component = require("../../component.js");
 const constants = require("../../constants.js");
 
 module.exports = function (RED) {
-  function qbitNode(config) {
+  function qubitNode(config) {
     RED.nodes.createNode(this, config);
     var node = this;
 
@@ -15,20 +15,20 @@ module.exports = function (RED) {
         expectedQubits = 0; // Ensure it's initialized
       }
 
-      // Add the qbit component as a child
-      const qbit_component = new component.Component(
+      // Add the qubit component as a child
+      const qubit_component = new component.Component(
         constants.QUBITS_COMPONENT_NAME,
         {}
       );
-      qbit_component.parameters["id"] = expectedQubits;
+      qubit_component.parameters["id"] = expectedQubits;
 
       // Get the name of the circuit from Quantum Circuit Begin component
-      qbit_component.parameters[constants.CIRCUIT_NAME] = node
+      qubit_component.parameters[constants.CIRCUIT_NAME] = node
         .context()
         .flow.get(constants.CIRCUIT_NAME);
-      msg.payload["qubit_id"] = qbit_component.parameters["id"];
+      msg.payload["qubit_id"] = qubit_component.parameters["id"];
 
-      component.addComponent(msg, qbit_component);
+      component.addComponent(msg, qubit_component);
 
       // Increment the number of expected qubits
       expectedQubits += 1;
@@ -41,5 +41,5 @@ module.exports = function (RED) {
     });
   }
 
-  RED.nodes.registerType("qbit", qbitNode);
+  RED.nodes.registerType("qubit", qubitNode);
 };
