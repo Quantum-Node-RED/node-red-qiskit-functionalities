@@ -52,6 +52,9 @@ The Interactive Node Framework simplifies quantum computing by allowing users to
     
 
 - **Math**
+
+    The Math category includes operations related to mathematics, which are used to support the construction of quantum computing at a mathematical level. For example, it can receive an Adjacency Matrix representing a graph in JSON format.
+
 - **Programming**
 
     The purpose of the Programming node is to enhance the flexibility and scalability of the framework. It includes a text input box where users can manually enter Python code snippets and insert this node at any location in the flow to customize the final generated code.
