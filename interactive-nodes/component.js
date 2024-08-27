@@ -126,19 +126,19 @@ function addGateComponentasChild(msg, newNode) {
 function aggregatePaths(type, expectedQubits, circuit_name, connectedPaths, node, msg, iterations = null) {
   if (expectedQubits === null || expectedQubits === undefined) {
     node.error(
-      "expectedQubits not initialized. Ensure Quantum_Circuit_Begin node is setting this correctly."
+      "expectedQubits not initialized. Ensure Quantum_Circuit_Begin/Circuit_Begin node is setting this correctly."
     );
     return;
   }
 
   let state = node.context().flow.get("executionState") || {
     receivedQubits: 0,
-    structure: []
+    structure: [],
+    sequenceComponents: [],
+    sortedComponents: []
   };
 
   if (state.receivedQubits === 0) {
-    node.log(`Starting aggregation for ${type}.`);
-    node.log(`Expected qubits initialized to ${expectedQubits}`);
     state.structure = [];
   }
 
@@ -167,11 +167,10 @@ function aggregatePaths(type, expectedQubits, circuit_name, connectedPaths, node
     msg.payload.structure.push(endComponent);
     node.send(msg);
   }
+
   // First Qubit Logic
   else if (state.receivedQubits === 0) {
-    for (let component_ of msg.payload.structure) {
-      state.structure.push(component_);
-      
+    for (let component_ of msg.payload.structure) {     
       if (type === constants.TYPE_CIRCUIT_LOOP_BEFORE_BEGIN) {
         if (component_.name === constants.CIRCUIT_LOOP_BEGIN_COMPONENT_NAME &&
             component_.parameters.circuit_name === circuit_name) {
@@ -187,6 +186,12 @@ function aggregatePaths(type, expectedQubits, circuit_name, connectedPaths, node
             component_.parameters.circuit_name === circuit_name) {
           break;
         }
+      }
+      if (component_.parameters.hasOwnProperty("sequence_no")) {
+        state.sequenceComponents.push(component_);
+      }
+      else{
+        state.sortedComponents.push(component_);
       }
     }
   }
@@ -217,9 +222,28 @@ function aggregatePaths(type, expectedQubits, circuit_name, connectedPaths, node
       }
 
       if (collecting) {
-        state.structure.push(component_);
+        if (component_.parameters.hasOwnProperty("sequence_no")) {
+          state.sequenceComponents.push(component_);
+        }
+        else{
+          state.sortedComponents.push(component_);
+        }
       }
     }
+
+    has_no_defined_sequence=[];
+    final_sequence=[];
+    for (let component_ of state.sequenceComponents) {
+      if (component_.parameters["sequence_no"] === null || component_.parameters["sequence_no"] === undefined || component_.parameters["sequence_no"] === ""){
+        has_no_defined_sequence.push(component_);
+      }
+      else{
+        final_sequence.push(component_);
+      }
+    }
+    // Sort the components with a sequence number
+    final_sequence.sort((a, b) => a.parameters.sequence_no - b.parameters.sequence_no);
+    state.structure = [...state.sortedComponents, ...has_no_defined_sequence, ...final_sequence];
 
     let endComponent = null;
 
@@ -241,6 +265,7 @@ function aggregatePaths(type, expectedQubits, circuit_name, connectedPaths, node
     }
 
     state.structure.push(endComponent);
+
 
     let new_payload = {};
     new_payload.structure = state.structure;
@@ -283,11 +308,6 @@ function aggregatePaths(type, expectedQubits, circuit_name, connectedPaths, node
           continue;
         }
       }
-
-      if (collecting) {
-        state.structure.push(component_);
-      }
-
       if (type === constants.TYPE_CIRCUIT_LOOP_BEFORE_BEGIN &&
           component_.name === constants.CIRCUIT_LOOP_BEGIN_COMPONENT_NAME &&
           component_.parameters.circuit_name === circuit_name) {
@@ -300,6 +320,14 @@ function aggregatePaths(type, expectedQubits, circuit_name, connectedPaths, node
                  component_.name === constants.QUANTUM_CIRCUIT_END_COMPONENT_NAME &&
                  component_.parameters.circuit_name === circuit_name) {
         break;
+      }
+      if (collecting) {
+        if (component_.parameters.hasOwnProperty("sequence_no")) {
+          state.sequenceComponents.push(component_);
+        }
+        else{
+          state.sortedComponents.push(component_);
+        }
       }
     }
   }
