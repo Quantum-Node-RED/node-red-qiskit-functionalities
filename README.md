@@ -38,27 +38,34 @@ The Interactive Node Framework simplifies quantum computing by allowing users to
     - `msg.payload.result.code_snapshot`: The final code snippet in image format.
     - `msg.payload.result.result`: The execution result of the final code snippet.
     After the _End_ node, only the _debug_ node or the _image output_ node can be used to display the results.
+    ![image](https://github.com/Quantum-Node-RED/node-red-qiskit-functionality/blob/uniform-documentation-flow-style/Readme_Image/Interactive_flow.png)
 
 - **Functions**
 
     The Functions category includes various functional nodes, such as those for defining a sampler for a quantum circuit or converting results into readable output. Each node has a distinct responsibility, and you can use these nodes according to your needs. Note that these responsibilities do not involve operations at the qubit level, so function nodes should always be placed outside the quantum circuit you defined.
+    ![image](https://github.com/Quantum-Node-RED/node-red-qiskit-functionality/blob/uniform-documentation-flow-style/Readme_Image/Interactive_functions.png)
 
 - **Gates**
 
     The Gates category includes various gates that can be applied to qubits, such as the Hadamard gate and the NOT gate. These gates can be arranged and combined in any order, but they must be placed after the _qbit_ node.
+    ![image](https://github.com/Quantum-Node-RED/node-red-qiskit-functionality/blob/uniform-documentation-flow-style/Readme_Image/Interactive_gates.png)
+    
 
 - **Math**
 - **Programming**
 
     The purpose of the Programming node is to enhance the flexibility and scalability of the framework. It includes a text input box where users can manually enter Python code snippets and insert this node at any location in the flow to customize the final generated code.
+    ![image](https://github.com/Quantum-Node-RED/node-red-qiskit-functionality/blob/uniform-documentation-flow-style/Readme_Image/Interactive_programming.png)
 
 - **Quantum Circuit**
 
     The QuantumCircuit class is used to define and construct quantum circuits, and it also includes some fundamental operations for quantum circuits. The _Quantum-Circuit-Begin_ and _Quantum-Circuit-End_ nodes define the scope of the quantum circuit. Users should start with the _Quantum-Circuit-Begin_ node and follow it with the desired number of _qbit_ nodes. After adding operation nodes such as _Gate_ and _Measure_ to the _qbit_ nodes, the circuit should be ended with the _Quantum-Circuit-End_ node.
+    ![image](https://github.com/Quantum-Node-RED/node-red-qiskit-functionality/blob/uniform-documentation-flow-style/Readme_Image/Interactive_quantum_circuit.png)
 
 - **Tools**
 
     The Tools category includes various useful functions, such as _draw circuit_ and _print_, that assist in constructing and outputting flows more conveniently.
+    ![image](https://github.com/Quantum-Node-RED/node-red-qiskit-functionality/blob/uniform-documentation-flow-style/Readme_Image/Interactive_tools.png)
 
 ## Contributing
 ## Acknowledgements
