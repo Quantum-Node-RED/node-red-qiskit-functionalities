@@ -9,6 +9,7 @@ module.exports = function (RED) {
       const SX_gate_component = new component.Component("SX_gate",{});
       SX_gate_component.parameters["qbit"] = msg.payload["qubit_id"];  
       SX_gate_component.parameters[constants.CIRCUIT_NAME] = node.context().flow.get(constants.CIRCUIT_NAME);
+      SX_gate_component.parameters["sequence_no"]=config.sequence_no;
       component.addComponent(msg, SX_gate_component);
       node.send(msg);
     });

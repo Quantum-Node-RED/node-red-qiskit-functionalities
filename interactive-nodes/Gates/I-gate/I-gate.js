@@ -10,6 +10,7 @@ module.exports = function (RED) {
       const I_gate_component = new component.Component("I_gate",{});
       I_gate_component.parameters["qbit"] = msg.payload["qubit_id"];
       I_gate_component.parameters[constants.CIRCUIT_NAME] = node.context().flow.get(constants.CIRCUIT_NAME);
+      I_gate_component.parameters["sequence_no"]=config.sequence_no;
       component.addComponent(msg, I_gate_component);
       node.send(msg);
     });

@@ -14,6 +14,7 @@ module.exports = function (RED) {
       mutli_controlled_U_gate_component.parameters["list_of_control_qubits"] = parseInt(config.list_of_control_qubits);
       mutli_controlled_U_gate_component.parameters["target_qubit"] = msg.payload["qubit_id"];
       mutli_controlled_U_gate_component.parameters[constants.CIRCUIT_NAME] = node.context().flow.get(constants.CIRCUIT_NAME);
+      mutli_controlled_U_gate_component.parameters["sequence_no"] = config.sequence_no;
       component.addComponent(msg, mutli_controlled_U_gate_component);
       node.send(msg);
     });

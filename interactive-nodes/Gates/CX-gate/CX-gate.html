@@ -5,6 +5,7 @@
     defaults: {
       name: { value: "" },
       control_qubit: { value: "" },
+      sequence_no: { value: "" },
     },
     inputs: 1,
     outputs: 1,
@@ -25,6 +26,10 @@
     <label for="node-input-control_qubit"><i class="fa fa-tag"></i> Control Qubit</label>
     <input type="number" id="node-input-control_qubit" placeholder="Control Qubit" />
   </div>
+
+  <div class="form-row">
+    <label for="node-input-sequence_no"><i class="fa fa-tag"></i> Sequence No</label>
+    <input type="number" id="node-input-sequence_no" placeholder="Sequence No" />
 </script>
 
 <script type="text/html" data-help-name="CX_gate">

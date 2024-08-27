@@ -10,6 +10,7 @@ module.exports = function (RED) {
       CX_gate_component.parameters["control_qubit"] = parseInt(config.control_qubit);
       CX_gate_component.parameters["target_qubit"] = msg.payload["qubit_id"];
       CX_gate_component.parameters[constants.CIRCUIT_NAME] = node.context().flow.get(constants.CIRCUIT_NAME);
+      CX_gate_component.parameters["sequence_no"] = config.sequence_no;
       component.addComponent(msg, CX_gate_component);
 
       node.send(msg);

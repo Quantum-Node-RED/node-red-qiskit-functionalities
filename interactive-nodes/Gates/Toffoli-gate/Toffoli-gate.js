@@ -11,6 +11,7 @@ module.exports = function (RED) {
       Toffoli_gate_component.parameters["control_qubit1"] = parseInt(config.control_qubit1);
       Toffoli_gate_component.parameters["control_qubit2"] = parseInt(config.control_qubit2);
       Toffoli_gate_component.parameters[constants.CIRCUIT_NAME] = node.context().flow.get(constants.CIRCUIT_NAME);
+      Toffoli_gate_component.parameters["sequence_no"] = config.sequence_no;
       component.addComponent(msg, Toffoli_gate_component);
       node.send(msg);
     });

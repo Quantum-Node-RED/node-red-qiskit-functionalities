@@ -12,6 +12,7 @@ module.exports = function (RED) {
       U_gate_component.parameters["lam"] = parseFloat(config.lambda);
       U_gate_component.parameters["qbit"] = msg.payload["qubit_id"];
       U_gate_component.parameters[constants.CIRCUIT_NAME] = node.context().flow.get(constants.CIRCUIT_NAME);
+      U_gate_component.parameters["sequence_no"] = config.sequence_no;
       component.addComponent(msg, U_gate_component);
       node.send(msg);
     });

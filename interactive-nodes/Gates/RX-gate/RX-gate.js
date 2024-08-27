@@ -11,6 +11,7 @@ module.exports = function (RED) {
       RX_gate_component.parameters["theta"] = parseFloat(config.theta);
       RX_gate_component.parameters["mode"] = config.mode;
       RX_gate_component.parameters[constants.CIRCUIT_NAME] = node.context().flow.get(constants.CIRCUIT_NAME);
+      RX_gate_component.parameters["sequence_no"] = config.sequence_no;
       component.addComponent(msg, RX_gate_component);
       node.send(msg);
     });
