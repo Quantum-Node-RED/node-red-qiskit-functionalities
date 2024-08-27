@@ -47,7 +47,7 @@ The Interactive Node Framework simplifies quantum computing by allowing users to
 
 - **Gates**
 
-    The Gates category includes various gates that can be applied to qubits, such as the Hadamard gate and the NOT gate. These gates can be arranged and combined in any order, but they must be placed after the _qbit_ node.
+    The Gates category includes various gates that can be applied to qubits, such as the Hadamard gate and the NOT gate. These gates can be arranged and combined in any order, but they must be placed after the _qubit_ node.
     ![image](https://github.com/Quantum-Node-RED/node-red-qiskit-functionality/blob/uniform-documentation-flow-style/Readme_Image/Interactive_gates.png)
     
 
@@ -59,7 +59,7 @@ The Interactive Node Framework simplifies quantum computing by allowing users to
 
 - **Quantum Circuit**
 
-    The QuantumCircuit class is used to define and construct quantum circuits, and it also includes some fundamental operations for quantum circuits. The _Quantum-Circuit-Begin_ and _Quantum-Circuit-End_ nodes define the scope of the quantum circuit. Users should start with the _Quantum-Circuit-Begin_ node and follow it with the desired number of _qbit_ nodes. After adding operation nodes such as _Gate_ and _Measure_ to the _qbit_ nodes, the circuit should be ended with the _Quantum-Circuit-End_ node.
+    The QuantumCircuit class is used to define and construct quantum circuits, and it also includes some fundamental operations for quantum circuits. The _Quantum-Circuit-Begin_ and _Quantum-Circuit-End_ nodes define the scope of the quantum circuit. Users should start with the _Quantum-Circuit-Begin_ node and follow it with the desired number of _qubit_ nodes. After adding operation nodes such as _Gate_ and _Measure_ to the _qubit_ nodes, the circuit should be ended with the _Quantum-Circuit-End_ node.
     ![image](https://github.com/Quantum-Node-RED/node-red-qiskit-functionality/blob/uniform-documentation-flow-style/Readme_Image/Interactive_quantum_circuit.png)
 
 - **Tools**
