@@ -1,0 +1,73 @@
+<script type="text/javascript">
+  RED.nodes.registerType("Operator-For-Gate-Object", {
+    category: "The operator class",
+    color: "#9cd0e0",
+    defaults: {
+      name: { value: "Operator for gate object" },
+      info: {
+          value: "# [The Operator class guide](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n" +
+          "&nbsp;\r\n" +
+          "Gate object example:\r\n" +
+          "```python\r\n" +
+          "# Create an Operator for a Gate object\r\n" + 
+          "operator = Operator(CXGate())\r\n" +
+          "\r\n" +
+          "printprint(f\"operator: {operator.to_matrix()}\")\r\n" +
+          "print(f\"dim: {operator.dim}\")\r\n" +
+          "print(f\"input_dims: {operator.input_dims()}\")\r\n" +
+          "print(f\"output_dims: {operator.output_dims()}\")\r\n" +
+          "```\r\n "
+      },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    label: function () {
+      return this.name || "Operator-For-Gate-Object";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="Operator-For-Gate-Object">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="Operator-For-Gate-Object">
+  <p>A node that shows how to convert a Gate object to an Operator</p>
+
+  <h3>Outputs</h3>
+  <ol class="node-ports">
+    <li>Matrix operator data
+      <dl class="message-properties">
+        <dt>payload.result.operator <span class="property-type">string</span></dt>
+        <dd>Data (QuantumCircuit orOperation or BaseOperator or matrix) to initialize operator.</dd>
+      </dl>
+    </li>
+    <li>Matrix operator input dimensions 
+      <dl class="message-properties">
+        <dt>payload.result.dim <span class="property-type">string</span></dt>
+        <dd>The total input and output dimension of the operator</dd>
+      </dl>
+    </li>
+    <li>Matrix operator input dimensions 
+      <dl class="message-properties">
+        <dt>payload.result.input_dims <span class="property-type">string</span></dt>
+        <dd>String representation of a Tuple input subsystem dimensions</dd>
+      </dl>
+    </li>
+    <li>Matrix operator output dimensions
+      <dl class="message-properties">
+        <dt>payload.result.output_dims <span class="property-type">string</span></dt>
+        <dd>String representation of a Tuple output subsystem dimensions</dd>
+      </dl>
+    </li>
+  </ol>
+
+  <h3>Details</h3>
+  <p>
+    This node demonstrates how to create an <code>Operator</code> from a Gate object.
+  </p>
+</script>

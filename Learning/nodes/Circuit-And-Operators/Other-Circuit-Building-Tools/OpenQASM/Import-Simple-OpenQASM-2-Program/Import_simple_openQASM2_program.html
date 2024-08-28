@@ -1,0 +1,39 @@
+
+<script type="text/javascript">
+    RED.nodes.registerType("import-OpenQASM2-program", {
+      category: "Import OpenQASM 2 program",
+      color: "#dddddd",
+      defaults: {
+        name: { value: "Import simple OpenQASM2 program" },
+        info: { value: "# Two functions import OpenQASM 2 programs into Qiskit. These are <font style=\"background: lightgrey\">[qasm2.load()](https://docs.quantum.ibm.com/api/qiskit/qasm2#load)</font>, which takes a filename, and <font style=\"background: lightgrey\">[qasm2.loads()](https://docs.quantum.ibm.com/api/qiskit/qasm2#loads)</font>, which takes the OpenQASM 2 program as a string.\r\n&nbsp;\r\n# **In the following nodes, we will seperately demonstrate how these two methods convert OpenQASM2 programs into Qiskit QuantumCircuit instances.**\r\n&nbsp;\r\n# See the [OpenQASM 2 Qiskit API](https://docs.quantum.ibm.com/api/qiskit/qasm2) for more information." }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "white_info.svg",
+      label: function () {
+        return this.name || "Import simple OpenQASM2 program";
+      },
+      
+    });
+
+  </script>
+  
+  <script type="text/html" data-template-name="import-OpenQASM2-program">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Import simple OpenQASM2 program" />
+    </div>
+
+  </script>
+
+  
+  
+  <script type="text/html" data-help-name="import-OpenQASM2-program">
+    <p>A node that briefly introduce how to import OpenQASM2 program into Qiskit.</p>
+
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to the OpenQASM 2 integration in Qiskit. It explains how the qasm2.load() and qasm2.loads() functions are used to import OpenQASM 2 programs into Qiskit, converting them into QuantumCircuit instances. These functions allow users to either load a program from a file or directly from a string, offering flexibility in how quantum circuits are defined and manipulated within the Qiskit framework.
+    </p>
+  </script>
+  

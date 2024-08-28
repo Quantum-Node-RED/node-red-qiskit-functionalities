@@ -1,0 +1,34 @@
+<script type="text/javascript">
+    RED.nodes.registerType('intro-to-transpile-stage', {
+      category: 'Transpiler Stages',
+      color: '#dddddd',
+      defaults: {
+        name: { value: "Introduction to transpiler stages" },
+        info: { 
+            value: "# This flow describes the stages of prebuilt transpilation pipeline in the Qiskit SDK. There are six stages:\r\n- # <font style=\"background: lightgrey\">init</font>\r\n- # <font style=\"background: lightgrey\">layout</font>\r\n- # <font style=\"background: lightgrey\">routing</font>\r\n- # <font style=\"background: lightgrey\">translation</font>\r\n- # <font style=\"background: lightgrey\">optimization</font>\r\n- # <font style=\"background: lightgrey\">scheduling</font>\r\n# The [<font style=\"background: lightgrey\">generate_preset_pass_manager</font>](https://docs.quantum.ibm.com/api/qiskit/transpiler_preset#qiskit.transpiler.preset_passmanagers.generate_preset_pass_manager) function creates a preset [staged pass manager](https://docs.quantum.ibm.com/api/qiskit/qiskit.transpiler.StagedPassManager) composed of these stages. The specific passes that make up each stage depends on the arguments passed to <font style=\"background: lightgrey\">generate_preset_pass_manager</font>. The <font style=\"background: lightgrey\">optimization_level</font> is a positional argument that must be specified; it is an integer that can be 0, 1, 2, or 3. Higher values indicate heavier but more costly optimization (see [Transpilation defaults and configuration options](https://docs.quantum.ibm.com/guides/defaults-and-configuration-options)).\r\n&nbsp;\r\n# The recommended way to transpile a circuit is to create a preset staged pass manager and then run that pass manager on the circuit, as described in Transpile with pass managers flow. However, a simpler but less customizable alternative is to use the [<font style=\"background: lightgrey\">transpile</font>](https://docs.quantum.ibm.com/api/qiskit/compiler#qiskit.compiler.transpile) function. This function accepts the circuit directly as an argument. As with <font style=\"background: lightgrey\">generate_preset_pass_manager</font>, the specific transpiler passes used depend on the arguments, such as <font style=\"background: lightgrey\">optimization_level</font>, passed to <font style=\"background: lightgrey\">transpile</font>. In fact, internally the <font style=\"background: lightgrey\">transpile</font> function calls <font style=\"background: lightgrey\">generate_preset_pass_manager</font> to create a preset staged pass manager and runs it on the circuit."
+        }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "white_info.svg",
+      label: function () {
+        return this.name || "Introduction to transpiler stages";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="intro-to-transpile-stage">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Introduction to transpiler stages">
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="intro-to-transpile-stage">
+    <p>A node that introduces the 'Transpiler Stages' tutorial.</p>
+
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to the transpilation pipeline stages in the Qiskit SDK. It details the six stages of the prebuilt transpilation process: init, layout, routing, translation, optimization, and scheduling. The node explains how the generate_preset_pass_manager function is used to create a preset staged pass manager, which is tailored based on the arguments provided, including the required optimization_level. Additionally, it highlights that while the preferred method for circuit transpilation is using a preset staged pass manager, a simpler alternative is the transpile function, which directly handles the circuit and internally utilizes the preset pass manager created by generate_preset_pass_manager.
+    </p>
+  </script>

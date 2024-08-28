@@ -1,0 +1,36 @@
+<script type="text/javascript">
+    RED.nodes.registerType('transpiler-init-stage', {
+      category: 'Transpiler Stages',
+      color: '#dddddd',
+      defaults: {
+        name: { value: "Init Stage" },
+        info: { 
+            value: "## **Init Stage**\r\n&nbsp;\r\n# This first stage does very little by default and is primarily useful if you want to include your own initial optimizations. Because most layout and routing algorithms are only designed to work with single- and two-qubit gates, this stage is also used to translate any gates that operate on more than two qubits, into gates that only operate on one or two qubits.\r\n&nbsp;\r\n# For more information about implementing your own initial optimizations for this stage, see the section on plugins and customizing pass managers flow."
+        }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "white_info.svg",
+      label: function () {
+        return this.name || "Init Stage";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="transpiler-init-stage">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Init Stage">
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="transpiler-init-stage">
+    <p>
+      A simple node that introduce Init Stage.
+    </p>
+
+    <h3>Details</h3>
+    <p>     
+      This node provides an introduction to the Init Stage in quantum circuit optimization, as described in the Qiskit documentation. The Init Stage primarily handles initial optimizations in a quantum circuit, especially for circuits involving multi-qubit gates. It is essential for translating gates that operate on more than two qubits into equivalent gates that only affect one or two qubits, ensuring compatibility with most layout and routing algorithms.
+    </p>
+  </script>

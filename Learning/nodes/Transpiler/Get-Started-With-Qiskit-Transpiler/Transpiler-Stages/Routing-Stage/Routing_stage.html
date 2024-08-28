@@ -1,0 +1,62 @@
+<script type="text/javascript">
+  RED.nodes.registerType("routing", {
+    category: "Transpiler Stages",
+    color: "#FDF0C2",
+    defaults: {
+      name: { value: "Routing Stage" },
+      info: { value: "## **Routing Stage**\r\n&nbsp;\r\n# In order to implement a two-qubit gate between qubits that are not directly connected on a quantum device, one or more SWAP gates must be inserted into the circuit to move the qubit states around until they are adjacent on the device gate map. Each SWAP gate represents an expensive and noisy operation to perform. Thus, finding the minimum number of SWAP gates needed to map a circuit onto a given device is an important step in the transpilation process. For efficiency, this stage is typically computed alongside the Layout stage by default, but they are logically distinct from one another. The Layout stage selects the hardware qubits to be used, while the Routing stage inserts the appropriate amount of SWAP gates in order to execute the circuits using the selected layout.\r\n&nbsp;\r\n# However, finding the optimal SWAP mapping is hard. In fact, it is an NP-hard problem, and is thus prohibitively expensive to compute for all but the smallest quantum devices and input circuits. To work around this, Qiskit uses a stochastic heuristic algorithm called <font style=\"background: lightgrey\">SabreSwap</font> to compute a good, but not necessarily optimal, SWAP mapping. The use of a stochastic method means that the circuits generated are not guaranteed to be the same over repeated runs. Indeed, running the same circuit repeatedly results in a distribution of circuit depths and gate counts at the output. It is for this reason that many users choose to run the routing function (or the entire <font style=\"background: lightgrey\">StagedPassManager</font>) many times and select the lowest-depth circuits from the distribution of outputs.\r\n&nbsp;\r\n# For example, let's take a 15-qubit GHZ circuit executed 100 times, using a “bad” (disconnected) <font style=\"background: lightgrey\">initial_layout</font>. The following code snippet creates a 15-qubit GHZ state quantum circuit using Qiskit and simulates it on a fake quantum backend (FakeAuckland). It then uses a preset pass manager to optimize the circuit with a specified optimization level and layout method. The code runs the circuit 100 times, recording the circuit depths after optimization.\r\n```python\r\nimport matplotlib.pyplot as plt\r\nfrom qiskit import QuantumCircuit\r\nfrom qiskit_ibm_runtime.fake_provider import FakeAuckland, FakeWashingtonV2\r\nfrom qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager\r\n \r\nbackend = FakeAuckland()\r\n \r\nghz = QuantumCircuit(15)\r\nghz.h(0)\r\nghz.cx(0, range(1, 15))\r\n \r\npass_manager = generate_preset_pass_manager(\r\n    optimization_level=1,\r\n    backend=backend,\r\n    layout_method=\"trivial\",  # Fixed layout mapped in circuit order\r\n)\r\ndepths = []\r\nfor _ in range(100):\r\n    depths.append(pass_manager.run(ghz).depth())\r\n \r\nplt.figure(figsize=(8, 6))\r\nplt.hist(depths, align=\"left\", color=\"#AC557C\")\r\nplt.xlabel(\"Depth\", fontsize=14)\r\nplt.ylabel(\"Counts\", fontsize=14)\r\n```\r\n# You can check the image of the distribution in the \"Distribution Output\" node.\r\n&nbsp;\r\n# This wide distribution demonstrates how difficult it is for the SWAP mapper to compute the best mapping. To gain some insight, let's look at both the circuit being executed as well as the qubits that were chosen on the hardware.\r\n```python\r\nghz.draw('mpl', idle_wires=False)\r\n```\r\n# You can check the image of circuit `ghz` in the \"Circuit Diagram Output\" node.\r\n&nbsp;\r\n# The following code snippet  is using Qiskit to visualize the layout of a quantum circuit on a specific quantum hardware backend. After the circuit (`ghz`) is transpiled using a pass manager (`pass_manager`), the `plot_circuit_layout` function is called to display the hardware graph and highlight which qubits on the hardware were selected to execute the circuit.\r\n```python\r\nfrom qiskit.visualization import plot_circuit_layout\r\n \r\n# Plot the hardware graph and indicate which hardware qubits were chosen to run the circuit\r\ntranspiled_circ = pass_manager.run(ghz)\r\nplot_circuit_layout(transpiled_circ, backend)\r\n```\r\n# You can check the image of the hardware graph in the \"Circuit on hardware Output\" node.\r\n&nbsp;\r\n# As you can see, this circuit has to execute a two-qubit gate between qubits 0 and 14, which are very far apart on the connectivity graph. Running this circuit thus requires inserting SWAP gates to execute all of the two-qubit gates using the <font style=\"background: lightgrey\">SabreSwap</font> pass.\r\n&nbsp;\r\n# Note also that the <font style=\"background: lightgrey\">SabreSwap</font> algorithm is different from the larger <font style=\"background: lightgrey\">SabreLayout</font> method in the previous stage. By default, <font style=\"background: lightgrey\">SabreLayout</font> runs both layout and routing, and returns the transformed circuit. This is done for a few particular technical reasons specified in the pass's [API reference page](https://docs.quantum.ibm.com/api/qiskit/qiskit.transpiler.passes.SabreLayout).\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Object: `backend` (Type: _qiskit.providers.Backend_)\r\n- # Image: The image of distribution in 100 times optimizations\r\n- # Image: The image of circuit `ghz`\r\n- # Image: The image of circuit on hardware graph."},
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    label: function () {
+      return this.name || "Routing Stage";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="routing">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Routing Stage" />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="routing">
+  <p>
+    A simple node that introduce Routing stage.
+  </p>
+
+  <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Backend
+        <dl class="message-properties">
+          <dt>backend<span class="property-type">qiskit.providers.Backend</span></dt>
+          <dd>The object of backend "FakeAuckland()"</dd>
+        </dl>
+      </li>
+      <li>Distribution Diagram
+        <dl class="message-properties">
+          <dt>distribution_diagram<span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the distribution over 100 times optimizations.</dd>
+        </dl>
+      </li>
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the quantum circuit `ghz`.</dd>
+        </dl>
+      </li>
+      <li>Hardware Graph
+        <dl class="message-properties">
+          <dt>hardware_graph<span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the quantum circuit on hardware.</dd>
+        </dl>
+      </li>
+    </ol>
+
+    <h3>Details</h3>
+    <p>     
+      This node provides an introduction to the Routing Stage in quantum circuit transpilation, focusing on the process of inserting SWAP gates to enable two-qubit gates between non-adjacent qubits on a quantum device. It highlights the importance of this stage in optimizing circuit execution by minimizing the number of SWAP gates required, which can otherwise introduce significant noise and increase circuit depth. The node explains the challenges of finding an optimal SWAP mapping due to its NP-hard nature and describes how Qiskit uses the SabreSwap heuristic algorithm to generate effective, though not necessarily optimal, SWAP mappings.
+    </p>
+</script>

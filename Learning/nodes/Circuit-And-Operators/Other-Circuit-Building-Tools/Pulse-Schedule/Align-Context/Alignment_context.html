@@ -1,0 +1,41 @@
+
+<script type="text/javascript">
+    RED.nodes.registerType("pulse-builder-alignment-context", {
+      category: "Feature of pulse builder",
+      color: "#dddddd",
+      defaults: {
+        name: { value: "Alignment Context" },
+        info: { value: "# The builder has alignment contexts that influence how a schedule is built. Contexts can also be nested. In the following nodes, we will show you different alignment strategy,  and use <font style=\"background:lightgrey\">.draw()</font> to see how the pulses are aligned.\r\n&nbsp;\r\n# Regardless of the alignment context, the duration of the resulting schedule is as short as it can be while including every instruction and following the alignment rules. This still allows some degrees of freedom for scheduling instructions off the \"longest path\". The examples will illustrate this.\r\n&nbsp;\r\n# **You can try out different strategies by clicking the \"Start\" node for each of them and check the output image.**" }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "white_info.svg",
+      label: function () {
+        return this.name || "Alignment Context";
+      },
+      
+    });
+
+  </script>
+  
+  <script type="text/html" data-template-name="pulse-builder-alignment-context">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Alignment Context" />
+    </div>
+
+  </script>
+
+  
+  
+  <script type="text/html" data-help-name="pulse-builder-alignment-context">
+    <p>Node that introduce Alignment context of the pulse builder.</p>
+
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to Alignment context of the pulse builder. It is an information node that does not require any specific input
+      and does not generate any output. Instead, it is intended to be a part of a chain of tutorial nodes that explain the basics of 
+      quantum computing.
+    </p>
+  </script>
+  

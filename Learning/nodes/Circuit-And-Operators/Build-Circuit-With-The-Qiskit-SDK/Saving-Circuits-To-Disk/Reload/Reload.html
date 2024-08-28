@@ -1,0 +1,44 @@
+<script type="text/javascript">
+    RED.nodes.registerType('reload', {
+      category: 'Save circuits to disk',
+      color: '#D7D7A0',
+      defaults: {
+        name: { value: "Reload circuit from disk" },
+        info: {
+          value: "# This circuit is now saved to the file <font style=\"background: lightgrey\">test.qpy</font>. You can also re-load the circuit using the <font style=\"background: lightgrey\">qpy.load</font> function. Note that this always returns a list of circuits, even if you only serialized one circuit.\r\n&nbsp;\r\n# The following code snippet reloads the circuit we created in the previous node from disk.\r\n```python\r\nwith open('test.qpy', 'rb') as handle:\r\n    qc = qpy.load(handle)\r\n \r\nqc[0].draw('mpl')\r\n```\r\n# You can check the image of this circuit in the \"Circuit Diagram\" node. It should contain a Hardamard gate and a CX gate.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: the image of variable `qc`"
+        }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "Reload circuit from disk";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="reload">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Reload circuit from disk">
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="reload">
+    <p>A node that introduce how to load quantum circuits from disk.</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the quantum circuit.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to the process of saving and reloading quantum circuits using Qiskit's QPY serialization format. It demonstrates how to persist a quantum circuit to a file and subsequently reload it, offering a way to maintain and visualize circuits across sessions. Specifically, the node explains how to use the qpy.load function to retrieve circuits from a saved file.
+    </p>
+  </script>

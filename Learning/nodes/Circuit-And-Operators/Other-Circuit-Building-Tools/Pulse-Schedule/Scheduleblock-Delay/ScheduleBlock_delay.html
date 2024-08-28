@@ -1,0 +1,59 @@
+
+<script type="text/javascript">
+    RED.nodes.registerType("pulse-delay", {
+      category: "Build pulse schedule",
+      color: "#E6E0F8",
+      defaults: {
+        name: { value: "delay()" },
+        info: { value: "## **Node Input:**\r\n- # Object: `channel` (Type: _qiskit.pulse.channels_)\r\n\r\n***\r\n&nbsp;\r\n# <font style=\"background: lightgrey\">**delay(duration, channel)**</font>\r\n&nbsp;\r\n# One of the simplest instructions is <font style=\"background: lightgrey\">delay</font>. This is a blocking instruction that tells the control electronics to output no signal on the given channel for the duration specified. It is useful for controlling the timing of other instructions. The duration here and elsewhere is in terms of the backend's cycle time (1 / sample rate), <font style=\"background: lightgrey\">dt</font>. It must take an integer value.\r\n&nbsp;\r\n# To add a <font style=\"background: lightgrey\">delay</font> instruction, you need to pass a duration and a channel, where channel can be any kind of channel, including <font style=\"background: lightgrey\">AcquireChannel</font>. The following code uses <font style=\"background: lightgrey\">`pulse.build`</font> to begin a Pulse Builder context, and schedules the delay into the schedule 'delay_5dt'.\r\n```python\r\nwith pulse.build(backend) as delay_5dt:\r\n    pulse.delay(5, channel)\r\n    pulse.play(gaus, channel)\r\n```\r\n# Any instruction added after this delay on the same channel will execute five timesteps later than it would have without this delay.\r\n&nbsp;\r\n# The image in the \"Delay Output\" node shows a comparison between the pulse with the delay applied and the original pulse.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: the image of pulse executed with delay()." }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "delay()";
+      },
+      
+    });
+
+  </script>
+  
+  <script type="text/html" data-template-name="pulse-delay">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="delay()" />
+    </div>
+
+  </script>
+
+  
+  
+  <script type="text/html" data-help-name="pulse-delay">
+    <p>Node that set delay tp pulse.</p>
+
+    <h3>Inputs</h3>
+    <ol class="node-ports">
+      <li>Channel
+        <dl class="message-properties">
+          <dt>channel<span class="property-type">qiskit.pulse.channels</span></dt>
+          <dd>The channel object set for the pulse.</dd>
+        </dl>
+      </li>
+    </ol>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Pulse Diagram
+        <dl class="message-properties">
+          <dt>result_image<span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the pulse.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to the delay instruction used in pulse control for quantum computing. The delay instruction is a blocking command that instructs the control electronics to output no signal on a specified channel for a given duration, which is measured in terms of the backend's cycle time (dt). This feature is essential for managing the timing of pulse sequences and ensuring precise synchronization between different instructions. The node helps users understand how to use delays to adjust the timing of subsequent instructions and visualize the impact of these delays on pulse sequences.
+    </p>
+  </script>
+  

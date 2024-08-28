@@ -1,0 +1,107 @@
+<script type="text/javascript">
+  RED.nodes.registerType("Subsystem-Composition", {
+    category: "The operator class",
+    color: "#9cd0e0",
+    defaults: {
+      name: { value: "Subsystem composition" },
+      info: {
+        value: "# [The Operator class guide](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n" +
+            "&nbsp;\r\n" +
+            "# Subsystem composition \r\n" +
+            "# Note that the previous compose requires that the total output dimension of the first operator *A* " +
+            "is equal to the total input dimension of the composed operator *B* (and similarly, the output dimension " +
+            "of *B* must be equal to the input dimension of *A* when composing with " +
+            "<font style='background: GhostWhite'>_`front=True`_</font>).\r\n" +
+            "# You can also compose a smaller operator with a selection of subsystems on a larger operator using the " +
+            "<font style='background: GhostWhite'>_`qargs`_</font> kwarg of " +
+            "<font style='background: GhostWhite'>_`compose`_</font>, either with or without " +
+            "<font style='background: GhostWhite'>_`front=True`_</font>. In this case, the relevant input and " +
+            "output dimensions of the subsystems being composed must match. Note that the smaller operator must always " +
+            "be the argument of the <font style='background: GhostWhite'>_`compose`_</font> method.\r\n" +
+            "# For example, to compose a two-qubit gate with a three-qubit operator:\r\n" +
+            "Example 1, output in node:\r\n " +
+            "```python\r\n" +
+            "# Compose XZ with a 3-qubit identity operator\r\n" + 
+            "op = Operator(np.eye(2**3))\r\n" + 
+            "XZ = Operator(Pauli(\"XZ\"))\r\n" +
+            "subsystem_composition= op.compose(XZ, qargs=[0, 2])\r\n" +
+            "\r\n" +
+            "printprint(f\"subsystem_composition: {subsystem_composition.to_matrix()}\")\r\n" +
+            "print(f\"dim: {subsystem_composition.dim}\")\r\n" +
+            "print(f\"input_dims: {subsystem_composition.input_dims()}\")\r\n" +
+            "print(f\"output_dims: {subsystem_composition.output_dims()}\")\r\n" +
+            "```\r\n " +
+            "Example 2, output not in node:\r\n " +
+            "```python\r\n" +
+            "# Compose YX in front of the previous operator\r\n" + 
+            "op = Operator(np.eye(2**3))\r\n" + 
+            "YX = Operator(Pauli(\"YX\"))\r\n" +
+            "print(op.compose(YX, qargs=[0, 2], front=True))\r\n" +
+            "```\r\n " +
+            "Output:\r\n " +
+            "```python\r\n" +
+            "Operator([[0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.-1.j, 0.+0.j, 0.+0.j],\r\n" + 
+            "          [0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.-1.j, 0.+0.j, 0.+0.j, 0.+0.j],\r\n" + 
+            "          [0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.-1.j],\r\n" + 
+            "          [0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.-1.j, 0.+0.j],\r\n" + 
+            "          [0.+0.j, 0.+1.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j],\r\n" + 
+            "          [0.+1.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j],\r\n" + 
+            "          [0.+0.j, 0.+0.j, 0.+0.j, 0.+1.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j],\r\n" + 
+            "          [0.+0.j, 0.+0.j, 0.+1.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j, 0.+0.j]],\r\n" + 
+            "         input_dims=(2, 2, 2), output_dims=(2, 2, 2))\r\n" +
+            "```\r\n "
+        },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    label: function () {
+      return this.name || "Subsystem-Composition";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="Subsystem-Composition">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="Subsystem-Composition">
+  <p>A node that shows how operators can be combined with a subsystem composition example</p>
+
+  <h3>Outputs</h3>
+  <ol class="node-ports">
+    <li>Matrix operator data
+      <dl class="message-properties">
+        <dt>payload.result.subsystem_composition <span class="property-type">string</span></dt>
+        <dd>Data (QuantumCircuit orOperation or BaseOperator or matrix) to initialize operator.</dd>
+      </dl>
+    </li>
+    <li>Matrix operator input dimensions 
+      <dl class="message-properties">
+        <dt>payload.result.dim <span class="property-type">string</span></dt>
+        <dd>The total input and output dimension of the operator</dd>
+      </dl>
+    </li>
+    <li>Matrix operator input dimensions 
+      <dl class="message-properties">
+        <dt>payload.result.input_dims <span class="property-type">string</span></dt>
+        <dd>String representation of a Tuple input subsystem dimensions</dd>
+      </dl>
+    </li>
+    <li>Matrix operator output dimensions
+      <dl class="message-properties">
+        <dt>payload.result.output_dims <span class="property-type">string</span></dt>
+        <dd>String representation of a Tuple output subsystem dimensions</dd>
+      </dl>
+    </li>
+  </ol>
+  
+  <h3>Details</h3>
+  <p>
+    This node shows how <code>Operators</code> can be combined using a example using the subsystem composition 
+    method using <code>compose</code>.
+  </p>
+</script>

@@ -1,0 +1,39 @@
+
+<script type="text/javascript">
+    RED.nodes.registerType("link-OpenQASM2-to-Qiskit", {
+      category: "Import OpenQASM 2 program",
+      color: "#dddddd",
+      defaults: {
+        name: { value: "Link OpenQASM2 gate to Qiskit gate" },
+        info: { value: "# By default, Qiskit's OpenQASM 2 importer treats the include file <font style=\"background: lightgrey\">\"qelib1.inc\"</font> as a _de facto_ standard library. The importer treats this file as containing precisely the gates it is described to contain in [the original paper defining OpenQASM 2](https://arxiv.org/abs/1707.03429). Qiskit will use the built-in gates in the [<font style=\"background: lightgrey\">circuit library</font>](https://docs.quantum.ibm.com/api/qiskit/circuit_library) to represent the gates in \"qelib1.inc\". Gates defined in the program by manual OpenQASM 2 <font style=\"background: lightgrey\">gate</font> statements will, by default, be constructed as custom [Qiskit <font style=\"background: lightgrey\">Gate</font> subclasses](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.Gate).\r\n&nbsp;\r\n# You can tell the importer to use specific  <font style=\"background: lightgrey\">Gate</font> classes for the given  <font style=\"background: lightgrey\">gate</font> statements it encounters. You can also use this mechanism to treat additional gate names as \"built-in\", that is, not requiring an explicit definition. If you specify which gate classes to use for  <font style=\"background: lightgrey\">gate</font> statements outside of \"qelib1.inc\", the resulting circuit will typically be more efficient to work with.\r\n&nbsp;\r\n# To pass information about a custom instruction to the OpenQASM 2 importer, use the [<font style=\"background: lightgrey\">qasm2.CustomInstruction</font>](https://docs.quantum.ibm.com/api/qiskit/qasm2#qiskit.qasm2.CustomInstruction) class. This has four required pieces of information, in order:\r\n- # The **name** of the gate, used in the OpenQASM 2 program\r\n- # The **number of angle parameters** that the gate takes\r\n- # The **number of qubits** that the gate acts on\r\n- # The Python **constructor** class or function for the gate, which takes the gate parameters (but not qubits) as individual arguments\r\n&nbsp;\r\n# If the importer encounters a <font style=\"background: lightgrey\">gate</font> definition that matches a given custom instruction, it will use that custom information to reconstruct the gate object. If a <font style=\"background: lightgrey\">gate</font> statement is encountered that matches the name of a custom instruction, but does not match both the number of parameters and the number of qubits, the importer will raise a [QASM2ParseError](https://docs.quantum.ibm.com/api/qiskit/qasm2#qasm2parseerror), to indicate the mismatch between the supplied information and program.\r\n&nbsp;\r\n# In addition, a fifth argument <font style=\"background: lightgrey\">builtin</font> can be optionally set to _True_ to make the <font style=\"background: lightgrey\">gate</font> automatically available within the OpenQASM 2 program, even if it is not explicitly defined. If the importer does encounter an explicit <font style=\"background: lightgrey\">gate</font> definition for a built-in custom instruction, it will accept it silently. As before, if an explicit definition of the same name is not compatible with the provided custom instruction, a [QASM2ParseError](https://docs.quantum.ibm.com/api/qiskit/qasm2#qasm2parseerror) will be raised. This is useful for compatibility with older OpenQASM 2 exporters, and with certain other quantum platforms that treat the \"basis gates\" of their hardware as built-in instructions.\r\n&nbsp;\r\n# Qiskit provides a data attribute for working with OpenQASM 2 programs produced by legacy versions of Qiskit's OpenQASM 2 exporting capabilities. This is [qasm2.LEGACY_CUSTOM_INSTRUCTIONS](https://docs.quantum.ibm.com/api/qiskit/qasm2#legacy-compatibility), which can be given as the custom_instructions argument to <font style=\"background: lightgrey\">qasm2.load()</font> and <font style=\"background: lightgrey\">qasm2.loads()</font>.\r\n&nbsp;\r\n# **Note:** As of Qiskit SDK 1.0, Qiskit's OpenQASM 2 exporter still behaves as if \"qelib1.inc\" has more gates than it really does. This means that the default settings of the importer might not be able to import a program exported by our importer. This discrepancy is legacy behavior of Qiskit, and it will be resolved in a later release of Qiskit." }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "white_info.svg",
+      label: function () {
+        return this.name || "Link OpenQASM2 gate to Qiskit gate";
+      },
+      
+    });
+
+  </script>
+  
+  <script type="text/html" data-template-name="link-OpenQASM2-to-Qiskit">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Link OpenQASM2 gate to Qiskit gate" />
+    </div>
+
+  </script>
+
+  
+  
+  <script type="text/html" data-help-name="link-OpenQASM2-to-Qiskit">
+    <p>A node that briefly introduce how to link OpenQASM2 gate to QIskit gate.</p>
+
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to the process of importing OpenQASM 2 programs in Qiskit, focusing on how the importer handles the inclusion of standard and custom gate definitions. It explains that by default, Qiskit treats the "qelib1.inc" file as a standard library containing specific gates, and how the built-in gates are represented using Qiskit's circuit library. Additionally, the node outlines the use of the qasm2.CustomInstruction class to pass custom gate information to the importer, allowing users to specify gate classes for more efficient circuit construction.
+    </p>
+  </script>
+  

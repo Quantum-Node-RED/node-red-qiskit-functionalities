@@ -1,0 +1,41 @@
+<script type="text/javascript">
+  RED.nodes.registerType('transpilation-number-generator-seed', {
+    category: 'Transpiler parameters',
+    color: '#FDD0A2',
+    defaults: {
+      name: { value: "Number generator seed" }
+    },
+    info: "## Random Number Generator Seed\n\n### Purpose\n\n- **Stochastic Processes**: Some parts of the transpiler use random processes, leading to different results on repeated runs.\n- **Reproducibility**: Setting a seed ensures consistent results across runs.\n\n### Usage\n\n- **Parameter**: `seed_transpiler`\n- **Example**:\n  ```python\n  pass_manager = generate_preset_pass_manager(\n      optimization_level=1, seed_transpiler=11, basis_gates=[\"sx\", \"rz\", \"cx\"]\n  )\n  optimized_1 = pass_manager.run(qc)\n  optimized_1.draw(\"mpl\")\n  ```",
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    paletteLabel: "number generator seed",
+    label: function () {
+      return this.name || "number generator seed";
+    }
+  });
+</script>
+
+<script type="text/html" data-template-name="transpilation-number-generator-seed">
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+
+<script type="text/html" data-help-name="transpilation-number-generator-seed">
+  <p>A node that shows how the transpilation random number generator seed works</p>
+
+  <h3>Outputs</h3>
+  <ol class="node-ports">Circuit Diagram
+      <dl class="message-properties">
+        <dt>payload.result.circuit_diagram <span class="property-type">string (Base64)</span></dt>
+        <dd>The Base64-encoded string representing the visual diagram of the quantum circuit.</dd>
+      </dl>
+  </ol>
+
+  <h3>Details</h3>
+  <p>
+      This node shows an example of how to use the random number generator seed that is part of the transpiler
+  </p>
+</script>

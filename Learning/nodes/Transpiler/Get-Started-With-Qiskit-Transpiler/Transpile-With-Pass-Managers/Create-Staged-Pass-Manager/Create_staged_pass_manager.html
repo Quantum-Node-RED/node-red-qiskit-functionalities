@@ -1,0 +1,34 @@
+<script type="text/javascript">
+    RED.nodes.registerType('create-staged-pass-manager', {
+      category: 'Transpile with pass manager',
+      color: '#dddddd',
+      defaults: {
+        name: { value: "Create a staged pass manager" },
+        info: { 
+            value: "# A <font style=\"background: lightgrey\">StagedPassManager</font> is a pass manager that is composed of individual stages, where each stage is defined by a <font style=\"background: lightgrey\">PassManager</font> instance. You can create a <font style=\"background: lightgrey\">StagedPassManager</font> by specifying the desired stages. For example, the following code creates a staged pass manager with two stages, <font style=\"background: lightgrey\">init</font> and <font style=\"background: lightgrey\">translation</font>. The <font style=\"background: lightgrey\">translation</font> stage is defined by the pass manager that was created previously.\r\n```python\r\nfrom qiskit.transpiler import PassManager, StagedPassManager\r\nfrom qiskit.transpiler.passes import UnitarySynthesis, Unroll3qOrMore\r\n \r\nbasis_gates = [\"rx\", \"ry\", \"rxx\"]\r\ninit = PassManager([UnitarySynthesis(basis_gates, min_qubits=3), Unroll3qOrMore()])\r\nstaged_pm = StagedPassManager(\r\n    stages=[\"init\", \"translation\"], init=init, translation=translate\r\n)\r\n```\r\n# There is no limit on the number of stages you can put in a staged pass manager.\r\n&nbsp;\r\n# Another useful way to create a staged pass manager is to begin with a preset staged pass manager and then swap out some of the stages. For example, the following code generates a preset pass manager with optimization level 3, and then specifies a custom <font style=\"background: lightgrey\">pre_layout</font> stage.\r\n```python\r\nimport numpy as np\r\nfrom qiskit.circuit.library import HGate, PhaseGate, RXGate, TdgGate, TGate\r\nfrom qiskit.transpiler.passes import CXCancellation, InverseCancellation\r\n \r\npass_manager = generate_preset_pass_manager(3, backend)\r\ninverse_gate_list = [\r\n    HGate(),\r\n    (RXGate(np.pi / 4), RXGate(-np.pi / 4)),\r\n    (PhaseGate(np.pi / 4), PhaseGate(-np.pi / 4)),\r\n    (TGate(), TdgGate()),\r\n]\r\nlogical_opt = PassManager(\r\n    [\r\n        CXCancellation(),\r\n        InverseCancellation(inverse_gate_list),\r\n    ]\r\n)\r\n \r\n# Add pre-layout stage to run extra logical optimization\r\npass_manager.pre_layout = logical_opt\r\n```\r\n# The [stage generator functions](https://docs.quantum.ibm.com/api/qiskit/transpiler_preset#stage-generator-functions) might be useful for constructing custom pass managers. They generate stages that provide common functionality used in many pass managers. For example, [<font style=\"background: lightgrey\">generate_embed_passmanager</font>](https://docs.quantum.ibm.com/api/qiskit/transpiler_preset#qiskit.transpiler.preset_passmanagers.common.generate_embed_passmanager) can be used to generate a stage to \"embed\" a selected initial <font style=\"background: lightgrey\">Layout</font> from a layout pass to the specified target device."
+        }
+      },
+      inputs: 1,
+      outputs: 0,
+      icon: "white_info.svg",
+      label: function () {
+        return this.name || "Create a staged pass manager";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="create-staged-pass-manager">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Create a staged pass manager">
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="create-staged-pass-manager">
+    <p>A node that introduce how to create a staged pass manager.</p>
+
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to the concept of StagedPassManager in Qiskit. A StagedPassManager is a powerful tool that allows you to manage and customize the execution of quantum circuit transformations by organizing them into distinct stages. Each stage is defined by a PassManager instance, enabling you to sequence different sets of optimization and compilation passes according to your needs. This node also demonstrates how you can build on existing preset staged pass managers by substituting or adding stages, offering flexibility to tailor the pass management process. Use this node to understand the structure and customization of staged pass management in quantum circuit transpilation.
+    </p>
+  </script>

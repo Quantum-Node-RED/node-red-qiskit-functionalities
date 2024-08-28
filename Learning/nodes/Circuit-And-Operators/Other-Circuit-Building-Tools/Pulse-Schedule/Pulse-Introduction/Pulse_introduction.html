@@ -1,0 +1,41 @@
+
+<script type="text/javascript">
+    RED.nodes.registerType("pulse-introduction", {
+      category: "Build pulse schedule",
+      color: "#dddddd",
+      defaults: {
+        name: { value: "What is pulse?" },
+        info: { value: "# A **Pulse** specifies an arbitrary pulse envelope. There are many methods available for building pulses, such as those available in the Qiskit Pulse <font style=\"background: lightgrey\">_library_</font>.\r\n&nbsp;\r\n\r\n# Here, we will introduce two different methods to construct a pulse with an amplitude of 1, a standard deviation σ of 10, and 128 sample points:\r\n- # Parametric pulse\r\n- # Pulse waveforms described by examples\r\n&nbsp;\r\n# **Note:**  The amplitude norm is arbitrarily limited to 1.0. Each backend system may also impose further constraints. For instance, a minimum pulse size of 64. Any additional constraints are provided through [Target](https://docs.quantum.ibm.com/api/qiskit/qiskit.transpiler.Target)." }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "white_info.svg",
+      label: function () {
+        return this.name || "What is pulse?";
+      },
+      
+    });
+
+  </script>
+  
+  <script type="text/html" data-template-name="pulse-introduction">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="What is pulse?" />
+    </div>
+
+  </script>
+
+  
+  
+  <script type="text/html" data-help-name="pulse-introduction">
+    <p>A simple node that introduce pulse.</p>
+
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to the 'pulse'. It is an information node that does not require any specific input
+      and does not generate any output. Instead, it is intended to be a part of a chain of tutorial nodes that explain the basics of 
+      quantum computing.
+    </p>
+  </script>
+  

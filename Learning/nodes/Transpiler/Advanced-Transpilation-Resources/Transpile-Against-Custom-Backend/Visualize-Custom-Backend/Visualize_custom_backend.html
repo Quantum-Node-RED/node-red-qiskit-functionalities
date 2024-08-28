@@ -1,0 +1,49 @@
+
+<script type="text/javascript">
+    RED.nodes.registerType("visualize-custom-backend", {
+      category: "Transpile against custom backend",
+      color: "#E7E7AE",
+      defaults: {
+        name: { value: "Visualize a Custom Backend" },
+        info: { value: "# You can view the connectivity graph of this new class with the [<font style=\"background: lightgrey\">plot_gate_map()</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.visualization.plot_gate_map) method from the <font style=\"background: lightgrey\">qiskit.visualization</font> module. This method, along with [<font style=\"background: lightgrey\">plot_coupling_map()</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.visualization.plot_coupling_map) and [<font style=\"background: lightgrey\">plot_circuit_layout()</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.visualization.plot_circuit_layout), are helpful tools for visualizing the qubit arrangement of a backend, as well as how a circuit is laid out across the qubits of a backend. This example creates a backend containing three small heavy-hex chips. It specifies a set of coordinates to arrange the qubits, as well as a set of custom colors for the differing two-qubit gates.\r\n&nbsp;\r\n# **Note:** In this flow, we will directly show you the visualizations. However, if you want to manually try building the code yourself or customize your code, you will need to install the [graphviz](https://graphviz.org/) library for the diagram plotting functions.\r\n```python\r\nbackend = FakeLOCCBackend(3, 3)\r\n \r\n \r\ntarget = backend.target\r\ncoupling_map_backend = target.build_coupling_map()\r\n \r\n \r\ncoordinates = [(3, 1),\r\n               (3, -1),\r\n               (2, -2),\r\n               (1,1),\r\n               (0,0),\r\n               (-1, -1),\r\n               (-2, 2),\r\n               (-3, 1),\r\n               (-3, -1),\r\n               (2, 1),\r\n               (1, -1),\r\n               (-1, 1),\r\n               (-2, -1),\r\n               (3, 0),\r\n               (2, -1),\r\n               (0, 1),\r\n               (0, -1),\r\n               (-2, 1),\r\n               (-3, 0)]\r\n \r\nsingle_qubit_coordinates = []\r\ntotal_qubit_coordinates = []\r\n \r\n \r\nfor coordinate in coordinates:\r\n    total_qubit_coordinates.append(coordinate)\r\n \r\nfor coordinate in coordinates:\r\n    total_qubit_coordinates.append((-1*coordinate[0]+1, coordinate[1]+4))\r\n \r\nfor coordinate in coordinates:\r\n    total_qubit_coordinates.append((coordinate[0], coordinate[1]+8))\r\n \r\n \r\n \r\n \r\nline_colors = [\"#adaaab\" for edge in coupling_map_backend.get_edges()]\r\necr_edges = []\r\n \r\n# Get tuples for the edges which have an ecr instruction attached\r\nfor instruction in target.instructions:\r\n    if instruction[0].name == 'ecr':\r\n        ecr_edges.append(instruction[1])\r\n \r\nfor i, edge in enumerate(coupling_map_backend.get_edges()):\r\n    if edge in ecr_edges:\r\n        line_colors[i] = \"#000000\"\r\n\r\nplot_gate_map(backend, plot_directed=True, qubit_coordinates=total_qubit_coordinates, line_color=line_colors)\r\n```\r\n# You can check the image of the created backend in \"Backend Image Output\" node.\r\n&nbsp;\r\n# In the image, each qubit is labeled, and colored arrows represent the two-qubit gates. Gray arrows are the CZ gates and the black arrows are the inter-chip CX gates (these connect qubits 6→21 and 25→40). The direction of the arrow indicates the default direction in which these gates are executed; they specify which qubits are control/targets by default for each two-qubit channel.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: The image of the customized backend" }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "Visualize a Custom Backend";
+      }
+      
+    });
+
+  </script>
+  
+  <script type="text/html" data-template-name="visualize-custom-backend">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Visualize a Custom Backend" />
+    </div>
+
+  </script>
+
+  
+  
+  <script type="text/html" data-help-name="visualize-custom-backend">
+    <p>A node that visualize a custom backend.</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Backend Diagram
+        <dl class="message-properties">
+          <dt>backend_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the customized backend.</dd>
+        </dl>
+      </li>
+    </ol>
+
+    <h3>Details</h3>
+    <p>     
+      This node provides an introduction to visualizing qubit connectivity and gate maps in quantum computing using Qiskit. It demonstrates how to visualize the qubit arrangement of a quantum backend and the layout of circuits across its qubits. By using the plot_gate_map() method, you can create visual representations that illustrate qubit connections and gate operations, including custom color schemes for different types of gates. This node is ideal for understanding qubit interactions and circuit designs in a backend simulation, offering a clear and intuitive view of quantum circuit layouts and connectivity.
+    </p>
+  </script>
+  

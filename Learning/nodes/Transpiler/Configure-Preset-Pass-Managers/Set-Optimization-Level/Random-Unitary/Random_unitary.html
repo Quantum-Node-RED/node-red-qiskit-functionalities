@@ -1,0 +1,44 @@
+<script type="text/javascript">
+  RED.nodes.registerType('transpilation-random-unitary', {
+    category: 'Transpiler optimization level',
+    color: '#D7D7A0',
+    defaults: {
+      name: { value: "Random unitary" }
+    },
+    info: "# Set Transpiler Optimization Level\n\nOptimizing quantum circuits reduces noise and gate errors, improving results. The `generate_preset_pass_manager` function's `optimization_level` argument controls the optimization effort, ranging from 0 to 3. Higher levels mean better optimization but longer compile times. Here's a summary:\n\n## Optimization Levels\n\n| Level | Description |\n|-------|-------------|\n| 0     | - No optimization <br> - Basic translation <br> - TrivialLayout: Physical qubits match virtual, SWAPs inserted as needed |\n| 1     | - Light optimization <br> - Initial TrivialLayout, then SabreSWAP and VF2LayoutPostLayout for better qubit selection <br> - InverseCancellation <br> - 1Q gate optimization |\n| 2     | - Medium optimization <br> - Heuristic optimization with greater search depth and trials <br> - CommutativeCancellation |\n| 3     | - High optimization <br> - Enhanced heuristic optimization <br> - Two-qubit block resynthesis using Cartan's KAK Decomposition <br> - OptimizeSwapBeforeMeasure: Moves measurements to avoid SWAPs <br> - RemoveDiagonalGatesBeforeMeasure: Removes non-impactful gates before measurements |\n\n## Optimization Level in Action\n\nTo evaluate \"hardware efficiency,\" we count two-qubit gates in the resulting circuit. Here's an example with a random unitary followed by a SWAP gate.\n\n```python\nfrom qiskit import QuantumCircuit\nfrom qiskit.circuit.library import UnitaryGate\nfrom qiskit.quantum_info import Operator, random_unitary\n\nUU = random_unitary(4, seed=12345)\nrand_U = UnitaryGate(UU)\n\nqc = QuantumCircuit(2)\nqc.append(rand_U, range(2))\nqc.swap(0, 1)\nqc.draw(\"mpl\", style=\"iqp\")\n```",
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    paletteLabel: "random unitary",
+    label: function () {
+      return this.name || "random unitary";
+    }
+  });
+</script>
+
+<script type="text/html" data-template-name="transpilation-random-unitary">
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+
+<script type="text/html" data-help-name="transpilation-random-unitary">
+  <p>A node that sets up an example to show different optimiztion levels</p>
+
+  <h3>Outputs</h3>
+  <ol class="node-ports">
+    <li>Circuit Diagram
+      <dl class="message-properties">
+        <dt>payload.result.circuit_diagram <span class="property-type">string (Base64)</span></dt>
+        <dd>The Base64-encoded string representing the visual diagram of the quantum circuit.</dd>
+      </dl>
+    </li>
+  </ol>
+
+  <h3>Details</h3>
+  <p>
+      This node shows the sets up for an example for the next node where different optimization levels will be tried on an 
+      input circuit consisting of a random unitary followed by a SWAP gate.
+  </p>
+</script>

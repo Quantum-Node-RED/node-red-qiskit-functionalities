@@ -1,0 +1,50 @@
+<script type="text/javascript">
+    RED.nodes.registerType('Quantum-circuits', {
+      category: 'Bit ordering in the Qiskit SDK',
+      color: '#3FADB5',
+      defaults: {
+        name: { value: "Quantum-circuits" },
+        info: {
+          value: "# The <font style=\"background: lightgrey\">QuantumCircuit</font> class stores its qubits in a list (<font style=\"background: lightgrey\">QuantumCircuit.qubits</font>). The index of a qubit in this list defines the qubit's label.\r\n&nbsp;\r\n# The following code snippet creates a quantum circuit with 2 qubits using Qiskit. Then, it references the first qubit (qubit \"0\") of the quantum circuit.\r\n```python\r\nfrom qiskit import QuantumCircuit\r\nqc = QuantumCircuit(2)\r\nqc.qubits[0]  # qubit \"0\"\r\n```\r\n# The object of the first qubit is sent to \"Qubit 0\" node and you can check its information in the debug sidebar.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Object: `qc` (Type: _qiskit.circuit.QuantumCircuit_)\r\n- # Object: `qc.qubits[0]` (Type: _qiskit.circuit.Qubit_)"
+        }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "Quantum-circuits";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="Quantum-circuits">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="Quantum-circuits">
+    <p>A node that introduce bit ordering for quantum circuit.</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Quantum Circuit
+        <dl class="message-properties">
+          <dt>qc<span class="property-type">qiskit.circuit.QuantumCircuit</span></dt>
+          <dd>The quantum circuit `qc` which contains two qubits.</dd>
+        </dl>
+      </li>
+      <li>Qubit
+        <dl class="message-properties">
+          <dt>qc.qubits[0]<span class="property-type">qiskit.circuit.Qubit</span></dt>
+          <dd>The first qubit in quantum circuit `qc`.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to the QuantumCircuit class from Qiskit, which is used to create and manage quantum circuits. Specifically, it explains how qubits are stored within the QuantumCircuit object, with each qubit being indexed in a list.
+    </p>
+  </script>
