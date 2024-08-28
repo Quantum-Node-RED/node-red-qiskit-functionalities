@@ -1,0 +1,105 @@
+[
+  {
+    "id": "cb5d0b6e2d2991ad",
+    "type": "tab",
+    "label": "VQE-default-flow",
+    "disabled": false,
+    "info": "",
+    "env": []
+  },
+  {
+    "id": "0ff363bc1e143a24",
+    "type": "VQE",
+    "z": "cb5d0b6e2d2991ad",
+    "name": "VQE algorithm",
+    "rotationLayers": "ry",
+    "entanglementLayers": "cz",
+    "hamiltonianPauli": "[\"II\", \"IZ\", \"ZI\", \"ZZ\", \"XX\", \"XX\"]",
+    "hamiltonianCoeffs": "[-1.05237, 0.39793, -0.39793, -0.01128, 0.1809, 0.11]",
+    "optimizer": "SPSA",
+    "maxiter": "70",
+    "x": 420,
+    "y": 220,
+    "wires": [
+      [
+        "43021fab1ad47e34",
+        "e5b6338efa8a3c16",
+        "9b19d415f1bbc31e"
+      ]
+    ]
+  },
+  {
+    "id": "babd99cf4b767a4a",
+    "type": "inject",
+    "z": "cb5d0b6e2d2991ad",
+    "name": "Input_qubits",
+    "props": [
+      {
+        "p": "payload.numQubits",
+        "v": "2",
+        "vt": "num"
+      }
+    ],
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "topic": "",
+    "x": 210,
+    "y": 220,
+    "wires": [
+      [
+        "0ff363bc1e143a24"
+      ]
+    ]
+  },
+  {
+    "id": "43021fab1ad47e34",
+    "type": "debug",
+    "z": "cb5d0b6e2d2991ad",
+    "name": "Optimal_value",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload.result.optimal_value",
+    "targetType": "msg",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 640,
+    "y": 40,
+    "wires": []
+  },
+  {
+    "id": "e5b6338efa8a3c16",
+    "type": "image",
+    "z": "cb5d0b6e2d2991ad",
+    "name": "",
+    "width": "600",
+    "data": "payload.result.enegy_image",
+    "dataType": "msg",
+    "thumbnail": true,
+    "active": true,
+    "pass": false,
+    "outputs": 0,
+    "x": 640,
+    "y": 280,
+    "wires": []
+  },
+  {
+    "id": "9b19d415f1bbc31e",
+    "type": "image",
+    "z": "cb5d0b6e2d2991ad",
+    "name": "",
+    "width": "600",
+    "data": "payload.result.optimal_circuit_image",
+    "dataType": "msg",
+    "thumbnail": true,
+    "active": true,
+    "pass": false,
+    "outputs": 0,
+    "x": 920,
+    "y": 40,
+    "wires": []
+  }
+]

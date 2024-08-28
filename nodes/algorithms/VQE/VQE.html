@@ -1,0 +1,91 @@
+<script type="text/javascript">
+  RED.nodes.registerType("VQE", {
+    category: "VQE",
+    color: "#aaaaaa",
+    defaults: {
+      name: { value: "VQE algorithm" },
+      rotationLayers: { value: "rx" },
+      entanglementLayers: { value: "rx" },
+      hamiltonianPauli: { value: '["II", "IZ", "ZI", "ZZ", "XX"]' },
+      hamiltonianCoeffs: { value: '[-1.05237, 0.39793, -0.39793, -0.01128, 0.1809]' },
+      optimizer: { value: "SLSQP" },
+      maxiter: { value: 50 },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    label: function () {
+      return this.name || "VQE";
+    },
+    oneditprepare: function () {
+      $("#node-input-name").val(this.name || "");
+      $("#node-input-optimizer").val(this.optimizer || "SLSQP");
+      $("#node-input-maxiter").val(this.maxiter || 50);
+      $("#node-input-rotationLayers").val(this.rotationLayers || "rx");
+      $("#node-input-entanglementLayers").val(this.entanglementLayers || "cz");
+      $("#node-input-hamiltonianPauli").val(this.hamiltonianPauli || '["II", "IZ", "ZI", "ZZ", "XX"]');
+      $("#node-input-hamiltonianCoeffs").val(hamiltonianCoeffs.target || '[-1.05237, 0.39793, -0.39793, -0.01128, 0.1809]');
+    },
+    oneditsave: function () {
+      this.name = $("#node-input-name").val();
+      this.optimizer = $("#node-input-optimizer").val();
+      this.maxiter = $("#node-input-maxiter").val();
+      this.rotationLayers = $("#node-input-rotationLayers").val();
+      this.entanglementLayers = $("#node-input-entanglementLayers").val();
+      this.hamiltonianPauli = $("#node-input-hamiltonianPauli").val();
+      this.hamiltonianCoeffs = $("#node-input-hamiltonianCoeffs").val();
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="VQE">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-optimizer"><i class="fa fa-tag"></i>Optimizer</label>
+    <select name="optimizer" id="node-input-optimizer">
+      <option value="SLSQP">SLSQP</option>
+      <option value="SPSA">SPSA</option>
+      <option value="COBYLA">COBYLA</option>
+      <option value="L_BFGS_B">L_BFGS_B</option>
+    </select>
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-maxiter" style="width:40%;"><i class="fa fa-tag"></i>Maximum number of iterations</label>
+    <input
+      style="width:40%; float:right; text-align: right;"
+      type="number"
+      id="node-input-maxiter"
+      name="maxiter-text"
+      placeholder="0"
+    /> 
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-rotationLayers" style="width:40%"><i class="fa fa-tag"></i>Rotation Layers</label>
+    <input type="string" id="node-input-rotationLayers" placeholder="The gates used in the rotation layer. ex: 'ry' or 'RYGate'" style="width:40%; float:right;">
+  </div>
+  
+  <div class="form-row">
+    <label for="node-input-entanglementLayers" style="width:40%"><i class="fa fa-tag"></i>Entanglement Layers</label>
+    <input type="string" id="node-input-entanglementLayers" placeholder="The gates used in the entanglement layer. ex: 'ry' or 'RYGate'" style="width:40%; float:right;">
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-hamiltonianPauli"  style="width:100%"><i class="fa fa-tag"></i>Hamiltonian's Pauli list of terms</label>
+    <input type="string" id="node-input-hamiltonianPauli" placeholder='Please use format ["a", "b", "c"]' style="width:100%">
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-hamiltonianCoeffs" style="width:100%;"><i class="fa fa-tag"></i>Hamiltonian's complex coefficients for Pauli terms</label>
+    <input type="string" id="node-input-hamiltonianCoeffs" placeholder="Please use format [1.0, 2.0, 3.0]" style="width:100%">
+  </div>
+</script>
+
+<script type="text/html" data-help-name="VQE">
+  <p>A simple node that implements VQE algorithm.</p>
+</script>
