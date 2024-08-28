@@ -188,7 +188,7 @@
       "build-oracle": "nodes/algorithms/Grover/build_oracle.js",
       "build-gate": "nodes/gate/utils/build_gate.js",
       "grover_iteration": "nodes/algorithms/Grover/Grover_iteration.js",
-      "move-to-next-node": "nodes/documentation/functional-nodes/Next/move-to-next-node.js",
+      "move-to-next-node": "Learning/nodes/Functional-Nodes/Next/move-to-next-node.js",
       "intro-to-operator-classes": "Learning/nodes/Circuit-And-Operators/Build-Operators-With-The-Qiskit-SDK/Operators-Module-Overview/Intro-To-Operator-Classes/Intro_to_operator_classes.js",
       "sparse-pauli-op": "Learning/nodes/Circuit-And-Operators/Build-Operators-With-The-Qiskit-SDK/Operators-Module-Overview/Sparse-Pauli-Op/Sparse_pauli_op.js",
       "sparse-pauli-op-operations": "Learning/nodes/Circuit-And-Operators/Build-Operators-With-The-Qiskit-SDK/Operators-Module-Overview/Sparse-Pauli-Op-Operations/Sparse_pauli_op_operations.js",
