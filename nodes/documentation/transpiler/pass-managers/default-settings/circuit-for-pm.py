@@ -21,7 +21,7 @@ qc_str = base64.b64encode(qc_buffer.read()).decode('utf-8')
 qc_buffer.close()
 
 result = {
-  "qc_image": qc_str
+  "circuit_diagram": qc_str
 }
 
 print(json.dumps(result))

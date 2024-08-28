@@ -1,9 +1,9 @@
 <script type="text/javascript">
   RED.nodes.registerType('transpilation-synthesis-fidelity', {
-    category: 'transpiler-pass-managers',
-    color: '#aaaaaa',
+    category: 'Transpiler optimization level',
+    color: '#D7D7A0',
     defaults: {
-      name: { value: "" }
+      name: { value: "Synthesis fidelity" }
     },
     info: "This circuit has only two ECR gates but is approximate. To compare it with the exact circuit, we calculate the fidelity between the unitary operators implemented by both circuits. We reduce the circuits to the active qubits (two in this case) for easier simulation.\n\n```python\nimport numpy as np\nfrom qiskit.synthesis.two_qubit.two_qubit_decompose import trace_to_fid\n\n# Reduce circuits to 2 qubits for easier simulation\nqc_t3_exact_small = QuantumCircuit.from_instructions(qc_t3_exact)\nqc_t3_approx_small = QuantumCircuit.from_instructions(qc_t3_approx)\n\n# Compute the fidelity\nexact_fid = trace_to_fid(\n    np.trace(np.dot(Operator(qc_t3_exact_small).adjoint().data, UU))\n)\napprox_fid = trace_to_fid(\n    np.trace(np.dot(Operator(qc_t3_approx_small).adjoint().data, UU))\n)\nprint(f\"Synthesis fidelity\\nExact: {exact_fid:.3f}\\nApproximate: {approx_fid:.3f}\")\n```",
     inputs: 1,
@@ -21,4 +21,29 @@
       <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
       <input type="text" id="node-input-name" placeholder="Name">
   </div>
+</script>
+
+<script type="text/html" data-help-name="transpilation-synthesis-fidelity">
+  <p>A node that shows how to calculate exact and approximate synthesis fidelity</p>
+
+  <h3>Outputs</h3>
+  <ol class="node-ports">
+    <li>Synthesis Fidelity Exact
+      <dl class="message-properties">
+        <dt>payload.result.synthesis_fidelity_exact <span class="property-type">number</span></dt>
+        <dd>The exact fidelity between the unitary operator this circuit implements.</dd>
+      </dl>
+    </li>
+    <li>Synthesis Fidelity Approx
+      <dl class="message-properties">
+        <dt>payload.result.synthesis_fidelity_approx <span class="property-type">number</span></dt>
+        <dd>The approximate fidelity between the unitary operator this circuit implements.</dd>
+      </dl>
+    </li>
+  </ol>
+
+  <h3>Details</h3>
+  <p>
+      This node shows how to calculate the fidelity between the unitary operator this circuit implements, and the exact unitary.
+  </p>
 </script>

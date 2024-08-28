@@ -37,7 +37,7 @@ transpiled_circ_str = base64.b64encode(qc_buffer.read()).decode('utf-8')
 qc_buffer.close()
 
 result = {
-  "transpiled_circ_image": transpiled_circ_str
+  "circuit_diagram": transpiled_circ_str
 }
 
 print(json.dumps(result))

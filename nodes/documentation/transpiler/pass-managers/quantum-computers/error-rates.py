@@ -42,7 +42,7 @@ qc_t_cm_bg_et_str = base64.b64encode(qc_buffer.read()).decode('utf-8')
 qc_buffer.close()
 
 result = {
-  "qc_t_cm_bg_et": qc_t_cm_bg_et_str
+  "circuit_diagram": qc_t_cm_bg_et_str
 }
 
 print(json.dumps(result))

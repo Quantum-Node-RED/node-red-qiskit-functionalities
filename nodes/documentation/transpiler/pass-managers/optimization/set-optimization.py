@@ -61,10 +61,10 @@ qc_t3_str = base64.b64encode(qc_buffer.read()).decode('utf-8')
 qc_buffer.close()
 
 result = {
-  "qc_t0_image": qc_t0_str,
-  "qc_t1_image": qc_t1_str,
-  "qc_t2_image": qc_t2_str,
-  "qc_t3_image": qc_t3_str
+  "circuit_diagram_0": qc_t0_str,
+  "circuit_diagram_1": qc_t1_str,
+  "circuit_diagram_2": qc_t2_str,
+  "circuit_diagram_3": qc_t3_str
 }
 
 print(json.dumps(result))

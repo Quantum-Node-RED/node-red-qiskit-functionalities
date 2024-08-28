@@ -1,9 +1,9 @@
 <script type="text/javascript">
   RED.nodes.registerType('transpilation-circuit-for-pm', {
-    category: 'transpiler-pass-managers',
-    color: '#aaaaaa',
+    category: 'Transpilation default settings',
+    color: '#FFF0F0',
     defaults: {
-      name: { value: "" }
+      name: { value: "Create circuit" }
     },
     info: "# Transpilation Default Settings and Configuration Options\n\nAbstract circuits need to be transpiled because systems have a limited set of basis gates and cannot execute arbitrary operations. The transpiler's function is to change arbitrary circuits so that they can run on a specified system. This is done by translating the circuits to the supported basis gates, and by introducing SWAP gates as needed, so that the circuit's connectivity matches that of the system.\n\nAs explained in *Transpile with pass managers*, you can create a pass manager using the `generate_preset_pass_manager` function and pass a circuit or list of circuits to its `run` method to transpile them. You can call `generate_preset_pass_manager` passing only the optimization level and backend, choosing to use the defaults for all other options, or you can pass additional arguments to the function to fine-tune the transpilation.\n\n## Basic Usage Without Parameters\n\nIn this example, we pass a circuit and target system to the transpiler without specifying any further parameters.\n\n### Create a Circuit:\n\n```python\nfrom qiskit import QuantumCircuit\nfrom qiskit.circuit.library import GroverOperator, Diagonal\nfrom qiskit_ibm_runtime import QiskitRuntimeService\nfrom qiskit_ibm_runtime.fake_provider import FakeSherbrooke\n\n# Create circuit to test transpiler on\noracle = Diagonal([1] * 7 + [-1])\nqc = QuantumCircuit(3)\nqc.h([0, 1, 2])\nqc = qc.compose(GroverOperator(oracle))\n\n# Add measurements to the circuit\nqc.measure_all()\n\n# View the circuit\nqc.draw(output='mpl')\n```",
     inputs: 1,
@@ -21,4 +21,24 @@
       <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
       <input type="text" id="node-input-name" placeholder="Name">
   </div>
+</script>
+
+<script type="text/html" data-help-name="transpilation-basic-pass-manager">
+  <p>A node that shows an example of basic transpilation usage without parameters</p>
+
+  <h3>Outputs</h3>
+  <ol class="node-ports">
+    <li>Circuit Diagram
+      <dl class="message-properties">
+        <dt>payload.result.circuit_diagram <span class="property-type">string (Base64)</span></dt>
+        <dd>The Base64-encoded string representing the visual diagram of the quantum circuit.</dd>
+      </dl>
+    </li>
+  </ol>
+
+  <h3>Details</h3>
+  <p>
+      This node shows the first part of an example where a circuit and target QPU is passed to a transpiler 
+      without specifying any further parameters. It shows the creation of a circuit and how to view the result
+  </p>
 </script>

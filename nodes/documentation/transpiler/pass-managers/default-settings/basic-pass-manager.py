@@ -30,7 +30,7 @@ transpiled_circ_str = base64.b64encode(transpiled_circ_buffer.read()).decode('ut
 transpiled_circ_buffer.close()
 
 result = {
-  "transpiled_circ_image": transpiled_circ_str,
+  "circuit_diagram": transpiled_circ_str,
 }
 
 print(json.dumps(result))

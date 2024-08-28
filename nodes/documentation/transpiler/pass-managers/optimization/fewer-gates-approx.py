@@ -33,7 +33,7 @@ qc_t3_approx_str = base64.b64encode(qc_buffer.read()).decode('utf-8')
 qc_buffer.close()
 
 result = {
-  "qc_t3_approx_image": qc_t3_approx_str
+  "circuit_diagram": qc_t3_approx_str
 }
 
 print(json.dumps(result))

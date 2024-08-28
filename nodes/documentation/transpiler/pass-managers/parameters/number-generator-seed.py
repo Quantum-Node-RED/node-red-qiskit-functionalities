@@ -27,7 +27,7 @@ qc_buffer.close()
  
 
 result = {
-  "optimized_1_image": optimized_1_str
+  "circuit_diagram": optimized_1_str
 }
 
 print(json.dumps(result))

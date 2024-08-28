@@ -1,9 +1,9 @@
 <script type="text/javascript">
   RED.nodes.registerType('transpilation-basis-gates', {
     category: 'transpiler-pass-managers',
-    color: '#aaaaaa',
+    color: '#C7E9C0',
     defaults: {
-      name: { value: "" }
+      name: { value: "Basis gates" }
     },
     info: "## Basis Gates\n\n### Purpose\n\n- **Supported Instruction Set**: Each quantum system supports a limited set of gates, called its basis gates.\n- **Universal Gate Set**: Any quantum operation can be decomposed into these basis gates.\n- **Translation**: BasisTranslator translates all circuit gates into the basis gates.\n\n### Usage\n\n- **Specify Basis Gates**: Pass the `basis_gates` keyword argument to the transpiler.\n\n### Example Workflow\n\n1. **Retrieve Basis Gates**:\n   ```python\n   basis_gates = list(target.operation_names)\n   print(basis_gates)\n   ```\n   Output:\n   ```\n   ['id', 'switch_case', 'if_else', 'sx', 'reset', 'delay', 'rz', 'for_loop', 'x', 'measure', 'ecr']\n   ```\n\n2. **Pass Manager with Basis Gates**:\n   ```python\n   pass_manager = generate_preset_pass_manager(\n       optimization_level=1,\n       coupling_map=coupling_map,\n       basis_gates=basis_gates,\n       seed_transpiler=12345,\n   )\n   qc_t_cm_bg = pass_manager.run(qc)\n   qc_t_cm_bg.draw(\"mpl\", idle_wires=False, fold=-1)\n   ```\n\n### Notes\n\n- **Default Basis Gates**: Systems have default basis gates (e.g., `rz`, `x`, `sx`, `ecr`).\n  - `ecr` is the entangling part of the `cx` gate.\n  - Some systems use `cx` while others use `ecr` as the default two-qubit gate.\n- **Custom Gates**: For gates not in the basis set, use custom gates with pulse instructions (see Qiskit SDK API documentation).",
     inputs: 1,
@@ -24,5 +24,26 @@
 </script>
 
 <script type="text/html" data-help-name="transpilation-basis-gates">
-  <p>transpilation-basis-gates</p>
+  <p>A node that introduces basis gates</p>
+
+  <h3>Outputs</h3>
+  <ol class="node-ports">
+    <li>Circuit Diagram
+      <dl class="message-properties">
+        <dt>payload.result.circuit_diagram <span class="property-type">string (Base64)</span></dt>
+        <dd>The Base64-encoded string representing the visual diagram of the quantum circuit.</dd>
+      </dl>
+    </li>
+    <li>Basis Gates
+      <dl class="message-properties">
+        <dt>payload.result.basis_gates <span class="property-type">array</span></dt>
+        <dd>The basis gates that the quantum computer supports</dd>
+      </dl>
+    </li>
+  </ol>
+
+  <h3>Details</h3>
+  <p>
+      This node shows an example how to list the basis gates.
+  </p>
 </script>

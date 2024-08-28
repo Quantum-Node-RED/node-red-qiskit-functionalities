@@ -1,9 +1,9 @@
 <script type="text/javascript">
   RED.nodes.registerType('transpilation-error-map', {
-    category: 'transpiler-pass-managers',
-    color: '#aaaaaa',
+    category: 'Transpiler parameters',
+    color: '#FDD0A2',
     defaults: {
-      name: { value: "" }
+      name: { value: "Error map" }
     },
     info: "## Plotting the Error Map\n\n### Purpose\n\n- **Device Graph**: Generates a diagram of the device graph with error information and labeled physical qubits.\n\n### Usage\n\n- **Function**: `plot_error_map`\n\n### Example\n\n```python\nfrom qiskit.visualization import plot_error_map\n\nplot_error_map(backend, figsize=(30, 24))\n```\n\n### Additional Resources\n\n- **View Similar Diagrams**: Visit [IBM Quantum Services](https://quantum.ibm.com/services/resources) for more diagrams.",
     inputs: 1,
@@ -24,5 +24,19 @@
 </script>
 
 <script type="text/html" data-help-name="transpilation-error-map">
-  <p>transpilation-error-map</p>
-</script>
+    <p>A node that introduces a translation error map</p>
+  
+    <h3>Outputs</h3>
+    <ol class="node-ports">Error map
+        <dl class="message-properties">
+          <dt>payload.result.error_map <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing an error map.</dd>
+        </dl>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+        This node shows an example of how <code>plot_error_map</code> an be used to generate a diagram of the device graph with 
+        error information and with the physical qubits labeled
+    </p>
+  </script>
