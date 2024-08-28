@@ -1,0 +1,68 @@
+<script type="text/javascript">
+  RED.nodes.registerType("Use-Pauli-In-Circuit", {
+    category: "The operator class",
+    color: "#9cd0e0",
+    defaults: {
+      name: { value: "Use Pauli in circuit" },
+      info: {
+          value: "# [The Operator class guide](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n" +
+          "&nbsp;\r\n" +
+          "# Note that in the example in the previous node (Use unitary Operator in circuit) the operator is initialized " +
+          "from a <font style='background: GhostWhite'>_`Pauli`_</font> object. However, the " +
+          "<font style='background: GhostWhite'>_`Pauli`_</font> object may also be directly inserted " +
+          "into the circuit itself and will be converted into a sequence of single-qubit Pauli gates:\r\n" +
+          "```python\r\n" +
+          "# Add to a circuit\r\n" + 
+          "circ2 = QuantumCircuit(2, 2)\r\n" +
+          "circ2.append(Pauli(\"XX\"), [0, 1])\r\n" +
+          "circ2.measure([0, 1], [0, 1])\r\n" +
+          "circ2.draw(\"mpl\")\r\n" +
+          "```\r\n "
+      },
+      pauli: { value: "XX", required: true },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    label: function () {
+      return this.name || "Use-Pauli-In-Circuit";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="Use-Pauli-In-Circuit">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-pauli"><i class="fa fa-magic"></i> Pauli</label>
+    <input
+      type="string"
+      id="node-input-pauli"
+      placeholder="Please give a Pauli term"
+    />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="Use-Pauli-In-Circuit">
+  <p>A node that introduces how to direcly insert a operator into a circuit</p>
+
+  <h3>Outputs</h3>
+  <ol class="node-ports">
+    <li>Circuit image
+      <dl class="message-properties">
+        <dt>payload.result.circuit_image <span class="property-type">string (Base64)</span></dt>
+        <dd>The Base64-encoded string representing the visual diagram of the quantum circuit.</dd>
+      </dl>
+    </li>
+  </ol>
+
+  <h3>Details</h3>
+  <p>
+    This node demonstrates how unitary <code>Operatos</code> can be directly inserted into a <code>QuantumCircuit</code>.
+    It shows an example where a XX Pauli object is direcly inserted.
+    This node has a predefined placeholder value for the Pauli object that is used, but this can be changed
+    for interactability in the properties tab for the node.
+  </p>
+</script>
