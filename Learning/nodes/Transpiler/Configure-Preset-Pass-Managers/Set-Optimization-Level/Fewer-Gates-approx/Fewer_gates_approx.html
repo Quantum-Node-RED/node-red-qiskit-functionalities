@@ -1,0 +1,43 @@
+<script type="text/javascript">
+  RED.nodes.registerType('transpilation-fewer-gates-approx', {
+    category: 'Transpiler optimization level',
+    color: '#D7D7A0',
+    defaults: {
+      name: { value: "Fewer gates approx" }
+    },
+    info: "At optimization level 3, Qiskit tries to re-synthesize two-qubit blocks, with each two-qubit gate implemented using at most three ECR gates. By setting `approximation_degree` to less than 1, we can reduce the number of ECR gates further, allowing for approximations that may introduce some error:\n\n```python\npass_manager = generate_preset_pass_manager(\n    optimization_level=3,\n    approximation_degree=0.99,\n    backend=backend,\n    seed_transpiler=12345,\n)\nqc_t3_approx = pass_manager.run(qc)\nqc_t3_approx.draw(\"mpl\", idle_wires=False)\n```",
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    paletteLabel: "fewer gates approx",
+    label: function () {
+      return this.name || "fewer gates approx";
+    }
+  });
+</script>
+
+<script type="text/html" data-template-name="transpilation-fewer-gates-approx">
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+
+<script type="text/html" data-help-name="transpilation-fewer-gates-approx">
+  <p>A node that sets up an example using approximation_degree</p>
+
+  <h3>Outputs</h3>
+  <ol class="node-ports">
+    <li>Circuit Diagram
+      <dl class="message-properties">
+        <dt>payload.result.circuit_diagram <span class="property-type">string (Base64)</span></dt>
+        <dd>The Base64-encoded string representing the visual diagram of the quantum circuit.</dd>
+      </dl>
+    </li>
+  </ol>
+
+  <h3>Details</h3>
+  <p>
+      This node shows how fewer ECR gates can be obtained by setting the <code>approximation_degree</code> to a value less than 1.
+  </p>
+</script>

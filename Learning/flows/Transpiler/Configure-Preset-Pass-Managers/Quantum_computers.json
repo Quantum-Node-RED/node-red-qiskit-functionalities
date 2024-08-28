@@ -1,0 +1,371 @@
+[
+  {
+      "id": "2d49d3b71aa7c27e",
+      "type": "tab",
+      "label": "quantum-computers",
+      "disabled": false,
+      "info": "",
+      "env": []
+  },
+  {
+      "id": "b5cffdb9fdfd938b",
+      "type": "debug",
+      "z": "2d49d3b71aa7c27e",
+      "name": "Basis Gates",
+      "active": true,
+      "tosidebar": true,
+      "console": false,
+      "tostatus": false,
+      "complete": "payload.result.basis_gates",
+      "targetType": "msg",
+      "statusVal": "",
+      "statusType": "auto",
+      "x": 490,
+      "y": 860,
+      "wires": []
+  },
+  {
+      "id": "a8dbe3a54fa75bfb",
+      "type": "image",
+      "z": "2d49d3b71aa7c27e",
+      "name": "View gate structure",
+      "width": "240",
+      "data": "payload.result.circuit_diagram",
+      "dataType": "msg",
+      "thumbnail": false,
+      "active": true,
+      "pass": false,
+      "outputs": 0,
+      "x": 550,
+      "y": 120,
+      "wires": []
+  },
+  {
+      "id": "fab35ad3750f3969",
+      "type": "image",
+      "z": "2d49d3b71aa7c27e",
+      "name": "View circuit",
+      "width": "600",
+      "data": "payload.result.circuit_diagram",
+      "dataType": "msg",
+      "thumbnail": false,
+      "active": true,
+      "pass": false,
+      "outputs": 0,
+      "x": 970,
+      "y": 60,
+      "wires": [],
+      "info": "This example shows that the coupling map and basis gates are essential for optimal circuit construction. The system can select default settings for other information, such as timing and scheduling, if not explicitly provided."
+  },
+  {
+      "id": "c34ddad5ea84e2bb",
+      "type": "image",
+      "z": "2d49d3b71aa7c27e",
+      "name": "View level 0 optimization",
+      "width": "600",
+      "data": "payload.result.qc_t_cm_lv0",
+      "dataType": "msg",
+      "thumbnail": false,
+      "active": true,
+      "pass": false,
+      "outputs": 0,
+      "x": 570,
+      "y": 440,
+      "wires": [],
+      "info": "- **Level 0 Optimization**: \n  - SWAP gates inserted due to limited connectivity."
+  },
+  {
+      "id": "f4143cc8f7646a9d",
+      "type": "image",
+      "z": "2d49d3b71aa7c27e",
+      "name": "View circuit layout",
+      "width": "400",
+      "data": "payload.result.qc_t_cm_lv0_layout",
+      "dataType": "msg",
+      "thumbnail": false,
+      "active": true,
+      "pass": false,
+      "outputs": 0,
+      "x": 550,
+      "y": 640,
+      "wires": [],
+      "info": "This shows that our virtual qubits 0-11 were trivially mapped to the line of physical qubits 0-11. Let's return to the default (optimization_level=1), which uses VF2Layout if any routing is required."
+  },
+  {
+      "id": "027f0ed4fccffeb1",
+      "type": "image",
+      "z": "2d49d3b71aa7c27e",
+      "name": "View level 1 optimization",
+      "width": "600",
+      "data": "payload.result.qc_t_cm_lv1",
+      "dataType": "msg",
+      "thumbnail": false,
+      "active": true,
+      "pass": false,
+      "outputs": 0,
+      "x": 990,
+      "y": 380,
+      "wires": [],
+      "info": "- **Level 1 Optimization**: \n  - No SWAP gates, better qubit mapping for the circuit."
+  },
+  {
+      "id": "4f1a81aab0ab8a3c",
+      "type": "image",
+      "z": "2d49d3b71aa7c27e",
+      "name": "View circuit layout",
+      "width": "400",
+      "data": "payload.result.qc_t_cm_lv1_layout",
+      "dataType": "msg",
+      "thumbnail": false,
+      "active": true,
+      "pass": false,
+      "outputs": 0,
+      "x": 990,
+      "y": 560,
+      "wires": [],
+      "info": "Now the layout is in a ring. Because this layout respects the circuit's connectivity, there are no SWAP gates, providing a much better circuit for execution."
+  },
+  {
+      "id": "cfdfaaaccdbe1c95",
+      "type": "image",
+      "z": "2d49d3b71aa7c27e",
+      "name": "View Circuit",
+      "width": "600",
+      "data": "payload.result.circuit_diagram",
+      "dataType": "msg",
+      "thumbnail": false,
+      "active": true,
+      "pass": false,
+      "outputs": 0,
+      "x": 490,
+      "y": 920,
+      "wires": [],
+      "info": "- **Decomposition**: CX gates are decomposed into `ecr` gates and single-qubit basis gates.\n\n"
+  },
+  {
+      "id": "c85a54ae8d5b3061",
+      "type": "image",
+      "z": "2d49d3b71aa7c27e",
+      "name": "View Circuit",
+      "width": "600",
+      "data": "payload.result.circuit_diagram",
+      "dataType": "msg",
+      "thumbnail": false,
+      "active": true,
+      "pass": false,
+      "outputs": 0,
+      "x": 490,
+      "y": 1140,
+      "wires": [],
+      "info": "Because we included error information, the VF2PostLayout pass tries to find the optimal qubits to use, resulting in the same circuit that we found originally with the same physical qubits."
+  },
+  {
+      "id": "a00df2759b909233",
+      "type": "inject",
+      "z": "2d49d3b71aa7c27e",
+      "name": "Start",
+      "props": [
+          {
+              "p": "payload"
+          }
+      ],
+      "repeat": "",
+      "crontab": "",
+      "once": false,
+      "onceDelay": 0.1,
+      "topic": "",
+      "payload": "",
+      "payloadType": "date",
+      "x": 110,
+      "y": 60,
+      "wires": [
+          [
+              "ce42b506bc8289ab"
+          ]
+      ]
+  },
+  {
+      "id": "95b3265b33ac6498",
+      "type": "inject",
+      "z": "2d49d3b71aa7c27e",
+      "name": "Start",
+      "props": [
+          {
+              "p": "payload"
+          }
+      ],
+      "repeat": "",
+      "crontab": "",
+      "once": false,
+      "onceDelay": 0.1,
+      "topic": "",
+      "payload": "",
+      "payloadType": "date",
+      "x": 110,
+      "y": 380,
+      "wires": [
+          [
+              "69692f81464be9f6"
+          ]
+      ]
+  },
+  {
+      "id": "3da1f1bb95e2fb1d",
+      "type": "inject",
+      "z": "2d49d3b71aa7c27e",
+      "name": "Start",
+      "props": [
+          {
+              "p": "payload"
+          }
+      ],
+      "repeat": "",
+      "crontab": "",
+      "once": false,
+      "onceDelay": 0.1,
+      "topic": "",
+      "payload": "",
+      "payloadType": "date",
+      "x": 110,
+      "y": 860,
+      "wires": [
+          [
+              "240192be4a102571"
+          ]
+      ]
+  },
+  {
+      "id": "48d4271492b1f04f",
+      "type": "inject",
+      "z": "2d49d3b71aa7c27e",
+      "name": "Start",
+      "props": [
+          {
+              "p": "payload"
+          }
+      ],
+      "repeat": "",
+      "crontab": "",
+      "once": false,
+      "onceDelay": 0.1,
+      "topic": "",
+      "payload": "",
+      "payloadType": "date",
+      "x": 110,
+      "y": 1140,
+      "wires": [
+          [
+              "95392e192c8c6827"
+          ]
+      ]
+  },
+  {
+      "id": "117eb3ede075eb00",
+      "type": "move-to-next-node",
+      "z": "2d49d3b71aa7c27e",
+      "name": "Next",
+      "x": 530,
+      "y": 60,
+      "wires": [
+          [
+              "e3613038a584d8a2"
+          ]
+      ]
+  },
+  {
+      "id": "2f7e123ce35a91e4",
+      "type": "move-to-next-node",
+      "z": "2d49d3b71aa7c27e",
+      "name": "Next",
+      "x": 530,
+      "y": 380,
+      "wires": [
+          [
+              "6a410f44120201e5"
+          ]
+      ]
+  },
+  {
+      "id": "ce42b506bc8289ab",
+      "type": "transpilation-system-information",
+      "z": "2d49d3b71aa7c27e",
+      "name": "System information",
+      "x": 310,
+      "y": 60,
+      "wires": [
+          [
+              "117eb3ede075eb00",
+              "a8dbe3a54fa75bfb"
+          ]
+      ]
+  },
+  {
+      "id": "e3613038a584d8a2",
+      "type": "transpilation-default-configuration",
+      "z": "2d49d3b71aa7c27e",
+      "name": "Default configuration",
+      "x": 740,
+      "y": 60,
+      "wires": [
+          [
+              "fab35ad3750f3969"
+          ]
+      ]
+  },
+  {
+      "id": "69692f81464be9f6",
+      "type": "transpilation-coupling-map-lv0",
+      "z": "2d49d3b71aa7c27e",
+      "name": "Coupling map lv0",
+      "x": 310,
+      "y": 380,
+      "wires": [
+          [
+              "2f7e123ce35a91e4",
+              "c34ddad5ea84e2bb",
+              "f4143cc8f7646a9d"
+          ]
+      ]
+  },
+  {
+      "id": "6a410f44120201e5",
+      "type": "transpilation-coupling-map-lv1",
+      "z": "2d49d3b71aa7c27e",
+      "name": "Coupling map lv1",
+      "x": 730,
+      "y": 380,
+      "wires": [
+          [
+              "027f0ed4fccffeb1",
+              "4f1a81aab0ab8a3c"
+          ]
+      ]
+  },
+  {
+      "id": "240192be4a102571",
+      "type": "transpilation-basis-gates",
+      "z": "2d49d3b71aa7c27e",
+      "name": "Basis gates",
+      "x": 290,
+      "y": 860,
+      "wires": [
+          [
+              "b5cffdb9fdfd938b",
+              "cfdfaaaccdbe1c95"
+          ]
+      ]
+  },
+  {
+      "id": "95392e192c8c6827",
+      "type": "transpilation-error-rates",
+      "z": "2d49d3b71aa7c27e",
+      "name": "Error rates",
+      "x": 290,
+      "y": 1140,
+      "wires": [
+          [
+              "c85a54ae8d5b3061"
+          ]
+      ]
+  }
+]
