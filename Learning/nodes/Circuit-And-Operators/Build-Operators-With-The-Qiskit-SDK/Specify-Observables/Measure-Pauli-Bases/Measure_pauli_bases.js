@@ -24,7 +24,7 @@ module.exports = function (RED) {
       });
 
       const newMsg = {
-        payload: result,
+        payload: result
       };
       node.send(newMsg);
     });

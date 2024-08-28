@@ -28,6 +28,6 @@ module.exports = function (RED) {
     node.on('close', function () {
       node.status({ fill: "red", shape: "dot", text: "You haven't learned this node yet." });
     });
-}
+  }
   RED.nodes.registerType("observable-pauli-basis", ObservablePauliBasisNode);
 };

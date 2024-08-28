@@ -17,12 +17,12 @@ module.exports = function (RED) {
       const option = {
         op1: {
           sparse_list: node.op1,
-          num_qubits: parseInt(node.op1_num_qubits),
+          num_qubits: parseInt(node.op1_num_qubits)
         },
         op2: {
           sparse_list: node.op2,
-          num_qubits: parseInt(node.op2_num_qubits),
-        },
+          num_qubits: parseInt(node.op2_num_qubits)
+        }
       };
       const result = await new Promise((resolve, reject) => {
         runPythonScript(
@@ -37,7 +37,7 @@ module.exports = function (RED) {
       });
 
       const newMsg = {
-        payload: result,
+        payload: result
       };
       node.send(newMsg);
     });

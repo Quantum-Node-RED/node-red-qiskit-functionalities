@@ -12,7 +12,7 @@ module.exports = function (RED) {
     node.on("input", async function (msg) {
       node.status({ fill: "green", shape: "dot", text: "You have learned this node." });
       const option = {
-        matrix: node.matrix,
+        matrix: node.matrix
       };
       const result = await new Promise((resolve, reject) => {
         runPythonScript(__dirname, "Operators_object.py", option, (err, results) => {
@@ -23,7 +23,7 @@ module.exports = function (RED) {
 
       try {
         const newMsg = {
-          payload: result,
+          payload: result
         };
         node.send(newMsg);
       } catch (e) {

@@ -14,7 +14,7 @@ module.exports = function (RED) {
       node.status({ fill: "green", shape: "dot", text: "You have learned this node." });
       const option = {
         pauli_1: node.pauli_1,
-        pauli_2: node.pauli_2,
+        pauli_2: node.pauli_2
       };
       const result = await new Promise((resolve, reject) => {
         runPythonScript(
@@ -29,7 +29,7 @@ module.exports = function (RED) {
       });
 
       const newMsg = {
-        payload: result,
+        payload: result
       };
       node.send(newMsg);
     });
