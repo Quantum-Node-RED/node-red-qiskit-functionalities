@@ -173,7 +173,6 @@
       "transpilation-coupling-map-lv1": "Learning/nodes/Transpiler/Configure-Preset-Pass-Managers/Represent-Quantum-Computers/Coupling-Map-Lv1/Coupling_map_lv1.js",
       "transpilation-basis-gates": "Learning/nodes/Transpiler/Configure-Preset-Pass-Managers/Represent-Quantum-Computers/Basis-Gates/Basis_gates.js",
       "transpilation-error-rates": "Learning/nodes/Transpiler/Configure-Preset-Pass-Managers/Represent-Quantum-Computers/Error-Rates/Error_rates.js",
-      "Grover": "nodes/algorithms/Grover/Grover.js",
       "intro-to-transpile-stage": "Learning/nodes/Transpiler/Get-Started-With-Qiskit-Transpiler/Transpiler-Stages/Intro-To-Tranpile-Stages/Intro_to_transpile_stage.js",
       "transpiler-init-stage": "Learning/nodes/Transpiler/Get-Started-With-Qiskit-Transpiler/Transpiler-Stages/Init-Stage/Init_stage.js",
       "transpiler-layout-stage": "Learning/nodes/Transpiler/Get-Started-With-Qiskit-Transpiler/Transpiler-Stages/Layout-Stage/Layout_stage.js",
@@ -185,9 +184,7 @@
       "create-own-pass-manager": "Learning/nodes/Transpiler/Get-Started-With-Qiskit-Transpiler/Transpile-With-Pass-Managers/Create-Own-Pass-Manager/Create_own_pass_manager.js",
       "create-staged-pass-manager": "Learning/nodes/Transpiler/Get-Started-With-Qiskit-Transpiler/Transpile-With-Pass-Managers/Create-Staged-Pass-Manager/Create_staged_pass_manager.js",
       "intro-to-pass-manager": "Learning/nodes/Transpiler/Get-Started-With-Qiskit-Transpiler/Transpile-With-Pass-Managers/Intro-To-Pass-Manager/Intro_to_pass_manager.js",
-      "build-oracle": "nodes/algorithms/Grover/build_oracle.js",
       "build-gate": "nodes/gate/utils/build_gate.js",
-      "grover_iteration": "nodes/algorithms/Grover/Grover_iteration.js",
       "move-to-next-node": "Learning/nodes/Functional-Nodes/Next/move-to-next-node.js",
       "intro-to-operator-classes": "Learning/nodes/Circuit-And-Operators/Build-Operators-With-The-Qiskit-SDK/Operators-Module-Overview/Intro-To-Operator-Classes/Intro_to_operator_classes.js",
       "sparse-pauli-op": "Learning/nodes/Circuit-And-Operators/Build-Operators-With-The-Qiskit-SDK/Operators-Module-Overview/Sparse-Pauli-Op/Sparse_pauli_op.js",
@@ -212,7 +209,16 @@
       "subsystem-composition": "Learning/nodes/Circuit-And-Operators/Build-Operators-With-The-Qiskit-SDK/The-Operator-Class/Subsystem-Composition/Subsystem_composition.js",
       "linear-combinations": "Learning/nodes/Circuit-And-Operators/Build-Operators-With-The-Qiskit-SDK/The-Operator-Class/Linear-Combinations/Linear_combinations.js",
       "equality-operator": "Learning/nodes/Circuit-And-Operators/Build-Operators-With-The-Qiskit-SDK/The-Operator-Class/Equality-Operator/Equality_operator.js",
-      "process-fidelity": "Learning/nodes/Circuit-And-Operators/Build-Operators-With-The-Qiskit-SDK/The-Operator-Class/Process-Fidelity/Process_fidelity.js"
+      "process-fidelity": "Learning/nodes/Circuit-And-Operators/Build-Operators-With-The-Qiskit-SDK/The-Operator-Class/Process-Fidelity/Process_fidelity.js",
+      "Grover": "nodes/algorithms/Grover/Grover.js",
+      "build-oracle": "nodes/algorithms/Grover/build_oracle.js",
+      "grover_iteration": "nodes/algorithms/Grover/Grover_iteration.js",
+      "VQE": "nodes/algorithms/VQE/VQE.js",
+      "ansatz": "nodes/algorithms/VQE/ansatz.js",
+      "optimizer": "nodes/algorithms/VQE/optimizer.js",
+      "hamiltonianPauli": "nodes/algorithms/VQE/hamiltonianPauli.js",
+      "VQEIteration": "nodes/algorithms/VQE/VQEIteration.js",
+      "classicEigensolver": "nodes/algorithms/VQE/classicEigensolver.js"
     }
   },
   "dependencies": {

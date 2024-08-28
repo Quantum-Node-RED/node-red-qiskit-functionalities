@@ -1,0 +1,261 @@
+[
+  {
+    "id": "62a08d87b41b2e8a",
+    "type": "tab",
+    "label": "VQE-Customise-Flow",
+    "disabled": false,
+    "info": "",
+    "env": []
+  },
+  {
+    "id": "386093321e6bbbe0",
+    "type": "ansatz",
+    "z": "62a08d87b41b2e8a",
+    "name": "ansatz",
+    "rotationLayers": "rx",
+    "entanglementLayers": "cz",
+    "x": 430,
+    "y": 260,
+    "wires": [
+      [
+        "08dea8eed42b7512",
+        "69e7a2eb62af9994"
+      ]
+    ]
+  },
+  {
+    "id": "69e7a2eb62af9994",
+    "type": "optimizer",
+    "z": "62a08d87b41b2e8a",
+    "name": "optimizer",
+    "optimizer": "SPSA",
+    "x": 600,
+    "y": 260,
+    "wires": [
+      [
+        "a7c2ba0f718ba75a"
+      ]
+    ]
+  },
+  {
+    "id": "6476d583e11773b6",
+    "type": "hamiltonianPauli",
+    "z": "62a08d87b41b2e8a",
+    "name": "hamiltonianPauli",
+    "paulis": [
+      {
+        "term": "XXX",
+        "coeff": "2"
+      },
+      {
+        "term": "YYY",
+        "coeff": "1"
+      },
+      {
+        "term": "ZZZ",
+        "coeff": "4"
+      },
+      {
+        "term": "III",
+        "coeff": "2"
+      }
+    ],
+    "x": 260,
+    "y": 260,
+    "wires": [
+      [
+        "386093321e6bbbe0"
+      ]
+    ]
+  },
+  {
+    "id": "dc6674e3083b8a98",
+    "type": "inject",
+    "z": "62a08d87b41b2e8a",
+    "name": "",
+    "props": [
+      {
+        "p": "payload.numQubits",
+        "v": "3",
+        "vt": "num"
+      }
+    ],
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "topic": "",
+    "x": 110,
+    "y": 260,
+    "wires": [
+      [
+        "6476d583e11773b6"
+      ]
+    ]
+  },
+  {
+    "id": "08dea8eed42b7512",
+    "type": "image",
+    "z": "62a08d87b41b2e8a",
+    "name": "",
+    "width": "600",
+    "data": "result.result.ansatz_image",
+    "dataType": "msg",
+    "thumbnail": false,
+    "active": true,
+    "pass": false,
+    "outputs": 0,
+    "x": 100,
+    "y": 400,
+    "wires": []
+  },
+  {
+    "id": "a7c2ba0f718ba75a",
+    "type": "VQEIteration",
+    "z": "62a08d87b41b2e8a",
+    "name": "VQEIteration",
+    "maxiter": "63",
+    "x": 770,
+    "y": 260,
+    "wires": [
+      [
+        "17323ef42297b4cc",
+        "c2fb25b3b841170f",
+        "80b0cfec6ab6f35b",
+        "b74989446a07cb11",
+        "f675823f6b8e8f5c",
+        "9640f6d86d2e3ae1"
+      ]
+    ]
+  },
+  {
+    "id": "c2fb25b3b841170f",
+    "type": "image",
+    "z": "62a08d87b41b2e8a",
+    "name": "View enegy convergence",
+    "width": "400",
+    "data": "payload.result.enegy_image",
+    "dataType": "msg",
+    "thumbnail": false,
+    "active": true,
+    "pass": false,
+    "outputs": 0,
+    "x": 750,
+    "y": 400,
+    "wires": []
+  },
+  {
+    "id": "17323ef42297b4cc",
+    "type": "debug",
+    "z": "62a08d87b41b2e8a",
+    "name": "optimal value",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload.result.optimal_value",
+    "targetType": "msg",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 1110,
+    "y": 260,
+    "wires": []
+  },
+  {
+    "id": "80b0cfec6ab6f35b",
+    "type": "classicEigensolver",
+    "z": "62a08d87b41b2e8a",
+    "name": "classicEigensolver",
+    "x": 990,
+    "y": 140,
+    "wires": [
+      [
+        "b1b015a4b423a245",
+        "076cb4757f18fcff"
+      ]
+    ]
+  },
+  {
+    "id": "b1b015a4b423a245",
+    "type": "debug",
+    "z": "62a08d87b41b2e8a",
+    "name": "classical_result",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload.result.classical_result",
+    "targetType": "msg",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 1240,
+    "y": 140,
+    "wires": []
+  },
+  {
+    "id": "076cb4757f18fcff",
+    "type": "debug",
+    "z": "62a08d87b41b2e8a",
+    "name": "percent_error",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload.result.percent_error",
+    "targetType": "msg",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 1380,
+    "y": 200,
+    "wires": []
+  },
+  {
+    "id": "b74989446a07cb11",
+    "type": "debug",
+    "z": "62a08d87b41b2e8a",
+    "name": "optimal_parameters",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload.result.parameter",
+    "targetType": "msg",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 1180,
+    "y": 360,
+    "wires": []
+  },
+  {
+    "id": "f675823f6b8e8f5c",
+    "type": "image",
+    "z": "62a08d87b41b2e8a",
+    "name": "optimal_circuit",
+    "width": "600",
+    "data": "payload.result.optimal_circuit",
+    "dataType": "msg",
+    "thumbnail": false,
+    "active": true,
+    "pass": false,
+    "outputs": 0,
+    "x": 1160,
+    "y": 720,
+    "wires": []
+  },
+  {
+    "id": "9640f6d86d2e3ae1",
+    "type": "image",
+    "z": "62a08d87b41b2e8a",
+    "name": "intermediate_circuit",
+    "width": "600",
+    "data": "payload.result.intermediate_circuit",
+    "dataType": "msg",
+    "thumbnail": false,
+    "active": true,
+    "pass": false,
+    "outputs": 0,
+    "x": 1170,
+    "y": 460,
+    "wires": []
+  }
+]
