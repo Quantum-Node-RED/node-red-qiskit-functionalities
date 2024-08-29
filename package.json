@@ -62,7 +62,6 @@
       "Define-hyperparameter": "interactive-nodes/Quantum-Circuit/Define-hyperparameter/Define-hyperparameter.js",
       "Execute-quantum-circuit-with-sampler": "interactive-nodes/Functions/Execute-quantum-circuit-with-sampler/Execute-quantum-circuit-with-sampler.js",
       "Print": "interactive-nodes/Tools/print/print.js",
-      "QAOA-Algorithm": "interactive-nodes/Algorithms/QAOA-Algorithm/QAOA-Algorithm.js",
       "Circuit-Loop-Begin": "interactive-nodes/Quantum-Circuit/Circuit-Loop/Circuit-Loop-Begin.js",
       "Circuit-Loop-End": "interactive-nodes/Quantum-Circuit/Circuit-Loop/Circuit-Loop-End.js",
       "custom_programming": "interactive-nodes/Programming/Custom-programming/Custom-programming.js",
@@ -264,15 +263,16 @@
       "linear-combinations": "Learning/nodes/Circuit-And-Operators/Build-Operators-With-The-Qiskit-SDK/The-Operator-Class/Linear-Combinations/Linear_combinations.js",
       "equality-operator": "Learning/nodes/Circuit-And-Operators/Build-Operators-With-The-Qiskit-SDK/The-Operator-Class/Equality-Operator/Equality_operator.js",
       "process-fidelity": "Learning/nodes/Circuit-And-Operators/Build-Operators-With-The-Qiskit-SDK/The-Operator-Class/Process-Fidelity/Process_fidelity.js",
-      "Grover": "nodes/algorithms/Grover/Grover.js",
-      "build-oracle": "nodes/algorithms/Grover/build_oracle.js",
-      "grover_iteration": "nodes/algorithms/Grover/Grover_iteration.js",
-      "VQE": "nodes/algorithms/VQE/VQE.js",
-      "ansatz": "nodes/algorithms/VQE/ansatz.js",
-      "optimizer": "nodes/algorithms/VQE/optimizer.js",
-      "hamiltonianPauli": "nodes/algorithms/VQE/hamiltonianPauli.js",
-      "VQEIteration": "nodes/algorithms/VQE/VQEIteration.js",
-      "classicEigensolver": "nodes/algorithms/VQE/classicEigensolver.js"
+      "QAOA": "interactive-nodes/Algorithms/QAOA/QAOA.js",
+      "Grover": "interactive-nodes/Algorithms/Grover/Grover.js",
+      "build-oracle": "interactive-nodes/Algorithms/Grover/build_oracle.js",
+      "grover_iteration": "interactive-nodes/Algorithms/Grover/Grover_iteration.js",
+      "VQE": "interactive-nodes/Algorithms/VQE/VQE.js",
+      "ansatz": "interactive-nodes/Algorithms/VQE/ansatz.js",
+      "optimizer": "interactive-nodes/Algorithms/VQE/optimizer.js",
+      "hamiltonianPauli": "interactive-nodes/Algorithms/VQE/hamiltonianPauli.js",
+      "VQEIteration": "interactive-nodes/Algorithms/VQE/VQEIteration.js",
+      "classicEigensolver": "interactive-nodes/Algorithms/VQE/classicEigensolver.js"
     }
   },
   "dependencies": {

@@ -1,4 +1,4 @@
-const runPythonScript = require("../../pythonShell");
+const runPythonScript = require("../../../../../nodes/pythonShell");
 
 module.exports = function (RED) {
   function GroverNode(config) {
@@ -16,10 +16,10 @@ module.exports = function (RED) {
           target: node.target,
           oracleType: node.oracleType,
           iterators: node.iterators,
-          input : node.input,
+          input: node.input,
           growthRate: node.growthRate,
           sampleFromIterations: node.sampleFromIterations
-        }; 
+        };
         runPythonScript(__dirname, "Grover.py", options, (err, results) => {
           if (err) {
             node.error("Error running Python script: " + err);

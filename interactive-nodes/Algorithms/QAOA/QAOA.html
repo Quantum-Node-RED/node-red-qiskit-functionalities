@@ -1,9 +1,9 @@
 <script type="text/javascript">
-  RED.nodes.registerType("QAOA-Algorithm", {
+  RED.nodes.registerType("QAOA", {
     category: "function",
     color: "#FF6347",
     defaults: {
-      name: { value: "QAOA-Algorithm" },
+      name: { value: "QAOA" },
       reps: { value: 2, required: true },
       optimizer: { value: "COBLYA", required: true },
     },
@@ -11,7 +11,7 @@
     outputs: 1,
     icon: "file.svg",
     label: function () {
-      return this.name || "QAOA-Algorithm";
+      return this.name || "QAOA";
     },
     oneditprepare: function () {
       // Ensure the reps value is not less than 1
@@ -38,7 +38,7 @@
   });
 </script>
 
-<script type="text/html" data-template-name="QAOA-Algorithm">
+<script type="text/html" data-template-name="QAOA">
     <div class="form-row">
       <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
       <input type="text" id="node-input-name" placeholder="Name" />
@@ -54,6 +54,6 @@
   </div>
 </script>
 
-<script type="text/html" data-help-name="QAOA-Algorithm">
-  <p>QAOA-Algorithm</p>
+<script type="text/html" data-help-name="QAOA">
+  <p>QAOA</p>
 </script>

@@ -1,7 +1,7 @@
 const component = require("../../component.js");
 
 module.exports = function (RED) {
-  function QAOAAlgorithm(config) {
+  function QAOA(config) {
     RED.nodes.createNode(this, config);
     var node = this;
     node.on("input", function (msg) {
@@ -15,5 +15,5 @@ module.exports = function (RED) {
       node.send(msg);
     });
   }
-  RED.nodes.registerType("QAOA-Algorithm", QAOAAlgorithm);
+  RED.nodes.registerType("QAOA", QAOA);
 };
