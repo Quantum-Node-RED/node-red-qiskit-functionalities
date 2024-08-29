@@ -1,0 +1,62 @@
+<script type="text/javascript">
+  RED.nodes.registerType("custom_programming", {
+    category: "Programming",
+    color: "#E6BCB9",
+    defaults: {
+      name: { value: "" },
+      exampleText: { value: "" }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "function.svg",
+    label: function () {
+      return this.name || "custom_programming";
+    },
+    oneditprepare: function () {
+      this.editor = RED.editor.createEditor({
+      id: 'node-input-example-editor',
+      mode: 'ace/mode/text',
+      value: this.exampleText
+    });
+    },
+    oneditsave: function() {
+    this.exampleText = this.editor.getValue();
+    this.editor.destroy();
+    delete this.editor;
+    },
+    oneditcancel: function() {
+        this.editor.destroy();
+        delete this.editor;
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="custom_programming">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+
+  <div style="height: 250px; min-height:150px;" class="node-text-editor" id="node-input-example-editor">Custom code snippet</div>
+</script>
+
+<script type="text/html" data-help-name="custom_programming">
+  <p>
+    <h2>Introduction:</h2>
+    <p>This node enhances the framework's extensibility by allowing users to manually input Qiskit code snippets and place them anywhere within the flow. 
+      This enables users to insert custom code into any part of the final script. 
+      By doing so, users can easily perform operations that have not yet been encapsulated into dedicated nodes.</p>
+    
+    <h2>Placement:</h2>
+    <ul>
+      <li>It could be placed anywhere within the flow but should be inside the range [Start, End].</li>
+    </ul>
+    
+    <h2>Properties:</h2>
+    <ul>
+      <li><strong>Custom code snippet:</strong> The code snippet input should be in the form of text string.</li>
+      <li>Please note that since Qiskit uses Python code, indentation should follow Python coding standards.</li>
+    </ul>
+  </p>
+</script>
+

@@ -1,0 +1,49 @@
+<script type="text/javascript">
+  RED.nodes.registerType("draw-graph", {
+    category: "Tools",
+    color: "#D3E7B5",
+    defaults: {
+      name: { value: "draw_graph" },
+      variable: { value: "" },
+      matrix: { value: "" },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "font-awesome/fa-area-chart",
+    label: function () {
+      return this.name || "draw_graph";
+    },
+    oneditprepare: function () {
+      // Populate the existing matrix value
+      $("#node-input-matrix").val(this.matrix);
+    },
+    oneditsave: function () {
+      // Save the matrix value
+      this.matrix = $("#node-input-matrix").val();
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="draw-graph">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-variable"
+      ><i class="fa fa-tag"></i> Variable Name</label
+    >
+    <input type="text" id="node-input-variable" placeholder="variable name" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-matrix"><i class="fa fa-cogs"></i> Matrix</label>
+    <input type="text" id="node-input-matrix" placeholder="matrix name" />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="draw-graph">
+  <p>
+    This node constructs a graph based on an adjacency matrix provided in JSON
+    format.
+  </p>
+</script>

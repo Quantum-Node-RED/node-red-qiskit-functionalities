@@ -1,6 +1,7 @@
+qiskit = 1.0
+networkx
 numpy
 matplotlib
-qiskit
 qiskit_aer
 qiskit-algorithms
 qiskit_ibm_runtime

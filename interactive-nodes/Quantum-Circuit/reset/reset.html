@@ -1,0 +1,46 @@
+<script type="text/javascript">
+  RED.nodes.registerType("reset", {
+    category: "Quantum Circuit",
+    color: "#E6B9D7",
+    defaults: {
+      name: { value: "" },
+      reset_qubits: { value: "" },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "font-awesome/fa-chain",
+    label: function () {
+      return this.name || "reset";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="reset">
+  <!-- <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div> -->
+
+<div class="form-row">
+  <label for="node-input-reset_qubits"><i class="fa fa-tag"></i> reset qubits</label>
+  <input type="text" id="node-input-reset_qubits" placeholder="qubit(s) to reset" />
+</div>
+</script>
+
+<script type="text/html" data-help-name="reset">
+  <p>
+    <h2>Introduction:</h2>
+    <p>The <strong>reset</strong> operation forces a qubit back to state <code>|0⟩</code>.</p>
+    </p>
+    <h2>Placement:</h2>
+    <ul>
+      <li>It should follow a qubit node directly or indirectly.</li>
+      <li>It should be placed inside the range [Quantum-Circuit-Begin, Quantum-Circuit-END].</li>
+      <li>There should be at least 1 qubit inside the circuit.</li>
+    </ul>
+    <h2>Properties:</h2>
+    <ul>
+      <li><strong> qbit:</strong> The index of a qubit that will be set to state <code>|0⟩</code>.</li>
+    </ul>
+  </p>
+</script>

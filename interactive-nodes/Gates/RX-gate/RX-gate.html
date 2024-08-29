@@ -1,0 +1,65 @@
+<script type="text/javascript">
+  RED.nodes.registerType("RX_gate", {
+    category: "Gates",
+    color: "#D7B9E6",
+    defaults: {
+      name: { value: "" },
+      theta: { value: "" },
+      mode: { value: "number" },
+      sequence_no: { value: "" },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "cog.svg",
+    label: function () {
+      return this.name || "RX_gate";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="RX_gate">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-theta"><i class="fa fa-tag"></i> theta</label>
+    <input type="number" min="0" step="any"  id="node-input-theta" placeholder="theta" />
+  </div>
+</script>
+
+<div class="form-row">
+  <label for="node-input-mode"><i class="fa fa-list"></i>Theta Mode</label>
+  <select name="mode" id="node-input-mode">
+    <option value="number">Number</option>
+    <option value="parameters">Parameters</option>
+  </select>
+</div>
+<div class="form-row">
+  <label for="node-input-sequence_no"><i class="fa fa-tag"></i> Sequence No</label>
+  <input type="number" id="node-input-sequence_no" placeholder="Sequence No" />
+</div>
+<script type="text/html" data-help-name="RX_gate">
+  <p>
+    <h2>Introduction:</h2>
+    <p>The <code>R<sub>x</sub>(θ)</code> gate, or RX gate, is a single-qubit rotation gate that performs a rotation 
+    around the X-axis of the Bloch sphere by an angle <code>θ</code>.</p>
+    <h2>Placement:</h2>
+    <ul>
+      <li>It should follow a qubit node directly or indirectly.</li>
+      <li>It should be placed inside the range [Quantum-Circuit-Begin, Quantum-Circuit-END].</li>
+      <li>There should be at least 1 qubit inside the circuit.</li>
+    </ul>
+    <h4>Matrix Representation</h4>
+    <pre>
+      RX(θ) = ⎡ cos(θ/2)      -i sin(θ/2) ⎤
+              ⎣-i sin(θ/2)     cos(θ/2)   ⎦
+    </pre>
+    <h2>Properties:</h2>
+    <ul>
+      <li><strong>Theta (θ):</strong> Determines the extent of the qubit's rotation around the X-axis, 
+        modifying its state and the associated probability amplitudes.</li>
+    </ul>
+  </p>
+</script>

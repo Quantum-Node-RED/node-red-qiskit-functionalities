@@ -1,0 +1,93 @@
+<script type="text/javascript">
+  RED.nodes.registerType("apply_optimizer", {
+    category: "function",
+    color: "#E6BCB9",
+    defaults: {
+      name: { value: "" },
+      variable: { value: "" },
+      costFunction: { value: "" },
+      circuit: { value: "" },
+      paramVector: { value: "" },
+      hamiltonian: { value: "" },
+      estimator: { value: "" },
+      optimizer: { value: "COBLYA", required: true },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "function.svg",
+    label: function () {
+      return this.name || "apply_optimizer";
+    },
+    oneditprepare: function () {
+      // Populate initial dropdown options
+      var select = $("#node-input-optimizer");
+      var initialOptions = [
+        { value: "COBYLA", label: "COBYLA" },
+        { value: "SPSA", label: "SPSA" },
+      ];
+
+      initialOptions.forEach(function (option) {
+        select.append(
+          '<option value="' + option.value + '">' + option.label + "</option>"
+        );
+      });
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="apply_optimizer">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-variable"><i class="fa fa-tag"></i>Variable</label>
+    <input type="text" id="node-input-variable" placeholder="Variable" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-costFunction"
+      ><i class="fa fa-tag"></i>Cost function</label
+    >
+    <input
+      type="text"
+      id="node-input-costFunction"
+      placeholder="Cost function"
+    />
+  </div>
+  <div class="form-row">
+    <label for="node-input-circuit"
+      ><i class="fa fa-tag"></i>Circuit name</label
+    >
+    <input type="text" id="node-input-circuit" placeholder="Circuit name" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-paramVector"
+      ><i class="fa fa-tag"></i>Param vector</label
+    >
+    <input
+      type="text"
+      id="node-input-paramVector"
+      placeholder="Parameter vector"
+    />
+  </div>
+  <div class="form-row">
+    <label for="node-input-hamiltonian"
+      ><i class="fa fa-tag"></i>Hamiltonian</label
+    >
+    <input type="text" id="node-input-hamiltonian" placeholder="Hamiltonian" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-estimator"><i class="fa fa-tag"></i>Estimator</label>
+    <input type="text" id="node-input-estimator" placeholder="Estimator" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-optimizer"
+      ><i class="fa fa-list"></i>Optimizer</label
+    >
+    <select id="node-input-optimizer"></select>
+  </div>
+</script>
+
+<script type="text/html" data-help-name="apply_optimizer">
+  <p></p>
+</script>

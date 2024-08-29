@@ -1,0 +1,47 @@
+<script type="text/javascript">
+  RED.nodes.registerType("H_gate", {
+    category: "Gates",
+    color: "#D7B9E6",
+    defaults: {
+      name: { value: "" },
+      sequence_no: { value: "" },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "cog.svg",
+    label: function () {
+      return this.name || "H_gate";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="H_gate">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-sequence_no"><i class="fa fa-tag"></i> Sequence No</label>
+    <input type="number" id="node-input-sequence_no" placeholder="Sequence No" />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="H_gate">
+  <p>
+    <h2>Introduction:</h2>
+    <p>The Hadamard gate, or H gate, is a single-qubit gate in quantum computing. 
+      It creates superposition by transforming a qubit from a definite state <code>|0⟩</code> or <code>|1⟩</code> 
+      into an equal superposition of both states.</p>
+      <ul>
+        <li>If applied to <code>|0⟩</code>, it transforms the qubit to <code>(1/√2) (|0⟩ + |1⟩)</code>.</li>
+        <li>If applied to <code>|1⟩</code>, it transforms the qubit to <code>(1/√2) (|0⟩ - |1⟩)</code>.</li>
+      </ul>
+
+    <h2>Placement:</h2>
+    <ul>
+      <li>It should follow a qubit node directly or indirectly. This qubit will become the qubit of the H gate.</li>
+      <li>It should be placed inside the range [Quantum-Circuit-Begin, Quantum-Circuit-END].</li>
+      <li>There should be at least 1 qubit inside the circuit.</li>
+    </ul>
+  </p>
+</script>

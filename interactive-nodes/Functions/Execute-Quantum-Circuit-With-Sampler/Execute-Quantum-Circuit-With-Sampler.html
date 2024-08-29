@@ -1,0 +1,70 @@
+<script type="text/javascript">
+  RED.nodes.registerType("execute_quantum_circuit_with_sampler", {
+    category: "function",
+    color: "#E6BCB9",
+    defaults: {
+      name: { value: "" },
+      circuit_name: { value: "", required: true },
+      variable: { value: "", required: true },
+      sampler: { value: "", required: true },
+      result: { value: "", required: true },
+      parameterVector: { value: "", required: true },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "function.svg",
+    label: function () {
+      return this.name || "execute_quantum_circuit_with_sampler";
+    },
+  });
+</script>
+
+<script
+  type="text/html"
+  data-template-name="execute_quantum_circuit_with_sampler"
+>
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-circuit_name"
+      ><i class="fa fa-tag"></i> Circuit Name</label
+    >
+    <input
+      type="text"
+      id="node-input-circuit_name"
+      placeholder="Circuit Name"
+    />
+  </div>
+  <div class="form-row">
+    <label for="node-input-variable"
+      ><i class="fa fa-tag"></i> Variable name</label
+    >
+    <input type="text" id="node-input-variable" placeholder="Variable Name" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-sampler"
+      ><i class="fa fa-tag"></i> Sampler name</label
+    >
+    <input type="text" id="node-input-sampler" placeholder="Sampler" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-result"><i class="fa fa-tag"></i> Result name</label>
+    <input type="text" id="node-input-result" placeholder="Result" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-parameterVector"
+      ><i class="fa fa-tag"></i> Parameter Vector</label
+    >
+    <input
+      type="text"
+      id="node-input-parameterVector"
+      placeholder="Parameter Vector"
+    />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="execute_quantum_circuit_with_sampler">
+  <p></p>
+</script>

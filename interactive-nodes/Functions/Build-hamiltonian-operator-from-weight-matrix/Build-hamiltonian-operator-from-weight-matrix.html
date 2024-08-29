@@ -1,0 +1,50 @@
+<script type="text/javascript">
+  RED.nodes.registerType("build_hamiltonian_operator_from_weight_matrix", {
+    category: "function",
+    color: "#E6BCB9",
+    defaults: {
+      name: { value: "build hamiltonian operator from weight matrix" },
+      operator: { value: "", required: true },
+      weight_matrix: { value: "", required: true },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "function.svg",
+    label: function () {
+      return this.name || "build hamiltonian operator from weight matrix";
+    },
+  });
+</script>
+
+<script
+  type="text/html"
+  data-template-name="build_hamiltonian_operator_from_weight_matrix"
+>
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-operator"
+      ><i class="fa fa-cogs"></i> Operator name</label
+    >
+    <input type="text" id="node-input-operator" placeholder="Operator" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-weight_matrix"
+      ><i class="fa fa-cogs"></i> Weight matrix</label
+    >
+    <input
+      type="text"
+      id="node-input-weight_matrix"
+      placeholder="Weight matrix"
+    />
+  </div>
+</script>
+
+<script
+  type="text/html"
+  data-help-name="build_hamiltonian_operator_from_weight_matrix"
+>
+  <p>This node constructs a hamiltonian taking in a weight matrix</p>
+</script>
