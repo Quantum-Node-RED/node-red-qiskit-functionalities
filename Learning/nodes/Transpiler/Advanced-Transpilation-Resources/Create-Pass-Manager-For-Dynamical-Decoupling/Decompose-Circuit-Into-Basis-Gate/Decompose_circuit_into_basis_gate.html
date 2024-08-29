@@ -1,0 +1,66 @@
+
+<script type="text/javascript">
+    RED.nodes.registerType("decompose-circuit-into-basis-gate", {
+      category: "Create a pass manager for dynamical decoupling",
+      color: "#FFCC66",
+      defaults: {
+        name: { value: "Decompose Custom Circuit into Basis Gates" },
+        info: { value: "## **Node Input:**\r\n- # Object: `qc_dd` (Type: _qiskit.circuit.QuantumCircuit_)\r\n- # List: `basis_gates` (Type: _string_)\r\n\r\n***\r\n&nbsp;\r\n# Lastly, because the <font style=\"background: lightgrey\">YGate</font> is not an actual basis gate of our backend, you need to manually apply the <font style=\"background: lightgrey\">BasisTranslator</font> pass (this is a default pass, but it is executed before scheduling, so it needs to be applied again). The session equivalence library is a library of circuit equivalences that allows the transpiler to decompose circuits into basis gates, as also specified as an argument.\r\n```python\r\nfrom qiskit.circuit.equivalence_library import SessionEquivalenceLibrary as sel\r\nfrom qiskit.transpiler.passes import BasisTranslator\r\n \r\nqc_dd = BasisTranslator(sel, basis_gates)(qc_dd)\r\nqc_dd.draw(\"mpl\", fold=-1, idle_wires=False)\r\n```\r\n# Now, you can check the image of the circuit added with dynamical decoupling sequence in the \"New EfficientSU2 Image\" node. You can see that <font style=\"background: lightgrey\">YGates</font> are absent from our circuit, and there is explicit timing information in the form of <font style=\"background: lightgrey\">Delay</font> gates.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: The image of circuit `qc_dd`" }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "Decompose Custom Circuit into Basis Gates";
+      },
+      
+    });
+
+  </script>
+  
+  <script type="text/html" data-template-name="decompose-circuit-into-basis-gate">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Decompose Custom Circuit into Basis Gates" />
+    </div>
+
+  </script>
+
+  
+  
+  <script type="text/html" data-help-name="decompose-circuit-into-basis-gate">
+    <p>A node that decompose the custom circuit into basis gates.</p>
+
+    <h3>Inputs</h3>
+    <ol class="node-ports">
+      <li>Quantum Circuit
+        <dl class="message-properties">
+          <dt>qc_dd<span class="property-type">qiskit.circuit.Quantumcircuit</span></dt>
+          <dd>The created EfficientSU2 circuit optimized by Pass Manager</dd>
+        </dl>
+      </li>
+      <li>List
+        <dl class="message-properties">
+          <dt>basis_gates<span class="property-type">list</span></dt>
+          <dd>The list of operation names of target</dd>
+        </dl>
+      </li>
+    </ol>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>qc_dd<span class="property-type">qiskit.circuit.Quantumcircuit</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the quantum circuit.</dd>
+        </dl>
+      </li>
+    </ol>
+
+    <h3>Details</h3>
+    <p>     
+      This node provides an introduction to applying the BasisTranslator pass in Qiskit, specifically for circuits that include gates not supported by the target quantum backend. The BasisTranslator is used to decompose such circuits into a set of basis gates defined for the backend. This node outlines the process of manually reapplying the BasisTranslator after scheduling, ensuring that gates like the YGate, which are not native to the backend, are properly decomposed. Additionally, the node discusses the use of the Session Equivalence Library for managing circuit equivalences during this decomposition.
+    </p>
+        
+  </script>
+  

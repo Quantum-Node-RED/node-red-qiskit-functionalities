@@ -1,0 +1,43 @@
+<script type="text/javascript">
+    RED.nodes.registerType('Saving', {
+      category: 'Save circuits to disk',
+      color: '#D7D7A0',
+      defaults: {
+        name: { value: "Save circuits to disk" },
+        info: {
+          value: "# Use [QPY serialization](https://docs.quantum.ibm.com/api/qiskit/qpy) to save your circuit to file. QPY files store the full Qiskit circuit object and will be compatible with newer versions of Qiskit (although not necessarily with older versions of Qiskit).\n&nbsp;\n# To demonstrate, the following code snippet creates a simple quantum circuit.\n```python\nfrom qiskit import QuantumCircuit\n \nqc = QuantumCircuit(2)\nqc.h(0)\nqc.cx(0,1)\nqc.measure_all()\n```\n# To save this file to disk, use the <font style=\"background: lightgrey\">qpy.dump</font> function. You can also save a list of circuits.\n```python\nfrom qiskit import qpy\n \nwith open('test.qpy', 'wb') as file:\n    qpy.dump(qc, file)\n```\n# The path of the saved circuit file has been sent to the \"Path of saved file\" node. You can check it in the debug sidebar.\n\n***\n&nbsp;\n## **Node Output:**\n- # Path: the path of 'test.qpy'"
+        }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "Save circuits to disk";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="Saving">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Save circuits to disk">
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="Saving">
+    <p>A node that introduce how to save quantum circuit to disk.</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Path
+        <dl class="message-properties">
+          <dt>payload.result<span class="property-type">string</span></dt>
+          <dd>The path of the file where the circuit `qc` saved.</dd>
+        </dl>
+      </li>
+      
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to QPY serialization in Qiskit. QPY files are used to store the full Qiskit circuit object, making them compatible with newer versions of Qiskit. This node demonstrates how to create a simple quantum circuit using Qiskit, and explains how to save this circuit to a file using QPY serialization.
+    </p>
+  </script>

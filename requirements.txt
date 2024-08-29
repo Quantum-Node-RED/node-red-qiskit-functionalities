@@ -1,3 +1,11 @@
 qiskit = 1.0
-numpy
 networkx
+numpy
+matplotlib
+qiskit_aer
+qiskit-algorithms
+qiskit_ibm_runtime
+python-dotenv
+pylatexenc
+seaborn
+Graphviz

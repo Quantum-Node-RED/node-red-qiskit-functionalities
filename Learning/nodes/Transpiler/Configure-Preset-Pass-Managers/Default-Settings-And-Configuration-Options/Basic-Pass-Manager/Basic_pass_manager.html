@@ -1,0 +1,44 @@
+<script type="text/javascript">
+  RED.nodes.registerType('transpilation-basic-pass-manager', {
+    category: 'Transpilation default settings',
+    color: '#FFF0F0',
+    defaults: {
+      name: { value: "Basic pass manager" }
+    },
+    info: "# Transpile the Circuit and View the Result:\n\n```python\nfrom qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager\n\n# Specify the system to target\nbackend = FakeSherbrooke()\n\n# Transpile the circuit\npass_manager = generate_preset_pass_manager(optimization_level=1, backend=backend)\ntranspiled_circ = pass_manager.run(qc)\n\n# View the transpiled circuit\ntranspiled_circ.draw(output='mpl', idle_wires=False)\n```\n",
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    paletteLabel: "basic pass manager",
+    label: function () {
+      return this.name || "basic pass manager";
+    }
+  });
+</script>
+
+<script type="text/html" data-template-name="transpilation-basic-pass-manager">
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+
+<script type="text/html" data-help-name="transpilation-circuit-for-pm">
+  <p>A node that shows an example of basic transpilation usage without parameters</p>
+
+  <h3>Outputs</h3>
+  <ol class="node-ports">
+    <li>Circuit Diagram
+      <dl class="message-properties">
+        <dt>payload.result.circuit_diagram <span class="property-type">string (Base64)</span></dt>
+        <dd>The Base64-encoded string representing the visual diagram of the quantum circuit.</dd>
+      </dl>
+    </li>
+  </ol>
+
+  <h3>Details</h3>
+  <p>
+      This node shows the second part of an example where a circuit and target QPU is passed to a transpiler without 
+      specifying any further parameters. It shows the transpilation of the circuit and how to view the result.
+  </p>
+</script>

@@ -1,0 +1,36 @@
+<script type="text/javascript">
+    RED.nodes.registerType('transpiler-layout-stage', {
+      category: 'Transpiler Stages',
+      color: '#dddddd',
+      defaults: {
+        name: { value: "Layout Stage" },
+        info: { 
+            value: "## **Layout Stage**\r\n&nbsp;\r\n# The next stage involves the layout or connectivity of the backend a circuit will be sent to. In general, quantum circuits are abstract entities whose qubits are \"virtual\" or \"logical\" representations of actual qubits used in computations. To execute a sequence of gates, a one-to-one mapping from the \"virtual\" qubits to the \"physical\" qubits in an actual quantum device is necessary. This mapping is stored as a <font style=\"background: lightgrey\">Layout</font> object and is part of the constraints defined within a backend's [instruction set architecture (ISA)](https://docs.quantum.ibm.com/guides/transpile#instruction-set-architecture).\r\n&nbsp;\r\n# You can check the image of how the \"virtual\" qubits are mapped into real \"physical\" qubits in the \"Qubits Mapping Output\" node.\r\n&nbsp;\r\n# The choice of mapping is extremely important for minimizing the number of SWAP operations needed to map the input circuit onto the device topology and ensure the most well-calibrated qubits are used. Due to the importance of this stage, the preset pass managers try a few different methods to find the best layout. Typically this involves two steps: first, try to find a \"perfect\" layout (a layout that does not require any SWAP operations), and then, a heuristic pass that tries to find the best layout to use if a perfect layout cannot be found. There are two <font style=\"background: lightgrey\">Passes</font> typically used for this first step:\r\n- # <font style=\"background: lightgrey\">TrivialLayout</font>: Naively maps each virtual qubit to the same numbered physical qubit on the device, i.e., `[0,1,1,3]` -> `[0,1,1,3]`. This is historical behavior only used in <font style=\"background: lightgrey\">optimzation_level=1</font> to try to find a perfect layout. If it fails, <font style=\"background: lightgrey\">VF2Layout</font> is tried next.\r\n- # <font style=\"background: lightgrey\">VF2Layout</font>: This is an <font style=\"background: lightgrey\">AnalysisPass</font> that selects an ideal layout by treating this stage as a subgraph isomorphism problem, solved by the VF2++ algorithm. If more than one layout is found, a scoring heuristic is run to select the mapping with the lowest average error.\r\n&nbsp;\r\n# Then for the heuristic stage, two passes are used by default:\r\n- # <font style=\"background: lightgrey\">DenseLayout</font>: Finds the sub-graph of the device with the greatest connectivity and that has the same number of qubits as the circuit (used for optimization level 1 if there are control flow operations (such as IfElseOp) present in the circuit).\r\n- # <font style=\"background: lightgrey\">SabreLayout</font>: This pass selects a layout by starting from an initial random layout and repeatedly running the <font style=\"background: lightgrey\">SabreSwap</font> algorithm. This pass is only used in optimization levels 1, 2, and 3 if a perfect layout isn't found via the <font style=\"background: lightgrey\">VF2Layout</font> pass. For more details on this algorithm, refer to the paper [arXiv:1809.02573.](https://arxiv.org/abs/1809.02573)\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: the image of qubits mapping.\r\n."
+        }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "white_info.svg",
+      label: function () {
+        return this.name || "Layout Stage";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="transpiler-layout-stage">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Layout Stage">
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="transpiler-layout-stage">
+    <p>
+      A simple node that introduce Layout Stage.
+    </p>
+
+    <h3>Details</h3>
+    <p>     
+      This node provides an introduction to the layout stage in quantum circuit execution, focusing on how virtual qubits are mapped to physical qubits in a quantum device. It explains the significance of this mapping for minimizing SWAP operations and ensuring optimal qubit usage. The node details two primary steps in the layout process: first, the search for a "perfect" layout using the TrivialLayout and VF2Layout passes; and second, the application of heuristic methods like DenseLayout and SabreLayout if a perfect layout cannot be achieved. This stage is crucial for optimizing quantum circuit performance on actual hardware.
+    </p>
+  </script>

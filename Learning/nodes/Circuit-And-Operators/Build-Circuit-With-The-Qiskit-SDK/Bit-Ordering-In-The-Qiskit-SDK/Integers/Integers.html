@@ -1,0 +1,54 @@
+<script type="text/javascript">
+    RED.nodes.registerType('Integers', {
+      category: 'Bit ordering in the Qiskit SDK',
+      color: '#3FADB5',
+      defaults: {
+        name: { value: "Integers" },
+        info: {
+          value: "## **Node Input:**\r\n- # Object: `qc` (Type: _qiskit.circuit.QuantumCircuit_)\r\n\r\n***\r\n&nbsp;\r\n# When interpreting bits as a number, bit 0 is the least significant bit, and bit 𝑛 the most significant. This is helpful when coding because each bit has the value 2^_label_ (_label_ being the qubit's index in <font style=\"background: lightgrey\">QuantumCircuit.qubits</font>). \r\n&nbsp;\r\n# For example, executing the circuit we created before ends with bit 0 being 0, and bit 1 being 1. This is interpreted as the decimal integer 2， which is the decimal representation of the binary \"10\" (measured with probability 1.0).\r\n```python\r\nfrom qiskit.primitives import Sampler\r\nqc.measure_all()\r\n \r\nSampler().run(qc).result().quasi_dists[0]\r\n```\r\n# The output of the result is sent to \"Integer Output\" node and you can check it in the debug sidebar.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Dictionary: `Sampler().run(qc).result().quasi_dists[0]`"
+        }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "Integers";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="Integers">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="Integers">
+    <p>A node that introduce how qubits are ordered in quantum circuit diagram.</p>
+
+    <h3>Inputs</h3>
+    <ol class="node-ports">
+      <li>Quantum Circuit
+        <dl class="message-properties">
+          <dt>qc<span class="property-type">qiskit.circuit.QuantumCircuit</span></dt>
+          <dd>The quantum circuit `qc` which contains two qubits.</dd>
+        </dl>
+      </li>
+    </ol>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Dictionary
+        <dl class="message-properties">
+          <dt>Sampler().run(qc).result().quasi_dists[0]<span class="property-type">dict</span></dt>
+          <dd>The key is the decimal representation of qubits' binary string, and the value is the probability that qubits' state is same as that binary string</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to interpreting quantum measurement results in Qiskit. When working with quantum circuits, measurements are often used to determine the state of qubits, and these measurements are represented as binary strings. Each bit in the measurement result corresponds to a specific qubit, with bit 0 being the least significant bit and the highest numbered bit being the most significant. The node helps in understanding how these bits are mapped to decimal numbers, where each bit’s position represents a power of 2. For example, a result where bit 0 is 0 and bit 1 is 1 represents the decimal number 2, derived from the binary string "10".
+    </p>
+  </script>

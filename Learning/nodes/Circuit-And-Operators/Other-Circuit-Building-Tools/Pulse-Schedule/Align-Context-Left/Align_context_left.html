@@ -1,0 +1,49 @@
+
+<script type="text/javascript">
+    RED.nodes.registerType("pulse-builder-align-left", {
+      category: "Feature of pulse builder",
+      color: "#E7E7AE",
+      defaults: {
+        name: { value: "align_left()" },
+        info: { value: "# The builder has alignment contexts that influence how a schedule is built. The default is <font style=\"background: lightgrey\">align_left</font>.\r\n&nbsp;\r\n# The following code snippet create a pulse schedule where three Gaussian pulses(with duration 100 each) are played on two drive channels, all aligned to start at the same time.\r\n```python\r\nwith pulse.build(backend, name='Left align example') as program:\r\n    with pulse.align_left():\r\n        gaussian_pulse = library.Gaussian(100, 0.5, 20)\r\n        pulse.play(gaussian_pulse, pulse.drive_channel(0))\r\n        pulse.play(gaussian_pulse, pulse.drive_channel(1))\r\n        pulse.play(gaussian_pulse, pulse.drive_channel(1))\r\n```\r\n&nbsp;\r\n# Check the output image and notice how there is no scheduling freedom for the pulses on channel <font style=\"background: lightgrey\">D1</font>. The second waveform begins immediately after the first. The pulse on channel <font style=\"background: lightgrey\">D0</font> can start at any time between <font style=\"background: lightgrey\">t=0</font> and <font style=\"background: lightgrey\">t=100</font> without changing the duration of the overall schedule. The <font style=\"background: lightgrey\">align_left</font> context sets the start time of this pulse to <font style=\"background: lightgrey\">t=0</font>. You can think of this like left-justification of a text document.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: the image of pulses which are aligned left." }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "align_left()";
+      },
+      
+    });
+
+  </script>
+  
+  <script type="text/html" data-template-name="pulse-builder-align-left">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="align_left()" />
+    </div>
+
+  </script>
+
+  
+  
+  <script type="text/html" data-help-name="pulse-builder-align-left">
+    <p>A simple node that align the context of builder to left.</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Pulse Diagram
+        <dl class="message-properties">
+          <dt>result_image<span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the pulses.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to the alignment contexts used in pulse scheduling for quantum systems. In quantum pulse schedules, alignment contexts determine how different pulses are coordinated in time. The default alignment context, align_left, ensures that pulses on different channels start at the same time, with subsequent pulses on the same channel following one another without overlap.
+    </p>
+  </script>
+  

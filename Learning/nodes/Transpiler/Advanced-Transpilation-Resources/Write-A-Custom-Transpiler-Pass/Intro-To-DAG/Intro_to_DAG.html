@@ -1,0 +1,39 @@
+
+<script type="text/javascript">
+    RED.nodes.registerType("intro-to-dag", {
+      category: "Write a custom transpiler pass",
+      color: "#dddddd",
+      defaults: {
+        name: { value: "What is DAG diagram?" },
+        info: { value: "# Before building a pass, it is important to introduce the internal representation of quantum circuits in Qiskit, the [directed acyclic graph (DAG)](https://docs.quantum.ibm.com/api/qiskit/qiskit.dagcircuit.DAGCircuit) (see this [tutorial](https://www.rustworkx.org/tutorial/dags.html#) for an overview). \r\n&nbsp;\r\n# In Qiskit, within the transpilation stages, circuits are represented using a DAG. In general, a DAG is composed of **vertices** (also known as \"nodes\") and directed **edges** that connect pairs of vertices in a particular orientation. This representation is stored using <font style=\"background: lightgrey\">qiskit.dagcircuit.DAGCircuit</font> objects that are composed of invididual <font style=\"background: lightgrey\">DagNode</font> objects. The advantage of this representation over a pure list of gates (that is, a _netlist_) is that the flow of information between operations is explicit, making it easier to make transformation decisions.\r\n&nbsp;\r\n# **Note :** In this flow, we will directly show you the DAG diagram and the corresponding visualizations. However, if you want to manually try building the code yourself or customize your code, you will need to install the [graphviz library](https://graphviz.org/download/) for the DAG plotting functions." }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "white_info.svg",
+      label: function () {
+        return this.name || "What is DAG diagram?";
+      },
+      
+    });
+
+  </script>
+  
+  <script type="text/html" data-template-name="intro-to-dag">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="What is DAG diagram?" />
+    </div>
+
+  </script>
+
+  
+  
+  <script type="text/html" data-help-name="intro-to-dag">
+    <p>A node that introduce DAG.</p>
+
+    <h3>Details</h3>
+    <p>     
+      This node provides an introduction to the internal representation of quantum circuits in Qiskit, specifically focusing on the Directed Acyclic Graph (DAG) used within the transpilation stages. A DAG in Qiskit, represented by qiskit.dagcircuit.DAGCircuit objects, is composed of vertices (or "nodes") and directed edges that illustrate the flow of information between operations. This structure offers a clearer view of the circuit's operation flow compared to a simple list of gates, facilitating more effective transformation decisions. For visualizations of the DAG and further exploration, the graphviz library is recommended for generating DAG diagrams.
+    </p>
+  </script>
+  

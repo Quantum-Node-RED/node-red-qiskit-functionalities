@@ -1,0 +1,49 @@
+
+<script type="text/javascript">
+    RED.nodes.registerType("pulse-builder-align-equispaced", {
+      category: "Feature of pulse builder",
+      color: "#E7E7AE",
+      defaults: {
+        name: { value: "align_equispaced(duration)" },
+        info: { value: "# If the duration of a particular block is known, you can also use <font style=\"background: lightgrey\">align_equispaced</font> to insert equal duration delays between each instruction.\r\n&nbsp;\r\n# This code snippet generates and plays Gaussian pulse on two separate drive channels, ensuring equispaced alignment for the first drive channel <font style=\"background: lightgrey\">D0</font> over 150 dt.\r\n```python\r\nwith pulse.build(backend, name='example') as program:\r\n    gaussian_pulse = library.Gaussian(100, 0.5, 20)\r\n    with pulse.align_equispaced(int(1.5*gaussian_pulse.duration)):\r\n        pulse.play(gaussian_pulse, pulse.drive_channel(0))\r\n    pulse.play(gaussian_pulse, pulse.drive_channel(1))\r\n    pulse.play(gaussian_pulse, pulse.drive_channel(1))\r\n```\r\n# You can see how the end of first pulse aligned with 150 dt on channel D0 in the \"Align by duration Example\" node.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: the image of pulses which are aligned with equal duration." }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "align_equispaced(duration)";
+      },
+      
+    });
+
+  </script>
+  
+  <script type="text/html" data-template-name="pulse-builder-align-equispaced">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="align_equispaced(duration)" />
+    </div>
+
+  </script>
+
+  
+  
+  <script type="text/html" data-help-name="pulse-builder-align-equispaced">
+    <p>A simple node that align the context by duration.</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Pulse Diagram
+        <dl class="message-properties">
+          <dt>result_image<span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the pulses.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to generating and aligning Gaussian pulses using Qiskit’s pulse library. It demonstrates how to create a Gaussian pulse and ensure that it is equispaced across multiple drive channels. Specifically, the example showcases how to align pulses with equal-duration delays between each instruction, using the align_equispaced function to synchronize the pulses on different channels.
+    </p>
+  </script>
+  

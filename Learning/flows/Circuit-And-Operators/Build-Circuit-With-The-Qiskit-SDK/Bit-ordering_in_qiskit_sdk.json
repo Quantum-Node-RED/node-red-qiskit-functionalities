@@ -1,0 +1,405 @@
+[
+    {
+        "id": "514658e90288fa39",
+        "type": "tab",
+        "label": "Bit-ordering in the Qiskit SDK",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "a47a98f824161746",
+        "type": "intro-to-bit-ordering",
+        "z": "514658e90288fa39",
+        "name": "Introduction to bit-ordering",
+        "info": "# If you have a set of 𝑛 bits (or qubits), you'll usually label each bit 0 → 𝑛−1. Different softwares and resources must choose how they order these bits both in computer memory and when displayed on-screen.",
+        "x": 130,
+        "y": 760,
+        "wires": [
+            [
+                "e054ab78a344221f",
+                "c423f43ac2e90d01"
+            ]
+        ]
+    },
+    {
+        "id": "e054ab78a344221f",
+        "type": "intro-to-qiskit-convention",
+        "z": "514658e90288fa39",
+        "name": "Qiskit Convention",
+        "info": "# This flow introduces how the Qiskit SDK orders bits in different scenarios.",
+        "x": 450,
+        "y": 480,
+        "wires": [
+            [
+                "92abbd022cf41687",
+                "e134ee7bfbf7dcb2",
+                "297bf2f8ef7f9484"
+            ]
+        ]
+    },
+    {
+        "id": "1a7b8668f261e8e6",
+        "type": "inject",
+        "z": "514658e90288fa39",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 250,
+        "y": 480,
+        "wires": [
+            [
+                "e054ab78a344221f"
+            ]
+        ],
+        "info": "# This flow will demonstrate how the Qiskit SDK orders bits in different scenarios. Run this flow by clicking the left button on \"Start\" node."
+    },
+    {
+        "id": "e7b0c2350dd60d28",
+        "type": "Quantum-circuits",
+        "z": "514658e90288fa39",
+        "name": "Quantum circuits",
+        "info": "# The <font style=\"background: lightgrey\">QuantumCircuit</font> class stores its qubits in a list (<font style=\"background: lightgrey\">QuantumCircuit.qubits</font>). The index of a qubit in this list defines the qubit's label.\r\n&nbsp;\r\n# The following code snippet creates a quantum circuit with 2 qubits using Qiskit. Then, it references the first qubit (qubit \"0\") of the quantum circuit.\r\n```python\r\nfrom qiskit import QuantumCircuit\r\nqc = QuantumCircuit(2)\r\nqc.qubits[0]  # qubit \"0\"\r\n```\r\n# The object of the first qubit is sent to \"Qubit 0\" node and you can check its information in the debug sidebar.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Object: `qc` (Type: _qiskit.circuit.QuantumCircuit_)\r\n- # Object: `qc.qubits[0]` (Type: _qiskit.circuit.Qubit_)",
+        "x": 870,
+        "y": 80,
+        "wires": [
+            [
+                "574544223c741578",
+                "585ca0073b563aa3"
+            ]
+        ]
+    },
+    {
+        "id": "197f3f2bad202a79",
+        "type": "Circuit-diagrams",
+        "z": "514658e90288fa39",
+        "name": "Circuit diagrams",
+        "info": "## **Node Input:**\r\n- # Object: `qc` (Type: _qiskit.circuit.QuantumCircuit_)\r\n\r\n***\r\n&nbsp;\r\n# On a circuit diagram, qubit 0 is the topmost qubit, and qubit 𝑛 the bottommost qubit. You can change this with the <font style=\"background: lightgrey\">reverse_bits</font> argument of <font style=\"background: lightgrey\">QuantumCircuit.draw</font> (see \"Change ordering in Qiskit\" node below).\r\n&nbsp;\r\n# This code snippet add a X Gate to qubit 1 of the circuit we created in previous node, and draw a diagram for this circuit.\r\n```python\r\nqc.x(1)\r\nqc.draw()\r\n```\r\n# You can check the image of this circuit in \"Circuit Diagram\" node. You should see qubit 0 at the top and qubit 1 with X gate at the bottom.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Object: `qc` (Type: _qiskit.circuit.QuantumCircuit_)\r\n- # Image: the image of variable `qc`",
+        "x": 1360,
+        "y": 80,
+        "wires": [
+            [
+                "1cda52ec89391a73",
+                "ff64af6be9c93545"
+            ]
+        ]
+    },
+    {
+        "id": "9653300aefc94abf",
+        "type": "Integers",
+        "z": "514658e90288fa39",
+        "name": "Integers",
+        "info": "## **Node Input:**\r\n- # Object: `qc` (Type: _qiskit.circuit.QuantumCircuit_)\r\n\r\n***\r\n&nbsp;\r\n# When interpreting bits as a number, bit 0 is the least significant bit, and bit 𝑛 the most significant. This is helpful when coding because each bit has the value 2^_label_ (_label_ being the qubit's index in <font style=\"background: lightgrey\">QuantumCircuit.qubits</font>). \r\n&nbsp;\r\n# For example, executing the circuit we created before ends with bit 0 being 0, and bit 1 being 1. This is interpreted as the decimal integer 2， which is the decimal representation of the binary \"10\" (measured with probability 1.0).\r\n```python\r\nfrom qiskit.primitives import Sampler\r\nqc.measure_all()\r\n \r\nSampler().run(qc).result().quasi_dists[0]\r\n```\r\n# The output of the result is sent to \"Integer Output\" node and you can check it in the debug sidebar.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Dictionary: `Sampler().run(qc).result().quasi_dists[0]`",
+        "x": 1800,
+        "y": 80,
+        "wires": [
+            [
+                "fe1c43e32c9d85ef"
+            ]
+        ]
+    },
+    {
+        "id": "574544223c741578",
+        "type": "debug",
+        "z": "514658e90288fa39",
+        "name": "Qubit 0",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload.result.result",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 1080,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "1cda52ec89391a73",
+        "type": "image",
+        "z": "514658e90288fa39",
+        "name": "Circuit Diagram",
+        "width": "251",
+        "data": "payload.result.circuit_diagram",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1580,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "fe1c43e32c9d85ef",
+        "type": "debug",
+        "z": "514658e90288fa39",
+        "name": "Integer Output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload.result.result",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 2060,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "e32b17177aa9b7a9",
+        "type": "Strings",
+        "z": "514658e90288fa39",
+        "name": "Strings",
+        "info": "# When displaying or interpreting a list of bits (or qubits) as a string, bit 𝑛 is the leftmost bit, and bit 0 is the rightmost bit. This is because we usually write numbers with the most significant digit on the left, and in Qiskit, bit 𝑛 is interpreted as the most significant bit.\n&nbsp;\n# For example, the following code snippet defines a <font style=\"background: lightgrey\">Statevector</font> from a string of single-qubit states. In this case, qubit 0 is in state ∣+⟩, and qubit 1 in state ∣0⟩.\n```python\nfrom qiskit.quantum_info import Statevector\nsv = Statevector.from_label(\"0+\")\nsv.probabilities_dict()\n```\n# The result is sent to \"Strings Output\" node and you can check it in the debug sidebar. Since qubit 0 is in the state ∣+⟩ and qubit 1 is in the state ∣0⟩, qubit 0 has approximately a 50% probability of being 0 and a 50% probability of being 1, while qubit 1 has a 100% probability of being 0.\n\n***\n&nbsp;\n## **Node Output:**\n- # Object: `sv` (Type: _qiskit.quantum_info.Statevector_)\n- # Dictionary: `sv.probabilities_dict()`",
+        "x": 840,
+        "y": 480,
+        "wires": [
+            [
+                "5184557b0abccf37",
+                "921d0c9a78a15eaa"
+            ]
+        ]
+    },
+    {
+        "id": "a5dcf34fb5307574",
+        "type": "State_vector_matrices",
+        "z": "514658e90288fa39",
+        "name": "Statevector matrices",
+        "info": "## **Node Input:**\r\n- # Object: `sv` (Type: _qiskit.quantum_info.Statevector_)\r\n\r\n***\r\n&nbsp;\r\n# When representing a statevector as a list of complex numbers (amplitudes), Qiskit orders these amplitudes such that the amplitude at index 𝑥 represents the computational basis state ∣𝑥⟩.\r\n&nbsp;\r\n# In the following code snippet, we will output the second and third elements of the statevector created in the previous node to examine the amplitudes of the basis states ∣01⟩ and ∣10⟩.\r\n```python\r\nprint(sv[1])  # amplitude of state |01>\r\nprint(sv[2])  # amplitude of state |10>\r\n```\r\n# The Output is sent to \"Statevector matrices Output\" node and you can check them in the debug sidebar. Since qubit 0 of the statevector `sv` is in state ∣+⟩ and qubit 1 is in state ∣0⟩, the amplitude of the basis state ∣01⟩ should be 1 / sqrt(2), while the amplitude of the basis state ∣10⟩ should be 0.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Object: `sv[1]`, `sv[2]` (Type: _numpy.complex128_)\r\n\r\n",
+        "x": 1280,
+        "y": 480,
+        "wires": [
+            [
+                "e02398f2a3f892ba"
+            ]
+        ]
+    },
+    {
+        "id": "5184557b0abccf37",
+        "type": "debug",
+        "z": "514658e90288fa39",
+        "name": "Strings Output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload.result.result",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 1040,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "e02398f2a3f892ba",
+        "type": "debug",
+        "z": "514658e90288fa39",
+        "name": "Statevector matrices Output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload.result.result",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 1640,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "59b346cc00dc657b",
+        "type": "Gates",
+        "z": "514658e90288fa39",
+        "name": "Gates",
+        "info": "# Each gate in Qiskit can interpret a list of qubits in its own way, but controlled gates usually follow the convention <font style=\"background: lightgrey\">(control, target)</font>.\n&nbsp;\n# For example, the following code snippet adds a controlled-X gate where qubit 0 is the control and qubit 1 is the target.\n```python\nfrom qiskit import QuantumCircuit\nqc = QuantumCircuit(2)\nqc.cx(0, 1)\nqc.draw()\n```\n# You can check the image of this circuit in the \"Gates Circuit Diagram\" node.\n&nbsp;\n# Following all the previously mentioned conventions in Qiskit, this CX-gate performs the transformation ∣01⟩↔∣11⟩, so has the following matrix.\n```python\n[[1, 0, 0, 0],\n [0, 0, 0, 1],\n [0, 0, 1, 0],\n [0, 1, 0, 0]]\n```\n\n***\n&nbsp;\n## **Node Output:**\n- # Image: the image of variable `qc`\n",
+        "x": 850,
+        "y": 740,
+        "wires": [
+            [
+                "47aa1c06dc7c64c7"
+            ]
+        ]
+    },
+    {
+        "id": "47aa1c06dc7c64c7",
+        "type": "image",
+        "z": "514658e90288fa39",
+        "name": "Gates Circuit Diagram",
+        "width": "251",
+        "data": "payload.result.circuit_diagram",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1140,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "fdea7c72ab8064fd",
+        "type": "inject",
+        "z": "514658e90288fa39",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 230,
+        "y": 1040,
+        "wires": [
+            [
+                "c423f43ac2e90d01"
+            ]
+        ],
+        "info": "# This flow will demonstrate how to change qubits' orders in circuit diagram. Run this flow by clicking the left button on \"Start\" node."
+    },
+    {
+        "id": "c423f43ac2e90d01",
+        "type": "Change_ordering_in_Qiskit",
+        "z": "514658e90288fa39",
+        "name": "Change ordering in Qiskit",
+        "info": "# To draw a circuit with qubits in reversed order (that is, qubit 0 at the bottom), use the <font style=\"background: lightgrey\">reverse_bits</font> argument. This only affects the generated diagram and does not affect the circuit; the X-gate still acts on qubit.\n&nbsp;\n# The following code snippet creates a 2-qubit quantum circuit using Qiskit. It applies an X gate (a bit-flip operation) to the first qubit (qubit 0). Finally, it draws the circuit diagram with qubit in reversed order.\n```python\nfrom qiskit import QuantumCircuit\nqc = QuantumCircuit(2)\nqc.x(0)\nqc.draw(reverse_bits=True)\n```\n# You can check the image in the \"Reversed Circuit Diagram\" node, the qubit 0 should now at the bottom.\n&nbsp;\n# You can also use the <font style=\"background: lightgrey\">reverse_bits</font> method to return a new circuit with the qubits' **labels** reversed (this does not mutate the original circuit).\n```python\nqc.reverse_bits().draw()\n```\n# You can check the image in the \"Circuit Diagram Reverse using the revese_bits method\" node. You should see although the X gate is added to qubit 0 before, now its label becomes \"qubit 1\" (the label is reversed).\n\n***\n&nbsp;\n## **Node Output:**\n- # Image: the image of variable `qc` with bits reversed\n- # Image: the image of `qc.reverse_bits()`",
+        "x": 450,
+        "y": 1040,
+        "wires": [
+            [
+                "cf21019d47d12b1c",
+                "964052610a0d254f"
+            ]
+        ]
+    },
+    {
+        "id": "cf21019d47d12b1c",
+        "type": "image",
+        "z": "514658e90288fa39",
+        "name": "Reversed Circuit Diagram",
+        "width": "250",
+        "data": "payload.result.circuit_diagram",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 830,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "964052610a0d254f",
+        "type": "image",
+        "z": "514658e90288fa39",
+        "name": "Circuit Diagram Reverse using the revese_bits method",
+        "width": "250",
+        "data": "payload.result.circuit_diagram_reversed",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 920,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "92abbd022cf41687",
+        "type": "move-to-next-node",
+        "z": "514658e90288fa39",
+        "name": "Next",
+        "x": 650,
+        "y": 80,
+        "wires": [
+            [
+                "e7b0c2350dd60d28"
+            ]
+        ]
+    },
+    {
+        "id": "585ca0073b563aa3",
+        "type": "move-to-next-node",
+        "z": "514658e90288fa39",
+        "name": "Next",
+        "x": 1070,
+        "y": 80,
+        "wires": [
+            [
+                "197f3f2bad202a79"
+            ]
+        ]
+    },
+    {
+        "id": "ff64af6be9c93545",
+        "type": "move-to-next-node",
+        "z": "514658e90288fa39",
+        "name": "Next",
+        "x": 1550,
+        "y": 80,
+        "wires": [
+            [
+                "9653300aefc94abf"
+            ]
+        ]
+    },
+    {
+        "id": "e134ee7bfbf7dcb2",
+        "type": "move-to-next-node",
+        "z": "514658e90288fa39",
+        "name": "Next",
+        "x": 650,
+        "y": 480,
+        "wires": [
+            [
+                "e32b17177aa9b7a9"
+            ]
+        ]
+    },
+    {
+        "id": "921d0c9a78a15eaa",
+        "type": "move-to-next-node",
+        "z": "514658e90288fa39",
+        "name": "Next",
+        "x": 1010,
+        "y": 480,
+        "wires": [
+            [
+                "a5dcf34fb5307574"
+            ]
+        ]
+    },
+    {
+        "id": "297bf2f8ef7f9484",
+        "type": "move-to-next-node",
+        "z": "514658e90288fa39",
+        "name": "Next",
+        "x": 650,
+        "y": 740,
+        "wires": [
+            [
+                "59b346cc00dc657b"
+            ]
+        ]
+    }
+]

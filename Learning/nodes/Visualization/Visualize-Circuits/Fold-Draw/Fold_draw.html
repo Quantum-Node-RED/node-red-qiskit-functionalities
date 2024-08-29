@@ -1,0 +1,64 @@
+<script type="text/javascript">
+    RED.nodes.registerType('fold-draw',{
+        category: 'Visualize circuits',
+        color: '#E6E0F8',
+        defaults: {
+            name: {value:"Fold Draw"},
+            info: {
+                value:"# [Visualize circuits guide.](https://docs.quantum.ibm.com/guides/visualize-circuits#)\r\n" +
+                "&nbsp;\r\n" +
+                "# Some available customizing options are specific to a renderer.\r\n" +
+                "# The <font style='background: lightgrey'>_`fold`_</font> argument sets a maximum width for the output. " +
+                "In the The <font style='background: lightgrey'>_`text`_</font> renderer, this sets the length of the " +
+                "lines of the diagram before it is wrapped to the next line. When using the 'mpl' renderer, this is " +
+                "the number of (visual) layers before folding to the next line.\r\n" +
+                "# This node shows a text output rendering for drawing a quantum circuit using " +
+                "<font style='background: lightgrey'>_`circuit.draw()`_</font> and the " +
+                "<font style='background: lightgrey'>_`fold`_</font>" +
+                " argument. The output is the diagram in text format and sets the maximum width for the output.\r\n" +
+                "```python\r\n" +
+                "from qiskit import QuantumCircuit\r\n" +
+                " \r\n" +
+                "circuit = QuantumCircuit(1) \r\n" +
+                "for _ in range(10):\r\n" +
+                "    circuit.h(0)\r\n" +
+                "# limit line length to 40 characters\r\n" +
+                "circuit.draw(output=\"text\", fold=40)\r\n" +
+                "```\r\n "
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "file.svg",
+        label: function() {
+            return this.name||"fold-draw";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="fold-draw">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="fold-draw">
+    <p>A node that shows the text rendering of circuit diagrams using the fold argument</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Result Class set
+        <dl class="message-properties">
+          <dt>payload.result.circuit_text <span class="property-type">string</span></dt>
+          <dd>A string representaton of an ASCII art version of the circuit diagram.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+        This node shows an example of how to use the <code>fold</code> argument with <code>circuit.draw()</code> to
+        customize the width of the output text diagram.
+    </p>
+</script>

@@ -1,0 +1,176 @@
+[
+    {
+        "id": "3c6c5802d21e0121",
+        "type": "tab",
+        "label": "Add calibration to your circuit",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "18abd7d34658387d",
+        "type": "pulse-build-circuit",
+        "z": "3c6c5802d21e0121",
+        "name": "Build a circuit",
+        "info": "# This Node build a simple Bell state circuit using following python code.\r\n```python\r\nfrom qiskit import QuantumCircuit\r\n \r\ncirc = QuantumCircuit(2, 2)\r\ncirc.h(0)\r\ncirc.cx(0, 1)\r\ncirc.measure(0, 0)\r\ncirc.measure(1, 1)\r\n \r\ncirc.draw('mpl')\r\n```\r\n# This code snippet defines a quantum circuit consisting of two qubits and two classical bits. It begins by applying a Hadamard gate (circ.h(0)) to the first qubit, placing it in a superposition state. Subsequently, a CNOT gate (circ.cx(0, 1)) is applied, entangling the two qubits. The circuit then measures both qubits (circ.measure(0, 0) and circ.measure(1, 1)) and stores the measurement outcomes in corresponding classical bits.\r\n&nbsp;\r\n# The image of the circuit will be shown below in the \"Bell state circuit\" node.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Object: `circ` (Type: _qiskit.circuit.quantumcircuit_)\r\n- # Image: The image of variable `circ`",
+        "x": 730,
+        "y": 340,
+        "wires": [
+            [
+                "6e35518d93e41aa7",
+                "b430f43b1cecc01c"
+            ]
+        ]
+    },
+    {
+        "id": "76f6ca4cfcfc61df",
+        "type": "inject",
+        "z": "3c6c5802d21e0121",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 390,
+        "y": 340,
+        "wires": [
+            [
+                "18abd7d34658387d"
+            ]
+        ],
+        "info": "# **What is Pulse Schedule?**\r\nMost quantum algorithms can be described with circuit operations alone. When you need more control over the low-level program implementation, you can use **pulse gates**. Pulse gates remove the constraint of executing circuits with basis gates only and let you override the default implementation of any basis gate.\r\n\r\nPulse gates let you map a logical circuit gate (for example, X) to a Qiskit Pulse program, called a _ScheduleBlock_. This mapping is referred to as a **calibration**. A high-fidelity calibration is one that faithfully implements the logical operation it is mapped from (for example, whether the X gate calibration drives ∣0 ⟩ to ∣1⟩).\r\n\r\nA **schedule** specifies the exact time dynamics of the input signals across all input channels to the device. There are usually multiple channels per qubit, such as drive and measure. This interface is more powerful, and requires a deeper understanding of the underlying device physics.\r\n\r\nIt's important to note that pulse programs operate on physical qubits. A drive pulse on qubit 𝑎 does not enact the same logical operation on the state of qubit 𝑏. In other words, gate calibrations are not interchangeable across qubits. This is in contrast to the circuit level, where an X gate is defined independently of its qubit operand.\r\n\r\n**In this flow, we will show you how to add a calibration to your circuit. To start the process, click the button in front of the 'Start' Node. You can view the details of each Node in the information palette during the process.**"
+    },
+    {
+        "id": "6e35518d93e41aa7",
+        "type": "image",
+        "z": "3c6c5802d21e0121",
+        "name": "Bell state circuit",
+        "width": "320",
+        "data": "payload.result.result_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 960,
+        "y": 500,
+        "wires": [],
+        "info": "# The image of circuit you built"
+    },
+    {
+        "id": "a6a216888e51582e",
+        "type": "pulse-build-calibration",
+        "z": "3c6c5802d21e0121",
+        "name": "Build a calibration",
+        "info": "## **Node Input:**\r\n- # Object: `circ` (Type: _qiskit.circuit.quantumcircuit_)\r\n\r\n***\r\n&nbsp;\r\n# This node defines a calibration for the Hadamard gate on qubit 0 which built in previous node.\r\n&nbsp;\r\n# In practice, the pulse shape and its parameters would be optimized through a series of calibration experiments. For this demonstration, the Hadamard will be a Gaussian pulse. You play the pulse on the drive channel of qubit 0.\r\n&nbsp;\r\n# The python code is shown below. For more information on calibrations, see the [Qiskit Experiments tutorial.](https://qiskit-extensions.github.io/qiskit-experiments/tutorials/calibrations.html#)\r\n```python\r\nfrom qiskit import pulse\r\nfrom qiskit.pulse.library import Gaussian\r\nfrom qiskit_ibm_runtime.fake_provider import FakeValenciaV2\r\n \r\nbackend = FakeValenciaV2()\r\n \r\nwith pulse.build(backend, name='hadamard') as h_q0:\r\n    pulse.play(Gaussian(duration=128, amp=0.1, sigma=16), pulse.drive_channel(0))\r\n```\r\n# The image of the schedule we drew is shown in the \"Schedule Diagram\" node.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Object: `circ` (Type: _qiskit.circuit.quantumcircuit_)\r\n- # Object: `h_q0` (Type: _qiskit.pulse.schedule.ScheduleBlock_)\r\n- # Image: The image of variable `h_q0`\r\n",
+        "x": 1270,
+        "y": 340,
+        "wires": [
+            [
+                "f99f0ab3d0501039",
+                "d8f87b56772aa4fa"
+            ]
+        ]
+    },
+    {
+        "id": "f99f0ab3d0501039",
+        "type": "image",
+        "z": "3c6c5802d21e0121",
+        "name": "Schedule Diagram",
+        "width": "640",
+        "data": "payload.result.result_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1490,
+        "y": 500,
+        "wires": [],
+        "info": "# The image of the schedule you built"
+    },
+    {
+        "id": "4f83db6523a60d8b",
+        "type": "image",
+        "z": "3c6c5802d21e0121",
+        "name": "Optimized Circuit",
+        "width": "320",
+        "data": "payload.result.result_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 2110,
+        "y": 460,
+        "wires": [],
+        "info": "# The image of optimized circuit"
+    },
+    {
+        "id": "9d948bb61e1226ba",
+        "type": "debug",
+        "z": "3c6c5802d21e0121",
+        "name": "Show optimizing instructions",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result.result_instructions",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2140,
+        "y": 340,
+        "wires": [],
+        "info": "# The instructions for optimizing your circuit"
+    },
+    {
+        "id": "e4109d8c6c99efda",
+        "type": "pulse-link-cal-to-cir",
+        "z": "3c6c5802d21e0121",
+        "name": "Link calibration to circuit",
+        "info": "## **Node Input:**\r\n- # Object: `circ` (Type: _qiskit.circuit.quantumcircuit_)\r\n- # Object: `h_q0` (Type: _qiskit.pulse.schedule.ScheduleBlock_)\r\n\r\n***\r\n&nbsp;\r\n# Now we need to map the calibration to the circuit. The circuit method <font style='background: lightgrey'>_`add_calibration`_</font> needs information about the gate and a reference to the schedule to complete the mapping:\r\n```python\r\nQuantumCircuit.add_calibration(gate, qubits, schedule, parameters)\r\n```\r\n&nbsp;\r\n# The gate can be either a circuit.Gate object or the name of the gate. Usually, you'll need a different schedule for each unique set of qubits and parameters. Since the Hadamard gate doesn't have any parameters, there is no need to supply any. So we can link the calibration 'h_q0' to circuit 'circ' by using following python code:\r\n```python\r\ncirc.add_calibration('h', [0], h_q0)\r\n```\r\n&nbsp;\r\n# Lastly, note that the transpiler will respect your calibrations. In other words, the transpiler will generate a series of instructions aimed at optimizing your circuit. Use it as you normally would.\r\n```python\r\nfrom qiskit_ibm_runtime.fake_provider import FakeHanoiV2\r\nfrom qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager\r\n \r\nbackend = FakeHanoiV2()\r\npassmanager = generate_preset_pass_manager(optimization_level=1, backend=backend)\r\ncirc = passmanager.run(circ)\r\n \r\n# Print instructions that only affect qubits 0 and 1\r\nfor instruction, qubits in FakeHanoiV2().instructions:\r\n    if qubits and set(qubits).issubset({0, 1}):\r\n        print(instruction, qubits)\r\ncirc.draw('mpl', idle_wires=False)\r\n```\r\n&nbsp;\r\n# The generated optimization instructions are transmitted to the \"Show optimizing instruction\" node, and you can open the debug palette on the right to view these instructions. The diagram of optimized quantum circuit is displayed below the \"Optimized circuit\" node  (our example is too simple for the transpiler to optimize, so the output circuit is the same as what we built before).\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # List: A list of optimized instructions (Type: _qiskit.circuit.Instruction_)\r\n- # Image: The image of optimized circuit `circ`\r\n",
+        "x": 1750,
+        "y": 340,
+        "wires": [
+            [
+                "9d948bb61e1226ba",
+                "4f83db6523a60d8b"
+            ]
+        ]
+    },
+    {
+        "id": "b430f43b1cecc01c",
+        "type": "move-to-next-node",
+        "z": "3c6c5802d21e0121",
+        "name": "Next",
+        "x": 890,
+        "y": 340,
+        "wires": [
+            [
+                "a6a216888e51582e"
+            ]
+        ]
+    },
+    {
+        "id": "d8f87b56772aa4fa",
+        "type": "move-to-next-node",
+        "z": "3c6c5802d21e0121",
+        "name": "Next",
+        "x": 1450,
+        "y": 340,
+        "wires": [
+            [
+                "e4109d8c6c99efda"
+            ]
+        ]
+    }
+]

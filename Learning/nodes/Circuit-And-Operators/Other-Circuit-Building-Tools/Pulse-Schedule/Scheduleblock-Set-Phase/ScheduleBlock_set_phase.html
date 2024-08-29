@@ -1,0 +1,59 @@
+
+<script type="text/javascript">
+    RED.nodes.registerType("pulse-set-phase", {
+      category: "Build pulse schedule",
+      color: "#E6E0F8",
+      defaults: {
+        name: { value: "set_phase()" },
+        info: { value: "## **Node Input:**\r\n- # Object: `channel` (Type: _qiskit.pulse.channels_)\r\n\r\n***\r\n&nbsp;\r\n# <font style=\"background: lightgrey\">**set_phase(phase, channel)**</font>\r\n&nbsp;\r\n# The <font style=\"background: lightgrey\">set_phase</font> instruction sets the phase of a pulse channel. The following code snippet set pulse's phase to π:\r\n```python\r\nwith pulse.build() as pulse_prog:\r\n    pulse.set_phase(np.pi, channel)\r\n    pulse.play(gaus, channel)\r\n```\r\n# The image of phase-set pulse is shown in the \"Set Phase Output\" node.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: the image of pulse executed with set_phase()." }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "set_phase()";
+      },
+      
+    });
+
+  </script>
+  
+  <script type="text/html" data-template-name="pulse-set-phase">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="set_phase()" />
+    </div>
+
+  </script>
+
+  
+  
+  <script type="text/html" data-help-name="pulse-set-phase">
+    <p>Node that set pulse with phase 1/4 pi.</p>
+
+    <h3>Inputs</h3>
+    <ol class="node-ports">
+      <li>Channel
+        <dl class="message-properties">
+          <dt>channel<span class="property-type">qiskit.pulse.channels</span></dt>
+          <dd>The channel object set for the pulse.</dd>
+        </dl>
+      </li>
+    </ol>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Pulse Diagram
+        <dl class="message-properties">
+          <dt>result_image<span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the pulse.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to the set_phase instruction used in pulse programming with Qiskit. It allows you to configure the phase of a pulse channel, which is essential for controlling the timing and alignment of quantum pulses. The node highlights how to set the phase of a pulse to specific values, such as π, and demonstrates its usage in the context of pulse programming.
+    </p>
+  </script>
+  

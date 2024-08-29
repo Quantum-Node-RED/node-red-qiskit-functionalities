@@ -1,0 +1,68 @@
+<script type="text/javascript">
+  RED.nodes.registerType("intro-pauli-basis-observables", {
+    category: "Observable pauli basis",
+    color: "#dddddd",
+    defaults: {
+      name: { value: "Intro to Pauli basis observables" },
+      info: {
+          value: "# [Specify observables in the Pauli basis guide.](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n" +
+          "&nbsp;\r\n" +
+          "# In quantum mechanics, observables correspond to physical properties that can be measured. When considering a " +
+          "system of spins, for example, you could be interested in measuring the system's energy or obtaining information " +
+          "about the alignment of the spins, such as the magnetization or the correlations between spins.\r\n " +
+          "# To measure an n-qubit observable *O* on a quantum computer, you must represent it as a sum of tensor " +
+          "products of Pauli operators, that is\r\n" +
+          "# *O = Σ<sub>k=1</sub><sup>K</sup> α<sub>k</sub> P<sub>k</sub>, where P<sub>k</sub> ∈ " +
+          "{I, X, Y, Z}<sup>⊗n</sup> and α<sub>k</sub> ∈ ℝ.*\r\n" +
+          "# where \r\n" +
+          "# *I = [[1,0],[0,1]], X = [[0,1],[1,0]], Y = [[0,-i],[i,0]] and Z = [[1,0],[0,-1]]*\r\n" +
+          "# and you use the fact that an observable is Hermitian, as in,*O<sup>†</sup> = O*. If *O* is not Hermitiona " +
+          " it can still be decomposed as a sum of Paulis, but the coefficient α<sub>k</sub> becomes complex.\r\n" +
+          "# In many cases, the observable is naturally specified in this representation after mapping the system of " +
+          "interest to qubits. For example, a spin-1/2 system can be mapped to an Ising Hamiltonian\r\n" +
+          "# *H = Σ<sub>&lt;i,j&gt;</sub> Z<sub>i</sub>Z<sub>j</sub> - Σ<sub>i=1</sub><sup>n</sup> X<sub>i</sub>*,\r\n" +
+          "# where the indices *⟨i,j⟩*  run over interacting spins and the spins are subject to a transversal field in *X*. " +
+          "The subscript index indicates which qubit the Pauli operator acts on, i.e. *X<sub>i</sub>* applies an *X* operator " +
+          "on qubit *i* and leaves the rest unchanged. In the Qiskit SDK, this Hamiltonian could be constructed as \r\n" +
+          "```python\r\n" +
+          "from qiskit.quantum_info import SparsePauliOp\r\n" + 
+          "# define the number of qubits\r\n" +
+          "n = 12\r\n" +
+          "\r\n" +
+          "# define the single Pauli terms as (\"Paulis\", [indices], coefficient)\r\n" +
+          "interactions = [(\"ZZ\", [i, i + 1], 1) for i in range(n - 1)]  # we assume spins on a 1D line\r\n" +
+          "field = [(\"X\", [i], -1) for i in range(n)]\r\n" + 
+          "\r\n" +
+          "# build the operator\r\n" +
+          "hamiltonian = SparsePauliOp.from_sparse_list(interactions + field, num_qubits=n)\r\n" +
+          "```\r\n " +
+          "If we would like to measure the energy the observable is the Hamiltonian itself."
+      }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "white_info.svg",
+    label: function () {
+      return this.name || "intro-pauli-basis-observables";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="intro-pauli-basis-observables">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="intro-pauli-basis-observables">
+  <p>A node that introduces how to specify observable in the Pauli basis</p>
+
+  <h3>Details</h3>
+  <p>
+      This node gives an introduction into how to specify observable in the Pauli Basis.
+      It is an information node that does not require any specific input and 
+      does not generate any output. Instead, it is intended to be a part of 
+      a chain of tutorial nodes that explain the basics of quantum computing.
+  </p>
+</script>

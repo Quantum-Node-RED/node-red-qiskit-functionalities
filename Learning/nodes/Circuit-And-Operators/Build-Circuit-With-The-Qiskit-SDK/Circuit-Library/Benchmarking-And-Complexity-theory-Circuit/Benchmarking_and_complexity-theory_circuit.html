@@ -1,0 +1,42 @@
+<script type="text/javascript">
+    RED.nodes.registerType('Benchmarking-and-complexity-theory-circuit', {
+      category: 'Circuit Library',
+      color: '#A6BBCF',
+      defaults: {
+        name: { value: "Benchmarking and complexity-theory circuit" },
+        info: { value: "# **Benchmarking** circuits give us a sense of how well our hardware is actually working, and **complexity-theory** circuits help us understand how difficult the problems we want to solve are.\r\n&nbsp;\r\n# For example, the _\"quantum volume\"_ benchmark measures how accurately a quantum computer executes a type of random quantum circuit. The score of the quantum computer increases with the size of the circuit it can reliably run. This takes into account all aspects of the computer, including qubit count, instruction fidelity, qubit connectivity, and the software stack transpiling and post-processing results. Read more about quantum volume in the [original quantum volume paper](https://arxiv.org/abs/1811.12926).\r\n&nbsp;\r\n# The following code creates a Quantum Volume circuit with 4 qubits. It then decomposes the circuit into randomized two-qubit gates and draws the resulting circuit.\r\n```python\r\nfrom qiskit.circuit.library import QuantumVolume\r\nQuantumVolume(4).decompose().draw('mpl')\r\n```\r\n# You can check the image in the \"Benchmarking and Complexity Theory Circuit Image Output\" node.\r\n&nbsp;\r\n# The circuit library also includes circuits believed to be hard to simulate classically, such as instantaneous quantum polynomial (IQP) circuits. These circuits sandwich certain diagonal gates (in the computational basis) between blocks of Hadamard gates.\r\n&nbsp;\r\n# Other circuits include <font style=\"background: lightgrey\">GroverOperator</font> for use in Grover's algorithm, and the <font style=\"background: lightgrey\">FourierChecking</font> circuit for the Fourier checking problem. See these circuits in [Particular quantum circuits](https://docs.quantum.ibm.com/api/qiskit/circuit_library#particular-quantum-circuits) in the circuit library API documentation.\r\n\r\n***\r\n&nbsp;\r\n## **Node Ouput:**\r\n- # Image: Image of _Quantum Volumn_ circuit with 4 qubits"}
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "Benchmarking and complexity-theory circuit";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="Benchmarking-and-complexity-theory-circuit">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="Benchmarking-and-complexity-theory-circuit">
+    <p>A node that introduce the Benchmarking and complexity-theory circuits.</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the quantum volume circuit.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+      This node introduces the Quantum Volume benchmark circuit, designed to evaluate the performance of quantum computers. It utilizes Qiskit's QuantumVolume class to create and decompose a quantum volume circuit that runs on a specified number of qubits (e.g., 4 qubits in this case). 
+    </p>
+  </script>

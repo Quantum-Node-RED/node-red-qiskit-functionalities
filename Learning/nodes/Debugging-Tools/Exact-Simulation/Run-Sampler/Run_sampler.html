@@ -1,0 +1,85 @@
+<script type="text/javascript">
+    RED.nodes.registerType('run-sampler',{
+        category: 'Debugging tools',
+        color: '#f5c7b6',
+        defaults: {
+            name: {value:"Run the sampler"},
+            info: {
+                value:"# [Exact simulation with Qiskit SDK primitives guide.](https://docs.quantum.ibm.com/guides/simulate-with-qiskit-sdk-primitives#)\r\n" +
+                "&nbsp;\r\n" +
+                "# To run the Sampler and get results, more code has to be added. This node contains two examples\r\n" +
+                "# StatevectorSampler (V2)\r\n" +
+                "```python\r\n" +
+                "# execute 1 circuit with Sampler V2\r\n" + 
+                "job = sampler.run([isa_circuit]) \r\n" +
+                "pub_result = job.result()[0]\r\n" +
+                "print(f\" > Result class: {type(pub_result)}\")\r\n" +
+                "```\r\n " +
+                "V2 primitives accept multiple PUBs as inputs, and each PUB gets its own result. Therefore, you can run" +
+                "different circuits with various parameter/observable combinations, and retrieve the PUB results:\r\n" +
+                "```python\r\n" +
+                "from qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager\r\n" + 
+                "\r\n" + 
+                "# create two circuits\r\n" +
+                "circuit1 = qc.copy()\r\n" +
+                "circuit2 = qc.copy()\r\n" +
+                "\r\n" + 
+                "# transpile circuits\r\n" +
+                "pm = generate_preset_pass_manager(optimization_level=1)\r\n" +
+                "isa_circuit1 = pm.run(circuit1)\r\n" +
+                "isa_circuit2 = pm.run(circuit2)\r\n" +
+                "# execute 2 circuits using Sampler V2\r\n" +
+                "job = sampler.run([(isa_circuit1), (isa_circuit2)])\r\n" +
+                "pub_result_1 = job.result()[0]\r\n" +
+                "pub_result_2 = job.result()[1]\r\n" +
+                "print(f\" > Result class: {type(pub_result_1)}\")\r\n" +
+                "print(f\" > Result class: {type(pub_result_2)}\")\r\n" +
+                "```\r\n " +
+                "# Sampler (V1)\r\n" +
+                "Run Sampler by calling the <font style='background: GhostWhite'>_`qiskit.primitives.Sampler.run`_</font> " +
+                "method, which returns an instance of <font style='background: GhostWhite'>_`qiskit.providers.JobV1`_</font>. " +
+                "You can get the results from the job (as a <font style='background: GhostWhite'>_`qiskit.primitives.SamplerResult`_</font> " +
+                "object) with the <font style='background: GhostWhite'>_`qiskit.providers.JobV1.result`_</font> method. \r\n" +
+                "```python\r\n" +
+                "job = sampler.run(isa_circuit)\r\n" + 
+                "result = job.result()\r\n" +
+                "print(result)\r\n" +
+                "```\r\n "
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "file.svg",
+        label: function() {
+            return this.name||"run-sampler";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="run-sampler">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="run-sampler">
+    <p>A node for running the Sampler and getting results</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Result Class set
+        <dl class="message-properties">
+          <dt>payload.result.result_class_1_circuit <span class="property-type">object</span></dt>
+          <dd>A set of string representations of the result classes generated in example.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+        This node shows an example Sampler code with one circuit
+        and one observable being run and the results generated, both
+        for StatevectorSampler (V2) and Sampler (V1) implementations.
+    </p>
+</script>

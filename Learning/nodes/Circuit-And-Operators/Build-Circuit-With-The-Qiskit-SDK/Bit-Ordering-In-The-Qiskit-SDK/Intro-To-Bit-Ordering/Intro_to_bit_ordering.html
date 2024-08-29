@@ -1,0 +1,34 @@
+<script type="text/javascript">
+    RED.nodes.registerType('intro-to-bit-ordering', {
+      category: 'Bit ordering in the Qiskit SDK',
+      color: '#dddddd',
+      defaults: {
+        name: { value: "Introduction to bit-ordering" },
+        info: {value: "# If you have a set of 𝑛 bits (or qubits), you'll usually label each bit 0 → 𝑛−1. Different softwares and resources must choose how they order these bits both in computer memory and when displayed on-screen."}
+      },
+      inputs: 0,
+      outputs: 1,
+      icon: "white_info.svg",
+      label: function () {
+        return this.name || "Introduction to bit-ordering";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="intro-to-bit-ordering">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Introduction to bit-ordering">
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="intro-to-bit-ordering">
+    <p>Introduction to bit-ordering in qiskit sdk.</p>
+
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to the 'Bit ordering in qiskit sdk' tutorial. It is an information node that does not require any specific input
+      and does not generate any output. Instead, it is intended to be a part of a chain of tutorial nodes that explain the basics of 
+      quantum computing.
+    </p>
+  </script>

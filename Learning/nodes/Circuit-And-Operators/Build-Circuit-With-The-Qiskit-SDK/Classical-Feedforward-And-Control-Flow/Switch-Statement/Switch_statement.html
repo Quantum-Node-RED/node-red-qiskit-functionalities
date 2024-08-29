@@ -1,0 +1,50 @@
+<script type="text/javascript">
+    RED.nodes.registerType('Switch-statement', {
+      category: 'Classical feedforward and control flow',
+      color: '#C0DEED',
+      defaults: {
+        name: { value: "Switch statment" },
+        info: {
+          value: "# The switch statement is used to select actions based on the value of a classical bit or register. It is similar to an if statement, but allows one to specify more cases for the branching logic. \r\n&nbsp;\r\n# In the following code snippet, we apply a Hadamard gate to a qubit and measure it. If the result is 0, we apply an X gate on the qubit, and if the result is 1, we apply a Z gate.\r\n```python\r\nqubits = QuantumRegister(1)\r\nclbits = ClassicalRegister(1)\r\ncircuit = QuantumCircuit(qubits, clbits)\r\n(q0,) = qubits\r\n(c0,) = clbits\r\n \r\ncircuit.h(q0)\r\ncircuit.measure(q0, c0)\r\nwith circuit.switch(c0) as case:\r\n    with case(0):\r\n        circuit.x(q0)\r\n    with case(1):\r\n        circuit.z(q0)\r\ncircuit.measure(q0, c0)\r\n \r\ncircuit.draw(\"mpl\")\r\n \r\n# example output counts: {'1': 1024}\r\n```\r\n# The code will use the code snippets from \"Introduction to classical feedforward and control flow\" node to run on the simulator and store the statistical results in the `counts` variable. The resulting measurement outcome should be 1 with 100% probability.\r\n&nbsp;\r\n# The result is sent to \"Switch statment Measure\" node and you can check it in the debug sidebar. You can also check the Image of the circuit in the \"Switch statment Circuit Diagram\" node.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Dictionary: `counts`\r\n- # Image: The image of `circuit`"
+        }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "Switch statment";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="Switch-statement">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="Switch-statement">
+    <p>A node that introduce switch statement in qiskit.</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Dictionary
+        <dl class="message-properties">
+          <dt>counts<span class="property-type">dict</span></dt>
+          <dd>The result of running circuits on simulator in 1024 shots. The key represents the quantum state, and the value is the number of times the quantum is in that state out of 1024 shots.</dd>
+        </dl>
+      </li>
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the quantum circuit.</dd>
+        </dl>
+      </li>
+    </ol>
+
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to using switch statements in quantum circuits with Qiskit. Switch statements enable the selection of different actions based on the value of classical bits or registers, offering a more structured approach compared to multiple if statements.
+    </p>
+  </script>

@@ -1,0 +1,52 @@
+<script type="text/javascript">
+    RED.nodes.registerType('transpile-to-ISA',{
+        category: 'Debugging tools',
+        color: '#dddddd',
+        defaults: {
+            name: {value:"Transpile to ISA circuits and observables"},
+            info: {
+                value: "# [Exact simulation with Qiskit SDK primitives guide.](https://docs.quantum.ibm.com/guides/simulate-with-qiskit-sdk-primitives#)\r\n" +
+                "&nbsp;\r\n" +
+                "# The Qiskit Runtime primitives workflow requires circuits and observables to be transformed to only use " +
+                "instructions supported by the system (referred to as instruction set architecture (ISA) circuits and " +
+                "observables). The reference primitives still accept abstract instructions, as they rely on local statevector" +
+                "simulations, but transpiling the circuit might still be beneficial in terms of circuit optimization.\r\n" +
+                "```python\r\n" +
+                "# Generate a pass manager without providing a backend\r\n" +
+                "from qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager\r\n" + 
+                "\r\n" +
+                "pm = generate_preset_pass_manager(optimization_level=1)\r\n" +
+                "isa_circuit = pm.run(qc)\r\n" +
+                "isa_observable = observable.apply_layout(isa_circuit.layout)\r\n" +
+                "```\r\n "
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "white_info.svg",
+        label: function() {
+            return this.name||"transpile-to-ISA";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="transpile-to-ISA">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="transpile-to-ISA">
+    <p>A node that shows how to transpile circuits and observables to ISA circuits and observables</p>
+
+    <h3>Details</h3>
+    <p>
+      This node gives an exeample on how to transform circuits and 
+      observable to only use instructions supported by the QPU.
+      It is an information node that does not require any specific input and 
+      does not generate any output. Instead, it is intended to be a part of 
+      a chain of tutorial nodes that explain the basics of quantum computing.
+    </p>
+
+</script>
