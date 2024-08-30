@@ -267,12 +267,7 @@
       "Grover": "interactive-nodes/Algorithms/Grover/Grover.js",
       "build-oracle": "interactive-nodes/Algorithms/Grover/build_oracle.js",
       "grover_iteration": "interactive-nodes/Algorithms/Grover/Grover_iteration.js",
-      "VQE": "interactive-nodes/Algorithms/VQE/VQE.js",
-      "ansatz": "interactive-nodes/Algorithms/VQE/ansatz.js",
-      "optimizer": "interactive-nodes/Algorithms/VQE/optimizer.js",
-      "hamiltonianPauli": "interactive-nodes/Algorithms/VQE/hamiltonianPauli.js",
-      "VQEIteration": "interactive-nodes/Algorithms/VQE/VQEIteration.js",
-      "classicEigensolver": "interactive-nodes/Algorithms/VQE/classicEigensolver.js"
+      "whole-VQE": "interactive-nodes/Algorithms/VQE/whole-VQE.js"
     }
   },
   "dependencies": {

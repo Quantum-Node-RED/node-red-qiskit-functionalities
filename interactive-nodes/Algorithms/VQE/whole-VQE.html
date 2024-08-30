@@ -4,6 +4,7 @@
     color: "#aaaaaa",
     defaults: {
       name: { value: "VQE algorithm" },
+      numQubit: { value: 1 },
       rotationLayers: { value: "rx" },
       entanglementLayers: { value: "rx" },
       hamiltonianPauli: { value: '["II", "IZ", "ZI", "ZZ", "XX"]' },
@@ -19,6 +20,7 @@
     },
     oneditprepare: function () {
       $("#node-input-name").val(this.name || "");
+      $("#node-input-qubit").val(this.numQubit || "");
       $("#node-input-optimizer").val(this.optimizer || "SLSQP");
       $("#node-input-maxiter").val(this.maxiter || 50);
       $("#node-input-rotationLayers").val(this.rotationLayers || "rx");
@@ -28,6 +30,7 @@
     },
     oneditsave: function () {
       this.name = $("#node-input-name").val();
+      this.numQubit = $("#node-input-qubit").val();
       this.optimizer = $("#node-input-optimizer").val();
       this.maxiter = $("#node-input-maxiter").val();
       this.rotationLayers = $("#node-input-rotationLayers").val();
@@ -42,6 +45,11 @@
   <div class="form-row">
     <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
     <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-qubit"><i class="fa fa-tag"></i> Number of Qubit</label>
+    <input type="number" id="node-input-qubit" placeholder="Number of Qubit" />
   </div>
 
   <div class="form-row">

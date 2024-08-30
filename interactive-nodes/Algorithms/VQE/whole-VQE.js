@@ -5,6 +5,7 @@ module.exports = function (RED) {
     RED.nodes.createNode(this, config);
 
     this.rotationLayers = config.rotationLayers;
+    this.numQubits = config.numQubit;
     this.entanglementLayers = config.entanglementLayers;
     this.hamiltonianPauli = config.hamiltonianPauli;
     this.hamiltonianCoeffs = config.hamiltonianCoeffs;
@@ -15,7 +16,7 @@ module.exports = function (RED) {
     node.on('input', async function (msg) {
       const result = await new Promise((resolve, reject) => {
         const option = {
-          numQubits: msg.payload.numQubits,
+          numQubits: node.numQubits,
           rotationLayers: node.rotationLayers,
           entanglementLayers: node.entanglementLayers,
           hamiltonianPauli: node.hamiltonianPauli,
@@ -23,7 +24,7 @@ module.exports = function (RED) {
           optimizer: node.optimizer,
           maxiter: node.maxiter
         };
-        runPythonScript(__dirname, "VQE.py", option, (err, results) => {
+        runPythonScript(__dirname, "whole-VQE.py", option, (err, results) => {
           if (err) throw err;
           return resolve(results);
         });
