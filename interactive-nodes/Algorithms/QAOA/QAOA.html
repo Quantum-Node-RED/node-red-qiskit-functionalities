@@ -1,11 +1,14 @@
 <script type="text/javascript">
   RED.nodes.registerType("QAOA", {
-    category: "function",
+    category: "Quantum Algorithms",
     color: "#FF6347",
     defaults: {
       name: { value: "QAOA" },
+      variable: { value: "" },
+      sampler: { value: "", required: true },
       reps: { value: 2, required: true },
       optimizer: { value: "COBLYA", required: true },
+      hamiltonian: { value: "", required: true },
     },
     inputs: 1,
     outputs: 1,
@@ -39,18 +42,41 @@
 </script>
 
 <script type="text/html" data-template-name="QAOA">
-    <div class="form-row">
-      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
-      <input type="text" id="node-input-name" placeholder="Name" />
-    </div>
-    <div class="form-row">
-      <label for="node-input-reps"><i class="fa fa-repeat"></i> Reps</label>
-      <input type="number" id="node-input-reps" placeholder="2" min="1" />
-    </div>
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
   </div>
   <div class="form-row">
-    <label for="node-input-optimizer"><i class="fa fa-list"></i>Optimizer</label>
+    <label for="node-input-variable"
+      ><i class="fa fa-tag"></i>Variable Name</label
+    >
+    <input type="text" id="node-input-variable" placeholder="Variable" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-sampler"
+      ><i class="fa fa-tag"></i>Sampler name</label
+    >
+    <input type="text" id="node-input-sampler" placeholder="Sampler" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-reps"><i class="fa fa-repeat"></i> Reps</label>
+    <input type="number" id="node-input-reps" placeholder="2" min="1" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-optimizer"
+      ><i class="fa fa-list"></i>Optimizer</label
+    >
     <select id="node-input-optimizer"></select>
+  </div>
+  <div class="form-row">
+    <label for="node-input-hamiltonian"
+      ><i class="fa fa-tag"></i>Hamiltonian Name</label
+    >
+    <input
+      type="text"
+      id="node-input-hamiltonian"
+      placeholder="Hamiltonian or Operator"
+    />
   </div>
 </script>
 

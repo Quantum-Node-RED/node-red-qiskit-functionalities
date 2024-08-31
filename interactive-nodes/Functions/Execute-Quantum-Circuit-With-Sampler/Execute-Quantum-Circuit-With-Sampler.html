@@ -66,5 +66,117 @@
 </script>
 
 <script type="text/html" data-help-name="execute_quantum_circuit_with_sampler">
-  <p></p>
+  <p>
+    The <strong>execute_quantum_circuit_with_sampler</strong> node is designed
+    to execute a quantum circuit using a specified <em>Sampler</em> instance.
+    This node assigns parameter values to a parameterized quantum circuit, runs
+    the circuit with the Sampler, and retrieves the results. It is typically
+    used in quantum workflows where you need to evaluate the circuit's
+    performance or measure its output states.
+  </p>
+
+  <h3>Inputs</h3>
+  <ul>
+    <li>
+      <strong>Name (name)</strong>: An optional name for the node instance to
+      identify it within your Node-RED flow.
+    </li>
+    <li>
+      <strong>Circuit Name (circuit_name)</strong>: The name of the quantum
+      circuit to execute. This should be a pre-defined quantum circuit that has
+      parameters which need to be optimized or evaluated.
+    </li>
+    <li>
+      <strong>Variable (variable)</strong>: The variable name where the
+      execution result will be stored. This variable can be used in subsequent
+      nodes to access the result.
+    </li>
+    <li>
+      <strong>Sampler Name (sampler)</strong>: The name of the Sampler instance
+      to use for executing the quantum circuit. This should be an instance of a
+      Sampler that has been defined earlier in the flow.
+    </li>
+    <li>
+      <strong>Result Name (result)</strong>: The name of the variable containing
+      the optimization or parameter result (e.g., from a previous optimization
+      step). This result is used to assign parameter values to the circuit
+      before execution.
+    </li>
+    <li>
+      <strong>Parameter Vector (parameterVector)</strong>: The parameter vector
+      that contains the initial or optimized parameter values to be assigned to
+      the quantum circuit's parameterized gates.
+    </li>
+  </ul>
+
+  <h3>Outputs</h3>
+  <ul>
+    <li>
+      <strong>msg.payload</strong>: The result of the circuit execution. This
+      result includes the measurement outcomes or any other information returned
+      by the quantum circuit's execution using the Sampler.
+    </li>
+  </ul>
+
+  <h3>How to Use</h3>
+  <ol>
+    <li>
+      Drag the <strong>execute_quantum_circuit_with_sampler</strong> node from
+      the "function" category into your Node-RED workspace.
+    </li>
+    <li>Double-click the node to open its configuration panel.</li>
+    <li>
+      Set the <strong>Name</strong> field (optional) to label your node
+      instance.
+    </li>
+    <li>
+      Enter the <strong>Circuit Name</strong> that refers to the quantum circuit
+      you wish to execute.
+    </li>
+    <li>
+      Specify the <strong>Variable Name</strong> where the execution result will
+      be stored.
+    </li>
+    <li>
+      Provide the <strong>Sampler Name</strong> to specify which Sampler
+      instance will be used to run the quantum circuit.
+    </li>
+    <li>
+      Enter the <strong>Result Name</strong> containing the optimization results
+      or parameters to be used for the circuit's execution.
+    </li>
+    <li>
+      Provide the <strong>Parameter Vector</strong> that holds the parameter
+      values to be assigned to the quantum circuit's gates.
+    </li>
+    <li>
+      Connect the input of this node to other nodes that provide the necessary
+      quantum circuit, Sampler, and parameters, and connect the output to a
+      debug or further processing node to utilize the results of the circuit
+      execution.
+    </li>
+    <li>
+      Deploy your flow to save the configuration and execute the quantum circuit
+      when the flow is triggered.
+    </li>
+  </ol>
+
+  <h3>Example Use Case</h3>
+  <p>
+    This node can be used in a quantum computing workflow where a parameterized
+    quantum circuit needs to be evaluated using a set of optimized parameters.
+    For example, after optimizing parameters with a VQE or QAOA algorithm, this
+    node can execute the circuit to measure its output states or compute
+    expectation values for further analysis.
+  </p>
+
+  <h3>Additional Notes</h3>
+  <p>
+    Ensure that the circuit, Sampler, and parameter vector are properly defined
+    and compatible with each other. The node relies on having a valid quantum
+    circuit and Sampler instance as inputs. Incorrect configuration or
+    mismatched inputs could result in execution errors or unexpected results.
+    Proper error handling and validation are recommended when setting up this
+    node.
+  </p>
 </script>

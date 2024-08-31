@@ -282,7 +282,6 @@ coeffs = {coeffs}
 print(json.dumps({variable}))"""
     ),
 
-    # Algorithms - QAOA
     "apply_objective_value": Code_Component(
         import_statement=[Component_Dependency.Numpy],
         function="""def objective_value(x, w):
@@ -318,9 +317,17 @@ print(json.dumps({variable}))"""
     result = np.binary_repr(k, num_qubits)
     x = [int(digit) for digit in result]
     x.reverse()
-    return np.asarray(x)""",
+    return np.asarray(x)
+    
+def get_state_vector_to_use(result):
+    if hasattr(result, 'eigenstate') and result.eigenstate is not None:
+        return result.eigenstate
+    elif hasattr(result, 'quasi_dists') and result.quasi_dists:
+        return result.quasi_dists[0]
+    else:
+        raise ValueError("The provided result object does not contain 'eigenstate' or 'quasi_dists'.")""",
         calling_function="""
-            {variable} = extract_most_likely_state({state_vector}.quasi_dists[0], {num_qubits})
+            {variable} = extract_most_likely_state(get_state_vector_to_use({state_vector}), {num_qubits})
         """
     ),
 
@@ -405,10 +412,13 @@ print(json.dumps({variable}))"""
     "QAOA": Code_Component(
         import_statement=[
             Component_Dependency.QAOA, 
-            Component_Dependency.Optimizers  # Using the defined import for QAOA and Optimizer
+            Component_Dependency.Optimizers,  # Using the defined import for QAOA and Optimizer
+            Component_Dependency.Sampler
         ],
         function="",
-        calling_function="{var_result} = QAOA({sampler}, {optimizer}(), reps={reps})"
+        calling_function="""qaoa = QAOA({sampler}, {optimizer}(), reps={reps})
+{variable} = qaoa.compute_minimum_eigenvalue({hamiltonian})
+    """
     ),
 
     "define_parameter": Code_Component(

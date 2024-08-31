@@ -264,6 +264,7 @@
       "equality-operator": "Learning/nodes/Circuit-And-Operators/Build-Operators-With-The-Qiskit-SDK/The-Operator-Class/Equality-Operator/Equality_operator.js",
       "process-fidelity": "Learning/nodes/Circuit-And-Operators/Build-Operators-With-The-Qiskit-SDK/The-Operator-Class/Process-Fidelity/Process_fidelity.js",
       "QAOA": "interactive-nodes/Algorithms/QAOA/QAOA.js",
+      "whole-QAOA": "interactive-nodes/Algorithms/QAOA/whole-QAOA.js",
       "Grover": "interactive-nodes/Algorithms/Grover/Grover.js",
       "build-oracle": "interactive-nodes/Algorithms/Grover/build_oracle.js",
       "grover_iteration": "interactive-nodes/Algorithms/Grover/Grover_iteration.js",

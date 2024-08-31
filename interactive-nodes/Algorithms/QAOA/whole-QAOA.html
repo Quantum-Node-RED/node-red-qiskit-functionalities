@@ -1,0 +1,219 @@
+<script type="text/javascript">
+  RED.nodes.registerType("whole_QAOA", {
+    category: "Quantum Algorithms",
+    color: "#FF6347",
+    defaults: {
+      name: { value: "" },
+      option: { value: "general", required: true },
+      adjacent_matrices: {
+        value: "[[]]",
+        required: true,
+      },
+      hamiltonian: {
+        value: "",
+        required: true,
+      },
+      reps: { value: 2, required: true },
+      seed: { value: 10598, required: true },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    label: function () {
+      return this.name || "whole_QAOA";
+    },
+    oneditprepare: function () {
+      // Populate initial dropdown options
+      var select = $("#node-input-option");
+      var initialOptions = [
+        { value: "general", label: "General Problem" },
+        { value: "max_cut", label: "Max Cut Problem" },
+        { value: "tsp", label: "Travelling Salesman Problem" },
+      ];
+
+      initialOptions.forEach(function (option) {
+        select.append(
+          '<option value="' + option.value + '">' + option.label + "</option>"
+        );
+      });
+
+      // Show/hide fields based on the selected option and update label
+      function toggleFields() {
+        var selectedOption = $("#node-input-option").val();
+        if (selectedOption === "general") {
+          $("#node-input-adjacent_matrices").parent().hide();
+          $("#node-input-hamiltonian").parent().show();
+        } else {
+          $("#node-input-adjacent_matrices").parent().show();
+          $("#node-input-hamiltonian").parent().hide();
+          if (selectedOption === "max_cut") {
+            $("label[for='node-input-adjacent_matrices']").text(
+              "Weight Matrices"
+            );
+          } else if (selectedOption === "tsp") {
+            $("label[for='node-input-adjacent_matrices']").text(
+              "Distance Matrices"
+            );
+          }
+        }
+      }
+
+      // Initially toggle fields based on the current selection
+      toggleFields();
+
+      // Add event listener to toggle fields when selection changes
+      $("#node-input-option").change(toggleFields);
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="whole_QAOA">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-option"><i class="fa fa-list"></i> Option</label>
+    <select id="node-input-option"></select>
+  </div>
+  <div class="form-row">
+    <label for="node-input-reps"><i class="fa fa-repeat"></i> Reps</label>
+    <input type="number" id="node-input-reps" placeholder="2" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-seed"><i class="fa fa-hashtag"></i> Seed</label>
+    <input type="number" id="node-input-seed" placeholder="10598" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-adjacent_matrices"
+      ><i class="fa fa-w"></i> Weight Matrices</label
+    >
+    <input type="string" id="node-input-adjacent_matrices" placeholder="[[]]" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-hamiltonian"
+      ><i class="fa fa-w"></i> Hamiltonian</label
+    >
+    <input type="string" id="node-input-hamiltonian" placeholder="[[]]" />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="whole_QAOA">
+  <p>
+    The <strong>whole_QAOA</strong> node is designed to execute the Quantum
+    Approximate Optimization Algorithm (QAOA) for various optimization problems
+    using quantum computing. This node supports different problem types,
+    including "General Problem," "Max Cut Problem," and "Travelling Salesman
+    Problem (TSP)."
+  </p>
+
+  <h3>Inputs</h3>
+  <ul>
+    <li>
+      <strong>Name (name)</strong>: An optional name for the node instance.
+    </li>
+    <li>
+      <strong>Option (option)</strong>: Dropdown to select the type of problem
+      to solve:
+      <ul>
+        <li><strong>General Problem</strong>: Use a custom Hamiltonian.</li>
+        <li>
+          <strong>Max Cut Problem</strong>: Optimize cuts in a graph using
+          weight matrices.
+        </li>
+        <li>
+          <strong>Travelling Salesman Problem (TSP)</strong>: Solve TSP using
+          distance matrices.
+        </li>
+      </ul>
+    </li>
+    <li>
+      <strong>Reps (reps)</strong>: Number of repetitions (layers) in the QAOA
+      circuit (default: 2).
+    </li>
+    <li>
+      <strong>Seed (seed)</strong>: Seed for random number generator to ensure
+      reproducibility (default: 10598).
+    </li>
+    <li>
+      <strong>Weight Matrices (adjacent_matrices)</strong>: Matrix representing
+      weights between nodes (for Max Cut and TSP). No need quotation.
+    </li>
+    <li>
+      <strong>Hamiltonian (hamiltonian)</strong>: Custom Hamiltonian for general
+      problems. No need quotation.
+    </li>
+  </ul>
+
+  <h3>Outputs</h3>
+  <ul>
+    <li>
+      <strong>msg.payload</strong>: An object containing:
+      <ul>
+        <li>
+          <strong>problem</strong>: The type of problem solved (e.g., "max_cut",
+          "tsp", "general").
+        </li>
+        <li>
+          <strong>solution</strong>: The optimal solution found, formatted as a
+          list of integers.
+        </li>
+        <li>
+          <strong>objective_value</strong>: (For Max Cut Problem) The computed
+          value of the cut.
+        </li>
+        <li>
+          <strong>graph</strong>: Base64-encoded PNG image of the graph (if
+          applicable).
+        </li>
+        <li>
+          <strong>circuit_image</strong>: Base64-encoded PNG image of the
+          quantum circuit (ansatz).
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>How to Use</h3>
+  <ol>
+    <li>
+      Drag the <strong>whole_QAOA</strong> node from the "Quantum Algorithms"
+      category into your Node-RED workspace.
+    </li>
+    <li>
+      Double-click the node to open the configuration panel and set the desired
+      parameters.
+    </li>
+    <li>
+      Connect the node to other nodes in your flow to provide input data and
+      handle the output.
+    </li>
+    <li>
+      Deploy your flow to save the configuration and run the QAOA algorithm when
+      triggered.
+    </li>
+    <li>
+      View the output from the node's debug panel or connected output nodes.
+    </li>
+  </ol>
+
+  <h3>Example Use Cases</h3>
+  <p>
+    The <strong>whole_QAOA</strong> node can be used to solve various
+    optimization problems:
+  </p>
+  <ul>
+    <li>
+      <strong>Max-Cut Problem</strong>: Optimize a cut in a graph to maximize
+      the weight sum of crossing edges.
+    </li>
+    <li>
+      <strong>Travelling Salesman Problem (TSP)</strong>: Find the shortest path
+      visiting each city exactly once.
+    </li>
+    <li>
+      <strong>General Quantum Optimization</strong>: Solve custom optimization
+      problems using user-defined Hamiltonians.
+    </li>
+  </ul>
+</script>
