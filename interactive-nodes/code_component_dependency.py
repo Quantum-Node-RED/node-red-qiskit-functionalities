@@ -20,6 +20,7 @@ class Component_Dependency:
     SparsePauliOp = ["qiskit.quantum_info.SparsePauliOp"]
     QuasiDistribution = ["qiskit.result.QuasiDistribution"]
     QAOA = ["qiskit_algorithms.QAOA"]
+    VQE = ["qiskit_algorithms.VQE"]
     Optimizers = ["qiskit_algorithms.optimizers.{optimizer}"]
     Pyplot = ["matplotlib.pyplot", "plt"]
     Base64 = ["base64"]

@@ -1,38 +1,19 @@
-const runPythonScript = require("../../pythonShell");
-
+const component = require("../../component.js");
+const constants = require('../../constants.js');
 module.exports = function (RED) {
   function VQENode(config) {
     RED.nodes.createNode(this, config);
-
-    this.rotationLayers = config.rotationLayers;
-    this.entanglementLayers = config.entanglementLayers;
-    this.hamiltonianPauli = config.hamiltonianPauli;
-    this.hamiltonianCoeffs = config.hamiltonianCoeffs;
-    this.optimizer = config.optimizer;
-    this.maxiter = config.maxiter;
-
     var node = this;
-    node.on('input', async function (msg) {
-      const result = await new Promise((resolve, reject) => {
-        const option = {
-          numQubits: msg.payload.numQubits,
-          rotationLayers: node.rotationLayers,
-          entanglementLayers: node.entanglementLayers,
-          hamiltonianPauli: node.hamiltonianPauli,
-          hamiltonianCoeffs: node.hamiltonianCoeffs,
-          optimizer: node.optimizer,
-          maxiter: node.maxiter
-        };
-        runPythonScript(__dirname, "VQE.py", option, (err, results) => {
-          if (err) throw err;
-          return resolve(results);
-        });
-      });
-
-      const newMsg = {
-        payload: result
-      };
-      node.send(newMsg);
+    node.on('input', function (msg) {
+      msg.payload = msg.payload || {};
+      const VQE_component = new component.Component("VQE", {});
+      VQE_component.parameters["var_result"] = config.varResult;
+      VQE_component.parameters["estimator"] = config.estimatorName;
+      VQE_component.parameters["ansatz"] = config.ansatzName;
+      VQE_component.parameters["optimizer"] = config.optimizerName;
+      VQE_component.parameters["operator"] = config.operatorName
+      component.addComponent(msg, VQE_component);
+      node.send(msg);
     });
   }
   RED.nodes.registerType("VQE", VQENode);

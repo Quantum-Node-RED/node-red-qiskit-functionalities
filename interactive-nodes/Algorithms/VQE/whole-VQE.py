@@ -15,7 +15,7 @@ input = sys.argv[1]
 parse_input = json.loads(input)
 
 # parese input
-num_qubits = parse_input["numQubits"]
+num_qubits = int(parse_input["numQubits"])
 rotation_blocks = parse_input["rotationLayers"]
 entanglement_blocks = parse_input["entanglementLayers"]
 hamiltonian_data = parse_input["hamiltonianPauli"].strip('[]').split(',')
