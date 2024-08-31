@@ -1,0 +1,55 @@
+[
+  {
+    "id": "ce4413279ad5de3e",
+    "type": "tab",
+    "label": "whole QAOA",
+    "disabled": false,
+    "info": "",
+    "env": []
+  },
+  {
+    "id": "4df40ff40a88cb0a",
+    "type": "whole_QAOA",
+    "z": "ce4413279ad5de3e",
+    "name": "",
+    "option": "max_cut",
+    "adjacent_matrices": "[[0.0, 1.0, 1.0, 0.0], [1.0, 0.0, 1.0, 1.0], [1.0, 1.0, 0.0, 1.0], [0.0, 1.0, 1.0, 0.0]]",
+    "hamiltonian": "[[]]",
+    "reps": 2,
+    "seed": 10598,
+    "x": 590,
+    "y": 380,
+    "wires": [["b7c1c01a39226dbf"]]
+  },
+  {
+    "id": "242aaae9589aeac5",
+    "type": "inject",
+    "z": "ce4413279ad5de3e",
+    "name": "",
+    "props": [],
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "topic": "",
+    "x": 410,
+    "y": 380,
+    "wires": [["4df40ff40a88cb0a"]]
+  },
+  {
+    "id": "b7c1c01a39226dbf",
+    "type": "debug",
+    "z": "ce4413279ad5de3e",
+    "name": "debug 11",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "false",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 780,
+    "y": 380,
+    "wires": []
+  }
+]

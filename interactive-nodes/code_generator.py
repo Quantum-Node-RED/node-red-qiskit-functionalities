@@ -283,16 +283,19 @@ if __name__ == "__main__":
     # Execute the Python file and capture the output
     try:
         process = subprocess.run([sys.executable, file_path], capture_output=True, text=True)
-        execution_result = process.stdout + process.stderr
+        execution_result = process.stdout.strip()
+        execution_error = process.stderr.strip()
         if is_base64_png(execution_result):
             execution_result = execution_result.rstrip('\n').strip('"')
     except Exception as e:
-        execution_result = str(e)
+        execution_result = "Execution failed"
+        execution_error = str(e)
 
     result = {
         "code": full_code,
         "code_snapshot": code_snapshot,
-        "result": execution_result,
+        "result": execution_result if execution_result else "No output",  # Normal output
+        "error_warning": execution_error if execution_error else "No error/warning",  # Error output, empty if no error
     }
 
     # Cleanup the generated Python file

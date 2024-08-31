@@ -1,0 +1,106 @@
+[
+  {
+    "id": "3f9e9016e0f47a23",
+    "type": "tab",
+    "label": "Qiskit QAOA",
+    "disabled": false,
+    "info": "",
+    "env": []
+  },
+  {
+    "id": "4c4cb73821fbbca4",
+    "type": "Start",
+    "z": "3f9e9016e0f47a23",
+    "name": "",
+    "topic": "",
+    "repeat": "",
+    "x": 150,
+    "y": 320,
+    "wires": [["f4d8cd602f217d46"]]
+  },
+  {
+    "id": "e8a5d2d48a5fee74",
+    "type": "extract_most_likely_state",
+    "z": "3f9e9016e0f47a23",
+    "name": "",
+    "variable": "x",
+    "state_vector": "result",
+    "num_qubits": "2",
+    "x": 810,
+    "y": 320,
+    "wires": [["04526b3d3fb4d19f"]]
+  },
+  {
+    "id": "3b016945de73b72e",
+    "type": "debug",
+    "z": "3f9e9016e0f47a23",
+    "name": "debug 3",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "targetType": "msg",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 1000,
+    "y": 400,
+    "wires": []
+  },
+  {
+    "id": "b5705d8006d807e3",
+    "type": "End",
+    "z": "3f9e9016e0f47a23",
+    "name": "",
+    "x": 990,
+    "y": 360,
+    "wires": [["3b016945de73b72e"]]
+  },
+  {
+    "id": "eccc81fc94a1bd3b",
+    "type": "QAOA",
+    "z": "3f9e9016e0f47a23",
+    "name": "QAOA",
+    "variable": "result",
+    "sampler": "sampler",
+    "reps": 2,
+    "optimizer": "COBYLA",
+    "hamiltonian": "operator",
+    "x": 630,
+    "y": 320,
+    "wires": [["e8a5d2d48a5fee74"]]
+  },
+  {
+    "id": "f4d8cd602f217d46",
+    "type": "sparse-pauli-op",
+    "z": "3f9e9016e0f47a23",
+    "name": "",
+    "variable": "operator",
+    "terms": "ZZ,IZ,ZZ",
+    "coefficients": "0.5,0.1,0.8",
+    "x": 300,
+    "y": 320,
+    "wires": [["a0b43dc0c344c837"]]
+  },
+  {
+    "id": "04526b3d3fb4d19f",
+    "type": "print",
+    "z": "3f9e9016e0f47a23",
+    "name": "",
+    "variable_name": "qaoa_result",
+    "variable": "x",
+    "x": 990,
+    "y": 320,
+    "wires": [["b5705d8006d807e3"]]
+  },
+  {
+    "id": "a0b43dc0c344c837",
+    "type": "define_sampler",
+    "z": "3f9e9016e0f47a23",
+    "name": "",
+    "variable": "sampler",
+    "x": 480,
+    "y": 320,
+    "wires": [["eccc81fc94a1bd3b"]]
+  }
+]
