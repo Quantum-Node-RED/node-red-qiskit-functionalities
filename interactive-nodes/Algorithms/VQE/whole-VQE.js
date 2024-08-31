@@ -1,7 +1,7 @@
 const runPythonScript = require("../../pythonShell");
 
 module.exports = function (RED) {
-  function VQENode(config) {
+  function wholeVQENode(config) {
     RED.nodes.createNode(this, config);
 
     this.rotationLayers = config.rotationLayers;
@@ -36,5 +36,5 @@ module.exports = function (RED) {
       node.send(newMsg);
     });
   }
-  RED.nodes.registerType("VQE", VQENode);
+  RED.nodes.registerType("whole-VQE", wholeVQENode);
 }

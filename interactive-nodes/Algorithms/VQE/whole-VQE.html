@@ -1,9 +1,9 @@
 <script type="text/javascript">
-  RED.nodes.registerType("VQE", {
-    category: "VQE",
+  RED.nodes.registerType("whole-VQE", {
+    category: "whole-VQE",
     color: "#aaaaaa",
     defaults: {
-      name: { value: "VQE algorithm" },
+      name: { value: "whole-VQE algorithm" },
       numQubit: { value: 1 },
       rotationLayers: { value: "rx" },
       entanglementLayers: { value: "rx" },
@@ -16,7 +16,7 @@
     outputs: 1,
     icon: "file.svg",
     label: function () {
-      return this.name || "VQE";
+      return this.name || "whole-VQE";
     },
     oneditprepare: function () {
       $("#node-input-name").val(this.name || "");
@@ -41,7 +41,7 @@
   });
 </script>
 
-<script type="text/html" data-template-name="VQE">
+<script type="text/html" data-template-name="whole-VQE">
   <div class="form-row">
     <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
     <input type="text" id="node-input-name" placeholder="Name" />
@@ -94,6 +94,6 @@
   </div>
 </script>
 
-<script type="text/html" data-help-name="VQE">
+<script type="text/html" data-help-name="whole-VQE">
   <p>A simple node that implements VQE algorithm.</p>
 </script>

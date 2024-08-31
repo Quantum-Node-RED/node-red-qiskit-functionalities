@@ -411,6 +411,16 @@ print(json.dumps({variable}))"""
         calling_function="{var_result} = QAOA({sampler}, {optimizer}(), reps={reps})"
     ),
 
+    "VQE": Code_Component(
+        import_statement=[
+            Component_Dependency.VQE, 
+            Component_Dependency.Optimizers  # Using the defined import for VQE and Optimizer
+        ],
+        function="",
+        calling_function="""vqe = VQE({estimator}, {ansatz}, {optimizer}())
+{var_result} = vqe.compute_minimum_eigenvalue({operator})"""
+    ),
+
     "define_parameter": Code_Component(
         import_statement=[
             Component_Dependency.ParameterVector, 
