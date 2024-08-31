@@ -42,9 +42,132 @@
   </div>
 </script>
 
-<script
-  type="text/html"
-  data-help-name="build_hamiltonian_operator_from_weight_matrix"
->
-  <p>This node constructs a hamiltonian taking in a weight matrix</p>
+<script type="text/html" data-help-name="apply_optimizer">
+  <p>
+    The <strong>apply_optimizer</strong> node is designed to optimize the
+    parameters of a quantum circuit by minimizing an objective (cost) function.
+    This node leverages classical optimizers such as COBYLA or SPSA to identify
+    the optimal set of parameters that reduce the given cost function. The cost
+    function is typically the expectation value of a Hamiltonian in variational
+    quantum algorithms, like VQE (Variational Quantum Eigensolver).
+  </p>
+
+  <h3>Inputs</h3>
+  <ul>
+    <li>
+      <strong>Name (name)</strong>: An optional name to label the node instance
+      within the Node-RED flow.
+    </li>
+    <li>
+      <strong>Variable (variable)</strong>: The variable name where the
+      optimization result will be stored.
+    </li>
+    <li>
+      <strong>Cost Function (costFunction)</strong>: The objective function to
+      minimize. This function calculates the energy or cost based on the quantum
+      state's parameters.
+    </li>
+    <li>
+      <strong>Circuit Name (circuit)</strong>: The name of the quantum circuit
+      to optimize. It refers to the parameterized quantum circuit whose
+      parameters will be adjusted to minimize the cost function.
+    </li>
+    <li>
+      <strong>Param Vector (paramVector)</strong>: The initial parameter vector
+      (guess) for the quantum circuit optimization.
+    </li>
+    <li>
+      <strong>Hamiltonian (hamiltonian)</strong>: The Hamiltonian operator used
+      in evaluating the cost function. This operator represents the observable
+      whose expectation value is being minimized.
+    </li>
+    <li>
+      <strong>Estimator (estimator)</strong>: An estimator instance used to
+      compute the expectation value of the Hamiltonian for given circuit
+      parameters.
+    </li>
+    <li>
+      <strong>Optimizer (optimizer)</strong>: The classical optimizer to use for
+      minimizing the cost function. Options include:
+      <ul>
+        <li>
+          <strong>COBYLA</strong>: Constrained Optimization BY Linear
+          Approximations.
+        </li>
+        <li>
+          <strong>SPSA</strong>: Simultaneous Perturbation Stochastic
+          Approximation, suitable for noisy quantum environments.
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>Outputs</h3>
+  <ul>
+    <li>
+      <strong>msg.payload</strong>: The result of the optimization, typically a
+      list or array of optimized parameter values found by the chosen optimizer.
+    </li>
+  </ul>
+
+  <h3>How to Use</h3>
+  <ol>
+    <li>
+      Drag the <strong>apply_optimizer</strong> node from the "function"
+      category into your Node-RED workspace.
+    </li>
+    <li>Double-click the node to open the configuration panel.</li>
+    <li>
+      Fill in the <strong>Name</strong> (optional) to help identify your node
+      instance.
+    </li>
+    <li>
+      Enter the <strong>Variable</strong> where the optimized parameters will be
+      stored.
+    </li>
+    <li>
+      Provide the <strong>Cost Function</strong> that calculates the quantum
+      state's cost or energy.
+    </li>
+    <li>
+      Specify the <strong>Circuit Name</strong> and
+      <strong>Param Vector</strong> for the quantum circuit.
+    </li>
+    <li>
+      Input the required <strong>Hamiltonian</strong> and
+      <strong>Estimator</strong> details.
+    </li>
+    <li>
+      Select the desired <strong>Optimizer</strong> (COBYLA or SPSA) from the
+      dropdown menu.
+    </li>
+    <li>
+      Connect the input of this node to nodes supplying the required input
+      parameters and connect the output to a debug or further processing node to
+      utilize the optimized parameters.
+    </li>
+    <li>
+      Deploy your flow to save the configuration and run the optimization
+      process upon triggering the flow.
+    </li>
+  </ol>
+
+  <h3>Example Use Case</h3>
+  <p>
+    This node is typically used in quantum computing workflows involving
+    parameter optimization, such as variational quantum algorithms. For
+    instance, in a VQE setup, this node optimizes the parameters of a
+    variational quantum circuit to minimize the expected energy of a molecule,
+    represented by a Hamiltonian.
+  </p>
+
+  <h3>Additional Notes</h3>
+  <p>
+    Ensure that all inputs are correctly formatted and appropriate for the
+    optimization process. The choice of optimizer can significantly affect the
+    results; COBYLA is suitable for problems with constraints, while SPSA is
+    ideal for noisy environments common in quantum computing. Proper
+    initialization of parameters is crucial for convergence and successful
+    optimization.
+  </p>
 </script>

@@ -1,11 +1,14 @@
 <script type="text/javascript">
   RED.nodes.registerType("QAOA", {
-    category: "function",
+    category: "Quantum Algorithms",
     color: "#FF6347",
     defaults: {
       name: { value: "QAOA" },
+      variable: { value: "" },
+      sampler: { value: "", required: true },
       reps: { value: 2, required: true },
       optimizer: { value: "COBLYA", required: true },
+      hamiltonian: { value: "", required: true },
     },
     inputs: 1,
     outputs: 1,
@@ -39,21 +42,165 @@
 </script>
 
 <script type="text/html" data-template-name="QAOA">
-    <div class="form-row">
-      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
-      <input type="text" id="node-input-name" placeholder="Name" />
-    </div>
-    <div class="form-row">
-      <label for="node-input-reps"><i class="fa fa-repeat"></i> Reps</label>
-      <input type="number" id="node-input-reps" placeholder="2" min="1" />
-    </div>
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
   </div>
   <div class="form-row">
-    <label for="node-input-optimizer"><i class="fa fa-list"></i>Optimizer</label>
+    <label for="node-input-variable"
+      ><i class="fa fa-tag"></i>Variable Name</label
+    >
+    <input type="text" id="node-input-variable" placeholder="Variable" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-sampler"
+      ><i class="fa fa-tag"></i>Sampler name</label
+    >
+    <input type="text" id="node-input-sampler" placeholder="Sampler" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-reps"><i class="fa fa-repeat"></i> Reps</label>
+    <input type="number" id="node-input-reps" placeholder="2" min="1" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-optimizer"
+      ><i class="fa fa-list"></i>Optimizer</label
+    >
     <select id="node-input-optimizer"></select>
+  </div>
+  <div class="form-row">
+    <label for="node-input-hamiltonian"
+      ><i class="fa fa-tag"></i>Hamiltonian Name</label
+    >
+    <input
+      type="text"
+      id="node-input-hamiltonian"
+      placeholder="Hamiltonian or Operator"
+    />
   </div>
 </script>
 
 <script type="text/html" data-help-name="QAOA">
-  <p>QAOA</p>
+  <p>
+    The <strong>QAOA</strong> (Quantum Approximate Optimization Algorithm) node
+    is used to perform a quantum optimization task on a given Hamiltonian using
+    a variational approach. QAOA is commonly employed in quantum algorithms to
+    find approximate solutions to combinatorial optimization problems. This node
+    allows users to configure and execute the QAOA algorithm by selecting a
+    sampler, optimizer, number of repetitions, and a Hamiltonian operator.
+  </p>
+
+  <h3>Inputs</h3>
+  <ul>
+    <li>
+      <strong>Name (name)</strong>: An optional name for the node instance to
+      help identify it within your Node-RED flow.
+    </li>
+    <li>
+      <strong>Variable Name (variable)</strong>: The name of the variable where
+      the result of the QAOA execution will be stored. This allows other nodes
+      in the flow to reference the computed result.
+    </li>
+    <li>
+      <strong>Sampler Name (sampler)</strong>: The name of the Sampler instance
+      to use for running the quantum circuits. This should be an instance
+      created previously in the flow that will handle the execution of the
+      quantum circuits.
+    </li>
+    <li>
+      <strong>Reps (reps)</strong>: The number of repetitions (p) for the QAOA
+      circuit. This defines the depth of the QAOA circuit, where a higher value
+      may increase the quality of the solution but also the complexity of the
+      circuit.
+    </li>
+    <li>
+      <strong>Optimizer (optimizer)</strong>: The classical optimizer to be used
+      for minimizing the objective function of QAOA. Available options are:
+      <ul>
+        <li>
+          <strong>COBYLA</strong>: Constrained Optimization BY Linear
+          Approximations, suitable for small-scale optimization problems.
+        </li>
+        <li>
+          <strong>SPSA</strong>: Simultaneous Perturbation Stochastic
+          Approximation, well-suited for noisy quantum environments.
+        </li>
+      </ul>
+    </li>
+    <li>
+      <strong>Hamiltonian Name (hamiltonian)</strong>: The name of the
+      Hamiltonian operator or quantum circuit to be minimized. This Hamiltonian
+      represents the cost function of the optimization problem.
+    </li>
+  </ul>
+
+  <h3>Outputs</h3>
+  <ul>
+    <li>
+      <strong>msg.payload</strong>: Contains the result of the QAOA execution,
+      which typically includes the optimized parameters and the minimum
+      eigenvalue found for the provided Hamiltonian. This output can be used in
+      further processing nodes or for analysis.
+    </li>
+  </ul>
+
+  <h3>How to Use</h3>
+  <ol>
+    <li>
+      Drag the <strong>QAOA</strong> node from the "Quantum Algorithms" category
+      into your Node-RED workspace.
+    </li>
+    <li>Double-click the node to open its configuration panel.</li>
+    <li>
+      Set the <strong>Name</strong> field (optional) to label your node
+      instance.
+    </li>
+    <li>
+      Enter the <strong>Variable Name</strong> where the QAOA result will be
+      stored.
+    </li>
+    <li>
+      Provide the <strong>Sampler Name</strong> for the quantum circuit
+      execution.
+    </li>
+    <li>
+      Set the <strong>Reps</strong> (number of repetitions) to define the depth
+      of the QAOA circuit. Ensure the value is at least 1.
+    </li>
+    <li>
+      Select the desired <strong>Optimizer</strong> from the dropdown menu
+      (COBYLA or SPSA).
+    </li>
+    <li>
+      Input the <strong>Hamiltonian Name</strong>, which represents the cost
+      function to be minimized by the QAOA algorithm.
+    </li>
+    <li>
+      Connect the input of this node to nodes that initiate or provide the
+      necessary Sampler, Hamiltonian, and other required parameters. Connect the
+      output to nodes that will process or display the QAOA results.
+    </li>
+    <li>
+      Deploy your flow to save the configuration and execute the QAOA algorithm
+      when the flow is triggered.
+    </li>
+  </ol>
+
+  <h3>Example Use Case</h3>
+  <p>
+    This node is typically used in quantum computing workflows that involve
+    combinatorial optimization problems, such as Max-Cut or Traveling Salesman
+    Problem (TSP). By setting up the QAOA node with the appropriate Hamiltonian
+    and optimizer, users can approximate solutions to these problems using a
+    quantum algorithm.
+  </p>
+
+  <h3>Additional Notes</h3>
+  <p>
+    Ensure that all inputs are correctly defined and compatible with the quantum
+    computing environment. The choice of optimizer and the number of repetitions
+    can significantly impact the performance and accuracy of the QAOA algorithm.
+    Proper configuration of these parameters is crucial for achieving optimal
+    results.
+  </p>
 </script>

@@ -9,11 +9,13 @@ module.exports = function (RED) {
         "extract_most_likely_state",
         {}
       );
+
       extract_most_likely_state_component.parameters["variable"] =
         config.variable;
       extract_most_likely_state_component.parameters["state_vector"] =
         config.state_vector;
-      extract_most_likely_state_component.parameters["num_qubits"] = "4";
+      extract_most_likely_state_component.parameters["num_qubits"] =
+        config.num_qubits;
       component.addComponent(msg, extract_most_likely_state_component);
       node.send(msg);
     });
