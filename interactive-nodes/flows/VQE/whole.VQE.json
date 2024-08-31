@@ -1,0 +1,54 @@
+[
+  {
+    "id": "0b3dca05dd4868a1",
+    "type": "whole-VQE",
+    "z": "81d80c904bd83a92",
+    "name": "whole-VQE algorithm",
+    "numQubit": "1",
+    "rotationLayers": "rx",
+    "entanglementLayers": "rx",
+    "hamiltonianPauli": "[\"II\", \"IZ\", \"ZI\", \"ZZ\", \"XX\"]",
+    "hamiltonianCoeffs": "[-1.05237, 0.39793, -0.39793, -0.01128, 0.1809]",
+    "optimizer": "SLSQP",
+    "maxiter": "50",
+    "x": 380,
+    "y": 160,
+    "wires": [
+      [
+        "80c5a1ccae031136"
+      ]
+    ]
+  },
+  {
+    "id": "3a255e63eee02395",
+    "type": "Start",
+    "z": "81d80c904bd83a92",
+    "name": "",
+    "topic": "",
+    "repeat": "",
+    "x": 190,
+    "y": 160,
+    "wires": [
+      [
+        "0b3dca05dd4868a1"
+      ]
+    ]
+  },
+  {
+    "id": "80c5a1ccae031136",
+    "type": "debug",
+    "z": "81d80c904bd83a92",
+    "name": "debug 11",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "targetType": "msg",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 550,
+    "y": 160,
+    "wires": []
+  }
+]
