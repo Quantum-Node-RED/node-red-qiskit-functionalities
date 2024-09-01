@@ -14,8 +14,6 @@
   "license": "Apache-2.0",
   "node-red": {
     "nodes": {
-      "CHSH-game-classic": "nodes/CHSH-game-classic/CHSH-game-classic.js",
-      "CHSH-game-quantum": "nodes/CHSH-game-quantum/CHSH-game-quantum.js",
       "Start": "interactive-nodes/Flow/Start/Start.js",
       "End": "interactive-nodes/Flow/End/End.js",
       "Display": "interactive-nodes/Flow/Display/Display.js",
