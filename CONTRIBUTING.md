@@ -1,11 +1,12 @@
 # Contributing
 
 ## Qiskit Demonstration Flows
+
 The Qiskit Documentation Flow is encapsulated from the [Qiskit official documentation](https://docs.quantum.ibm.com/). To contribute to this section, please follow these steps:
 
 1. Each flow represents a module, or chapter, from the Qiskit official documentation, while each node corresponds to a step required to complete that module. You can decide the range of the step length in the original text according to your own understanding. These nodes should be placed in the `Learning/nodes/` directory, and paths should be created for them based on the hierarchical structure of the original article. For example, in the original text, the step "Change order in Qiskit" from the ["Bit-Ordering in the Qiskit SDK"](https://docs.quantum.ibm.com/guides/bit-ordering) section is placed in `Learning/nodes/Circuit-And-Operators/Build-Circuit-With-The-Qiskit-SDK/Bit-Ordering-In-The-Qiskit-SDK/Change-Ordering-In-Qiskit/Change_ordering_in_qiskit.js`
 
-2. When building a node, please refer to [the official Node-RED documentation](https://nodered.org/docs/creating-nodes/first-node). The description in the node should include a textual introduction for the corresponding steps, the required code snippet, an explanation of the code, and the node's input and output. This information should be placed in the node's Information sidebar. 
+2. When building a node, please refer to [the official Node-RED documentation](https://nodered.org/docs/creating-nodes/first-node). The description in the node should include a textual introduction for the corresponding steps, the required code snippet, an explanation of the code, and the node's input and output. This information should be placed in the node's Information sidebar.
 
 3. Since Node-RED cannot directly run Python code snippets, you will need to create an additional `.py` file and call PythonShell in the node's JavaScript to execute this `.py` file. The output from the .py file should be added to `msg.payload.result`. If the output is an image, connect an image output node after the node; if the output is text, connect a debug node.
 
@@ -14,8 +15,6 @@ The Qiskit Documentation Flow is encapsulated from the [Qiskit official document
 5. Once you have completed all the nodes, connect them sequentially to form a flow. The nodes in this flow should have the same category name and consistent names. At the beginning of the flow, use Node-RED's built-in inject node to inject a message and trigger the flow. Between each node, add a "Next" node, which can be found in the 'Learning Functional Nodes' category, to control the flow, allowing it to execute step-by-step and generate the output accordingly.
 
 6. When your flow is complete, it should be exported in JSON format and named after the corresponding chapter in orignal text. The flow should be placed in the `Learning/flows` directory.
-
-
 
 ## Interactive Node Framework
 
@@ -100,7 +99,7 @@ The **schemas** dictionary maps each quantum component or operation to a set of 
 
 You can contribute by adding
 
-## Other folders:
+### Other folders:
 
 There are many folders within the interactive-nodes that separate each category as a directory of the nodes. This includes:
 
@@ -115,12 +114,12 @@ There are many folders within the interactive-nodes that separate each category 
 
 If you want to add a new node or component, you can add it to these categories.
 
-## Adding new node or component
+## Adding new node or component to the Interactive Node Framework
 
 To add new node or component, you can follow these steps:
 
 1. Choose a category or directory of the node you think your node will be in. You can add new category if desired.
-2. Create a directory of that node with the node name under the category directory and subsequently create HTML and JavaScript file under the created node name .directory.
+2. Create a directory of that node with the node name under the category directory and subsequently create HTML and JavaScript file under the created node name directory.
 3. Add the code snippet of that component in code_component.py
 4. Add new import statement if an import statement for the code snippet added is not already exist in code_component_dependency.py.
 5. Add a new node as a path in package.json. Ensure that all the spelling reflect the name of the node you registered within HTML and JavaScript file.
