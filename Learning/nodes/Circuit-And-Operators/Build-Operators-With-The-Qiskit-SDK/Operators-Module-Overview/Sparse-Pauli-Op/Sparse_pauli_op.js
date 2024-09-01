@@ -40,5 +40,5 @@ module.exports = function (RED) {
       node.status({ fill: "red", shape: "dot", text: "You haven't learned this node yet." });
     });
   }
-  RED.nodes.registerType("sparse-pauli-op", SparsePauliOpNode);
+  RED.nodes.registerType("sparse-pauli", SparsePauliOpNode);
 };

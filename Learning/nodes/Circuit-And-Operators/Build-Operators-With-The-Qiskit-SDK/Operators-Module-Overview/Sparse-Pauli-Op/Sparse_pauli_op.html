@@ -1,5 +1,5 @@
 <script type="text/javascript">
-  RED.nodes.registerType("sparse-pauli-op", {
+  RED.nodes.registerType("sparse-pauli", {
     category: "Learning Build operators",
     color: "#fdaaa2",
     defaults: {
@@ -32,7 +32,7 @@
   });
 </script>
 
-<script type="text/html" data-template-name="sparse-pauli-op">
+<script type="text/html" data-template-name="sparse-pauli">
   <div class="form-row">
     <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
     <input type="text" id="node-input-name" placeholder="Name" />
@@ -57,7 +57,7 @@
   </div>
 </script>
 
-<script type="text/html" data-help-name="sparse-pauli-op">
+<script type="text/html" data-help-name="sparse-pauli">
   <p>A node that introduces the SparsePauliOp class</p>
 
   <h3>Outputs</h3>
