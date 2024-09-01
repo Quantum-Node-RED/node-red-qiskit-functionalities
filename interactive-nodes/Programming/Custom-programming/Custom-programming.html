@@ -1,6 +1,6 @@
 <script type="text/javascript">
   RED.nodes.registerType("custom_programming", {
-    category: "Programming",
+    category: "Interactive Programming",
     color: "#E6BCB9",
     defaults: {
       name: { value: "" },
@@ -14,19 +14,19 @@
     },
     oneditprepare: function () {
       this.editor = RED.editor.createEditor({
-      id: 'node-input-example-editor',
-      mode: 'ace/mode/text',
-      value: this.exampleText
-    });
+        id: 'node-input-example-editor',
+        mode: 'ace/mode/text',
+        value: this.exampleText
+      });
     },
-    oneditsave: function() {
-    this.exampleText = this.editor.getValue();
-    this.editor.destroy();
-    delete this.editor;
+    oneditsave: function () {
+      this.exampleText = this.editor.getValue();
+      this.editor.destroy();
+      delete this.editor;
     },
-    oneditcancel: function() {
-        this.editor.destroy();
-        delete this.editor;
+    oneditcancel: function () {
+      this.editor.destroy();
+      delete this.editor;
     },
   });
 </script>
@@ -59,4 +59,3 @@
     </ul>
   </p>
 </script>
-

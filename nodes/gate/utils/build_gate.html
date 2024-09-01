@@ -1,6 +1,6 @@
 <script type="text/javascript">
   RED.nodes.registerType("Build-Gate", {
-    category: "function",
+    category: "Interactive Function",
     color: "#aaaaaa",
     defaults: {
       name: { value: "Build-Gate" },
@@ -30,18 +30,18 @@
           ),
           $("<td>").append(
             '<input type="number" class="qubit-input qubit1-input" value="' +
-              ((gate && gate.qubits[0]) || "") +
-              '" style="display:none;">'
+            ((gate && gate.qubits[0]) || "") +
+            '" style="display:none;">'
           ),
           $("<td>").append(
             '<input type="number" class="qubit-input qubit2-input" value="' +
-              ((gate && gate.qubits[1]) || "") +
-              '" style="display:none;">'
+            ((gate && gate.qubits[1]) || "") +
+            '" style="display:none;">'
           ),
           $("<td>").append(
             '<input type="number" class="qubit-input qubit3-input" value="' +
-              ((gate && gate.qubits[2]) || "") +
-              '" style="display:none;">'
+            ((gate && gate.qubits[2]) || "") +
+            '" style="display:none;">'
           ),
           $("<td>").append('<button class="delete-gate">Delete</button>')
         );
