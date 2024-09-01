@@ -430,6 +430,18 @@ def get_state_vector_to_use(result):
         calling_function="""vqe = VQE({estimator}, {ansatz}, {optimizer}())
 {var_result} = vqe.compute_minimum_eigenvalue({operator})"""
     ),
+    
+    "Grover": Code_Component(
+        import_statement=[
+            Component_Dependency.Grover, 
+            Component_Dependency.AmplificationProblem,
+            Component_Dependency.Sampler 
+        ],
+        function="",
+        calling_function="""grover = Grover(iterations={iterators},growth_rate={growthRate},sample_from_iterations=False,sampler=Sampler())
+        problem = AmplificationProblem(oracle={oracleType},state_preparation=None,grover_operator=None, is_good_state=lambda bitstring: bitstring == {target})
+{var_result} = grover.amplify(problem))"""
+    ),
 
     "define_parameter": Code_Component(
         import_statement=[

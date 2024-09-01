@@ -21,6 +21,8 @@ class Component_Dependency:
     QuasiDistribution = ["qiskit.result.QuasiDistribution"]
     QAOA = ["qiskit_algorithms.QAOA"]
     VQE = ["qiskit_algorithms.VQE"]
+    Grover = ["qiskit_algorithms.Grover"]
+    AmplificationProblem = ["qiskit_algorithms.AmplificationProblem"]
     Optimizers = ["qiskit_algorithms.optimizers.{optimizer}"]
     Pyplot = ["matplotlib.pyplot", "plt"]
     Base64 = ["base64"]

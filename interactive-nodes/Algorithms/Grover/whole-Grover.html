@@ -1,9 +1,9 @@
 <script type="text/javascript">
-  RED.nodes.registerType("Grover_iteration", {
+  RED.nodes.registerType("whole-Grover", {
     category: "function",
     color: "#aaaaaa",
     defaults: {
-      name: { value: "Grover_iteration" },
+      name: { value: "whole-Grover" },
       oracleType: { value: "QuantumCircuit " },
       iterators: { value: "None" },
       input: { value: "None" },
@@ -15,16 +15,18 @@
     outputs: 1,
     icon: "file.svg",
     label: function () {
-      return this.name || "Grover_iteration";
+      return this.name || "whole-Grover";
     },
     oneditprepare: function () {
       $("#node-input-name").val(this.name || "");
+      $("#node-input-oracleType").val(this.oracleType || "QuantumCircuit");
       $("#node-input-iterators").val(this.iterators || "None");
       $("#node-input-input").val(this.input || "");
       $("#node-input-growth-rate").val(this.growthRate || "0.5");
       $("#node-input-sampleFromIterations").val(
         this.sampleFromIterations || "None"
       );
+      $("#node-input-target").val(this.target || "11");
 
       function updateFields() {
         var option = $("#node-input-iterators").val();
@@ -46,21 +48,34 @@
     },
     oneditsave: function () {
       this.name = $("#node-input-name").val();
+      this.oracleType = $("#node-input-oracleType").val();
       this.input = $("#node-input-input").val();
       this.iterators = $("#node-input-iterators").val();
       this.growthRate = $("#node-input-growth-rate").val();
       this.sampleFromIterations = $("#node-input-sampleFromIterations").val();
+      this.target = $("#node-input-target").val();
     },
   });
 </script>
 
-<script type="text/html" data-template-name="Grover_iteration">
+<script type="text/html" data-template-name="whole-Grover">
   <div class="form-row">
     <label for="node-input-name"><i class="fa fa-tag"></i>Name</label>
     <input type="text" id="node-input-name" placeholder="Name" />
   </div>
 
-  <!-- <div class="form-row">
+  <div class="form-row">
+    <label for="node-input-target"
+      ><i class="fa fa-tag"></i>Search Target</label
+    >
+    <input
+      type="text"
+      id="node-input-target"
+      placeholder="Enter the target less than 3 qubits"
+    />
+  </div>
+
+  <div class="form-row">
     <label for="node-input-oracleType"
       ><i class="fa fa-tag"></i>Oracle Type</label
     >
@@ -68,7 +83,7 @@
       <option value="QuantumCircuit">QuantumCircuit</option>
       <option value="Statevector">Statevector</option>
     </select>
-  </div> -->
+  </div>
 
   <div class="form-row">
     <label for="node-input-iterators"><i class="fa fa-tag"></i> Iterator</label>
@@ -107,6 +122,6 @@
   </div>
 </script>
 
-<script type="text/html" data-help-name="Grover_iteration">
-  <p>Grover_iteration</p>
+<script type="text/html" data-help-name="whole-Grover">
+  <p>whole-Grover</p>
 </script>

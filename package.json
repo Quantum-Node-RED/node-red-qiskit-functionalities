@@ -265,8 +265,7 @@
       "QAOA": "interactive-nodes/Algorithms/QAOA/QAOA.js",
       "whole-QAOA": "interactive-nodes/Algorithms/QAOA/whole-QAOA.js",
       "Grover": "interactive-nodes/Algorithms/Grover/Grover.js",
-      "build-oracle": "interactive-nodes/Algorithms/Grover/build_oracle.js",
-      "grover_iteration": "interactive-nodes/Algorithms/Grover/Grover_iteration.js",
+      "whole-Grover": "interactive-nodes/Algorithms/Grover/whole-Grover.js",
       "whole-VQE": "interactive-nodes/Algorithms/VQE/whole-VQE.js",
       "VQE": "interactive-nodes/Algorithms/VQE/VQE.js"
     }
