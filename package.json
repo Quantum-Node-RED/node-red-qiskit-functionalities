@@ -1,6 +1,6 @@
 {
   "name": "node-red-qiskit-functionalities",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "Quantum Computing Functionality for Node-RED",
   "main": "index.js",
   "scripts": {
