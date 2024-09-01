@@ -1,0 +1,56 @@
+<script type="text/javascript">
+    RED.nodes.registerType('initialize-estimator',{
+        category: 'Learning Debugging tools',
+        color: '#dddddd',
+        defaults: {
+            name: {value:"Initialize Estimator"},
+            info: {
+                value: "# [Exact simulation with Qiskit SDK primitives guide.](https://docs.quantum.ibm.com/guides/simulate-with-qiskit-sdk-primitives#)\r\n" +
+                "&nbsp;\r\n" +
+                "# To use the Estimator V2 implementation, follow the instructions to instantiate a " +
+                "<font style='background: GhostWhite'>_`qiskit.primitives.StatevectorEstimator`_</font>. If you want to maintain your " +
+                "pre-existing workflow using an Estimator V1 implementation, you can also use the " +
+                "<font style='background: GhostWhite'>_`qiskit.primitives.Estimator`_</font> class. \r\n" +
+                "# The nodes used in this flow use the Estimator V2 implementation, but each node will contain example code for both implementations.\r\n" +
+                "# StatevectorEstimator (V2)\r\n" +
+                "Instantiate a <font style='background: GhostWhite'>_`qiskit.primitives.StatevectorEstimator`_</font>\r\n" +
+                "```python\r\n" +
+                "from qiskit.primitives import StatevectorEstimator\r\n" + 
+                "estimator = StatevectorEstimator()\r\n" +
+                "```\r\n " +
+                "# Estimator (V1)\r\n" +
+                "Instantiate a <font style='background: GhostWhite'>_`qiskit.primitives.Estimator`_</font>\r\n" +
+                "```python\r\n" +
+                "from qiskit.primitives import Estimator\r\n" + 
+                "estimator = Estimator()\r\n" +
+                "```\r\n "
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "white_info.svg",
+        label: function() {
+            return this.name||"initialize-estimator";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="initialize-estimator">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="initialize-estimator">
+    <p>A node that shows how to initialize an Estimator primitive</p>
+
+    <h3>Details</h3>
+    <p>
+        This node shows how to initialize both the StatevectorEstimator (V2)
+        implementation and the Estimator (V1) implementation.
+        It is an information node that does not require any specific input and 
+        does not generate any output. Instead, it is intended to be a part of 
+        a chain of tutorial nodes that explain the basics of quantum computing.
+    </p>
+</script>

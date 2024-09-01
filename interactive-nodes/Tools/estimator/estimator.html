@@ -1,0 +1,31 @@
+<script type="text/javascript">
+  RED.nodes.registerType("estimator", {
+    category: "Interactive Tools",
+    color: "#D3E7B5",
+    defaults: {
+      name: { value: "" },
+      variable: { value: "" },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "font-awesome/fa-area-chart",
+    label: function () {
+      return "estimator";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="estimator">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-variable"><i class="fa fa-tag"></i>Variable</label>
+    <input type="text" id="node-input-variable" placeholder="Variable" />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="estimator">
+  <p></p>
+</script>

@@ -1,0 +1,65 @@
+
+<script type="text/javascript">
+    RED.nodes.registerType("run-circuit-on-custom-backend", {
+      category: "Learning Transpile against custom backend",
+      color: "#E7E7AE",
+      defaults: {
+        name: { value: "Run circuit on the custom backend" },
+        info: { value: "## **Node Input:**\r\n- # Object: `ghz` (Type: _qiskit.circuit.Quantumcircuit_)\r\n\r\n***\r\n&nbsp;\r\n# In this node, we transpiles created circuit against the backend constructed before.\r\n```python\r\nfrom qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager\r\n\r\npm = generate_preset_pass_manager(optimization_level=3, backend=backend)\r\ntranspiled_ghz = pm.run(ghz)\r\nop_counts = transpiled_ghz.count_ops()\r\n```\r\n# The number of each types of gate is sent to \"Gates after transpilation\" node and you can check them in the debug palette. You can also see which qubits and two-qubit channels were used in this circuit in \"Backend Usage Image Output\" node.\r\n&nbsp;\r\n# You should find that  transpiled circuit now contains a mixture of CZ and ECR gates,which we specified as the basis gates in the backend's <font style=\"background: lightgrey\">Target</font>. There are also quite a few more gates than you started with because of the need to insert SWAP instructions after choosing a layout.\r\n&nbsp;\r\n# **Note:** In this flow, we will directly show you the visualizations. However, if you want to manually try building the code yourself or customize your code, you will need to install the [graphviz](https://graphviz.org/) library for the diagram plotting functions.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Dictionary: `op_counts` (Type: _dict_)\r\n- # Image: The image of which qubits and two-qubit channels were used in the circuit\r\n" }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "Run circuit on the custom backend";
+      },
+      
+    });
+
+  </script>
+  
+  <script type="text/html" data-template-name="run-circuit-on-custom-backend">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Run circuit on the custom backend" />
+    </div>
+
+  </script>
+
+  
+  
+  <script type="text/html" data-help-name="run-circuit-on-custom-backend">
+    <p>A node that run circuit on the created custom backend.</p>
+
+    <h3>Inputs</h3>
+    <ol class="node-ports">
+      <li>Quantum Circuit
+        <dl class="message-properties">
+          <dt>ghz<span class="property-type">qiskit.circuit.Quantumcircuit</span></dt>
+          <dd>The created quantum circuit</dd>
+        </dl>
+      </li>
+    </ol>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Dictionary
+        <dl class="message-properties">
+          <dt>op_counts<span class="property-type">dict</span></dt>
+          <dd>The key is  gate and the value is the number of this gate</dd>
+        </dl>
+      </li>
+      <li>Qubits Diagram
+        <dl class="message-properties">
+          <dt>qubits_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing which qubits and two-qubit channels were used in the circuit.</dd>
+        </dl>
+      </li>
+    </ol>
+
+    <h3>Details</h3>
+    <p>     
+      This node provides an introduction to Qiskit's transpilation process and its interaction with a specified backend. It explains how a quantum circuit, such as a GHZ state, can be transpiled using a preset pass manager with a given optimization level. After transpilation, the circuit is adapted to match the backend's constraints, which may include a mix of gates like CZ and ECR, and potentially additional SWAP gates. You can review the counts of different gate types in the "Gates after transpilation" section and analyze the qubit and two-qubit channel usage in the "Backend Usage Image Output" section. Note that for custom implementations or further exploration, installing the Graphviz library is necessary for generating visualization diagrams.
+    </p>
+  </script>
+  

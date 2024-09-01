@@ -1,0 +1,112 @@
+[
+    {
+        "id": "2223dd71286e972f",
+        "type": "tab",
+        "label": "Save circuits to disk",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "3e96ad675dd194f3",
+        "type": "inject",
+        "z": "2223dd71286e972f",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 230,
+        "y": 560,
+        "wires": [
+            [
+                "1ddcb99739666176"
+            ]
+        ],
+        "info": "# This flow will demonstrate you how to save circuits to file and reload them from the file."
+    },
+    {
+        "id": "4a8368fa0b60cf9d",
+        "type": "image",
+        "z": "2223dd71286e972f",
+        "name": "Circuit Diagram",
+        "width": "400",
+        "data": "payload.result.circuit_diagram",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1340,
+        "y": 560,
+        "wires": [],
+        "info": "Image reloaded from test.qpy"
+    },
+    {
+        "id": "1ddcb99739666176",
+        "type": "Saving",
+        "z": "2223dd71286e972f",
+        "name": "Save circuits to disk",
+        "info": "# Use [QPY serialization](https://docs.quantum.ibm.com/api/qiskit/qpy) to save your circuit to file. QPY files store the full Qiskit circuit object and will be compatible with newer versions of Qiskit (although not necessarily with older versions of Qiskit).\n&nbsp;\n# To demonstrate, the following code snippet creates a simple quantum circuit.\n```python\nfrom qiskit import QuantumCircuit\n \nqc = QuantumCircuit(2)\nqc.h(0)\nqc.cx(0,1)\nqc.measure_all()\n```\n# To save this file to disk, use the <font style=\"background: lightgrey\">qpy.dump</font> function. You can also save a list of circuits.\n```python\nfrom qiskit import qpy\n \nwith open('test.qpy', 'wb') as file:\n    qpy.dump(qc, file)\n```\n# The path of the saved circuit file has been sent to the \"Path of saved file\" node. You can check it in the debug sidebar.\n\n***\n&nbsp;\n## **Node Output:**\n- # Path: the path of 'test.qpy'",
+        "x": 520,
+        "y": 560,
+        "wires": [
+            [
+                "31c61956a86bcdc9",
+                "15346ccdfeef230a"
+            ]
+        ]
+    },
+    {
+        "id": "e966c9cf1eefacf7",
+        "type": "reload",
+        "z": "2223dd71286e972f",
+        "name": "Reload circuit from disk",
+        "info": "# This circuit is now saved to the file <font style=\"background: lightgrey\">test.qpy</font>. You can also re-load the circuit using the <font style=\"background: lightgrey\">qpy.load</font> function. Note that this always returns a list of circuits, even if you only serialized one circuit.\r\n&nbsp;\r\n# The following code snippet reloads the circuit we created in the previous node from disk.\r\n```python\r\nwith open('test.qpy', 'rb') as handle:\r\n    qc = qpy.load(handle)\r\n \r\nqc[0].draw('mpl')\r\n```\r\n# You can check the image of this circuit in the \"Circuit Diagram\" node. It should contain a Hardamard gate and a CX gate.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: the image of variable `qc`",
+        "x": 1030,
+        "y": 560,
+        "wires": [
+            [
+                "4a8368fa0b60cf9d"
+            ]
+        ]
+    },
+    {
+        "id": "31c61956a86bcdc9",
+        "type": "debug",
+        "z": "2223dd71286e972f",
+        "name": "Path of saved file",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload.result.result",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 770,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "15346ccdfeef230a",
+        "type": "move-to-next-node",
+        "z": "2223dd71286e972f",
+        "name": "Next",
+        "x": 730,
+        "y": 560,
+        "wires": [
+            [
+                "e966c9cf1eefacf7"
+            ]
+        ]
+    }
+]

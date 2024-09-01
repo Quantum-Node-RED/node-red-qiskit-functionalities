@@ -1,0 +1,64 @@
+<script type="text/javascript">
+    RED.nodes.registerType('plot-bloch-multivector',{
+        category: 'Learning Plot quantum states',
+        color: '#E9967A',
+        defaults: {
+            name: {value:"Plot Bloch Multivector"},
+            info: {
+                value:"# [Plot quantum states guide.](https://docs.quantum.ibm.com/guides/plot-quantum-states#)\r\n" +
+                "&nbsp;\r\n" +
+                "# The Bloch vector of a qubit state is its expectation value in the X, Y, and Z Pauli observables mapped to the X, Y" +
+                ", and Z axes in three-dimensional space. This plot projects multi-qubit quantum states onto the single-qubit space " +
+                "and plots each qubit on a Bloch sphere. This visualization only shows the expectation values of individual qubits." +
+                "It can't show correlations between qubits and so can't fully describe entangled quantum states.\r\n" +
+                "```python\r\n" +
+                "from math import pi\r\n" +
+                "from qiskit import QuantumCircuit\r\n" +
+                "from qiskit.quantum_info import Statevector\r\n" + 
+                "from qiskit.visualization import plot_bloch_multivector\r\n" + 
+                "\r\n" +
+                "# Create a Bell state for demonstration\r\n" +
+                "qc = QuantumCircuit(2)\r\n" +
+                "qc.h(0)\r\n" +
+                "qc.crx(pi/2, 0, 1)\r\n" +
+                "psi = Statevector(qc)\r\n" +
+                "\r\n" +
+                "plot_bloch_multivector(psi)\r\n" +
+                "```\r\n "
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "file.svg",
+        label: function() {
+            return this.name||"plot-bloch-multivector";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="plot-bloch-multivector">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="plot-bloch-multivector">
+    <p>A node that shows how to generate a "Bloch" plot using the plot_bloch_multivector visulization</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Bloch plot
+        <dl class="message-properties">
+          <dt>payload.result.circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the Bloch plot.</dd>
+        </dl>
+      </li>
+    </ol>
+    
+    <h3>Details</h3>
+    <p>
+        This node shows an example of how a <code>plot_bloch_multivector()</code> function of the 
+        <code>qiskit.visualization</code> module is used to plot a Bloch sphere.
+    </p>
+</script>

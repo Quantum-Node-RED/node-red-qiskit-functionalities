@@ -1,0 +1,49 @@
+
+<script type="text/javascript">
+    RED.nodes.registerType("pulse-builder-align-sequential", {
+      category: "Learning Feature of pulse builder",
+      color: "#E7E7AE",
+      defaults: {
+        name: { value: "align_sequential()" },
+        info: { value: "# <font style=\"background: lightgrey\">align_sequential</font> does not schedule instructions in parallel. Each instruction will begin at the end of the previously added instruction.\r\n&nbsp;\r\n# In the code snippet below, we create a pulse schedule where three Gaussian pulses(with duration 100 each) are played on two drive channels. And in the output image, you can see these three pulses connected end-to-end in sequence.\r\n```python\r\nwith pulse.build(backend, name='example') as program:\r\n    with pulse.align_sequential():\r\n        gaussian_pulse = library.Gaussian(100, 0.5, 20)\r\n        pulse.play(gaussian_pulse, pulse.drive_channel(0))\r\n        pulse.play(gaussian_pulse, pulse.drive_channel(1))\r\n        pulse.play(gaussian_pulse, pulse.drive_channel(1))\r\n```\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: the image of pulses which are aligned by sequential order.\r\n" }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "align_sequential()";
+      },
+      
+    });
+
+  </script>
+  
+  <script type="text/html" data-template-name="pulse-builder-align-sequential">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="align_sequential()" />
+    </div>
+
+  </script>
+
+  
+  
+  <script type="text/html" data-help-name="pulse-builder-align-sequential">
+    <p>A simple node that align the context by order of sequence.</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Pulse Diagram
+        <dl class="message-properties">
+          <dt>result_image<span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the pulses.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to the align_sequential scheduling method in Qiskit's pulse module. It demonstrates how align_sequential arranges instructions so that each new instruction starts after the previous one completes, rather than scheduling them in parallel.
+    </p>
+  </script>
+  

@@ -1,0 +1,61 @@
+
+<script type="text/javascript">
+    RED.nodes.registerType("use-the-transpiler-pass", {
+      category: "Learning Write a custom transpiler pass",
+      color: "#FFF0F0",
+      defaults: {
+        name: { value: "Use PauliTwirl transpiler pass" },
+        info: { value: "# In this node, we use the pass created above to transpile a circuit. The code snippet below create a simple circuit with <font style=\"background: lightgrey\">cx</font>s and <font style=\"background: lightgrey\">ecr</font>s.\r\n```python\r\nqc = QuantumCircuit(3)\r\nqc.cx(0, 1)\r\nqc.ecr(1, 2)\r\nqc.ecr(1, 0)\r\nqc.cx(2, 1)\r\nqc.draw('mpl')\r\n```\r\n# You can check the image of this circuit in the \"Circuit Image Output\" node.\r\n&nbsp;\r\n# Then, to apply the custom pass, build a pass manager using the <font style=\"background: lightgrey\">PauliTwirl</font> pass and run it on 50 circuits. \r\n```python\r\npm = PassManager([PauliTwirl()])\r\ntwirled_qcs = [pm.run(qc) for _ in range(50)]\r\n```\r\n# Check the image of the tranpiled circuit in the \"Circuit after transpilation Output\" node. You can see each two-qubit gate is now sandwiched between two Paulis.\r\n&nbsp;\r\n# The operators are the same if <font style=\"background: lightgrey\">Operator</font> from <font style=\"background: lightgrey\">qiskit.quantum_info</font> is used:\r\n```python\r\nnp.all([Operator(twirled_qc).equiv(qc) for twirled_qc in twirled_qcs])\r\n```\r\n# The output should be _True_ in \"Same Operators\" node.\r\n\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: The image of circuit `qc`\r\n- # Image: The image of transpiled circuit `twirled_qcs`\r\n- # Boolean: Check whether the operators in `twirled_qcs` are same with `qc`" }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "Use PauliTwirl transpiler pass";
+      },
+      
+    });
+
+  </script>
+  
+  <script type="text/html" data-template-name="use-the-transpiler-pass">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Use PauliTwirl transpiler pass" />
+    </div>
+
+  </script>
+
+  
+  
+  <script type="text/html" data-help-name="use-the-transpiler-pass">
+    <p>A node that use the PauliTwirl transpiler pass.</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the quantum circuit `qc`.</dd>
+        </dl>
+      </li>
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the optimized quantum circuit `twirled_qcs`.</dd>
+        </dl>
+      </li>
+      <li>Boolean
+        <dl class="message-properties">
+          <dt>same<span class="property-type">bool</span></dt>
+          <dd>Check whether the operators in `twirled_qcs` are same with `qc`.</dd>
+        </dl>
+      </li>
+    </ol>
+
+    <h3>Details</h3>
+    <p>     
+      This node provides an introduction to the concept of circuit transpilation in quantum computing using Qiskit. It specifically focuses on the use of a custom transpiler pass called "PauliTwirl," which is applied to a simple quantum circuit containing controlled-X (CX) and echoed cross-resonance (ECR) gates. The node illustrates how the PauliTwirl pass can be employed to modify a quantum circuit by sandwiching two-qubit gates between random Pauli operators, while ensuring the overall operator equivalence of the circuit is preserved. 
+    </p>
+  </script>
+  

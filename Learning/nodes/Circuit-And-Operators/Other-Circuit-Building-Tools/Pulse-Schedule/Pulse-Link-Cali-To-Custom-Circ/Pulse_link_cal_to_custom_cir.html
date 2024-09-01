@@ -1,0 +1,64 @@
+<script type="text/javascript">
+  RED.nodes.registerType("pulse-link-cal-to-custom-cir", {
+    category: "Learning Add calibrations to custom gate",
+    color: "#DAC4B4",
+    defaults: {
+      name: { value: "Link calibration to your custom gate" },
+      info: { value: "## **Node Input:**\r\n- # Object: `circ` (Type: _qiskit.circuit.quantumcircuit_)\r\n- # Object: `my_schedule` (Type: _qiskit.pulse.schedule.ScheduleBlock_)\r\n\r\n***\r\n&nbsp;\r\n# Once the calibration is built, you can link it to your custom gate by following python code:\r\n```python\r\ncirc.add_calibration('my_custom_gate', [0], my_schedule, [3.14, 1])\r\ncirc = passmanager.run(circ)\r\n```\r\n# Remember that the order of parameters is significant.\r\n&nbsp;\r\n# Also, there is another way to link calibration to your gate. You can you use the <font style='background: lightgrey'>_Gate_</font> instance variable 'custom_gate' to add the calibration, and the parameters are derived from that instance.\r\n```python\r\ncirc.add_calibration(custom_gate, [0], my_schedule)\r\ncirc = passmanager.run(circ)\r\n```\r\n# The diagram of optimized quantum circuit is displayed below the \"Optimized custom gate\" node\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image:  the image of optimized circuit `circ`"}
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    label: function () {
+      return this.name || "Link calibration to your custom gate";
+    },
+  });
+
+</script>
+
+<script type="text/html" data-template-name="pulse-link-cal-to-custom-cir">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Link calibration to your custom gate" />
+  </div>
+
+</script>
+
+
+
+<script type="text/html" data-help-name="pulse-link-cal-to-custom-cir">
+  <p>A simple node that link the calibration to your custom gate.</p>
+
+  <h3>Inputs</h3>
+    <ol class="node-ports">
+      <li>Quantum Circuit
+        <dl class="message-properties">
+          <dt>circ<span class="property-type">qiskit.circuit.QuantumCircuit</span></dt>
+          <dd>The quantum circuit `circ`.</dd>
+        </dl>
+      </li>
+      <li>Schedule Block
+        <dl class="message-properties">
+          <dt>my_schedule<span class="property-type">qiskit.pulse.schedule.ScheduleBlock</span></dt>
+          <dd>The schedule block which calibrates the hardamard gate on qubit 0 of the circuit.</dd>
+        </dl>
+      </li>
+    </ol>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the optimized circuit.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to adding custom gate calibrations in Qiskit circuits. It explains how to link a calibration to a custom gate using Python code. Users can add calibrations by specifying gate names and parameters, or by utilizing the Gate instance variable. The node highlights the significance of parameter order in calibration and provides insight into the process of incorporating custom schedules into quantum circuits. 
+    </p>
+</script>
+
+  

@@ -1,0 +1,79 @@
+<script type="text/javascript">
+  RED.nodes.registerType("sparse-pauli", {
+    category: "Learning Build operators",
+    color: "#fdaaa2",
+    defaults: {
+      name: { value: "SparsePauliOp class" },
+      info: {
+          value:"# [Overview of operator classes guide.](https://docs.quantum.ibm.com/guides/operators-overview#overview-of-operator-classes#)\r\n" +
+          "&nbsp;\r\n" +
+          "# The <font style='background: lightgrey'>_`SparsePauliOp`_</font> class represents a linear combination of Pauli strings. " +
+          "There are several ways to initialize a <font style='background: lightgrey'>_`SparsePauliOp`_</font>, " +
+          "but the most flexible way is to use the <font style='background: lightgrey'>_`from_sparse_list`_</font> method, " +
+          "as demonstrated in the following code cell. The <font style='background: lightgrey'>_`from_sparse_list`_</font> accepts " +
+          "a list of <font style='background: lightgrey'>_`(pauli_string, qubit_indices, coefficient)`_</font> triplets.\r\n" +
+          "```python\r\n" +
+          "# You can change the value of op1 in the node's properties\r\n" + 
+          "op1 = SparsePauliOp.from_sparse_list(\r\n" + 
+          "    [(\"ZX\", [1, 4], 1.0), (\"YY\", [0, 3], -1 + 1j)], num_qubits=5)\r\n" +
+          "\r\n" +
+          "print(op1.to_list())\r\n" +
+          "```\r\n "
+      },
+      op1: { value: "[[\"ZX\", [1, 4], 1.0], [\"YY\", [0, 3], -1 + 1j]]", required: true },
+      op1_num_qubits: { value: 5, required: true },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    label: function () {
+      return this.name || "sparse-pauli-op";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="sparse-pauli">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+
+  <div class="form-row">
+    <label><i class="fa fa-cube"></i> Operator 1</label>
+  </div>
+  <div class="form-row">
+    <label for="node-input-op1"><i class="fa fa-cube"></i> Sparse List</label>
+    <input
+      type="string"
+      id="node-input-op1"
+      placeholder='[["ZX", [1, 4], 1.0], ["YY", [0, 3], -1 + 1j]]'
+    />
+  </div>
+  <div class="form-row">
+    <label for="node-input-op1_num_qubits"
+      ><i class="fa fa-cube"></i> Num Qubits</label
+    >
+    <input type="number" id="node-input-op1_num_qubits" placeholder="5" />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="sparse-pauli">
+  <p>A node that introduces the SparsePauliOp class</p>
+
+  <h3>Outputs</h3>
+  <ol class="node-ports">
+    <li>Sparse representation
+      <dl class="message-properties">
+        <dt>payload.result.SparsePauliOp_list <span class="property-type">array</span></dt>
+        <dd>List of pairs (label, coeff) for rows of the PauliList generated from the sparse list given to the node</dd>
+      </dl>
+    </li>
+  </ol>
+
+  <h3>Details</h3>
+  <p>
+    This node demonstrates how a <code>SparsePauliOp</code> can be initialized using a <code>from_sparse_list</code> method.
+    This node has a predefined placeholder value for the sparse list used, but can be changed to any list of 
+    <code>(pauli_string, qubit_indices, coefficient)</code> triplets for interactability in the properties tab for the node.
+  </p>
+</script>

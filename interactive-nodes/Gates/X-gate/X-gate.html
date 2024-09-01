@@ -1,0 +1,45 @@
+<script type="text/javascript">
+  RED.nodes.registerType("X_gate", {
+    category: "Interactive Gates",
+    color: "#D7B9E6",
+    defaults: {
+      name: { value: "" },
+      sequence_no: { value: "" },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "cog.svg",
+    label: function () {
+      return this.name || "X_gate";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="X_gate">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-sequence_no"><i class="fa fa-tag"></i> Sequence No</label>
+    <input type="number" id="node-input-sequence_no" placeholder="Sequence No" /> 
+  </div>
+
+</script>
+
+<script type="text/html" data-help-name="X_gate">
+  <p>
+    <h2>Introduction:</h2>
+    <p>The <code>X</code> gate, also known as the Pauli-X gate or NOT gate, is a single-qubit quantum gate 
+      that flips the state of a qubit.</p>
+      <li><code>X|0⟩ = |1⟩</code></li>
+      <li><code>X|1⟩ = |0⟩</code></li>
+      
+    <h2>Placement:</h2>
+    <ul>
+      <li>It should follow a qubit node directly or indirectly.</li>
+      <li>It should be placed inside the range [Quantum-Circuit-Begin, Quantum-Circuit-END].</li>
+      <li>There should be at least 1 qubit inside the circuit.</li>
+    </ul>
+  </p>
+</script>

@@ -4,6 +4,11 @@
 # local dev file
 .vscode/
 .DS_Store
+*/__pycache__
 
 # Optional npm cache directory
 .npm
+
+# environment
+/venv
+.env

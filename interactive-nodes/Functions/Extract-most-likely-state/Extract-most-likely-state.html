@@ -1,0 +1,147 @@
+<script type="text/javascript">
+  RED.nodes.registerType("extract_most_likely_state", {
+    category: "Interactive Function",
+    color: "#E6BCB9",
+    defaults: {
+      name: { value: "" },
+      variable: { value: "", required: true },
+      state_vector: { value: "", required: true },
+      num_qubits: { value: 1, required: true },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "function.svg",
+    label: function () {
+      return this.name || "extract_most_likely_state";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="extract_most_likely_state">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-variable"
+      ><i class="fa fa-tag"></i> Variable name</label
+    >
+    <input type="text" id="node-input-variable" placeholder="Variable Name" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-state_vector"
+      ><i class="fa fa-tag"></i> State vector</label
+    >
+    <input
+      type="text"
+      id="node-input-state_vector"
+      placeholder="State Vector (Quantum State Result)"
+    />
+  </div>
+  <div class="form-row">
+    <label for="node-input-num_qubits"
+      ><i class="fa fa-tag"></i> Number of qubits</label
+    >
+    <input
+      type="number"
+      id="node-input-num_qubits"
+      placeholder="Number of Qubits (e.g. 2)"
+      min="1"
+      step="1"
+    />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="extract_most_likely_state">
+  <p>
+    The <strong>extract_most_likely_state</strong> node is designed to determine
+    the most likely quantum state from a given state vector or quasi-probability
+    distribution. This node is useful in quantum computing applications where
+    the most probable outcome of a quantum circuit needs to be identified.
+  </p>
+
+  <h3>Inputs</h3>
+  <ul>
+    <li>
+      <strong>Name (name)</strong>: An optional name for the node instance. This
+      is helpful for identifying the node in your Node-RED flow.
+    </li>
+    <li>
+      <strong>Variable (variable)</strong>: The variable name where the result
+      of the most likely state will be stored.
+    </li>
+    <li>
+      <strong>State Vector (state_vector)</strong>: The input state vector or
+      quasi-probability distribution from which the most likely quantum state
+      will be extracted. This should be provided as a string representing the
+      variable or data containing the state information.
+    </li>
+    <li>
+      <strong>Number of Qubits (num_qubits)</strong>: The number of qubits in
+      the quantum circuit or state vector. This value must be a positive integer
+      and represents the number of binary digits in the resulting most likely
+      state.
+    </li>
+  </ul>
+
+  <h3>Outputs</h3>
+  <ul>
+    <li>
+      <strong>msg.payload</strong>: Contains the extracted most likely quantum
+      state as a binary array. The output is a NumPy array where each element
+      represents a qubit's state (0 or 1) in the most probable quantum state.
+    </li>
+  </ul>
+
+  <h3>How to Use</h3>
+  <ol>
+    <li>
+      Drag the <strong>extract_most_likely_state</strong> node into your
+      Node-RED workspace from the "function" category.
+    </li>
+    <li>Double-click the node to open its configuration panel.</li>
+    <li>
+      Set the <strong>Name</strong> (optional) to label your node instance.
+    </li>
+    <li>
+      Enter the <strong>Variable</strong> where you want the most likely state
+      to be stored.
+    </li>
+    <li>
+      Specify the <strong>State Vector</strong> that contains the quantum state
+      data to analyze. This should be formatted correctly as per the quantum
+      computation result.
+    </li>
+    <li>
+      Set the <strong>Number of Qubits</strong> to indicate the number of qubits
+      in your quantum circuit.
+    </li>
+    <li>
+      Connect the input of this node to a node that provides the quantum state
+      vector and connect the output to a debug or further processing node to
+      utilize the extracted state.
+    </li>
+    <li>
+      Deploy the flow to save the changes and run the quantum state extraction
+      when the flow is triggered.
+    </li>
+  </ol>
+
+  <h3>Example Use Case</h3>
+  <p>
+    This node can be used in a quantum computing workflow where you need to
+    analyze the result of a quantum circuit execution and determine the most
+    probable outcome. For example, after running a QAOA (Quantum Approximate
+    Optimization Algorithm) circuit, you may want to extract the most likely
+    result state to evaluate the solution's quality.
+  </p>
+
+  <h3>Additional Notes</h3>
+  <p>
+    The function implemented in this node checks if the provided
+    <strong>state_vector</strong> is a QuasiDistribution or a standard state
+    vector. It automatically handles both cases and computes the most likely
+    state. Ensure that the <strong>num_qubits</strong> is set correctly to match
+    the quantum circuit's configuration to avoid unexpected results.
+  </p>
+</script>

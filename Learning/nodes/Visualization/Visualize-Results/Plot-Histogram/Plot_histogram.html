@@ -1,0 +1,75 @@
+<script type="text/javascript">
+    RED.nodes.registerType('plot-histogram',{
+        category: 'Learning Visualize results',
+        color: '#FDF0C2',
+        defaults: {
+            name: {value:"Plot histogram"},
+            info: {
+                value:"# [Visualize results guide.](https://docs.quantum.ibm.com/guides/visualize-results#)\r\n" +
+                "&nbsp;\r\n" +
+                "# The <font style='background: lightgrey'>_`plot_histogram`_</font> function visualizes the result of " +
+                "sampling a quantum circuit on a QPU or simulator.\r\n" +
+                "# This function returns a <font style='background: lightgrey'>_`matplotlib.Figure`_</font> object. " +
+                "When the last line of a code cell outputs these objects, Jupyter notebooks display them below " +
+                "the cell. If you call these functions in some other environments or in scripts, you will " +
+                "need to explicitly show or save the outputs. Two options are:\r\n" +
+                "- Call <font style='background: lightgrey'>_`.show()`_</font> on the returned object to open the " +
+                "image in a new window (assuming your configured matplotlib backend is interactive).\r\n" +
+                "- Call <font style='background: lightgrey'>_`.savefig(\"out.png\")`_</font> to save the figure to " +
+                "<font style='background: lightgrey'>_`out.png`_</font> in the current working directory. The " +
+                "<font style='background: lightgrey'>_`savefig()`_</font> method takes a path so you can adjust " +
+                "the location and filename where you're saving the output. For example, " +
+                "<font style='background: lightgrey'>_`plot_state_city(psi).savefig(\"out.png\")`_</font>\r\n" +
+                "# For example, make a two-qubit Bell state:\r\n" +
+                "```python\r\n" +
+                "from qiskit_aer.primitives import Sampler\r\n" +
+                "from qiskit import QuantumCircuit\r\n" +
+                "from qiskit.visualization import plot_histogram\r\n" + 
+                "\r\n" +
+                "# quantum circuit to make a Bell state\r\n" +
+                "bell = QuantumCircuit(2)\r\n" +
+                "bell.h(0)\r\n" +
+                "bell.cx(0, 1)\r\n" +
+                "bell.measure_all()\r\n" +
+                "\r\n" +
+                "# execute the quantum circuit\r\n" +
+                "quasi_dists = Sampler().run(bell, shots=1000).result().quasi_dists[0]\r\n" +
+                "plot_histogram(quasi_dists)\r\n" +
+                "```\r\n "
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "file.svg",
+        label: function() {
+            return this.name||"plot-histogram";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="plot-histogram">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="plot-histogram">
+    <p>A node that shows how to visualize the result of sampling a quantum circuit using plot_histogram</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+        <li>Histogram
+        <dl class="message-properties">
+            <dt>payload.result.quantum_histogram <span class="property-type">string (Base64)</span></dt>
+            <dd>The Base64-encoded string representing the histogram of the quantum circuit.</dd>
+        </dl>
+        </li>
+    </ol>
+
+    <h3>Details</h3>
+    <p>
+        This node introduces the <code>plot_histogram</code> function that visualizes the result
+        of sampling and shows and example of how to use it.
+    </p>
+</script>

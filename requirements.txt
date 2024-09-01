@@ -1,0 +1,8 @@
+matplotlib==3.6.2
+networkx==2.8.4
+numpy==1.24.2
+qiskit==1.1.0
+qiskit_aer==0.14.2
+qiskit_algorithms==0.3.0
+qiskit_ibm_runtime==0.24.1
+rustworkx==0.14.2

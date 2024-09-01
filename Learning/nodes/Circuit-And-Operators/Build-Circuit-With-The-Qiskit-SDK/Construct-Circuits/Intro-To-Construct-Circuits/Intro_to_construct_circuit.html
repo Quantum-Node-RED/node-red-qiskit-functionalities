@@ -1,0 +1,38 @@
+<script type="text/javascript">
+    RED.nodes.registerType('intro-to-construct-circuits', {
+      category: 'Learning Construct circuits',
+      color: '#dddddd',
+      defaults: {
+        name: { value: "Construct circuits" },
+        info: { 
+            value: "# These flows take a closer look at the " +
+        "[<font style=\"background: lightgrey\">QuantumCircuit</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit) " +
+        "class in the Qiskit SDK, including some more advanced methods you can use to create quantum circuits."
+        }
+      },
+      inputs: 0,
+      outputs: 1,
+      icon: "white_info.svg",
+      label: function () {
+        return this.name || "Construct circuits";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="intro-to-construct-circuits">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Construct circuits">
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="intro-to-construct-circuits">
+    <p>A node that introduces the 'construct circuit' tutorial.</p>
+
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to the 'construct circuit' tutorial. It is an information node that does not require any specific input
+      and does not generate any output. Instead, it is intended to be a part of a chain of tutorial nodes that explain the basics of 
+      quantum computing.
+    </p>
+  </script>

@@ -1,0 +1,75 @@
+<script type="text/javascript">
+  RED.nodes.registerType("Use-Unitary-Operator-In-Circuit", {
+    category: "Learning The operator class",
+    color: "#9cd0e0",
+    defaults: {
+      name: { value: "Use unitary Operator in Circuit" },
+      info: {
+          value: "# [The Operator class guide](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n" +
+          "&nbsp;\r\n" +
+          "# Unitary <font style='background: GhostWhite'>_`Operators`_</font> can be directly inserted into a " +
+          "<font style='background: GhostWhite'>_`QuantumCircuit`_</font> using the " +
+          "<font style='background: GhostWhite'>_`QuantumCircuit.append`_</font> method. This converts the " +
+          "<font style='background: GhostWhite'>_`Operator`_</font> into a " +
+          "<font style='background: GhostWhite'>_`UnitaryGate `_</font> object, which is added to the circuit.\r\n" +
+          "# If the operator is not unitary, an exception is raised. This can be checked using the" +
+          " <font style='background: GhostWhite'>_`Operator.is_unitary()`_</font> function, which returns True " +
+          "if the operator is unitary and False otherwise.\r\n" +
+          "```python\r\n" +
+          "# Create an operator\r\n" + 
+          "XX = Operator(Pauli(\"XX\"))\r\n" +
+          "\r\n" +
+          "# Add to a circuit\r\n" +
+          "circ = QuantumCircuit(2, 2)\r\n" +
+          "circ.append(XX, [0, 1])\r\n" +
+          "circ.measure([0, 1], [0, 1])\r\n" +
+          "circ.draw(\"mpl\")\r\n" +
+          "```\r\n "
+      },
+      pauli: { value: "XX", required: true },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    label: function () {
+      return this.name || "Use-Unitary-Operator-In-Circuit";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="Use-Unitary-Operator-In-Circuit">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-pauli"><i class="fa fa-magic"></i> Pauli</label>
+    <input
+      type="string"
+      id="node-input-pauli"
+      placeholder="Please give a Pauli term"
+    />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="Use-Unitary-Operator-In-Circuit">
+  <p>A node that introduces how to use operators in circuits</p>
+
+  <h3>Outputs</h3>
+  <ol class="node-ports">
+    <li>Circuit image
+      <dl class="message-properties">
+        <dt>payload.result.circuit_image <span class="property-type">string (Base64)</span></dt>
+        <dd>The Base64-encoded string representing the visual diagram of the quantum circuit.</dd>
+      </dl>
+    </li>
+  </ol>
+
+  <h3>Details</h3>
+  <p>
+    This node demonstrates how unitary <code>Operatos</code> can be inserted into a <code>QuantumCircuit</code>.
+    It shows an example where the operator is initialized from a XX Pauli object and then inserted.
+    This node has a predefined placeholder value for the Pauli object that is used, but this can be changed
+    for interactability in the properties tab for the node.
+  </p>
+</script>

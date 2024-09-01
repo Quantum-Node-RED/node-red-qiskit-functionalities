@@ -1,0 +1,81 @@
+<script type="text/javascript">
+    RED.nodes.registerType('add-x-gate', {
+      category: 'Learning Construct circuits',
+      color: '#AAAA66',
+      defaults: {
+        name: { value: "Add instruction to circuit" },
+        info: {
+            value:"## **Node Input:**\r\n" +
+            "- # Object: `qc` (Type: _qiskit.QuantumCircuit_)\r\n\r\n" +
+            "***\r\n" +
+            "&nbsp;\r\n" +
+            "# Adding an instruction to the circuit appends the instruction to the circuit's " +
+            "[<font style=\"background: lightgrey\">data</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#data) " +
+            "attribute. The following code adds X-gate to qubit 0, and display its " +
+            "<font style=\"background: lightgrey\">data</font> attribute.\r\n" +
+            "```python\r\n" +
+            "qc.x(0)  # Add X-gate to qubit 0\r\n" +
+            "qc.data\r\n" +
+            "```\r\n" +
+            "# <font style=\"background: lightgrey\">data</font> is a list of " +
+            "[<font style=\"background: lightgrey\">CircuitInstruction</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.CircuitInstruction) " +
+            "objects, each of which has an <font style=\"background: lightgrey\">operation</font> attribute, and a " +
+            "<font style=\"background: lightgrey\">qubits</font> attribute. The output of those " +
+            "<font style=\"background: lightgrey\">data</font> attribute is sent to \"Data Output\" node and you can check them in the debug palette.\r\n" +
+            "&nbsp;\r\n" +
+            "# The easiest way to view circuit's information is through the <font style=\"background: lightgrey\">draw</font> method, which " +
+            "returns a visualization of a circuit. You can use the code snippet below to visualize the circuit.\r\n" +
+            "```python\r\n" +
+            "qc.draw(\"mpl\")\r\n" +
+            "```\r\n" +
+            "# You can check the image of the created circuit in the \"X-gate Image\" node. See " +
+            "[Visualize circuits](https://docs.quantum.ibm.com/guides/visualize-circuits) for different ways of displaying quantum circuits.\r\n" +
+            "\r\n" +
+            "***\r\n" +
+            "&nbsp;\r\n" +
+            "## **Node Ouput:**\r\n" +
+            "- # List: `qc.data` (Type: _qiskit.circuit.CircuitInstruction_)\r\n" +
+            "- # Image: Image of circuit `qc`" }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "Add instruction to circuit";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="add-x-gate">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Add instruction to circuit">
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="add-x-gate">
+    <p>A node that adds the X-gate instruction to a quantum circuit.</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>List of CircuitInstruction Objects
+        <dl class="message-properties">
+          <dt> payload.result.result <span class="property-type">string</span></dt>
+          <dd>The string representation of a list of CircuitInstruction objects, each of which contain an operation attribute, and a qubits attribute.</dd>
+        </dl>
+      </li>
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>payload.result.circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the quantum circuit.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+      This node demonstrates how an X-gate instruction can be added to a circuit using the <code>x</code> method and how that
+      instruction changes the visualization of the circuit. Adding an instruction appends the instruction to the circuit's data 
+      attribute and this node also shows how the <code>data</code> property outputs a list of <code>CircuitInstruction</code> objects. 
+    </p>
+  </script>

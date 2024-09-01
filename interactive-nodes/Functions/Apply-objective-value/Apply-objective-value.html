@@ -1,0 +1,53 @@
+<script type="text/javascript">
+  RED.nodes.registerType("apply_objective_value", {
+    category: "Interactive Function",
+    color: "#E6BCB9",
+    defaults: {
+      name: { value: "" },
+      variable: { value: "", required: true },
+      binary_vector: { value: "", required: true },
+      matrix: { value: "", required: true },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "function.svg",
+    label: function () {
+      return this.name || "apply_objective_value";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="apply_objective_value">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-variable"
+      ><i class="fa fa-tag"></i> Variable name</label
+    >
+    <input type="text" id="node-input-variable" placeholder="Variable Name" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-binary_vector"
+      ><i class="fa fa-tag"></i> Binary vector</label
+    >
+    <input
+      type="text"
+      id="node-input-binary_vector"
+      placeholder="Binary Vector (Quantum State Result)"
+    />
+  </div>
+  <div class="form-row">
+    <label for="node-input-matrix"><i class="fa fa-tag"></i> Matrix</label>
+    <input
+      type="text"
+      id="node-input-matrix"
+      placeholder="Matrix (The input matrix defined)"
+    />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="apply_objective_value">
+  <p>Provide information about the apply_objective_value node here.</p>
+</script>

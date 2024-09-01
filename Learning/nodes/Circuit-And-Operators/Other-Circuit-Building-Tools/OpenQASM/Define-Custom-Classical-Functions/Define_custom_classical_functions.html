@@ -1,0 +1,39 @@
+
+<script type="text/javascript">
+    RED.nodes.registerType("define-custom-classical-function", {
+      category: "Learning Import OpenQASM 2 program",
+      color: "#dddddd",
+      defaults: {
+        name: { value: "Define custom classical functions in OpenQASM 2" },
+        info: { value: "# OpenQASM 2 includes some built-in classical functions to use in gate arguments. You can extend the language with more functions by using the <font style=\"background: lightgrey\">custom_classical</font> argument to <font style=\"background: lightgrey\">qasm2.load()</font> and <font style=\"background: lightgrey\">qasm2.loads()</font>, with the [<font style=\"background: lightgrey\">qasm2.CustomClassical</font>](https://docs.quantum.ibm.com/api/qiskit/qasm2#qiskit.qasm2.CustomClassical) class.\r\n&nbsp;\r\n# To define a custom classical function, you must supply:\r\n- # The name of the function as it appears in the OpenQASM 2 program\r\n- # The number of floating-point arguments it accepts\r\n- # A callable Python object that evaluates the function\r\n# All defined custom classical functions are treated as built-in to the OpenQASM 2 language by the importer. There is no official way within the OpenQASM 2 language to define new functions; this is a Qiskit extension." }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "white_info.svg",
+      label: function () {
+        return this.name || "Define custom classical functions in OpenQASM 2";
+      },
+      
+    });
+
+  </script>
+  
+  <script type="text/html" data-template-name="define-custom-classical-function">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Define custom classical functions in OpenQASM 2" />
+    </div>
+
+  </script>
+
+  
+  
+  <script type="text/html" data-help-name="define-custom-classical-function">
+    <p>A node that define custom classical functions in an OpenQASM 2 program.</p>
+
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to the concept of extending the OpenQASM 2 language in Qiskit by defining custom classical functions. While OpenQASM 2 includes some built-in classical functions for use in gate arguments, this node explains how additional functions can be added using the custom_classical argument within the qasm2.load() and qasm2.loads() methods. By leveraging the qasm2.CustomClassical class, users can specify the function name, the number of arguments it accepts, and a Python callable that defines the function’s behavior. 
+    </p>
+  </script>
+  

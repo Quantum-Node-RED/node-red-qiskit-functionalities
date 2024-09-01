@@ -1,0 +1,79 @@
+<script type="text/javascript">
+    RED.nodes.registerType('use-reference-estimator',{
+        category: 'Learning Debugging tools',
+        color: '#f5c7b6',
+        defaults: {
+            name: {value:"Use the rerference Estimator"},
+            info: {
+                value:"# [Exact simulation with Qiskit SDK primitives guide.](https://docs.quantum.ibm.com/guides/simulate-with-qiskit-sdk-primitives#)\r\n" +
+                "&nbsp;\r\n" +
+                "# There are two reference implementations of <font style='background: GhostWhite'>_`Estimator`_</font> in " +
+                "<font style='background: GhostWhite'>_`qiskit.primitives`_</font> that run on a local statevecotr simulators: " +
+                "the [StatevectorEstimator](https://docs.quantum.ibm.com/api/qiskit/qiskit.primitives.StatevectorEstimator) class and" +
+                "the [Estimator](https://docs.quantum.ibm.com/api/qiskit/qiskit.primitives.Estimator) class. The " +
+                " <font style='background: GhostWhite'>_`StatevectorEstimator`_</font> implements the new Estimator V2 interface " +
+                "introduced in the Qiskit SDK 1.0, and offers additional input vectorization features in comparison with the " +
+                "<font style='background: GhostWhite'>_`Estimator`_</font> class, which implements the legacy Estimator V1 interface. " +
+                "Both can take circuits, observables, and parameters as inputs and return the locally computed expectation values.\r\n" +
+                "# This node contains the code that prepares the inputs that will be used in the examples that follow and outputs the circuit.\r\n" +
+                "# Every code sample added in later nodes in the flow can be added directly below the previous code samples in your qiskit .\r\n" +
+                "file or reordered for a cleaner look.\r\n" +
+                "# The expected input type for the observables is <font style='background: GhostWhite'>_`qiskit.quantum_info.SparsePauliOp.`_</font>" +
+                " Note that the circuit in the example is parametrized, but you can also run the Estimator on non-parametrized circuits. " +
+                "Also note that any circuit passed to an Estimator must not include any measurements.\r\n" +
+                "```python\r\n" +
+                "from qiskit import QuantumCircuit\r\n" +
+                "from qiskit.circuit import Parameter\r\n" + 
+                "from qiskit.quantum_info import SparsePauliOp\r\n" + 
+                "import numpy as np\r\n" + 
+                "\r\n" +
+                "# circuit for which you want to obtain the expected value\r\n" +
+                "qc = QuantumCircuit(2)\r\n" +
+                "qc.ry(Parameter('theta'), 0)\r\n" +
+                "qc.h(0)\r\n" +
+                "qc.cx(0,1)\r\n" +
+                "qc.draw(\"mpl\", style=\"iqp\")\r\n" +
+                "# observable(s) whose expected values you want to compute\r\n" +
+                "from qiskit.quantum_info import SparsePauliOp\r\n" +
+                "observable = SparsePauliOp([\"II\", \"XX\", \"YY\", \"ZZ\"], coeffs=[1, 1, -1, 1])\r\n" +
+                "# value(s) for the circuit parameter(s)\r\n" +
+                "parameter_values = [[0], [np.pi/6], [np.pi/2]]\r\n" +
+                "```\r\n "
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "file.svg",
+        label: function() {
+            return this.name||"use-reference-estimator";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="use-reference-estimator">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="use-reference-estimator">
+    <p>A simple node preparing to use the Estimator reference</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>payload.result.circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the quantum circuit.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+        This node shows an example code and how to prepare the inputs
+        to use the <code>Estimator</code> reference.
+    </p>
+
+</script>

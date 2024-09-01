@@ -1,0 +1,65 @@
+<script type="text/javascript">
+    RED.nodes.registerType('mpl-draw',{
+        category: 'Learning Visualize circuits',
+        color: '#E6E0F8',
+        defaults: {
+            name: {value:"Mpl Draw"},
+            info: {
+                value:"# [Visualize circuits guide.](https://docs.quantum.ibm.com/guides/visualize-circuits#)\r\n" +
+                "&nbsp;\r\n" +
+                "# A text output is useful for quickly seeing the output while developing a circuit, but it doesn't provide " +
+                "the most flexibility. There are two alternative output renderers for the quantum circuit. One uses " +
+                "[Matplotlib](https://matplotlib.org/#) and the other uses [Latex](https://www.latex-project.org/#). " +
+                "The LaTeX renderer requires the qcircuit package. Select these renderers by setting the \"output\" " +
+                "argument argument to the strings <font style='background: lightgrey'>_`mpl`_</font> and " +
+                "<font style='background: lightgrey'>_`latex`_</font>. This node shows how to draw using the mpl argument.\r\n" +
+                "```python\r\n" +
+                "from qiskit import QuantumCircuit\r\n" +
+                " \r\n" +
+                "# Build a quantum circuit \r\n" +
+                "circuit = QuantumCircuit(3, 3)\r\n" +
+                "circuit.x(1)\r\n" +
+                "circuit.h(range(3))\r\n" +
+                "circuit.cx(0, 1)\r\n" +
+                "circuit.measure(range(3), range(3));\r\n" +
+                " \r\n" +
+                "# Matplotlib drawing\r\n" +
+                "circ.draw(output='mpl')\r\n" +
+                "#To create a Latex drawing, replace 'mpl' with 'latex'\r\n" +
+                "```\r\n "}
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "file.svg",
+        label: function() {
+            return this.name||"mpl-draw";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="mpl-draw">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="mpl-draw">
+    <p>A node that shows how to draw a circuit diagram with a mpl output</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>payload.result.circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the quantum circuit.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+        This node shows an example of how to use default draw using alternative renders and shows an example using
+        the <code>mpl</code> argument.
+    </p>
+</script>

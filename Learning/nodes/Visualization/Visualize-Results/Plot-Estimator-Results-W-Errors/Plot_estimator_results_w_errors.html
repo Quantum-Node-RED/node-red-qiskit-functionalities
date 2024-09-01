@@ -1,0 +1,71 @@
+<script type="text/javascript">
+    RED.nodes.registerType('plot-estimator-results-w-errors',{
+        category: 'Learning Visualize results',
+        color: '#FDF0C2',
+        defaults: {
+            name: {value:"Estimator results w. errors"},
+            info: {
+                value:"# [Visualize results guide.](https://docs.quantum.ibm.com/guides/visualize-results#)\r\n" +
+                "&nbsp;\r\n" +
+                "# The following code example estimates the standard error from the variance of each result and adds them as error " +
+                "bars. See the [bar plot documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.bar.html#)" +
+                " for a full description of the plot.\r\n" +
+                "```python\r\n" +
+                "from qiskit import QuantumCircuit\r\n" +
+                "from qiskit.quantum_info import SparsePauliOp\r\n" +
+                "from qiskit_aer.primitives import Estimator\r\n" + 
+                "from matplotlib import pyplot as plt\r\n" +
+                "from math import sqrt\r\n" +
+                "\r\n" +
+                "# Simple estimation experiment to create results\r\n" +
+                "qc = QuantumCircuit(2)\r\n" +
+                "qc.h(0)\r\n" +
+                "qc.crx(1.5, 0, 1)\r\n" +
+                "\r\n" +
+                "observables_labels = [\"ZZ\", \"XX\", \"YZ\", \"ZY\", \"XY\", \"XZ\", \"ZX\"]\r\n" +
+                "observables = [SparsePauliOp(label) for label in observables_labels]\r\n" +
+                "\r\n" +
+                "result = Estimator().run([qc]*7, observables).result()\r\n" +
+                "standard_error = [sqrt(exp_data[\"variance\"])/sqrt(exp_data[\"shots\"]) for exp_data in result.metadata]\r\n" +
+                "\r\n" +
+                "_, ax = plt.subplots()\r\n" +
+                "ax.bar(observables_labels, result.values, yerr=standard_error, capsize=2)\r\n" +
+                "ax.set_title(\"Expectation values (with standard errors)\")" +
+                "```\r\n "
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "file.svg",
+        label: function() {
+            return this.name||"plot-estimator-results-w-errors";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="plot-estimator-results-w-errors">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="plot-estimator-results-w-errors">
+    <p>A node that shows how to plot Estimator results with standard errors</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+        <li>Estimator with errors
+        <dl class="message-properties">
+            <dt>payload.result.plotted_estimator_w_errors <span class="property-type">string (Base64)</span></dt>
+            <dd>The Base64-encoded string representing the visulaization of plotting Estimator results with errors.</dd>
+        </dl>
+        </li>
+    </ol>
+
+    <h3>Details</h3>
+    <p>
+        This node shows how to plot Estimator results with estimated standard errors using Matplotlib's 
+        bar plot and gives an example of how it can be used.
+    </p>
+</script>

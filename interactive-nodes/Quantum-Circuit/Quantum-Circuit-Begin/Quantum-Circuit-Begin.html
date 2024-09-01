@@ -1,0 +1,63 @@
+<script type="text/javascript">
+  RED.nodes.registerType("Quantum_Circuit_Begin", {
+    category: 'Interactive Quantum Circuit',
+    color: "#A390E4",
+    defaults: {
+      name: { value: "" },
+      circuit_name: { value: "" },
+      cbits: { value: "" },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "font-awesome/fa-chain",
+    label: function () {
+      return this.name || "Quantum_Circuit_Begin";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="Quantum_Circuit_Begin">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-circuit_name"
+      ><i class="fa fa-tag"></i> Circuit Name</label
+    >
+    <input
+      type="text"
+      id="node-input-circuit_name"
+      placeholder="Circuit Name"
+    />
+  </div>
+  <div class="form-row">
+    <label for="node-input-cbits"
+      ><i class="fa fa-tag"></i> Number of classical bits</label
+    >
+    <input
+      type="text"
+      id="node-input-cbits"
+      placeholder="Number of classical bits"
+    />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="Quantum_Circuit_Begin">
+  <p>
+    <h2>Introduction:</h2>
+    <p>Quantum Circuit Begin is a node that indicates the start of a quantum circuit.</p>
+    </p>
+    <h2>Placement:</h2>
+    <ul>
+      <li>It must be followed by a Quantum Circuit End indirectly.
+      <li>It cannot be preceded by a Quantum Circuit Begin.</li> 
+      <li>Only qubits and gates are allowed between it and the Quantum Circuit End.</li>
+    </ul>
+    <h2>Properties:</h2>
+    <ul>
+      <li><strong> Circuit Name:</strong> Variable name of the current circuit.</li>
+      <li><strong> Number of classical bits:</strong> The number of classical bits in thi current circuit.</li>
+    </ul>
+  </p>
+</script>

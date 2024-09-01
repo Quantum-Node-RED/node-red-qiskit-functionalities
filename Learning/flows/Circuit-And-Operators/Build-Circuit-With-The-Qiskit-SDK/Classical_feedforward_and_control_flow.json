@@ -1,0 +1,509 @@
+[
+    {
+        "id": "2ba4a2143c9023d1",
+        "type": "tab",
+        "label": "Classical feedforward and control flow",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "a27631ce98e610a2",
+        "type": "intro-to-control-flow",
+        "z": "2ba4a2143c9023d1",
+        "name": "Introduction to classical feedforward and control flow",
+        "info": "# This flow demonstrates the functionality available in the Qiskit SDK for performing classical feedforward and control flow. These features are sometimes referred to collectively as \"dynamic circuits.\" Classical feedforward refers to the ability to measure qubits in the middle of a circuit and perform additional quantum operations that depend on the measurement outcome. Qiskit supports four control flow constructs for classical feedforward, each implemented as a method on [<font style=\"background: lightgrey\">QuantumCircuit</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit). The constructs and their corresponding methods are:\r\n- # If statement - [<font style=\"background: lightgrey\">QuantumCircuit.if_test</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#if_test)\r\n- # Switch statement - [<font style=\"background: lightgrey\">QuantumCircuit.switch</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#switch)\r\n- # For loop - [<font style=\"background: lightgrey\">QuantumCircuit.for_loop</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#for_loop)\r\n- # While loop - [<font style=\"background: lightgrey\">QuantumCircuit.while_loop</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#while_loop)\r\n# Each of these methods returns a [context manager](https://docs.python.org/3/reference/datamodel.html#with-statement-context-managers) and is typically used in a <font style=\"background: lightgrey\">with</font> statement. In the rest of this guide, we will explain each of these constructs and how to use them.\r\n&nbsp;\r\n# In this flow, we use the following code snippet to test each condition flow. This code snippet runs the generated condition circuit on the simulator, using 1024 shots each time. We compare the number of hits for each condition in the final results to determine if the condition is effective.\r\n```python\r\nfrom qiskit_aer import AerSimulator\r\nsimulator = AerSimulator()\r\nresult = simulator.run(circuit, shots=1024).result()\r\n\r\ncounts = result.get_counts(circuit)\r\n```\r\n&nbsp;\r\n# **Note:** There are some limitations of classical feedforward and control flow operations on quantum hardware that might impact your program. For more information, see [Hardware considerations and limitations for classical feedforward and control flow](https://docs.quantum.ibm.com/guides/dynamic-circuits-considerations).",
+        "x": 190,
+        "y": 940,
+        "wires": [
+            [
+                "6776c66cef346bd5",
+                "e0a8f3af6f88ed88",
+                "c3d5f32650450be3",
+                "7b639a7c78a3a40a"
+            ]
+        ]
+    },
+    {
+        "id": "de1550f48e5617ac",
+        "type": "with-statement",
+        "z": "2ba4a2143c9023d1",
+        "name": "with statement",
+        "info": "# The <font style=\"background: lightgrey\">with</font> statement can be given an assignment target which is itself a context manager that can be stored and subsequently used to create an else block, which is executed whenever the contents of the if block are _not_ executed.\n&nbsp;\n# In the following code snippet, we initialize registers with two qubits and two classical bits. We apply a Hadamard gate to the first qubit and measure it. If the result is 1, then we apply a Hadamard gate on the second qubit; otherwise, we apply an X gate on the second qubit. Finally, we measure the second qubit as well.\n```python\nqubits = QuantumRegister(2)\nclbits = ClassicalRegister(2)\ncircuit = QuantumCircuit(qubits, clbits)\n(q0, q1) = qubits\n(c0, c1) = clbits\n \ncircuit.h(q0)\ncircuit.measure(q0, c0)\nwith circuit.if_test((c0, 1)) as else_:\n    circuit.h(q1)\nwith else_:\n    circuit.x(q1)\ncircuit.measure(q1, c1)\n \ncircuit.draw(\"mpl\")\n \n# example output counts: {'01': 260, '11': 272, '10': 492}\n```\n# The code will use the code snippets from \"Introduction to classical feedforward and control flow\" node to run on the simulator and store the statistical results in the `counts` variable.The frequencies of '01', '11', and '10' in the results should be close to a 1:1:2 ratio.\n&nbsp;\n# The result is sent to \"with statement Measure\" node and you can check it in the debug sidebar. You can also check the Image of the circuit in the \"with statement Circuit Diagram\" node.\n\n***\n&nbsp;\n## **Node Output:**\n- # Dictionary: `counts`\n- # Image: The image of `circuit`",
+        "x": 1300,
+        "y": 20,
+        "wires": [
+            [
+                "e357baec42aeb1b7",
+                "5a9f25952cfebee0"
+            ]
+        ]
+    },
+    {
+        "id": "ef29f959757e67dd",
+        "type": "condition-classical-registers",
+        "z": "2ba4a2143c9023d1",
+        "name": "condition classical registers",
+        "info": "# In addition to conditioning on a single classical bit, it's also possible to condition on the value of a classical register composed of multiple bits.\r\n&nbsp;\r\n# In the code snippet below, we apply Hadamard gates to two qubits and measure them. If the result is 01, that is, the first qubit is 1 and the second qubit is 0, then we apply an X gate to a third qubit. Finally, we measure the third qubit. Note that for clarity, we chose to specify the state of the third classical bit, which is 0, in the if condition.\r\n```python\r\nqubits = QuantumRegister(3)\r\nclbits = ClassicalRegister(3)\r\ncircuit = QuantumCircuit(qubits, clbits)\r\n(q0, q1, q2) = qubits\r\n(c0, c1, c2) = clbits\r\n \r\ncircuit.h([q0, q1])\r\ncircuit.measure(q0, c0)\r\ncircuit.measure(q1, c1)\r\nwith circuit.if_test((clbits, 0b001)):\r\n    circuit.x(q2)\r\ncircuit.measure(q2, c2)\r\n \r\ncircuit.draw(\"mpl\")\r\n \r\n# example output counts: {'101': 269, '011': 260, '000': 252, '010': 243}\r\n```\r\n# The code will use the code snippets from \"Introduction to classical feedforward and control flow\" node to run on the simulator and store the statistical results in the `counts` variable. In the results, the proportions of occurrences for each condition should be generally consistent.\r\n&nbsp;\r\n# The result is sent to \"condition classical registers statement Measure\" node and you can check it in the debug sidebar. You can also check the Image of the circuit in the \"condition classical registers statement Circuit Diagram\" node. In the Image, the condition is indicated by the circles on the classical bits being conditioned on. A black circle indicates conditioning on 1, while a white circle indicates conditioning on 0.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Dictionary: `counts`\r\n- # Image: The image of `circuit`",
+        "x": 1340,
+        "y": 300,
+        "wires": [
+            [
+                "154f6b1f421b8957",
+                "3a4d90f11d7a11cf"
+            ]
+        ]
+    },
+    {
+        "id": "b45188b6d37b0260",
+        "type": "image",
+        "z": "2ba4a2143c9023d1",
+        "name": "If statement Circuit Diagram",
+        "width": "480",
+        "data": "payload.result.circuit_diagram",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 980,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "f4deb257e7377f9f",
+        "type": "debug",
+        "z": "2ba4a2143c9023d1",
+        "name": "If statement Measure",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload.result.measure",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 960,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "5a9f25952cfebee0",
+        "type": "image",
+        "z": "2ba4a2143c9023d1",
+        "name": "with statement Circuit Diagram",
+        "width": "480",
+        "data": "payload.result.circuit_diagram",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1610,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "e357baec42aeb1b7",
+        "type": "debug",
+        "z": "2ba4a2143c9023d1",
+        "name": "with statement Measure",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload.result.measure",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 1590,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "154f6b1f421b8957",
+        "type": "debug",
+        "z": "2ba4a2143c9023d1",
+        "name": "condition classical registers Measure",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload.result.measure",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 1650,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "3a4d90f11d7a11cf",
+        "type": "image",
+        "z": "2ba4a2143c9023d1",
+        "name": "condition classical registers Circuit Diagram",
+        "width": "480",
+        "data": "payload.result.circuit_diagram",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1670,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "6b50b57eddeaca0c",
+        "type": "inject",
+        "z": "2ba4a2143c9023d1",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 390,
+        "y": 300,
+        "wires": [
+            [
+                "7b639a7c78a3a40a"
+            ]
+        ],
+        "info": "# In this flow we will introduce you the if-statement. Run this flow by clicking the left button on the \"Start\" node."
+    },
+    {
+        "id": "6776c66cef346bd5",
+        "type": "Switch-statement",
+        "z": "2ba4a2143c9023d1",
+        "name": "Switch statment",
+        "info": "# The switch statement is used to select actions based on the value of a classical bit or register. It is similar to an if statement, but allows one to specify more cases for the branching logic. \r\n&nbsp;\r\n# In the following code snippet, we apply a Hadamard gate to a qubit and measure it. If the result is 0, we apply an X gate on the qubit, and if the result is 1, we apply a Z gate.\r\n```python\r\nqubits = QuantumRegister(1)\r\nclbits = ClassicalRegister(1)\r\ncircuit = QuantumCircuit(qubits, clbits)\r\n(q0,) = qubits\r\n(c0,) = clbits\r\n \r\ncircuit.h(q0)\r\ncircuit.measure(q0, c0)\r\nwith circuit.switch(c0) as case:\r\n    with case(0):\r\n        circuit.x(q0)\r\n    with case(1):\r\n        circuit.z(q0)\r\ncircuit.measure(q0, c0)\r\n \r\ncircuit.draw(\"mpl\")\r\n \r\n# example output counts: {'1': 1024}\r\n```\r\n# The code will use the code snippets from \"Introduction to classical feedforward and control flow\" node to run on the simulator and store the statistical results in the `counts` variable. The resulting measurement outcome should be 1 with 100% probability.\r\n&nbsp;\r\n# The result is sent to \"Switch statment Measure\" node and you can check it in the debug sidebar. You can also check the Image of the circuit in the \"Switch statment Circuit Diagram\" node.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Dictionary: `counts`\r\n- # Image: The image of `circuit`",
+        "x": 740,
+        "y": 700,
+        "wires": [
+            [
+                "e67c45bbbe84ddd6",
+                "af0e18fc99ba7580",
+                "320ef9fe16f87f66"
+            ]
+        ]
+    },
+    {
+        "id": "5cc3ba0eca4f027b",
+        "type": "different-example",
+        "z": "2ba4a2143c9023d1",
+        "name": "different example",
+        "info": "# Because the example in the node before used a single classical bit, there were only two possible cases, so we could have achieved the same result using an if-else statement. The switch case is mainly useful when branching on the value of a classical register composed of multiple bits, as demonstrated in the following example. Here, we also show how to construct a default case, which is executed if none of the preceding cases are. Note that in a switch statement, only one of the blocks are ever executed. There is no fallthrough.\n&nbsp;\n# In the example below, we apply Hadamard gates to two qubits and measure them. If the result is either 00 or 11, we apply a Z gate to the third qubit. If the result is 01, we apply a Y gate. If none of the preceding cases matched, we apply an X gate. Finally, measure the third qubit.\n```python\nqubits = QuantumRegister(3)\nclbits = ClassicalRegister(3)\ncircuit = QuantumCircuit(qubits, clbits)\n(q0, q1, q2) = qubits\n(c0, c1, c2) = clbits\n \ncircuit.h([q0, q1])\ncircuit.measure(q0, c0)\ncircuit.measure(q1, c1)\nwith circuit.switch(clbits) as case:\n    with case(0b000, 0b011):\n        circuit.z(q2)\n    with case(0b001):\n        circuit.y(q2)\n    with case(case.DEFAULT):\n        circuit.x(q2)\ncircuit.measure(q2, c2)\n \ncircuit.draw(\"mpl\")\n \n# example output counts: {'101': 267, '110': 249, '011': 265, '000': 243}\n```\n# The code will use the code snippets from \"Introduction to classical feedforward and control flow\" node to run on the simulator and store the statistical results in the `counts` variable. In the results, the proportions of occurrences for each condition should be generally consistent.\n&nbsp;\n# The result is sent to \"different example Measure\" node and you can check it in the debug sidebar. You can also check the Image of the circuit in the \"different example Circuit Diagram\" node.\n\n***\n&nbsp;\n## **Node Output:**\n- # Dictionary: `counts`\n- # Image: The image of `circuit`",
+        "x": 1310,
+        "y": 700,
+        "wires": [
+            [
+                "6989749e55d3c7d8",
+                "6826b07ef8a89f7f"
+            ]
+        ]
+    },
+    {
+        "id": "e67c45bbbe84ddd6",
+        "type": "debug",
+        "z": "2ba4a2143c9023d1",
+        "name": "Switch statment Measure",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload.result.measure",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 990,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "af0e18fc99ba7580",
+        "type": "image",
+        "z": "2ba4a2143c9023d1",
+        "name": "Switch statment Circuit Diagram",
+        "width": "480",
+        "data": "payload.result.circuit_diagram",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1010,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "6989749e55d3c7d8",
+        "type": "debug",
+        "z": "2ba4a2143c9023d1",
+        "name": "different example Measure",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload.result.measure",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 1640,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "6826b07ef8a89f7f",
+        "type": "image",
+        "z": "2ba4a2143c9023d1",
+        "name": "different example Circuit Diagram",
+        "width": "480",
+        "data": "payload.result.circuit_diagram",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1660,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "ebcaf46aa8301a5b",
+        "type": "inject",
+        "z": "2ba4a2143c9023d1",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 390,
+        "y": 700,
+        "wires": [
+            [
+                "6776c66cef346bd5"
+            ]
+        ],
+        "info": "# In this flow we will introduce you the switch-statement. Run this flow by clicking the left button on the \"Start\" node."
+    },
+    {
+        "id": "e640deb7149588f9",
+        "type": "inject",
+        "z": "2ba4a2143c9023d1",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 370,
+        "y": 1140,
+        "wires": [
+            [
+                "e0a8f3af6f88ed88"
+            ]
+        ],
+        "info": "# In this flow we will introduce you the for-loop. Run this flow by clicking the left button on the \"Start\" node."
+    },
+    {
+        "id": "f1806c5a63e2b9d9",
+        "type": "image",
+        "z": "2ba4a2143c9023d1",
+        "name": "For loop Circuit Diagram",
+        "width": "480",
+        "data": "payload.result.circuit_diagram",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1030,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "e0a8f3af6f88ed88",
+        "type": "for-loop",
+        "z": "2ba4a2143c9023d1",
+        "name": "For loop",
+        "info": "# A for loop is used to iterate over a sequence of classical values and perform some operations during each iteration.\n&nbsp;\n# In the code snippet below, we use a for loop to apply 5 X gates to a qubit and then measure it. Because we perform an odd number of X gates, the overall effect is to flip the qubit from the 0 state to the 1 state.\n```python\nqubits = QuantumRegister(1)\nclbits = ClassicalRegister(1)\ncircuit = QuantumCircuit(qubits, clbits)\n(q0,) = qubits\n(c0,) = clbits\n \nwith circuit.for_loop(range(5)) as _:\n    circuit.x(q0)\ncircuit.measure(q0, c0)\n \ncircuit.draw(\"mpl\")\n \n# example output counts: {'1': 1024}\n```\n# The code will use the code snippets from \"Introduction to classical feedforward and control flow\" node to run on the simulator and store the statistical results in the `counts` variable. The resulting measurement outcome should be 1 with 100% probability.\n&nbsp;\n# The result is sent to \"For loop Measure\" node and you can check it in the debug sidebar. You can also check the Image of the circuit in the \"For loop Circuit Diagram\" node.\n\n***\n&nbsp;\n## **Node Output:**\n- # Dictionary: `counts`\n- # Image: The image of `circuit`",
+        "x": 700,
+        "y": 1140,
+        "wires": [
+            [
+                "f1806c5a63e2b9d9",
+                "fc85683f6a9b2baf"
+            ]
+        ]
+    },
+    {
+        "id": "fc85683f6a9b2baf",
+        "type": "debug",
+        "z": "2ba4a2143c9023d1",
+        "name": "For loop Measure",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result.measure",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1010,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "c3d5f32650450be3",
+        "type": "While-loop",
+        "z": "2ba4a2143c9023d1",
+        "name": "While loop",
+        "info": "# A while loop is used to repeat instructions while some condition is satisfied.\n&nbsp;\n# In the example below, we apply Hadamard gates to two qubits and measure them. Then, we create a while loop that repeats this procedure while the measurement outcome is 11. As a result, the final measurement should never be 11, with the remaining possibilities appearing with approximately equal frequency.\n```python\nqubits = QuantumRegister(2)\nclbits = ClassicalRegister(2)\ncircuit = QuantumCircuit(qubits, clbits)\n \nq0, q1 = qubits\nc0, c1 = clbits\n \ncircuit.h([q0, q1])\ncircuit.measure(q0, c0)\ncircuit.measure(q1, c1)\nwith circuit.while_loop((clbits, 0b11)):\n    circuit.h([q0, q1])\n    circuit.measure(q0, c0)\n    circuit.measure(q1, c1)\n \ncircuit.draw(\"mpl\")\n \n# example output counts: {'01': 334, '10': 368, '00': 322}\n```\n# The code will use the code snippets from \"Introduction to classical feedforward and control flow\" node to run on the simulator and store the statistical results in the `counts` variable. In the results, the proportions of occurrences for each condition should be generally consistent.\n&nbsp;\n# The result is sent to \"While loop Measure\" node and you can check it in the debug sidebar. You can also check the Image of the circuit in the \"While loop Circuit Diagram\" node.\n\n***\n&nbsp;\n## **Node Output:**\n- # Dictionary: `counts`\n- # Image: The image of `circuit`",
+        "x": 710,
+        "y": 1500,
+        "wires": [
+            [
+                "e8e9d57c3ccc6f7e",
+                "c48183c446b8bce8"
+            ]
+        ]
+    },
+    {
+        "id": "c48183c446b8bce8",
+        "type": "image",
+        "z": "2ba4a2143c9023d1",
+        "name": "While loop Circuit Diagram",
+        "width": "480",
+        "data": "payload.result.circuit_diagram",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1020,
+        "y": 1540,
+        "wires": []
+    },
+    {
+        "id": "e8e9d57c3ccc6f7e",
+        "type": "debug",
+        "z": "2ba4a2143c9023d1",
+        "name": "While loop Measure",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result.measure",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1000,
+        "y": 1500,
+        "wires": []
+    },
+    {
+        "id": "137e36681d2cc093",
+        "type": "inject",
+        "z": "2ba4a2143c9023d1",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 370,
+        "y": 1500,
+        "wires": [
+            [
+                "c3d5f32650450be3"
+            ]
+        ],
+        "info": "# In this flow we will introduce you the while-loop. Run this flow by clicking the left button on the \"Start\" node."
+    },
+    {
+        "id": "7b639a7c78a3a40a",
+        "type": "if-statement",
+        "z": "2ba4a2143c9023d1",
+        "name": "If statement",
+        "info": "# The if statement is used to conditionally perform operations based on the value of a classical bit or register.\r\n&nbsp;\r\n# In the code snippet below, we apply a Hadamard gate to a qubit and measure it. If the result is 1, then we apply an X gate on the qubit, which has the effect of flipping it back to the 0 state. We then measure the qubit again.\r\n```python\r\nfrom qiskit.circuit import QuantumCircuit, QuantumRegister, ClassicalRegister\r\n \r\nqubits = QuantumRegister(1)\r\nclbits = ClassicalRegister(1)\r\ncircuit = QuantumCircuit(qubits, clbits)\r\n(q0,) = qubits\r\n(c0,) = clbits\r\n \r\ncircuit.h(q0)\r\ncircuit.measure(q0, c0)\r\nwith circuit.if_test((c0, 1)):\r\n    circuit.x(q0)\r\ncircuit.measure(q0, c0)\r\ncircuit.draw(\"mpl\")\r\n \r\n# example output counts: {'0': 1024}\r\n```\r\n# The code will use the code snippets from \"Introduction to classical feedforward and control flow\" node to run on the simulator and store the statistical results in the `counts` variable. The resulting measurement outcome should be 0 with 100% probability.\r\n&nbsp;\r\n# The result is sent to \"If statement Measure\" node and you can check it in the debug sidebar. You can also check the Image of the circuit in the \"If statement Circuit Diagram\" node.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Dictionary: `counts`\r\n- # Image: The image of `circuit`",
+        "x": 730,
+        "y": 300,
+        "wires": [
+            [
+                "f4deb257e7377f9f",
+                "b45188b6d37b0260",
+                "5adc58e549533386",
+                "70624c4735368cb5"
+            ]
+        ]
+    },
+    {
+        "id": "5adc58e549533386",
+        "type": "move-to-next-node",
+        "z": "2ba4a2143c9023d1",
+        "name": "Next",
+        "x": 930,
+        "y": 300,
+        "wires": [
+            [
+                "ef29f959757e67dd"
+            ]
+        ]
+    },
+    {
+        "id": "70624c4735368cb5",
+        "type": "move-to-next-node",
+        "z": "2ba4a2143c9023d1",
+        "name": "Next",
+        "x": 930,
+        "y": 20,
+        "wires": [
+            [
+                "de1550f48e5617ac"
+            ]
+        ]
+    },
+    {
+        "id": "320ef9fe16f87f66",
+        "type": "move-to-next-node",
+        "z": "2ba4a2143c9023d1",
+        "name": "Next",
+        "x": 930,
+        "y": 700,
+        "wires": [
+            [
+                "5cc3ba0eca4f027b"
+            ]
+        ]
+    }
+]

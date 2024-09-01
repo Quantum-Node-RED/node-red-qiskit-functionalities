@@ -1,0 +1,105 @@
+<script type="text/javascript">
+    RED.nodes.registerType('run-estimator',{
+        category: 'Learning Debugging tools',
+        color: '#f5c7b6',
+        defaults: {
+            name: {value:"Run the estimator"},
+            info: {
+                value:"# [Exact simulation with Qiskit SDK primitives guide.](https://docs.quantum.ibm.com/guides/simulate-with-qiskit-sdk-primitives#)\r\n" +
+                "&nbsp;\r\n" +
+                "# To run the estimation and get results, more code has to be added. The example code used in this node only uses " +
+                "one circuit (of type <font style='background: GhostWhite'>_`QuantumCircuit`_</font> and one observable.\r\n" +
+                "# StatevectorEstimator (V2)\r\n" +
+                "Run the estimation by calling the <font style='background: GhostWhite'>_`StatevectorEstimator.run`_</font> " +
+                "method, which returns an instance of a <font style='background: GhostWhite'>_`PrimitiveJob`_</font> object. " +
+                "You can get the results from the job (as a <font style='background: GhostWhite'>_`qiskit.primitives.PrimitiveResult`_</font> " +
+                "object) with the <font style='background: GhostWhite'>_`qiskit.primitives.PrimitiveJob.result`_</font> method. \r\n" +
+                "```python\r\n" +
+                "job = estimator.run([(isa_circuit, isa_observable, parameter_values)])\r\n" + 
+                "result = job.result()\r\n" +
+                "print(f\" > Result class: {type(result)}\")\r\n" +
+                "```\r\n " +
+                "# Estimator (V1)\r\n" +
+                "Run the estimation by calling the <font style='background: GhostWhite'>_`Estimator.run`_</font> " +
+                "method, which returns an instance of <font style='background: GhostWhite'>_`qiskit.providers.JobV1`_</font>. " +
+                "You can get the results from the job (as a <font style='background: GhostWhite'>_`EstimatorResult`_</font> " +
+                "object) with the <font style='background: GhostWhite'>_`JobV1.result`_</font> method. \r\n" +
+                "```python\r\n" +
+                "pm = generate_preset_pass_manager(backend=backend, optimization_level=1)\r\n" + 
+                "isa_circuit = pm.run(qc)\r\n" +
+                "\r\n" +
+                "job = estimator.run([isa_circuit]*3, [isa_observable]*3, parameter_values)\r\n" + 
+                "result = job.result()\r\n" +
+                "print(f\" > Result class: {type(result)}\")\r\n" +
+                "```\r\n " +
+                "# Get the expected value from the result\r\n" +
+                "# StatevectorEstimator (V2)\r\n" +
+                "The primitives V2 result outputs an array of <font style='background: GhostWhite'>_`PubResults`_</font>, where each " +
+                "item of the array is a PubResult object that contains in its data the array of evaluations corresponding to every " +
+                "circuit-observable combination in the PUB. To retrieve the expectation values and metadata for the first (and in this " +
+                "case, only) circuit evaluation, we must access the evaluation " +
+                "<font style='background: GhostWhite'>_`data`_</font> for PUB 0: \r\n" +
+                "```python\r\n" +
+                "print(f\" > Expectation value: {result[0].data.evs}\")\r\n" + 
+                "print(f\" > Metadata: {result[0].metadata}\")\r\n" +
+                "```\r\n " +
+                "# Estimator (V1)\r\n" +
+                "The primitives V1 result stores an array of values that can be accessed through the attribute " +
+                "<font style='background: GhostWhite'>_`EstimatorResult.values`_</font>, where the ith element is the expectation " +
+                "value corresponding to the ith circuit and ith observable. To see the values for the first (and in this case, only) " +
+                "circuit evaluation, we must access the first item of the array. \r\n" +
+                "```python\r\n" +
+                "print(f\" > Expectation value: {result.values[0]}\")\r\n" + 
+                "print(f\" > Metadata: {result.metadata}\")\r\n" +
+                "```\r\n "
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "file.svg",
+        label: function() {
+            return this.name||"run-estimator";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="run-estimator">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="run-estimator">
+    <p>A node for running the Estimator and getting results</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Result Class
+        <dl class="message-properties">
+          <dt>payload.result.result_class <span class="property-type">string</span></dt>
+          <dd>A string representation of the results from an instance of a <code>PrimitiveJob</code> object.</dd>
+        </dl>
+      </li>
+      <li>Expectation Value
+        <dl class="message-properties">
+          <dt>payload.result.expectation_value <span class="property-type">array</span></dt>
+          <dd>The expectation value of the evaluations corresponding to every circuit-observable combination in the PUB.</dd>
+        </dl>
+      </li>
+      <li>Result Class
+        <dl class="message-properties">
+          <dt>payload.result.result_class <span class="property-type">object</span></dt>
+          <dd>Metadata associated with the evaluation, such as precision and other relevant details..</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+        This node shows an example Estimator code with one circuit
+        and one observable being run and the results generated, both
+        for StatevectorEstimator (V2) and Estimator (V1) implementations.
+    </p>
+
+</script>

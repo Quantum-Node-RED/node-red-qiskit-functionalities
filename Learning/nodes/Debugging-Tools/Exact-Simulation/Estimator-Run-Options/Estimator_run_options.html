@@ -1,0 +1,66 @@
+<script type="text/javascript">
+    RED.nodes.registerType('estimator-run-options',{
+        category: 'Learning Debugging tools',
+        color: '#dddddd',
+        defaults: {
+            name: {value:"Set Estimator run options"},
+            info: {
+                value: "# [Exact simulation with Qiskit SDK primitives guide.](https://docs.quantum.ibm.com/guides/simulate-with-qiskit-sdk-primitives#)\r\n" +
+                "&nbsp;\r\n" +
+                "# By default, the reference Estimator performs an exact statevector calculation based on the " +
+                "<font style='background: GhostWhite'>_`quantum_info.Statevector`_</font> class. However, this can be modified " +
+                "to introduce the effect of the sampling overhead (also known as \"shot noise\").\r\n" +
+                "# With the introduction of the new V2 interface, the sampling overhead in the Estimator is now more concretely " +
+                "defined. The new interface accepts a <font style='background: GhostWhite'>_`precision`_</font> argument that expresses " +
+                "the error bars that the primitive implementation should target for expectation values estimates, instead of the number of " +
+                "<font style='background: GhostWhite'>_`shots`_</font> used in the V1 interface.\r\n" +
+                "# StatevectorEstimator (V2)\r\n" +
+                "The sampling overhead is now called <font style='background: GhostWhite'>_`precision`_</font>, and is defined exclusively " +
+                "at the <font style='background: GhostWhite'>_`.run()`_</font> method level. This allows for a more finely-grained tuning " +
+                "of the option all the way to the PUB level.\r\n " +
+                "This example assumes you have defined two circuits, each with its own array of observables.\r\n" +
+                "```python\r\n" +
+                "# Estimate expectation values for two PUBs, both with 0.05 precision.\r\n" + 
+                "estimator.run([(isa_circuit1, isa_obs_array1), (isa_circuit2, isa_obs_array_2)], precision=0.05)\r\n" +
+                "```\r\n " +
+                "For a full example, see the [Primitives examples](https://docs.quantum.ibm.com/guides/primitives-examples#estimator-examples) page.\r\n" +
+                "# Estimator (V1)\r\n" +
+                "The V1 interface specifies shots in the following ways:\r\n" +
+                "- Setting keyword arguments in the <font style='background: GhostWhite'>_`qiskit.primitives.Estimator.run`_</font> method.\r\n " +
+                "- Modifying the <font style='background: GhostWhite'>_`qiskit.primitives.Estimator `_</font> options.\r\n" +
+                "object) with the <font style='background: GhostWhite'>_`JobV1.result`_</font> method. \r\n" +
+                "```python\r\n" +
+                "job = estimator.run(isa_circuit, isa_observable, shots=2048, seed=123)\r\n" + 
+                "result = job.result()\r\n" +
+                "```\r\n "
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "white_info.svg",
+        label: function() {
+            return this.name||"estimator-run-options";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="estimator-run-options">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="estimator-run-options">
+    <p>A node that shows how the Estimator run options can be modified</p>
+
+    <h3>Details</h3>
+    <p>
+        This node shows different ways to modify the Estimator run 
+        options to introduce the effect of the sampling overhead, 
+        for both StatevectorEstimator (V2) and Estimator (V1) implementations.
+        It is an information node that does not require any specific input and 
+        does not generate any output. Instead, it is intended to be a part of 
+        a chain of tutorial nodes that explain the basics of quantum computing.
+    </p>
+</script>

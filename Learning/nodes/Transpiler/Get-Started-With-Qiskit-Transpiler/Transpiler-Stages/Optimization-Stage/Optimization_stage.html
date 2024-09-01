@@ -1,0 +1,60 @@
+<script type="text/javascript">
+  RED.nodes.registerType("optimization", {
+    category: "Learning Transpiler Stages",
+    color: "#FDF0C2",
+    defaults: {
+      name: { value: "Optimization Stage" },
+      info: { value: "## **Node Input:**\r\n- # Object: `backend` (Type: _qiskit.providers.Backend_)\r\n\r\n***\r\n&nbsp;\r\n## **Optimization Stage**\r\n# This stage centers around decomposing quantum circuits into the basis gate set of the target device, and must fight against the increased depth from the layout and routing stages. Fortunately, there are many routines for optimizing circuits by either combining or eliminating gates. In some cases, these methods are so effective that the output circuits have lower depth than the inputs, even after layout and routing to the hardware topology. In other cases, not much can be done, and the computation may be difficult to perform on noisy devices. This stage is where the various optimization levels begin to differ.\r\n- # For <font style=\"background: lightgrey\">optimization_level=1</font>, this stage prepares [<font style=\"background: lightgrey\">Optimize1qGatesDecomposition</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.transpiler.passes.Optimize1qGatesDecomposition) and [<font style=\"background: lightgrey\">CXCancellation</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.transpiler.passes.CXCancellation), which combine chains of single-qubit gates and cancel any back-to-back CNOT gates.\r\n- # For <font style=\"background: lightgrey\">optimization_level=2</font>, this stage uses the [<font style=\"background: lightgrey\">CommutativeCancellation</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.transpiler.passes.CommutativeCancellation) pass instead of <font style=\"background: lightgrey\">CXCancellation</font>, which removes redundant gates by exploiting commutation relations.\r\n- # For <font style=\"background: lightgrey\">optimization_level=3</font>, this stage prepares the following passes\r\n    - # [<font style=\"background: lightgrey\">Collect2qBlocks</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.transpiler.passes.Collect2qBlocks)\r\n    - # [<font style=\"background: lightgrey\">ConsolidateBlocks</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.transpiler.passes.ConsolidateBlocks)\r\n    - # [<font style=\"background: lightgrey\">UnitarySynthesis</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.transpiler.passes.UnitarySynthesis)\r\n    - # [<font style=\"background: lightgrey\">Optimize1qGateDecomposition</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.transpiler.passes.Optimize1qGatesDecomposition)\r\n    - # [<font style=\"background: lightgrey\">CommutativeCancellation</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.transpiler.passes.CommutativeCancellation)\r\n# Additionally, this stage also executes a few final checks to make sure that all instructions in the circuit are composed of the basis gates available on the target backend.\r\n&nbsp;\r\n# The example below using a GHZ state demonstrates the effects of different optimization level settings on circuit depth and gate count. You can check the image of this GHZ state in the \"15-qubit GHZ state Output\" node.\r\n&nbsp;\r\n# The following code constructs a 15-qubit GHZ state and compares the <font style=\"background: lightgrey\">optimization_levels</font> of transpilation in terms of resulting circuit depth, gate counts, and multi-qubit gate counts.\r\n```python\r\nghz = QuantumCircuit(15)\r\nghz.h(0)\r\nghz.cx(0, range(1, 15))\r\n \r\ndepths = []\r\ngate_counts = []\r\nmultiqubit_gate_counts = []\r\nlevels = [str(x) for x in range(4)]\r\nfor level in range(4):\r\n    pass_manager = generate_preset_pass_manager(\r\n        optimization_level=level,\r\n        backend=backend,\r\n    )\r\n    circ = pass_manager.run(ghz)\r\n    depths.append(circ.depth())\r\n    gate_counts.append(sum(circ.count_ops().values()))\r\n    multiqubit_gate_counts.append(circ.count_ops()[\"cx\"])\r\n \r\nfig, (ax1, ax2) = plt.subplots(2, 1)\r\nax1.bar(levels, depths, label=\"Depth\")\r\nax1.set_xlabel(\"Optimization Level\")\r\nax1.set_ylabel(\"Depth\")\r\nax1.set_title(\"Output Circuit Depth\")\r\nax2.bar(levels, gate_counts, label=\"Number of Circuit Operations\")\r\nax2.bar(levels, multiqubit_gate_counts, label=\"Number of CX gates\")\r\nax2.set_xlabel(\"Optimization Level\")\r\nax2.set_ylabel(\"Number of gates\")\r\nax2.legend()\r\nax2.set_title(\"Number of output circuit gates\")\r\nfig.tight_layout()\r\nplt.show()\r\n```\r\n# You can check the image of the comparison result in the \"Comparision Result Output\" node.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: The image of 15-qubit GHZ state\r\n- # Image: The image of comparison result between different optimization levels.\r\n\r\n    "}
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    label: function () {
+      return this.name || "Optimization Stage";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="optimization">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Optimization Stage" />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="optimization">
+  <p>
+    A simple node that introduce Optimization stage.
+  </p>
+
+  <h3>Inputs</h3>
+    <ol class="node-ports">
+      <li>Backend
+        <dl class="message-properties">
+          <dt>backend<span class="property-type">qiskit.providers.Backend</span></dt>
+          <dd>The object of backend "FakeAuckland()"</dd>
+        </dl>
+      </li>
+    </ol>
+
+  <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>State Diagram
+        <dl class="message-properties">
+          <dt>state_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the 15-qubit GHZ state.</dd>
+        </dl>
+      </li>
+      <li>Comparison Result
+        <dl class="message-properties">
+          <dt>comparison result<span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the comparison result between different optimization levels..</dd>
+        </dl>
+      </li>
+    </ol>
+
+    <h3>Details</h3>
+    <p>     
+      This node provides an introduction to the optimization stage in quantum circuit transpilation, as defined by Qiskit. It focuses on how quantum circuits are decomposed into the basis gate set of a target quantum device, and how various optimization techniques can be employed to minimize circuit depth and gate counts. The node outlines different optimization levels (0-3), each with specific strategies for reducing circuit complexity, such as combining or canceling gates. 
+    </p>
+</script>

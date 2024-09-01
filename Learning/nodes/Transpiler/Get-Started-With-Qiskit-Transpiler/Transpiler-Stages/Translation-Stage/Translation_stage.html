@@ -1,0 +1,72 @@
+<script type="text/javascript">
+  RED.nodes.registerType("translation", {
+    category: "Learning Transpiler Stages",
+    color: "#FDF0C2",
+    defaults: {
+      name: { value: "Translation Stage" },
+      info: { value: "## **Node Input:**\r\n- # Object: `backend` (Type: _qiskit.providers.Backend_)\r\n\r\n***\r\n&nbsp;\r\n## **Translation Stage**\r\n&nbsp;\r\n# When writing a quantum circuit, you are free to use any quantum gate (unitary operation) that you like, along with a collection of non-gate operations such as qubit measurement or reset instructions. However, most quantum devices only natively support a handful of quantum gate and non-gate operations. These native gates are part of the definition of a target's [ISA](https://docs.quantum.ibm.com/guides/transpile#instruction-set-architecture) and this stage of the preset <font style=\"background: lightgrey\">PassManagers</font> translates (or unrolls) the gates specified in a circuit to the native basis gates of a specified backend. This is an important step, as it allows the circuit to be executed by the backend, but typically leads to an increase in the depth and number of gates.\r\n&nbsp;\r\n# Two special cases are especially important to highlight, and help illustrate what this stage does.\r\n# 1.  If a SWAP gate is not a native gate to the target backend, this requires three **CNOT** gates:\r\n```python\r\nprint(\"native gates:\" + str(backend.operation_names))\r\nqc = QuantumCircuit(2)\r\nqc.swap(0, 1)\r\nqc.decompose().draw('mpl')\r\n```\r\n# The operation names of the backend you created in the previous node is sent to \"Native gates Output\" node and you can check them in the debug sidebar. You can see there is no operation called \"swap\". Therefore, if you want to apply \"swap\" operation, you need to replace it with 3 CNOT gates. You can also check the image of decomposed circuit in the \"Decomposed Circuit Diagram\" node.\r\n&nbsp;\r\n# As a product of three CNOT gates, a SWAP is an expensive operation to perform on noisy quantum devices. However, such operations are usually necessary for embedding a circuit into the limited gate connectivities of many devices. Thus, minimizing the number of SWAP gates in a circuit is a primary goal in the transpilation process.\r\n&nbsp;\r\n# 2. A Toffoli, or controlled-controlled-not gate (<font style=\"background: lightgrey\">ccx</font>), is a three-qubit gate. Given that our basis gate set includes only single- and two-qubit gates, this operation must be decomposed. However, it is quite costly:\r\n```python\r\nqc = QuantumCircuit(3)\r\nqc.ccx(0, 1, 2)\r\nqc.decompose().draw('mpl')\r\n```\r\n# You can check the image of decomposed ccx gate in the \"Decomposed Circuit Diagram 2\" node.\r\n&nbsp;\r\n# For every Toffoli gate in a quantum circuit, the hardware may execute up to six CNOT gates and a handful of single-qubit gates. This example demonstrates that any algorithm making use of multiple Toffoli gates will end up as a circuit with large depth and will therefore be appreciably affected by noise.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Object: `backend` (Type: _qiskit.providers.Backend_)\r\n- # String: `native_gates`\r\n- # Image: The image of decomposed SWAP gate\r\n- # Image: The image of decomposed CCX gate"}
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    label: function () {
+      return this.name || "Translation Stage";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="translation">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Translation Stage" />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="translation">
+  <p>
+    A simple node that introduce Translation Stage.
+  </p>
+
+  <h3>Inputs</h3>
+    <ol class="node-ports">
+      <li>Backend
+        <dl class="message-properties">
+          <dt>backend<span class="property-type">qiskit.providers.Backend</span></dt>
+          <dd>The object of backend "FakeAuckland()"</dd>
+        </dl>
+      </li>
+    </ol>
+
+  <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Backend
+        <dl class="message-properties">
+          <dt>backend<span class="property-type">qiskit.providers.Backend</span></dt>
+          <dd>The object of backend "FakeAuckland()"</dd>
+        </dl>
+      </li>
+      <li>String
+        <dl class="message-properties">
+          <dt>native_gates<span class="property-type">string</span></dt>
+          <dd>The string represents the native gates in the backend.</dd>
+        </dl>
+      </li>
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the decomposed SWAP gate.</dd>
+        </dl>
+      </li>
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the decomposed CCX gate.</dd>
+        </dl>
+      </li>
+    </ol>
+
+    <h3>Details</h3>
+    <p>     
+      This node provides an introduction to the Translation Stage in quantum circuit transpilation, a crucial step for executing quantum circuits on specific hardware backends. It explains how quantum gates and operations in a circuit, such as the SWAP and Toffoli gates, are decomposed into the native gate set supported by the target quantum device. This process, known as unrolling, ensures compatibility with the hardware but can increase the circuit's depth and the number of gates, potentially making the circuit more susceptible to noise. The node also highlights the impact of these decompositions on quantum circuit performance, emphasizing the importance of minimizing costly operations like SWAP and Toffoli gates during the transpilation process.
+    </p>
+</script>

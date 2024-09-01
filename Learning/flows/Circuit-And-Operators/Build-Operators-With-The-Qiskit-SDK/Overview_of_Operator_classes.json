@@ -1,0 +1,464 @@
+[
+    {
+        "id": "3093a894b69772b7",
+        "type": "tab",
+        "label": "Operator module overview",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "5ff64583b6ccdd98",
+        "type": "debug",
+        "z": "3093a894b69772b7",
+        "name": "Addition PauliList",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result.addition_result",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1350,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "8f7d0c23d2fba9e5",
+        "type": "inject",
+        "z": "3093a894b69772b7",
+        "name": "Start",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 390,
+        "y": 100,
+        "wires": [
+            [
+                "a80e07b943b9c94f"
+            ]
+        ]
+    },
+    {
+        "id": "4cb37f0e945e5732",
+        "type": "inject",
+        "z": "3093a894b69772b7",
+        "name": "Start",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 390,
+        "y": 380,
+        "wires": [
+            [
+                "e4a540a7f07f1c24"
+            ]
+        ]
+    },
+    {
+        "id": "8b687ae2d1b7c037",
+        "type": "debug",
+        "z": "3093a894b69772b7",
+        "name": "Pauli dimension",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result.dimension",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "7e24e7a3be93fd65",
+        "type": "inject",
+        "z": "3093a894b69772b7",
+        "name": "Start",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 390,
+        "y": 620,
+        "wires": [
+            [
+                "8454945af972fb76"
+            ]
+        ]
+    },
+    {
+        "id": "1eb9d0bfd875c3e6",
+        "type": "debug",
+        "z": "3093a894b69772b7",
+        "name": "Operator output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 760,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "9fc7186b5a21cc39",
+        "type": "intro-to-operator-classes",
+        "z": "3093a894b69772b7",
+        "name": "Introduction to operator classes",
+        "info": "# [Overview of operator classes guide.](https://docs.quantum.ibm.com/guides/operators-overview#overview-of-operator-classes#)\r\n&nbsp;\r\n# In Qiskit, quantum operators are represented using classes from the (of type <font style='background: lightgrey'>_`quantum_info`_</font> module. The most important operator class is (of type <font style='background: lightgrey'>_`SparsePauliOp`_</font>, which represents a general quantum operator as a linear combination of Pauli strings. SparsePauliOp is the class most commonly used to represent quantum observables. The rest of this flow explains how to use SparsePauliOp and other operator classes.\r\n```python\r\nimport numpy as np\r\nfrom qiskit.quantum_info.operators import Operator, Pauli, SparsePauliOp\r\n```\r\n ",
+        "x": 130,
+        "y": 380,
+        "wires": [
+            [
+                "e4a540a7f07f1c24",
+                "8454945af972fb76",
+                "a80e07b943b9c94f"
+            ]
+        ]
+    },
+    {
+        "id": "d140f7cf4456a1db",
+        "type": "debug",
+        "z": "3093a894b69772b7",
+        "name": "PauliList",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result.SparsePauliOp_list",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "838c8805eee283e6",
+        "type": "debug",
+        "z": "3093a894b69772b7",
+        "name": "Scalar mult. PauliList",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result.scalar_multiplication_result",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1360,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "d81e598b2633df7f",
+        "type": "debug",
+        "z": "3093a894b69772b7",
+        "name": "Operator mult. PauliList",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result.operator_multiplication_result",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1370,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "7e333edf7e806a25",
+        "type": "debug",
+        "z": "3093a894b69772b7",
+        "name": "Tensor product PauliList",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result.tensor_product_result",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1370,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "ea0b65d47c6a71da",
+        "type": "debug",
+        "z": "3093a894b69772b7",
+        "name": "Pauli phase",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result.phase",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 810,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "2bf60cfbf62643fa",
+        "type": "debug",
+        "z": "3093a894b69772b7",
+        "name": "Pauli matrix",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result.matrix",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 810,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "8454945af972fb76",
+        "type": "operators",
+        "z": "3093a894b69772b7",
+        "name": "Operator",
+        "info": "# [Overview of operator classes guide.](https://docs.quantum.ibm.com/guides/operators-overview#overview-of-operator-classes#)\r\n&nbsp;\r\n# The <font style='background: lightgrey'>_`Operator`_</font> class represents a general linear operator. Unlike SparsePauliOp, Operator stores the linear operator as a dense matrix. Because the memory required to store a dense matrix scales exponentially with the number of qubits, the Operator class is only suitable for use with a small number of qubits.\r\n# You can initialize an Operator by directly passing a Numpy array storing the matrix of the operator.For example, the following code cell creates a two-qubit Pauli XX operator:\r\n```python\r\nXX = Operator(\r\n    np.array(\r\n        [\r\n            [0, 0, 0, 1],\r\n            [0, 0, 1, 0],\r\n            [0, 1, 0, 0],\r\n            [1, 0, 0, 0],\r\n        ]\r\n    )\r\n)\r\nprint(XX.data)\r\nprint(XX.input_dims())\r\nprint(XX.output_dims())\r\n```\r\n ",
+        "matrix": "[[0, 0, 0, 1],[0, 0, 1, 0],[0, 1, 0, 0],[1, 0, 0, 0]]",
+        "x": 580,
+        "y": 620,
+        "wires": [
+            [
+                "1eb9d0bfd875c3e6",
+                "0dc5c7106f0386da"
+            ]
+        ]
+    },
+    {
+        "id": "e4a540a7f07f1c24",
+        "type": "pauli-operations",
+        "z": "3093a894b69772b7",
+        "name": "Pauli class",
+        "info": "# [Overview of operator classes guide.](https://docs.quantum.ibm.com/guides/operators-overview#overview-of-operator-classes#)\r\n&nbsp;\r\n# The <font style='background: lightgrey'>_`Pauli`_</font> class represents a single Pauli string with an optional phase coefficient from the set <font style='background: lightgrey'>_`{+1, *i*, -1, -*i*}`_</font>. A <font style='background: lightgrey'>_`Pauli`_</font> can be initialized by passing a string of characters from the set<font style='background: ghostwhite'>_`{\"I\", \"X\", \"Y\", \"Z\"}`_</font>, optionally prefixed by one of <font style='background: ghostwhite'>_`{\"\", \"i\", \"-\", \"-i\"}`_</font> to represent the phase coefficient.\r\n```python\r\n# You can change the value of op1 in the node's properties\r\nop1 = Pauli(\"iXX\")\r\n\r\nprint(f\"dimension: {op1.dim}\")\r\nprint(f\"phase: {op1.phase}\")\r\ntensor_product = op1.tensor(op2)\r\nprint(f\"matrix: {op1.to_matrix()}\")\r\n```\r\n # <font style='background: lightgrey'>_`Pauli`_</font> objects possess a number of other methods to manipulate the operators such as determining its adjoint, whether it (anti)commutes with another <font style='background: lightgrey'>_`Pauli`_</font> , and computing the dot product with another <font style='background: lightgrey'>_`Pauli`_</font>. \r\nRefer to the [API documentation.](https://docs.quantum.ibm.com/api/qiskit/qiskit.quantum_info.Pauli#) for more info.",
+        "operator": "iXX",
+        "x": 590,
+        "y": 380,
+        "wires": [
+            [
+                "8b687ae2d1b7c037",
+                "ea0b65d47c6a71da",
+                "2bf60cfbf62643fa"
+            ]
+        ]
+    },
+    {
+        "id": "442fc6fdd2a0a64a",
+        "type": "sparse-pauli-op-operations",
+        "z": "3093a894b69772b7",
+        "name": "SparsePauli operations",
+        "info": "# [Overview of operator classes guide.](https://docs.quantum.ibm.com/guides/operators-overview#overview-of-operator-classes#)\r\n&nbsp;\r\n# <font style='background: lightgrey'>_`SparsePauliOp`_</font> supports arithmetic operations, as demonstrated in this code example\n```python\r\n# You can change the value of op2 in the node's properties\r\nop2 = SparsePauliOp.from_sparse_list(\r\n    [(\"XXZ\", [0, 1, 4], 1 + 2j), (\"ZZ\", [1, 2], -1 + 1j)], num_qubits=5\r\n)\r\nprint(op1.to_list())\r\n# Addition\r\naddition = op1 + op2\r\nprint(addition.to_list()) \r\n\r\n # Multiplication by a scalar\r\nscalar_mult = 2 * op1\r\nprint(scalar_mult.to_list())\r\n\r\n # Operator multiplication (composition)\r\noperator_mult = op1 @ op2\r\nprint(operator_mult.to_list())\r\n\r\n # Tensor product\r\ntensor_product = op1.tensor(op2)\r\nprint(tensor_product.to_list())\r\n```\r\n ",
+        "op1": "[[\"ZX\", [1, 4], 1.0], [\"YY\", [0, 3], -1 + 1j]]",
+        "op1_num_qubits": 5,
+        "op2": "[[\"XXZ\", [0, 1, 4], 1 + 2j], [\"ZZ\", [1, 2], -1 + 1j]]",
+        "op2_num_qubits": 5,
+        "x": 1070,
+        "y": 100,
+        "wires": [
+            [
+                "5ff64583b6ccdd98",
+                "838c8805eee283e6",
+                "d81e598b2633df7f",
+                "7e333edf7e806a25"
+            ]
+        ]
+    },
+    {
+        "id": "0cea5535058f1275",
+        "type": "debug",
+        "z": "3093a894b69772b7",
+        "name": "Operator matrix",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result.matrix",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1200,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "8ac91086d01813b1",
+        "type": "operators-object",
+        "z": "3093a894b69772b7",
+        "name": "Operator object",
+        "info": "# [Overview of operator classes guide.](https://docs.quantum.ibm.com/guides/operators-overview#overview-of-operator-classes#)\r\n&nbsp;\r\n# The operator object stores the underlying matrix, and the input and output dimension of subsystems. - <font style='background: lightgrey'>_`data`_</font>: To access the underlying Numpy array, you can use the <font style='background: lightgrey'>_`Operator.data`_</font> property.- <font style='background: lightgrey'>_`dims`_</font>: To return the total input and output dimension of the operator, you can use the <font style='background: lightgrey'>_`Operator.dim`_</font> property. Note: the output is.returned as a tuple (input_dim, output_dim), which is the reverse of the shape of the underlying matrix.```python\r\nprint(XX.data)\r\nprint(XX.dim)\r\nprint(XX.input_dims())\r\nprint(XX.output_dims())\r\n```\r\n # <font style='background: lightgrey'>_`Pauli`_</font> objects possess a number of other methods to manipulate the operators such as determining its adjoint, whether it (anti)commutes with another <font style='background: lightgrey'>_`Pauli`_</font> , and computing the dot product with another <font style='background: lightgrey'>_`Pauli`_</font>. \r\nRefer to the [API documentation.](https://docs.quantum.ibm.com/api/qiskit/qiskit.quantum_info.Pauli#) for more info.",
+        "matrix": "[[0, 0, 0, 1],[0, 0, 1, 0],[0, 1, 0, 0],[1, 0, 0, 0]]",
+        "x": 960,
+        "y": 620,
+        "wires": [
+            [
+                "0cea5535058f1275",
+                "393f9255fd83de8e",
+                "0ea6ca8542bc3b6e",
+                "5a43d89cd9fbafd5",
+                "576044d6ecf4bf11"
+            ]
+        ]
+    },
+    {
+        "id": "393f9255fd83de8e",
+        "type": "debug",
+        "z": "3093a894b69772b7",
+        "name": "Operator dimensions",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result.dim",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1220,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "0ea6ca8542bc3b6e",
+        "type": "debug",
+        "z": "3093a894b69772b7",
+        "name": "Operator input dims",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result.input_dims",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1210,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "5a43d89cd9fbafd5",
+        "type": "debug",
+        "z": "3093a894b69772b7",
+        "name": "Operator output dims",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result.output_dims",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1220,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "edcfa970879e924f",
+        "type": "debug",
+        "z": "3093a894b69772b7",
+        "name": "Dimensions output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1650,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "08952098bebbee1d",
+        "type": "operators-subsystem",
+        "z": "3093a894b69772b7",
+        "name": "Operator subsytem dims",
+        "info": "# [Overview of operator classes guide.](https://docs.quantum.ibm.com/guides/operators-overview#overview-of-operator-classes#)\r\n&nbsp;\r\n# The operator class also keeps track of subsystem dimensions, which can be usedfor composing operators together. These can be accessed using the <font style='background: lightgrey'>_`input_dims `_</font> and  <font style='background: lightgrey'>_`output_dims  `_</font> functions. \r\n# For 2<sup>N</sup> by 2<sup>M</sup> operators, the input and output dimensions are automatically assumed to be M-qubit and N-qubit:\r\nExample 1:\r\n```python\r\nop = Operator(np.random.rand(2**1, 2**2))\r\nprint(\"input_dims:\", op.input_dims())\r\nprint(\"output_dims:\", op.output_dims())\r\n```\r\n # If the input matrix is not divisible into qubit subsystems, then it will be stored as a single-qubit operator. For example, for a 6 x 6 matrix: \r\nExample 2:\r\n```python\r\nop = Operator(np.random.rand(6, 6))\r\nprint(\"input_dims:\", op.input_dims())\r\nprint(\"output_dims:\", op.output_dims())\r\n```\r\n Output:\r\n```python\r\ninput_dims: (6,)\r\noutput_dims: (6,)\r\n```\r\n # The input and output dimension can also be manually specified when initializing a new operator: \r\nExample 3:\r\n```python\r\n# Force input dimension to be (4,) rather than (2, 2)\r\nop = Operator(np.random.rand(2**1, 2**2), input_dims=[4])\r\nprint(\"input_dims:\", op.input_dims())\r\nprint(\"output_dims:\", op.output_dims())\r\n```\r\n Output:\r\n```python\r\ninput_dims: (4,)\r\noutput_dims: (2,)\r\n```\r\n Example 4:\r\n```python\r\n# Specify system is a qubit and qutrit\r\nop = Operator(np.random.rand(6, 6), input_dims=[2, 3], output_dims=[2, 3])\r\nprint(\"input_dims:\", op.input_dims())\r\nprint(\"output_dims:\", op.output_dims())\r\n```\r\n Output:\r\n```python\r\ninput_dims: (2, 3)\r\noutput_dims: (2, 3)\r\n```\r\n # You can also extract just the input or output dimensions of a subset of subsystems using the input_dims and output_dims functions: \r\nExample 3:\r\n```python\r\nprint(\"Dimension of input system 0:\", op.input_dims([0]))\r\nprint(\"Dimension of input system 1:\", op.input_dims([1]))\r\n```\r\n Output:\r\n```python\r\nDimension of input system 0: (2,)\r\nDimension of input system 1: (3,)\r\n```\r\n ",
+        "x": 1390,
+        "y": 620,
+        "wires": [
+            [
+                "edcfa970879e924f"
+            ]
+        ]
+    },
+    {
+        "id": "dc06abf46243285e",
+        "type": "move-to-next-node",
+        "z": "3093a894b69772b7",
+        "name": "Next",
+        "x": 850,
+        "y": 100,
+        "wires": [
+            [
+                "442fc6fdd2a0a64a"
+            ]
+        ]
+    },
+    {
+        "id": "0dc5c7106f0386da",
+        "type": "move-to-next-node",
+        "z": "3093a894b69772b7",
+        "name": "Next",
+        "x": 770,
+        "y": 620,
+        "wires": [
+            [
+                "8ac91086d01813b1"
+            ]
+        ]
+    },
+    {
+        "id": "576044d6ecf4bf11",
+        "type": "move-to-next-node",
+        "z": "3093a894b69772b7",
+        "name": "Next",
+        "x": 1170,
+        "y": 620,
+        "wires": [
+            [
+                "08952098bebbee1d"
+            ]
+        ]
+    },
+    {
+        "id": "a80e07b943b9c94f",
+        "type": "sparse-pauli",
+        "z": "3093a894b69772b7",
+        "name": "SparsePauliOp class",
+        "info": "# [Overview of operator classes guide.](https://docs.quantum.ibm.com/guides/operators-overview#overview-of-operator-classes#)\r\n&nbsp;\r\n# The <font style='background: lightgrey'>_`SparsePauliOp`_</font> class represents a linear combination of Pauli strings. There are several ways to initialize a <font style='background: lightgrey'>_`SparsePauliOp`_</font>, but the most flexible way is to use the <font style='background: lightgrey'>_`from_sparse_list`_</font> method, as demonstrated in the following code cell. The <font style='background: lightgrey'>_`from_sparse_list`_</font> accepts a list of <font style='background: lightgrey'>_`(pauli_string, qubit_indices, coefficient)`_</font> triplets.\r\n```python\r\n# You can change the value of op1 in the node's properties\r\nop1 = SparsePauliOp.from_sparse_list(\r\n    [(\"ZX\", [1, 4], 1.0), (\"YY\", [0, 3], -1 + 1j)], num_qubits=5)\r\n\r\nprint(op1.to_list())\r\n```\r\n ",
+        "op1": "[[\"ZX\", [1, 4], 1.0], [\"YY\", [0, 3], -1 + 1j]]",
+        "op1_num_qubits": 5,
+        "x": 600,
+        "y": 100,
+        "wires": [
+            [
+                "dc06abf46243285e",
+                "d140f7cf4456a1db"
+            ]
+        ]
+    }
+]

@@ -1,0 +1,101 @@
+<script type="text/javascript">
+  RED.nodes.registerType("define_parameter", {
+    category: "Interactive Quantum Circuit",
+    color: "#a6bbcf",
+    defaults: {
+      name: { value: "" },
+      variable: { value: "" },
+      parameters: { value: {}, required: true },
+      numberOfRepetitions: { value: 1 },
+      mode: { value: "customize" },
+      numberOfParams: { value: 0 },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "font-awesome/fa-file-excel-o",
+    label: function () {
+      return this.name || "define_parameter";
+    },
+    oneditprepare: function () {
+      $("#node-input-parameters").typedInput({
+        type: "json",
+        types: ["json"],
+      });
+      document.getElementById("node-input-mode").addEventListener("change", function () {
+        var mode = this.value;
+        var numberOfParamsRow = document.getElementById("randomize-parameters");
+        var parametersRow = document.getElementById("customize-parameters");
+
+        if (mode === "randomize") {
+          numberOfParamsRow.style.display = "block";
+          parametersRow.style.display = "none";
+        } else if (mode === "customize") {
+          numberOfParamsRow.style.display = "none";
+          parametersRow.style.display = "block";
+        }
+      });
+
+      document.getElementById("node-input-mode").dispatchEvent(new Event("change"));
+
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="define_parameter">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-variable"><i class="fa fa-tag"></i> Variable</label>
+    <input type="text" id="node-input-variable" placeholder="Variable" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-mode"><i class="fa fa-list"></i>Parameters Mode</label>
+    <select name="mode" id="node-input-mode">
+      <option value="customize">Customize</option>
+      <option value="randomize">Randomize</option>
+    </select>
+  </div>
+
+  <div class="form-row" id="randomize-parameters">
+    <label for="node-input-numberOfParams"
+      ><i class="fa fa-tag"></i> Number of parames</label
+    >
+    <input
+      type="number"
+      id="node-input-numberOfParams"
+      placeholder="Number of parameters"
+    />
+  </div>
+  
+  <div class="form-row" id="customize-parameters">
+    <label for="node-input-parameters"
+      ><i class="fa fa-code"></i> Parameters</label
+    >
+    <input
+      type="text"
+      id="node-input-parameters"
+      placeholder='{"gamma":[1,2],"beta":[3,4]}'
+    />
+  </div>
+  <div class="form-row">
+    <label for="node-input-numberOfRepetitions"
+      ><i class="fa fa-tag"></i> Number of repetitions</label
+    >
+    <input
+      type="number"
+      id="node-input-numberOfRepetitions"
+      placeholder="Number of repetitions"
+    />
+  </div>
+  <div class="form-tips">
+    Enter parameters as a JSON object with parameter names as keys and arrays as
+    values.
+  </div>
+</script>
+
+<script type="text/html" data-help-name="define_parameter">
+  <p></p>
+</script>

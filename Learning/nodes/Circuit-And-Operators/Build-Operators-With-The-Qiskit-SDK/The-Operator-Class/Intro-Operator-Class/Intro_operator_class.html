@@ -1,0 +1,46 @@
+<script type="text/javascript">
+  RED.nodes.registerType("intro-operator-class", {
+    category: "Learning The operator class",
+    color: "#dddddd",
+    defaults: {
+      name: { value: "Intro to Operator class" },
+      info: {
+          value: "# [The Operator class guide](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n" +
+          "&nbsp;\r\n" +
+          "# This page shows how to use the <font style='background: GhostWhite'>_`Operator`_</font> class " +
+          "For a high-level overview of operator representations in Qiskit, including the Operator class " +
+          "and others, see [Overview of operator classes](https://docs.quantum.ibm.com/guides/operators-overview#)\r\n" +
+          "```python\r\n" +
+          "import numpy as np\r\n" + 
+          "from qiskit.circuit import QuantumCircuit\r\n" +
+          "from qiskit.circuit.library import CXGate, RXGate, XGate\r\n" +
+          "from qiskit.quantum_info import Operator, Pauli, process_fidelity\r\n"
+      }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "white_info.svg",
+    label: function () {
+      return this.name || "intro-operator-class";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="intro-operator-class">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="intro-operator-class">
+  <p>A node that introduces the Operatro class</p>
+
+  <h3>Details</h3>
+  <p>
+      This node gives an introduction into the <code>Operator</code> class.
+      It is an information node that does not require any specific input and 
+      does not generate any output. Instead, it is intended to be a part of 
+      a chain of tutorial nodes that explain the basics of quantum computing.
+  </p>
+</script>

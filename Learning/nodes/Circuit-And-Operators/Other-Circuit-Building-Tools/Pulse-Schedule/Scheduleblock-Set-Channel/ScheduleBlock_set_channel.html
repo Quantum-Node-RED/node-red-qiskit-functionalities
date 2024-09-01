@@ -1,0 +1,49 @@
+
+<script type="text/javascript">
+    RED.nodes.registerType("scheduleblock-set-channel", {
+      category: "Learning Build pulse schedule",
+      color: "#E6E0F8",
+      defaults: {
+        name: { value: "Set a channel"},
+        info: { value: "# To add instructions to pulse, you need to specify at least one <font style=\"background: lightgrey\">_Channel_</font> where the instruction will be applied.\r\n&nbsp;\r\n# **Channels** are labels for signal lines from the control hardware to the quantum chip. There are four different types of channels:\r\n - # A <font style=\"background: lightgrey\">_DriveChannel_</font> is typically used for driving single-qubit rotations.\r\n - # A <font style=\"background: lightgrey\">_ControlChannel_</font> is typically used for multi-qubit gates or additional drive lines for tunable qubits.\r\n - # A <font style=\"background: lightgrey\">_MeasureChannel_</font> is specific to transmitting pulses that stimulate readout.\r\n - # An <font style=\"background: lightgrey\">_AcquireChannel_</font> is used to trigger digitizers which collect readout signals.\r\n# DriveChannels, ControlChannels, and MeasureChannels are all PulseChannels; this means that they support transmitting pulses, whereas the AcquireChannel is a receive channel only and cannot play waveforms.\r\n&nbsp;\r\n# The following code create one DriveChannel instance for each Instruction that accepts a PulseChannel. Most of the channels take one integer <font style=\"background: lightgrey\">_index_</font> argument. Except for ControlChannels, the index maps trivially to the qubit label.\r\n```python\r\nfrom qiskit.pulse import DriveChannel\r\n \r\nchannel = DriveChannel(0)\r\n```\r\n&nbsp;\r\n# On the other hand, you can also build your program in a context that is aware of the target backend by supplying it to pulse.build. By using the channel accessors <font style=\"background: lightgrey\">_`pulse.<type>_channel(<idx>)`_</font>, you ensure you are only using available device resources. When possible you should supply a backend.\r\n```python\r\nfrom qiskit_ibm_runtime.fake_provider import FakeValenciaV2\r\n \r\nbackend = FakeValenciaV2()\r\n \r\nwith pulse.build(backend=backend, name='backend_aware') as backend_aware_program:\r\n    channel = pulse.drive_channel(0)\r\n```\r\n# The Channel object you created is sent to \"Channel\" node, and you can check it at the debug palette.\r\n&nbsp;\r\n# **After setting up the channel, you can add different instructions to your pulse. Each instruction type has its own set of operands. We will introduce each instruction in the following nodes one by one.**\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Object: `channel` (Type: _qiskit.pulse.channels_)**" }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "Set a channel";
+      },
+      
+    });
+
+  </script>
+  
+  <script type="text/html" data-template-name="scheduleblock-set-channel">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Set a channel" />
+    </div>
+
+  </script>
+
+  
+  
+  <script type="text/html" data-help-name="scheduleblock-set-channel">
+    <p>A simple node that set a channel for the pulse.</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Channel
+        <dl class="message-properties">
+          <dt>channel<span class="property-type">qiskit.pulse.channels</span></dt>
+          <dd>The channel object set for the pulse.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to the concept of channels used in Qiskit Pulse programming. Channels are essential for controlling and reading quantum systems, with four primary types: DriveChannels, ControlChannels, MeasureChannels, and AcquireChannels. DriveChannels are used for single-qubit rotations, ControlChannels manage multi-qubit gates, MeasureChannels handle readout stimuli, and AcquireChannels trigger digitizers for signal collection. This node explains how to create and utilize these channels within Qiskit, including how to ensure compatibility with specific backend hardware using the pulse.build function.
+    </p>
+  </script>
+  

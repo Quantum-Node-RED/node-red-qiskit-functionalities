@@ -1,0 +1,69 @@
+<script type="text/javascript">
+    RED.nodes.registerType('sampler-run-options',{
+        category: 'Learning Debugging tools',
+        color: '#dddddd',
+        defaults: {
+            name: {value:"sampler-run-options"},
+            info: {
+                value: "# [Exact simulation with Qiskit SDK primitives guide.](https://docs.quantum.ibm.com/guides/simulate-with-qiskit-sdk-primitives#)\r\n" +
+                "&nbsp;\r\n" +
+                "# By default, the reference Sampler  performs an exact statevector calculation based on the " +
+                "<font style='background: GhostWhite'>_`quantum_info.Statevector`_</font> class. However, this can be modified " +
+                "to introduce the effect of the sampling overhead (also known as \"shot noise\").\r\n" +
+                "# With the introduction of the new V2 interface, the sampling overhead in the Sampler  is now more precisely " +
+                "defined. The new interface accepts a <font style='background: GhostWhite'>_`shots`_</font> argument that " +
+                "can be defined at the \"PUB level\".\r\n" +
+                "# StatevectorSampler (V2)\r\n" +
+                "This example assumes you have defined two circuits.\r\n" +
+                "```python\r\n" +
+                "# Sample two circuits at 128 shots each.\r\n" + 
+                "sampler.run([isa_circuit1, isa_circuit2], shots=128)\r\n" +
+                "# Sample two circuits at different amounts of shots. The \"None\"s are necessary\r\n" +
+                "# as placeholders\r\n" +
+                "# for the lack of parameter values in this example.\r\n" +
+                "sampler.run([(isa_circuit1, None, 123), (isa_circuit2, None, 456)])\r\n" +
+                "```\r\n " +
+                "For a full example, see the [Primitives examples](https://docs.quantum.ibm.com/guides/primitives-examples#sampler-examples) page.\r\n" +
+                "# Sampler (V1)\r\n" +
+                "The V1 interface specifies shots in the following ways:\r\n" +
+                "- Setting keyword arguments in the <font style='background: GhostWhite'>_`Sampler.run`_</font> method.\r\n " +
+                "- Modifying the <font style='background: GhostWhite'>_`Sampler`_</font> options.\r\n" +
+                "object) with the <font style='background: GhostWhite'>_`JobV1.result`_</font> method. \r\n" +
+                "```python\r\n" +
+                "job = sampler.run(isa_circuit,  shots=2048, seed=123)\r\n" + 
+                "result = job.result()\r\n" +
+                "print(result)\r\n" +
+                "\r\n" +
+                ">> SamplerResult(quasi_dists=[{0: 0.5205078125, 3: 0.4794921875}], metadata=[{'shots': 2048}])" +
+                "```\r\n "
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "white_info.svg",
+        label: function() {
+            return this.name||"sampler-run-options";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="sampler-run-options">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="sampler-run-options">
+    <p>A node that shows how the Sampler run options can be modified</p>
+
+    <h3>Details</h3>
+    <p>
+        This node shows different ways to modify the Sampler run 
+        options to introduce the effect of the sampling overhead, 
+        for both StatevectorSampler (V2) and Sampler (V1) implementations.
+        It is an information node that does not require any specific input and 
+        does not generate any output. Instead, it is intended to be a part of 
+        a chain of tutorial nodes that explain the basics of quantum computing.
+    </p>
+</script>

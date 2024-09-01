@@ -1,0 +1,99 @@
+<script type="text/javascript">
+  RED.nodes.registerType("Tensor-Expansion", {
+    category: "Learning The operator class",
+    color: "#9cd0e0",
+    defaults: {
+      name: { value: "Tensor expansion" },
+      info: {
+        value: "# [The Operator class guide](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n" +
+            "&nbsp;\r\n" +
+            "# Tensor expansion \r\n" +
+            "# A closely related operation is <font style='background: GhostWhite'>_`Operator.expand`_</font>, " +
+            "which acts like a tensor product but in the reverse order. Hence, for two operators *A* and *B* " +
+            "you have <font style='background: GhostWhite'>_`A.expand(B)`_</font> = *B⊗A* where the " +
+            "subsystems are indexed as matrix *A* on subsystem 0, and matrix *B* on subsystem 1.\r\n" +
+            "```python\r\n" +
+            "A = Operator(Pauli(\"X\"))\r\n" + 
+            "B = Operator(Pauli(\"Z\"))\r\n" +
+            "tensor_expansion = A.expand(B)\r\n" +
+            "\r\n" +
+            "printprint(f\"tensor_expansion: {tensor_expansion.to_matrix()}\")\r\n" +
+            "print(f\"dim: {tensor_expansion.dim}\")\r\n" +
+            "print(f\"input_dims: {tensor_expansion.input_dims()}\")\r\n" +
+            "print(f\"output_dims: {tensor_expansion.output_dims()}\")\r\n" +
+            "```\r\n "
+        },
+      pauli_1: { value: "X", required: true },
+      pauli_2: { value: "Z", required: true },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    label: function () {
+      return this.name || "Tensor-Expansion";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="Tensor-Expansion">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-pauli-1"><i class="fa fa-magic"></i> Pauli 1</label>
+    <input
+      type="string"
+      id="node-input-pauli-1"
+      placeholder="Please give a Pauli term"
+    />
+  </div>
+  <div class="form-row">
+    <label for="node-input-pauli-2"><i class="fa fa-magic"></i> Pauli 2</label>
+    <input
+      type="string"
+      id="node-input-pauli-2"
+      placeholder="Please give a Pauli term"
+    />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="Tensor-Expansion">
+  <p>A node that shows how operators can be combined with a tensor expansion example</p>
+
+  <h3>Outputs</h3>
+  <ol class="node-ports">
+    <li>Matrix operator data
+      <dl class="message-properties">
+        <dt>payload.result.tensor_expansion <span class="property-type">string</span></dt>
+        <dd>Data (QuantumCircuit orOperation or BaseOperator or matrix) to initialize operator.</dd>
+      </dl>
+    </li>
+    <li>Matrix operator input dimensions 
+      <dl class="message-properties">
+        <dt>payload.result.dim <span class="property-type">string</span></dt>
+        <dd>The total input and output dimension of the operator</dd>
+      </dl>
+    </li>
+    <li>Matrix operator input dimensions 
+      <dl class="message-properties">
+        <dt>payload.result.input_dims <span class="property-type">string</span></dt>
+        <dd>String representation of a Tuple input subsystem dimensions</dd>
+      </dl>
+    </li>
+    <li>Matrix operator output dimensions
+      <dl class="message-properties">
+        <dt>payload.result.output_dims <span class="property-type">string</span></dt>
+        <dd>String representation of a Tuple output subsystem dimensions</dd>
+      </dl>
+    </li>
+  </ol>
+  
+  <h3>Details</h3>
+  <p>
+    This node shows how <code>Operators</code> can be combined using a example using the tensor 
+    product method using <code>A.expand(B)</code>.
+    This node has a predefined placeholder values "X" and "Z", but this can be changed
+    for interactability in the properties tab for the node.
+  </p>
+</script>

@@ -1,0 +1,36 @@
+<script type="text/javascript">
+    RED.nodes.registerType('intro-to-control-flow', {
+      category: 'Learning Classical feedforward and control flow',
+      color: '#dddddd',
+      defaults: {
+        name: { value: "Introduction to classical feedforward and control flow" },
+        info: { 
+            value:"# This flow demonstrates the functionality available in the Qiskit SDK for performing classical feedforward and control flow. These features are sometimes referred to collectively as \"dynamic circuits.\" Classical feedforward refers to the ability to measure qubits in the middle of a circuit and perform additional quantum operations that depend on the measurement outcome. Qiskit supports four control flow constructs for classical feedforward, each implemented as a method on [<font style=\"background: lightgrey\">QuantumCircuit</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit). The constructs and their corresponding methods are:\r\n- # If statement - [<font style=\"background: lightgrey\">QuantumCircuit.if_test</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#if_test)\r\n- # Switch statement - [<font style=\"background: lightgrey\">QuantumCircuit.switch</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#switch)\r\n- # For loop - [<font style=\"background: lightgrey\">QuantumCircuit.for_loop</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#for_loop)\r\n- # While loop - [<font style=\"background: lightgrey\">QuantumCircuit.while_loop</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#while_loop)\r\n# Each of these methods returns a [context manager](https://docs.python.org/3/reference/datamodel.html#with-statement-context-managers) and is typically used in a <font style=\"background: lightgrey\">with</font> statement. In the rest of this guide, we will explain each of these constructs and how to use them.\r\n&nbsp;\r\n# In this flow, we use the following code snippet to test each condition flow. This code snippet runs the generated condition circuit on the simulator, using 1024 shots each time. We compare the number of hits for each condition in the final results to determine if the condition is effective.\r\n```python\r\nfrom qiskit_aer import AerSimulator\r\nsimulator = AerSimulator()\r\nresult = simulator.run(circuit, shots=1024).result()\r\n\r\ncounts = result.get_counts(circuit)\r\n```\r\n&nbsp;\r\n# **Note:** There are some limitations of classical feedforward and control flow operations on quantum hardware that might impact your program. For more information, see [Hardware considerations and limitations for classical feedforward and control flow](https://docs.quantum.ibm.com/guides/dynamic-circuits-considerations)."
+        }
+      },
+      inputs: 0,
+      outputs: 1,
+      icon: "white_info.svg",
+      label: function () {
+        return this.name || "Introduction to classical feedforward and control flow";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="intro-to-control-flow">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Introduction to classical feedforward and control flow">
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="intro-to-control-flow">
+    <p>A node that introduces the 'classical feedforward and control flow' tutorial.</p>
+
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to the 'construct circuit' tutorial. It is an information node that does not require any specific input
+      and does not generate any output. Instead, it is intended to be a part of a chain of tutorial nodes that explain the basics of 
+      quantum computing.
+    </p>
+  </script>

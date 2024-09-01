@@ -1,0 +1,59 @@
+
+<script type="text/javascript">
+    RED.nodes.registerType("pulse-shift-freq", {
+      category: "Learning Build pulse schedule",
+      color: "#E6E0F8",
+      defaults: {
+        name: { value: "shift_frequency()" },
+        info: { value: "## **Node Input:**\r\n- # Object: `channel` (Type: _qiskit.pulse.channels_)\r\n\r\n***\r\n&nbsp;\r\n# <font style=\"background: lightgrey\">**shift_frequency(frequency, channel)**</font>\r\n&nbsp;\r\n# The <font style=\"background: lightgrey\">shift_frequency</font> instruction shifts the frequency of a pulse channel.\r\n&nbsp;\r\n# The follwoing code shows how to shifts the frequency of the specified channel by 1e9 within the context of the pulse program, and you can check the comparison between the frequency-shifted pulse and the original pulse at \"Shift Frequency Output\" node.\r\n```python\r\nwith pulse.build() as pulse_prog:\r\n    pulse.shift_frequency(1e9, channel)\r\n    pulse.play(gaus,channel)\r\n```\r\n&nbsp;\r\n# **Note:** The <font style=\"background: lightgrey\">shift_frequency</font> and <font style=\"background: lightgrey\">set_frequency</font> instructions change the frequency of following pulses and also change the channel's frame of reference. Because a qubit oscillates at its transition frequency, the controller needs to sync with its oscillation; otherwise, an unwanted Z drive is continuously applied. Usually, because the frame is matched with the drive's frequency, and drive matches with the transition's frequency, the Z drive is eliminated when the qubit frequency is calibrated properly. When you apply the <font style=\"background: lightgrey\">shift_frequency</font> instruction, it changes the drive frequency and impacts the frame. In other words, it accumulates the phase (Z) as a function of shifted frequency and duration of the program. Specifically, when you shift the frequency by <font style=\"background: lightgrey\">df</font> and spend <font style=\"background: lightgrey\">dt</font> on that frame, the qubit may experience a phase rotation of <font style=\"background: lightgrey\">df * dt</font>. The programmer needs to take this into account to control their qubits precisely.\r\n\r\n# Note also that these instructions are localized in the pulse gate in IBM devices. This means that accumulated phase and frequency shifts are not carried over. Each pulse gate always starts from the hardware default setting. This behavior is backend-dependent.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: the image of pulse executed with shift_frequency().\r\n" }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "shift_frequency()";
+      },
+      
+    });
+
+  </script>
+  
+  <script type="text/html" data-template-name="pulse-shift-freq">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="shift_frequency()" />
+    </div>
+
+  </script>
+
+  
+  
+  <script type="text/html" data-help-name="pulse-shift-freq">
+    <p>Node that shift frquency for the pulse.</p>
+
+    <h3>Inputs</h3>
+    <ol class="node-ports">
+      <li>Channel
+        <dl class="message-properties">
+          <dt>channel<span class="property-type">qiskit.pulse.channels</span></dt>
+          <dd>The channel object set for the pulse.</dd>
+        </dl>
+      </li>
+    </ol>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Pulse Diagram
+        <dl class="message-properties">
+          <dt>result_image<span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the pulse.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to the shift_frequency instruction used in quantum pulse programming. The shift_frequency instruction allows users to adjust the frequency of a pulse channel by a specified amount, affecting the frame of reference for the pulse sequence. This operation is crucial for aligning the qubit's oscillation frequency with the drive frequency and handling accumulated phase shifts during pulse execution. 
+    </p>
+  </script>
+  

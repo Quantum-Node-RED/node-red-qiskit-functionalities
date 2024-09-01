@@ -1,0 +1,54 @@
+<script type="text/javascript">
+  RED.nodes.registerType("CX_gate", {
+    category: "Interactive Gates",
+    color: "#D7B9E6",
+    defaults: {
+      name: { value: "" },
+      control_qubit: { value: "" },
+      sequence_no: { value: "" },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "cog.svg",
+    label: function () {
+      return this.name || "CX_gate";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="CX_gate">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-control_qubit"><i class="fa fa-tag"></i> Control Qubit</label>
+    <input type="number" id="node-input-control_qubit" placeholder="Control Qubit" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-sequence_no"><i class="fa fa-tag"></i> Sequence No</label>
+    <input type="number" id="node-input-sequence_no" placeholder="Sequence No" />
+</script>
+
+<script type="text/html" data-help-name="CX_gate">
+  <p>
+    <h2>Introduction:</h2>
+    <p>The CX gate, also known as the CNOT (Controlled-NOT) gate. The CX gate flips the state of the target qubit 
+      if and only if the control qubit is in the <code>|1⟩</code> state.</p>
+    
+    <h2>Placement:</h2>
+    <ul>
+      <li>It should follow a qubit node directly or indirectly. This qubit will become the target qubit of the CX gate.</li>
+      <li>It should be placed inside the range [Quantum-Circuit-Begin, Quantum-Circuit-END].</li>
+      <li>There should be at least 2 qubits inside the circuit.</li>
+    </ul>
+    
+    <h2>Properties:</h2>
+    <ul>
+      <li><strong>Control Qubit:</strong> Should be the ID of a qubit (0-index).</li>
+      <li>Control Qubit and the target qubit should have different IDs.</li>
+    </ul>
+  </p>
+</script>

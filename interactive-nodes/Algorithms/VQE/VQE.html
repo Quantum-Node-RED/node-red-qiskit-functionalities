@@ -1,0 +1,72 @@
+<script type="text/javascript">
+  RED.nodes.registerType("VQE", {
+    category: "Interactive Quantum Algorithms",
+    color: "#FF6347",
+    defaults: {
+      name: { value: "VQE algorithm" },
+      varResult: { value: "result" },
+      estimatorName: { value: "estimator" },
+      ansatzName: { value: "ansatz" },
+      optimizerName: { value: "optimizer" },
+      operatorName: { value: "operator" }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    label: function () {
+      return this.name || "VQE";
+    },
+    oneditprepare: function () {
+      $("#node-input-name").val(this.name || "");
+      $("#node-input-varResult").val(this.varResult || "");
+      $("#node-input-estimatorName").val(this.estimatorName || "");
+      $("#node-input-ansatzName").val(this.ansatzName || "");
+      $("#node-input-optimizerName").val(this.optimizerName || "");
+      $("#node-input-operatorName").val(this.operatorName || "");
+    },
+    oneditsave: function () {
+      this.name = $("#node-input-name").val();
+      this.var_result = $("#node-input-varResult").val();
+      this.estimatorName = $("#node-input-estimatorName").val();
+      this.ansatzName = $("#node-input-ansatzName").val();
+      this.optimizerName = $("#node-input-optimizerName").val();
+      this.operatorName = $("#node-input-operatorName").val();
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="VQE">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-varResult"><i class="fa fa-tag"></i>Result variable name</label>
+    <input type="text" id="node-input-varResult" placeholder="variable name" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-estimatorName"><i class="fa fa-tag"></i>estimator name</label>
+    <input type="text" id="node-input-estimatorName" placeholder="estimator name" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-ansatzName"><i class="fa fa-tag"></i>ansatz name</label>
+    <input type="text" id="node-input-ansatzName" placeholder="ansatz name" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-optimizerName"><i class="fa fa-tag"></i>optimizer name</label>
+    <input type="text" id="node-input-optimizerName" placeholder="optimizer name" />
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-operatorName"><i class="fa fa-tag"></i>operator name</label>
+    <input type="text" id="node-input-operatorName" placeholder="operatorName name" />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="VQE">
+  <p>A simple node that implements VQE algorithm.</p>
+</script>

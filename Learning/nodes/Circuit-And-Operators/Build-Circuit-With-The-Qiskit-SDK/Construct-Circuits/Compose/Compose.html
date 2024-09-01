@@ -1,0 +1,76 @@
+<script type="text/javascript">
+    RED.nodes.registerType('compose', {
+      category: 'Learning Construct circuits',
+      color: '#AAAA66',
+      defaults: {
+        name: { value: "Combine two circuits" },
+        info: {
+            value: "# To combine two circuits, use the " +
+            "[<font style=\"background: lightgrey\">compose</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#compose) " +
+            "method. This accepts another " +
+            "[<font style=\"background: lightgrey\">QuantumCircuit</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit) " +
+            "and an optional list of qubit mappings.\r\n" +
+            "&nbsp;\r\n" +
+            "# This code creates two quantum circuits: qc_a with an X-gate on qubit 0, and qc_b with a Y-gate on qubit 0 and a Z-gate " +
+            "on qubit 1. It then composes qc_b into qc_a, applying the gates of qc_b to qubits 1 and 3 of qc_a respectively.\r\n" +
+            "```python\r\n" +
+            "qc_a = QuantumCircuit(4)\r\n" +
+            "qc_a.x(0)\r\n" +
+            "\r\n" +
+            "qc_b = QuantumCircuit(2, name=\"qc_b\")\r\n" +
+            "qc_b.y(0)\r\n" +
+            "qc_b.z(1)\r\n" +
+            "\r\n" +
+            "# compose qubits (0, 1) of qc_a to qubits (1, 3) of qc_b respectively\r\n" +
+            "combined = qc_a.compose(qc_b, qubits=[1, 3])\r\n" +
+            "combined.draw(\"mpl\")\r\n" +
+            "```\r\n" +
+            "# You can check the image of composed circuits in the \"Composed circuits Image\" node.\r\n" +
+            "&nbsp;\r\n" +
+            "# **Note:** The [<font style=\"background: lightgrey\">compose</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#compose) " +
+            "method returns a new circuit and does not mutate either circuit it acts on. To mutate the circuit on which you're calling " +
+            "the [<font style=\"background: lightgrey\">compose</font>](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit#compose) " +
+            "method, use the argument <font style=\"background: lightgrey\">inplace=True</font>.\r\n" +
+            "\r\n" +
+            "***\r\n" +
+            "&nbsp;\r\n" +
+            "## **Node Output:**\r\n" +
+            "- # Object: `qc_a` (Type: _qiskit.QuantumCircuit_)\r\n" +
+            "- # Object: `qc_b` (Type: _qiskit.QuantumCircuit_)\r\n" +
+            "- # Image: Image of `qc_a` composed with `qc_b`"}
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "Combine two circuits";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="compose">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Combine two circuits">
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="compose">
+    <p>A node that applies a compose operation to combine circuits.</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>payload.result.circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the quantum circuit.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+      This node demonstrates how two circuits can be combined using the <code>compose</code> method and how that
+      instruction changes the visualization of the circuit. 
+    </p>
+  </script>

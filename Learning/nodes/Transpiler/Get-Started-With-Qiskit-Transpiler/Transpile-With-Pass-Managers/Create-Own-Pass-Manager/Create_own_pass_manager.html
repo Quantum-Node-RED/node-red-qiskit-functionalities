@@ -1,0 +1,50 @@
+<script type="text/javascript">
+  RED.nodes.registerType("create-own-pass-manager", {
+    category: "Learning Transpile with pass manager",
+    color: "#FFAAAA",
+    defaults: {
+      name: { value: "Create your own pass manager" },
+      info: { value: "# The [qiskit.transpiler.passes](https://docs.quantum.ibm.com/api/qiskit/transpiler_passes) module includes many transpiler passes that can be used to create pass managers. To create a pass manager, initialize a <font style=\"background: lightgrey\">PassManager</font> with a list of passes. For example, the following code creates a transpiler pass that merges adjacent two-qubit gates and then synthesizes them into a basis of [𝑅𝑦](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.RYGate), [𝑅𝑧](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.RZGate), and [𝑅𝑥𝑥](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.RXXGate) gates.\r\n```python\r\nfrom qiskit.transpiler import PassManager\r\nfrom qiskit.transpiler.passes import (\r\n    Collect2qBlocks,\r\n    ConsolidateBlocks,\r\n    UnitarySynthesis,\r\n)\r\n \r\nbasis_gates = [\"rx\", \"ry\", \"rxx\"]\r\ntranslate = PassManager(\r\n    [\r\n        Collect2qBlocks(),\r\n        ConsolidateBlocks(basis_gates=basis_gates),\r\n        UnitarySynthesis(basis_gates),\r\n    ]\r\n)\r\n```\r\n# To demonstrate this pass manager in action, test it on a two-qubit circuit consisting of a Hadamard followed by two adjacent CX gates by using following code snippet:\r\n```python\r\nfrom qiskit import QuantumRegister, QuantumCircuit\r\n \r\nqubits = QuantumRegister(2, name=\"q\")\r\ncircuit = QuantumCircuit(qubits)\r\n \r\na, b = qubits\r\ncircuit.h(a)\r\ncircuit.cx(a, b)\r\ncircuit.cx(b, a)\r\n \r\ncircuit.draw(\"mpl\")\r\n```\r\n# You can check the image of  created circuit in \"Circuit Diagram Output\" node.\r\n&nbsp;\r\n# To run the pass manager on the circuit, call the <font style=\"background: lightgrey\">run</font> method.\r\n```python\r\ntranslated = translate.run(circuit)\r\ntranslated.draw(\"mpl\")\r\n```\r\n# You can check the image of transpiled circuit in \"Transpiled Circuit Diagram Output\" node. It should only contains those 3 types of gates we mentioned before.\r\n&nbsp;\r\n# For a more advanced example that shows how to create a pass manager to implement the error suppression technique known as dynamical decoupling, see Create a pass manager for dynamical decoupling flow.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: The image of circuit `circuit`\r\n- # Image: The image of circuit after transpilation"}
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    label: function () {
+      return this.name || "Create your own pass manager";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="create-own-pass-manager">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="create-own-pass-manager">
+  <p>
+    A simple node that introduce how to create your own pass manager.
+  </p>
+
+  <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the circuit.</dd>
+        </dl>
+      </li>
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the circuit after transpilation.</dd>
+        </dl>
+      </li>
+    </ol>
+
+  <h3>Details</h3>
+  <p>     
+    This node provides an introduction to Qiskit's transpiler passes and their application in quantum circuit optimization. By leveraging the Qiskit transpiler framework, users can create custom pass managers that automate the process of transforming quantum circuits to enhance their performance on specific hardware. This node illustrates how to set up a pass manager to merge adjacent two-qubit gates and synthesize them into a basis of 𝑅𝑦, 𝑅𝑧, and 𝑅𝑥𝑥 gates. It demonstrates the practical use of passes such as Collect2qBlocks, ConsolidateBlocks, and UnitarySynthesis to refine quantum circuits, making them more efficient and compatible with the desired quantum gates. The example provided showcases the application of this pass manager on a simple two-qubit circuit, allowing users to see the effects of transpilation on the circuit diagram.
+  </p>
+</script>

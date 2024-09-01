@@ -1,0 +1,61 @@
+<script type="text/javascript">
+  RED.nodes.registerType("apply_energy_cost_objective_function", {
+    category: "Interactive Function",
+    color: "#E6BCB9",
+    defaults: {
+      name: { value: "" },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "function.svg",
+    label: function () {
+      return this.name || "apply_energy_cost_objective_function";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="apply_energy_cost_objective_function">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="apply_energy_cost_objective_function">
+  <p>
+    The <strong>apply_energy_cost_objective_function</strong> node is used to
+    compute the energy cost of a quantum state as part of a quantum algorithm,
+    typically in variational quantum algorithms like VQE (Variational Quantum
+    Eigensolver). This node evaluates the objective function by calculating the
+    expectation value of a Hamiltonian given a set of parameters for a quantum
+    circuit.
+  </p>
+
+  <h3>Inputs</h3>
+  <ul>
+    <li>
+      <strong>Name (name)</strong>: An optional name for the node instance to
+      identify it in your flow.
+    </li>
+  </ul>
+
+  <h3>Outputs</h3>
+  <ul>
+    <li>
+      <strong>msg.payload</strong>: The computed energy cost as a real number.
+      This value represents the expectation value of the Hamiltonian for the
+      given parameterized quantum circuit, and it can be used to assess the
+      quality of the quantum state in the context of the optimization problem
+      being solved.
+    </li>
+  </ul>
+
+  <h3>Example Use Case</h3>
+  <p>
+    This node is typically used in quantum optimization algorithms like VQE or
+    QAOA, where the goal is to find the minimum energy configuration of a
+    quantum system. By evaluating the energy cost for different parameter sets,
+    this node helps in the iterative optimization process to find the optimal
+    quantum state.
+  </p>
+</script>

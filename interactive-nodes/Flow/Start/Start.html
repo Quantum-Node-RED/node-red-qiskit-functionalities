@@ -1,0 +1,77 @@
+<script type="text/javascript">
+  RED.nodes.registerType('Start', {
+    category: "Interactive Flow",
+    color: '#D7E6B9',
+    defaults: {
+      name: { value: "" },
+      topic: { value: "" },
+      repeat: { value: "", validate: function (v) { return v === "" || (parseFloat(v) > 0); } }
+    },
+    inputs: 0,
+    outputs: 1,
+    icon: "arrow-in.svg",
+    label: function () {
+      return this.name || "Start";
+    },
+    labelStyle: function () {
+      return this.name ? "node_label_italic" : "";
+    },
+    button: {
+      onclick: function () {
+        var node = this;
+        $.ajax({
+          url: "inject/" + this.id,
+          type: "POST",
+          success: function (resp) {
+            RED.notify("Successfully injected", "success");
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            if (jqXHR.status === 404) {
+              RED.notify("Node not deployed", "error");
+            } else if (jqXHR.status === 500) {
+              RED.notify("Injection failed", "error");
+            } else if (jqXHR.status === 0) {
+              RED.notify("Injection failed - no response", "error");
+            } else {
+              RED.notify("Injection failed - unexpected error", "error");
+            }
+          }
+        });
+      }
+    }
+  });
+</script>
+
+<script type="text/html" data-template-name="Start">
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+  <div class="form-row">
+      <label for="node-input-repeat"><i class="fa fa-repeat"></i> Repeat</label>
+      <input type="text" id="node-input-repeat" placeholder="Repeat interval in seconds">
+  </div>
+</script>
+
+
+<script type="text/html" data-help-name="Start">
+  <p>
+    <h2>Introduction:</h2>
+    <p>The purpose of the Start node is to serve as the starting point for the entire flow. 
+      It injects a message into a flow with an empty JSON object as payload. 
+      This JSON object is passed along the flow, gradually building a flow structure as it moves through the nodes.
+      This structure enables the End node to generate the final code snippet.</p>
+    
+    <h2>Placement:</h2>
+    <ul>
+      <li>It should be placed at the beginning of the whole flow.</li>
+    </ul>
+    
+    <h2>Properties:</h2>
+    <ul>
+      <li>The Repeat option allows the injection to be repeated at a regular interval.</li>
+      <li><strong>Repeat:</strong> Should enter a number to specify the interval (in seconds) between sending messages.</li>
+      <li>The button on the left side of the node allows manual injection.</li>
+    </ul>
+  </p>
+</script>

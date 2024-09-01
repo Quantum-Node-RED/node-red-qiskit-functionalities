@@ -1,0 +1,49 @@
+
+<script type="text/javascript">
+    RED.nodes.registerType("parametric-pulse", {
+      category: "Learning Build pulse schedule",
+      color: "#E6E0F8",
+      defaults: {
+        name: { value: "Build parametric pulse" },
+        info: { value: "# You can build a <font style=\"background: lightgrey\">_Gaussian_</font> pulse by using the Gaussian parametric pulse. A parametric pulse sends the name of the function and its parameters to the backend, rather than every individual sample. Using parametric pulses makes the jobs much smaller to send. IBM Quantum backends limit the maximum job size that they accept, so parametric pulses might allow you to run larger programs.\r\n&nbsp;\r\n# Other parametric pulses in the library include <font style=\"background: lightgrey\">_GaussianSquare_</font>, <font style=\"background: lightgrey\">_Drag_</font>, and <font style=\"background: lightgrey\">_Constant_</font>. See the full list in [the API reference](https://docs.quantum.ibm.com/api/qiskit/pulse#parametric-pulse-representation).\r\n&nbsp;\r\n# **Note:** The backend is responsible for deciding how to sample the parametric pulses. It is possible to draw parametric pulses, but the samples displayed are not guaranteed to be the same as those executed on the backend.\r\n&nbsp;\r\n# Following code shows how to create pulse with parameters:\r\n```python\r\nfrom qiskit.pulse import library\r\n \r\namp = 1\r\nsigma = 10\r\nnum_samples = 128\r\n\r\ngaus = pulse.library.Gaussian(num_samples, amp, sigma,\r\n                              name=\"Parametric Gaus\")\r\n```\r\n# The image of the pulse 'gaus' is shown on the \"Parametric Pulse Output\" node\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: the image of parametric pulse `gaus`\r\n" }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "Build parametric pulse";
+      },
+      
+    });
+
+  </script>
+  
+  <script type="text/html" data-template-name="parametric-pulse">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Build parametric pulse" />
+    </div>
+
+  </script>
+
+  
+  
+  <script type="text/html" data-help-name="parametric-pulse">
+    <p>A simple node that build pulse by parameters.</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Pulse Diagram
+        <dl class="message-properties">
+          <dt>result_image<span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the pulse `gaus`.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to creating parametric pulses using Qiskit, specifically focusing on the Gaussian pulse. Parametric pulses allow for efficient communication with quantum backends by sending the pulse parameters instead of each individual sample, making it possible to execute larger quantum programs. The Gaussian pulse is characterized by its amplitude and standard deviation (sigma), and this node explains how these parameters can be used to define the pulse.
+    </p>
+  </script>
+  

@@ -1,0 +1,49 @@
+
+<script type="text/javascript">
+    RED.nodes.registerType("export-Qiskit-as-OpenQASM2-file", {
+      category: "Learning Export as OpenQASM 2 program",
+      color: "#E9967A",
+      defaults: {
+        name: { value: "Export simple Qiskit program as OpenQASM 2 file" },
+        info: { value: "# Qiskit can also export a QuantumCircuit to OpenQASM 2. You can use the function [<font style=\"background: lightgrey\">qasm2.dump()</font>](https://docs.quantum.ibm.com/api/qiskit/qasm2#dump) to write to a file, and [<font style=\"background: lightgrey\">qasm2.dumps()</font>](https://docs.quantum.ibm.com/api/qiskit/qasm2#dumps) to write to a string. These functions currently have a very simple interface: they accept a circuit and, only in the case of qasm2.dump(), a location to write the output to.\r\n&nbsp;\r\n# In the code snippet below, we create a simple Qiskit QuantumCircuit, and save it as string and as file separately.\r\n```python\r\nfrom qiskit import QuantumCircuit, qasm2\r\n \r\n# Define any circuit.\r\ncircuit = QuantumCircuit(2, 2)\r\ncircuit.h(0)\r\ncircuit.cx(0, 1)\r\ncircuit.measure([0, 1], [0, 1])\r\n \r\n# Export to a string.\r\nprogram = qasm2.dumps(circuit)\r\n \r\n# Export to a file.\r\nqasm2.dump(circuit, \"my_file.qasm\")\r\n```\r\n# \"my_file.qasm\" is read by \"Read QASM file\" node and its content is sent to \"OpenQASM 2 file content\" node. You can check the converted OpenQASM 2 program in the debug palette.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # File: `my_file.qasm`" }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "Export simple Qiskit program as OpenQASM 2 file";
+      },
+      
+    });
+
+  </script>
+  
+  <script type="text/html" data-template-name="export-Qiskit-as-OpenQASM2-file">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Export simple Qiskit program as OpenQASM 2 file" />
+    </div>
+
+  </script>
+
+  
+  
+  <script type="text/html" data-help-name="export-Qiskit-as-OpenQASM2-file">
+    <p>A node that export simple Qiskit circuit into OpenQASM 2 program.</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>File
+        <dl class="message-properties">
+          <dt>my_file.qasm<span class="property-type">qasm file</span></dt>
+          <dd>The file which contains the circuit you created.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+      This node provides an introduction to exporting Qiskit QuantumCircuit objects to OpenQASM 2 format. It allows users to easily understand and convert Qiskit quantum circuits into the OpenQASM 2 language, which is a standard for describing quantum circuits. This node showcases the process of exporting a quantum circuit both as a string and to a file. By integrating this node with your flow, you can view the OpenQASM 2 representation of your quantum circuits directly within the Node-RED environment, facilitating easier debugging and analysis of quantum programs.
+    </p>
+  </script>
+  

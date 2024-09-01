@@ -1,0 +1,79 @@
+<script type="text/javascript">
+  RED.nodes.registerType("define_sampler", {
+    category: "Interactive Function",
+    color: "#E6BCB9",
+    defaults: {
+      name: { value: "" },
+      variable: { value: "", required: true },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "function.svg",
+    label: function () {
+      return this.name || "define_sampler";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="define_sampler">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-variable"
+      ><i class="fa fa-tag"></i> Variable name</label
+    >
+    <input type="text" id="node-input-variable" placeholder="Variable Name" />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="define_sampler">
+  <p>
+    The <strong>define_sampler</strong> node is used to create a quantum
+    <em>Sampler</em> instance, which is a tool that executes quantum circuits
+    and returns a distribution of measurement outcomes. This node is typically
+    used in quantum algorithms to sample the output states of a quantum circuit
+    after execution.
+  </p>
+
+  <h3>Inputs</h3>
+  <ul>
+    <li>
+      <strong>Name (name)</strong>: An optional name to label the node instance
+      within your Node-RED flow.
+    </li>
+    <li>
+      <strong>Variable (variable)</strong>: The name of the variable where the
+      created Sampler instance will be stored. This variable can then be
+      referenced in subsequent nodes that require a Sampler for quantum circuit
+      execution.
+    </li>
+  </ul>
+
+  <h3>Outputs</h3>
+  <ul>
+    <li>
+      <strong>msg.payload</strong>: Contains the Sampler instance defined by the
+      node. This instance can be used for running quantum circuits and obtaining
+      a quasi-probability distribution of the results.
+    </li>
+  </ul>
+
+  <h3>Example Use Case</h3>
+  <p>
+    This node can be used in a quantum workflow where a Sampler is needed to
+    execute a parameterized quantum circuit and retrieve the probability
+    distribution of measurement outcomes. For instance, in a Variational Quantum
+    Eigensolver (VQE) algorithm, a Sampler is employed to measure the quantum
+    state and compute the expectation value of an operator.
+  </p>
+
+  <h3>Additional Notes</h3>
+  <p>
+    The <strong>define_sampler</strong> node does not require any input data to
+    function; it simply creates a new Sampler instance and stores it in the
+    specified variable. Ensure that the variable name is unique and consistent
+    across nodes to avoid overwriting or referencing errors in your flow.
+  </p>
+</script>

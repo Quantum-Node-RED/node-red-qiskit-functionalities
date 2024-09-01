@@ -1,0 +1,42 @@
+<script type="text/javascript">
+    RED.nodes.registerType('Data-encoding-circuits', {
+      category: 'Learning Circuit Library',
+      color: '#A6BBCF',
+      defaults: {
+        name: { value: "Data-encoding circuits" },
+        info: {value: "# These parameterized circuits encode data onto quantum states for processing by quantum machine learning algorithms. Some circuits supported by Qiskit are:\r\n- # Amplitude encoding, which encodes each number into the amplitude of a basis state. This can store 2^n numbers in a single state, but can be costly to implement.\r\n- # Basis encoding, which encodes an integer k by preparing the corresponding basis state |k⟩.\r\n- # Angle encoding, which sets each number in the data as a rotation angle in a parameterized circuit.\r\n&nbsp;\r\n# The best approach depends upon the specifics of your application. On current quantum computers, however, we often use angle-encoding circuits such as the <font style=\"background: lightgrey\">ZZFeatureMap</font>. The following code uses Qiskit's <font style=\"background: lightgrey\">ZZFeatureMap</font> to encode a set of features into a quantum circuit. It then assigns the provided feature values to the parameters of the feature map and visualizes the resulting circuit.\r\n```python\r\nfrom qiskit.circuit.library import ZZFeatureMap\r\n \r\nfeatures = [0.2, 0.4, 0.8]\r\nfeature_map = ZZFeatureMap(feature_dimension=len(features))\r\n \r\nencoded = feature_map.assign_parameters(features)\r\nencoded.draw('mpl')\r\n```\r\n# You can check the image of generated circuit in the \"Data Encoding Circuit Image Output\" node.\r\n&nbsp;\r\n# See [Data encoding circuits](https://docs.quantum.ibm.com/api/qiskit/circuit_library#data-encoding-circuits) in the circuit library API documentation for more information.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: Image of circuit `encoded`" }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.svg",
+      label: function () {
+        return this.name || "Data-encoding circuits";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="Data-encoding-circuits">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="Data-encoding-circuits">
+    <p>A node that introduce the Data-encoding circuit in qiskit circuit library.</p>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+      <li>Circuit Diagram
+        <dl class="message-properties">
+          <dt>circuit_diagram <span class="property-type">string (Base64)</span></dt>
+          <dd>The Base64-encoded string representing the visual diagram of the data-encoding quantum circuit.</dd>
+        </dl>
+      </li>
+    </ol>
+  
+    <h3>Details</h3>
+    <p>
+      This node introduces the ZZFeatureMap circuit from Qiskit, designed to encode classical data into quantum states for use in quantum machine learning algorithms. The ZZFeatureMap utilizes angle encoding, where each data point is represented as a rotation angle in a parameterized quantum circuit. By providing a list of features, this node generates a quantum feature map that can be used for various quantum computing tasks.
+    </p>
+  </script>

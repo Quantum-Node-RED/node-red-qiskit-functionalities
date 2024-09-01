@@ -1,0 +1,160 @@
+<script type="text/javascript">
+  RED.nodes.registerType("sparse-pauli-op", {
+    category: "Interactive Function",
+    color: "#E6BCB9",
+    defaults: {
+      name: { value: "" },
+      variable: { value: "", required: true },
+      terms: { value: "", required: true },
+      coefficients: { value: "", required: true },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "function.svg",
+    label: function () {
+      return this.name || "sparse-pauli-op";
+    },
+    oneditprepare: function () {
+      // Populate the existing terms and coefficients
+      $("#node-input-variable").val(this.variable);
+      $("#node-input-terms").val(this.terms);
+      $("#node-input-coefficients").val(this.coefficients);
+    },
+    oneditsave: function () {
+      // Save the terms and coefficients
+      this.variable = $("#node-input-variable").val();
+      this.terms = $("#node-input-terms").val();
+      this.coefficients = $("#node-input-coefficients").val();
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="sparse-pauli-op">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="string" id="node-input-name" placeholder="Name" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-variable"
+      ><i class="fa fa-tag"></i> Variable Name</label
+    >
+    <input type="string" id="node-input-variable" placeholder="variable name" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-terms"
+      ><i class="fa fa-cogs"></i> Pauli Terms (comma-separated)</label
+    >
+    <input
+      type="string"
+      id="node-input-terms"
+      placeholder="Pauli terms (e.g., ZZ,IZ,ZZ)"
+    />
+  </div>
+  <div class="form-row">
+    <label for="node-input-coefficients"
+      ><i class="fa fa-cogs"></i> Coefficients (comma-separated)</label
+    >
+    <input
+      type="string"
+      id="node-input-coefficients"
+      placeholder="Coefficients (e.g., 0.5,1.0,0.8)"
+    />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="sparse-pauli-op">
+  <p>
+    The <strong>sparse-pauli-op</strong> node is used to construct a quantum
+    Hamiltonian represented by a SparsePauliOp. This is particularly useful in
+    quantum computing when defining Hamiltonians for variational algorithms or
+    simulations, such as in the Variational Quantum Eigensolver (VQE) or Quantum
+    Approximate Optimization Algorithm (QAOA).
+  </p>
+
+  <h3>Inputs</h3>
+  <ul>
+    <li>
+      <strong>Name (name)</strong>: An optional name for the node instance,
+      useful for identifying it in your Node-RED flow.
+    </li>
+    <li>
+      <strong>Variable Name (variable)</strong>: The name of the variable where
+      the constructed SparsePauliOp instance will be stored. This variable can
+      be referenced in subsequent nodes that utilize the Hamiltonian.
+    </li>
+    <li>
+      <strong>Pauli Terms (terms)</strong>: Comma-separated Pauli terms (e.g.,
+      "ZZ,IZ,XX"). Each term represents a Pauli string that constitutes part of
+      the Hamiltonian. Ensure that each Pauli term is formatted correctly, using
+      "X", "Y", "Z", or "I" to denote the respective Pauli operators and
+      identity.
+    </li>
+    <li>
+      <strong>Coefficients (coefficients)</strong>: Comma-separated list of
+      coefficients (e.g., "0.5,1.0,0.8"). These coefficients correspond to the
+      Pauli terms provided and define the weighting of each term in the
+      Hamiltonian.
+    </li>
+  </ul>
+
+  <h3>Outputs</h3>
+  <ul>
+    <li>
+      <strong>msg.payload</strong>: Contains the SparsePauliOp instance
+      constructed from the provided Pauli terms and coefficients. This instance
+      represents a Hamiltonian that can be used in quantum algorithms or
+      simulations.
+    </li>
+  </ul>
+
+  <h3>How to Use</h3>
+  <ol>
+    <li>
+      Drag the <strong>sparse-pauli-op</strong> node from the "function"
+      category into your Node-RED workspace.
+    </li>
+    <li>Double-click the node to open its configuration panel.</li>
+    <li>
+      Set the <strong>Name</strong> field (optional) to label the node instance.
+    </li>
+    <li>
+      Enter the <strong>Variable Name</strong> where the SparsePauliOp instance
+      will be stored.
+    </li>
+    <li>
+      Provide the <strong>Pauli Terms</strong> as a comma-separated list
+      representing the terms in the Hamiltonian.
+    </li>
+    <li>
+      Input the corresponding <strong>Coefficients</strong> as a comma-separated
+      list that defines the weight of each Pauli term in the Hamiltonian.
+    </li>
+    <li>
+      Connect the input of this node to other nodes that initiate or require the
+      construction of a Hamiltonian and connect the output to nodes that utilize
+      the Hamiltonian for quantum operations or optimizations.
+    </li>
+    <li>
+      Deploy your flow to save the configuration and construct the SparsePauliOp
+      instance when the flow is triggered.
+    </li>
+  </ol>
+
+  <h3>Example Use Case</h3>
+  <p>
+    This node can be used in a quantum workflow where a Hamiltonian needs to be
+    defined for simulation or optimization purposes. For example, in a VQE
+    algorithm, the SparsePauliOp constructed by this node can represent the
+    electronic Hamiltonian of a molecule, and the quantum algorithm would aim to
+    find the ground state energy of this Hamiltonian.
+  </p>
+
+  <h3>Additional Notes</h3>
+  <p>
+    Ensure that the <strong>Pauli Terms</strong> and
+    <strong>Coefficients</strong> are formatted correctly and correspond to each
+    other. Each term must have a matching coefficient, and the inputs should be
+    compatible in length and type. Misformatted inputs may result in errors or
+    unexpected behavior.
+  </p>
+</script>

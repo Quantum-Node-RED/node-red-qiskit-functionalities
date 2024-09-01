@@ -1,0 +1,76 @@
+<script type="text/javascript">
+  RED.nodes.registerType("operators", {
+    category: "Learning Build operators",
+    color: "#fdaaa2",
+    defaults: {
+      name: { value: "Operator class" },
+      info: {
+          value:"# [Overview of operator classes guide.](https://docs.quantum.ibm.com/guides/operators-overview#overview-of-operator-classes#)\r\n" +
+          "&nbsp;\r\n" +
+          "# The <font style='background: lightgrey'>_`Operator`_</font> class represents a general linear operator. Unlike " +
+          "SparsePauliOp, Operator stores the linear operator as a dense matrix. Because the memory required to store a dense matrix " +
+          "scales exponentially with the number of qubits, the Operator class is only suitable for use with a small number of qubits.\r\n" +
+          "# You can initialize an Operator by directly passing a Numpy array storing the matrix of the operator." +
+          "For example, the following code cell creates a two-qubit Pauli XX operator:\r\n" +
+          "```python\r\n" +
+          "XX = Operator(\r\n" + 
+          "    np.array(\r\n" +
+          "        [\r\n" +
+          "            [0, 0, 0, 1],\r\n" +
+          "            [0, 0, 1, 0],\r\n" +
+          "            [0, 1, 0, 0],\r\n" +
+          "            [1, 0, 0, 0],\r\n" +
+          "        ]\r\n" +
+          "    )\r\n" +
+          ")\r\n" +
+          "print(XX.data)\r\n" +
+          "print(XX.input_dims())\r\n" +
+          "print(XX.output_dims())\r\n" +
+          "```\r\n "
+      },
+      matrix: { value: "[[0, 0, 0, 1],[0, 0, 1, 0],[0, 1, 0, 0],[1, 0, 0, 0]]", required: true },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    label: function () {
+      return this.name || "operators";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="operators">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+  <div class="form-row">
+    <label for="node-input-matrix"><i class="fa fa-cube"></i> Operator</label>
+    <input
+      type="string"
+      id="node-input-matrix"
+      placeholder="Matrix in 2D array format (e.g., '[[1,0],[0,1]]')"
+    />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="operators">
+  <p>A node that introduces the Operator class</p>
+
+  <h3>Outputs</h3>
+  <ol class="node-ports">
+    <li>The operator object
+      <dl class="message-properties">
+        <dt>payload.result.matrix <span class="property-type">string</span></dt>
+        <dd>The generated operator object in string format</dd>
+      </dl>
+    </li>
+  </ol>
+
+  <h3>Details</h3>
+  <p>
+    This node demonstrates how the <code>Operator</code> class works and can be used.
+    This node has a predefined placeholder value for the Operator that is initialized, but this can be changed
+    for interactability in the properties tab for the node.
+  </p>
+</script>

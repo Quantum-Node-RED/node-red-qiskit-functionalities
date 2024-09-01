@@ -1,0 +1,65 @@
+<script type="text/javascript">
+  RED.nodes.registerType("Equality-Operator", {
+    category: "Learning The operator class",
+    color: "#9cd0e0",
+    defaults: {
+      name: { value: "Equality Operator" },
+      info: {
+        value: "# [The Operator class guide](https://docs.quantum.ibm.com/guides/specify-observables-pauli#)\r\n" +
+            "&nbsp;\r\n" +
+            "# Compare Operators \r\n" +
+            "# Operators implement an equality method that can be used to check if two operators are approximately equal.\r\n" +
+            "example 1:\r\n " +
+            "```python\r\n" +
+            "equality_operator = Operator(Pauli(\"X\")) == Operator(XGate())\r\n" +
+            "print(f\"equality_operator: {equality_operator}\")\r\n" + 
+            "```\r\n " +
+            "# Note that this checks that each matrix element of the operators is approximately " +
+            " equal; two unitaries that differ by a global phase are not considered equal:\r\n" +
+            "example 2:\r\n " +
+            "```python\r\n" +
+            "equality_operator_2 = Operator(XGate()) == np.exp(1j * 0.5) * Operator(XGate())\r\n" +
+            "print(f\"equality_operator_with_different_global_phase: {equality_operator_2}\")\r\n" + 
+            "```\r\n "
+        },
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "file.svg",
+    label: function () {
+      return this.name || "Equality-Operator";
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="Equality-Operator">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+</script>
+
+<script type="text/html" data-help-name="Equality-Operator">
+  <p>A node that introduces how to compare operators</p>
+
+  <h3>Outputs</h3>
+  <ol class="node-ports">
+    <li>Eqaulity Operator
+      <dl class="message-properties">
+        <dt>payload.result.equality_operator <span class="property-type">string</span></dt>
+        <dd>String representation of whether two operators are approximately equal.</dd>
+      </dl>
+    </li>
+    <li>Different Global Phase
+      <dl class="message-properties">
+        <dt>payload.result.equality_operator_with_different_global_phase <span class="property-type">string</span></dt>
+        <dd>String representation of whether two operators with different global phsae are approximately equal</dd>
+      </dl>
+    </li>
+  </ol>
+  
+  <h3>Details</h3>
+  <p>
+    This node introduces how to compare <code>Operators</code>.
+  </p>
+</script>

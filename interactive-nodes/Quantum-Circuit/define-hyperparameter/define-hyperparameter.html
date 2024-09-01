@@ -1,0 +1,51 @@
+<script type="text/javascript">
+  RED.nodes.registerType("define_hyperparameter", {
+    category: "Interactive Quantum Circuit",
+    color: "#a6bbcf",
+    defaults: {
+      name: { value: "" },
+      hyperparameters: { value: {}, required: true }, // Changed 'parameters' to 'hyperparameters'
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "font-awesome/fa-file-excel-o",
+    label: function () {
+      return this.name || "define_hyperparameter";
+    },
+    oneditprepare: function () {
+      // Initialize the 'hyperparameters' input as a JSON typed input
+      $("#node-input-hyperparameters").typedInput({
+        type: "json",
+        types: ["json"],
+      });
+    },
+  });
+</script>
+
+<script type="text/html" data-template-name="define_hyperparameter">
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
+
+  <!-- Retaining the hyperparameters input field -->
+  <div class="form-row">
+    <label for="node-input-hyperparameters"
+      ><i class="fa fa-code"></i> Hyperparameters</label
+    >
+    <input
+      type="text"
+      id="node-input-hyperparameters"
+      placeholder='{"reps":2}'
+    />
+  </div>
+
+  <div class="form-tips">
+    Enter hyperparameters as a JSON object with hyperparameter names as keys and
+    arrays as values.
+  </div>
+</script>
+
+<script type="text/html" data-help-name="define_hyperparameter">
+  <p></p>
+</script>

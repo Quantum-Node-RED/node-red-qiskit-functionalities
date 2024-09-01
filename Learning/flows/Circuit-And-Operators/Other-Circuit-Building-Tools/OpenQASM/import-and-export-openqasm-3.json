@@ -1,0 +1,184 @@
+[
+    {
+        "id": "2abb279f01f2d561",
+        "type": "tab",
+        "label": "Import and Export OpenQASM 3",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "e83a3258617b76f4",
+        "type": "import-OpenQASM3",
+        "z": "2abb279f01f2d561",
+        "name": "Import OpenQASM3 program",
+        "info": "# To import and OpenQASM 3 program into Qiskit, You must install the package <font style=\"background: lightgrey\">qiskit_qasm3_import</font> to use this function. Install using the following command.\r\n```python\r\npip install qiskit-qasm3-import\r\n```\r\n# Currently two high-level functions are available for importing from OpenQASM 3 into Qiskit. These functions are <font style=\"background: lightgrey\">load()</font>, which takes a file name, and <font style=\"background: lightgrey\">loads()</font>, which takes the program itself as a string.\r\n&nbsp;\r\n# In the following code snippet, we  define a quantum program using OpenQASM 3, and use <font style=\"background: lightgrey\">loads()</font> to directly convert it into a QuantumCircuit.\r\n```python\r\nimport qiskit.qasm3\r\n \r\nprogram = \"\"\"\r\n    OPENQASM 3.0;\r\n    include \"stdgates.inc\";\r\n \r\n    input float[64] a;\r\n    qubit[3] q;\r\n    bit[2] mid;\r\n    bit[3] out;\r\n \r\n    let aliased = q[0:1];\r\n \r\n    gate my_gate(a) c, t {\r\n      gphase(a / 2);\r\n      ry(a) c;\r\n      cx c, t;\r\n    }\r\n    gate my_phase(a) c {\r\n      ctrl @ inv @ gphase(a) c;\r\n    }\r\n \r\n    my_gate(a * 2) aliased[0], q[{1, 2}][0];\r\n    measure q[0] -> mid[0];\r\n    measure q[1] -> mid[1];\r\n \r\n    while (mid == \"00\") {\r\n      reset q[0];\r\n      reset q[1];\r\n      my_gate(a) q[0], q[1];\r\n      my_phase(a - pi/2) q[1];\r\n      mid[0] = measure q[0];\r\n      mid[1] = measure q[1];\r\n    }\r\n \r\n    if (mid[0]) {\r\n      let inner_alias = q[{0, 1}];\r\n      reset inner_alias;\r\n    }\r\n \r\n    out = measure q;\r\n\"\"\"\r\n\r\ncircuit = qiskit.qasm3.loads(program)\r\n```\r\n# You can check the image of the output circuit in the \"Circuit Output\" node.\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # Image: the image of the loaded circuit.",
+        "x": 880,
+        "y": 360,
+        "wires": [
+            [
+                "47abf3b2a67cd810"
+            ]
+        ]
+    },
+    {
+        "id": "3b560f57d5de4151",
+        "type": "intro-to-OpenQASM",
+        "z": "2abb279f01f2d561",
+        "name": "Introduction to OpenQASM",
+        "info": "# **What is OpenQASM ?**\r\n&nbsp;\r\n# OpenQASM (open quantum assembly language), a machine-independent programming interface compatible with IBM Quantum™ systems, is an imperative programming language for describing quantum circuits. OpenQASM uses the quantum circuit model to express quantum programs as ordered sequences of parameterized operations (such as gates, measurements, and resets) and real-time classical computation. In addition to quantum algorithms, OpenQASM can describe circuits intended to characterize, validate, or debug quantum systems.\r\n&nbsp;\r\n# As the needs of quantum system development have evolved, OpenQASM's feature list has expanded in response; the latest version, [OpenQASM 3](https://arxiv.org/abs/2104.14722), incorporates extensions including classical feed-forward flow control, gate modifiers, and pulse implementations.\r\n&nbsp;\r\n# OpenQASM is the common interchange format among independent quantum software tools. For developers that prefer one tool for circuit construction, another for transpilation, and so forth, OpenQASM is the lingua franca that acts as a bridge among them.\r\n&nbsp;\r\n# The Qiskit SDK provides ways to convert between OpenQASM and the [QuantumCircuit](https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.QuantumCircuit) class. We will introduce you how both OpenQASM2 and OpenQASM3 are converted with the Circuit Class.\r\n&nbsp;\r\n# OpenQASM is the choice for a variety of audiences because of its versatility. For more information, view the [OpenQASM live specification](https://openqasm.com/).",
+        "x": 420,
+        "y": 560,
+        "wires": [
+            [
+                "057f12540c04e20a",
+                "99430f0d296d3460"
+            ]
+        ]
+    },
+    {
+        "id": "e79f28bdf4928579",
+        "type": "inject",
+        "z": "2abb279f01f2d561",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 560,
+        "wires": [
+            [
+                "3b560f57d5de4151"
+            ]
+        ],
+        "info": "# In this flow, we will introduce you how to import and export a OpenQASM 3 program."
+    },
+    {
+        "id": "47abf3b2a67cd810",
+        "type": "image",
+        "z": "2abb279f01f2d561",
+        "name": "Circuit Output",
+        "width": "960",
+        "data": "payload.result.result_image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1280,
+        "y": 360,
+        "wires": [],
+        "info": "# The image of converted Qiskit circuit"
+    },
+    {
+        "id": "6f9fc251548eae24",
+        "type": "file in",
+        "z": "2abb279f01f2d561",
+        "name": "Read QASM3 file",
+        "filename": "payload.result.result_file",
+        "filenameType": "msg",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 1270,
+        "y": 720,
+        "wires": [
+            [
+                "7513e97de1c59510"
+            ]
+        ],
+        "info": "# Read the content of \".qasm\" file"
+    },
+    {
+        "id": "34d826037d8d91e5",
+        "type": "export-OpenQASM3",
+        "z": "2abb279f01f2d561",
+        "name": "Export to OpenQASM3 program",
+        "info": "# You can export Qiskit code to OpenQASM 3 with <font style=\"background: lightgrey\">dumps()</font>, which exports to a string, or <font style=\"background: lightgrey\">dump()</font>, which exports to a file.\r\n&nbsp;\r\n# In the code snippet below, we constructed two Qiskit circuits and exported them as a string and a file, respectively.\r\n```python\r\nfrom qiskit import QuantumCircuit\r\nfrom qiskit.qasm3 import dump, dumps\r\n \r\n# Create a simple circuit and convert it to a string\r\nqc = QuantumCircuit(2)\r\nqc.h(0)\r\nqc.cx(0,1)\r\nqc.measure_all()\r\n \r\nstring = dumps(qc)\r\n\r\n\r\n\r\n# Create a simple circuit and write it to a file\r\nqc = QuantumCircuit(2)\r\nqc.h(0)\r\nqc.cx(0,1)\r\nqc.measure_all()\r\n \r\nf = open(\"my_file.txt\", 'w')\r\ndump(qc, f)\r\n# Get the absolute path of the file\r\nf.close()\r\n```\r\n# The string is sent to \"Output string\" node and the content of the file is read by \"Read QASM3 file\" node and sent to \"Output file\" node. You can check these contents in the debug palette\r\n\r\n***\r\n&nbsp;\r\n## **Node Output:**\r\n- # File: `my_file.txt`\r\n- # String: `string`",
+        "x": 890,
+        "y": 780,
+        "wires": [
+            [
+                "6f9fc251548eae24",
+                "cdd7015f5631269f"
+            ]
+        ]
+    },
+    {
+        "id": "7513e97de1c59510",
+        "type": "debug",
+        "z": "2abb279f01f2d561",
+        "name": "Output file",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1550,
+        "y": 720,
+        "wires": [],
+        "info": "# Output the content of the file you created"
+    },
+    {
+        "id": "cdd7015f5631269f",
+        "type": "debug",
+        "z": "2abb279f01f2d561",
+        "name": "Output string",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.result.result_string",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1250,
+        "y": 860,
+        "wires": [],
+        "info": "# Output the string you created."
+    },
+    {
+        "id": "057f12540c04e20a",
+        "type": "move-to-next-node",
+        "z": "2abb279f01f2d561",
+        "name": "Next",
+        "x": 670,
+        "y": 360,
+        "wires": [
+            [
+                "e83a3258617b76f4"
+            ]
+        ]
+    },
+    {
+        "id": "99430f0d296d3460",
+        "type": "move-to-next-node",
+        "z": "2abb279f01f2d561",
+        "name": "Next",
+        "x": 650,
+        "y": 780,
+        "wires": [
+            [
+                "34d826037d8d91e5"
+            ]
+        ]
+    }
+]
