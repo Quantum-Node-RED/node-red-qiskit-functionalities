@@ -87,7 +87,7 @@ This file contributes a **Component_Dependency class** that facilitates optimize
 The Component_Dependency class provides a structured mapping of component names to their respective modules and optional aliases. Each entry in the class specifies:
 
 - **Component Name**: The name of the component, corresponding to a specific function or element in quantum computing.
-- **Modules and Aliases**: A list defining the exact module path required for the component and an optional alias to simplify usage in the code.\*\*
+- **Modules and Aliases**: A list defining the exact module path required for the component and an optional alias to simplify usage in the code.
 
 You can contribute by adding more new import or update import accordingly when adding or updating a component.
 
