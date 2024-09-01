@@ -7,9 +7,32 @@ Firstly, we transform complex Qiskit documentation into easy-to-follow, graphica
 - Node-RED v3.1.9
 - Python3
 ## Installation
+1. **Install Node-RED:**
+   - Follow the installation instructions provided on the official Node-RED website: [Node-RED Installation Guide](https://nodered.org/docs/getting-started/local).
+
+2. **Install Node-RED Qiskit Functionality:**
+   - Navigate to your Node-RED user directory. This is typically located at `~/.node-red`.
+   - Run the following command to install the Node-RED Qiskit Functionality package:
+     ```bash
+     npm install node-red-qiskit-functionality
+     ```
+
+3. **Start Node-RED:**
+   - Use the following command in your terminal to start Node-RED:
+     ```bash
+     node-red
+     ```
+   - After starting Node-RED, check whether the Qiskit nodes appear in the Node-RED palette.
+
+4. **Install Python Packages:**
+   - Install the required Python packages listed in the `requirements.txt` file.
+   - You can install these packages either globally or within a virtual environment. To install the packages, run:
+     ```bash
+     pip install -r requirements.txt
+     ```
 ## How to Use
 ### Qiskit Learning flow
-The Qiskit Learning Flow integrates Qiskit documents into the more graphical step-by-step prebuilt Node-RED flows. It consists of a series of pre-built flows. To begin, you need to import the desired learning content from `./Learning/flows` into your Node-RED workspace and deploy it. Once deployed, you can follow these steps to explore and learn from the content in the flow:
+The Qiskit Learning Flow integrates Qiskit documents into the more graphical step-by-step prebuilt Node-RED flows. It consists of a series of pre-built flows. To begin, you need to click the menu button on the top right, click "Import" and choose the desired learning content from `Local/flows/node-red-qiskit-functionality/Learning/flows` into your Node-RED workspace and deploy it. Once deployed, you can follow these steps to explore and learn from the content in the flow:
 
 1. Click the button on the _Start_ node to execute this flow.
 
@@ -67,7 +90,19 @@ The Interactive Node Framework simplifies quantum computing by allowing users to
     The Tools category includes various useful functions, such as _draw circuit_ and _print_, that assist in constructing and outputting flows more conveniently.
     ![image](./assets/Interactive_tools.png)
 
+This framework provides different levels of abstraction so that users can engage with quantum computing at the level that suits their expertise and project requirements. We created QAOA algorithm flows using these nodes across three levels of abstraction as demonstration. To import them, you need to click the menu button on the top right, click "Import" and choose the desired content from `Local/flows/node-red-qiskit-functionality/interactive-nodes/flows` into your Node-RED workspace and deploy it.
+
+
+The "customized_(algorithm)" flow corresponds to the lowest level, where the entire algorithm is built from the gate level. 
+
+
+The "qiskit_(algorithm)" flow represents the intermediate level, encapsulating common operation sequences into single nodes. 
+
+The "whole_(algorithm)" flow belongs to the highest level, where entire quantum algorithms or large sections of a quantum process are encapsulated in single nodes.
+
 ## Contributing
+For information on how to contribute, please read the [CONTRIBUTING](./CONTRIBUTING.md) guidelines.
+
 ## Acknowledgements
 For more information about the authors, please refer to the [AUTHORS](./AUTHORS) file.
 
