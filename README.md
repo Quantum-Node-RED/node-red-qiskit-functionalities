@@ -8,8 +8,7 @@ Firstly, we transform complex Qiskit documentation into easy-to-follow, graphica
 
 - Node.js v21.0.0
 - Node-RED v3.1.9
-- Python3
-
+- Python 3.11
 ## Installation
 
 1. **Install Node-RED:**
