@@ -3,9 +3,9 @@ const path = require("path");
 
 // Check if we're in the correct package context
 const currentPackage = path.basename(process.cwd());
-if (currentPackage !== "node-red-qiskit-functionality") {
+if (currentPackage !== "node-red-qiskit-quantum-learning") {
   console.log(
-    "Skipping flow installation: Not in the node-red-qiskit-functionality context."
+    "Skipping flow installation: Not in the node-red-qiskit-quantum-learning context."
   );
   process.exit(0); // Exit without error
 }
@@ -19,8 +19,8 @@ const libFlowsDir = path.join(
   nodeRedDir,
   "lib",
   "flows",
-  "node-red-qiskit-functionality"
-); // Define the library flows directory with top-level node-red-qiskit-functionality folder
+  "node-red-qiskit-quantum-learning"
+); // Define the library flows directory with top-level node-red-qiskit-quantum-learning folder
 
 // Define the paths to your flow directories
 const flowDirs = [
@@ -70,7 +70,7 @@ const copyFlowFilesRecursively = (srcDir, destDir) => {
 // Copy flows from each directory recursively, preserving structure
 flowDirs.forEach((flowDir) => {
   const relativePath = path.relative(__dirname, flowDir);
-  const targetDir = path.join(libFlowsDir, relativePath); // Copying into ~/.node-red/lib/flows/node-red-qiskit-functionality
+  const targetDir = path.join(libFlowsDir, relativePath); // Copying into ~/.node-red/lib/flows/node-red-qiskit-quantum-learning
 
   // Start copying files recursively, preserving the structure
   copyFlowFilesRecursively(flowDir, targetDir);
