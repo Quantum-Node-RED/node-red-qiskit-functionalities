@@ -1,8 +1,16 @@
 [
   {
-    "id": "0b3dca05dd4868a1",
+    "id": "63b5b7f82ec55597",
+    "type": "tab",
+    "label": "whole VQE",
+    "disabled": false,
+    "info": "",
+    "env": []
+  },
+  {
+    "id": "42d049c94d081c1a",
     "type": "whole-VQE",
-    "z": "81d80c904bd83a92",
+    "z": "63b5b7f82ec55597",
     "name": "whole-VQE algorithm",
     "numQubit": "1",
     "rotationLayers": "rx",
@@ -11,34 +19,26 @@
     "hamiltonianCoeffs": "[-1.05237, 0.39793, -0.39793, -0.01128, 0.1809]",
     "optimizer": "SLSQP",
     "maxiter": "50",
-    "x": 380,
-    "y": 160,
-    "wires": [
-      [
-        "80c5a1ccae031136"
-      ]
-    ]
+    "x": 620,
+    "y": 240,
+    "wires": [["038360029b4bc58f"]]
   },
   {
-    "id": "3a255e63eee02395",
+    "id": "d90fb85d7577801c",
     "type": "Start",
-    "z": "81d80c904bd83a92",
+    "z": "63b5b7f82ec55597",
     "name": "",
     "topic": "",
     "repeat": "",
-    "x": 190,
-    "y": 160,
-    "wires": [
-      [
-        "0b3dca05dd4868a1"
-      ]
-    ]
+    "x": 450,
+    "y": 240,
+    "wires": [["42d049c94d081c1a"]]
   },
   {
-    "id": "80c5a1ccae031136",
+    "id": "038360029b4bc58f",
     "type": "debug",
-    "z": "81d80c904bd83a92",
-    "name": "debug 11",
+    "z": "63b5b7f82ec55597",
+    "name": "debug 12",
     "active": true,
     "tosidebar": true,
     "console": false,
@@ -47,8 +47,8 @@
     "targetType": "msg",
     "statusVal": "",
     "statusType": "auto",
-    "x": 550,
-    "y": 160,
+    "x": 800,
+    "y": 240,
     "wires": []
   }
 ]
