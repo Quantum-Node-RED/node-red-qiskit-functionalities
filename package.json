@@ -1,6 +1,6 @@
 {
   "name": "node-red-qiskit-functionality-test",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Quantum Computing Functionality for Node-RED",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "lint": "eslint \"**/**/*.js\"",
     "lint-fix": "eslint --fix \"**/**/*.js\"",
     "test": "mocha \"test/**/*_spec.js\"",
-    "postinstall": "node install_flows.js"
+    "postinstall": "node install_flows.js && pip install -r requirements.txt"
   },
   "author": "wangyiyuelva",
   "license": "Apache-2.0",
