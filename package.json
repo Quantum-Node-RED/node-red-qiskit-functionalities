@@ -1,6 +1,6 @@
 {
   "name": "node-red-qiskit-quantum-learning",
-  "version": "0.1.0",
+  "version": "0.1.3",
   "description": "Quantum Computing Functionality for Node-RED",
   "main": "index.js",
   "scripts": {
@@ -274,7 +274,6 @@
     "canvas": "^2.11.2",
     "mocha": "^10.7.3",
     "node-red-node-test-helper": "^0.3.4",
-    "node-red-qiskit-quantum-learning": "^0.0.1",
     "node-red-contrib-image-output": "^0.6.4",
     "python-shell": "^5.0.0"
   },

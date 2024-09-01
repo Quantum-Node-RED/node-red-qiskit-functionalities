@@ -1,4 +1,4 @@
-# Node-RED Qiskit functionality
+# Node-RED Qiskit Quantum Learning Framework
 Our objective is to create a Node-RED-based learning and interactive platform, supported by IBM's Qiskit, to make quantum computing more accessible. Qiskit, a powerful quantum computing library, has a steep learning curve. To address this, we use Node-RED's visual interface to simplify quantum programming by breaking down complex concepts into manageable components. Our project abstracts core Qiskit functionalities into Node-RED nodes, each representing a fundamental quantum operation, helping software developers with little or no knowledge of quantum physics effectively use the Qiskit library.
 
 Firstly, we transform complex Qiskit documentation into easy-to-follow, graphical Node-RED flows with detailed explanations and code snippets. Additionally, we designed the Interactive Node Framework, allowing users to design quantum circuits and algorithms through a user-friendly graphical interface, eliminating the need for coding. This hands-on approach not only simplifies quantum computing but also fosters a deeper understanding of quantum concepts, making the field more approachable and inclusive. Ultimately, this package encourages critical thinking and experimentation with quantum algorithms, enhancing users' comprehension of quantum computing.
@@ -10,7 +10,7 @@ Firstly, we transform complex Qiskit documentation into easy-to-follow, graphica
 1. **Install Node-RED:**
    - Follow the installation instructions provided on the official Node-RED website: [Node-RED Installation Guide](https://nodered.org/docs/getting-started/local).
 
-2. **Install Node-RED Qiskit Functionality:**
+2. **Install Node-RED Qiskit Quantum Learning Framework:**
    - Navigate to your Node-RED user directory. This is typically located at `~/.node-red`.
    - Run the following command to install the Node-RED Qiskit Functionality package:
      ```bash
