@@ -7,6 +7,29 @@ Firstly, we transform complex Qiskit documentation into easy-to-follow, graphica
 - Node-RED v3.1.9
 - Python3
 ## Installation
+1. **Install Node-RED:**
+   - Follow the installation instructions provided on the official Node-RED website: [Node-RED Installation Guide](https://nodered.org/docs/getting-started/local).
+
+2. **Install Node-RED Qiskit Functionality:**
+   - Navigate to your Node-RED user directory. This is typically located at `~/.node-red`.
+   - Run the following command to install the Node-RED Qiskit Functionality package:
+     ```bash
+     npm install node-red-qiskit-functionality
+     ```
+
+3. **Start Node-RED:**
+   - Use the following command in your terminal to start Node-RED:
+     ```bash
+     node-red
+     ```
+   - After starting Node-RED, check whether the Qiskit nodes appear in the Node-RED palette.
+
+4. **Install Python Packages:**
+   - Install the required Python packages listed in the `requirements.txt` file.
+   - You can install these packages either globally or within a virtual environment. To install the packages, run:
+     ```bash
+     pip install -r requirements.txt
+     ```
 ## How to Use
 ### Qiskit Learning flow
 The Qiskit Learning Flow integrates Qiskit documents into the more graphical step-by-step prebuilt Node-RED flows. It consists of a series of pre-built flows. To begin, you need to click the menu button on the top right, click "Import" and choose the desired learning content from `Local/flows/node-red-qiskit-functionality/Learning/flows` into your Node-RED workspace and deploy it. Once deployed, you can follow these steps to explore and learn from the content in the flow:
