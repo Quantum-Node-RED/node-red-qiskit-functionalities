@@ -1,5 +1,5 @@
 {
-  "name": "node-red-qiskit-functionalities",
+  "name": "node-red-qiskit-functionality",
   "version": "0.0.1",
   "description": "Quantum Computing Functionality for Node-RED",
   "main": "index.js",
@@ -274,7 +274,7 @@
     "canvas": "^2.11.2",
     "mocha": "^10.7.3",
     "node-red-node-test-helper": "^0.3.4",
-    "node-red-qiskit-functionalities": "^0.0.1",
+    "node-red-qiskit-functionality": "^0.0.1",
     "python-shell": "^5.0.0"
   },
   "devDependencies": {
