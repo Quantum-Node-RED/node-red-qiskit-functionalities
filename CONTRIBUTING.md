@@ -75,7 +75,7 @@ The Component_Dependency class provides a structured mapping of component names 
 
 You can contribute by adding more new import or update import accordingly when adding or updating a component.
 
-## params_schemas.py
+### params_schemas.py
 
 This file defines a **schemas** dictionary that outlines the expected parameters and their types for various quantum circuit components. These schemas are crucial for validating the input parameters during quantum circuit code generation, ensuring that each component is configured correctly before execution.
 
