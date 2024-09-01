@@ -1,23 +1,23 @@
 <script type="text/javascript">
   RED.nodes.registerType('parameter_condition', {
-      category: 'Quantum Circuit',
-      color: '#a6bbcf',
-      defaults: {
-          name: {value:""},
-          parameter_condition: {value:{}, required:true}
-      },
-      inputs:1,
-      outputs:1,
-      icon: "alert.svg",
-      label: function() {
-          return this.name||"parameter_condition";
-      },
-      oneditprepare: function() {
-          $("#node-input-parameter_condition").typedInput({
-              type:"json",
-              types:["json"]
-          });
-      }
+    category: 'Interactive Quantum Circuit',
+    color: '#a6bbcf',
+    defaults: {
+      name: { value: "" },
+      parameter_condition: { value: {}, required: true }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "alert.svg",
+    label: function () {
+      return this.name || "parameter_condition";
+    },
+    oneditprepare: function () {
+      $("#node-input-parameter_condition").typedInput({
+        type: "json",
+        types: ["json"]
+      });
+    }
   });
 </script>
 
