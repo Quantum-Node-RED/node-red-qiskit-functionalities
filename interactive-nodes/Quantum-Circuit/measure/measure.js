@@ -20,6 +20,7 @@ module.exports = function (RED) {
       // measure_component.parameters["qbit"] = [qbits, cbits];
       measure_component.parameters["qbit"] = qbits;
       measure_component.parameters["cbit"] = cbits;
+      measure_component.parameters["sequence_no"]= config.sequence_no;
       measure_component.parameters[constants.CIRCUIT_NAME] = node
         .context()
         .flow.get(constants.CIRCUIT_NAME);
