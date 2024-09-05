@@ -9,7 +9,7 @@ module.exports = function (RED) {
       msg.payload = msg.payload || {};
       const local_simulator_component = new component.Component("local_simulator",{});
       local_simulator_component.parameters["circuit_name"] = config.circuit_name;
-      local_simulator_component.parameters["optimization_level"] = config.optimization_level || 1;
+      local_simulator_component.parameters["shots"] = config.shots;
       component.addComponent(msg, local_simulator_component);
       node.send(msg);
     });

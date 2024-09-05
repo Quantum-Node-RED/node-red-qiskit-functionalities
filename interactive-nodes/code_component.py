@@ -174,18 +174,14 @@ snippets = {
     # Tools
     "local_simulator": Code_Component(
         import_statement=[Component_Dependency.Aer,
-                         Component_Dependency.Session,
-                         Component_Dependency.SamplerV2,
-                         Component_Dependency.Generate_preset_pass_manager],
+                         ],
         function="",
         calling_function="""
-aer_sim = AerSimulator()
-pm=generate_preset_pass_manager(backend=aer_sim, optimization_level={optimization_level})
-isa_qc=pm.run({circuit_name})
-with Session (backend=aer_sim) as session:
-    sampler = Sampler()
-    result = sampler.run([isa_qc]).result()
-print(result)
+simulator = AerSimulator()
+job = simulator.run(qc, shots=10)
+result = job.result()
+output = result.get_counts()
+print("Counts:", output)
         """
     ),
 
