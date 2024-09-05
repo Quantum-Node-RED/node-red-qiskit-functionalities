@@ -9,6 +9,7 @@ module.exports = function (RED) {
       measure_all_component.parameters["circuit_name"] = config.circuit_name;
       measure_all_component.parameters["num_qbits"] = config.num_qbits;
       measure_all_component.parameters["num_cbits"] = config.num_cbits;
+      measure_all_component.parameters["sequence_no"]= config.sequence_no;
       component.addComponent(msg, measure_all_component);
       node.send(msg);
     });

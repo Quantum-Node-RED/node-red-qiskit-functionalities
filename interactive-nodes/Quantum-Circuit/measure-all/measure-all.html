@@ -7,6 +7,7 @@
       circuit_name: { value: "", required: true },
       num_qbits: { value: "", required: true },
       num_cbits: { value: "", required: true },
+      sequence_no: { value: "" },
     },
     inputs: 1,
     outputs: 1,
@@ -51,6 +52,10 @@
       id="node-input-num_cbits"
       placeholder="Number of classical bits to place the measurement result(s) in."
     />
+  </div>
+  <div class="form-row">
+    <label for="node-input-sequence_no"><i class="fa fa-tag"></i>Sequence No</label>
+    <input type="number" id="node-input-sequence_no" placeholder="Sequence No" />
   </div>
 </script>
 
