@@ -24,6 +24,7 @@ class Component_Dependency:
     Grover = ["qiskit_algorithms.Grover"]
     AmplificationProblem = ["qiskit_algorithms.AmplificationProblem"]
     Optimizers = ["qiskit_algorithms.optimizers.{optimizer}"]
+    EfficientSU2=["qiskit.circuit.library.EfficientSU2"]
     Pyplot = ["matplotlib.pyplot", "plt"]
     Base64 = ["base64"]
     IO = ["io"]

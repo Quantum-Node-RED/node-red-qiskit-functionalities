@@ -423,6 +423,7 @@ def get_state_vector_to_use(result):
 
     "VQE": Code_Component(
         import_statement=[
+            Component_Dependency.EfficientSU2,
             Component_Dependency.VQE, 
             Component_Dependency.Optimizers  # Using the defined import for VQE and Optimizer
         ],
