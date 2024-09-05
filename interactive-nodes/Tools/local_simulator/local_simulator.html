@@ -5,7 +5,7 @@
     defaults: {
       name: { value: "" },
       circuit_name: { value: "" },
-      optimization_level: { value: "" },
+      shots:{ value: "" },
     },
     inputs: 1,
     outputs: 1,
@@ -28,8 +28,10 @@
   </div>
 
   <div class="form-row">
-    <label for="node-input-optimization_level"><i class="fa fa-tag"></i> Optimization level</label>
-    <input type="text" id="node-input-optimization_level" placeholder="Optimization level" />
+    <label for="node-input-shots"><i class="fa fa-tag"></i> Shots</label>
+    <input type="text" id="node-input-shots" placeholder="shots"/>
+  </div>
+
 </script>
 
 <script type="text/html" data-help-name="local_simulator">
